@@ -1,0 +1,17 @@
+spring:
+    cache:
+        type: redis
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+    cloud:
+        gateway:
+            routes:
+                -   id: demo-server-routes
+                    uri: lb://demo-server
+                    predicates:
+                        - Path=/demo/**
+                    filters:
+                        - StripPrefix=1

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{theme}}">
+<head>
+    <th:block th:insert="~{include/commons :: meta}"/>
+    <title>Application Profile</title>
+</head>
+<body>
+<div class="app-container bg-blue-400 dark:bg-black">
+    <div>
+        <h1>一级标题 - H1</h1>
+        <h2>二级标题 - H2</h2>
+        <h3>三级标题 - H3</h3>
+        <h4>四级标题 - H4</h4>
+        <h5>五级标题 - H5</h5>
+        <h6>六级标题 - H6</h6>
+        <span>普通文字</span>
+    </div>
+    <div>
+        <a href="/login">Login</a>
+    </div>
+    <div>
+        <button class="btn-primary btn">Button</button>
+    </div>
+</div>
+<th:block th:insert="~{include/commons :: js}"/>
+</body>
+</html>

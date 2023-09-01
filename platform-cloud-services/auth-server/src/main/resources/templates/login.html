@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" data-bs-theme="light">
+<head>
+    <th:block th:insert="~{include/commons :: meta}"/>
+    <title>Application Login</title>
+</head>
+<body>
+<div class="vh-100 min-vh-100 vw-100 min-vw-100 entry-body-bg">
+    <div class="container-fluid p-0 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-4">
+                <div class="card w-100">
+                    <div class="card-body p-5">
+                        <h2 class="fw-bold mb-3 text-center">Login</h2>
+
+                        <form method="POST" action="/login">
+                            <div class="mb-3">
+                                <label for="inputUsername" class="form-label">username</label>
+                                <div class="position-relative">
+                                            <span
+                                                    class="position-absolute top-50 translate-middle-y"
+                                                    style="left: 10px"
+                                            >
+                                                <i class="bi bi-person"></i>
+                                            </span>
+                                    <input
+                                            class="form-control"
+                                            style="padding-left: 32px; padding-right: 32px"
+                                            id="inputUsername"
+                                            name="username"
+                                            type="text"
+                                            value="admin"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Password</label>
+                                <div class="position-relative">
+                                            <span
+                                                    class="position-absolute top-50 translate-middle-y"
+                                                    style="left: 10px"
+                                            >
+                                                <i class="bi bi-key"></i>
+                                            </span>
+                                    <input
+                                            class="form-control"
+                                            style="padding-left: 32px; padding-right: 32px"
+                                            id="inputPassword"
+                                            name="password"
+                                            value="admin"
+                                            type="password"
+                                    />
+                                    <span
+                                            class="position-absolute top-50 translate-middle-y"
+                                            style="right: 10px"
+                                    >
+                                                <i class="bi bi-eye-slash"></i>
+                                            </span>
+                                </div>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="inputRememberMe"/>
+                                <label class="form-check-label" for="inputRememberMe">Remember me</label>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-wi">Log in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:insert="~{include/commons :: js}"/>
+</body>
+</html>

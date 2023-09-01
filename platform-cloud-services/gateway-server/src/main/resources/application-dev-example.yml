@@ -1,0 +1,42 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:9292
+                username: admin
+                password: admin
+    cloud:
+        gateway:
+            routes:
+                -   id: auth-server
+                    uri: lb://auth-server
+                    predicates:
+                        - Path=/oauth/**
+                -   id: system-server
+                    uri: lb://system-server
+                    predicates:
+                        - Path=/api/**
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    debug:
+        enabled: false
+    sequence:
+        enabled: false
+    cache:
+        enabled: false
+        type: redis
+        redis:
+            enabled: false
+        redisson:
+            enabled: false

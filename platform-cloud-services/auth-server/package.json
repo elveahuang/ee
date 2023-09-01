@@ -1,0 +1,43 @@
+{
+    "name": "webapp",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "vite build --mode=development --watch",
+        "build": "vite build --mode=production",
+        "lint": "eslint --color --ext .js,.jsx,.ts,.tsx src/main/webapp --quiet --fix",
+        "prettier": "prettier --write src/main/webapp"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "axios": "^1.4.0",
+        "bootstrap": "^5.3.1",
+        "bootstrap-icons": "^1.10.5",
+        "crypto-js": "^4.1.1",
+        "i18next": "^23.4.4",
+        "i18next-chained-backend": "^4.4.0",
+        "i18next-http-backend": "^2.2.1",
+        "js-cookie": "^3.0.5",
+        "lodash-es": "^4.17.21",
+        "rxjs": "^7.8.1",
+        "swiper": "^10.1.0"
+    },
+    "devDependencies": {
+        "del": "^7.0.0",
+        "eslint": "^8.47.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-define-config": "^1.23.0",
+        "eslint-plugin-html": "^7.1.0",
+        "eslint-plugin-import": "^2.28.0",
+        "eslint-plugin-n": "^16.0.1",
+        "eslint-plugin-prettier": "^5.0.0",
+        "eslint-plugin-promise": "^6.1.1",
+        "gulp": "^4.0.2",
+        "gulp-file-sync": "^2.1.0",
+        "prettier": "^3.0.2",
+        "sass": "^1.65.1",
+        "vite": "^4.4.9",
+        "vite-jsconfig-paths": "^2.0.1"
+    }
+}

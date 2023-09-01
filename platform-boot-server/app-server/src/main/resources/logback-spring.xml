@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProperty name="spring.application.name"
+                    source="spring.application.name"
+                    scop="context"
+                    defaultValue="application"/>
+    <!-- 日志文件路径 -->
+    <property name="log.path" value="logs"/>
+    <!-- 控制台输出格式 -->
+    <property name="pattern.console" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
+    <!-- 日志文件输出格式 -->
+    <property name="pattern.file" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
+    <!-- 日志归档策略 -->
+    <property name="rolling.policy.size" value="50MB"/>
+    <property name="rolling.policy.history" value="7"/>
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern.console}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志 -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${rolling.policy.size}</maxFileSize>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 错误日志 -->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${rolling.policy.size}</maxFileSize>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 链接日志 -->
+    <appender name="URL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/url.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/url.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${rolling.policy.size}</maxFileSize>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="cn.elvea" level="INFO"/>
+
+    <logger name="cn.elvea.platform.system.commons.interceptor.LogInterceptor" level="INFO">
+        <appender-ref ref="URL"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="DEBUG"/>
+    </root>
+</configuration>

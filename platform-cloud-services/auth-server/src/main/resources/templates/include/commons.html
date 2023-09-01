@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!-- @thymesVar id="applicationVersion" type="java.lang.String" -->
+<body>
+<th:block th:fragment="meta">
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/assets/main.css(v=${applicationVersion})}"/>
+</th:block>
+<th:block th:fragment="js">
+    <script type="module" th:src="@{/assets/vendor.js(v=${applicationVersion})}"></script>
+    <script type="module" th:src="@{/assets/main.js(v=${applicationVersion})}"></script>
+</th:block>
+</body>
+</html>

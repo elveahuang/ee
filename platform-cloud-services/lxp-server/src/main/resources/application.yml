@@ -1,0 +1,33 @@
+server:
+    port: 9191
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        web-application-type: reactive
+    application:
+        name: gateway-server
+    profiles:
+        active: dev
+    config:
+        import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
+    cloud:
+        consul:
+            host: 127.0.0.1
+            port: 8500
+            discovery:
+                enabled: true
+                service-name: ${spring.application.name}
+                instance-id: ${spring.application.name}--${spring.cloud.client.ip-address}--${server.port}
+                prefer-ip-address: true
+                ip-address: ${spring.cloud.client.ip-address}
+            config:
+                enabled: true
+                format: yaml
+                prefixes: "config"
+                default-context: ${spring.application.name}
+                profile-separator: "::"
+                data-key: "application"
+                watch:
+                    enabled: true
+                    delay: 3000
+                    wait-time: 5

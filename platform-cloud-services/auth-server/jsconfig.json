@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "target": "ESNext",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/main/webapp/*"]
+        }
+    },
+    "exclude": ["node_modules"]
+}

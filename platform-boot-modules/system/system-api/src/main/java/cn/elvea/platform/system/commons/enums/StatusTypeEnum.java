@@ -1,0 +1,32 @@
+package cn.elvea.platform.system.commons.enums;
+
+import cn.elvea.platform.commons.core.enums.BaseEnum;
+import lombok.Getter;
+
+/**
+ * 状态类型
+ *
+ * @author elvea
+ * @since 0.0.1
+ */
+@Getter
+public enum StatusTypeEnum implements BaseEnum<Integer> {
+    ENABLED(1, "ENABLED", "启用"),
+    DISABLED(2, "DISABLED", "禁用");
+
+    private final Integer value;
+    private final String code;
+    private final String description;
+
+    StatusTypeEnum(final Integer value, final String code, final String description) {
+        this.value = value;
+        this.code = code;
+        this.description = description;
+    }
+
+    @Override
+    public String getLabel() {
+        return ("label_status_type__".concat(this.code)).toLowerCase();
+    }
+
+}

@@ -1,0 +1,74 @@
+package cn.elvea.platform.commons.core.oapis.weixin.service.impl;
+
+import cn.elvea.platform.commons.core.cache.service.CacheService;
+import cn.elvea.platform.commons.core.oapis.weixin.config.AppCpConfig;
+import cn.elvea.platform.commons.core.oapis.weixin.service.WeiXinCpService;
+import cn.elvea.platform.commons.core.oapis.weixin.storage.WxCpCacheConfigStorage;
+import cn.elvea.platform.commons.core.utils.StringUtils;
+import lombok.Getter;
+import lombok.Setter;
+import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
+import me.chanjar.weixin.cp.config.WxCpConfigStorage;
+
+/**
+ * @author elvea
+ * @since 0.0.1
+ */
+@Getter
+@Setter
+public class WeiXinCpServiceImpl implements WeiXinCpService {
+
+    private final CacheService cacheService;
+
+    private final String cacheKeyPrefix;
+
+    private AppCpConfig appConfig;
+
+    public WeiXinCpServiceImpl(CacheService cacheService, String cacheKeyPrefix) {
+        this.cacheService = cacheService;
+        this.cacheKeyPrefix = cacheKeyPrefix;
+    }
+
+    /**
+     * @see WeiXinCpService#getConfigStorage()
+     */
+    @Override
+    public WxCpConfigStorage getConfigStorage() {
+        return this.getConfigStorage(this.appConfig);
+    }
+
+    /**
+     * @see WeiXinCpService#getConfigStorage(AppCpConfig)
+     */
+    @Override
+    public WxCpConfigStorage getConfigStorage(AppCpConfig appCpConfig) {
+        WxCpCacheConfigStorage config = new WxCpCacheConfigStorage(cacheService, cacheKeyPrefix);
+        config.setCorpId(appCpConfig.getCorpId());
+        config.setCorpSecret(appCpConfig.getCorpSecret());
+        config.setAgentId(appCpConfig.getAgentId());
+        if (StringUtils.isNotEmpty(appCpConfig.getToken())) {
+            config.setToken(appCpConfig.getToken());
+        }
+        return config;
+    }
+
+    /**
+     * @see WeiXinCpService#getService()
+     */
+    @Override
+    public WxCpService getService() {
+        return this.getService(this.appConfig);
+    }
+
+    /**
+     * @see WeiXinCpService#getService(AppCpConfig)
+     */
+    @Override
+    public WxCpService getService(AppCpConfig appCpConfig) {
+        WxCpService wxCpService = new WxCpServiceImpl();
+        wxCpService.setWxCpConfigStorage(getConfigStorage(appCpConfig));
+        return wxCpService;
+    }
+
+}
