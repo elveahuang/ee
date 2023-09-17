@@ -978,7 +978,6 @@ CREATE TABLE `sys_announcement`
     `title`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `content`          TEXT             NULL COMMENT '内容',
     `description`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `sort_order`       INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',

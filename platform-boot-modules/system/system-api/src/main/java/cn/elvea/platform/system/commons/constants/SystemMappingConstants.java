@@ -66,4 +66,11 @@ public interface SystemMappingConstants {
 
     String API_V1_ADMIN__LABEL__GENERATE = MappingConstants.API_V1_ADMIN_URL_PREFIX + "/label/generate";
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // 公告资讯
+    // -----------------------------------------------------------------------------------------------------------------
+
+    // 获取公告资讯列表
+    String API_V1__ANNOUNCEMENT__LIST = MappingConstants.API_V1_URL_PREFIX + "/announcement/list";
+
 }
