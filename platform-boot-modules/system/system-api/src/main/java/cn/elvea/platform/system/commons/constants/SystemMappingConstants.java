@@ -73,4 +73,7 @@ public interface SystemMappingConstants {
     // 获取公告资讯列表
     String API_V1__ANNOUNCEMENT__LIST = MappingConstants.API_V1_URL_PREFIX + "/announcement/list";
 
+    // 获取公告资讯详情
+    String API_V1__ANNOUNCEMENT__DETAILS = MappingConstants.API_V1_URL_PREFIX + "/announcement/details";
+
 }
