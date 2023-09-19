@@ -261,10 +261,12 @@ DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`
 (
     `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `group`            VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '分组',
+    `title`            VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '标题',
+    `label`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
     `key`              VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '参数名',
     `value`            VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '参数值',
     `default_value`    VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '默认值',
-    `label`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
     `description`      VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
     `help`             VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '帮助信息',
     `source`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',

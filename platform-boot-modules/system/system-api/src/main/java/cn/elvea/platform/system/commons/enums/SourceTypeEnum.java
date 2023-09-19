@@ -4,7 +4,12 @@ import cn.elvea.platform.commons.core.enums.BaseEnum;
 import lombok.Getter;
 
 /**
- * 数据来源类型
+ * 数据来源
+ * <p>
+ * 1. SYSTEM    - 系统内置，内置数据一般不允许删除
+ * 2. NORMAL    - 普通数据
+ * 3. IMPORT    - 导入数据
+ * 3. SYNC      - 同步数据
  *
  * @author elvea
  * @since 0.0.1
@@ -13,7 +18,7 @@ import lombok.Getter;
 public enum SourceTypeEnum implements BaseEnum<Integer> {
     SYSTEM(1, "SYSTEM", "内置"),
     NORMAL(2, "NORMAL", "普通"),
-    IMP(3, "IMP", "导入"),
+    IMPORT(3, "IMPORT", "导入"),
     SYNC(4, "SYNC", "同步");
 
     private final Integer value;
@@ -24,26 +29,6 @@ public enum SourceTypeEnum implements BaseEnum<Integer> {
         this.value = value;
         this.code = code;
         this.description = description;
-    }
-
-    public static SourceTypeEnum getSourceType(int value) {
-        SourceTypeEnum[] ts = SourceTypeEnum.values();
-        for (SourceTypeEnum t : ts) {
-            if (t.getValue() == value) {
-                return t;
-            }
-        }
-        return NORMAL;
-    }
-
-    public static SourceTypeEnum getSourceType(String code) {
-        SourceTypeEnum[] ts = SourceTypeEnum.values();
-        for (SourceTypeEnum t : ts) {
-            if (t.getCode().equalsIgnoreCase(code)) {
-                return t;
-            }
-        }
-        return NORMAL;
     }
 
     @Override

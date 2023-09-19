@@ -212,10 +212,11 @@ where sr.id = 1;
 --
 -- 系统设置项
 --
+truncate sys_config;
 
 insert into sys_config (`id`, `key`, `value`, `label`, `description`, `active`)
-values (1, 'site_title', 'Site Title', 'label_config_site_title', '站点标题', 1),
-       (2, 'site_copyright', 'Copyright@2021', 'label_config_site_copyright', '站点版权信息', 1);
+values (1, 'APP_TITLE', 'Application', 'label_config_site_title', '站点标题', 1),
+       (2, 'APP_COPYRIGHT', 'Copyright@2023', 'label_config_site_copyright', '站点版权信息', 1);
 
 -- =====================================================================================================================
 -- 多语言
