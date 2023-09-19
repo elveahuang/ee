@@ -41,7 +41,7 @@ public class ConfigServiceImpl extends BaseCachingEntityService<ConfigEntity, Lo
         return getCacheService().get(cacheKeyGenerator.byKey(key), k -> {
             Specification<ConfigEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(ConfigEntity_.key), key));
+                predicates.add(builder.equal(root.get(ConfigEntity_.configKey), key));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -57,8 +57,8 @@ public class ConfigServiceImpl extends BaseCachingEntityService<ConfigEntity, Lo
             if (!ObjectUtils.isEmpty(model.getId())) {
                 getCacheService().set(this.cacheKeyGenerator.keyById(model.getId()), model);
             }
-            if (StringUtils.isNotEmpty(model.getKey())) {
-                getCacheService().set(this.cacheKeyGenerator.byKey(model.getKey()), model);
+            if (StringUtils.isNotEmpty(model.getConfigKey())) {
+                getCacheService().set(this.cacheKeyGenerator.byKey(model.getConfigKey()), model);
             }
         }
     }
@@ -72,8 +72,8 @@ public class ConfigServiceImpl extends BaseCachingEntityService<ConfigEntity, Lo
             if (!ObjectUtils.isEmpty(model.getId())) {
                 getCacheService().delete(this.cacheKeyGenerator.keyById(model.getId()));
             }
-            if (StringUtils.isNotEmpty(model.getKey())) {
-                getCacheService().delete(this.cacheKeyGenerator.byKey(model.getKey()));
+            if (StringUtils.isNotEmpty(model.getConfigKey())) {
+                getCacheService().delete(this.cacheKeyGenerator.byKey(model.getConfigKey()));
             }
         }
     }

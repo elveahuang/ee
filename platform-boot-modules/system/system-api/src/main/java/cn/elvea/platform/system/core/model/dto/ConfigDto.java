@@ -17,6 +17,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Builder
 public class ConfigDto implements Serializable {
-    private String key;
-    private String value;
+    private String configGroup;
+    private String configKey;
+    private String configValue;
 }

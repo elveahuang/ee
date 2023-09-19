@@ -25,10 +25,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class ConfigEntity extends BaseEntity {
     /**
-     * 分组
-     */
-    private String group;
-    /**
      * 标题
      */
     private String title;
@@ -37,13 +33,17 @@ public class ConfigEntity extends BaseEntity {
      */
     private String label;
     /**
+     * 分组
+     */
+    private String configGroup;
+    /**
      * 参数名
      */
-    private String key;
+    private String configKey;
     /**
      * 参数值
      */
-    private String value;
+    private String configValue;
     /**
      * 默认值
      */
