@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.config.LanguageVersion
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("idea")
     id("java")
@@ -5,11 +9,11 @@ plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm") version "1.9.10"
     id("io.spring.dependency-management") version "1.1.3"
-    id("org.springframework.boot") version "3.1.3" apply false
+    id("org.springframework.boot") version "3.1.4" apply false
     id("com.github.node-gradle.node") version "7.0.0" apply false
-    id("org.graalvm.buildtools.native") version "0.9.24" apply false
+    id("org.graalvm.buildtools.native") version "0.9.27" apply false
     id("com.google.osdetector") version "1.7.3" apply false
-    id("org.hibernate.orm") version "6.2.7.Final" apply false
+    id("org.hibernate.orm") version "6.2.9.Final" apply false
 }
 
 allprojects {
@@ -36,23 +40,34 @@ allprojects {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    configure<KotlinJvmProjectExtension> {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+        kotlinOptions.languageVersion = LanguageVersion.KOTLIN_1_9.versionString
+    }
+
     tasks.withType<Test> {
         useJUnitPlatform()
     }
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.modulith:spring-modulith-bom:1.0.0")
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.3")
+            mavenBom("org.springframework.modulith:spring-modulith-bom:1.0.1")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.4")
             mavenBom("org.springframework.shell:spring-shell-dependencies:3.1.3")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.4")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2022.0.0.0")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.12.1-2022.0.4")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.1.6")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.1.7")
             mavenBom("io.grpc:grpc-bom:1.58.0")
-            mavenBom("cn.hutool:hutool-bom:5.8.21")
+            mavenBom("cn.hutool:hutool-bom:5.8.22")
             mavenBom("me.ahoo.cosid:cosid-bom:2.5.2")
-            mavenBom("org.mockito:mockito-bom:5.3.1")
+            mavenBom("org.mockito:mockito-bom:5.5.0")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:1.9.10")
         }
 
@@ -84,15 +99,15 @@ allprojects {
             dependency("com.baomidou:mybatis-plus-generator:3.5.3.2")
             dependency("com.baomidou:mybatis-plus-boot-starter:3.5.3.2")
             dependency("org.apache.shardingsphere:shardingsphere-jdbc-core:5.4.0")
-            dependency("com.github.jsqlparser:jsqlparser:4.4")
-            dependency("org.redisson:redisson:3.23.3")
-            dependency("org.redisson:redisson-spring-data-31:3.23.3")
-            dependency("org.redisson:redisson-spring-boot-starter:3.23.3")
+            dependency("com.github.jsqlparser:jsqlparser:4.6")
+            dependency("org.redisson:redisson:3.23.5")
+            dependency("org.redisson:redisson-spring-data-31:3.23.5")
+            dependency("org.redisson:redisson-spring-boot-starter:3.23.5")
             // others
-            dependency("com.nimbusds:nimbus-jose-jwt:9.31")
-            dependency("com.nimbusds:oauth2-oidc-sdk:10.13.2")
+            dependency("com.nimbusds:nimbus-jose-jwt:9.35")
+            dependency("com.nimbusds:oauth2-oidc-sdk:10.15")
             dependency("org.json:json:20230618")
-            dependency("com.alibaba:fastjson:2.0.39")
+            dependency("com.alibaba:fastjson:2.0.40")
             dependency("com.github.spotbugs:spotbugs-annotations:4.7.3")
             dependency("org.jetbrains:annotations:24.0.1")
             dependency("org.ow2.asm:asm:9.5")
@@ -106,7 +121,7 @@ allprojects {
             dependency("net.java.dev.jna:jna-platform:5.13.0")
             dependency("nl.basjes.parse.useragent:yauaa:7.22.0")
             dependency("net.logstash.logback:logstash-logback-encoder:7.4")
-            dependency("com.google.protobuf:protobuf-java:3.24.1")
+            dependency("com.google.protobuf:protobuf-java:3.24.3")
             dependency("com.xuxueli:xxl-job-core:2.4.0")
             dependency("org.apache.shardingsphere.elasticjob:elasticjob-lite-core:3.0.3")
             dependency("org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-core:3.0.3")
@@ -114,8 +129,8 @@ allprojects {
             dependency("org.apache.httpcomponents:httpcore-nio:4.4.16")
             dependency("org.apache.httpcomponents:httpclient:4.5.14")
             dependency("org.apache.httpcomponents:httpmime:4.5.14")
-            dependency("net.bytebuddy:byte-buddy:1.14.6")
-            dependency("net.bytebuddy:byte-buddy-agent:1.14.6")
+            dependency("net.bytebuddy:byte-buddy:1.14.8")
+            dependency("net.bytebuddy:byte-buddy-agent:1.14.8")
             dependency("org.bouncycastle:bcpkix-jdk15on:1.70")
             dependency("org.bouncycastle:bcprov-jdk15on:1.70")
             dependency("org.bouncycastle:bcutil-jdk15on:1.70")
@@ -133,10 +148,10 @@ allprojects {
             dependency("org.jodconverter:jodconverter-local-lo:4.4.6")
             dependency("org.jodconverter:jodconverter-remote:4.4.6")
             dependency("org.jodconverter:jodconverter-spring-boot-starter:4.4.6")
-            dependency("org.libreoffice:juh:7.6.0")
-            dependency("org.libreoffice:jurt:7.6.0")
-            dependency("org.libreoffice:ridl:7.6.0")
-            dependency("org.libreoffice:unoil:7.6.0")
+            dependency("org.libreoffice:juh:7.6.1")
+            dependency("org.libreoffice:jurt:7.6.1")
+            dependency("org.libreoffice:ridl:7.6.1")
+            dependency("org.libreoffice:unoil:7.6.1")
             dependency("org.dom4j:dom4j:2.1.4")
             dependency("org.apache.pdfbox:pdfbox:3.0.0")
             dependency("net.coobird:thumbnailator:0.4.20")
@@ -153,18 +168,18 @@ allprojects {
             dependency("com.aliyun:tea-openapi:0.3.0")
             dependency("com.aliyun:tea-rpc:0.1.3")
             dependency("com.aliyun:tea-rpc-util:0.1.3")
-            dependency("com.aliyun:dingtalk:2.0.30")
+            dependency("com.aliyun:dingtalk:2.0.41")
             dependency("com.aliyun:imm20170906:1.23.8")
             dependency("com.aliyun:facebody20191230:5.0.0")
             dependency("com.aliyun:dysmsapi20170525:2.0.24")
             dependency("com.aliyun:alimt20181012:1.2.0")
             dependency("com.aliyun.oss:aliyun-sdk-oss:3.17.1")
-            dependency("com.alipay.sdk:alipay-sdk-java:4.38.61.ALL")
-            dependency("com.qcloud:cos_api:5.6.166")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.835")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.835")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.835")
-            dependency("com.larksuite.oapi:oapi-sdk:2.0.25")
+            dependency("com.alipay.sdk:alipay-sdk-java:4.38.85.ALL")
+            dependency("com.qcloud:cos_api:5.6.173")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.853")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.853")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.853")
+            dependency("com.larksuite.oapi:oapi-sdk:2.0.27")
             // commons
             dependency("commons-io:commons-io:2.13.0")
             dependency("commons-cli:commons-cli:1.5.0")
