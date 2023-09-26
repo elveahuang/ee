@@ -5,7 +5,6 @@ import cn.elvea.platform.commons.core.enums.SslProtocolTypeEnum;
 import cn.elvea.platform.commons.core.extensions.mail.MailBody;
 import cn.elvea.platform.commons.core.extensions.mail.MailSender;
 import cn.elvea.platform.commons.core.extensions.mail.MailServer;
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,12 +25,12 @@ public class SpringMailSender implements MailSender {
     private MailServer server;
 
     @Override
-    public void send(MailBody body) throws MessagingException {
+    public void send(MailBody body) throws Exception {
         this.send(this.server, body);
     }
 
     @Override
-    public void send(MailServer server, MailBody body) throws MessagingException {
+    public void send(MailServer server, MailBody body) throws Exception {
         JavaMailSender sender = getJavaMailSender(server);
 
         MimeMessage msg = sender.createMimeMessage();

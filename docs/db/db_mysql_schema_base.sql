@@ -853,7 +853,7 @@ CREATE TABLE `sys_message_user`
     `id`                  BIGINT UNSIGNED  NOT NULL COMMENT 'ID',
     `message_id`          BIGINT UNSIGNED  NOT NULL COMMENT '消息ID',
     `user_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '用户ID',
-    `type`                VARCHAR(50) COMMENT '用户类型',
+    `type_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '类型ID',
     `name`                VARCHAR(255) COMMENT '姓名',
     `email`               VARCHAR(255) COMMENT '邮箱',
     `mobile_country_code` VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '手机区位码',
@@ -867,7 +867,7 @@ CREATE TABLE `sys_message_user`
     `deleted_at`          DATETIME         NULL COMMENT '删除时间',
     CONSTRAINT `pk_sys_message_user` PRIMARY KEY (`id`),
     INDEX `ix_sys_message_user__message_id` (`message_id`),
-    INDEX `ix_sys_message_user__user` (`user_id`, `type`)
+    INDEX `ix_sys_message_user__user` (`user_id`, `type_id`)
 );
 ALTER TABLE `sys_message_user`
     COMMENT '消息用户表';
@@ -946,6 +946,33 @@ CREATE TABLE `sys_message_history`
 );
 ALTER TABLE `sys_message_history`
     COMMENT '消息发送历史记录表';
+
+--
+-- 系统通知表
+--
+
+CREATE TABLE `sys_notice`
+(
+    `id`               BIGINT UNSIGNED  NOT NULL COMMENT 'ID',
+    `subject`          VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '通知标题',
+    `content`          VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '通知内容',
+    `recipient_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '收件人ID',
+    `sender_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '发件人ID',
+    `read_ind`         TINYINT          NOT NULL DEFAULT 0 COMMENT '是否已读',
+    `read_datetime`    DATETIME         NULL COMMENT '阅读时间',
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
+    `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME         NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_notice` PRIMARY KEY (`id`),
+    INDEX `ix_sys_notice__sender_id` (`sender_id`),
+    INDEX `ix_sys_notice__recipient_id` (`recipient_id`)
+);
+ALTER TABLE `sys_notice`
+    COMMENT '系统通知表';
 
 --
 -- 宣传栏

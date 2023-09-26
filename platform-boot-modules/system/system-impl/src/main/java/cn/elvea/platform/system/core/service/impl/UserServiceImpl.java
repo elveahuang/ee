@@ -71,6 +71,14 @@ public class UserServiceImpl extends BaseCachingEntityService<UserEntity, Long, 
     }
 
     /**
+     * @see UserService#getSystemAdministrator()
+     */
+    @Override
+    public UserEntity getSystemAdministrator() {
+        return this.findCacheById(1L);
+    }
+
+    /**
      * @see BaseCachingEntityService#setCache(IdEntity)
      */
     @Override

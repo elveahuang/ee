@@ -26,4 +26,9 @@ public interface UserService extends CachingEntityService<UserEntity, Long> {
      */
     UserEntity findByMobile(String mobileCountryCode, String mobileNumber);
 
+    /**
+     * 根据手机查找用户
+     */
+    UserEntity getSystemAdministrator();
+
 }

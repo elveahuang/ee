@@ -247,6 +247,26 @@ values (10010010001, 'label_lang_type__zh_cn', '简体中文', 'Simplified Chine
        (30010000001, 'label__x', '占位', '占位');
 
 -- ==============================¬=======================================================================================
+-- Message
+-- =====================================================================================================================
+
+truncate table sys_message_template_type;
+
+insert into sys_message_template_type (`id`, `code`, `label`, `title`, `status`, `active`)
+values (1, 'NOTICE', 'NOTICE', 'NOTICE', 1, 1),
+       (2, 'MAIL', 'MAIL', 'MAIL', 1, 1),
+       (3, 'SMS', 'SMS', 'SMS', 1, 1),
+       (4, 'WECHAT', 'WECHAT', 'WECHAT', 1, 1),
+       (5, 'WEWORK', 'WEWORK', 'WEWORK', 1, 1),
+       (6, 'LARK', 'LARK', 'LARK', 1, 1),
+       (7, 'DINGTALK', 'DINGTALK', 'DINGTALK', 1, 1);
+
+truncate table sys_message_type;
+
+insert into sys_message_type (`id`, `code`, `label`, `title`, `status`, `active`)
+values (1, 'REGISTER', 'REGISTER', 'REGISTER', 1, 1);
+
+-- ==============================¬=======================================================================================
 -- OAuth
 -- =====================================================================================================================
 

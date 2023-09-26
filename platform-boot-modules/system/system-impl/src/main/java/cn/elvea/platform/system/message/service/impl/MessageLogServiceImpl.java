@@ -16,5 +16,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class MessageLogServiceImpl
-        extends BaseEntityService<MessageLogEntity, Long, MessageLogRepository> implements MessageLogService {
+        extends BaseEntityService<MessageLogEntity, Long, MessageLogRepository>
+        implements MessageLogService {
 }

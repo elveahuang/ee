@@ -13,7 +13,6 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 
@@ -27,56 +26,37 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sys_message")
+@Table(name = "sys_notice")
 @DynamicUpdate
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-public class MessageEntity extends BaseEntity {
+public class NoticeEntity extends BaseEntity {
     /**
-     * 消息类型ID
-     */
-    @NonNull
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long typeId;
-    /**
-     * 目标ID
-     */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long targetId;
-    /**
-     * 目标类型
-     */
-    private Long templateType;
-    /**
-     * 标题
+     * 通知标题
      */
     private String subject;
     /**
-     * 内容
+     * 通知内容
      */
     private String content;
     /**
-     * 数据
+     * 收件人ID
      */
-    private String data;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long recipientId;
     /**
-     * 发布状态
+     * 发件人ID
      */
-    private Integer status;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long senderId;
     /**
-     * 目标发送时间
+     * 是否已读
      */
-    @JsonFormat(pattern = DateTimeConstants.DEFAULT_FULL_DATE_TIME_PATTERN)
-    @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_FULL_DATE_TIME_PATTERN)
-    private LocalDateTime targetSentDatetime;
+    private Boolean readInd;
     /**
      * 发送时间
      */
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_FULL_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_FULL_DATE_TIME_PATTERN)
-    private LocalDateTime sentDatetime;
-    /**
-     * 尝试发送次数
-     */
-    private Integer attempt;
+    private LocalDateTime readDatetime;
 }

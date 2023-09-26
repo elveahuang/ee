@@ -6,6 +6,7 @@ import cn.elvea.platform.commons.core.constants.DateTimeConstants;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -64,4 +65,15 @@ public abstract class BaseEntity extends AbstractEntity {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     private Long deletedBy;
+
+    @Transient
+    public boolean isActiveEntity() {
+        return this.active != null && this.active;
+    }
+
+    @Transient
+    public boolean isInactiveEntity() {
+        return !this.isActiveEntity();
+    }
+
 }

@@ -16,5 +16,23 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class MessageServiceImpl
-        extends BaseEntityService<MessageEntity, Long, MessageRepository> implements MessageService {
+        extends BaseEntityService<MessageEntity, Long, MessageRepository>
+        implements MessageService {
+
+    public void createMessage() {
+
+    }
+
+    public void sendMessage(Long id) {
+        log.info("sendMessage id [{}] start", id);
+
+        MessageEntity message = this.findById(id);
+        if (message == null) {
+            log.info("sendMessage id [{}] failure. message not exist.", id);
+            return;
+        }
+
+        log.info("sendMessage id [{}] done", id);
+    }
+
 }

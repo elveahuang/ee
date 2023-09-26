@@ -8,4 +8,7 @@ import cn.elvea.platform.system.message.model.entity.MessageTemplateEntity;
  * @since 0.0.1
  */
 public interface MessageTemplateService extends EntityService<MessageTemplateEntity, Long> {
+
+    MessageTemplateEntity findByType(Long typeId, Long templateTypeId);
+
 }

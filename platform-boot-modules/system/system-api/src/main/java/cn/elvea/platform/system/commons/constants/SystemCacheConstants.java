@@ -7,7 +7,7 @@ package cn.elvea.platform.system.commons.constants;
 public interface SystemCacheConstants {
 
     // ========================================================================
-    // System
+    // System - Core
     // ========================================================================
 
     String CONFIG = "config";
@@ -37,6 +37,16 @@ public interface SystemCacheConstants {
     String ENTITY_RELATION = "entity-relation";
 
     String CATALOG_RELATION = "catalog-relation";
+
+    // ========================================================================
+    // System - Message
+    // ========================================================================
+
+    String MESSAGE_TYPE = "message-type";
+
+    String MESSAGE_TEMPLATE_TYPE = "message-template-type";
+
+    String MESSAGE_TEMPLATE = "message-template";
 
     // ========================================================================
     // Catalog

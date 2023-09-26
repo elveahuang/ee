@@ -39,7 +39,7 @@ public class MessageUserEntity extends BaseEntity {
     /**
      * 用户类型
      */
-    private String type;
+    private Integer typeId;
     /**
      * 姓名
      */
@@ -52,4 +52,8 @@ public class MessageUserEntity extends BaseEntity {
      * 手机区位码
      */
     private String mobileCountryCode;
+    /**
+     * 手机号码
+     */
+    private String mobileNumber;
 }
