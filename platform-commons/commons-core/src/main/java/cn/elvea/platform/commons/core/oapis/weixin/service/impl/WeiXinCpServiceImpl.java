@@ -7,7 +7,9 @@ import cn.elvea.platform.commons.core.oapis.weixin.storage.WxCpCacheConfigStorag
 import cn.elvea.platform.commons.core.utils.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
+import me.chanjar.weixin.cp.api.WxCpMessageService;
 import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.api.WxCpUserService;
 import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
 
@@ -69,6 +71,38 @@ public class WeiXinCpServiceImpl implements WeiXinCpService {
         WxCpService wxCpService = new WxCpServiceImpl();
         wxCpService.setWxCpConfigStorage(getConfigStorage(appCpConfig));
         return wxCpService;
+    }
+
+    /**
+     * @see WeiXinCpService#getMessageService(AppCpConfig)
+     */
+    @Override
+    public WxCpMessageService getMessageService() {
+        return this.getMessageService(this.getAppConfig());
+    }
+
+    /**
+     * @see WeiXinCpService#getMessageService(AppCpConfig)
+     */
+    @Override
+    public WxCpMessageService getMessageService(AppCpConfig appConfig) {
+        return this.getService(appConfig).getMessageService();
+    }
+
+    /**
+     * @see WeiXinCpService#getUserService(AppCpConfig)
+     */
+    @Override
+    public WxCpUserService getUserService() {
+        return this.getUserService(this.getAppConfig());
+    }
+
+    /**
+     * @see WeiXinCpService#getUserService(AppCpConfig)
+     */
+    @Override
+    public WxCpUserService getUserService(AppCpConfig appConfig) {
+        return this.getService(appConfig).getUserService();
     }
 
 }

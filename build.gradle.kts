@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.10"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.springframework.boot") version "3.1.4" apply false
-    id("com.github.node-gradle.node") version "7.0.0" apply false
+    id("com.github.node-gradle.node") version "7.0.1" apply false
     id("org.graalvm.buildtools.native") version "0.9.27" apply false
     id("com.google.osdetector") version "1.7.3" apply false
     id("org.hibernate.orm") version "6.2.9.Final" apply false
@@ -38,6 +38,9 @@ allprojects {
     configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
     }
 
     configure<KotlinJvmProjectExtension> {
@@ -59,7 +62,7 @@ allprojects {
         imports {
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.4")
-            mavenBom("org.springframework.shell:spring-shell-dependencies:3.1.3")
+            mavenBom("org.springframework.shell:spring-shell-dependencies:3.1.4")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.4")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2022.0.0.0")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.12.1-2022.0.4")
@@ -79,11 +82,11 @@ allprojects {
             dependency("org.mapstruct:mapstruct-processor:1.5.5.Final")
             dependency("org.projectlombok:lombok-mapstruct-binding:0.2.0")
             // openapi & swagger & springdoc
-            dependency("io.swagger.core.v3:swagger-core-jakarta:2.2.15")
-            dependency("io.swagger.core.v3:swagger-annotations:2.2.15")
-            dependency("io.swagger.core.v3:swagger-annotations-jakarta:2.2.15")
-            dependency("io.swagger.core.v3:swagger-models:2.2.15")
-            dependency("io.swagger.core.v3:swagger-models-jakarta:2.2.15")
+            dependency("io.swagger.core.v3:swagger-core-jakarta:2.2.16")
+            dependency("io.swagger.core.v3:swagger-annotations:2.2.16")
+            dependency("io.swagger.core.v3:swagger-annotations-jakarta:2.2.16")
+            dependency("io.swagger.core.v3:swagger-models:2.2.16")
+            dependency("io.swagger.core.v3:swagger-models-jakarta:2.2.16")
             dependency("org.springdoc:springdoc-openapi-starter-common:2.2.0")
             dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
             dependency("org.springdoc:springdoc-openapi-starter-webflux-ui:2.2.0")
@@ -104,13 +107,13 @@ allprojects {
             dependency("org.redisson:redisson-spring-data-31:3.23.5")
             dependency("org.redisson:redisson-spring-boot-starter:3.23.5")
             // others
-            dependency("com.nimbusds:nimbus-jose-jwt:9.35")
-            dependency("com.nimbusds:oauth2-oidc-sdk:10.15")
+            dependency("com.nimbusds:nimbus-jose-jwt:9.36")
+            dependency("com.nimbusds:oauth2-oidc-sdk:11.1")
             dependency("org.json:json:20230618")
-            dependency("com.alibaba:fastjson:2.0.40")
+            dependency("com.alibaba:fastjson:2.0.41")
             dependency("com.github.spotbugs:spotbugs-annotations:4.7.3")
             dependency("org.jetbrains:annotations:24.0.1")
-            dependency("org.ow2.asm:asm:9.5")
+            dependency("org.ow2.asm:asm:9.6")
             dependency("ognl:ognl:3.4.2")
             dependency("org.lionsoul:ip2region:2.7.0")
             dependency("com.squareup.okio:okio:3.5.0")

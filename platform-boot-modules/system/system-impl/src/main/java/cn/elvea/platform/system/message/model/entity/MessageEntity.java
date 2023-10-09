@@ -46,7 +46,7 @@ public class MessageEntity extends BaseEntity {
     /**
      * 目标类型
      */
-    private Long templateType;
+    private String targetType;
     /**
      * 标题
      */

@@ -39,6 +39,7 @@ public class MessageUserEntity extends BaseEntity {
     /**
      * 用户类型
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Integer typeId;
     /**
      * 姓名

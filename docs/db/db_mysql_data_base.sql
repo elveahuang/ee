@@ -253,18 +253,21 @@ values (10010010001, 'label_lang_type__zh_cn', '简体中文', 'Simplified Chine
 truncate table sys_message_template_type;
 
 insert into sys_message_template_type (`id`, `code`, `label`, `title`, `status`, `active`)
-values (1, 'NOTICE', 'NOTICE', 'NOTICE', 1, 1),
-       (2, 'MAIL', 'MAIL', 'MAIL', 1, 1),
-       (3, 'SMS', 'SMS', 'SMS', 1, 1),
-       (4, 'WECHAT', 'WECHAT', 'WECHAT', 1, 1),
-       (5, 'WEWORK', 'WEWORK', 'WEWORK', 1, 1),
-       (6, 'LARK', 'LARK', 'LARK', 1, 1),
-       (7, 'DINGTALK', 'DINGTALK', 'DINGTALK', 1, 1);
+values (1001, 'NOTICE', 'NOTICE', 'NOTICE', 1, 1),
+       (1002, 'MAIL', 'MAIL', 'MAIL', 1, 1),
+       (1003, 'SMS', 'SMS', 'SMS', 1, 1),
+       (1004, 'WECHAT', 'WECHAT', 'WECHAT', 1, 1),
+       (1005, 'WEWORK', 'WEWORK', 'WEWORK', 1, 1),
+       (1006, 'LARK', 'LARK', 'LARK', 1, 1),
+       (1007, 'DINGTALK', 'DINGTALK', 'DINGTALK', 1, 1);
 
 truncate table sys_message_type;
 
 insert into sys_message_type (`id`, `code`, `label`, `title`, `status`, `active`)
-values (1, 'REGISTER', 'REGISTER', 'REGISTER', 1, 1);
+values (1001, 'REGISTER_CAPTCHA_MESSAGE', '', '', 1, 1),
+       (1002, 'REGISTER_SUCCESS_MESSAGE', '', '', 1, 1);
+
+truncate table sys_message_template;
 
 -- ==============================¬=======================================================================================
 -- OAuth

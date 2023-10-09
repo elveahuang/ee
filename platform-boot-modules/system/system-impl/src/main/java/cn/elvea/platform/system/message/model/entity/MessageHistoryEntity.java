@@ -47,7 +47,7 @@ public class MessageHistoryEntity extends BaseEntity {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long targetId;
     /**
-     * '目标类型'
+     * 目标类型
      */
     private String targetType;
 }

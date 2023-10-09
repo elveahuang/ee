@@ -1,7 +1,9 @@
 package cn.elvea.platform.commons.core.oapis.weixin.service;
 
 import cn.elvea.platform.commons.core.oapis.weixin.config.AppCpConfig;
+import me.chanjar.weixin.cp.api.WxCpMessageService;
 import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.api.WxCpUserService;
 import me.chanjar.weixin.cp.config.WxCpConfigStorage;
 
 /**
@@ -17,5 +19,13 @@ public interface WeiXinCpService {
     WxCpService getService();
 
     WxCpService getService(AppCpConfig appConfig);
+
+    WxCpMessageService getMessageService();
+
+    WxCpMessageService getMessageService(AppCpConfig appConfig);
+
+    WxCpUserService getUserService();
+
+    WxCpUserService getUserService(AppCpConfig appConfig);
 
 }

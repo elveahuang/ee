@@ -4,8 +4,6 @@ import cn.elvea.platform.commons.core.enums.BaseEnum;
 import lombok.Getter;
 
 /**
- * 消息发送类型枚举定义
- *
  * @author elvea
  * @since 0.0.1
  */

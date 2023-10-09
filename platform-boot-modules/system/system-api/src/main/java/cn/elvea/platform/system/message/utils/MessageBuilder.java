@@ -107,18 +107,23 @@ public class MessageBuilder {
         return this;
     }
 
-    public MessageBuilder recipient(LocalDateTime targetSentDatetime) {
-        this.targetSentDatetime = targetSentDatetime;
-        return this;
-    }
-
     public MessageBuilder recipient(String mobileCountryCode, String mobileNumber) {
         this.recipients.add(new MessageUserDto(MessageUserTypeEnum.TO, mobileCountryCode, mobileNumber));
         return this;
     }
 
+    public MessageBuilder recipientByUsername(String username) {
+        this.recipients.add(MessageUserDto.builder().type(MessageUserTypeEnum.TO).account(username).build());
+        return this;
+    }
+
     public MessageBuilder templateType(MessageTemplateTypeEnum templateType) {
         this.templateTypeList.add(templateType);
+        return this;
+    }
+
+    public MessageBuilder targetSentDatetime(LocalDateTime targetSentDatetime) {
+        this.targetSentDatetime = targetSentDatetime;
         return this;
     }
 

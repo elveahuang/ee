@@ -1,11 +1,9 @@
 package cn.elvea.platform.system.message.api.impl;
 
+import cn.elvea.platform.commons.core.constants.GlobalConstants;
 import cn.elvea.platform.commons.core.enums.BaseEnum;
 import cn.elvea.platform.commons.core.extensions.template.HtmlTemplateService;
-import cn.elvea.platform.commons.core.utils.JacksonUtils;
-import cn.elvea.platform.commons.core.utils.ObjectUtils;
-import cn.elvea.platform.commons.core.utils.SpringUtils;
-import cn.elvea.platform.commons.core.utils.StringUtils;
+import cn.elvea.platform.commons.core.utils.*;
 import cn.elvea.platform.system.core.model.entity.UserEntity;
 import cn.elvea.platform.system.core.service.UserService;
 import cn.elvea.platform.system.message.api.MessageApi;
@@ -18,14 +16,16 @@ import cn.elvea.platform.system.message.model.dto.SendMessageDto;
 import cn.elvea.platform.system.message.model.entity.*;
 import cn.elvea.platform.system.message.sender.*;
 import cn.elvea.platform.system.message.service.*;
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.compress.utils.Lists;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,32 +52,6 @@ public class MessageApiImpl implements MessageApi {
     private final MessageTemplateTypeService messageTemplateTypeService;
 
     private final UserService userService;
-
-    /**
-     * 辅助方法，用于获取系统用户的邮箱和手机号码等信息
-     */
-    private MessageUserEntity createMessageUser(Long messageId, MessageUserDto userDto) {
-        MessageUserEntity.MessageUserEntityBuilder builder = MessageUserEntity.builder()
-                .messageId(messageId)
-                .typeId(userDto.getType().getValue())
-                .userId((ObjectUtils.isEmpty(userDto.getUserId()) || userDto.getUserId() <= 0) ? 0L : userDto.getUserId());
-
-        UserEntity userEntity = null;
-        if (!ObjectUtils.isEmpty(userDto.getUserId()) && userDto.getUserId() > 0) {
-            userEntity = this.userService.findCacheById(userDto.getUserId());
-        }
-
-        if (userEntity != null) {
-            builder.email(StringUtils.isNotEmpty(userDto.getEmail()) ? userDto.getEmail() : userEntity.getEmail());
-            builder.mobileCountryCode(StringUtils.isNotEmpty(userDto.getMobileCountryCode()) ? userDto.getMobileCountryCode() : userEntity.getMobileCountryCode());
-            builder.mobileNumber(StringUtils.isNotEmpty(userDto.getMobileNumber()) ? userDto.getMobileNumber() : userEntity.getMobileNumber());
-        } else {
-            builder.email(userDto.getEmail());
-            builder.mobileCountryCode(userDto.getMobileCountryCode());
-            builder.mobileNumber(userDto.getMobileNumber());
-        }
-        return builder.build();
-    }
 
     /**
      * @see MessageApi#createMessage(CreateMessageDto)
@@ -185,6 +159,31 @@ public class MessageApiImpl implements MessageApi {
     }
 
     /**
+     * @see MessageApi#sendMessage()
+     */
+    @Override
+    public void sendMessage() throws Exception {
+        log.info("sendMessage start...");
+        List<MessageEntity> messageEntityList = this.messageService.findByStatus(Collections.singletonList(MessageStatusEnum.PENDING));
+        if (CollectionUtils.isNotEmpty(messageEntityList)) {
+            log.info("sendMessage. {} messages found.", messageEntityList.size());
+            for (MessageEntity messageEntity : messageEntityList) {
+                try {
+                    log.info("sendMessage. message [{}] send...", messageEntity.getId());
+                    messageEntity.setStatus(MessageStatusEnum.SENDING.getValue());
+                    this.messageService.save(messageEntity);
+                    log.info("sendMessage. message [{}] sent successfully.", messageEntity.getId());
+                } catch (Exception e) {
+                    log.info("sendMessage. message [{}] sent failed.", messageEntity.getId(), e);
+                }
+            }
+        } else {
+            log.info("sendMessage. no message found.");
+        }
+        log.info("sendMessage done.");
+    }
+
+    /**
      * @see MessageApi#sendMessage(Long)
      */
     @Override
@@ -285,6 +284,95 @@ public class MessageApiImpl implements MessageApi {
         log.info("Send message [{}]. done.", messageId);
     }
 
+    /**
+     * @see MessageApi#initTemplate()
+     */
+    @Override
+    public void initTemplate() throws Exception {
+        log.info("Init message template. start.");
+
+        List<MessageTypeEntity> messageTypeEntityList = this.messageTypeService.findAll();
+        if (CollectionUtils.isEmpty(messageTypeEntityList)) {
+            log.info("Init message template. empty message type. skip.");
+            return;
+        }
+
+        List<MessageTemplateTypeEntity> messageTemplateTypeEntityList = this.messageTemplateTypeService.findAll();
+        if (CollectionUtils.isEmpty(messageTemplateTypeEntityList)) {
+            log.info("Init message template. empty message template type. skip.");
+            return;
+        }
+
+        for (MessageTypeEntity messageTypeEntity : messageTypeEntityList) {
+            log.info("Init message template for type [{}]. start.", messageTypeEntity.getCode());
+            for (MessageTemplateTypeEntity messageTemplateTypeEntity : messageTemplateTypeEntityList) {
+                Long id = Long.valueOf(String.valueOf(messageTypeEntity.getId()).concat(String.valueOf(messageTemplateTypeEntity.getId())));
+
+                MessageTemplateEntity messageTemplateEntity = this.messageTemplateService.findById(id);
+                if (messageTemplateEntity == null) {
+                    log.info("Init message template for type [{}]. create message template.", messageTypeEntity.getCode());
+                    messageTemplateEntity = new MessageTemplateEntity();
+                    messageTemplateEntity.setId(id);
+                    messageTemplateEntity.setTypeId(messageTypeEntity.getId());
+                    messageTemplateEntity.setTemplateTypeId(messageTemplateTypeEntity.getId());
+                    messageTemplateEntity.setContent("");
+                    this.messageTemplateService.insert(messageTemplateEntity);
+                } else {
+                    log.info("Init message template for type [{}]. message template exists. skip.", messageTypeEntity.getCode());
+                }
+            }
+            log.info("Init message template for type [{}]. done.", messageTypeEntity.getCode());
+        }
+
+        log.info("Init message template. done.");
+    }
+
+    /**
+     * @see MessageApi#syncTemplate(boolean)
+     */
+    @Override
+    public void syncTemplate(boolean force) throws Exception {
+        log.info("Sync message template force [{}]. start.", force);
+
+        List<MessageTypeEntity> messageTypeEntityList = this.messageTypeService.findAll();
+        if (CollectionUtils.isEmpty(messageTypeEntityList)) {
+            log.info("Empty Message Type.");
+            return;
+        }
+
+        for (MessageTypeEntity messageTypeEntity : messageTypeEntityList) {
+            log.info("Sync message template for type [{}]. start.", messageTypeEntity.getCode());
+            List<MessageTemplateEntity> messageTemplateEntityList = this.messageTemplateService.findAll();
+            if (CollectionUtils.isEmpty(messageTemplateEntityList)) {
+                log.info("Sync message template for type [{}]. empty template.", messageTypeEntity.getCode());
+                continue;
+            }
+            for (MessageTemplateEntity messageTemplateEntity : messageTemplateEntityList) {
+                MessageTemplateTypeEntity messageTemplateTypeEntity = this.messageTemplateTypeService.findById(messageTemplateEntity.getTypeId());
+                if (messageTemplateTypeEntity == null) {
+                    continue;
+                }
+                log.info("Sync message template for type [{}] template [{}]. start.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode());
+                if (StringUtils.isEmpty(messageTemplateEntity.getContent()) || force) {
+                    String content = "";
+                    try {
+                        // 获取模板文件
+                        ClassPathResource classPathResource = new ClassPathResource("/template/message/" + messageTypeEntity.getCode() + "__" + messageTemplateTypeEntity.getCode() + ".html");
+                        content = IOUtils.toString(classPathResource.getInputStream(), GlobalConstants.ENCODING);
+                    } catch (Exception e) {
+                        log.error("Sync message template for type [{}] template [{}]. failed to load template.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode(), e);
+                    }
+                    messageTemplateEntity.setContent(content);
+                    this.messageTemplateService.save(messageTemplateEntity);
+                }
+                log.info("Sync message template for type [{}] template [{}]. done.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode());
+            }
+            log.info("Sync message template for type [{}]. done.", messageTypeEntity.getCode());
+        }
+
+        log.info("Sync message template done.");
+    }
+
     private MessageSender getMessageSender(MessageTemplateTypeEnum messageTemplateTypeEnum) {
         if (messageTemplateTypeEnum == null) {
             return null;
@@ -298,6 +386,32 @@ public class MessageApiImpl implements MessageApi {
             case LARK -> SpringUtils.getBean(MessageLarkSender.class);
             case DINGTALK -> SpringUtils.getBean(MessageDingTalkSender.class);
         };
+    }
+
+    /**
+     * 辅助方法，用于获取系统用户的邮箱和手机号码等信息
+     */
+    private MessageUserEntity createMessageUser(Long messageId, MessageUserDto userDto) {
+        MessageUserEntity.MessageUserEntityBuilder builder = MessageUserEntity.builder()
+                .messageId(messageId)
+                .typeId(userDto.getType().getValue())
+                .userId((ObjectUtils.isEmpty(userDto.getUserId()) || userDto.getUserId() <= 0) ? 0L : userDto.getUserId());
+
+        UserEntity userEntity = null;
+        if (!ObjectUtils.isEmpty(userDto.getUserId()) && userDto.getUserId() > 0) {
+            userEntity = this.userService.findCacheById(userDto.getUserId());
+        }
+
+        if (userEntity != null) {
+            builder.email(StringUtils.isNotEmpty(userDto.getEmail()) ? userDto.getEmail() : userEntity.getEmail());
+            builder.mobileCountryCode(StringUtils.isNotEmpty(userDto.getMobileCountryCode()) ? userDto.getMobileCountryCode() : userEntity.getMobileCountryCode());
+            builder.mobileNumber(StringUtils.isNotEmpty(userDto.getMobileNumber()) ? userDto.getMobileNumber() : userEntity.getMobileNumber());
+        } else {
+            builder.email(userDto.getEmail());
+            builder.mobileCountryCode(userDto.getMobileCountryCode());
+            builder.mobileNumber(userDto.getMobileNumber());
+        }
+        return builder.build();
     }
 
 }
