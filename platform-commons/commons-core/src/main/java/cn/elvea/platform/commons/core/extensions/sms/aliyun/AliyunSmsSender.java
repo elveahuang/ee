@@ -4,6 +4,7 @@ import cn.elvea.platform.commons.core.extensions.sms.SmsBody;
 import cn.elvea.platform.commons.core.extensions.sms.SmsSender;
 import cn.elvea.platform.commons.core.extensions.sms.SmsServer;
 import cn.elvea.platform.commons.core.utils.GsonUtils;
+import cn.elvea.platform.commons.core.utils.StringUtils;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
@@ -60,10 +61,12 @@ public class AliyunSmsSender implements SmsSender {
 
     @NonNull
     private static SendSmsRequest getRequest(ServerConfig server, SmsBody body) {
+        String template = StringUtils.isNotEmpty(body.getTemplate()) ? body.getTemplate() : server.getTemplate();
+
         SendSmsRequest request = new SendSmsRequest();
         request.setPhoneNumbers(body.getMobileNumber());
         request.setSignName(server.getSignName());
-        request.setTemplateCode(server.getTemplate());
+        request.setTemplateCode(template);
         request.setTemplateParam(GsonUtils.toJson(body.getParams()));
 
         return request;
@@ -97,6 +100,5 @@ public class AliyunSmsSender implements SmsSender {
         private String template;
 
     }
-
 
 }

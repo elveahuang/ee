@@ -885,6 +885,8 @@ CREATE TABLE `sys_message_content`
     `message_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '消息ID',
     `template_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '模板类型ID',
     `content`          TEXT COMMENT '消息内容',
+    `resp`             TEXT COMMENT '响应内容',
+    `exception`        TEXT COMMENT '异常内容',
     `sent_datetime`    DATETIME COMMENT '发送时间',
     `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',

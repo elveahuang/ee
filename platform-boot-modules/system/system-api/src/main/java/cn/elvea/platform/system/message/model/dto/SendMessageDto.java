@@ -1,9 +1,11 @@
 package cn.elvea.platform.system.message.model.dto;
 
+import com.google.common.collect.Maps;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author elvea
@@ -25,6 +27,9 @@ public class SendMessageDto implements Serializable {
     private String subject;
 
     private String content;
+
+    @Builder.Default
+    private Map<String, Object> params = Maps.newHashMap();
 
     private MessageSenderDto sender;
 

@@ -1,6 +1,7 @@
 package cn.elvea.platform.system.message.service.impl;
 
 import cn.elvea.platform.commons.core.data.jpa.service.BaseEntityService;
+import cn.elvea.platform.system.message.enums.MessageStatusEnum;
 import cn.elvea.platform.system.message.model.entity.MessageContentEntity;
 import cn.elvea.platform.system.message.model.entity.MessageContentEntity_;
 import cn.elvea.platform.system.message.repository.MessageContentRepository;
@@ -36,6 +37,43 @@ public class MessageContentServiceImpl
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);
+    }
+
+    /**
+     * @see MessageContentService#success(Long, String)
+     */
+    @Override
+    public void success(Long id, String resp) {
+        MessageContentEntity entity = this.findById(id);
+        if (entity != null) {
+            entity.setResp(resp);
+            entity.setSentDatetime(getCurLocalDateTime());
+            entity.setStatus(MessageStatusEnum.FAIL.getValue());
+            this.save(entity);
+        }
+    }
+
+    /**
+     * @see MessageContentService#fail(Long, String)
+     */
+    @Override
+    public void fail(Long id, String resp) {
+        this.fail(id, resp, "");
+    }
+
+    /**
+     * @see MessageContentService#fail(Long, String, String)
+     */
+    @Override
+    public void fail(Long id, String resp, String exception) {
+        MessageContentEntity entity = this.findById(id);
+        if (entity != null) {
+            entity.setResp(resp);
+            entity.setException(exception);
+            entity.setSentDatetime(getCurLocalDateTime());
+            entity.setStatus(MessageStatusEnum.SENT.getValue());
+            this.save(entity);
+        }
     }
 
 }

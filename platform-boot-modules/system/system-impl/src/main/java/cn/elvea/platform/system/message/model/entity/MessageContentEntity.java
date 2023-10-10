@@ -11,6 +11,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
 /**
  * @author elvea
  * @since 0.0.1
@@ -41,9 +43,17 @@ public class MessageContentEntity extends BaseEntity {
      */
     private String content;
     /**
+     * 响应内容
+     */
+    private String resp;
+    /**
+     * 异常内容
+     */
+    private String exception;
+    /**
      * 发送时间
      */
-    private String sentDatetime;
+    private LocalDateTime sentDatetime;
     /**
      * 发送状态
      */

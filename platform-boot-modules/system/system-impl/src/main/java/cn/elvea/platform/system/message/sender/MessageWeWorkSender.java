@@ -1,11 +1,15 @@
 package cn.elvea.platform.system.message.sender;
 
 import cn.elvea.platform.commons.core.oapis.weixin.service.WeiXinCpService;
+import cn.elvea.platform.commons.core.utils.ExceptionUtils;
+import cn.elvea.platform.commons.core.utils.GsonUtils;
 import cn.elvea.platform.commons.core.utils.StringUtils;
 import cn.elvea.platform.system.message.model.dto.SendMessageDto;
+import cn.elvea.platform.system.message.service.MessageContentService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 import me.chanjar.weixin.cp.bean.message.WxCpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +23,16 @@ public class MessageWeWorkSender implements MessageSender {
 
     private WeiXinCpService weiXinCpService;
 
+    private MessageContentService messageContentService;
+
     @Override
     public void send(SendMessageDto message) {
-        Long messageId = message.getId();
         try {
-            log.info("Send wework message [{}] start", messageId);
+            log.info("Send wework message. message id [{}]. message content id [{}]. start", message.getId(), message.getContentId());
 
             // 检查企微服务是否已经启动
             if (this.weiXinCpService == null) {
-                log.error("Send wework message [{}] failed. wework is disabled.", message.getId());
+                log.info("Send wework message. message id [{}]. message content id [{}]. failed. wework is disabled. ", message.getId(), message.getContentId());
                 return;
             }
 
@@ -38,47 +43,68 @@ public class MessageWeWorkSender implements MessageSender {
             if (StringUtils.isNotEmpty(username)) {
                 try {
                     // 先检测当前用户在企业微信里面是否存在
-                    log.info("Send wework message [{}]. check user [{}].", messageId, username);
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check user [{}].", message.getId(), message.getContentId(), username);
+
                     WxCpUser wxCpUser = weiXinCpService.getUserService().getById(username);
                     wxCpUserId = wxCpUser.getUserId();
-                    log.info("Send wework message [{}]. valid user. username [{}]. wxCpUserId [{}].", messageId, username, wxCpUserId);
+
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check user [{}]. valid user [{}].", message.getId(), message.getContentId(), username, wxCpUserId);
                 } catch (Exception e) {
-                    log.error("Send wework message [{}]. invalid user. username [{}]. ", messageId, username, e);
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check user [{}]. failed.", message.getId(), message.getContentId(), username);
                 }
             }
 
             if (StringUtils.isEmpty(wxCpUserId) && StringUtils.isNotEmpty(mobile)) {
                 try {
-                    // 先检测当前用户在企业微信里面是否存在
-                    log.info("Send wework message [{}]. check user [{}].", messageId, mobile);
+                    // 先检测当前手机号码在企业微信里面是否存在
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}].", message.getId(), message.getContentId(), mobile);
+
                     wxCpUserId = weiXinCpService.getUserService().getUserId(mobile);
-                    log.info("Send wework message [{}]. valid user. mobile [{}]. wxCpUserId [{}].", messageId, mobile, wxCpUserId);
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}]. valid user [{}].", message.getId(), message.getContentId(), mobile, wxCpUserId);
                 } catch (Exception e) {
-                    log.error("Send wework message [{}]. invalid user. mobile [{}]. ", messageId, mobile, e);
+                    log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}]. failed.", message.getId(), message.getContentId(), mobile);
                 }
             }
 
             if (StringUtils.isEmpty(wxCpUserId)) {
-                log.info("Send wework message [{}] failed. invalid user.", message.getId());
+                log.info("Send wework message. message id [{}]. message content id [{}]. invalid user.", message.getId(), message.getContentId());
                 return;
             }
 
+            // 发送企微消息
             WxCpMessage wxCpMessage = WxCpMessage
                     .TEXT()
                     .agentId(weiXinCpService.getConfigStorage().getAgentId())
                     .toUser(wxCpUserId)
                     .content(message.getContent())
                     .build();
-            weiXinCpService.getMessageService().send(wxCpMessage);
-            log.info("Send wework message [{}] done.", message.getId());
+            WxCpMessageSendResult result = weiXinCpService.getMessageService().send(wxCpMessage);
+
+            log.info("Send wework message. message id [{}]. message content id [{}]. result - [{}].", message.getId(), message.getContentId(), GsonUtils.toJson(result));
+            if (result.getErrCode() == 0) {
+                // 设置消息内容发送状态
+                this.messageContentService.success(message.getContentId(), GsonUtils.toJson(result));
+                log.info("Send wework message. message id [{}]. message content id [{}]. done.", message.getId(), message.getContentId());
+            } else {
+                // 设置消息内容发送状态
+                this.messageContentService.fail(message.getContentId(), GsonUtils.toJson(result));
+                log.info("Send wework message. message id [{}]. message content id [{}]. done.", message.getId(), message.getContentId());
+            }
         } catch (Exception e) {
-            log.error("Send wework message [{}] failed.", message.getId(), e);
+            // 设置消息内容发送状态
+            this.messageContentService.fail(message.getContentId(), "", ExceptionUtils.getStackTraceAsString(e));
+            log.error("Send wework message. message id [{}]. message content id [{}]. failed.", message.getId(), message.getContentId(), e);
         }
     }
 
     @Autowired(required = false)
     public void setWeiXinCpService(WeiXinCpService weiXinCpService) {
         this.weiXinCpService = weiXinCpService;
+    }
+
+    @Autowired
+    public void setMessageContentService(MessageContentService messageContentService) {
+        this.messageContentService = messageContentService;
     }
 
 }

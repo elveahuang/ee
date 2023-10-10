@@ -2,13 +2,14 @@ package cn.elvea.platform.system.message.sender;
 
 import cn.elvea.platform.commons.core.oapis.lark.message.LarkMessagePayload;
 import cn.elvea.platform.commons.core.oapis.lark.service.LarkService;
+import cn.elvea.platform.commons.core.utils.ExceptionUtils;
 import cn.elvea.platform.commons.core.utils.GsonUtils;
 import cn.elvea.platform.system.message.model.dto.SendMessageDto;
+import cn.elvea.platform.system.message.service.MessageContentService;
 import com.lark.oapi.service.im.v1.enums.CreateMessageReceiveIdTypeEnum;
 import com.lark.oapi.service.im.v1.model.CreateMessageReq;
 import com.lark.oapi.service.im.v1.model.CreateMessageReqBody;
 import com.lark.oapi.service.im.v1.model.CreateMessageResp;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,16 +20,16 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MessageLarkSender implements MessageSender {
 
     private LarkService larkService;
 
+    private MessageContentService messageContentService;
+
     @Override
     public void send(SendMessageDto message) {
-        Long messageId = message.getId();
         try {
-            log.info("Send lark message [{}] start", messageId);
+            log.info("Send lark message. message id [{}]. message content id [{}]. start", message.getId(), message.getContentId());
 
             // 检查飞书服务是否已经启动
             if (this.larkService == null) {
@@ -36,6 +37,7 @@ public class MessageLarkSender implements MessageSender {
                 return;
             }
 
+            // 发送飞书消息
             LarkMessagePayload payload = GsonUtils.parse(message.getContent(), LarkMessagePayload.class);
             CreateMessageReqBody messageReqBody = CreateMessageReqBody.newBuilder()
                     .content(GsonUtils.toJson(message.getContent()))
@@ -46,20 +48,33 @@ public class MessageLarkSender implements MessageSender {
                     .createMessageReqBody(messageReqBody)
                     .receiveIdType(CreateMessageReceiveIdTypeEnum.USER_ID)
                     .build();
-            CreateMessageResp messageResp = larkService.getImService().message().create(messageReq);
-            if (messageResp.getCode() != 0) {
-                log.error("Send lark message [{}] failed.", message.getId());
+            CreateMessageResp resp = larkService.getImService().message().create(messageReq);
+
+            log.info("Send lark message. message id [{}]. message content id [{}]. result - [{}].", message.getId(), message.getContentId(), GsonUtils.toJson(resp));
+            if (resp.getCode() == 0) {
+                // 设置消息内容发送状态
+                this.messageContentService.success(message.getContentId(), GsonUtils.toJson(resp));
+                log.info("Send lark message. message id [{}]. message content id [{}]. done.", message.getId(), message.getContentId());
             } else {
-                log.info("Send lark message [{}] done.", message.getId());
+                // 设置消息内容发送状态
+                this.messageContentService.fail(message.getContentId(), GsonUtils.toJson(resp));
+                log.info("Send lark message. message id [{}]. message content id [{}]. done.", message.getId(), message.getContentId());
             }
         } catch (Exception e) {
-            log.error("Send lark message [{}] failed.", message.getId(), e);
+            // 设置消息内容发送状态
+            this.messageContentService.fail(message.getContentId(), "", ExceptionUtils.getStackTraceAsString(e));
+            log.error("Send lark message. message id [{}]. message content id [{}]. failed.", message.getId(), message.getContentId(), e);
         }
     }
 
     @Autowired(required = false)
     public void setLarkService(LarkService larkService) {
         this.larkService = larkService;
+    }
+
+    @Autowired()
+    public void setMessageContentService(MessageContentService messageContentService) {
+        this.messageContentService = messageContentService;
     }
 
 }

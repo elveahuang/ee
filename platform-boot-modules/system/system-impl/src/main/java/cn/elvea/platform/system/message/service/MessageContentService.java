@@ -11,9 +11,12 @@ import java.util.List;
  */
 public interface MessageContentService extends EntityService<MessageContentEntity, Long> {
 
-    /**
-     * 获取消息内容
-     */
     List<MessageContentEntity> findByMessage(Long messageId);
+
+    void success(Long id, String resp);
+
+    void fail(Long id, String resp);
+
+    void fail(Long id, String resp, String exception);
 
 }

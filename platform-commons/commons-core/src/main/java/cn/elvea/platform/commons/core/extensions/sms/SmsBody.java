@@ -16,6 +16,7 @@ import java.util.Map;
 public class SmsBody implements Serializable {
     private String mobileCountryCode;
     private String mobileNumber;
+    private String template;
     @Builder.Default
     private Map<String, Object> params = Maps.newHashMap();
 }

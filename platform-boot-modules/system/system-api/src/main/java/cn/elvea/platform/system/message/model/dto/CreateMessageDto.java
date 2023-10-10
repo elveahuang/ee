@@ -32,6 +32,9 @@ public class CreateMessageDto implements Serializable {
 
     private String content;
 
+    /**
+     * 模版，一般情况下，短信服务只需要提供模版编号或者名称
+     */
     private String template;
 
     /**

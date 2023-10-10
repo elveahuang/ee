@@ -73,6 +73,22 @@ public class MessageApiTests extends BaseTests {
     }
 
     @Test
+    public void smsMessageTest() throws Exception {
+        CreateMessageDto message = MessageBuilder.builder()
+                .type(SystemMessageConstants.TEST_MESSAGE)
+                .subject("测试消息")
+                .templateType(MessageTemplateTypeEnum.SMS)
+                .content("测试消息内容")
+                .sender(1L)
+                .recipientByUsername("dev")
+                .build();
+        Long id = this.messageApi.createMessage(message);
+        Assertions.assertNotNull(id);
+        Assertions.assertTrue(id > 0);
+        this.messageApi.sendMessage(id);
+    }
+
+    @Test
     public void weWorkMessageTest() throws Exception {
         CreateMessageDto message = MessageBuilder.builder()
                 .type(SystemMessageConstants.TEST_MESSAGE)
