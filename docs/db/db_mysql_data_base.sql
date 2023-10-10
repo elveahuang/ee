@@ -253,21 +253,45 @@ values (10010010001, 'label_lang_type__zh_cn', '简体中文', 'Simplified Chine
 truncate table sys_message_template_type;
 
 insert into sys_message_template_type (`id`, `code`, `label`, `title`, `status`, `active`)
-values (1001, 'NOTICE', 'NOTICE', 'NOTICE', 1, 1),
-       (1002, 'MAIL', 'MAIL', 'MAIL', 1, 1),
-       (1003, 'SMS', 'SMS', 'SMS', 1, 1),
-       (1004, 'WECHAT', 'WECHAT', 'WECHAT', 1, 1),
-       (1005, 'WEWORK', 'WEWORK', 'WEWORK', 1, 1),
-       (1006, 'LARK', 'LARK', 'LARK', 1, 1),
-       (1007, 'DINGTALK', 'DINGTALK', 'DINGTALK', 1, 1);
+values (1001001, 'NOTICE', 'label_message_template_type__NOTICE', '通知', 1, 1),
+       (1001002, 'MAIL', 'label_message_template_type__MAIL', '邮件', 1, 1),
+       (1001003, 'SMS', 'label_message_template_type__SMS', '短息', 1, 1),
+       (1001004, 'WECHAT', 'label_message_template_type__WECHAT', '微信', 1, 1),
+       (1001005, 'WEWORK', 'label_message_template_type__WEWORK', '企微', 1, 1),
+       (1001006, 'LARK', 'label_message_template_type__LARK', '飞书', 1, 1),
+       (1001007, 'DINGTALK', 'label_message_template_type__DINGTALK', '钉钉', 1, 1);
 
 truncate table sys_message_type;
 
 insert into sys_message_type (`id`, `code`, `label`, `title`, `status`, `active`)
-values (1001, 'REGISTER_CAPTCHA_MESSAGE', '', '', 1, 1),
-       (1002, 'REGISTER_SUCCESS_MESSAGE', '', '', 1, 1);
+values (1001000, 'TEST_MESSAGE', 'label_message_type__TEST_MESSAGE', '测试专用消息', 1, 1),
+       (1001001, 'REGISTER_CAPTCHA_MESSAGE', 'label_message_type__REGISTER_CAPTCHA_MESSAGE', '注册验证码消息', 1, 1),
+       (1001002, 'REGISTER_SUCCESS_MESSAGE', 'label_message_type__REGISTER_SUCCESS_MESSAGE', '注册成功消息', 1, 1);
 
 truncate table sys_message_template;
+
+insert into sys_message_template (`id`, `type_id`, `template_type_id`, `content`, `status`, `active`)
+values (1001000001, 1001000, 1001001, '', 1, 1),
+       (1001000002, 1001000, 1001002, '', 1, 1),
+       (1001000003, 1001000, 1001003, '', 1, 1),
+       (1001000004, 1001000, 1001004, '', 1, 1),
+       (1001000005, 1001000, 1001005, '', 1, 1),
+       (1001000006, 1001000, 1001006, '', 1, 1),
+       (1001000007, 1001000, 1001007, '', 1, 1),
+       (1001001001, 1001001, 1001001, '', 1, 1),
+       (1001001002, 1001001, 1001002, '', 1, 1),
+       (1001001003, 1001001, 1001003, '', 1, 1),
+       (1001001004, 1001001, 1001004, '', 1, 1),
+       (1001001005, 1001001, 1001005, '', 1, 1),
+       (1001001006, 1001001, 1001006, '', 1, 1),
+       (1001001007, 1001001, 1001007, '', 1, 1),
+       (1001002001, 1001002, 1001001, '', 1, 1),
+       (1001002002, 1001002, 1001002, '', 1, 1),
+       (1001002003, 1001002, 1001003, '', 1, 1),
+       (1001002004, 1001002, 1001004, '', 1, 1),
+       (1001002005, 1001002, 1001005, '', 1, 1),
+       (1001002006, 1001002, 1001006, '', 1, 1),
+       (1001002007, 1001002, 1001007, '', 1, 1);
 
 -- ==============================¬=======================================================================================
 -- OAuth

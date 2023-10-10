@@ -13,6 +13,8 @@ import cn.elvea.platform.commons.core.utils.EncryptUtils;
 import cn.elvea.platform.commons.core.utils.StringUtils;
 import com.lark.oapi.Client;
 import com.lark.oapi.core.Config;
+import com.lark.oapi.service.contact.v3.ContactService;
+import com.lark.oapi.service.im.v1.ImService;
 
 /**
  * @author elvea
@@ -157,12 +159,36 @@ public class LarkServiceImpl implements LarkService {
         return jsapiSignature;
     }
 
-    public Cache getCache() {
-        return cache;
+    /**
+     * @see LarkService#getContactService()
+     */
+    @Override
+    public ContactService getContactService() {
+        return this.getContactService(this.appConfig);
     }
 
-    public AppConfig getAppConfig() {
-        return appConfig;
+    /**
+     * @see LarkService#getContactService(AppConfig)
+     */
+    @Override
+    public ContactService getContactService(AppConfig appConfig) {
+        return new ContactService(this.appConfig.getConfig());
+    }
+
+    /**
+     * @see LarkService#getImService()
+     */
+    @Override
+    public ImService getImService() {
+        return this.getImService(this.appConfig);
+    }
+
+    /**
+     * @see LarkService#getImService(AppConfig)
+     */
+    @Override
+    public ImService getImService(AppConfig appConfig) {
+        return new ImService(this.appConfig.getConfig());
     }
 
     public void setAppConfig(AppConfig appConfig) {

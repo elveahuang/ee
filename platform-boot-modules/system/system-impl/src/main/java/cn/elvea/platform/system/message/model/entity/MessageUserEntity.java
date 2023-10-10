@@ -44,7 +44,11 @@ public class MessageUserEntity extends BaseEntity {
     /**
      * 姓名
      */
-    private String name;
+    private String displayName;
+    /**
+     * 账号
+     */
+    private String username;
     /**
      * 邮箱
      */

@@ -113,7 +113,7 @@ public class MessageBuilder {
     }
 
     public MessageBuilder recipientByUsername(String username) {
-        this.recipients.add(MessageUserDto.builder().type(MessageUserTypeEnum.TO).account(username).build());
+        this.recipients.add(MessageUserDto.builder().type(MessageUserTypeEnum.TO).username(username).build());
         return this;
     }
 

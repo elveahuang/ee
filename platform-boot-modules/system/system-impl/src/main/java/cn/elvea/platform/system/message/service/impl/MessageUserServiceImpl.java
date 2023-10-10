@@ -56,6 +56,7 @@ public class MessageUserServiceImpl
         MessageSenderDto.MessageSenderDtoBuilder builder = MessageSenderDto.builder();
         if (entity != null) {
             builder.id(entity.getUserId());
+            builder.username(entity.getUsername());
             builder.email(entity.getEmail());
             builder.mobileCountryCode(entity.getMobileCountryCode());
             builder.mobileNumber(entity.getMobileNumber());
@@ -79,6 +80,7 @@ public class MessageUserServiceImpl
         MessageRecipientDto.MessageRecipientDtoBuilder builder = MessageRecipientDto.builder();
         if (entity != null) {
             builder.id(entity.getUserId());
+            builder.username(entity.getUsername());
             builder.email(entity.getEmail());
             builder.mobileCountryCode(entity.getMobileCountryCode());
             builder.mobileNumber(entity.getMobileNumber());

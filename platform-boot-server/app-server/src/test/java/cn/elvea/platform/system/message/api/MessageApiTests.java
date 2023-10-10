@@ -75,12 +75,12 @@ public class MessageApiTests extends BaseTests {
     @Test
     public void weWorkMessageTest() throws Exception {
         CreateMessageDto message = MessageBuilder.builder()
-                .type(SystemMessageConstants.REGISTER_CAPTCHA_MESSAGE)
+                .type(SystemMessageConstants.TEST_MESSAGE)
                 .subject("测试消息")
                 .templateType(MessageTemplateTypeEnum.WEWORK)
                 .content("测试消息内容")
                 .sender(1L)
-                .recipientByUsername("elvea")
+                .recipientByUsername("dev")
                 .build();
         Long id = this.messageApi.createMessage(message);
         Assertions.assertNotNull(id);

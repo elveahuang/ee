@@ -259,7 +259,14 @@ public class MessageApiImpl implements MessageApi {
             log.info("Send message [{}]. handle message content id [{}] templateTypeId [{}].",
                     messageId, messageContentEntity.getMessageId(), messageContentEntity.getTemplateTypeId());
 
-            MessageTemplateTypeEnum messageTemplateTypeEnum = BaseEnum.getEnumByValue(messageContentEntity.getTemplateTypeId(), MessageTemplateTypeEnum.class);
+            MessageTemplateTypeEntity messageTemplateTypeEntity = this.messageTemplateTypeService.findById(messageContentEntity.getTemplateTypeId());
+            if (messageTemplateTypeEntity == null) {
+                log.info("Send message [{}]. handle message content id [{}] templateTypeId [{}]. invalid template type.",
+                        messageId, messageContentEntity.getMessageId(), messageContentEntity.getTemplateTypeId());
+                continue;
+            }
+
+            MessageTemplateTypeEnum messageTemplateTypeEnum = BaseEnum.getEnumByValue(messageTemplateTypeEntity.getCode(), MessageTemplateTypeEnum.class);
             MessageSender messageSender = getMessageSender(messageTemplateTypeEnum);
             if (messageSender == null) {
                 log.info("Send message [{}]. handle message content id [{}] templateTypeId [{}]. invalid sender.",
@@ -334,43 +341,65 @@ public class MessageApiImpl implements MessageApi {
     public void syncTemplate(boolean force) throws Exception {
         log.info("Sync message template force [{}]. start.", force);
 
+        // 查询当前所有消息类型
         List<MessageTypeEntity> messageTypeEntityList = this.messageTypeService.findAll();
         if (CollectionUtils.isEmpty(messageTypeEntityList)) {
-            log.info("Empty Message Type.");
+            log.info("Sync message template. no message type found.");
             return;
         }
 
+        // 查询当前所有消息模版类型
+        List<MessageTemplateTypeEntity> messageTemplateTypeEntityList = this.messageTemplateTypeService.findAll();
+        if (CollectionUtils.isEmpty(messageTemplateTypeEntityList)) {
+            log.info("Sync message template. no message template type found.");
+            return;
+        }
+
+        // 遍历当前所有的消息类型，逐一刷新消息内容模版
         for (MessageTypeEntity messageTypeEntity : messageTypeEntityList) {
-            log.info("Sync message template for type [{}]. start.", messageTypeEntity.getCode());
-            List<MessageTemplateEntity> messageTemplateEntityList = this.messageTemplateService.findAll();
-            if (CollectionUtils.isEmpty(messageTemplateEntityList)) {
-                log.info("Sync message template for type [{}]. empty template.", messageTypeEntity.getCode());
-                continue;
-            }
-            for (MessageTemplateEntity messageTemplateEntity : messageTemplateEntityList) {
-                MessageTemplateTypeEntity messageTemplateTypeEntity = this.messageTemplateTypeService.findById(messageTemplateEntity.getTypeId());
-                if (messageTemplateTypeEntity == null) {
+            Long typeId = messageTypeEntity.getId();
+            String typeCore = messageTypeEntity.getCode();
+
+            log.info("Sync message template. type - [{}]. start.", typeCore);
+
+            for (MessageTemplateTypeEntity messageTemplateTypeEntity : messageTemplateTypeEntityList) {
+                Long templateTypeId = messageTemplateTypeEntity.getId();
+                String templateTypeCode = messageTemplateTypeEntity.getCode();
+
+                log.info("Sync message template. type - [{}]. template type - [{}]. start.", typeCore, templateTypeCode);
+
+                MessageTemplateEntity messageTemplateEntity = this.messageTemplateService.findByType(typeId, templateTypeId);
+
+                // 找不到消息模版记录，直接跳过
+                if (messageTemplateEntity == null) {
+                    log.info("Sync message template. type - [{}]. template type - [{}]. no template found..", typeCore, templateTypeCode);
                     continue;
                 }
-                log.info("Sync message template for type [{}] template [{}]. start.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode());
+
+                // 当强制刷新或者模版内容为空时，读取模版文件，更新到数据库
                 if (StringUtils.isEmpty(messageTemplateEntity.getContent()) || force) {
                     String content = "";
                     try {
                         // 获取模板文件
-                        ClassPathResource classPathResource = new ClassPathResource("/template/message/" + messageTypeEntity.getCode() + "__" + messageTemplateTypeEntity.getCode() + ".html");
+                        String path = ("/template/message/" + messageTypeEntity.getCode() + "/" + messageTemplateTypeEntity.getCode() + ".html").toLowerCase();
+                        ClassPathResource classPathResource = new ClassPathResource(path);
                         content = IOUtils.toString(classPathResource.getInputStream(), GlobalConstants.ENCODING);
                     } catch (Exception e) {
-                        log.error("Sync message template for type [{}] template [{}]. failed to load template.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode(), e);
+                        log.error("Sync message template. type - [{}]. template type - [{}]. failed.", typeCore, templateTypeCode, e);
                     }
+
+                    // 更新模版
                     messageTemplateEntity.setContent(content);
                     this.messageTemplateService.save(messageTemplateEntity);
-                }
-                log.info("Sync message template for type [{}] template [{}]. done.", messageTypeEntity.getCode(), messageTemplateTypeEntity.getCode());
-            }
-            log.info("Sync message template for type [{}]. done.", messageTypeEntity.getCode());
-        }
 
-        log.info("Sync message template done.");
+                    log.info("Sync message template. type - [{}]. template type - [{}]. done.", typeCore, templateTypeCode);
+                } else {
+                    log.info("Sync message template. type - [{}]. template type - [{}]. not empty content. skip.", typeCore, templateTypeCode);
+                }
+            }
+            log.info("Sync message template. type - [{}]. done.", typeCore);
+        }
+        log.info("Sync message template. done.");
     }
 
     private MessageSender getMessageSender(MessageTemplateTypeEnum messageTemplateTypeEnum) {
@@ -403,10 +432,12 @@ public class MessageApiImpl implements MessageApi {
         }
 
         if (userEntity != null) {
+            builder.username(StringUtils.isNotEmpty(userDto.getUsername()) ? userDto.getUsername() : userEntity.getUsername());
             builder.email(StringUtils.isNotEmpty(userDto.getEmail()) ? userDto.getEmail() : userEntity.getEmail());
             builder.mobileCountryCode(StringUtils.isNotEmpty(userDto.getMobileCountryCode()) ? userDto.getMobileCountryCode() : userEntity.getMobileCountryCode());
             builder.mobileNumber(StringUtils.isNotEmpty(userDto.getMobileNumber()) ? userDto.getMobileNumber() : userEntity.getMobileNumber());
         } else {
+            builder.username(userDto.getUsername());
             builder.email(userDto.getEmail());
             builder.mobileCountryCode(userDto.getMobileCountryCode());
             builder.mobileNumber(userDto.getMobileNumber());

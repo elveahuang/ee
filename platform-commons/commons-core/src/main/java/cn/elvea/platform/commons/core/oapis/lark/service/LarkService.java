@@ -4,6 +4,8 @@ import cn.elvea.platform.commons.core.oapis.lark.bean.JsapiSignature;
 import cn.elvea.platform.commons.core.oapis.lark.config.AppConfig;
 import com.lark.oapi.Client;
 import com.lark.oapi.core.Config;
+import com.lark.oapi.service.contact.v3.ContactService;
+import com.lark.oapi.service.im.v1.ImService;
 
 /**
  * 基于飞书官方SDK二次封装
@@ -82,5 +84,26 @@ public interface LarkService {
      * @see JsapiSignature
      */
     JsapiSignature createJsapiSignature(AppConfig appConfig, String url) throws Exception;
+
+
+    /**
+     * @return {@link ContactService}
+     */
+    ContactService getContactService();
+
+    /**
+     * @return {@link ContactService}
+     */
+    ContactService getContactService(AppConfig appConfig);
+
+    /**
+     * @return {@link ImService}
+     */
+    ImService getImService();
+
+    /**
+     * @return {@link ImService}
+     */
+    ImService getImService(AppConfig appConfig);
 
 }

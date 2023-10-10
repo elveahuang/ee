@@ -10,6 +10,10 @@ public interface SystemMessageConstants {
     // Message
     // ========================================================================
 
+    // 测试专属消息
+
+    String TEST_MESSAGE = "TEST_MESSAGE";
+
     // 注册验证码消息
 
     String REGISTER_CAPTCHA_MESSAGE = "REGISTER_CAPTCHA_MESSAGE";

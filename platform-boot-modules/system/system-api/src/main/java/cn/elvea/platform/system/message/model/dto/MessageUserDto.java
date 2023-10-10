@@ -23,7 +23,7 @@ public class MessageUserDto implements Serializable {
 
     private Long userId;
 
-    private String account;
+    private String username;
 
     private String email;
 
