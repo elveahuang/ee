@@ -60,4 +60,13 @@ public abstract class BaseEntity extends AbstractEntity {
      */
     @JsonSerialize(using = ToStringSerializer.class)
     private Long deletedBy;
+
+    public boolean isActiveEntity() {
+        return this.active != null && this.active;
+    }
+
+    public boolean isInactiveEntity() {
+        return !this.isActiveEntity();
+    }
+
 }

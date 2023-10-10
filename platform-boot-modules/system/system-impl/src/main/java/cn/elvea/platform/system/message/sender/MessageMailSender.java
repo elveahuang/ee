@@ -3,8 +3,8 @@ package cn.elvea.platform.system.message.sender;
 import cn.elvea.platform.commons.core.extensions.mail.MailBody;
 import cn.elvea.platform.commons.core.extensions.mail.MailSender;
 import cn.elvea.platform.system.message.model.dto.SendMessageDto;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,15 +13,20 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MessageMailSender implements MessageSender {
 
-    private final MailSender mailSender;
+    private MailSender mailSender;
 
     @Override
     public void send(SendMessageDto message) {
         try {
             log.info("Send mail message [{}] start", message.getId());
+
+            // 检查邮件服务是否已经启动
+            if (this.mailSender == null) {
+                log.error("Send mail message [{}] failed. mail is disabled.", message.getId());
+                return;
+            }
 
             MailBody body = MailBody.builder()
                     .subject(message.getSubject())
@@ -34,4 +39,9 @@ public class MessageMailSender implements MessageSender {
         }
     }
 
+    @Autowired(required = false)
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+    
 }

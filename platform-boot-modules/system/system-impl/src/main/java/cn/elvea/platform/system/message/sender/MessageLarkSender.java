@@ -10,6 +10,7 @@ import com.lark.oapi.service.im.v1.model.CreateMessageReqBody;
 import com.lark.oapi.service.im.v1.model.CreateMessageResp;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,13 +22,20 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class MessageLarkSender implements MessageSender {
 
-    private final LarkService larkService;
+    private LarkService larkService;
 
     @Override
     public void send(SendMessageDto message) {
         Long messageId = message.getId();
         try {
             log.info("Send lark message [{}] start", messageId);
+
+            // 检查飞书服务是否已经启动
+            if (this.larkService == null) {
+                log.error("Send lark message [{}] failed. lark is disabled.", message.getId());
+                return;
+            }
+
             LarkMessagePayload payload = GsonUtils.parse(message.getContent(), LarkMessagePayload.class);
             CreateMessageReqBody messageReqBody = CreateMessageReqBody.newBuilder()
                     .content(GsonUtils.toJson(message.getContent()))
@@ -47,6 +55,11 @@ public class MessageLarkSender implements MessageSender {
         } catch (Exception e) {
             log.error("Send lark message [{}] failed.", message.getId(), e);
         }
+    }
+
+    @Autowired(required = false)
+    public void setLarkService(LarkService larkService) {
+        this.larkService = larkService;
     }
 
 }

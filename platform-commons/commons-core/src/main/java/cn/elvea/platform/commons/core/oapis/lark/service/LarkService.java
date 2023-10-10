@@ -85,7 +85,6 @@ public interface LarkService {
      */
     JsapiSignature createJsapiSignature(AppConfig appConfig, String url) throws Exception;
 
-
     /**
      * @return {@link ContactService}
      */
