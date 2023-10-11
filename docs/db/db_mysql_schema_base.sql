@@ -904,27 +904,6 @@ ALTER TABLE `sys_message_content`
     COMMENT '消息内容表';
 
 --
--- 消息发送日志表
---
-
-DROP TABLE IF EXISTS `sys_message_log`;
-
-CREATE TABLE `sys_message_log`
-(
-    `id`         BIGINT UNSIGNED  NOT NULL COMMENT 'ID',
-    `message_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '消息ID',
-    `details`    VARCHAR(255) COMMENT '日志内容',
-    `exception`  TEXT COMMENT '日志异常',
-    `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
-    CONSTRAINT `pk_sys_message_log` PRIMARY KEY (`id`),
-    INDEX `ix_sys_message_log__message_id` (`message_id`)
-);
-ALTER TABLE `sys_message_log`
-    COMMENT '消息发送日志记录';
-
---
 -- 消息发送历史记录表
 --
 

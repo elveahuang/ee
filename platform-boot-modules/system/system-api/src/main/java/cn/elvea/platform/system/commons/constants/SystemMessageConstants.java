@@ -6,20 +6,20 @@ package cn.elvea.platform.system.commons.constants;
  */
 public interface SystemMessageConstants {
 
-    // ========================================================================
-    // Message
-    // ========================================================================
-
-    // 测试专属消息
-
+    /**
+     * 测试消息
+     */
     String TEST_MESSAGE = "TEST_MESSAGE";
 
-    // 注册验证码消息
+    /**
+     * 验证码
+     */
 
     String CAPTCHA_MESSAGE = "CAPTCHA_MESSAGE";
 
-    // 注册成功消息
-
+    /**
+     * 注册成功消息
+     */
     String REGISTER_SUCCESS_MESSAGE = "REGISTER_SUCCESS_MESSAGE";
 
 }
