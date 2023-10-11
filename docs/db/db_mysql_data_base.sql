@@ -265,7 +265,7 @@ truncate table sys_message_type;
 
 insert into sys_message_type (`id`, `code`, `label`, `title`, `status`, `active`)
 values (1001000, 'TEST_MESSAGE', 'label_message_type__TEST_MESSAGE', '测试专用消息', 1, 1),
-       (1001001, 'REGISTER_CAPTCHA_MESSAGE', 'label_message_type__REGISTER_CAPTCHA_MESSAGE', '注册验证码消息', 1, 1),
+       (1001001, 'CAPTCHA_MESSAGE', 'label_message_type__CAPTCHA_MESSAGE', '验证码消息', 1, 1),
        (1001002, 'REGISTER_SUCCESS_MESSAGE', 'label_message_type__REGISTER_SUCCESS_MESSAGE', '注册成功消息', 1, 1);
 
 truncate table sys_message_template;

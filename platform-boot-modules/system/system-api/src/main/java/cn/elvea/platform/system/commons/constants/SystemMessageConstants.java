@@ -16,7 +16,7 @@ public interface SystemMessageConstants {
 
     // 注册验证码消息
 
-    String REGISTER_CAPTCHA_MESSAGE = "REGISTER_CAPTCHA_MESSAGE";
+    String CAPTCHA_MESSAGE = "CAPTCHA_MESSAGE";
 
     // 注册成功消息
 

@@ -62,10 +62,27 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="DEBUG"/>
+    <!-- 链接日志 -->
+    <appender name="MESSAGE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/message.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/message.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${rolling.policy.size}</maxFileSize>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="WARN"/>
     <logger name="cn.elvea" level="INFO"/>
 
     <logger name="cn.elvea.platform.system.commons.interceptor.LogInterceptor" level="INFO">
+        <appender-ref ref="MESSAGE"/>
+    </logger>
+
+    <logger name="cn.elvea.platform.system.message" level="INFO">
         <appender-ref ref="URL"/>
     </logger>
 

@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" data-bs-theme="light">
+<!-- @thymesVar id="title" type="java.lang.String" -->
+<!-- @thymesVar id="code" type="java.lang.String" -->
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -7,8 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:text="${content}">
-    </div>
+    当前验证码是<span th:text="${code}"></span>1
 </div>
 </body>
 </html>

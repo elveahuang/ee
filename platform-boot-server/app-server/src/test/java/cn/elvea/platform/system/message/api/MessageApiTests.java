@@ -3,15 +3,18 @@ package cn.elvea.platform.system.message.api;
 import cn.elvea.platform.BaseTests;
 import cn.elvea.platform.commons.core.constants.DateTimeConstants;
 import cn.elvea.platform.commons.core.utils.DateTimeUtils;
+import cn.elvea.platform.commons.core.utils.StringUtils;
 import cn.elvea.platform.system.commons.constants.SystemMessageConstants;
 import cn.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import cn.elvea.platform.system.message.model.dto.CreateMessageDto;
 import cn.elvea.platform.system.message.utils.MessageBuilder;
+import com.google.common.collect.Maps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * @author elvea
@@ -25,12 +28,30 @@ public class MessageApiTests extends BaseTests {
     @Test
     public void directMailTest() throws Exception {
         CreateMessageDto message = MessageBuilder.builder()
-                .type(SystemMessageConstants.REGISTER_CAPTCHA_MESSAGE)
+                .type(SystemMessageConstants.CAPTCHA_MESSAGE)
                 .subject("测试消息")
                 .templateType(MessageTemplateTypeEnum.MAIL)
                 .content("测试消息内容 - " + DateTimeUtils.format(LocalDateTime.now(), DateTimeConstants.Pattern.FULL_DATE_TIME))
                 .sender(1L)
-                .recipient("elvea.huang@gmail.com")
+                .recipient("huang@elvea.cn")
+                .build();
+        Long id = this.messageApi.createMessage(message);
+        Assertions.assertNotNull(id);
+        Assertions.assertTrue(id > 0);
+        this.messageApi.sendMessage(id);
+    }
+
+    @Test
+    public void tplMailTest() throws Exception {
+        this.messageApi.syncTemplate(true);
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("code", StringUtils.randomNumeric(6));
+        CreateMessageDto message = MessageBuilder.builder()
+                .type(SystemMessageConstants.CAPTCHA_MESSAGE)
+                .templateType(MessageTemplateTypeEnum.MAIL)
+                .sender(1L)
+                .recipient("me@elvea.cn")
+                .params(params)
                 .build();
         Long id = this.messageApi.createMessage(message);
         Assertions.assertNotNull(id);
@@ -41,7 +62,7 @@ public class MessageApiTests extends BaseTests {
     @Test
     public void baseTest() throws Exception {
         CreateMessageDto message = MessageBuilder.builder()
-                .type(SystemMessageConstants.REGISTER_CAPTCHA_MESSAGE)
+                .type(SystemMessageConstants.CAPTCHA_MESSAGE)
                 .subject("测试消息")
                 .templateType(MessageTemplateTypeEnum.MAIL)
                 .content("测试消息内容")
@@ -57,7 +78,7 @@ public class MessageApiTests extends BaseTests {
     @Test
     public void fullTest() throws Exception {
         CreateMessageDto message = MessageBuilder.builder()
-                .type(SystemMessageConstants.REGISTER_CAPTCHA_MESSAGE)
+                .type(SystemMessageConstants.CAPTCHA_MESSAGE)
                 .subject("测试消息")
                 .templateType(MessageTemplateTypeEnum.MAIL)
                 .templateType(MessageTemplateTypeEnum.SMS)

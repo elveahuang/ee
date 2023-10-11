@@ -1,6 +1,9 @@
 package cn.elvea.platform.system.message.service.impl;
 
+import cn.elvea.platform.commons.core.data.domain.IdEntity;
 import cn.elvea.platform.commons.core.data.jpa.service.BaseCachingEntityService;
+import cn.elvea.platform.commons.core.utils.ObjectUtils;
+import cn.elvea.platform.commons.core.utils.StringUtils;
 import cn.elvea.platform.system.message.cache.MessageTemplateTypeCacheKeyGenerator;
 import cn.elvea.platform.system.message.model.entity.MessageTemplateTypeEntity;
 import cn.elvea.platform.system.message.model.entity.MessageTemplateTypeEntity_;
@@ -46,6 +49,36 @@ public class MessageTemplateTypeServiceImpl
             };
             return this.repository.findOne(specification).orElse(null);
         });
+    }
+
+    /**
+     * @see BaseCachingEntityService#setCache(IdEntity)
+     */
+    @Override
+    public void setCache(MessageTemplateTypeEntity model) {
+        if (!ObjectUtils.isEmpty(model)) {
+            if (!ObjectUtils.isEmpty(model.getId())) {
+                getCacheService().set(this.cacheKeyGenerator.keyById(model.getId()), model);
+            }
+            if (!StringUtils.isEmpty(model.getCode())) {
+                getCacheService().set(this.cacheKeyGenerator.byCode(model.getCode()), model);
+            }
+        }
+    }
+
+    /**
+     * @see BaseCachingEntityService#setCache(IdEntity)
+     */
+    @Override
+    public void deleteCache(MessageTemplateTypeEntity model) {
+        if (!ObjectUtils.isEmpty(model)) {
+            if (!ObjectUtils.isEmpty(model.getId())) {
+                getCacheService().delete(this.cacheKeyGenerator.keyById(model.getId()));
+            }
+            if (StringUtils.isNotEmpty(model.getCode())) {
+                getCacheService().delete(this.cacheKeyGenerator.byCode(model.getCode()));
+            }
+        }
     }
 
 }

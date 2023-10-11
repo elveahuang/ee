@@ -58,6 +58,8 @@ public class MessageApiImpl implements MessageApi {
      */
     @Override
     public Long createMessage(CreateMessageDto message) throws Exception {
+        log.info("Create message. type - [{}] type id - [{}]. start.", message.getType(), message.getTypeId());
+
         // 获取消息类型
         MessageTypeEntity messageTypeEntity = null;
         if (StringUtils.isNotEmpty(message.getType())) {
@@ -67,9 +69,24 @@ public class MessageApiImpl implements MessageApi {
         }
 
         if (messageTypeEntity == null) {
-            log.info("Invalid message type [{}][{}].", message.getType(), message.getTypeId());
+            log.info("Create message. type - [{}] type id - [{}]. Invalid message type.", message.getType(), message.getTypeId());
             return 0L;
         }
+
+        // 检查消息类型是否是正常并开启
+        if (!messageTypeEntity.getActive()) {
+            log.info("Create message. type - [{}]. Inactive message type.", messageTypeEntity.getCode());
+            return 0L;
+        }
+
+        if (messageTypeEntity.getStatus() != 1) {
+            log.info("Create message. type - [{}]. Disabled message type.", messageTypeEntity.getCode());
+            return 0L;
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+        // 保存消息记录
+        // -------------------------------------------------------------------------------------------------------------
 
         MessageEntity entity = MessageEntity.builder()
                 .typeId(messageTypeEntity.getId())
@@ -83,7 +100,14 @@ public class MessageApiImpl implements MessageApi {
 
         Long messageId = entity.getId();
 
+        log.info("Create message. type - [{}] id - [{}]. created.", messageTypeEntity.getCode(), messageId);
+
+        // -------------------------------------------------------------------------------------------------------------
         // 处理消息用户
+        // -------------------------------------------------------------------------------------------------------------
+
+        log.info("Create message. type - [{}] id - [{}]. user start.", messageTypeEntity.getCode(), messageId);
+
         List<MessageUserEntity> userEntityList = Lists.newArrayList();
         // 发件人
         userEntityList.add(createMessageUser(messageId, message.getSender()));
@@ -94,52 +118,67 @@ public class MessageApiImpl implements MessageApi {
             }
         }
         this.messageUserService.saveBatch(userEntityList);
+        log.info("Create message. type - [{}] id - [{}]. user done.", messageTypeEntity.getCode(), messageId);
 
+        // -------------------------------------------------------------------------------------------------------------
         // 处理消息内容
         // 如果指定了模版，那将沿用指定的模版来发送消息
         // 未指定的情况，则用系统已经保存并启用的模版来发送
-        log.info("Handle message content [{}].", message.getType());
+        // -------------------------------------------------------------------------------------------------------------
+
+        log.info("Create message. type - [{}] id - [{}]. content start.", messageTypeEntity.getCode(), messageId);
 
         List<MessageTemplateTypeEnum> templateTypeList = CollectionUtils.isEmpty(message.getTemplateTypeList()) ?
                 Arrays.stream(MessageTemplateTypeEnum.values()).toList() : message.getTemplateTypeList();
 
         List<MessageContentEntity> contentEntityList = Lists.newArrayList();
         for (MessageTemplateTypeEnum templateType : templateTypeList) {
-            log.info("Handle message content [{}] for template type [{}].", message.getType(), templateType.getCode());
+            log.info("Create message. type - [{}] id - [{}] template [{}]. start.", messageTypeEntity.getCode(), messageId, templateType.getCode());
 
             MessageTemplateTypeEntity templateTypeEntity = messageTemplateTypeService.findByCode(templateType.getCode());
+
+            // 检查消息模版类型是否存在并处于正常开启状态
             if (templateTypeEntity == null) {
-                log.info("Invalid MessageTemplateType [{}].", templateType.getCode());
+                log.info("Create message. type - [{}] id - [{}] template [{}]. invalid template type.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 continue;
             }
             if (!templateTypeEntity.isActiveEntity()) {
-                log.info("Inactive MessageTemplateType [{}].", templateType.getCode());
+                log.info("Create message. type - [{}] id - [{}] template [{}]. inactive template type.", messageTypeEntity.getCode(), messageId, templateType.getCode());
+                continue;
+            }
+            if (templateTypeEntity.getStatus() != 1) {
+                log.info("Create message. type - [{}] id - [{}] template [{}]. disabled template type.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 continue;
             }
 
             String content = "";
             if (StringUtils.isNotEmpty(message.getContent())) {
-                log.info("Handle message content [{}] for template type [{}]. use content.", message.getType(), templateType.getCode());
+                log.info("Create message. type - [{}] id - [{}] template [{}]. use content.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 content = message.getContent();
             } else if (StringUtils.isNotEmpty(message.getTemplate())) {
-                log.info("Handle message content [{}] for template type [{}]. use template.", message.getType(), templateType.getCode());
-
+                log.info("Create message. type - [{}] id - [{}] template [{}]. use template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 content = htmlTemplateService.toHtml(message.getTemplate(), message.getParams());
             } else {
-                MessageTemplateEntity templateEntity = this.messageTemplateService.findByType(messageTypeEntity.getId(), templateTypeEntity.getId());
-                if (templateEntity == null) {
-                    log.info("Invalid MessageTemplate typeId [{}] templateTypeId [{}].", messageTypeEntity.getId(), templateTypeEntity.getId());
+                log.info("Create message. type - [{}] id - [{}] template [{}]. use system template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
+
+                MessageTemplateEntity messageTemplateEntity = this.messageTemplateService.findByType(messageTypeEntity.getId(), templateTypeEntity.getId());
+
+                // 检查消息模版是否存在并处于正常开启状态
+                if (messageTemplateEntity == null) {
+                    log.info("Create message. type - [{}] id - [{}] template [{}]. invalid message template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                     continue;
                 }
-                if (!templateEntity.isActiveEntity()) {
-                    log.info("Inactive MessageTemplate typeId [{}] templateTypeId [{}].", messageTypeEntity.getId(), templateTypeEntity.getId());
+                if (!messageTemplateEntity.isActiveEntity()) {
+                    log.info("Create message. type - [{}] id - [{}] template [{}]. inactive message template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                     continue;
                 }
-
-                log.info("Handle message content [{}] for template type [{}]. use system template.", message.getType(), templateType.getCode());
-
-                content = htmlTemplateService.toHtml(templateEntity.getContent(), message.getParams());
+                if (messageTemplateEntity.getStatus() != 1) {
+                    log.info("Create message. type - [{}] id - [{}] template [{}]. disabled message template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
+                    continue;
+                }
+                content = htmlTemplateService.toHtml(messageTemplateEntity.getContent(), message.getParams());
             }
+
             MessageContentEntity contentEntity = MessageContentEntity.builder()
                     .messageId(entity.getId())
                     .templateTypeId(templateTypeEntity.getId())
@@ -148,13 +187,15 @@ public class MessageApiImpl implements MessageApi {
             contentEntityList.add(contentEntity);
         }
 
-        if (CollectionUtils.isEmpty(contentEntityList)) {
-            log.info("Handle message content [{}]. empty.", message.getType());
-        } else {
-            log.info("Handle message content [{}]. save.", message.getType());
+        if (CollectionUtils.isNotEmpty(contentEntityList)) {
             this.messageContentService.saveBatch(contentEntityList);
+            log.info("Create message. type - [{}] id - [{}]. save content.", messageTypeEntity.getCode(), messageId);
+        } else {
+            log.info("Create message. type - [{}] id - [{}]. empty content.", messageTypeEntity.getCode(), messageId);
         }
+        log.info("Create message. type - [{}] id - [{}]. content done.", messageTypeEntity.getCode(), messageId);
 
+        log.info("Create message. type - [{}] id - [{}]. done.", messageTypeEntity.getCode(), messageId);
         return messageId;
     }
 
@@ -163,24 +204,24 @@ public class MessageApiImpl implements MessageApi {
      */
     @Override
     public void sendMessage() throws Exception {
-        log.info("sendMessage start...");
+        log.info("Send message. start.");
         List<MessageEntity> messageEntityList = this.messageService.findByStatus(Collections.singletonList(MessageStatusEnum.PENDING));
         if (CollectionUtils.isNotEmpty(messageEntityList)) {
-            log.info("sendMessage. {} messages found.", messageEntityList.size());
+            log.info("Send message. {} messages found..", messageEntityList.size());
             for (MessageEntity messageEntity : messageEntityList) {
                 try {
-                    log.info("sendMessage. message [{}] send...", messageEntity.getId());
+                    log.info("Send message. id - [{}]. start.", messageEntity.getId());
                     messageEntity.setStatus(MessageStatusEnum.SENDING.getValue());
                     this.messageService.save(messageEntity);
-                    log.info("sendMessage. message [{}] sent successfully.", messageEntity.getId());
+                    log.info("Send message. id - [{}]. done.", messageEntity.getId());
                 } catch (Exception e) {
-                    log.info("sendMessage. message [{}] sent failed.", messageEntity.getId(), e);
+                    log.error("Send message. id - [{}]. failed.", messageEntity.getId(), e);
                 }
             }
         } else {
-            log.info("sendMessage. no message found.");
+            log.info("Send message. no messages found.");
         }
-        log.info("sendMessage done.");
+        log.info("Send message. done.");
     }
 
     /**
@@ -287,6 +328,11 @@ public class MessageApiImpl implements MessageApi {
                     messageSender.send(sendMessageDto);
                 }
             }
+
+            // 更新消息的发送状态和发送时间
+            messageEntity.setSentDatetime(this.messageService.getCurLocalDateTime());
+            messageEntity.setStatus(MessageStatusEnum.SENT.getValue());
+            this.messageService.save(messageEntity);
         }
         log.info("Send message [{}]. done.", messageId);
     }
@@ -399,6 +445,11 @@ public class MessageApiImpl implements MessageApi {
             }
             log.info("Sync message template. type - [{}]. done.", typeCore);
         }
+
+        this.messageTemplateTypeService.clearCache();
+        this.messageTemplateService.clearCache();
+        this.messageTypeService.clearCache();
+
         log.info("Sync message template. done.");
     }
 

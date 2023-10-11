@@ -5,10 +5,12 @@ import cn.elvea.platform.system.message.enums.MessageUserTypeEnum;
 import cn.elvea.platform.system.message.model.dto.CreateMessageDto;
 import cn.elvea.platform.system.message.model.dto.MessageUserDto;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author elvea
@@ -55,6 +57,11 @@ public class MessageBuilder {
      * 目标发送时间
      */
     private LocalDateTime targetSentDatetime;
+
+    /**
+     * 参数
+     */
+    private Map<String, Object> params = Maps.newHashMap();
 
     private MessageBuilder() {
     }
@@ -127,6 +134,11 @@ public class MessageBuilder {
         return this;
     }
 
+    public MessageBuilder params(Map<String, Object> params) {
+        this.params = params;
+        return this;
+    }
+
     public CreateMessageDto build() {
         CreateMessageDto message = new CreateMessageDto();
         message.setSubject(this.subject);
@@ -137,6 +149,7 @@ public class MessageBuilder {
         message.setSender(this.sender);
         message.setRecipients(this.recipients);
         message.setTemplateTypeList(this.templateTypeList);
+        message.setParams(this.params);
         return message;
     }
 
