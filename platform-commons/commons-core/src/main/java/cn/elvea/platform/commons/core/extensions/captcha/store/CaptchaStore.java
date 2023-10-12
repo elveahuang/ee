@@ -1,5 +1,7 @@
 package cn.elvea.platform.commons.core.extensions.captcha.store;
 
+import cn.elvea.platform.commons.core.extensions.captcha.Captcha;
+
 import java.time.Duration;
 
 /**
@@ -8,8 +10,8 @@ import java.time.Duration;
  */
 public interface CaptchaStore {
 
-    String get(String key);
+    Captcha get(String key);
 
-    void set(String key, String value, Duration duration);
+    void set(String key, Captcha value, Duration duration);
 
 }

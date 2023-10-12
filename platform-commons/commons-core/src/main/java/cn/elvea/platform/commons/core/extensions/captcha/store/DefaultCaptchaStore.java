@@ -3,6 +3,7 @@ package cn.elvea.platform.commons.core.extensions.captcha.store;
 import cn.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cn.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cn.elvea.platform.commons.core.cache.service.CacheService;
+import cn.elvea.platform.commons.core.extensions.captcha.Captcha;
 
 import java.time.Duration;
 
@@ -22,12 +23,12 @@ public class DefaultCaptchaStore implements CaptchaStore {
     }
 
     @Override
-    public String get(String key) {
+    public Captcha get(String key) {
         return this.cacheService.get(this.cacheKeyGenerator.key(key));
     }
 
     @Override
-    public void set(String key, String value, Duration duration) {
+    public void set(String key, Captcha value, Duration duration) {
         this.cacheService.set(this.cacheKeyGenerator.key(key), value, duration);
     }
 

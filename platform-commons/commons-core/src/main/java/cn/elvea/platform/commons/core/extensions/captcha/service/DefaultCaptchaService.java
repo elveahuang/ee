@@ -38,7 +38,7 @@ public class DefaultCaptchaService implements CaptchaService {
     @Override
     public Captcha generate(CaptchaRequest request) throws Exception {
         Captcha captcha = getCaptchaProvider(request).generate(request);
-        captchaStore.set(captcha.getKey(), captcha.getValue(), request.getDuration());
+        captchaStore.set(captcha.getKey(), captcha, request.getDuration());
         if (this.captchaLogStore != null) {
             CaptchaLogDto captchaLog = CaptchaLogDto.builder()
                     .email(request.getEmail())
@@ -54,8 +54,9 @@ public class DefaultCaptchaService implements CaptchaService {
     }
 
     @Override
-    public Boolean check(CaptchaTypeEnum captchaType) {
-        return null;
+    public Boolean check(String captchaKey, String captchaValue) {
+        Captcha captcha = captchaStore.get(captchaKey);
+        return captcha != null ? captcha.getValue().equals(captchaValue) : false;
     }
 
     @Override
