@@ -22,5 +22,7 @@ public class CaptchaRequest implements Serializable {
     private String email;
     private String mobileCountryCode;
     private String mobileNumber;
+    @Builder.Default
+    private int size = 6;
     private Duration duration;
 }

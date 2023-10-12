@@ -11,12 +11,13 @@ import cn.hutool.captcha.LineCaptcha;
  * @author elvea
  * @since 0.0.1
  */
-public class DefaultCodeCaptchaProvider extends AbstractCaptchaProvider implements CodeCaptchaProvider {
+public class DefaultCodeCaptchaProvider implements CodeCaptchaProvider {
 
     @Override
     public Captcha generate(CaptchaRequest request) {
         String uuid = StringUtils.uuid();
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100, 4, 64);
+        int length = (request.getSize() <= 0 || request.getSize() >= 8) ? 6 : request.getSize();
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100, length, 64);
         lineCaptcha.getImageBase64();
         return Captcha.builder().type(CaptchaTypeEnum.CODE)
                 .key(uuid)

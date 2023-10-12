@@ -13,6 +13,6 @@ public interface LogStore {
      *
      * @param dto {@link OperationLogDto}
      */
-    void saveLog(OperationLogDto dto);
+    void saveLog(OperationLogDto dto) throws Exception;
 
 }

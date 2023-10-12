@@ -5,7 +5,6 @@ import cn.elvea.platform.commons.core.utils.ExceptionUtils;
 import cn.elvea.platform.commons.core.utils.GsonUtils;
 import cn.elvea.platform.system.message.model.dto.SendMessageDto;
 import cn.elvea.platform.system.message.service.MessageContentService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MessageDingTalkSender implements MessageSender {
 
     private DingTalkService dingTalkService;

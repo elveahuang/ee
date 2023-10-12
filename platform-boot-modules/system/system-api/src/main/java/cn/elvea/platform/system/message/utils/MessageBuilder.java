@@ -1,5 +1,6 @@
 package cn.elvea.platform.system.message.utils;
 
+import cn.elvea.platform.system.message.enums.MessageTargetTypeEnum;
 import cn.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import cn.elvea.platform.system.message.enums.MessageUserTypeEnum;
 import cn.elvea.platform.system.message.model.dto.CreateMessageDto;
@@ -52,6 +53,11 @@ public class MessageBuilder {
      * 指定模版
      */
     private List<MessageTemplateTypeEnum> templateTypeList = Lists.newArrayList();
+
+    /**
+     * 发送方式
+     */
+    private MessageTargetTypeEnum targetType;
 
     /**
      * 目标发送时间
@@ -129,6 +135,11 @@ public class MessageBuilder {
         return this;
     }
 
+    public MessageBuilder targetType(MessageTargetTypeEnum targetType) {
+        this.targetType = targetType;
+        return this;
+    }
+
     public MessageBuilder targetSentDatetime(LocalDateTime targetSentDatetime) {
         this.targetSentDatetime = targetSentDatetime;
         return this;
@@ -150,6 +161,7 @@ public class MessageBuilder {
         message.setRecipients(this.recipients);
         message.setTemplateTypeList(this.templateTypeList);
         message.setParams(this.params);
+        message.setTargetType((this.targetType == null) ? MessageTargetTypeEnum.AUTO : MessageTargetTypeEnum.IMMEDIATE);
         return message;
     }
 

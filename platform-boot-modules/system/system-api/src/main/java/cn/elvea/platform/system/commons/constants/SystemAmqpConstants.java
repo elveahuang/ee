@@ -6,10 +6,12 @@ package cn.elvea.platform.system.commons.constants;
  */
 public interface SystemAmqpConstants {
 
-    String USER_SESSION = "USER_SESSION_Queue";
+    String USER_SESSION = "USER_SESSION_QUEUE";
 
     String CAPTCHA_LOG_QUEUE = "CAPTCHA_LOG_QUEUE";
 
     String OPERATION_LOG_QUEUE = "OPERATION_LOG_QUEUE";
+
+    String MESSAGE_QUEUE = "MESSAGE_QUEUE";
 
 }

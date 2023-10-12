@@ -9,8 +9,8 @@ import cn.elvea.platform.commons.core.log.dto.OperationLogDto;
  */
 public interface LogApi {
 
-    void saveCaptchaLog(CaptchaLogDto captchaLog);
+    void saveCaptchaLog(CaptchaLogDto captchaLog) throws Exception;
 
-    void saveOperationLog(OperationLogDto operationLog);
+    void saveOperationLog(OperationLogDto operationLog) throws Exception;
 
 }

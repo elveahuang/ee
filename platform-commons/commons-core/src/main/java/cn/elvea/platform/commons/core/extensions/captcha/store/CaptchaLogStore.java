@@ -8,6 +8,6 @@ import cn.elvea.platform.commons.core.extensions.captcha.domain.CaptchaLogDto;
  */
 public interface CaptchaLogStore {
 
-    void saveCaptchaLog(CaptchaLogDto captchaLog);
+    void saveCaptchaLog(CaptchaLogDto captchaLog) throws Exception;
 
 }

@@ -41,4 +41,9 @@ public class AmqpConfiguration {
         return new Queue(SystemAmqpConstants.OPERATION_LOG_QUEUE);
     }
 
+    @Bean
+    public Queue messageQueue() {
+        return new Queue(SystemAmqpConstants.MESSAGE_QUEUE);
+    }
+
 }

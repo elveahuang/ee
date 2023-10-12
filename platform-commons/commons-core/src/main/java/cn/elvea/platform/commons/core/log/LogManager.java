@@ -26,7 +26,7 @@ public class LogManager {
     }
 
     @Async
-    public void saveLog(OperationLogDto dto) {
+    public void saveLog(OperationLogDto dto) throws Exception {
         if (CollectionUtils.isNotEmpty(this.providers)) {
             for (LogStore provider : this.providers) {
                 provider.saveLog(dto);

@@ -20,7 +20,7 @@ import static cn.elvea.platform.system.commons.constants.SystemServiceConstants.
 public interface UserSessionApi {
 
     @PostMapping(API_V1_FEIGN__USER_SESSION__FIND_BY_USERNAME)
-    R<Boolean> saveUserSession(@SpringQueryMap UserSessionDto userSession);
+    R<Boolean> saveUserSession(@SpringQueryMap UserSessionDto userSession) throws Exception;
 
     // -----------------------------------------------------------------------------------------------------------------
     // Fallback

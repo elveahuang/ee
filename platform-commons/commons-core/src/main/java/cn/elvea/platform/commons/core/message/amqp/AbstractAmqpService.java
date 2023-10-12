@@ -21,7 +21,7 @@ public abstract class AbstractAmqpService<T> implements AmqpService<T> {
      * @see AmqpService#send(Object)
      */
     @Override
-    public void send(T body) {
+    public void send(T body) throws Exception {
         this.send(getRoutingKey(), body);
     }
 
@@ -29,7 +29,7 @@ public abstract class AbstractAmqpService<T> implements AmqpService<T> {
      * @see AmqpService#send(String, Object)
      */
     @Override
-    public void send(String routingKey, T body) {
+    public void send(String routingKey, T body) throws Exception {
         if (this.isEnabled()) {
             log.info("RabbitMQ is enabled. send...");
             this.rabbitTemplate.convertAndSend(routingKey, body);
@@ -62,7 +62,7 @@ public abstract class AbstractAmqpService<T> implements AmqpService<T> {
         return context.isAmqpEnabled();
     }
 
-    public abstract void execute(T t);
+    public abstract void execute(T t) throws Exception;
 
     public abstract String getRoutingKey();
 

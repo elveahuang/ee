@@ -23,12 +23,12 @@ public class LogApiImpl implements LogApi {
     private final OperationLogAmqpService operationLogAmqpService;
 
     @Override
-    public void saveCaptchaLog(CaptchaLogDto captchaLog) {
+    public void saveCaptchaLog(CaptchaLogDto captchaLog) throws Exception {
         this.captchaLogAmqpService.send(captchaLog);
     }
 
     @Override
-    public void saveOperationLog(OperationLogDto operationLog) {
+    public void saveOperationLog(OperationLogDto operationLog) throws Exception {
         this.operationLogAmqpService.send(operationLog);
     }
 

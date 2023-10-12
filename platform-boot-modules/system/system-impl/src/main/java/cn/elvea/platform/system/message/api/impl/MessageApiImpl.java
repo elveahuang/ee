@@ -8,21 +8,25 @@ import cn.elvea.platform.system.core.model.entity.UserEntity;
 import cn.elvea.platform.system.core.service.UserService;
 import cn.elvea.platform.system.message.api.MessageApi;
 import cn.elvea.platform.system.message.enums.MessageStatusEnum;
+import cn.elvea.platform.system.message.enums.MessageTargetTypeEnum;
 import cn.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import cn.elvea.platform.system.message.enums.MessageUserTypeEnum;
 import cn.elvea.platform.system.message.model.dto.CreateMessageDto;
 import cn.elvea.platform.system.message.model.dto.MessageUserDto;
+import cn.elvea.platform.system.message.model.dto.SendMessageAmqpDto;
 import cn.elvea.platform.system.message.model.dto.SendMessageDto;
 import cn.elvea.platform.system.message.model.entity.*;
 import cn.elvea.platform.system.message.sender.*;
 import cn.elvea.platform.system.message.service.*;
 import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,24 +38,25 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MessageApiImpl implements MessageApi {
 
-    private final HtmlTemplateService htmlTemplateService;
+    private HtmlTemplateService htmlTemplateService;
 
-    private final MessageService messageService;
+    private MessageService messageService;
 
-    private final MessageTypeService messageTypeService;
+    private MessageTypeService messageTypeService;
 
-    private final MessageUserService messageUserService;
+    private MessageUserService messageUserService;
 
-    private final MessageContentService messageContentService;
+    private MessageContentService messageContentService;
 
-    private final MessageTemplateService messageTemplateService;
+    private MessageTemplateService messageTemplateService;
 
-    private final MessageTemplateTypeService messageTemplateTypeService;
+    private MessageTemplateTypeService messageTemplateTypeService;
 
-    private final UserService userService;
+    private MessageAmqpService messageAmqpService;
+
+    private UserService userService;
 
     /**
      * @see MessageApi#createMessage(CreateMessageDto)
@@ -196,13 +201,21 @@ public class MessageApiImpl implements MessageApi {
         log.info("Create message. type - [{}] id - [{}]. content done.", messageTypeEntity.getCode(), messageId);
 
         log.info("Create message. type - [{}] id - [{}]. done.", messageTypeEntity.getCode(), messageId);
+
+        // 如果是立刻发送，消息创建完成后，直接推到消息队列
+        if (MessageTargetTypeEnum.IMMEDIATE.equals(message.getTargetType())) {
+            this.messageAmqpService.send(SendMessageAmqpDto.builder().id(messageId).build());
+        }
         return messageId;
     }
 
     /**
+     * 这个方法特别留意需要允许读取其他未提交的数据，这样可以避免高并发的时候重复推送消息
+     *
      * @see MessageApi#sendMessage()
      */
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public void sendMessage() throws Exception {
         log.info("Send message. start.");
         List<MessageEntity> messageEntityList = this.messageService.findByStatus(Collections.singletonList(MessageStatusEnum.PENDING));
@@ -211,8 +224,14 @@ public class MessageApiImpl implements MessageApi {
             for (MessageEntity messageEntity : messageEntityList) {
                 try {
                     log.info("Send message. id - [{}]. start.", messageEntity.getId());
+
+                    // 修改消息发送状态为发送中
                     messageEntity.setStatus(MessageStatusEnum.SENDING.getValue());
                     this.messageService.save(messageEntity);
+
+                    // 推送到消息队列
+                    this.messageAmqpService.send(SendMessageAmqpDto.builder().id(messageEntity.getId()).build());
+
                     log.info("Send message. id - [{}]. done.", messageEntity.getId());
                 } catch (Exception e) {
                     log.error("Send message. id - [{}]. failed.", messageEntity.getId(), e);
@@ -494,6 +513,52 @@ public class MessageApiImpl implements MessageApi {
             builder.mobileNumber(userDto.getMobileNumber());
         }
         return builder.build();
+    }
+
+    @Autowired
+    public void setHtmlTemplateService(HtmlTemplateService htmlTemplateService) {
+        this.htmlTemplateService = htmlTemplateService;
+    }
+
+    @Autowired
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    @Autowired
+
+    public void setMessageTypeService(MessageTypeService messageTypeService) {
+        this.messageTypeService = messageTypeService;
+    }
+
+    @Autowired
+    public void setMessageUserService(MessageUserService messageUserService) {
+        this.messageUserService = messageUserService;
+    }
+
+    @Autowired
+    public void setMessageContentService(MessageContentService messageContentService) {
+        this.messageContentService = messageContentService;
+    }
+
+    @Autowired
+    public void setMessageTemplateService(MessageTemplateService messageTemplateService) {
+        this.messageTemplateService = messageTemplateService;
+    }
+
+    @Autowired
+    public void setMessageTemplateTypeService(MessageTemplateTypeService messageTemplateTypeService) {
+        this.messageTemplateTypeService = messageTemplateTypeService;
+    }
+
+    @Autowired
+    public void setMessageAmqpService(MessageAmqpService messageAmqpService) {
+        this.messageAmqpService = messageAmqpService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 }

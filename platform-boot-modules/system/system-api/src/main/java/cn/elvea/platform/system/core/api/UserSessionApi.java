@@ -9,6 +9,6 @@ import cn.elvea.platform.system.core.model.dto.UserSessionDto;
  */
 public interface UserSessionApi {
 
-    R<Boolean> saveUserSession(UserSessionDto userSession);
+    R<Boolean> saveUserSession(UserSessionDto userSession) throws Exception;
 
 }

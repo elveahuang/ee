@@ -11,7 +11,7 @@ public interface AmqpService<T> {
      *
      * @param body 消息内容
      */
-    void send(T body);
+    void send(T body) throws Exception;
 
     /**
      * 发送消息
@@ -19,6 +19,6 @@ public interface AmqpService<T> {
      * @param queueName 队列名称
      * @param body      消息内容
      */
-    void send(String queueName, T body);
+    void send(String queueName, T body) throws Exception;
 
 }

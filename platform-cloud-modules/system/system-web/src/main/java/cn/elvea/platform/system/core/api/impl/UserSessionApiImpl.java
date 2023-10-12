@@ -18,7 +18,7 @@ public class UserSessionApiImpl implements UserSessionApi {
     private final UserSessionAmqpService userSessionAmqpService;
 
     @Override
-    public R<Boolean> saveUserSession(UserSessionDto userSession) {
+    public R<Boolean> saveUserSession(UserSessionDto userSession) throws Exception {
         this.userSessionAmqpService.send(userSession);
         return R.success(Boolean.TRUE);
     }

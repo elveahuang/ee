@@ -1,5 +1,6 @@
 package cn.elvea.platform.system.message.model.dto;
 
+import cn.elvea.platform.system.message.enums.MessageTargetTypeEnum;
 import cn.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -47,6 +48,11 @@ public class CreateMessageDto implements Serializable {
      */
     @Builder.Default
     private List<MessageUserDto> recipients = Lists.newArrayList();
+
+    /**
+     * 发送方式
+     */
+    private MessageTargetTypeEnum targetType;
 
     /**
      * 目标发送时间

@@ -12,13 +12,17 @@ import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaLogStore;
 import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaStore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author elvea
  * @since 0.0.1
  */
-@AllArgsConstructor
+@Slf4j
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class DefaultCaptchaService implements CaptchaService {
 
     private MailCaptchaProvider mailCaptchaProvider;
@@ -63,27 +67,7 @@ public class DefaultCaptchaService implements CaptchaService {
         } else if (CaptchaTypeEnum.CODE.equals(request.getType())) {
             return this.codeCaptchaProvider;
         }
-        return null;
-    }
-
-    public void setMailCaptchaProvider(MailCaptchaProvider mailCaptchaProvider) {
-        this.mailCaptchaProvider = mailCaptchaProvider;
-    }
-
-    public void setSmsCaptchaProvider(SmsCaptchaProvider smsCaptchaProvider) {
-        this.smsCaptchaProvider = smsCaptchaProvider;
-    }
-
-    public void setCodeCaptchaProvider(CodeCaptchaProvider codeCaptchaProvider) {
-        this.codeCaptchaProvider = codeCaptchaProvider;
-    }
-
-    public void setCaptchaStore(CaptchaStore captchaStore) {
-        this.captchaStore = captchaStore;
-    }
-
-    public void setCaptchaLogStore(CaptchaLogStore captchaLogStore) {
-        this.captchaLogStore = captchaLogStore;
+        return this.codeCaptchaProvider;
     }
 
 }

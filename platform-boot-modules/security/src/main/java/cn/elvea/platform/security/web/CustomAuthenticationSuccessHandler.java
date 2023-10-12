@@ -36,7 +36,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         // 保持用户成功登录记录
         for (int i = 0; i < 1; i++) {
-            this.userSessionApi.saveUserSession(UserSessionHelper.userSession(id, username, true, request));
+            try {
+                this.userSessionApi.saveUserSession(UserSessionHelper.userSession(id, username, true, request));
+            } catch (Exception e) {
+                log.error("Failed to save UserSession.", e);
+            }
         }
     }
 

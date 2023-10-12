@@ -15,7 +15,7 @@ public interface MessageApi {
 
     /**
      * 发送消息
-     * 用于系统定时任务自动推送当前未发送的消息
+     * 用于系统定时任务自动推送当前未发送的消息。
      */
     void sendMessage() throws Exception;
 

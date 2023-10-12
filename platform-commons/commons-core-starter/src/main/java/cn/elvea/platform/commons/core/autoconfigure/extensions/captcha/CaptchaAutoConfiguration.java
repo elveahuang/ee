@@ -9,8 +9,6 @@ import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaLogStore;
 import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaStore;
 import cn.elvea.platform.commons.core.extensions.captcha.store.DefaultCaptchaLogStore;
 import cn.elvea.platform.commons.core.extensions.captcha.store.DefaultCaptchaStore;
-import cn.elvea.platform.commons.core.extensions.mail.MailSender;
-import cn.elvea.platform.commons.core.extensions.sms.SmsSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,14 +32,14 @@ public class CaptchaAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean()
-    public MailCaptchaProvider mailCaptchaProvider(MailSender mailSender) {
-        return new DefaultMailCaptchaProvider(mailSender);
+    public MailCaptchaProvider mailCaptchaProvider() {
+        return new DefaultMailCaptchaProvider();
     }
 
     @Bean
     @ConditionalOnMissingBean()
-    public SmsCaptchaProvider smsCaptchaProvider(SmsSender smsSender) {
-        return new DefaultSmsCaptchaProvider(smsSender);
+    public SmsCaptchaProvider smsCaptchaProvider() {
+        return new DefaultSmsCaptchaProvider();
     }
 
     @Bean
