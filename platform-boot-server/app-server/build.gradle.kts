@@ -22,6 +22,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    implementation("org.springframework.boot:spring-boot-starter-quartz")
     // spring extensions
     implementation("de.codecentric:spring-boot-admin-starter-client")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")

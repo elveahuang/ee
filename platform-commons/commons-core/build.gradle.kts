@@ -69,6 +69,7 @@ dependencies {
     api("com.squareup.okhttp3:okhttp")
     api("com.nimbusds:nimbus-jose-jwt")
     api("org.apache.httpcomponents.client5:httpclient5")
+    compileOnly("org.quartz-scheduler:quartz")
     compileOnly("com.nimbusds:oauth2-oidc-sdk")
     compileOnly("org.lionsoul:ip2region")
     compileOnly("org.thymeleaf:thymeleaf")

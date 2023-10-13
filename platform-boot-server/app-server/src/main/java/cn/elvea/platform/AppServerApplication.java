@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -21,6 +22,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "cn.elvea.platform.lxp",
         "cn.elvea.platform.security",
         "cn.elvea.platform.system",
+}, exclude = {
+        QuartzAutoConfiguration.class
 })
 @EntityScan(basePackages = {
         "cn.elvea.platform.lxp.**.entity",

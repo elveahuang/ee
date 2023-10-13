@@ -17,12 +17,27 @@ spring:
                 username: admin
                 password: admin
     datasource:
-        name: master
-        type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
-        username: root
-        password: root
+        master:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        slave:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        job:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
     cache:
         type: redis
     data:
@@ -50,6 +65,8 @@ spring:
                 retry:
                     enabled: true
                 default-requeue-rejected: true
+    quartz:
+        scheduler-name: QuartzScheduler
 ### --------------------------------------------------------------------------------------------------------------------
 ### Spring Extension Config
 ### --------------------------------------------------------------------------------------------------------------------
@@ -110,6 +127,14 @@ platform:
             access-key-secret:
             sign-name:
             template:
+    datasource:
+        enabled: true
+        master:
+            enabled: true
+        slave:
+            enabled: false
+        job:
+            enabled: true
     data:
         enabled: true
         jdbc:
@@ -139,6 +164,10 @@ platform:
             accessKeyId:
             accessKeySecret:
             bucketName:
+    quartz:
+        enabled: true
+        cluster:
+            enabled: true
     jwt:
         enabled: true
         public-key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA15d0j/2y9gfvh9ZH696pjVCGfXKNt47/dN9WZ6rNOauzE7jPgWr1GC4XCudxD5gjDB8L6d//yKGLkvC/vDBMFL6aKp1ySDoP624+XNBJbMVvsICmqf8hmTh1icV/JIW2MioXsxKgOR0rC+Kfl0p5SP26SfUalTZDgnvvzVwN8NSwKxtyUSirBEtUsZqBZaZGVormGkaOKtOpDt9osDmSXb2AR+3mVCPLPEcDH89RdBIvYTS3S+9h795L6Buznq+KIglS/r/4uoW+NyPIapuYbHpdUlIjzm9nh1lWs0BRJvXgz0VgzKs5sUCCw0Aq0JAiJ4nn7LDYMY2yMUK7RKSF0QIDAQAB

@@ -11,6 +11,7 @@ dependencies {
     compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
     compileOnly("org.springframework.boot:spring-boot-starter-data-elasticsearch")
     compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compileOnly("org.springframework.boot:spring-boot-starter-quartz")
     compileOnly("org.springframework.boot:spring-boot-starter-thymeleaf")
     // spring extensions
     compileOnly("me.ahoo.cosid:cosid-spring-boot-starter")

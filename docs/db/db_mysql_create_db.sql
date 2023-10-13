@@ -12,8 +12,8 @@ CREATE DATABASE IF NOT EXISTS `platform`
 -- 建库 - 定时任务库
 -- =====================================================================================================================
 
-DROP DATABASE IF EXISTS `task`;
+DROP DATABASE IF EXISTS `quartz`;
 
-CREATE DATABASE IF NOT EXISTS `task`
+CREATE DATABASE IF NOT EXISTS `quartz`
     DEFAULT CHARACTER SET `utf8mb4`
     DEFAULT COLLATE `utf8mb4_0900_ai_ci`;
