@@ -7,7 +7,7 @@ plugins {
     id("java")
     id("application")
     id("java-library")
-    id("org.jetbrains.kotlin.jvm") version "1.9.10"
+    id("org.jetbrains.kotlin.jvm") version "1.9.20-RC"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.springframework.boot") version "3.1.4" apply false
     id("com.github.node-gradle.node") version "7.0.1" apply false
@@ -36,21 +36,21 @@ allprojects {
     }
 
     configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 
     configure<KotlinJvmProjectExtension> {
         jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 
     tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_21.toString()
         kotlinOptions.languageVersion = LanguageVersion.KOTLIN_1_9.versionString
     }
 
@@ -69,9 +69,9 @@ allprojects {
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.1.7")
             mavenBom("io.grpc:grpc-bom:1.58.0")
             mavenBom("cn.hutool:hutool-bom:5.8.22")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.5.2")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.5.3")
             mavenBom("org.mockito:mockito-bom:5.5.0")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:1.9.10")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:1.9.20-RC")
         }
 
         dependencies {

@@ -97,6 +97,10 @@ tasks.named<BootJar>("bootJar") {
     archiveFileName.set("app.jar")
 }
 
+node {
+    download = true
+}
+
 var buildWebapp = tasks.register<PnpmTask>("buildWebapp") {
     dependsOn(tasks.getByName<PnpmInstallTask>("pnpmInstall"))
     args.set(listOf("run", "build"))
