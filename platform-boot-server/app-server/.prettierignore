@@ -1,0 +1,7 @@
+.gradle
+build
+logs
+node_modules
+upload
+src/main/resources/static
+src/main/resources/public
