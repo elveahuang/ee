@@ -25,14 +25,14 @@ spring:
             username: root
             password: root
         slave:
-            name: master
+            name: slave
             type: com.zaxxer.hikari.HikariDataSource
             driver-class-name: com.mysql.cj.jdbc.Driver
             url: jdbc:mysql://127.0.0.1:3306/platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
             username: root
             password: root
         job:
-            name: master
+            name: job
             type: com.zaxxer.hikari.HikariDataSource
             driver-class-name: com.mysql.cj.jdbc.Driver
             url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
@@ -75,7 +75,7 @@ springdoc:
         enabled: true
         path: /swagger-ui.html
 cosid:
-    enabled: true
+    enabled: false
     namespace: ${spring.application.name}
     machine:
         enabled: true
@@ -103,7 +103,7 @@ platform:
         enabled: true
     sequence:
         enabled: true
-        type: auto
+        type: manual
     template:
         enabled: true
     log:

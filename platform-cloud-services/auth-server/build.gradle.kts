@@ -1,10 +1,7 @@
-import com.github.gradle.node.pnpm.task.PnpmInstallTask
-import com.github.gradle.node.pnpm.task.PnpmTask
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot")
-    id("com.github.node-gradle.node")
 }
 
 dependencies {
@@ -47,23 +44,4 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-var buildWebapp = tasks.register<PnpmTask>("buildWebapp") {
-    dependsOn(tasks.getByName<PnpmInstallTask>("pnpmInstall"))
-    args.set(listOf("run", "build"))
-}
-
-sourceSets {
-    java {
-        main {
-            resources {
-                srcDir(buildWebapp)
-            }
-        }
-    }
-}
-
-tasks.test {
-    dependsOn(buildWebapp)
 }

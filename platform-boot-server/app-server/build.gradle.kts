@@ -1,10 +1,7 @@
-import com.github.gradle.node.pnpm.task.PnpmInstallTask
-import com.github.gradle.node.pnpm.task.PnpmTask
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot")
-    id("com.github.node-gradle.node")
     id("org.hibernate.orm")
 }
 
@@ -95,27 +92,4 @@ tasks.named<BootJar>("bootJar") {
         }
     }
     archiveFileName.set("app.jar")
-}
-
-node {
-    download = true
-}
-
-var buildWebapp = tasks.register<PnpmTask>("buildWebapp") {
-    dependsOn(tasks.getByName<PnpmInstallTask>("pnpmInstall"))
-    args.set(listOf("run", "build"))
-}
-
-sourceSets {
-    java {
-        main {
-            resources {
-                srcDir(buildWebapp)
-            }
-        }
-    }
-}
-
-tasks.test {
-    dependsOn(buildWebapp)
 }

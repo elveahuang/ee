@@ -10,7 +10,6 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.20-RC"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.springframework.boot") version "3.1.4" apply false
-    id("com.github.node-gradle.node") version "7.0.1" apply false
     id("org.graalvm.buildtools.native") version "0.9.27" apply false
     id("com.google.osdetector") version "1.7.3" apply false
     id("org.hibernate.orm") version "6.2.9.Final" apply false

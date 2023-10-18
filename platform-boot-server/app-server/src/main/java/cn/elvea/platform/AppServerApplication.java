@@ -3,6 +3,7 @@ package cn.elvea.platform;
 import cn.elvea.platform.commons.core.constants.GlobalConstants;
 import cn.elvea.platform.commons.core.data.jpa.repository.BaseEntityRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
+import me.ahoo.cosid.spring.boot.starter.actuate.CosIdEndpointAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -23,7 +24,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "cn.elvea.platform.security",
         "cn.elvea.platform.system",
 }, exclude = {
-        QuartzAutoConfiguration.class
+        QuartzAutoConfiguration.class,
+        CosIdEndpointAutoConfiguration.class
 })
 @EntityScan(basePackages = {
         "cn.elvea.platform.lxp.**.entity",
