@@ -1,13 +1,9 @@
-import org.jetbrains.kotlin.config.LanguageVersion
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("idea")
     id("java")
     id("application")
     id("java-library")
-    id("org.jetbrains.kotlin.jvm") version "1.9.20-RC"
+    id("org.jetbrains.kotlin.jvm") version "1.9.10"
     id("io.spring.dependency-management") version "1.1.3"
     id("org.springframework.boot") version "3.1.4" apply false
     id("org.graalvm.buildtools.native") version "0.9.27" apply false
@@ -21,7 +17,6 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {
         maven { url = uri("https://maven.aliyun.com/repository/public") }
@@ -37,20 +32,6 @@ allprojects {
     configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
-    }
-
-    configure<KotlinJvmProjectExtension> {
-        jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_21.toString()
-        kotlinOptions.languageVersion = LanguageVersion.KOTLIN_1_9.versionString
     }
 
     tasks.withType<Test> {
