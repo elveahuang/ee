@@ -3,12 +3,12 @@ plugins {
     id("java")
     id("application")
     id("java-library")
-    id("org.jetbrains.kotlin.jvm") version "1.9.10"
     id("io.spring.dependency-management") version "1.1.3"
-    id("org.springframework.boot") version "3.1.4" apply false
-    id("org.graalvm.buildtools.native") version "0.9.27" apply false
     id("com.google.osdetector") version "1.7.3" apply false
     id("org.hibernate.orm") version "6.2.9.Final" apply false
+    id("org.jetbrains.kotlin.jvm") version "1.9.10" apply false
+    id("org.springframework.boot") version "3.1.4" apply false
+    id("org.graalvm.buildtools.native") version "0.9.27" apply false
 }
 
 allprojects {
