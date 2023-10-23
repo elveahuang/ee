@@ -3,6 +3,8 @@ package cn.elvea.platform.config;
 import cn.elvea.platform.commons.core.constants.GlobalConstants;
 import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaLogStore;
 import cn.elvea.platform.commons.core.log.LogManagerCustomizer;
+import cn.elvea.platform.lxp.commons.constants.LxpConstants;
+import cn.elvea.platform.system.commons.constants.SystemConstants;
 import cn.elvea.platform.system.commons.interceptor.LogInterceptor;
 import cn.elvea.platform.system.log.api.LogApi;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +27,11 @@ public class ApplicationConfiguration {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames(
-                "classpath:cn/elvea/platform/commons/messages/label",
-                "classpath:cn/elvea/platform/commons/messages/validation",
-                "classpath:org/springframework/security/messages",
-                "classpath:messages/messages"
+                SystemConstants.I18N_SECURITY_MESSAGES,
+                SystemConstants.I18N_LABEL_MESSAGES,
+                SystemConstants.I18N_VALIDATION_MESSAGES,
+                LxpConstants.I18N_LABEL_MESSAGES,
+                LxpConstants.I18N_VALIDATION_MESSAGES
         );
         messageSource.setDefaultEncoding(GlobalConstants.ENCODING);
         messageSource.setUseCodeAsDefaultMessage(true);

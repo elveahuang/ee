@@ -19,7 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UserRegisterForm implements Serializable {
 
-    @NotEmpty
+    @NotEmpty(message = "{system__validation__user__username_not_empty}")
     private String username;
 
     @NotEmpty
