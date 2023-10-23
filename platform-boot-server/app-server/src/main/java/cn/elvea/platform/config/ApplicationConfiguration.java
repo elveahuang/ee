@@ -1,7 +1,6 @@
 package cn.elvea.platform.config;
 
 import cn.elvea.platform.commons.core.constants.GlobalConstants;
-import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaLogStore;
 import cn.elvea.platform.commons.core.log.LogManagerCustomizer;
 import cn.elvea.platform.lxp.commons.constants.LxpConstants;
 import cn.elvea.platform.system.commons.constants.SystemConstants;
@@ -36,14 +35,6 @@ public class ApplicationConfiguration {
         messageSource.setDefaultEncoding(GlobalConstants.ENCODING);
         messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
-    }
-
-    /**
-     * 自定义验证码日志存储，用于保存验证码发送记录
-     */
-    @Bean("captchaLogStore")
-    public CaptchaLogStore captchaLogStore(LogApi logApi) {
-        return logApi::saveCaptchaLog;
     }
 
     /**

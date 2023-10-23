@@ -2,14 +2,13 @@ package cn.elvea.platform.commons.core.extensions.captcha.service;
 
 import cn.elvea.platform.commons.core.enums.CaptchaTypeEnum;
 import cn.elvea.platform.commons.core.extensions.captcha.Captcha;
-import cn.elvea.platform.commons.core.extensions.captcha.domain.CaptchaLogDto;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.CaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.CodeCaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.MailCaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.SmsCaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.request.CaptchaRequest;
-import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaLogStore;
 import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaStore;
+import cn.elvea.platform.commons.core.utils.ObjectUtils;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,30 +32,17 @@ public class DefaultCaptchaService implements CaptchaService {
 
     private CaptchaStore captchaStore;
 
-    private CaptchaLogStore captchaLogStore;
-
     @Override
     public Captcha generate(CaptchaRequest request) throws Exception {
         Captcha captcha = getCaptchaProvider(request).generate(request);
         captchaStore.set(captcha.getKey(), captcha, request.getDuration());
-        if (this.captchaLogStore != null) {
-            CaptchaLogDto captchaLog = CaptchaLogDto.builder()
-                    .email(request.getEmail())
-                    .mobileCountryCode(request.getMobileCountryCode())
-                    .mobileNumber(request.getMobileNumber())
-                    .captchaType(captcha.getKey())
-                    .captchaKey(captcha.getValue())
-                    .captchaValue(captcha.getType().getCode())
-                    .build();
-            this.captchaLogStore.saveCaptchaLog(captchaLog);
-        }
         return captcha;
     }
 
     @Override
     public Boolean check(String captchaKey, String captchaValue) {
         Captcha captcha = captchaStore.get(captchaKey);
-        return captcha != null ? captcha.getValue().equals(captchaValue) : false;
+        return (!ObjectUtils.isEmpty(captchaValue) && captchaValue.equalsIgnoreCase(captcha.getValue()));
     }
 
     @Override
