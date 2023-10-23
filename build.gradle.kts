@@ -40,12 +40,11 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.modulith:spring-modulith-bom:1.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.5")
             mavenBom("org.springframework.shell:spring-shell-dependencies:3.1.4")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2022.0.4")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2022.0.0.0")
-            mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.12.2-2022.0.4")
+            mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.12.3-2022.0.4")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.1.7")
             mavenBom("io.grpc:grpc-bom:1.58.0")
             mavenBom("cn.hutool:hutool-bom:5.8.22")
@@ -56,7 +55,7 @@ allprojects {
 
         dependencies {
             // spring authorization server
-            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.1.2")
+            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.1.3")
             // mapstruct & lombok
             dependency("org.mapstruct:mapstruct:1.5.5.Final")
             dependency("org.mapstruct:mapstruct-processor:1.5.5.Final")
