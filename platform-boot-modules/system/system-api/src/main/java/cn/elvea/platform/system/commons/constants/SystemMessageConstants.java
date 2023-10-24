@@ -7,6 +7,11 @@ package cn.elvea.platform.system.commons.constants;
 public interface SystemMessageConstants {
 
     /**
+     * 消息模版路径
+     */
+    String TPL_CLASSPATH = "/tpl/message/";
+
+    /**
      * 测试消息
      */
     String TEST_MESSAGE = "TEST_MESSAGE";
@@ -14,7 +19,6 @@ public interface SystemMessageConstants {
     /**
      * 验证码
      */
-
     String CAPTCHA_MESSAGE = "CAPTCHA_MESSAGE";
 
     /**

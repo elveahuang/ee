@@ -6,8 +6,8 @@ package cn.elvea.platform.lxp.commons.constants;
  */
 public interface LxpConstants {
 
-    String I18N_LABEL_MESSAGES = "classpath:cn/elvea/platform/lxp/i18n/label/messages";
+    String I18N_LABEL_MESSAGES = "classpath:i18n/lxp/label/messages";
 
-    String I18N_VALIDATION_MESSAGES = "classpath:cn/elvea/platform/lxp/i18n/validation/messages";
+    String I18N_VALIDATION_MESSAGES = "classpath:i18n/lxp/validation/messages";
 
 }

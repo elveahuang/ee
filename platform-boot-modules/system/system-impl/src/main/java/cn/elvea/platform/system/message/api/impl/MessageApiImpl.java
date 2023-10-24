@@ -32,6 +32,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static cn.elvea.platform.system.commons.constants.SystemMessageConstants.TPL_CLASSPATH;
+
 /**
  * @author elvea
  * @since 0.0.1
@@ -446,7 +448,7 @@ public class MessageApiImpl implements MessageApi {
                     String content = "";
                     try {
                         // 获取模板文件
-                        String path = ("/template/message/" + messageTypeEntity.getCode() + "/" + messageTemplateTypeEntity.getCode() + ".html").toLowerCase();
+                        String path = (TPL_CLASSPATH + messageTypeEntity.getCode() + "/" + messageTemplateTypeEntity.getCode() + ".html").toLowerCase();
                         ClassPathResource classPathResource = new ClassPathResource(path);
                         content = IOUtils.toString(classPathResource.getInputStream(), GlobalConstants.ENCODING);
                     } catch (Exception e) {
