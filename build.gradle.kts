@@ -19,6 +19,7 @@ allprojects {
     apply(plugin = "io.spring.dependency-management")
 
     repositories {
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public") }
         maven { url = uri("https://maven.aliyun.com/repository/public") }
         maven { url = uri("https://maven.aliyun.com/repository/spring") }
         maven { url = uri("https://maven.aliyun.com/repository/google") }
@@ -48,8 +49,8 @@ allprojects {
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.1.7")
             mavenBom("io.grpc:grpc-bom:1.58.0")
             mavenBom("cn.hutool:hutool-bom:5.8.22")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.5.3")
-            mavenBom("org.mockito:mockito-bom:5.5.0")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.5.5")
+            mavenBom("org.mockito:mockito-bom:5.3.1")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:1.9.10")
         }
 
@@ -87,7 +88,7 @@ allprojects {
             dependency("org.redisson:redisson-spring-boot-starter:3.24.2")
             // others
             dependency("com.nimbusds:nimbus-jose-jwt:9.37")
-            dependency("com.nimbusds:oauth2-oidc-sdk:11.4")
+            dependency("com.nimbusds:oauth2-oidc-sdk:11.5")
             dependency("org.json:json:20231013")
             dependency("com.alibaba:fastjson:2.0.41")
             dependency("com.github.spotbugs:spotbugs-annotations:4.7.3")
@@ -107,15 +108,11 @@ allprojects {
             dependency("com.xuxueli:xxl-job-core:2.4.0")
             dependency("org.apache.shardingsphere.elasticjob:elasticjob-lite-core:3.0.4")
             dependency("org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-core:3.0.4")
-            dependency("org.apache.httpcomponents:httpcore:4.4.16")
-            dependency("org.apache.httpcomponents:httpcore-nio:4.4.16")
-            dependency("org.apache.httpcomponents:httpclient:4.5.14")
-            dependency("org.apache.httpcomponents:httpmime:4.5.14")
             dependency("net.bytebuddy:byte-buddy:1.14.9")
             dependency("net.bytebuddy:byte-buddy-agent:1.14.9")
-            dependency("org.bouncycastle:bcpkix-jdk15on:1.70")
-            dependency("org.bouncycastle:bcprov-jdk15on:1.70")
-            dependency("org.bouncycastle:bcutil-jdk15on:1.70")
+            dependency("org.bouncycastle:bcpkix-jdk18on:1.76")
+            dependency("org.bouncycastle:bcprov-jdk18on:1.76")
+            dependency("org.bouncycastle:bcutil-jdk18on:1.76")
             // xml & docs
             dependency("xalan:xalan:2.7.3")
             dependency("org.jsoup:jsoup:1.16.1")
@@ -159,6 +156,7 @@ allprojects {
             dependency("com.alipay.sdk:alipay-sdk-java:4.38.105.ALL")
             dependency("com.qcloud:cos_api:5.6.175")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.880")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.880")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.880")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.880")
             dependency("com.larksuite.oapi:oapi-sdk:2.0.28")
@@ -195,6 +193,9 @@ allprojects {
         exclude(module = "javax.servlet-api")
         exclude(module = "javax.activation-api")
         exclude(module = "validation-api")
+        exclude(module = "bcpkix-jdk15on")
+        exclude(module = "bcprov-jdk15on")
+        exclude(module = "bcutil-jdk15on")
     }
 }
 
