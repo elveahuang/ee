@@ -22,7 +22,7 @@ include("platform-commons:commons-core-starter")
 // ---------------------------------------------------------------------------------------------------------------------
 // 单体服务
 // ---------------------------------------------------------------------------------------------------------------------
-// 微服务-模块
+// 单体服务-模块
 include("platform-boot-modules:system:system-api")
 include("platform-boot-modules:system:system-impl")
 include("platform-boot-modules:security")
