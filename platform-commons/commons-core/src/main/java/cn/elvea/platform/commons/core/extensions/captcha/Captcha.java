@@ -21,4 +21,7 @@ public class Captcha implements Serializable {
     private String key;
     private String value;
     private String image;
+    private String email;
+    private String mobileCountryCode;
+    private String mobileNumber;
 }

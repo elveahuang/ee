@@ -6,6 +6,7 @@ import cn.elvea.platform.commons.core.extensions.captcha.provider.CaptchaProvide
 import cn.elvea.platform.commons.core.extensions.captcha.provider.CodeCaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.MailCaptchaProvider;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.SmsCaptchaProvider;
+import cn.elvea.platform.commons.core.extensions.captcha.request.CaptchaCheckRequest;
 import cn.elvea.platform.commons.core.extensions.captcha.request.CaptchaRequest;
 import cn.elvea.platform.commons.core.extensions.captcha.store.CaptchaStore;
 import cn.elvea.platform.commons.core.utils.ObjectUtils;
@@ -40,9 +41,28 @@ public class DefaultCaptchaService implements CaptchaService {
     }
 
     @Override
-    public Boolean check(String captchaKey, String captchaValue) {
-        Captcha captcha = captchaStore.get(captchaKey);
-        return (!ObjectUtils.isEmpty(captchaValue) && captchaValue.equalsIgnoreCase(captcha.getValue()));
+    public boolean check(CaptchaCheckRequest request) {
+        Captcha captcha = captchaStore.get(request.getKey());
+
+        boolean result = false;
+        if (CaptchaTypeEnum.MAIL.equals(request.getType())) {
+            result = (!ObjectUtils.isEmpty(captcha)
+                    && captcha.getEmail().equalsIgnoreCase(request.getEmail())
+                    && captcha.getValue().equalsIgnoreCase(request.getValue()));
+        } else if (CaptchaTypeEnum.SMS.equals(request.getType())) {
+            result = (!ObjectUtils.isEmpty(captcha)
+                    && captcha.getMobileNumber().equalsIgnoreCase(request.getMobileNumber())
+                    && captcha.getValue().equalsIgnoreCase(request.getValue()));
+        } else if (CaptchaTypeEnum.CODE.equals(request.getType())) {
+            result = (!ObjectUtils.isEmpty(captcha) && captcha.getValue().equalsIgnoreCase(request.getValue()));
+        }
+
+        // 校验后删除验证码
+        if (request.isClearAfterCheck()) {
+            captchaStore.remove(request.getKey());
+        }
+
+        return result;
     }
 
     @Override

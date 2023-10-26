@@ -2,6 +2,7 @@ package cn.elvea.platform.commons.core.extensions.captcha.service;
 
 import cn.elvea.platform.commons.core.extensions.captcha.Captcha;
 import cn.elvea.platform.commons.core.extensions.captcha.provider.CaptchaProvider;
+import cn.elvea.platform.commons.core.extensions.captcha.request.CaptchaCheckRequest;
 import cn.elvea.platform.commons.core.extensions.captcha.request.CaptchaRequest;
 
 /**
@@ -12,7 +13,7 @@ public interface CaptchaService {
 
     Captcha generate(CaptchaRequest request) throws Exception;
 
-    Boolean check(String captchaKey, String captchaValue);
+    boolean check(CaptchaCheckRequest request);
 
     CaptchaProvider getCaptchaProvider(CaptchaRequest request);
 

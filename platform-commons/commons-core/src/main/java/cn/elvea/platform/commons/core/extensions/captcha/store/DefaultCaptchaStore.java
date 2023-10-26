@@ -32,4 +32,9 @@ public class DefaultCaptchaStore implements CaptchaStore {
         this.cacheService.set(this.cacheKeyGenerator.key(key), value, duration);
     }
 
+    @Override
+    public void remove(String key) {
+        this.cacheService.expire(key, Duration.ofSeconds(0));
+    }
+
 }

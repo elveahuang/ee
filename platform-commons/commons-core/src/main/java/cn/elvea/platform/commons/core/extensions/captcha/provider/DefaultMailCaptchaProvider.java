@@ -19,7 +19,11 @@ public class DefaultMailCaptchaProvider implements MailCaptchaProvider {
     public Captcha generate(CaptchaRequest request) throws Exception {
         String uuid = StringUtils.uuid();
         String number = StringUtils.randomNumeric((request.getSize() <= 0 || request.getSize() >= 8) ? 6 : request.getSize());
-        return Captcha.builder().type(CaptchaTypeEnum.MAIL).key(uuid).value(number).build();
+        return Captcha.builder()
+                .type(CaptchaTypeEnum.MAIL)
+                .email(request.getEmail())
+                .key(uuid)
+                .value(number).build();
     }
 
 }

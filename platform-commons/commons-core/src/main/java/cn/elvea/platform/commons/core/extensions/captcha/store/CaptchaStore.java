@@ -14,4 +14,6 @@ public interface CaptchaStore {
 
     void set(String key, Captcha value, Duration duration);
 
+    void remove(String key);
+
 }

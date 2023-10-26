@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.Duration;
 
 /**
  * @author elvea
@@ -17,13 +16,14 @@ import java.time.Duration;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CaptchaRequest implements Serializable {
+public class CaptchaCheckRequest implements Serializable {
     private CaptchaTypeEnum type;
     private String email;
     private String mobileCountryCode;
     private String mobileNumber;
+    private String key;
+    private String value;
+    // 是否在校验后删除验证码
     @Builder.Default
-    private int size = 6;
-    @Builder.Default
-    private Duration duration = Duration.ofMinutes(5);
+    private boolean clearAfterCheck = false;
 }
