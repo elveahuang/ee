@@ -1,0 +1,40 @@
+package cc.elvea.platform.commons.autoconfigure.core.properties;
+
+import cc.elvea.platform.commons.utils.jwt.JwtStrategy;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.oauth2.jose.jws.JwsAlgorithms;
+
+import java.time.Duration;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+@Data
+@NoArgsConstructor
+@ConfigurationProperties(JwtProperties.PREFIX)
+public class JwtProperties {
+
+    public static final String PREFIX = "platform.jwt";
+
+    private boolean enabled = true;
+
+    private JwtStrategy strategy = JwtStrategy.AUTO;
+
+    private String algorithm = JwsAlgorithms.RS256;
+
+    private String publicKeyValue;
+
+    private String privateKeyValue;
+
+    private Duration authorizationCodeTimeToLive = Duration.ofMinutes(5);
+
+    private Duration deviceCodeTimeToLive = Duration.ofMinutes(5);
+
+    private Duration accessTokenTimeToLive = Duration.ofMinutes(15);
+
+    private Duration refreshTokenTimeToLive = Duration.ofDays(3);
+
+}

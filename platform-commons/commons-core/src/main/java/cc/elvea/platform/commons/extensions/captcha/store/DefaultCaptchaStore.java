@@ -1,0 +1,40 @@
+package cc.elvea.platform.commons.extensions.captcha.store;
+
+import cc.elvea.platform.commons.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.cache.SimpleCacheKeyGenerator;
+import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.extensions.captcha.Captcha;
+
+import java.time.Duration;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+public class DefaultCaptchaStore implements CaptchaStore {
+
+    private final CacheKeyGenerator cacheKeyGenerator;
+
+    private final CacheService cacheService;
+
+    public DefaultCaptchaStore(CacheService cacheService, String cacheKeyPrefix) {
+        this.cacheKeyGenerator = SimpleCacheKeyGenerator.builder().prefix(cacheKeyPrefix).build();
+        this.cacheService = cacheService;
+    }
+
+    @Override
+    public Captcha get(String key) {
+        return this.cacheService.get(this.cacheKeyGenerator.key(key));
+    }
+
+    @Override
+    public void set(String key, Captcha value, Duration duration) {
+        this.cacheService.set(this.cacheKeyGenerator.key(key), value, duration);
+    }
+
+    @Override
+    public void remove(String key) {
+        this.cacheService.expire(key, Duration.ofSeconds(0));
+    }
+
+}

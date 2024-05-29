@@ -1,0 +1,46 @@
+package cc.elvea.platform.commons.autoconfigure.storage;
+
+import cc.elvea.platform.commons.autoconfigure.storage.properties.StorageProperties;
+import cc.elvea.platform.commons.storage.Storage;
+import cc.elvea.platform.commons.storage.StorageConfig;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+@Slf4j
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(StorageProperties.class)
+@ConditionalOnProperty(prefix = StorageProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+public class StorageAutoConfiguration {
+
+    public StorageAutoConfiguration(StorageProperties properties) {
+        log.info("StorageAutoConfiguration is enabled.");
+        log.info("Current Storage is {}", properties.getType());
+        log.info("Min Storage is {}", properties.getMin().isEnabled());
+        log.info("COS Storage is {}", properties.getCos().isEnabled());
+        log.info("OSS Storage is {}", properties.getOss().isEnabled());
+    }
+
+    /**
+     * @return {@link Storage}
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    Storage storage(StorageProperties properties) {
+        StorageConfig config = StorageConfig.builder()
+                .type(properties.getType())
+                .cos(properties.getCos())
+                .oss(properties.getOss())
+                .min(properties.getMin())
+                .build();
+        return new Storage(config);
+    }
+
+}

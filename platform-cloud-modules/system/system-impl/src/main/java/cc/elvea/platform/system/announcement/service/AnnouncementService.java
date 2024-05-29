@@ -1,0 +1,14 @@
+package cc.elvea.platform.system.announcement.service;
+
+import cc.elvea.platform.commons.service.CachingEntityService;
+import cc.elvea.platform.commons.service.EntityService;
+import cc.elvea.platform.system.announcement.domain.entity.AnnouncementEntity;
+
+/**
+ * @author elvea
+ * @see EntityService
+ * @see CachingEntityService
+ * @since 24.1.0
+ */
+public interface AnnouncementService extends CachingEntityService<AnnouncementEntity, Long> {
+}

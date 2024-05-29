@@ -1,0 +1,10 @@
+server:
+    port: 8181
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        allow-circular-references: true
+    application:
+        name: app-server
+    profiles:
+        active: local

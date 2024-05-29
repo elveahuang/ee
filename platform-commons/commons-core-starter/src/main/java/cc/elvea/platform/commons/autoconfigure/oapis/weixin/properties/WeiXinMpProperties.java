@@ -1,0 +1,30 @@
+package cc.elvea.platform.commons.autoconfigure.oapis.weixin.properties;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+@Data
+@NoArgsConstructor
+@ConfigurationProperties(prefix = WeiXinMpProperties.PREFIX)
+public class WeiXinMpProperties {
+
+    public static final String PREFIX = "platform.oapis.weixin.mp";
+
+    private boolean enabled = false;
+
+    private String cacheKeyPrefix = "mp";
+
+    // =================================================================================================================
+    // 默认应用配置
+    // =================================================================================================================
+
+    private String appId;
+
+    private String appSecret;
+
+}

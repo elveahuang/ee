@@ -1,0 +1,31 @@
+package cc.elvea.platform.commons.utils;
+
+import cc.elvea.platform.commons.utils.builder.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+public class BuilderTests {
+
+    @Test
+    public void test() {
+        User user = Builder.of(User::new)
+                .with(User::setUsername, "mike")
+                .build();
+        Assertions.assertEquals("mike", user.getUsername());
+    }
+
+    @Getter
+    @Setter
+    static class User {
+
+        private String username;
+
+    }
+
+}

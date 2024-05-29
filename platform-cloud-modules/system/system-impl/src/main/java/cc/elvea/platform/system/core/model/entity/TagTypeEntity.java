@@ -1,0 +1,45 @@
+package cc.elvea.platform.system.core.model.entity;
+
+import cc.elvea.platform.commons.data.domain.IdEntity;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("sys_tag_type")
+public class TagTypeEntity implements IdEntity {
+    /**
+     * 主键
+     */
+    @TableId
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
+    /**
+     *
+     */
+    private String code;
+    /**
+     *
+     */
+    private String title;
+    /**
+     *
+     */
+    private String label;
+    /**
+     *
+     */
+    private String description;
+}

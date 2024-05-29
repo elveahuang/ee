@@ -1,0 +1,15 @@
+package cc.elvea.platform.system.mall.web.app;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+@RestController
+@AllArgsConstructor
+@Tag(name = "CartController", description = "购物车控制器")
+public class CartController {
+}

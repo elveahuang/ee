@@ -1,0 +1,232 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    thymeleaf:
+        cache: false
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:9292
+                username: admin
+                password: admin
+    datasource:
+        master:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        slave:
+            name: slave
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        job:
+            name: job
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/job?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+    cache:
+        type: redis
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+            lettuce:
+                pool:
+                    enabled: true
+                    max-active: 32
+                    max-idle: 8
+                    min-idle: 0
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: ee
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+                default-requeue-rejected: true
+    quartz:
+        scheduler-name: QuartzScheduler
+        job-store-type: jdbc
+    jpa:
+        show-sql: true
+    ai:
+        openai:
+            api-key: xxx
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+        path: /swagger-ui.html
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    mode: production
+    home:
+        admin: http://127.0.0.1:8081
+        mobile: http://127.0.0.1:8082
+        webapp: http://127.0.0.1:8083
+        main: http://127.0.0.1:8084
+    jwt:
+        enabled: true
+        strategy: auto
+        public-key-value:
+        private-key-value:
+    data:
+        core:
+            enabled: true
+            jdbc:
+                enabled: true
+            auditing:
+                enabled: true
+        datasource:
+            enabled: true
+            master:
+                enabled: true
+            slave:
+                enabled: true
+            job:
+                enabled: true
+        jpa:
+            enabled: true
+        mybatis:
+            enabled: false
+    cache:
+        enabled: true
+        type: redisson
+        redis:
+            enabled: false
+            spring-cache-enabled: false
+        redisson:
+            enabled: true
+            spring-cache-enabled: true
+    amqp:
+        enabled: true
+    quartz:
+        enabled: true
+    oapis:
+        dingtalk:
+            enabled: false
+            agent-id:
+            app-key:
+            app-secret:
+            corp-id:
+        lark:
+            enabled: false
+            app-type: self_built
+            app-id:
+            app-secret:
+        weixin:
+            cp:
+                enabled: false
+                agent-id:
+                corp-id:
+                corp-secret:
+            mp:
+                enabled: false
+                app-id:
+                app-secret:
+            ma:
+                enabled: false
+                app-id:
+                app-secret:
+    storage:
+        enabled: true
+        type: min
+        min:
+            enabled: true
+            bucket-name:
+            access-key:
+            secret-key:
+            endpoint:
+        oss:
+            enabled: false
+            endpoint:
+            accessKeyId:
+            accessKeySecret:
+            bucketName:
+    sms:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+            sign-name:
+            template:
+    mail:
+        enabled: true
+        server:
+            enabled: true
+            from:
+            host:
+            port: 25
+            username:
+            password:
+    translator:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+        baidu:
+            enabled: false
+            app-id:
+            secret-key:
+    face-body:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+    coin:
+        enabled: true
+        etherscan:
+            api-key:
+    message:
+        broadcast:
+            enabled: true
+            redisson:
+                enabled: true
+            rabbit:
+                enabled: true

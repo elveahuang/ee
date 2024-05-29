@@ -1,0 +1,27 @@
+package cc.elvea.platform.system.core.cache;
+
+import cc.elvea.platform.commons.cache.CacheKey;
+import cc.elvea.platform.commons.cache.CacheKeyGenerator;
+import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * @author elvea
+ * @since 24.1.0
+ */
+public class UserRoleCacheKeyGenerator implements CacheKeyGenerator {
+
+    @Override
+    public @NotNull String getPrefix() {
+        return SystemCacheConstants.USER_ROLE;
+    }
+
+    public CacheKey byUserId(Long userId) {
+        return this.key(userId);
+    }
+
+    public static CacheKey keyByUserId(Long userId) {
+        return new UserRoleCacheKeyGenerator().byUserId(userId);
+    }
+
+}
