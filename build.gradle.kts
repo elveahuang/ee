@@ -65,7 +65,7 @@ allprojects {
             mavenBom("org.springframework.ai:spring-ai-bom:0.8.1")
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.0")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.0")
-            mavenBom("org.springframework.shell:spring-shell-dependencies:3.2.5")
+            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.2")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.0")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
