@@ -69,13 +69,13 @@ allprojects {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.2")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.0")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.2.3")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.2")
             mavenBom("io.grpc:grpc-bom:1.64.0")
-            mavenBom("cn.hutool:hutool-bom:5.8.27")
+            mavenBom("cn.hutool:hutool-bom:5.8.28")
             mavenBom("me.ahoo.cosid:cosid-bom:2.8.1")
             mavenBom("org.mockito:mockito-bom:5.12.0")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.0")
-            mavenBom("com.baomidou:mybatis-plus-bom:3.5.6")
+            mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
         }
 
         dependencies {
