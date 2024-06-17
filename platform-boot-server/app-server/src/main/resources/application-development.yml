@@ -16,6 +16,11 @@ spring:
                 url: http://127.0.0.1:9292
                 username: admin
                 password: admin
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 1000MB
+            max-request-size: 1000MB
     datasource:
         master:
             name: master
@@ -69,8 +74,6 @@ spring:
     quartz:
         scheduler-name: QuartzScheduler
         job-store-type: jdbc
-    jpa:
-        show-sql: true
     ai:
         openai:
             api-key: xxx
@@ -105,11 +108,6 @@ platform:
         mobile: http://127.0.0.1:8082
         webapp: http://127.0.0.1:8083
         main: http://127.0.0.1:8084
-    jwt:
-        enabled: true
-        strategy: auto
-        public-key-value:
-        private-key-value:
     data:
         core:
             enabled: true
@@ -138,6 +136,11 @@ platform:
         redisson:
             enabled: true
             spring-cache-enabled: true
+    jwt:
+        enabled: true
+        strategy: auto
+        public-key-value:
+        private-key-value:
     amqp:
         enabled: true
     quartz:
@@ -173,16 +176,16 @@ platform:
         type: min
         min:
             enabled: true
-            bucket-name:
             access-key:
             secret-key:
             endpoint:
+            bucket-name:
         oss:
             enabled: false
+            access-key-id:
+            access-key-secret:
             endpoint:
-            accessKeyId:
-            accessKeySecret:
-            bucketName:
+            bucket-name:
     sms:
         enabled: true
         type: aliyun
@@ -222,7 +225,7 @@ platform:
     coin:
         enabled: true
         etherscan:
-            api-key:
+            api-key: xxx
     message:
         broadcast:
             enabled: true

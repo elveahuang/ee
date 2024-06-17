@@ -85,7 +85,7 @@ dependencies {
     api("cn.hutool:hutool-http")
     api("cn.hutool:hutool-extra")
     api("ognl:ognl")
-    api("com.google.zxing:core:3.5.3")
+    api("com.google.zxing:core")
     compileOnly("org.quartz-scheduler:quartz")
     compileOnly("com.nimbusds:oauth2-oidc-sdk")
     compileOnly("org.lionsoul:ip2region")

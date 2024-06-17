@@ -19,4 +19,6 @@ public class CustomJpaProperties {
 
     private boolean showSql = true;
 
+    private boolean formatSql = true;
+
 }

@@ -47,7 +47,10 @@ public class CustomJpaAutoConfiguration {
      */
     @Bean
     public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(CustomJpaProperties properties) {
-        return hibernateProperties -> hibernateProperties.put("hibernate.show_sql", properties.isShowSql());
+        return hibernateProperties -> {
+            hibernateProperties.put("hibernate.show_sql", properties.isShowSql());
+            hibernateProperties.put("hibernate.format_sql", properties.isFormatSql());
+        };
     }
 
 }

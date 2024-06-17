@@ -1508,13 +1508,11 @@ CREATE TABLE `sys_link`
 -- 定时任务表
 --
 
-DROP TABLE IF EXISTS `sys_job`;
-
 CREATE TABLE `sys_job`
 (
     `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
     `code`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
-    `classname`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '任务类名',
+    `classname`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '线程类名',
     `description`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '描述说明',
     `type`             VARCHAR(255) COMMENT '类型',
     `unit`             VARCHAR(255) COMMENT '单位',
@@ -1536,8 +1534,6 @@ CREATE TABLE `sys_job`
 --
 -- 定时任务参数表
 --
-
-DROP TABLE IF EXISTS `sys_job_param`;
 
 CREATE TABLE `sys_job_param`
 (

@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import static cc.elvea.platform.commons.autoconfigure.data.core.properties.CustomDataProperties.*;
+
 /**
  * @author elvea
  * @since 24.1.0
@@ -20,7 +22,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CustomDataProperties.class)
-@ConditionalOnProperty(prefix = CustomDataProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = PREFIX, name = "enabled", havingValue = "true")
 public class CustomDataAutoConfiguration {
 
     public CustomDataAutoConfiguration() {
@@ -32,7 +34,7 @@ public class CustomDataAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = CustomDataProperties.JDBC_PREFIX, name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = JDBC_PREFIX, name = "enabled", havingValue = "true")
     public DbDialect dbDialect(JdbcTemplate jdbcTemplate) {
         return jdbcTemplate.execute(JdbcUtils::getDialect);
     }
@@ -42,7 +44,7 @@ public class CustomDataAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = CustomDataProperties.JDBC_PREFIX, name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = JDBC_PREFIX, name = "enabled", havingValue = "true")
     public Dao dao(JdbcTemplate jdbcTemplate) {
         return new Dao(jdbcTemplate);
     }
@@ -52,7 +54,7 @@ public class CustomDataAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = CustomDataProperties.AUDITING_PREFIX, name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = AUDITING_PREFIX, name = "enabled", havingValue = "true")
     public UserAuditorAware userAuditorAware() {
         return new UserAuditorAware();
     }
