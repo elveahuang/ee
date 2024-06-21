@@ -46,6 +46,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import static cc.elvea.platform.commons.data.mybatis.utils.MyBatisPlusUtils.getMyBatisPlusPage;
+
 /**
  * @param <T> 实体
  * @param <K> 主键
@@ -57,11 +59,12 @@ import java.util.stream.Collectors;
  * @since 24.1.0
  */
 @Slf4j
-@NoRepositoryBean
 @Transactional
+@NoRepositoryBean
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public abstract class BaseEntityService<T extends IdEntity, K extends Serializable, M extends BaseEntityMapper<T, K>>
-        extends AbstractService implements EntityService<T, K>, EnhancedEntityService<T, K, M> {
+        extends AbstractService
+        implements EntityService<T, K>, EnhancedEntityService<T, K, M> {
 
     protected Log logger = LogFactory.getLog(getClass());
 
@@ -129,7 +132,6 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
         return this.getMapper().selectById(id);
     }
 
-
     /**
      * @see EntityService#findById(Serializable, Consumer)
      */
@@ -170,9 +172,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public List<T> findAll(Pageable pageable) {
-        return this.getMapper().selectPage(
-                MyBatisPlusUtils.getMyBatisPlusPage(pageable), Wrappers.emptyWrapper()
-        ).getRecords();
+        return this.getMapper().selectPage(getMyBatisPlusPage(pageable), Wrappers.emptyWrapper()).getRecords();
     }
 
     /**
@@ -180,9 +180,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public Page<T> findByPage(Pageable pageable) {
-        return MyBatisPlusUtils.toSpringDataPage(
-                this.getMapper().selectPage(MyBatisPlusUtils.getMyBatisPlusPage(pageable), Wrappers.emptyWrapper())
-        );
+        return MyBatisPlusUtils.toSpringDataPage(this.getMapper().selectPage(getMyBatisPlusPage(pageable), Wrappers.emptyWrapper()));
     }
 
     /**
@@ -193,9 +191,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
         if (example == null) {
             return findByPage(pageable);
         }
-        return MyBatisPlusUtils.toSpringDataPage(
-                this.getMapper().selectPage(MyBatisPlusUtils.getMyBatisPlusPage(pageable), new QueryWrapper<>(example))
-        );
+        return MyBatisPlusUtils.toSpringDataPage(this.getMapper().selectPage(getMyBatisPlusPage(pageable), new QueryWrapper<>(example)));
     }
 
     /**
@@ -319,6 +315,8 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     public void softDelete(T entity) {
         if (entity instanceof BaseEntity baseEntity) {
             baseEntity.setActive(Boolean.FALSE);
+            baseEntity.setDeletedAt(getCurLocalDateTime());
+            baseEntity.setDeletedBy(SecurityUtils.getUid());
             this.save(entity);
         } else if (entity instanceof SimpleEntity simpleEntity) {
             simpleEntity.setActive(Boolean.FALSE);
