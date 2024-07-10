@@ -278,7 +278,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public void deleteBatchById(Collection<K> entityIdList) {
         if (CollectionUtils.isNotEmpty(entityIdList)) {
-            this.getMapper().deleteBatchIds(entityIdList);
+            this.getMapper().deleteByIds(entityIdList);
         }
     }
 
@@ -296,7 +296,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public void deleteBatch(Collection<T> entityList, int batchSize) {
         if (CollectionUtils.isNotEmpty(entityList)) {
-            this.getMapper().deleteBatchIds(entityList.stream().map(IdEntity::getId).collect(Collectors.toList()));
+            this.getMapper().deleteByIds(entityList.stream().map(IdEntity::getId).collect(Collectors.toList()));
         }
     }
 

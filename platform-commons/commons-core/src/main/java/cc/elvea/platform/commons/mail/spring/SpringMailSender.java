@@ -5,6 +5,8 @@ import cc.elvea.platform.commons.enums.SslProtocolTypeEnum;
 import cc.elvea.platform.commons.mail.MailBody;
 import cc.elvea.platform.commons.mail.MailSender;
 import cc.elvea.platform.commons.mail.MailServer;
+import cc.elvea.platform.commons.utils.StringUtils;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,11 @@ public class SpringMailSender implements MailSender {
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
         // 发件人
         // 邮件服务器基本都要求发件人必须和链接的账号一致
-        helper.setFrom(server.getFrom());
+        if (StringUtils.isNotEmpty(server.getName())) {
+            helper.setFrom(new InternetAddress(server.getFrom(), server.getName()));
+        } else {
+            helper.setFrom(server.getFrom());
+        }
         // 收件人
         helper.setTo(body.getTo());
         // 标题

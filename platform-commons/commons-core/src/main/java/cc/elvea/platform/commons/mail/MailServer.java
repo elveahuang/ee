@@ -28,6 +28,7 @@ public class MailServer implements Serializable {
     private String from;
     private String host;
     private int port;
+    private String name;
     private String username;
     private String password;
 }
