@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.extensions.template;
 
 import cc.elvea.platform.BaseTests;
+import cc.elvea.platform.commons.template.HtmlTemplateService;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

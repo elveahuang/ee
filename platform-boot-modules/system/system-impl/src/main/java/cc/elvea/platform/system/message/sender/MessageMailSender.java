@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.sender;
 
-import cc.elvea.platform.commons.extensions.mail.MailBody;
-import cc.elvea.platform.commons.extensions.mail.MailSender;
+import cc.elvea.platform.commons.mail.MailBody;
+import cc.elvea.platform.commons.mail.MailSender;
 import cc.elvea.platform.commons.utils.ExceptionUtils;
 import cc.elvea.platform.system.message.model.dto.SendMessageDto;
 import cc.elvea.platform.system.message.service.MessageContentService;

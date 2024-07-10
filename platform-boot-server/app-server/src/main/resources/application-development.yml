@@ -145,6 +145,13 @@ platform:
         enabled: true
     quartz:
         enabled: true
+    http:
+        enabled: true
+        type: okhttp
+        proxy:
+            enabled: true
+            host: 127.0.0.1
+            port: 7890
     oapis:
         dingtalk:
             enabled: false

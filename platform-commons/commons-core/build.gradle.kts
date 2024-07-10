@@ -69,6 +69,10 @@ dependencies {
     compileOnly("com.tencentcloudapi:tencentcloud-sdk-java-iai")
     compileOnly("com.larksuite.oapi:oapi-sdk")
     compileOnly("com.github.goodforgod:java-etherscan-api")
+    // http
+    api("org.jodd:jodd-http")
+    api("com.squareup.okhttp3:okhttp")
+    api("org.apache.httpcomponents.client5:httpclient5")
     // 3rd party
     api("com.github.spotbugs:spotbugs-annotations")
     api("io.swagger.core.v3:swagger-annotations")
@@ -77,9 +81,7 @@ dependencies {
     api("com.google.code.gson:gson")
     api("com.mysql:mysql-connector-j")
     api("com.google.guava:guava")
-    api("com.squareup.okhttp3:okhttp")
     api("com.nimbusds:nimbus-jose-jwt")
-    api("org.apache.httpcomponents.client5:httpclient5")
     api("cn.hutool:hutool-captcha")
     api("cn.hutool:hutool-dfa")
     api("cn.hutool:hutool-http")

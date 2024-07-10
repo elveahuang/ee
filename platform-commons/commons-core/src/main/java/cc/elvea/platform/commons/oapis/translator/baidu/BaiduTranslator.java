@@ -2,7 +2,11 @@ package cc.elvea.platform.commons.oapis.translator.baidu;
 
 import cc.elvea.platform.commons.oapis.translator.Translator;
 import cc.elvea.platform.commons.oapis.translator.TranslatorConverter;
-import cc.elvea.platform.commons.utils.*;
+import cc.elvea.platform.commons.utils.CollectionUtils;
+import cc.elvea.platform.commons.utils.GsonUtils;
+import cc.elvea.platform.commons.utils.JacksonUtils;
+import cc.elvea.platform.commons.utils.StringUtils;
+import cc.elvea.platform.commons.utils.http.ApacheHttpUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +56,7 @@ public class BaiduTranslator implements Translator {
 
         log.info("BaiduTranslator translate from {} to {} start. text - [{}].", sourceLang, targetLang, text);
         try {
-            String responseText = HttpComponentsUtils.get(this.config.getEndpoint(), params);
+            String responseText = ApacheHttpUtils.get(this.config.getEndpoint(), params);
             Response response = JacksonUtils.toObject(responseText, Response.class);
 
             log.info("BaiduTranslator translate from {} to {}. response - [{}].", sourceLang, targetLang, GsonUtils.toJson(response));
