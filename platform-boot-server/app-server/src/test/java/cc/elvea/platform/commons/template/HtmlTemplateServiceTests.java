@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.extensions.template;
+package cc.elvea.platform.commons.template;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.template.HtmlTemplateService;

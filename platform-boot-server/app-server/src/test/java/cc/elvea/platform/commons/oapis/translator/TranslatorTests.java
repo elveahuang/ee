@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.extensions.translator;
+package cc.elvea.platform.commons.oapis.translator;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.enums.LangTypeEnum;

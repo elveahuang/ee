@@ -29,7 +29,8 @@ public class CoinAutoConfiguration {
     @ConditionalOnMissingBean
     public CoinManager coinManager(CoinProperties properties) {
         CoinConfig config = CoinConfig.builder()
-                .etherScanApiKey(properties.getEtherscan().getApiKey())
+                .etherScan(properties.getEtherscan())
+                .coinGecko(properties.getCoinGecko())
                 .build();
         return new DefaultCoinManager(config);
     }

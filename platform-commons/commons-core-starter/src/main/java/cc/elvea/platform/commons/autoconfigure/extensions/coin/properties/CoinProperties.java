@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.autoconfigure.extensions.coin.properties;
 
-import lombok.Builder;
+import cc.elvea.platform.commons.extensions.coin.CoinConfig;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,12 +20,9 @@ public class CoinProperties {
     private boolean enabled = false;
 
     @NestedConfigurationProperty
-    private CoinProperties.EtherScan etherscan = CoinProperties.EtherScan.builder().build();
+    private CoinConfig.EtherScan etherscan = CoinConfig.EtherScan.builder().build();
 
-    @Data
-    @Builder
-    public static class EtherScan {
-        private String apiKey;
-    }
+    @NestedConfigurationProperty
+    private CoinConfig.CoinGecko coinGecko = CoinConfig.CoinGecko.builder().build();
 
 }

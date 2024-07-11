@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.extensions.coin;
 
 import io.goodforgod.api.etherscan.EtherScanAPI;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 24.1.0
  */
 @Slf4j
+@Getter
 public class DefaultCoinManager implements CoinManager {
 
     private final CoinConfig config;
@@ -21,9 +23,7 @@ public class DefaultCoinManager implements CoinManager {
      */
     @Override
     public EtherScanAPI getEtherScanAPI() {
-        return EtherScanAPI.builder()
-                .withApiKey(config.getEtherScanApiKey())
-                .build();
+        return this.getEtherScanAPI(this.config);
     }
 
     /**
@@ -32,7 +32,7 @@ public class DefaultCoinManager implements CoinManager {
     @Override
     public EtherScanAPI getEtherScanAPI(CoinConfig config) {
         return EtherScanAPI.builder()
-                .withApiKey(config.getEtherScanApiKey())
+                .withApiKey(config.getEtherScan().getApiKey())
                 .build();
     }
 

@@ -30,7 +30,7 @@ public class HttpAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public Http httpManger(HttpProperties properties) {
-        Http http = new Http();
+        Http http = Http.builder().proxy(properties.getProxy()).type(properties.getType()).build();
         HttpManger.setHttp(http);
         return http;
     }

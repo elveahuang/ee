@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.extensions.http;
+package cc.elvea.platform.commons.http;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.http.HttpConfig;
@@ -22,7 +22,7 @@ public class HttpTests extends BaseTests {
     @Test
     public void baseTest() throws Exception {
         HttpExecutor<String, Map<String, String>> executor = HttpGetRequestExecutor.create(HttpManger.getHttp().getConfig());
-        executor.execute("https://google.com", Maps.newHashMap(), response -> {
+        executor.execute("https://www.coingecko.com/zh", Maps.newHashMap(), response -> {
             log.info("google response: {}", response);
         });
     }

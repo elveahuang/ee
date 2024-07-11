@@ -25,8 +25,8 @@ public abstract class HttpGetRequestExecutor implements HttpExecutor<String, Map
     }
 
     @Override
-    public void execute(String uri, Map<String, String> data, ResponseHandler<String> handler) throws IOException {
-        handler.handle(this.execute(uri, data));
+    public void execute(String uri, Map<String, String> data, Map<String, String> headerMap, ResponseHandler<String> handler) throws IOException {
+        handler.handle(this.execute(uri, data, headerMap));
     }
 
     public static HttpExecutor<String, Map<String, String>> create(HttpConfig config) {
@@ -43,7 +43,8 @@ public abstract class HttpGetRequestExecutor implements HttpExecutor<String, Map
             }
             StringBuilder sb = new StringBuilder(uri);
             for (String key : paramMap.keySet()) {
-                sb.append(sb.toString().endsWith("?") ? key : '&' + ObjectUtils.nvl(paramMap.get(key), ""));
+                String param = key + '=' + ObjectUtils.nvl(paramMap.get(key), "");
+                sb.append(sb.toString().endsWith("?") ? param : '&' + param);
             }
             uri = sb.toString();
         }

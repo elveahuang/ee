@@ -9,12 +9,17 @@ import io.goodforgod.api.etherscan.EtherScanAPI;
 public interface CoinManager {
 
     /**
-     * @return {@see EtherScanConfig}
+     * @return {@see CoinConfig}
+     */
+    CoinConfig getConfig();
+
+    /**
+     * @return {@see EtherScanAPI}
      */
     EtherScanAPI getEtherScanAPI();
 
     /**
-     * @return {@see EtherScanConfig}
+     * @return {@see EtherScanAPI}
      */
     EtherScanAPI getEtherScanAPI(CoinConfig config);
 

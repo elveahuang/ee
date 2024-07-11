@@ -17,8 +17,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class HttpConfig implements Serializable {
 
-    HttpProxy proxy;
+    @Builder.Default
+    HttpType type = HttpType.OKHTTP;
 
-    HttpType type;
+    @Builder.Default
+    HttpProxy proxy = HttpProxy.builder().build();
 
 }

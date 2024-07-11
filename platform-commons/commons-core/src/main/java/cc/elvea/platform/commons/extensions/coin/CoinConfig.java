@@ -17,6 +17,41 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class CoinConfig implements Serializable {
 
-    private String etherScanApiKey;
+    @Builder.Default
+    private EtherScan etherScan = EtherScan.builder().build();
+
+    @Builder.Default
+    private CoinGecko coinGecko = CoinGecko.builder().build();
+
+    @Builder.Default
+    private CoinMarketCap coinMarketCap = CoinMarketCap.builder().build();
+
+    @Builder.Default
+    private Alchemy alchemy = Alchemy.builder().build();
+
+    @Data
+    @Builder
+    public static class EtherScan {
+        private String apiKey;
+    }
+
+    @Data
+    @Builder
+    public static class CoinGecko {
+        private String apiKey;
+    }
+
+    @Data
+    @Builder
+    public static class CoinMarketCap {
+        private String apiKey;
+    }
+
+    @Data
+    @Builder
+    public static class Alchemy {
+        private String apiId;
+        private String apiKey;
+    }
 
 }

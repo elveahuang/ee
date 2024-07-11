@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.extensions.mail;
+package cc.elvea.platform.commons.mail;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.mail.MailBody;
