@@ -137,7 +137,7 @@ allprojects {
             dependency("us.codecraft:webmagic-extension:0.7.3")
             // xml & pdf & office & image
             dependency("xalan:xalan:2.7.3")
-            dependency("org.jsoup:jsoup:1.17.2")
+            dependency("org.jsoup:jsoup:1.18.1")
             dependency("xerces:xercesImpl:2.12.2")
             dependency("com.alibaba:easyexcel:4.0.1")
             dependency("org.apache.poi:poi:5.2.5")

@@ -1,12 +1,12 @@
 package cc.elvea.platform.commons.oapis.translator.baidu;
 
+import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
 import cc.elvea.platform.commons.oapis.translator.Translator;
 import cc.elvea.platform.commons.oapis.translator.TranslatorConverter;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.GsonUtils;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
-import cc.elvea.platform.commons.utils.http.ApacheHttpUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

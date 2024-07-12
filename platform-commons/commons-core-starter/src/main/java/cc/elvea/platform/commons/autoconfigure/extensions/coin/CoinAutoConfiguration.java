@@ -31,6 +31,8 @@ public class CoinAutoConfiguration {
         CoinConfig config = CoinConfig.builder()
                 .etherScan(properties.getEtherscan())
                 .coinGecko(properties.getCoinGecko())
+                .coinMarketCap(properties.getCoinMarketCap())
+                .alchemy(properties.getAlchemy())
                 .build();
         return new DefaultCoinManager(config);
     }

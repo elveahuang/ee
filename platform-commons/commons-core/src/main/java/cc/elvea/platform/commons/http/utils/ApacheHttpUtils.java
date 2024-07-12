@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.utils.http;
+package cc.elvea.platform.commons.http.utils;
 
 import cc.elvea.platform.commons.constants.GlobalConstants;
 import cc.elvea.platform.commons.utils.JacksonUtils;
@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ClassicHttpRequest;
 import org.apache.hc.core5.http.ContentType;
@@ -37,116 +38,116 @@ public abstract class ApacheHttpUtils {
     // Get
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static String get(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+    public static String get(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            ClassicHttpRequest httpGet = ClassicRequestBuilder.get(createURI(url, params)).build();
+            ClassicHttpRequest httpGet = ClassicRequestBuilder.get(createURI(uri, params)).build();
             setRequestHeader(httpGet, headers);
             return getHttpResponse(client, httpGet);
         }
     }
 
-    public static String get(String url, Map<String, String> params) throws Exception {
-        return get(url, new HashMap<>(), params);
+    public static String get(String uri, Map<String, String> params) throws Exception {
+        return get(uri, new HashMap<>(), params);
     }
 
-    public static String get(String url) throws Exception {
-        return get(url, new HashMap<>(), new HashMap<>());
+    public static String get(String uri) throws Exception {
+        return get(uri, new HashMap<>(), new HashMap<>());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Post
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static String post(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+    public static String post(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(createURI(url)).build();
+            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(createURI(uri)).build();
             setRequestHeader(httpPost, headers);
             setRequestParams(httpPost, params);
             return getHttpResponse(client, httpPost);
         }
     }
 
-    public static String post(String url, Map<String, String> params) throws Exception {
-        return post(url, Maps.newHashMap(), params);
+    public static String post(String uri, Map<String, String> params) throws Exception {
+        return post(uri, Maps.newHashMap(), params);
     }
 
-    public static String post(String url) throws Exception {
-        return post(url, Maps.newHashMap());
+    public static String post(String uri) throws Exception {
+        return post(uri, Maps.newHashMap());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Post Json
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static String postJson(String url, Map<String, String> headers, Map<String, Object> params) throws Exception {
+    public static String postJson(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(createURI(url)).build();
+            ClassicHttpRequest httpPost = ClassicRequestBuilder.post(createURI(uri)).build();
             setRequestHeader(httpPost, headers);
             setRequestJson(httpPost, params);
             return getHttpResponse(client, httpPost);
         }
     }
 
-    public static String postJson(String url, Map<String, Object> params) throws Exception {
-        return postJson(url, Maps.newHashMap(), params);
+    public static String postJson(String uri, Map<String, String> params) throws Exception {
+        return postJson(uri, Maps.newHashMap(), params);
     }
 
-    public static String postJson(String url) throws Exception {
-        return postJson(url, Maps.newHashMap());
+    public static String postJson(String uri) throws Exception {
+        return postJson(uri, Maps.newHashMap());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Put
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static String put(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+    public static String put(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            ClassicHttpRequest httpPut = ClassicRequestBuilder.post(createURI(url)).build();
+            ClassicHttpRequest httpPut = ClassicRequestBuilder.post(createURI(uri)).build();
             setRequestHeader(httpPut, headers);
             setRequestParams(httpPut, params);
             return getHttpResponse(client, httpPut);
         }
     }
 
-    public static String put(String url, Map<String, String> params) throws Exception {
-        return put(url, Maps.newHashMap(), params);
+    public static String put(String uri, Map<String, String> params) throws Exception {
+        return put(uri, Maps.newHashMap(), params);
     }
 
-    public static String put(String url) throws Exception {
-        return put(url, Maps.newHashMap());
+    public static String put(String uri) throws Exception {
+        return put(uri, Maps.newHashMap());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Delete
     // -----------------------------------------------------------------------------------------------------------------
 
-    public static String delete(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+    public static String delete(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            ClassicHttpRequest httpDelete = ClassicRequestBuilder.delete(createURI(url)).build();
+            ClassicHttpRequest httpDelete = ClassicRequestBuilder.delete(createURI(uri)).build();
             setRequestHeader(httpDelete, headers);
             setRequestParams(httpDelete, params);
             return getHttpResponse(client, httpDelete);
         }
     }
 
-    public static String delete(String url, Map<String, String> params) throws Exception {
-        return delete(url, Maps.newHashMap(), params);
+    public static String delete(String uri, Map<String, String> params) throws Exception {
+        return delete(uri, Maps.newHashMap(), params);
     }
 
-    public static String delete(String url) throws Exception {
-        return delete(url, Maps.newHashMap());
+    public static String delete(String uri) throws Exception {
+        return delete(uri, Maps.newHashMap());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Commons
     // -----------------------------------------------------------------------------------------------------------------
 
-    private static URI createURI(String url) throws Exception {
-        return createURI(url, Maps.newHashMap());
+    private static URI createURI(String uri) throws Exception {
+        return createURI(uri, Maps.newHashMap());
     }
 
-    private static URI createURI(String url, Map<String, String> params) throws Exception {
-        URIBuilder builder = new URIBuilder(url);
+    private static URI createURI(String uri, Map<String, String> params) throws Exception {
+        URIBuilder builder = new URIBuilder(uri);
         if (!ObjectUtils.isEmpty(params)) {
             params.forEach(builder::setParameter);
         }
@@ -159,7 +160,7 @@ public abstract class ApacheHttpUtils {
         }
     }
 
-    private static void setRequestParams(ClassicHttpRequest httpRequest, Map<String, String> params) {
+    public static void setRequestParams(ClassicHttpRequest httpRequest, Map<String, String> params) {
         if (!ObjectUtils.isEmpty(params)) {
             List<NameValuePair> nameValuePairs = new ArrayList<>();
             params.forEach((key, value) -> nameValuePairs.add(new BasicNameValuePair(key, value)));
@@ -167,7 +168,7 @@ public abstract class ApacheHttpUtils {
         }
     }
 
-    private static void setRequestJson(ClassicHttpRequest httpRequest, Map<String, Object> params) throws Exception {
+    public static void setRequestJson(ClassicHttpRequest httpRequest, Map<String, String> params) throws Exception {
         if (!ObjectUtils.isEmpty(params)) {
             String json = JacksonUtils.toJson(params);
             StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
@@ -175,7 +176,7 @@ public abstract class ApacheHttpUtils {
         }
     }
 
-    private static String getHttpResponse(HttpClient httpClient, ClassicHttpRequest httpRequest) throws Exception {
+    public static String getHttpResponse(HttpClient httpClient, ClassicHttpRequest httpRequest) throws Exception {
         return httpClient.execute(httpRequest, response -> {
             String resp = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
@@ -193,8 +194,18 @@ public abstract class ApacheHttpUtils {
     // Commons
     // -----------------------------------------------------------------------------------------------------------------
 
+    /**
+     * 获取客户端构建器
+     */
+    public static HttpClientBuilder getBuilder() {
+        return HttpClients.custom();
+    }
+
+    /**
+     * 获取客户端
+     */
     public static CloseableHttpClient getClient() {
-        return HttpClients.createDefault();
+        return getBuilder().build();
     }
 
 }

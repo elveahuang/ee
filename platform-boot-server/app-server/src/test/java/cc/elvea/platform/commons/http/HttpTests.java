@@ -1,9 +1,6 @@
 package cc.elvea.platform.commons.http;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.http.HttpConfig;
-import cc.elvea.platform.commons.http.HttpManger;
-import cc.elvea.platform.commons.http.HttpType;
 import cc.elvea.platform.commons.http.executor.HttpExecutor;
 import cc.elvea.platform.commons.http.executor.HttpGetRequestExecutor;
 import com.google.common.collect.Maps;

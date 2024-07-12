@@ -1,9 +1,9 @@
 package cc.elvea.platform.commons.http.executor;
 
+import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.ResponseHandler;
 import com.google.common.collect.Maps;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -14,16 +14,28 @@ import java.util.Map;
  */
 public interface HttpExecutor<T, E> {
 
-    default T execute(String url, E data) throws IOException {
-        return this.execute(url, data, Maps.newHashMap());
+    default T execute(String uri, E data) throws Exception {
+        return this.execute(uri, data, Maps.newHashMap());
     }
 
-    T execute(String url, E data, Map<String, String> headerMap) throws IOException;
+    T execute(String uri, E data, Map<String, String> headerMap) throws Exception;
 
-    default void execute(String url, E data, ResponseHandler<T> handler) throws IOException {
-        this.execute(url, data, Maps.newHashMap(), handler);
+    T execute(HttpRequestType type, String uri, E data, Map<String, String> headerMap) throws Exception;
+
+    default void execute(String uri, E data, ResponseHandler<T> handler) throws Exception {
+        this.execute(uri, data, Maps.newHashMap(), handler);
     }
 
-    void execute(String url, E data, Map<String, String> headerMap, ResponseHandler<T> handler) throws IOException;
+    default void execute(String uri, E data, Map<String, String> headerMap, ResponseHandler<T> handler) throws Exception {
+        handler.handle(this.execute(uri, data, headerMap));
+    }
+
+    default void execute(HttpRequestType type, String uri, E data, ResponseHandler<T> handler) throws Exception {
+        handler.handle(this.execute(type, uri, data, Maps.newHashMap()));
+    }
+
+    default void execute(HttpRequestType type, String uri, E data, Map<String, String> headerMap, ResponseHandler<T> handler) throws Exception {
+        handler.handle(this.execute(type, uri, data, headerMap));
+    }
 
 }

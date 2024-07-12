@@ -1,5 +1,7 @@
 package cc.elvea.platform.commons.http;
 
+import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
+import cc.elvea.platform.commons.http.utils.OkHttpUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpHost;
 
 import java.net.InetSocketAddress;
@@ -38,21 +39,13 @@ public class Http {
         return HttpConfig.builder().type(this.type).proxy(this.proxy).build();
     }
 
-    public OkHttpClient getOkHttpClient() {
-        return Http.getOkHttpClient(this.getConfig());
-    }
-
-    public CloseableHttpClient getApacheHttpClient() {
-        return Http.getApacheHttpClient(this.getConfig());
-    }
-
-    //
+    // -----------------------------------------------------------------------------------------------------------------
     // 静态方法
-    //
+    // -----------------------------------------------------------------------------------------------------------------
 
     public static OkHttpClient getOkHttpClient(HttpConfig config) {
         log.info("Creating OkHttpClient instance start.");
-        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+        OkHttpClient.Builder builder = OkHttpUtils.getBuilder();
         if (config.getProxy() != null && config.getProxy().isEnabled()) {
             log.info("Creating OkHttpClient instance. proxy [{}] [{}] enabled.", config.getProxy().getHost(), config.getProxy().getPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(config.getProxy().getHost(), config.getProxy().getPort()));
@@ -63,7 +56,7 @@ public class Http {
 
     public static CloseableHttpClient getApacheHttpClient(HttpConfig config) {
         log.info("Creating ApacheHttpClient instance start.");
-        HttpClientBuilder builder = HttpClients.custom();
+        HttpClientBuilder builder = ApacheHttpUtils.getBuilder();
         if (config.getProxy() != null && config.getProxy().isEnabled()) {
             log.info("Creating ApacheHttpClient instance. proxy [{}] [{}] enabled.", config.getProxy().getHost(), config.getProxy().getPort());
             HttpHost proxy = new HttpHost(config.getProxy().getHost(), config.getProxy().getPort());

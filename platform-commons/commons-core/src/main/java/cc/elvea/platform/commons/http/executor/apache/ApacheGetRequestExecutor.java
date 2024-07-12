@@ -1,8 +1,9 @@
-package cc.elvea.platform.commons.http.apache;
+package cc.elvea.platform.commons.http.executor.apache;
 
 import cc.elvea.platform.commons.constants.GlobalConstants;
 import cc.elvea.platform.commons.http.Http;
 import cc.elvea.platform.commons.http.HttpConfig;
+import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.executor.HttpGetRequestExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
@@ -26,7 +27,7 @@ public class ApacheGetRequestExecutor extends HttpGetRequestExecutor {
     }
 
     @Override
-    public String execute(final String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws IOException {
+    public String execute(HttpRequestType type, final String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws IOException {
         final String url = this.handleQueryParam(uri, paramMap);
 
         log.info("ApacheGetRequestExecutor.execute() - [{}] - start.", url);
@@ -38,7 +39,7 @@ public class ApacheGetRequestExecutor extends HttpGetRequestExecutor {
             String content = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
                 content = EntityUtils.toString(response.getEntity(), GlobalConstants.UTF8);
-                log.info("ApacheGetRequestExecutor.execute() - [{}] - response - [{}].", uri, content);
+                log.info("ApacheGetRequestExecutor.execute() - [{}] - response - [{}].", url, content);
             }
             log.info("ApacheGetRequestExecutor.execute() - [{}] - start.", url);
             return content;

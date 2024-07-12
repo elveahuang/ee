@@ -11,7 +11,7 @@ public interface CoinManager {
     /**
      * @return {@see CoinConfig}
      */
-    CoinConfig getConfig();
+    CoinConfig config();
 
     /**
      * @return {@see EtherScanAPI}

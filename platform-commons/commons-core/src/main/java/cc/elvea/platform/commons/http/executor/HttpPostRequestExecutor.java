@@ -2,8 +2,8 @@ package cc.elvea.platform.commons.http.executor;
 
 import cc.elvea.platform.commons.http.HttpConfig;
 import cc.elvea.platform.commons.http.HttpRequestType;
-import cc.elvea.platform.commons.http.executor.apache.ApacheGetRequestExecutor;
-import cc.elvea.platform.commons.http.executor.okhttp.OkHttpGetRequestExecutor;
+import cc.elvea.platform.commons.http.executor.apache.ApachePostRequestExecutor;
+import cc.elvea.platform.commons.http.executor.okhttp.OkHttpPostRequestExecutor;
 import cc.elvea.platform.commons.utils.ObjectUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -15,23 +15,23 @@ import java.util.Map;
  * @author elvea
  * @since 24.1.0
  */
-public abstract class HttpGetRequestExecutor implements HttpExecutor<String, Map<String, String>> {
+public abstract class HttpPostRequestExecutor implements HttpExecutor<String, Map<String, String>> {
 
     protected HttpConfig config;
 
-    public HttpGetRequestExecutor(HttpConfig config) {
+    public HttpPostRequestExecutor(HttpConfig config) {
         this.config = config;
     }
 
     @Override
     public String execute(String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws Exception {
-        return this.execute(HttpRequestType.GET, uri, paramMap, headerMap);
+        return this.execute(HttpRequestType.POST, uri, paramMap, headerMap);
     }
 
     public static HttpExecutor<String, Map<String, String>> create(HttpConfig config) {
         return switch (config.getType()) {
-            case APACHE -> new ApacheGetRequestExecutor(config);
-            case OKHTTP -> new OkHttpGetRequestExecutor(config);
+            case APACHE -> new ApachePostRequestExecutor(config);
+            case OKHTTP -> new OkHttpPostRequestExecutor(config);
         };
     }
 

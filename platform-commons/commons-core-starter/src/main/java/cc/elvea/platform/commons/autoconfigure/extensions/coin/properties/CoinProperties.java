@@ -25,4 +25,10 @@ public class CoinProperties {
     @NestedConfigurationProperty
     private CoinConfig.CoinGecko coinGecko = CoinConfig.CoinGecko.builder().build();
 
+    @NestedConfigurationProperty
+    private CoinConfig.CoinMarketCap coinMarketCap = CoinConfig.CoinMarketCap.builder().build();
+
+    @NestedConfigurationProperty
+    private CoinConfig.Alchemy alchemy = CoinConfig.Alchemy.builder().build();
+
 }

@@ -50,7 +50,6 @@ public class CoinConfig implements Serializable {
     @Data
     @Builder
     public static class Alchemy {
-        private String apiId;
         private String apiKey;
     }
 
