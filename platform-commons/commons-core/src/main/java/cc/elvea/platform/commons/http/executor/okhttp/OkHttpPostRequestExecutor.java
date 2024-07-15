@@ -4,15 +4,12 @@ import cc.elvea.platform.commons.http.Http;
 import cc.elvea.platform.commons.http.HttpConfig;
 import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.executor.HttpPostRequestExecutor;
-import com.google.common.collect.Maps;
+import cc.elvea.platform.commons.http.utils.OkHttpUtils;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.commons.collections4.MapUtils;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -27,19 +24,19 @@ public class OkHttpPostRequestExecutor extends HttpPostRequestExecutor {
     }
 
     @Override
-    public String execute(HttpRequestType type, String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws IOException {
-        final String url = this.handleQueryParam(uri, paramMap);
-
-        log.info("OkHttpPostRequestExecutor.execute() - [{}] - [{}] - start.", type, url);
+    public String execute(HttpRequestType type, String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws Exception {
+        log.info("OkHttp post execute - [{}] - [{}] - start.", type, uri);
         OkHttpClient client = getHttpClient();
-        Headers headers = MapUtils.isNotEmpty(headerMap) ? Headers.of(headerMap) : Headers.of(Maps.newHashMap());
-        Request request = new Request.Builder().url(url).headers(headers).build();
+        Request.Builder builder = new Request.Builder().url(uri);
+        OkHttpUtils.setRequestHeader(builder, headerMap);
+        OkHttpUtils.setRequestJson(builder, paramMap);
+        Request request = builder.build();
         try (Response response = client.newCall(request).execute()) {
             String content = response.body().string();
-            log.info("OkHttpPostRequestExecutor.execute() - [{}] - [{}] - response - [{}].", type, url, content);
+            log.info("OkHttp post execute - [{}] - [{}] - response - [{}].", type, uri, content);
             return this.handleResponse(content);
         } finally {
-            log.info("OkHttpPostRequestExecutor.execute() - [{}] - [{}] - finish.", type, url);
+            log.info("OkHttp post execute - [{}] - [{}] - finish.", type, uri);
         }
     }
 

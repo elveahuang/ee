@@ -1,13 +1,16 @@
 package cc.elvea.platform.commons.http.utils;
 
-import cc.elvea.platform.commons.utils.GsonUtils;
+import cc.elvea.platform.commons.utils.JacksonUtils;
 import com.google.common.collect.Maps;
 import okhttp3.*;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static cc.elvea.platform.commons.http.utils.HttpUtils.*;
 
 /**
  * OkHttpUtils
@@ -18,12 +21,6 @@ import java.util.concurrent.TimeUnit;
  * @since 24.1.0
  */
 public abstract class OkHttpUtils {
-
-    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
-
-    private static final int CONNECT_TIMEOUT = 3 * 60 * 1000;
-    private static final int READ_TIMEOUT = 3 * 60 * 1000;
-    private static final int WRITE_TIMEOUT = 3 * 60 * 1000;
 
     // -----------------------------------------------------------------------------------------------------------------
     // Get
@@ -54,15 +51,10 @@ public abstract class OkHttpUtils {
     // -----------------------------------------------------------------------------------------------------------------
 
     public static Response post(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
-        FormBody.Builder builder = new FormBody.Builder();
-        if (MapUtils.isNotEmpty(params)) {
-            params.forEach(builder::add);
-        }
-        Request.Builder request = new Request.Builder().url(uri).post(builder.build());
-        if (MapUtils.isNotEmpty(headers)) {
-            headers.forEach(request::addHeader);
-        }
-        return execute(request.build());
+        Request.Builder builder = new Request.Builder().url(uri);
+        setRequestHeader(builder, headers);
+        setRequestParams(builder, params);
+        return execute(builder.build());
     }
 
     public static Response post(String uri, Map<String, String> params) throws Exception {
@@ -78,16 +70,17 @@ public abstract class OkHttpUtils {
     // -----------------------------------------------------------------------------------------------------------------
 
     public static Response postJson(String uri, Map<String, String> headers, String json) throws Exception {
-        RequestBody body = RequestBody.create(json, MEDIA_TYPE_JSON);
-        Request.Builder request = new Request.Builder().url(uri).post(body);
-        if (MapUtils.isNotEmpty(headers)) {
-            headers.forEach(request::addHeader);
-        }
-        return execute(request.build());
+        Request.Builder builder = new Request.Builder().url(uri);
+        setRequestHeader(builder, headers);
+        setRequestJson(builder, json);
+        return execute(builder.build());
     }
 
     public static Response postJson(String uri, Map<String, String> headers, Map<String, String> params) throws Exception {
-        return postJson(uri, headers, GsonUtils.toJson(params));
+        Request.Builder builder = new Request.Builder().url(uri);
+        setRequestHeader(builder, headers);
+        setRequestJson(builder, params);
+        return execute(builder.build());
     }
 
     public static Response postJson(String uri, Map<String, String> params) throws Exception {
@@ -101,6 +94,30 @@ public abstract class OkHttpUtils {
     // -----------------------------------------------------------------------------------------------------------------
     // Commons
     // -----------------------------------------------------------------------------------------------------------------
+
+    public static void setRequestHeader(Request.Builder builder, Map<String, String> headers) {
+        if (!ObjectUtils.isEmpty(headers)) {
+            headers.forEach(builder::addHeader);
+        }
+    }
+
+    public static void setRequestParams(Request.Builder builder, Map<String, String> params) {
+        if (!ObjectUtils.isEmpty(params)) {
+            FormBody.Builder bodyBuilder = new FormBody.Builder();
+            params.forEach(bodyBuilder::add);
+            builder.post(bodyBuilder.build());
+        }
+    }
+
+    public static void setRequestJson(Request.Builder builder, Map<String, String> params) throws Exception {
+        if (!ObjectUtils.isEmpty(params)) {
+            setRequestJson(builder, JacksonUtils.toJson(params));
+        }
+    }
+
+    public static void setRequestJson(Request.Builder builder, String json) {
+        builder.post(RequestBody.create(json, MEDIA_TYPE_JSON));
+    }
 
     /**
      * 获取客户端构建器

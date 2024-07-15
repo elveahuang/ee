@@ -32,7 +32,7 @@ import java.util.Map;
  * @author elvea
  * @since 24.1.0
  */
-public abstract class ApacheHttpUtils {
+public abstract class ApacheHttpUtils extends HttpUtils {
 
     // -----------------------------------------------------------------------------------------------------------------
     // Get
@@ -154,7 +154,7 @@ public abstract class ApacheHttpUtils {
         return builder.build();
     }
 
-    private static void setRequestHeader(ClassicHttpRequest httpRequest, Map<String, String> headers) {
+    public static void setRequestHeader(ClassicHttpRequest httpRequest, Map<String, String> headers) {
         if (!ObjectUtils.isEmpty(headers)) {
             headers.forEach(httpRequest::setHeader);
         }
@@ -185,14 +185,6 @@ public abstract class ApacheHttpUtils {
             return resp;
         });
     }
-
-    public static String createBearerAuthorization(String token) {
-        return "Bearer " + token;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // Commons
-    // -----------------------------------------------------------------------------------------------------------------
 
     /**
      * 获取客户端构建器

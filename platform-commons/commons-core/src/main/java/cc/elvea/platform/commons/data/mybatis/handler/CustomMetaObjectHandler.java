@@ -26,8 +26,8 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.strictUpdateFill(metaObject, "lastModifiedAt", LocalDateTime.class, LocalDateTime.now());
-        this.strictUpdateFill(metaObject, "lastModifiedBy", Long.class, getCurUserId());
+        this.setFieldValByName("lastModifiedAt", LocalDateTime.now(), metaObject);
+        this.setFieldValByName("lastModifiedBy", getCurUserId(), metaObject);
     }
 
     private Long getCurUserId() {

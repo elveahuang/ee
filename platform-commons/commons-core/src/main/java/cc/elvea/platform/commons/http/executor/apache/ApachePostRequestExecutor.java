@@ -5,10 +5,8 @@ import cc.elvea.platform.commons.http.Http;
 import cc.elvea.platform.commons.http.HttpConfig;
 import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.executor.HttpGetRequestExecutor;
-import cc.elvea.platform.commons.http.executor.okhttp.OkHttpGetRequestExecutor;
 import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -29,22 +27,20 @@ public class ApachePostRequestExecutor extends HttpGetRequestExecutor {
 
     @Override
     public String execute(final HttpRequestType type, final String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws Exception {
-        log.info("ApachePostRequestExecutor.execute() - [{}] - [{}] - start.", type, uri);
+        log.info("Apache post execute - [{}] - [{}] - start.", type, uri);
         HttpPost httpPost = new HttpPost(uri);
-        if (MapUtils.isNotEmpty(headerMap)) {
-            headerMap.forEach(httpPost::addHeader);
-        }
-        switch (config.getType()) {
-            case APACHE -> ApacheHttpUtils.setRequestJson(httpPost, paramMap);
-            case OKHTTP -> new OkHttpGetRequestExecutor(config);
+        ApacheHttpUtils.setRequestParams(httpPost, headerMap);
+        switch (type) {
+            case POST -> ApacheHttpUtils.setRequestParams(httpPost, paramMap);
+            case JSON -> ApacheHttpUtils.setRequestJson(httpPost, paramMap);
         }
         return getHttpClient().execute(httpPost, response -> {
             String content = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
                 content = EntityUtils.toString(response.getEntity(), GlobalConstants.UTF8);
-                log.info("ApachePostRequestExecutor.execute() - [{}] - [{}] - response - [{}].", type, uri, content);
+                log.info("Apache post execute - [{}] - [{}] - response - [{}].", type, uri, content);
             }
-            log.info("ApachePostRequestExecutor.execute() - [{}] - [{}] - start.", type, uri);
+            log.info("Apache post execute - [{}] - [{}] - finish.", type, uri);
             return content;
         });
     }

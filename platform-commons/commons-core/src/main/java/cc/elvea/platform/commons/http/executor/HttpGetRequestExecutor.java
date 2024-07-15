@@ -4,9 +4,6 @@ import cc.elvea.platform.commons.http.HttpConfig;
 import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.executor.apache.ApacheGetRequestExecutor;
 import cc.elvea.platform.commons.http.executor.okhttp.OkHttpGetRequestExecutor;
-import cc.elvea.platform.commons.utils.ObjectUtils;
-import cc.elvea.platform.commons.utils.StringUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -33,21 +30,6 @@ public abstract class HttpGetRequestExecutor implements HttpExecutor<String, Map
             case APACHE -> new ApacheGetRequestExecutor(config);
             case OKHTTP -> new OkHttpGetRequestExecutor(config);
         };
-    }
-
-    public String handleQueryParam(String uri, Map<String, String> paramMap) {
-        if (MapUtils.isNotEmpty(paramMap) && StringUtils.isNotEmpty(uri)) {
-            if (uri.indexOf('?') == -1) {
-                uri += '?';
-            }
-            StringBuilder sb = new StringBuilder(uri);
-            for (String key : paramMap.keySet()) {
-                String param = key + '=' + ObjectUtils.nvl(paramMap.get(key), "");
-                sb.append(sb.toString().endsWith("?") ? param : '&' + param);
-            }
-            uri = sb.toString();
-        }
-        return uri;
     }
 
     @NotNull

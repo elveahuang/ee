@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * 请求执行器
  *
- * @param <T>
- * @param <E>
+ * @param <T> 返回值类型
+ * @param <E> 参数类型
  */
 public interface HttpExecutor<T, E> {
 

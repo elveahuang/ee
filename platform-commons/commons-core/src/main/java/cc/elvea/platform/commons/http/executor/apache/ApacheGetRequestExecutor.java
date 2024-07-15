@@ -5,8 +5,9 @@ import cc.elvea.platform.commons.http.Http;
 import cc.elvea.platform.commons.http.HttpConfig;
 import cc.elvea.platform.commons.http.HttpRequestType;
 import cc.elvea.platform.commons.http.executor.HttpGetRequestExecutor;
+import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
+import cc.elvea.platform.commons.http.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -28,20 +29,17 @@ public class ApacheGetRequestExecutor extends HttpGetRequestExecutor {
 
     @Override
     public String execute(HttpRequestType type, final String uri, Map<String, String> paramMap, Map<String, String> headerMap) throws IOException {
-        final String url = this.handleQueryParam(uri, paramMap);
-
-        log.info("ApacheGetRequestExecutor.execute() - [{}] - start.", url);
+        final String url = HttpUtils.handleQueryParam(uri, paramMap);
+        log.info("Apache execute - [{}] - [{}] - start.", type, uri);
         HttpGet httpGet = new HttpGet(url);
-        if (MapUtils.isNotEmpty(headerMap)) {
-            headerMap.forEach(httpGet::addHeader);
-        }
+        ApacheHttpUtils.setRequestParams(httpGet, headerMap);
         return getHttpClient().execute(httpGet, response -> {
             String content = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
                 content = EntityUtils.toString(response.getEntity(), GlobalConstants.UTF8);
-                log.info("ApacheGetRequestExecutor.execute() - [{}] - response - [{}].", url, content);
+                log.info("Apache execute - [{}] - [{}] - response - [{}].", type, url, content);
             }
-            log.info("ApacheGetRequestExecutor.execute() - [{}] - start.", url);
+            log.info("Apache execute - [{}] - [{}] - finish.", type, uri);
             return content;
         });
     }

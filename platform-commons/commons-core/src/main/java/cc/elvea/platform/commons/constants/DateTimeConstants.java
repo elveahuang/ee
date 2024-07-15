@@ -9,6 +9,9 @@ import java.util.TimeZone;
  */
 public interface DateTimeConstants {
 
+    /**
+     * 2023-01-01 00:00:00
+     */
     Long EPOCH = 1672502400000L;
 
     String DEFAULT_TIME_PATTERN = "HH:mm:ss";
