@@ -29,7 +29,6 @@ dependencies {
     api("com.tencentcloudapi:tencentcloud-sdk-java-sms")
     api("com.tencentcloudapi:tencentcloud-sdk-java-tmt")
     api("com.larksuite.oapi:oapi-sdk")
-    api("com.github.goodforgod:java-etherscan-api")
     // others
     api("ognl:ognl")
     api("cn.hutool:hutool-captcha")

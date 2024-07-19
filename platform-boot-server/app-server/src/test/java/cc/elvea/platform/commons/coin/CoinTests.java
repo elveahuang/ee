@@ -2,8 +2,6 @@ package cc.elvea.platform.commons.coin;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.extensions.coin.CoinManager;
-import io.goodforgod.api.etherscan.EtherScanAPI;
-import io.goodforgod.api.etherscan.model.Balance;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,7 @@ public class CoinTests extends BaseTests {
 
     @Test
     public void bastTest() {
-        EtherScanAPI getEtherScanAPI = this.coinManager.getEtherScanAPI();
-        Balance balance = getEtherScanAPI.account().balance("0x388C818CA8B9251b393131C08a736A67ccB19297");
-        Assertions.assertNotNull(balance);
+        Assertions.assertNotNull(this.coinManager);
     }
 
 }

@@ -3,6 +3,9 @@ package cc.elvea.platform.commons.autoconfigure.data.datasource;
 import cc.elvea.platform.commons.annotations.ds.*;
 import cc.elvea.platform.commons.autoconfigure.data.datasource.properties.CustomDataSourceProperties;
 import com.zaxxer.hikari.HikariDataSource;
+import io.micrometer.core.instrument.Clock;
+import io.micrometer.core.instrument.logging.LoggingMeterRegistry;
+import io.micrometer.core.instrument.logging.LoggingRegistryConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,8 +18,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.lang.NonNull;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
+import java.time.Duration;
 
 import static cc.elvea.platform.commons.constants.DataSourceConstants.*;
 
@@ -38,6 +45,13 @@ public class CustomDataSourceAutoConfiguration {
         } else {
             log.info("CustomDataSourceAutoConfiguration master-slave is disabled.");
         }
+    }
+
+    @Bean
+    public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate();
+        transactionTemplate.setTransactionManager(transactionManager);
+        return transactionTemplate;
     }
 
     /**
@@ -75,7 +89,9 @@ public class CustomDataSourceAutoConfiguration {
     @ConditionalOnProperty(prefix = CustomDataSourceProperties.MASTER_DATASOURCE_PREFIX, name = "enabled", havingValue = "true")
     public HikariDataSource masterDataSource(@Qualifier(MASTER_DATASOURCE_PROPERTIES) DataSourceProperties properties) {
         log.info("Creating MasterDataSource...");
-        return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        HikariDataSource dataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        initDataSource(dataSource);
+        return dataSource;
     }
 
     /**
@@ -99,7 +115,9 @@ public class CustomDataSourceAutoConfiguration {
     @ConditionalOnProperty(prefix = CustomDataSourceProperties.SLAVE_DATASOURCE_PREFIX, name = "enabled", havingValue = "true")
     public HikariDataSource slaveDataSource(@Qualifier(SLAVE_DATASOURCE_PROPERTIES) DataSourceProperties properties) {
         log.info("Creating SlaveDataSource...");
-        return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        HikariDataSource dataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        initDataSource(dataSource);
+        return dataSource;
     }
 
     /**
@@ -123,7 +141,32 @@ public class CustomDataSourceAutoConfiguration {
     @ConditionalOnProperty(prefix = CustomDataSourceProperties.JOB_DATASOURCE_PREFIX, name = "enabled", havingValue = "true")
     public HikariDataSource jobDataSource(@Qualifier(JOB_DATASOURCE_PROPERTIES) DataSourceProperties properties) {
         log.info("Creating JobDataSource...");
-        return properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        HikariDataSource dataSource = properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+        initDataSource(dataSource);
+        return dataSource;
+    }
+
+    /**
+     * 初始化数据源
+     * 1. 增加监控
+     * 2. 设置参数
+     */
+    private void initDataSource(HikariDataSource dataSource) {
+        LoggingMeterRegistry loggingMeterRegistry = new LoggingMeterRegistry(new LoggingRegistryConfig() {
+            @Override
+            public String get(@NonNull String key) {
+                return null;
+            }
+
+            @Override
+            public @NonNull Duration step() {
+                return Duration.ofMinutes(1);
+            }
+        }, Clock.SYSTEM);
+        dataSource.setMetricRegistry(loggingMeterRegistry);
+        dataSource.setMaxLifetime(60 * 60 * 1000);
+        dataSource.setMinimumIdle(10);
+        dataSource.setMaximumPoolSize(500);
     }
 
 }

@@ -24,6 +24,9 @@ public class CoinConfig implements Serializable {
     private CoinGecko coinGecko = CoinGecko.builder().build();
 
     @Builder.Default
+    private CryptoRank cryptoRank = CryptoRank.builder().build();
+
+    @Builder.Default
     private CoinMarketCap coinMarketCap = CoinMarketCap.builder().build();
 
     @Builder.Default
@@ -44,6 +47,12 @@ public class CoinConfig implements Serializable {
     @Data
     @Builder
     public static class CoinMarketCap {
+        private String apiKey;
+    }
+
+    @Data
+    @Builder
+    public static class CryptoRank {
         private String apiKey;
     }
 

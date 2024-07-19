@@ -5,5 +5,5 @@ package cc.elvea.platform.commons.http;
  * @since 24.1.0
  */
 public interface ResponseHandler<T> {
-    void handle(T t);
+    void handle(T t) throws Exception;
 }

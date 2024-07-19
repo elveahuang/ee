@@ -1,12 +1,12 @@
 package cc.elvea.platform.commons.oapis.translator.baidu;
 
+import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
 import cc.elvea.platform.commons.oapis.translator.Translator;
 import cc.elvea.platform.commons.oapis.translator.TranslatorConverter;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.GsonUtils;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
-import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,7 @@ public class BaiduTranslator implements Translator {
                 log.error("BaiduTranslator translate from {} to {} fail. error - [{}].", sourceLang, targetLang, response.getError_code());
             } else {
                 String result = (response != null && CollectionUtils.isNotEmpty(response.getTrans_result())) ?
-                        response.getTrans_result().get(0).getDst() : "";
+                        response.getTrans_result().getFirst().getDst() : "";
                 log.info("BaiduTranslator translate from {} to {} success. text - [{}]  result - [{}]", sourceLang, targetLang, text, result);
                 return result;
             }

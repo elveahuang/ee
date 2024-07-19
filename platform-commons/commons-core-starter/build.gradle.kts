@@ -2,6 +2,7 @@ dependencies {
     // spring
     api("org.springframework:spring-webmvc")
     api("org.springframework.boot:spring-boot-starter-validation")
+    api("org.springframework.boot:spring-boot-starter-actuator")
     api("org.springframework.boot:spring-boot-autoconfigure")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.springframework.security:spring-security-oauth2-jose")
@@ -46,7 +47,6 @@ dependencies {
     compileOnly("com.tencentcloudapi:tencentcloud-sdk-java-tmt")
     compileOnly("com.tencentcloudapi:tencentcloud-sdk-java-iai")
     compileOnly("com.larksuite.oapi:oapi-sdk")
-    compileOnly("com.github.goodforgod:java-etherscan-api")
     // modules
     api(project(":platform-commons:commons-core"))
 }

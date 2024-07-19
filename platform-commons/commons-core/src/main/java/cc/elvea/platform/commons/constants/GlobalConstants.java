@@ -27,18 +27,24 @@ public interface GlobalConstants {
     String ENCODING = "UTF-8";
 
     /**
+     * 英文
+     */
+    Locale US_LOCALE = Locale.US;
+
+    /**
      * 简体中文
      */
     Locale SIMPLIFIED_CHINESE_LOCALE = Locale.SIMPLIFIED_CHINESE;
+
     /**
      * 繁体中文
      */
     Locale TRADITIONAL_CHINESE_LOCALE = Locale.TRADITIONAL_CHINESE;
 
     /**
-     * 英文
+     * 韩文
      */
-    Locale US_LOCALE = Locale.US;
+    Locale KOREA = Locale.KOREA;
 
     /**
      * 默认语言

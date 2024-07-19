@@ -6,7 +6,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.Nullable;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
+
+import java.util.function.Function;
 
 /**
  * @author elvea
@@ -84,6 +87,47 @@ public class SpringUtils implements ApplicationContextAware {
      */
     public static Class<?> getType(String name) {
         return applicationContext.getType(name);
+    }
+
+    /**
+     * 编程式事务
+     */
+    public static <T> T executeWithResult(Function<Object, T> function) {
+        return executeWithResult(getBean(TransactionTemplate.class), function);
+    }
+
+    /**
+     * 编程式事务
+     */
+    public static <T> T executeWithResult(TransactionTemplate template, Function<Object, T> function) {
+        return template.execute(status -> {
+            try {
+                return function.apply(new Object());
+            } catch (Exception e) {
+                status.setRollbackOnly();
+                return null;
+            }
+        });
+    }
+
+    /**
+     * 编程式事务
+     */
+    public static void executeWithoutResult(Function<Object, ?> function) {
+        executeWithoutResult(getBean(TransactionTemplate.class), function);
+    }
+
+    /**
+     * 编程式事务
+     */
+    public static void executeWithoutResult(TransactionTemplate template, Function<Object, ?> function) {
+        template.executeWithoutResult(status -> {
+            try {
+                function.apply(new Object());
+            } catch (Exception e) {
+                status.setRollbackOnly();
+            }
+        });
     }
 
 }

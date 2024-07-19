@@ -29,6 +29,9 @@ public class CoinProperties {
     private CoinConfig.CoinMarketCap coinMarketCap = CoinConfig.CoinMarketCap.builder().build();
 
     @NestedConfigurationProperty
+    private CoinConfig.CryptoRank cryptoRank = CoinConfig.CryptoRank.builder().build();
+
+    @NestedConfigurationProperty
     private CoinConfig.Alchemy alchemy = CoinConfig.Alchemy.builder().build();
 
 }
