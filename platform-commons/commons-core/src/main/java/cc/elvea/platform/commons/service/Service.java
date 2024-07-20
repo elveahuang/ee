@@ -1,5 +1,6 @@
 package cc.elvea.platform.commons.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -15,6 +16,13 @@ public interface Service {
      */
     default LocalDateTime getCurLocalDateTime() {
         return LocalDateTime.now();
+    }
+
+    /**
+     * 获取当前系统时间
+     */
+    default LocalDate getCurLocalDate() {
+        return LocalDate.now();
     }
 
     /**

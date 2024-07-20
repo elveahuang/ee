@@ -34,8 +34,8 @@ dependencies {
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     // hibernate & redis & cache & mybatis
-    api("org.mybatis:mybatis")
     api("com.baomidou:mybatis-plus-annotation")
+    api("org.mybatis:mybatis")
     api("org.hibernate.orm:hibernate-core")
     compileOnly("org.redisson:redisson")
     compileOnly("me.ahoo.cosid:cosid-spring-redis")
@@ -72,7 +72,6 @@ dependencies {
     api("com.squareup.okhttp3:okhttp")
     api("org.apache.httpcomponents.client5:httpclient5")
     compileOnly("org.jodd:jodd-http")
-    compileOnly("cn.hutool:hutool-http")
     // database
     api("org.postgresql:postgresql")
     api("com.mysql:mysql-connector-j")
@@ -87,6 +86,7 @@ dependencies {
     api("cn.hutool:hutool-captcha")
     api("cn.hutool:hutool-dfa")
     api("cn.hutool:hutool-extra")
+    api("cn.hutool:hutool-http")
     api("ognl:ognl")
     api("com.google.zxing:core")
     api("org.jsoup:jsoup")

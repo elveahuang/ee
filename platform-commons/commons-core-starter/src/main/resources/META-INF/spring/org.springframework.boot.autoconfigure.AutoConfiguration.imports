@@ -12,7 +12,7 @@ cc.elvea.platform.commons.autoconfigure.storage.StorageAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.swagger.SwaggerAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.web.WebAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.core.CustomDataAutoConfiguration
-cc.elvea.platform.commons.autoconfigure.data.datasource.CustomDataSourceAutoConfiguration
+cc.elvea.platform.commons.autoconfigure.data.core.CustomDataSourceAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.jpa.CustomJpaAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.mybatis.CustomMyBatisAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.elasticsearch.CustomElasticsearchAutoConfiguration

@@ -1,7 +1,7 @@
-package cc.elvea.platform.commons.autoconfigure.data.datasource;
+package cc.elvea.platform.commons.autoconfigure.data.core;
 
 import cc.elvea.platform.commons.annotations.ds.*;
-import cc.elvea.platform.commons.autoconfigure.data.datasource.properties.CustomDataSourceProperties;
+import cc.elvea.platform.commons.autoconfigure.data.core.properties.CustomDataSourceProperties;
 import com.zaxxer.hikari.HikariDataSource;
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.logging.LoggingMeterRegistry;

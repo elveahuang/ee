@@ -3,8 +3,6 @@ package cc.elvea.platform.commons.service;
 import cc.elvea.platform.commons.sequence.Sequence;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
-
 /**
  * @author elvea
  * @since 24.1.0
@@ -12,13 +10,6 @@ import java.time.LocalDateTime;
 public abstract class AbstractService implements Service {
 
     protected Sequence sequence;
-
-    /**
-     * @see Service#getCurLocalDateTime()
-     */
-    public LocalDateTime getCurLocalDateTime() {
-        return LocalDateTime.now();
-    }
 
     /**
      * @see Service#generateId()

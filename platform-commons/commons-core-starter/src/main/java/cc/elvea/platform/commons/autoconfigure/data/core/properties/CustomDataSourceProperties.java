@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.autoconfigure.data.datasource.properties;
+package cc.elvea.platform.commons.autoconfigure.data.core.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

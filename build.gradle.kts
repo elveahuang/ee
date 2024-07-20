@@ -63,7 +63,7 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M1")
-            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.1")
+            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.2")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.2")
             mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.1")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
