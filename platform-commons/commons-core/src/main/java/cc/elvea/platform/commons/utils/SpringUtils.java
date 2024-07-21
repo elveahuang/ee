@@ -6,6 +6,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.Nullable;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
 
@@ -93,14 +95,16 @@ public class SpringUtils implements ApplicationContextAware {
      * 编程式事务
      */
     public static <T> T executeWithResult(Function<Object, T> function) {
-        return executeWithResult(getBean(TransactionTemplate.class), function);
+        return executeWithResult(getBean(PlatformTransactionManager.class), function);
     }
 
     /**
      * 编程式事务
      */
-    public static <T> T executeWithResult(TransactionTemplate template, Function<Object, T> function) {
-        return template.execute(status -> {
+    public static <T> T executeWithResult(PlatformTransactionManager transactionManager, Function<Object, T> function) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        return transactionTemplate.execute(status -> {
             try {
                 return function.apply(new Object());
             } catch (Exception e) {
@@ -114,14 +118,16 @@ public class SpringUtils implements ApplicationContextAware {
      * 编程式事务
      */
     public static void executeWithoutResult(Function<Object, ?> function) {
-        executeWithoutResult(getBean(TransactionTemplate.class), function);
+        executeWithoutResult(getBean(PlatformTransactionManager.class), function);
     }
 
     /**
      * 编程式事务
      */
-    public static void executeWithoutResult(TransactionTemplate template, Function<Object, ?> function) {
-        template.executeWithoutResult(status -> {
+    public static void executeWithoutResult(PlatformTransactionManager transactionManager, Function<Object, ?> function) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        transactionTemplate.executeWithoutResult(status -> {
             try {
                 function.apply(new Object());
             } catch (Exception e) {
