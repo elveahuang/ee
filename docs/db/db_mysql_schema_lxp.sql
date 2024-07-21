@@ -16,10 +16,12 @@ CREATE TABLE `lxp_resource_type`
     `description`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注，仅用于后台管理显示',
     `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_resource_type` PRIMARY KEY (`id`),
     INDEX `ix_lxp_resource_type__code` (`code`)
 ) COMMENT '资源类型表';
@@ -51,12 +53,12 @@ CREATE TABLE `lxp_resource`
     `complete_total_time`      INT UNSIGNED     NOT NULL DEFAULT 0 COMMENT '需学习时长',
     `status`                   TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`                   TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`               DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`         DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`               DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`               DATETIME         NULL     DEFAULT NULL COMMENT '删除时间',
+    `last_modified_at`         DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
     `deleted_by`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`               DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_resource` PRIMARY KEY (`id`),
     INDEX `ix_lxp_resource__code` (`code`)
 ) COMMENT '资源表';
@@ -75,10 +77,12 @@ CREATE TABLE `lxp_project_type`
     `description`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project_type` PRIMARY KEY (`id`),
     INDEX `ix_lxp_project_type__code` (`code`)
 ) COMMENT '项目类型表';
@@ -108,12 +112,12 @@ CREATE TABLE `lxp_project`
     `vip_price`              NUMERIC(8, 2)    NOT NULL DEFAULT 0 COMMENT '会员价格',
     `status`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`             DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`             DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`             DATETIME         NULL     DEFAULT NULL COMMENT '删除时间',
+    `last_modified_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
     `deleted_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`             DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project` PRIMARY KEY (`id`),
     INDEX `ix_lxp_project__code` (`code`)
 ) COMMENT '活动表';
@@ -134,10 +138,12 @@ CREATE TABLE `lxp_project_section`
     `description`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project_section` PRIMARY KEY (`id`)
 ) COMMENT '项目章节表';
 
@@ -185,12 +191,12 @@ CREATE TABLE `lxp_project_attendance`
     `latest_ind`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '是否最新的报名',
     `source`                VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '报名来源',
     `active`                TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`            DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`      DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`            DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`            DATETIME         NOT NULL DEFAULT NOW() COMMENT '删除时间',
+    `last_modified_at`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
     `deleted_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`            DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project_attendance` PRIMARY KEY (`id`),
     INDEX `ix_lxp_project_attendance__project_id` (`project_id`),
     INDEX `ix_lxp_project_attendance__user_id` (`user_id`)
@@ -223,12 +229,12 @@ CREATE TABLE `lxp_project_section_attendance`
     `final_score`          NUMERIC(10, 2)   NOT NULL DEFAULT 0 COMMENT '最终分数',
     `source`               VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '报名来源',
     `active`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`           DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`     DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`           DATETIME         NOT NULL DEFAULT NOW() COMMENT '删除时间',
+    `last_modified_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project_section_attendance` PRIMARY KEY (`id`)
 ) COMMENT '项目章节成绩表';
 
@@ -259,12 +265,12 @@ CREATE TABLE `lxp_project_resource_attendance`
     `final_score`          NUMERIC(10, 2)   NOT NULL DEFAULT 0 COMMENT '最终分数',
     `source`               VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '报名来源',
     `active`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`           DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`     DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`           DATETIME         NOT NULL DEFAULT NOW() COMMENT '删除时间',
+    `last_modified_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_project_resource_attendance` PRIMARY KEY (`id`)
 ) COMMENT '活动资源成绩表';
 
@@ -294,12 +300,12 @@ CREATE TABLE `lxp_question`
     `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
     `source`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
     `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`       DATETIME         NULL COMMENT '删除时间',
-    `deleted_by`       BIGINT UNSIGNED  NULL COMMENT '删除人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_sys_question_id` PRIMARY KEY (`id`)
 ) COMMENT '试题表';
 
@@ -320,12 +326,13 @@ CREATE TABLE `lxp_question_option`
     `score`            NUMERIC(10, 2)   NOT NULL DEFAULT 0 COMMENT '选项分值',
     `correct_ind`      TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否正确答案',
     `case_ind`         TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否不区分大小写',
-    `created_at`       DATETIME         NOT NULL DEFAULT NOW() COMMENT '创建时间',
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME         NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `deleted_at`       DATETIME         NULL COMMENT '删除时间',
-    `deleted_by`       BIGINT UNSIGNED  NULL COMMENT '删除人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_question_option` PRIMARY KEY (`id`),
     INDEX `ix_lxp_question_option` (`question_id`)
 ) COMMENT '题目选项表';
@@ -371,15 +378,18 @@ DROP TABLE IF EXISTS `lxp_paper_attendance`;
 
 CREATE TABLE `lxp_paper_attendance`
 (
-    `id`                  BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
-    `paper_section_id`    BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `user_id`             BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `learning_session_id` VARCHAR(150)    NOT NULL DEFAULT '' COMMENT '学习会话ID',
-    `score`               NUMERIC(10, 2)  NOT NULL DEFAULT 0 COMMENT '分数',
-    `created_at`          DATETIME        NOT NULL DEFAULT NOW() COMMENT '创建时间',
-    `created_by`          BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at`    DATETIME        NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
-    `last_modified_by`    BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `id`                  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `paper_section_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `user_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `learning_session_id` VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '学习会话ID',
+    `score`               NUMERIC(10, 2)   NOT NULL DEFAULT 0 COMMENT '分数',
+    `active`              TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`          DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at`    DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`          DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_paper_attendance` PRIMARY KEY (`id`),
     INDEX `ix_lxp_paper_attendance` (`paper_section_id`, `user_id`)
 ) COMMENT '试卷答题记录表';
@@ -392,15 +402,18 @@ DROP TABLE IF EXISTS `lxp_paper_question_attendance`;
 
 CREATE TABLE `lxp_paper_question_attendance`
 (
-    `id`               BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
-    `paper_section_id` BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `user_id`          BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `answer`           VARCHAR(5000)   NOT NULL DEFAULT '' COMMENT '答案',
-    `score`            NUMERIC(10, 2)  NOT NULL DEFAULT 0 COMMENT '分数',
-    `created_at`       DATETIME        NOT NULL DEFAULT NOW() COMMENT '创建时间',
-    `created_by`       BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME        NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
-    `last_modified_by` BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `paper_section_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `user_id`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `answer`           VARCHAR(5000)    NOT NULL DEFAULT '' COMMENT '答案',
+    `score`            NUMERIC(10, 2)   NOT NULL DEFAULT 0 COMMENT '分数',
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_paper_question_attendance` PRIMARY KEY (`id`)
 ) COMMENT '题目答题记录';
 
@@ -412,13 +425,16 @@ DROP TABLE IF EXISTS `lxp_paper_question_option_attendance`;
 
 CREATE TABLE `lxp_paper_question_option_attendance`
 (
-    `id`               BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
-    `paper_section_id` BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `option_id`        BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `user_id`          BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
-    `created_at`       DATETIME        NOT NULL DEFAULT NOW() COMMENT '创建时间',
-    `created_by`       BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建人',
-    `last_modified_at` DATETIME        NOT NULL DEFAULT NOW() COMMENT '最后修改时间',
-    `last_modified_by` BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `paper_section_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `option_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `user_id`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '试卷章节ID',
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT `pk_lxp_paper_question_option_attendance` PRIMARY KEY (`id`)
 ) COMMENT '选项答题记录';
