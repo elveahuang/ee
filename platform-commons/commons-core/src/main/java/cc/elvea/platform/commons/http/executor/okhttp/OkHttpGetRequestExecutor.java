@@ -36,7 +36,9 @@ public class OkHttpGetRequestExecutor extends HttpGetRequestExecutor {
         Request request = new Request.Builder().url(url).headers(headers).build();
         try (Response response = client.newCall(request).execute()) {
             String content = response.body().string();
-            log.info("OkHttp execute - [{}] - response - [{}].", url, content);
+            if (this.config.getDebug().isEnabled()) {
+                log.info("OkHttp execute - [{}] - response - [{}].", url, content);
+            }
             return this.handleResponse(content);
         } finally {
             log.info("OkHttp execute - [{}] - finish.", url);

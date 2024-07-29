@@ -1,5 +1,6 @@
 package cc.elvea.platform.commons.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.util.StopWatch;
 
@@ -9,6 +10,7 @@ import java.text.NumberFormat;
  * @author elvea
  * @since 24.1.0
  */
+@Slf4j
 public class StopWatchUtils {
 
     public static StopWatch createStopWatch(String id) {
@@ -50,6 +52,10 @@ public class StopWatchUtils {
             }
             return sb.toString();
         }
+    }
+
+    public static void log(StopWatch sw) {
+        log.info(sw.prettyPrint());
     }
 
 }

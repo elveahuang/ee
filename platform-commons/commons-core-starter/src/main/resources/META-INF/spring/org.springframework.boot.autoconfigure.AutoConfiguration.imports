@@ -1,4 +1,5 @@
 cc.elvea.platform.commons.autoconfigure.core.CoreAutoConfiguration
+cc.elvea.platform.commons.autoconfigure.core.IpConfiguration
 cc.elvea.platform.commons.autoconfigure.core.JwtAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.RateLimitAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.cache.CustomCacheAutoConfiguration

@@ -37,7 +37,9 @@ public class ApacheGetRequestExecutor extends HttpGetRequestExecutor {
             String content = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
                 content = EntityUtils.toString(response.getEntity(), GlobalConstants.UTF8);
-                log.info("Apache execute - [{}] - [{}] - response - [{}].", type, url, content);
+                if (this.config.getDebug().isEnabled()) {
+                    log.info("Apache execute - [{}] - [{}] - response - [{}].", type, url, content);
+                }
             }
             log.info("Apache execute - [{}] - [{}] - finish.", type, uri);
             return content;

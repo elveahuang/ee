@@ -27,6 +27,9 @@ import java.net.Proxy;
 public class Http {
 
     @Builder.Default
+    HttpDebug debug = HttpDebug.builder().build();
+
+    @Builder.Default
     private HttpType type = HttpType.OKHTTP;
 
     @Builder.Default
@@ -36,7 +39,7 @@ public class Http {
      * 获取配置
      */
     public HttpConfig getConfig() {
-        return HttpConfig.builder().type(this.type).proxy(this.proxy).build();
+        return HttpConfig.builder().debug(this.debug).type(this.type).proxy(this.proxy).build();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

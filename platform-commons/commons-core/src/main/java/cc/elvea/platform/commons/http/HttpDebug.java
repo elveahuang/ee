@@ -15,15 +15,9 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HttpConfig implements Serializable {
+public class HttpDebug implements Serializable {
 
     @Builder.Default
-    HttpDebug debug = HttpDebug.builder().build();
-
-    @Builder.Default
-    HttpType type = HttpType.OKHTTP;
-
-    @Builder.Default
-    HttpProxy proxy = HttpProxy.builder().build();
+    private boolean enabled = false;
 
 }

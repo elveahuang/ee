@@ -38,7 +38,9 @@ public class ApachePostRequestExecutor extends HttpGetRequestExecutor {
             String content = "";
             if (!ObjectUtils.isEmpty(response) && !ObjectUtils.isEmpty(response.getEntity())) {
                 content = EntityUtils.toString(response.getEntity(), GlobalConstants.UTF8);
-                log.info("Apache post execute - [{}] - [{}] - response - [{}].", type, uri, content);
+                if (this.config.getDebug().isEnabled()) {
+                    log.info("Apache post execute - [{}] - [{}] - response - [{}].", type, uri, content);
+                }
             }
             log.info("Apache post execute - [{}] - [{}] - finish.", type, uri);
             return content;

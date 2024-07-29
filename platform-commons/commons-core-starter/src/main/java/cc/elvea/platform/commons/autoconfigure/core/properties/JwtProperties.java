@@ -33,8 +33,8 @@ public class JwtProperties {
 
     private Duration deviceCodeTimeToLive = Duration.ofMinutes(5);
 
-    private Duration accessTokenTimeToLive = Duration.ofMinutes(15);
+    private Duration accessTokenTimeToLive = Duration.ofMinutes(60);
 
-    private Duration refreshTokenTimeToLive = Duration.ofDays(3);
+    private Duration refreshTokenTimeToLive = Duration.ofDays(14);
 
 }

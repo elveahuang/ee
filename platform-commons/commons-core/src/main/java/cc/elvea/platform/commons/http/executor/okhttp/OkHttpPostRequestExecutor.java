@@ -33,7 +33,9 @@ public class OkHttpPostRequestExecutor extends HttpPostRequestExecutor {
         Request request = builder.build();
         try (Response response = client.newCall(request).execute()) {
             String content = response.body().string();
-            log.info("OkHttp post execute - [{}] - [{}] - response - [{}].", type, uri, content);
+            if (this.config.getDebug().isEnabled()) {
+                log.info("OkHttp post execute - [{}] - [{}] - response - [{}].", type, uri, content);
+            }
             return this.handleResponse(content);
         } finally {
             log.info("OkHttp post execute - [{}] - [{}] - finish.", type, uri);
