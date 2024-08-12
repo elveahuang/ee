@@ -12,7 +12,7 @@ plugins {
     id("com.google.osdetector") version "1.7.3" apply false
     id("org.hibernate.orm") version "6.5.2.Final" apply false
     id("org.springframework.boot") version "3.3.2" apply false
-    id("org.jetbrains.kotlin.jvm") version "2.0.0" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.0.10" apply false
     id("org.graalvm.buildtools.native") version "0.10.2" apply false
 }
 
@@ -74,7 +74,7 @@ allprojects {
             mavenBom("cn.hutool:hutool-bom:5.8.29")
             mavenBom("me.ahoo.cosid:cosid-bom:2.9.3")
             mavenBom("org.mockito:mockito-bom:5.12.0")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.0")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.10")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
         }
 
@@ -106,7 +106,7 @@ allprojects {
             dependency("org.redisson:redisson-spring-boot-starter:3.34.0")
             // others
             dependency("com.nimbusds:nimbus-jose-jwt:9.40")
-            dependency("com.nimbusds:oauth2-oidc-sdk:11.13")
+            dependency("com.nimbusds:oauth2-oidc-sdk:11.14")
             dependency("org.json:json:20240303")
             dependency("com.alibaba:fastjson:2.0.52")
             dependency("com.github.spotbugs:spotbugs-annotations:4.8.6")

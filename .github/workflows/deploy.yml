@@ -11,10 +11,10 @@ jobs:
             -   name: Setup Java
                 uses: actions/setup-java@v4
                 with:
-                    distribution: 'liberica'
-                    java-version: '21'
+                    distribution: "liberica"
+                    java-version: "21"
             -   name: Setup Gradle
-                uses: gradle/actions/setup-gradle@v3
+                uses: gradle/actions/setup-gradle@v4
             -   name: Check Java and Gradle
                 run: |
                     java -version
@@ -30,8 +30,8 @@ jobs:
                     server: ${{ secrets.SERVER_HOST }}
                     username: ${{ secrets.SERVER_USER }}
                     ssh_private_key: ${{ secrets.SERVER_KEY }}
-                    local_path: 'platform-boot-server/app-server/build/libs/app.zip'
-                    remote_path: '/data/app/deploy'
+                    local_path: "platform-boot-server/app-server/build/libs/app.zip"
+                    remote_path: "/data/app/deploy"
                     sftpArgs: "-o ConnectTimeout=5"
             -   name: Executing Remote SSH Commands
                 uses: appleboy/ssh-action@v1.0.3
