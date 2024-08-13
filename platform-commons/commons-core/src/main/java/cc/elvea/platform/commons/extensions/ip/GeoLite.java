@@ -33,8 +33,8 @@ public class GeoLite {
         CountryResponse country = this.reader.country(InetAddress.getByName(ip));
         CityResponse city = this.reader.city(InetAddress.getByName(ip));
         return Ip.builder()
-                .country(country.getCountry().getName())
-                .city(city.getCity().getName())
+                .country(Ip.Country.builder().code(country.getCountry().getIsoCode()).name(country.getCountry().getName()).label(country.getCountry().getNames()).build())
+                .city(Ip.City.builder().name(city.getCity().getName()).label(city.getCity().getNames()).build())
                 .build();
     }
 

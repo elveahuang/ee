@@ -153,11 +153,6 @@ public class DefaultSnowflakeSequence implements Sequence {
                 | sequence;
     }
 
-    @Override
-    public String nextIdAsString() {
-        return String.valueOf(this.nextId());
-    }
-
     private long tilNextMillis(long lastTimestamp) {
         long timestamp = currentTimestamp();
         while (timestamp <= lastTimestamp) {

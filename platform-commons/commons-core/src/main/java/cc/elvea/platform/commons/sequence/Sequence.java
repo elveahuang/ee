@@ -8,6 +8,12 @@ public interface Sequence {
 
     long nextId();
 
-    String nextIdAsString();
+    default String nextIdAsString() {
+        return String.valueOf(this.nextId());
+    }
+
+    default String generateCode() {
+        return Long.toString(this.nextId(), 36).toUpperCase();
+    }
 
 }

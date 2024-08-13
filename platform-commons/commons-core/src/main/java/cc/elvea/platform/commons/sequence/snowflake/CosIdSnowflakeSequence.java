@@ -38,9 +38,4 @@ public class CosIdSnowflakeSequence implements Sequence {
         return this.provider.getShare().generate();
     }
 
-    @Override
-    public String nextIdAsString() {
-        return String.valueOf(this.provider.getShare().generate());
-    }
-
 }

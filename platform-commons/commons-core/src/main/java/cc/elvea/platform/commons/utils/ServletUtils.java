@@ -106,6 +106,45 @@ public abstract class ServletUtils {
      *
      * @return String
      */
+    public static String getIp() {
+        return getIp(getRequest());
+    }
+
+    /**
+     * 获取客户端IP
+     *
+     * @return String
+     */
+    public static String getIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (!StringUtils.isNotEmpty(ip) || UNKNOWN_IP.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
+        }
+        if (!StringUtils.isNotEmpty(ip) || UNKNOWN_IP.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if (LOCAL_IP.equals(ip)) {
+            try { // 根据网卡取本机配置的IP
+                InetAddress inet = InetAddress.getLocalHost();
+                ip = inet.getHostAddress();
+            } catch (UnknownHostException e) {
+                log.error("Unknown Host.", e);
+            }
+        }
+        // 对于通过多个代理的情况，第一个IP为客户端真实IP，多个IP按照','分割。
+        if (ip != null && ip.length() > 15) {
+            if (ip.indexOf(GlobalConstants.STR_DELIMITER) > 0) {
+                ip = ip.substring(0, ip.indexOf(","));
+            }
+        }
+        return ip;
+    }
+
+    /**
+     * 获取客户端IP
+     *
+     * @return String
+     */
     public static String getHost() {
         return getHost(getRequest());
     }
