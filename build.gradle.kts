@@ -70,9 +70,9 @@ allprojects {
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.2")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.3")
-            mavenBom("io.grpc:grpc-bom:1.65.1")
+            mavenBom("io.grpc:grpc-bom:1.66.0")
             mavenBom("cn.hutool:hutool-bom:5.8.31")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.9.3")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.9.4")
             mavenBom("org.mockito:mockito-bom:5.12.0")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.10")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
@@ -82,8 +82,8 @@ allprojects {
             // spring authorization server
             dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.3.1")
             // mapstruct & lombok
-            dependency("org.mapstruct:mapstruct:1.5.5.Final")
-            dependency("org.mapstruct:mapstruct-processor:1.5.5.Final")
+            dependency("org.mapstruct:mapstruct:1.6.0")
+            dependency("org.mapstruct:mapstruct-processor:1.6.0")
             dependency("org.projectlombok:lombok-mapstruct-binding:0.2.0")
             // openapi & swagger & springdoc
             dependency("io.swagger.core.v3:swagger-core-jakarta:2.2.22")
