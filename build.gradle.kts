@@ -11,7 +11,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
     id("org.hibernate.orm") version "6.6.0.Final" apply false
     id("org.springframework.boot") version "3.3.3" apply false
-    id("org.jetbrains.kotlin.jvm") version "2.0.10" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
     id("org.graalvm.buildtools.native") version "0.10.2" apply false
 }
 
@@ -73,7 +73,7 @@ allprojects {
             mavenBom("cn.hutool:hutool-bom:5.8.31")
             mavenBom("me.ahoo.cosid:cosid-bom:2.9.5")
             mavenBom("org.mockito:mockito-bom:5.12.0")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.10")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
         }
 
