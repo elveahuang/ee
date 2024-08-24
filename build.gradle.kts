@@ -61,8 +61,7 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M1")
-            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.2")
+            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.3")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.3")
             mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.1")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
@@ -75,8 +74,8 @@ allprojects {
             mavenBom("org.mockito:mockito-bom:5.12.0")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
+            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M2")
         }
-
         dependencies {
             // spring authorization server
             dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.3.2")
