@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ConfigurationProperties(prefix = WebSocketProperties.PREFIX)
 public class WebSocketProperties implements Serializable {
 
-    public static final String PREFIX = "platform.socket";
+    public static final String PREFIX = "platform.websocket";
 
     private boolean enabled = true;
 

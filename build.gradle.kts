@@ -16,7 +16,6 @@ plugins {
 }
 
 allprojects {
-    apply(plugin = "idea")
     apply(plugin = "application")
     apply(plugin = "java")
     apply(plugin = "java-library")
@@ -63,17 +62,18 @@ allprojects {
         imports {
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.3")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.3")
-            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.1")
+            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.2")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.2")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.3")
             mavenBom("io.grpc:grpc-bom:1.66.0")
             mavenBom("cn.hutool:hutool-bom:5.8.31")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.9.5")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.9.6")
             mavenBom("org.mockito:mockito-bom:5.12.0")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
+            mavenBom("io.netty:netty-bom:4.1.112.Final")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M2")
         }
         dependencies {

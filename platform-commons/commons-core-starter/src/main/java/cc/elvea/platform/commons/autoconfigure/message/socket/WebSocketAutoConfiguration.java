@@ -38,8 +38,7 @@ public class WebSocketAutoConfiguration implements WebSocketConfigurer {
     public void registerWebSocketHandlers(@NonNull WebSocketHandlerRegistry registry) {
         registry.addHandler(messageWebSocketHandler, "/socket/message")
                 .setAllowedOrigins("*")
-                .addInterceptors(sessionHandshakeInterceptor)
-                .withSockJS();
+                .addInterceptors(sessionHandshakeInterceptor);
     }
 
 }
