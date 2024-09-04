@@ -23,16 +23,14 @@ allprojects {
     apply(plugin = "io.spring.dependency-management")
 
     repositories {
-        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public") }
-        maven { url = uri("https://repo.spring.io/milestone") }
         maven { url = uri("https://maven.aliyun.com/repository/public") }
         maven { url = uri("https://maven.aliyun.com/repository/spring") }
         maven { url = uri("https://maven.aliyun.com/repository/google") }
-        mavenLocal()
-        mavenCentral()
-        gradlePluginPortal()
         maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
         maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") }
+        maven { url = uri("https://repo.spring.io/milestone") }
+        mavenCentral()
+        gradlePluginPortal()
     }
 
     configure<JavaPluginExtension> {
