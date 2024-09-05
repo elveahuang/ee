@@ -9,7 +9,6 @@ plugins {
     id("application")
     id("java-library")
     id("io.spring.dependency-management") version "1.1.6"
-    id("org.hibernate.orm") version "6.5.2.Final" apply false
     id("org.springframework.boot") version "3.3.3" apply false
     id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
     id("org.graalvm.buildtools.native") version "0.10.2" apply false
