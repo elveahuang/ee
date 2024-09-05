@@ -28,8 +28,6 @@ allprojects {
         maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
         maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") }
         maven { url = uri("https://repo.spring.io/milestone") }
-        mavenCentral()
-        gradlePluginPortal()
     }
 
     configure<JavaPluginExtension> {
