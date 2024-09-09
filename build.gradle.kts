@@ -190,7 +190,7 @@ allprojects {
             dependency("org.apache.commons:commons-email:1.6.0")
             dependency("org.apache.commons:commons-csv:1.11.0")
             dependency("org.apache.commons:commons-text:1.12.0")
-            dependency("org.apache.commons:commons-lang3:3.16.0")
+            dependency("org.apache.commons:commons-lang3:3.17.0")
             dependency("org.apache.commons:commons-compress:1.27.1")
             dependency("org.apache.commons:commons-collections4:4.4")
             // webjars

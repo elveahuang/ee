@@ -38,7 +38,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return 随机字符串
      */
     public static String randomAlphabetic(int length) {
-        return RandomStringUtils.randomAlphabetic(length);
+        return RandomStringUtils.secure().nextAlphabetic(length);
     }
 
     /**
@@ -48,7 +48,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @return 随机数字
      */
     public static String randomNumeric(int length) {
-        return RandomStringUtils.randomNumeric(length);
+        return RandomStringUtils.secure().nextNumeric(length);
     }
 
     /**
