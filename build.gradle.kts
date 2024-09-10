@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-
 plugins {
     id("idea")
     id("java")
@@ -7,7 +5,6 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.6"
     id("org.springframework.boot") version "3.3.3" apply false
-    id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
     id("org.graalvm.buildtools.native") version "0.10.2" apply false
 }
 
@@ -15,7 +12,6 @@ allprojects {
     apply(plugin = "application")
     apply(plugin = "java")
     apply(plugin = "java-library")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "io.spring.dependency-management")
 
     repositories {
@@ -30,12 +26,6 @@ allprojects {
     configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    configure<KotlinJvmProjectExtension> {
-        jvmToolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
     }
 
     tasks.withType<Test> {

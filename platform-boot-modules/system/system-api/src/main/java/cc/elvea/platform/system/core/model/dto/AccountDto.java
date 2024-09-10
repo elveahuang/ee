@@ -3,8 +3,6 @@ package cc.elvea.platform.system.core.model.dto;
 import cc.elvea.platform.commons.annotations.DateTimeFormat;
 import cc.elvea.platform.commons.annotations.JsonFormat;
 import cc.elvea.platform.commons.constants.DateTimeConstants;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -70,7 +68,6 @@ public class AccountDto implements Serializable {
     /**
      * 最后修改时间
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime lastModifiedAt;

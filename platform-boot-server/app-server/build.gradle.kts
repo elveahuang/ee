@@ -2,6 +2,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot")
+    id("org.graalvm.buildtools.native")
 }
 
 dependencies {
