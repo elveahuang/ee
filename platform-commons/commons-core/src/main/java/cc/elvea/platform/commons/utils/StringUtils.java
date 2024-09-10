@@ -34,21 +34,21 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 生产随机字符串
      *
-     * @param length 字符串长度
+     * @param count 字符串长度
      * @return 随机字符串
      */
-    public static String randomAlphabetic(int length) {
-        return RandomStringUtils.secure().nextAlphabetic(length);
+    public static String randomAlphabetic(int count) {
+        return RandomStringUtils.secure().nextAlphabetic(count);
     }
 
     /**
      * 生产随机数字
      *
-     * @param length 数字长度
+     * @param count 数字长度
      * @return 随机数字
      */
-    public static String randomNumeric(int length) {
-        return RandomStringUtils.secure().nextNumeric(length);
+    public static String randomNumeric(int count) {
+        return RandomStringUtils.secure().nextNumeric(count);
     }
 
     /**

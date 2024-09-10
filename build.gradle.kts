@@ -1,7 +1,4 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("idea")
@@ -41,14 +38,6 @@ allprojects {
         }
     }
 
-    tasks.withType<KotlinCompile> {
-        compilerOptions {
-            apiVersion.set(KotlinVersion.KOTLIN_2_0)
-            jvmTarget.set(JvmTarget.JVM_21)
-            languageVersion.set(KotlinVersion.KOTLIN_2_0)
-        }
-    }
-
     tasks.withType<Test> {
         useJUnitPlatform()
     }
@@ -67,6 +56,7 @@ allprojects {
             mavenBom("me.ahoo.cosid:cosid-bom:2.9.6")
             mavenBom("org.mockito:mockito-bom:5.12.0")
             mavenBom("io.netty:netty-bom:4.1.112.Final")
+            mavenBom("org.apache.groovy:groovy-bom:4.0.22")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.7")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M2")
@@ -190,7 +180,7 @@ allprojects {
             dependency("org.apache.commons:commons-email:1.6.0")
             dependency("org.apache.commons:commons-csv:1.11.0")
             dependency("org.apache.commons:commons-text:1.12.0")
-            dependency("org.apache.commons:commons-lang3:3.17.0")
+            dependency("org.apache.commons:commons-lang3:3.16.0")
             dependency("org.apache.commons:commons-compress:1.27.1")
             dependency("org.apache.commons:commons-collections4:4.4")
             // webjars
