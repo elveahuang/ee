@@ -3,6 +3,7 @@ package cc.elvea.platform.commons.utils;
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.lang.Nullable;
 
 import java.util.UUID;
 
@@ -11,7 +12,23 @@ import java.util.UUID;
  * @since 24.1.0
  */
 @Slf4j
-public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
+public abstract class StringUtils extends org.springframework.util.StringUtils {
+
+    public static boolean isEmpty(@Nullable String str) {
+        return !hasText(str);
+    }
+
+    public static boolean isNotEmpty(@Nullable String str) {
+        return hasText(str);
+    }
+
+    public static boolean isBlank(@Nullable String str) {
+        return !hasText(str);
+    }
+
+    public static boolean isNotBlank(@Nullable String str) {
+        return hasText(str);
+    }
 
     /**
      * 生成UUID

@@ -6,7 +6,6 @@ import cc.elvea.platform.commons.enums.RateLimitTypeEnum;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.ServiceException;
 import cc.elvea.platform.commons.utils.ServletUtils;
-import cc.elvea.platform.commons.utils.StringUtils;
 import cn.hutool.core.util.ArrayUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +76,7 @@ public class RateLimitAspect {
         String key = rateLimiter.key();
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
-        if (StringUtils.containsAny(key, "#")) {
+        if (org.apache.commons.lang3.StringUtils.containsAny(key, "#")) {
             Object[] args = point.getArgs();
             String[] parameterNames = parameterNameDiscoverer.getParameterNames(method);
             if (ArrayUtil.isEmpty(parameterNames)) {
@@ -88,7 +87,8 @@ public class RateLimitAspect {
             }
             try {
                 Expression expression;
-                if (StringUtils.startsWith(key, parserContext.getExpressionPrefix()) && StringUtils.endsWith(key, parserContext.getExpressionSuffix())) {
+                if (org.apache.commons.lang3.StringUtils.startsWith(key, parserContext.getExpressionPrefix()) &&
+                        org.apache.commons.lang3.StringUtils.endsWith(key, parserContext.getExpressionSuffix())) {
                     expression = expressionParser.parseExpression(key, parserContext);
                 } else {
                     expression = expressionParser.parseExpression(key);
