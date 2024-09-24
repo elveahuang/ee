@@ -1,3 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("idea")
     id("java")
@@ -5,6 +10,7 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.6"
     id("org.springframework.boot") version "3.3.4" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
     id("org.graalvm.buildtools.native") version "0.10.3" apply false
 }
 
@@ -12,6 +18,7 @@ allprojects {
     apply(plugin = "application")
     apply(plugin = "java")
     apply(plugin = "java-library")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "io.spring.dependency-management")
 
     repositories {
@@ -29,6 +36,20 @@ allprojects {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
+    configure<KotlinJvmProjectExtension> {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(21))
+        }
+    }
+
+    tasks.withType<KotlinCompile> {
+        compilerOptions {
+            apiVersion.set(KotlinVersion.KOTLIN_2_0)
+            jvmTarget.set(JvmTarget.JVM_21)
+            languageVersion.set(KotlinVersion.KOTLIN_2_0)
+        }
+    }
+
     tasks.withType<Test> {
         useJUnitPlatform()
     }
@@ -37,7 +58,7 @@ allprojects {
         imports {
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.4")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.4")
-            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.2")
+            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.3")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.2")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
@@ -162,7 +183,7 @@ allprojects {
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1106")
             dependency("com.larksuite.oapi:oapi-sdk:2.3.4")
             // commons
-            dependency("commons-io:commons-io:2.16.1")
+            dependency("commons-io:commons-io:2.17.0")
             dependency("commons-cli:commons-cli:1.9.0")
             dependency("commons-net:commons-net:3.11.1")
             dependency("commons-codec:commons-codec:1.17.1")
