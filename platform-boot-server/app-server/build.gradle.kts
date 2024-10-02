@@ -62,38 +62,7 @@ dependencies {
     testImplementation("jakarta.servlet:jakarta.servlet-api")
 }
 
-var clearLibs = tasks.register<Delete>("clearLibs") {
-    delete(layout.buildDirectory.dir("libs/libs-internal"))
-    delete(layout.buildDirectory.dir("libs/libs-external"))
-}
-
-var copyLibs = tasks.register<Copy>("copyLibs") {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(configurations.runtimeClasspath)
-    include("**/platform-*.jar")
-    into(layout.buildDirectory.dir("libs/libs-internal"))
-}
-
-var copyExtLibs = tasks.register<Copy>("copyExtLibs") {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(configurations.runtimeClasspath)
-    exclude("**/platform-*.jar")
-    into(layout.buildDirectory.dir("libs/libs-external"))
-}
-
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    dependsOn(clearLibs)
-    dependsOn(copyExtLibs)
-    dependsOn(copyLibs)
-    exclude("*.jar")
-    manifest {
-        attributes["Manifest-Version"] = 1.0
-        attributes["Class-Path"] = configurations.runtimeClasspath.get().files.onEach {
-            println(it.name)
-        }.joinToString(" ") {
-            if (it.name.startsWith("platform-")) "./libs-internal/" + it.name else "./libs-external/" + it.name
-        }
-    }
     archiveFileName.set("app.jar")
 }
