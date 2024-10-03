@@ -42,6 +42,10 @@ allprojects {
         }
     }
 
+    tasks.withType<JavaCompile> {
+        options.encoding = "UTF-8"
+    }
+
     tasks.withType<KotlinCompile> {
         compilerOptions {
             apiVersion.set(KotlinVersion.KOTLIN_2_0)

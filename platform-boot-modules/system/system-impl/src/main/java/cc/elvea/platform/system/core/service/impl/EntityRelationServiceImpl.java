@@ -107,8 +107,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public List<EntityRelationEntity> getParents(String relationType, Long entityId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.entityId), entityId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_PATH), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ENTITY_ID), entityId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);
@@ -121,9 +121,9 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public List<EntityRelationEntity> getDirectParents(String relationType, Long entityId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.parentInd), Boolean.TRUE));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.entityId), entityId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.PARENT_IND), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ENTITY_ID), entityId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);
@@ -136,8 +136,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public List<EntityRelationEntity> getChildren(String relationType, Long ancestorId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.ancestorId), ancestorId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ANCESTOR_ID), ancestorId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);
@@ -150,9 +150,9 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public List<EntityRelationEntity> getDirectChildren(String relationType, Long ancestorId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.parentInd), Boolean.TRUE));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.ancestorId), ancestorId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.PARENT_IND), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ANCESTOR_ID), ancestorId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);
@@ -165,8 +165,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public void deleteAsAncestor(String relationType, Long ancestorId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.ancestorId), ancestorId));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ANCESTOR_ID), ancestorId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         this.repository.delete(specification);
@@ -179,8 +179,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public void deleteAsAncestor(String relationType, List<Long> ancestorIdList) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(root.get(EntityRelationEntity_.ancestorId).in(ancestorIdList));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
+            predicates.add(root.get(EntityRelationEntity_.ANCESTOR_ID).in(ancestorIdList));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         this.repository.delete(specification);
@@ -193,8 +193,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public void deleteAsChild(String relationType, Long entityId) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.entityId), entityId));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.ENTITY_ID), entityId));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         this.repository.delete(specification);
@@ -207,8 +207,8 @@ public class EntityRelationServiceImpl extends BaseCachingEntityService<EntityRe
     public void deleteAsChild(String relationType, List<Long> entityIdList) {
         Specification<EntityRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(root.get(EntityRelationEntity_.entityId).in(entityIdList));
-            predicates.add(builder.equal(root.get(EntityRelationEntity_.relationType), relationType));
+            predicates.add(root.get(EntityRelationEntity_.ENTITY_ID).in(entityIdList));
+            predicates.add(builder.equal(root.get(EntityRelationEntity_.RELATION_TYPE), relationType));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         this.repository.delete(specification);

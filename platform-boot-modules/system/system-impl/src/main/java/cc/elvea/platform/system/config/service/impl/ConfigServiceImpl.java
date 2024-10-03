@@ -41,7 +41,7 @@ public class ConfigServiceImpl extends BaseCachingEntityService<ConfigEntity, Lo
         return getCacheService().get(cacheKeyGenerator.byCacheKey(key), k -> {
             Specification<ConfigEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(ConfigEntity_.configKey), key));
+                predicates.add(builder.equal(root.get(ConfigEntity_.CONFIG_KEY), key));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

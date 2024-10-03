@@ -1,6 +1,7 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
+    id("java-library")
     id("org.springframework.boot")
     id("org.graalvm.buildtools.native")
 }
@@ -60,6 +61,26 @@ dependencies {
     // development & test
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("jakarta.servlet:jakarta.servlet-api")
+}
+
+graalvmNative {
+    toolchainDetection.set(true)
+    binaries {
+        named("main") {
+            buildArgs.add("--initialize-at-build-time=org.slf4j")
+            buildArgs.add("--initialize-at-build-time=ch.qos.logback")
+            buildArgs.add("--initialize-at-run-time=sun.net.dns.ResolverConfigurationImpl")
+            buildArgs.add("--initialize-at-run-time=me.ahoo.cosid.spring.redis.SpringRedisMachineIdDistributor")
+            buildArgs.add("--initialize-at-run-time=me.ahoo.cosid.machine.ManualMachineIdDistributor")
+            buildArgs.add("--trace-class-initialization=org.springframework.util.ClassUtils")
+            buildArgs.add("-H:+ReportExceptionStackTraces")
+            buildArgs.add("-H:+UnlockExperimentalVMOptions")
+            buildArgs.add("-H:+PrintClassInitialization")
+            sharedLibrary.set(false)
+            quickBuild.set(true)
+            imageName.set("app")
+        }
+    }
 }
 
 tasks.named<BootJar>("bootJar") {
