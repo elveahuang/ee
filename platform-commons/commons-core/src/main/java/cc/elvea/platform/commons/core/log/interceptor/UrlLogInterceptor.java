@@ -24,10 +24,6 @@ public class UrlLogInterceptor implements HandlerInterceptor {
 
     private final LogStore logStore;
 
-    private Long startTime;
-
-    private Long endTime;
-
     public UrlLogInterceptor(LogStore logStore) {
         this.logStore = logStore;
     }
@@ -36,7 +32,8 @@ public class UrlLogInterceptor implements HandlerInterceptor {
     public boolean preHandle(@NonNull HttpServletRequest request,
                              @NonNull HttpServletResponse response,
                              @NonNull Object handler) {
-        startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
+        request.setAttribute("startTime", startTime);
         return true;
     }
 
@@ -45,6 +42,8 @@ public class UrlLogInterceptor implements HandlerInterceptor {
                            @NonNull HttpServletResponse response,
                            @NonNull Object handler,
                            ModelAndView modelAndView) {
+        long endTime = System.currentTimeMillis();
+        request.setAttribute("endTime", endTime);
     }
 
     @Override
@@ -52,16 +51,16 @@ public class UrlLogInterceptor implements HandlerInterceptor {
                                 @NonNull HttpServletResponse response,
                                 @NonNull Object handler,
                                 Exception ex) {
-        endTime = System.currentTimeMillis();
-
-        Long execTime = this.endTime - this.startTime;
+        long startTime = (long) request.getAttribute("startTime");
+        long endTime = (long) request.getAttribute("endTime");
+        long execTime = endTime - startTime;
 
         log.info("URL - [{}] - [{}] - [{}]", request.getRequestURI(), execTime, ServletUtils.getHost());
         try {
             UrlLogDto dto = new UrlLogDto();
             dto.setPath(request.getRequestURI());
-            dto.setStartTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(this.startTime), ZoneOffset.systemDefault()));
-            dto.setEndTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(this.endTime), ZoneOffset.systemDefault()));
+            dto.setStartTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime), ZoneOffset.systemDefault()));
+            dto.setEndTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneOffset.systemDefault()));
             dto.setExecTime(execTime);
             logStore.saveUrlLog(dto);
         } catch (Exception e) {

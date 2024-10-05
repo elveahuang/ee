@@ -5,7 +5,6 @@ import cc.elvea.platform.commons.core.log.interceptor.UrlLogInterceptor;
 import cc.elvea.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.elvea.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +22,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ConditionalOnProperty(prefix = WebProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WebAutoConfiguration implements WebMvcConfigurer {
 
-    private LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory;
+    private final LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory;
 
-    private StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory;
+    private final StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory;
 
-    private UrlLogInterceptor urlLogInterceptor;
+    private final UrlLogInterceptor urlLogInterceptor;
 
-    public WebAutoConfiguration() {
+    public WebAutoConfiguration(LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory, StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory, UrlLogInterceptor urlLogInterceptor) {
         log.info("WebAutoConfiguration is enabled.");
+        this.legacyDateTimeAnnotationFormatterFactory = legacyDateTimeAnnotationFormatterFactory;
+        this.standardDateTimeAnnotationFormatterFactory = standardDateTimeAnnotationFormatterFactory;
+        this.urlLogInterceptor = urlLogInterceptor;
     }
 
     @Override
@@ -42,21 +44,6 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatterForFieldAnnotation(legacyDateTimeAnnotationFormatterFactory);
         registry.addFormatterForFieldAnnotation(standardDateTimeAnnotationFormatterFactory);
-    }
-
-    @Autowired
-    public void setLegacyDateTimeAnnotationFormatterFactory(LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory) {
-        this.legacyDateTimeAnnotationFormatterFactory = legacyDateTimeAnnotationFormatterFactory;
-    }
-
-    @Autowired
-    public void setStandardDateTimeAnnotationFormatterFactory(StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory) {
-        this.standardDateTimeAnnotationFormatterFactory = standardDateTimeAnnotationFormatterFactory;
-    }
-
-    @Autowired
-    public void setUrlLogInterceptor(UrlLogInterceptor urlLogInterceptor) {
-        this.urlLogInterceptor = urlLogInterceptor;
     }
 
 }
