@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.data.jpa.id;
 
-import cc.elvea.platform.commons.sequence.SequenceManager;
+import cc.elvea.platform.commons.core.sequence.SequenceManager;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;

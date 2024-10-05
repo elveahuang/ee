@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.sequence;
 
 import cc.elvea.platform.BaseTests;
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

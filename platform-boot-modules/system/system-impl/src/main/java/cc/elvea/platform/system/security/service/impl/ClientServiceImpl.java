@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKey;
+import cc.elvea.platform.commons.core.cache.CacheKey;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;
@@ -51,7 +51,7 @@ public class ClientServiceImpl extends BaseCachingEntityService<ClientEntity, Lo
         return getCacheService().get(cacheKey, k -> {
             Specification<ClientEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(ClientEntity_.clientId), clientId));
+                predicates.add(builder.equal(root.get(ClientEntity_.CLIENT_ID), clientId));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

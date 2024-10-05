@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.log.service.impl;
 
+import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.commons.logging.domain.OperationLogDto;
 import cc.elvea.platform.commons.message.amqp.AbstractAmqpService;
 import cc.elvea.platform.system.log.model.converter.OperationLogConverter;
 import cc.elvea.platform.system.log.model.entity.OperationLogEntity;

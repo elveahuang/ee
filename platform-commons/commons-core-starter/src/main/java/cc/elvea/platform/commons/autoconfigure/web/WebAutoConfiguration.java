@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.autoconfigure.web;
 
 import cc.elvea.platform.commons.autoconfigure.web.properties.WebProperties;
+import cc.elvea.platform.commons.core.log.interceptor.UrlLogInterceptor;
 import cc.elvea.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.elvea.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -25,8 +27,15 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
 
     private StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory;
 
+    private UrlLogInterceptor urlLogInterceptor;
+
     public WebAutoConfiguration() {
         log.info("WebAutoConfiguration is enabled.");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(this.urlLogInterceptor);
     }
 
     @Override
@@ -43,6 +52,11 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     @Autowired
     public void setStandardDateTimeAnnotationFormatterFactory(StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory) {
         this.standardDateTimeAnnotationFormatterFactory = standardDateTimeAnnotationFormatterFactory;
+    }
+
+    @Autowired
+    public void setUrlLogInterceptor(UrlLogInterceptor urlLogInterceptor) {
+        this.urlLogInterceptor = urlLogInterceptor;
     }
 
 }

@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.data.elasticsearch.callback;
 
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import cc.elvea.platform.commons.data.domain.IdEntity;
-import cc.elvea.platform.commons.sequence.Sequence;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.Ordered;
 import org.springframework.data.elasticsearch.core.event.BeforeConvertCallback;

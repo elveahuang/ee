@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.log.api.impl;
 
+import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
+import cc.elvea.platform.commons.core.log.domain.UrlLogDto;
 import cc.elvea.platform.commons.extensions.captcha.domain.CaptchaLogDto;
-import cc.elvea.platform.commons.logging.domain.OperationLogDto;
-import cc.elvea.platform.commons.logging.domain.UrlLogDto;
 import cc.elvea.platform.system.log.api.LogApi;
 import cc.elvea.platform.system.log.service.CaptchaLogAmqpService;
 import cc.elvea.platform.system.log.service.OperationLogAmqpService;
@@ -27,7 +27,7 @@ public class LogApiImpl implements LogApi {
     private final UrlLogAmqpService urlLogAmqpService;
 
     @Override
-    public void saveLogLog(UrlLogDto captchaLog) throws Exception {
+    public void saveUrlLogLog(UrlLogDto captchaLog) throws Exception {
         this.urlLogAmqpService.send(captchaLog);
     }
 

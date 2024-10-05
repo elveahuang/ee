@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.oapis.lark.cache;
 
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;

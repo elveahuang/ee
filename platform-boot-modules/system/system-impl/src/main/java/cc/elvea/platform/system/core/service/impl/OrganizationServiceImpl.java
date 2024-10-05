@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
-import cc.elvea.platform.commons.cache.SimpleCacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
 import cc.elvea.platform.system.commons.enums.EntityRelationTypeEnum;
@@ -82,7 +82,7 @@ public class OrganizationServiceImpl extends BaseCachingEntityService<Organizati
     public OrganizationEntity getRootOrganization() {
         Specification<OrganizationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(OrganizationEntity_.rootInd), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(OrganizationEntity_.ROOT_IND), Boolean.TRUE));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findOne(specification).orElse(null);
@@ -95,7 +95,7 @@ public class OrganizationServiceImpl extends BaseCachingEntityService<Organizati
     public OrganizationEntity getDefaultOrganization() {
         Specification<OrganizationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(OrganizationEntity_.defaultInd), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(OrganizationEntity_.DEFAULT_IND), Boolean.TRUE));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findOne(specification).orElse(null);

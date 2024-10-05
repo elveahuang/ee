@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.core.cache.RoleAuthorityCacheKeyGenerator;
@@ -40,7 +40,7 @@ public class RoleAuthorityServiceImpl extends BaseCachingEntityService<RoleAutho
         List<RoleAuthorityEntity> entityList = null;
         if (CollectionUtils.isNotEmpty(roleIdList)) {
             Specification<RoleAuthorityEntity> specification = (root, query, builder) ->
-                    builder.and(root.get(RoleAuthorityEntity_.roleId).in(roleIdList));
+                    builder.and(root.get(RoleAuthorityEntity_.ROLE_ID).in(roleIdList));
             entityList = this.repository.findAll(specification);
         }
         return CollectionUtils.isNotEmpty(entityList) ? entityList : Collections.emptyList();

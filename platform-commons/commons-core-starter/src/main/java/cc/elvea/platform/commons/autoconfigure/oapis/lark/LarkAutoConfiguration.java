@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.autoconfigure.oapis.lark;
 
 import cc.elvea.platform.commons.autoconfigure.oapis.lark.properties.LarkProperties;
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.oapis.lark.cache.Cache;
 import cc.elvea.platform.commons.oapis.lark.cache.RedisCache;
 import cc.elvea.platform.commons.oapis.lark.config.AppConfig;

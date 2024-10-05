@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.log.api;
 
+import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
+import cc.elvea.platform.commons.core.log.domain.UrlLogDto;
 import cc.elvea.platform.commons.extensions.captcha.domain.CaptchaLogDto;
-import cc.elvea.platform.commons.logging.domain.OperationLogDto;
-import cc.elvea.platform.commons.logging.domain.UrlLogDto;
 
 /**
  * @author elvea
@@ -10,7 +10,7 @@ import cc.elvea.platform.commons.logging.domain.UrlLogDto;
  */
 public interface LogApi {
 
-    void saveLogLog(UrlLogDto captchaLog) throws Exception;
+    void saveUrlLogLog(UrlLogDto captchaLog) throws Exception;
 
     void saveCaptchaLog(CaptchaLogDto captchaLog) throws Exception;
 

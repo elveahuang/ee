@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 import static cc.elvea.platform.commons.constants.SecurityConstants.*;
-import static cc.elvea.platform.commons.storage.domain.FileParameter.withDefault;
+import static cc.elvea.platform.commons.core.storage.domain.FileParameter.withDefault;
 
 /**
  * @author elvea

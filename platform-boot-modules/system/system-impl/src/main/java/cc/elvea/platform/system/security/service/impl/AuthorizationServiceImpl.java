@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKey;
+import cc.elvea.platform.commons.core.cache.CacheKey;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
@@ -36,7 +36,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
 
     @Override
     public void updateByUuid(AuthorizationEntity entity) {
-        Specification<AuthorizationEntity> spec = (root, query, builder) -> builder.equal(root.get(AuthorizationEntity_.uuid), entity.getUuid());
+        Specification<AuthorizationEntity> spec = (root, query, builder) -> builder.equal(root.get(AuthorizationEntity_.UUID), entity.getUuid());
         List<AuthorizationEntity> entityList = this.repository.findAll(spec);
         if (CollectionUtils.isNotEmpty(entityList)) {
             entityList = entityList.stream().peek((e) -> ObjectUtils.copyNotNullProperties(entity, e)).toList();
@@ -63,7 +63,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(getCacheKeyGenerator().keyByUuid(uuid), k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.uuid), uuid));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.UUID), uuid));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -76,7 +76,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.state), state));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.STATE), state));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -89,7 +89,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.authorizationCodeValue), authorizationCodeValue));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.AUTHORIZATION_CODE_VALUE), authorizationCodeValue));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -102,7 +102,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.oidcIdTokenValue), oidcIdTokenValue));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.OIDC_ID_TOKEN_VALUE), oidcIdTokenValue));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -115,7 +115,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.accessTokenValue), accessTokenValue));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.ACCESS_TOKEN_VALUE), accessTokenValue));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);
@@ -128,7 +128,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationEntity_.refreshTokenValue), refreshTokenValue));
+                predicates.add(builder.equal(root.get(AuthorizationEntity_.REFRESH_TOKEN_VALUE), refreshTokenValue));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

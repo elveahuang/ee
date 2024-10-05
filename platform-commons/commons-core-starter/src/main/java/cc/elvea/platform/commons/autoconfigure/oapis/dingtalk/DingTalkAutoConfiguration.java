@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.autoconfigure.oapis.dingtalk;
 
 import cc.elvea.platform.commons.autoconfigure.oapis.dingtalk.properties.DingTalkProperties;
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.oapis.dingtalk.cache.Cache;
 import cc.elvea.platform.commons.oapis.dingtalk.cache.DefaultCache;
 import cc.elvea.platform.commons.oapis.dingtalk.config.AppConfig;

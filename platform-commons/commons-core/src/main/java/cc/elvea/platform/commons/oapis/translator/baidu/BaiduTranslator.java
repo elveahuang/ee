@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.oapis.translator.baidu;
 
-import cc.elvea.platform.commons.http.utils.ApacheHttpUtils;
+import cc.elvea.platform.commons.core.http.utils.ApacheHttpUtils;
 import cc.elvea.platform.commons.oapis.translator.Translator;
 import cc.elvea.platform.commons.oapis.translator.TranslatorConverter;
 import cc.elvea.platform.commons.utils.CollectionUtils;

@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.keyword.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
-import cc.elvea.platform.commons.cache.SimpleCacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.keyword.model.entity.KeywordEntity;
 import cc.elvea.platform.system.keyword.repository.KeywordRepository;

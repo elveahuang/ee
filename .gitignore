@@ -4,5 +4,6 @@
 build
 target
 logs
+temp
 
 application-local.yml

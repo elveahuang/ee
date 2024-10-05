@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.attachment.cache;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
 import org.jetbrains.annotations.NotNull;
 

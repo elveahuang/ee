@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.log.model.converter;
 
-import cc.elvea.platform.commons.logging.domain.OperationLogDto;
+import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
 import cc.elvea.platform.system.log.model.entity.OperationLogEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

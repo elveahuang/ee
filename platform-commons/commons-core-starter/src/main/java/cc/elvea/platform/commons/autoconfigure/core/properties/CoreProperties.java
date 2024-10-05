@@ -1,9 +1,10 @@
 package cc.elvea.platform.commons.autoconfigure.core.properties;
 
 import cc.elvea.platform.commons.constants.DateTimeConstants;
-import cc.elvea.platform.commons.context.Mode;
+import cc.elvea.platform.commons.core.context.Mode;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -97,6 +98,21 @@ public class CoreProperties implements Serializable {
          * 移动端主页
          */
         private String mobile;
+    }
+
+    /**
+     * @author elvea
+     * @since 24.1.0
+     */
+    @Data
+    @NoArgsConstructor
+    @ConfigurationProperties(LogProperties.PREFIX)
+    public static class LogProperties {
+
+        public static final String PREFIX = "platform.log";
+
+        private boolean enabled = true;
+
     }
 
 }

@@ -44,7 +44,7 @@ public class MessageTemplateTypeServiceImpl
         return getCacheService().get(cacheKeyGenerator.byCode(code), k -> {
             Specification<MessageTemplateTypeEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(MessageTemplateTypeEntity_.code), code));
+                predicates.add(builder.equal(root.get(MessageTemplateTypeEntity_.CODE), code));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

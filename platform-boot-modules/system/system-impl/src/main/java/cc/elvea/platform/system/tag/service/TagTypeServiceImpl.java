@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.tag.service;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;

@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKey;
+import cc.elvea.platform.commons.core.cache.CacheKey;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;
@@ -42,8 +42,8 @@ public class AuthorizationConsentServiceImpl
         return getCacheService().get(cacheKey, k -> {
             Specification<AuthorizationConsentEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(AuthorizationConsentEntity_.clientId), clientId));
-                predicates.add(builder.equal(root.get(AuthorizationConsentEntity_.principalName), principalName));
+                predicates.add(builder.equal(root.get(AuthorizationConsentEntity_.CLIENT_ID), clientId));
+                predicates.add(builder.equal(root.get(AuthorizationConsentEntity_.PRINCIPAL_NAME), principalName));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

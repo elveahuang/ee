@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.data.jpa.service;
 
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepository;
 import cc.elvea.platform.commons.service.CachingEntityService;

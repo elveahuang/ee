@@ -1,8 +1,11 @@
 package cc.elvea.platform.commons.http;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.http.executor.HttpExecutor;
-import cc.elvea.platform.commons.http.executor.HttpGetRequestExecutor;
+import cc.elvea.platform.commons.core.http.HttpConfig;
+import cc.elvea.platform.commons.core.http.HttpManger;
+import cc.elvea.platform.commons.core.http.HttpType;
+import cc.elvea.platform.commons.core.http.executor.HttpExecutor;
+import cc.elvea.platform.commons.core.http.executor.HttpGetRequestExecutor;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

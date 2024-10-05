@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.tag.service;
 
-import cc.elvea.platform.commons.data.core.utils.JdbcUtils;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
+import cc.elvea.platform.commons.utils.JdbcUtils;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.tag.model.entity.TagEntity;

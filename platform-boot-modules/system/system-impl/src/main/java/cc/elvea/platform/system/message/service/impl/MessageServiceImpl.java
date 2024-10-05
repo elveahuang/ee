@@ -36,9 +36,9 @@ public class MessageServiceImpl
             List<Predicate> predicates = Lists.newArrayList();
             if (CollectionUtils.isNotEmpty(statusList)) {
                 List<Integer> statusValueList = statusList.stream().map(MessageStatusEnum::getValue).toList();
-                predicates.add(root.get(MessageEntity_.status).in(statusValueList));
+                predicates.add(root.get(MessageEntity_.STATUS).in(statusValueList));
             }
-            predicates.add(builder.equal(root.get(MessageEntity_.active), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(MessageEntity_.ACTIVE), Boolean.TRUE));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);

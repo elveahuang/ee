@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.cache.service;
 
 import cc.elvea.platform.BaseTests;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import org.junit.jupiter.api.Assertions;
 
 /**

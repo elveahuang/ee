@@ -1,10 +1,10 @@
 package cc.elvea.platform.security.web.authentication;
 
+import cc.elvea.platform.commons.core.security.CustomAuthorizationGrantType;
+import cc.elvea.platform.commons.core.security.CustomParameterNames;
 import cc.elvea.platform.commons.enums.CaptchaTypeEnum;
 import cc.elvea.platform.commons.exception.InvalidCaptchaException;
 import cc.elvea.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
-import cc.elvea.platform.commons.security.CustomAuthorizationGrantType;
-import cc.elvea.platform.commons.security.CustomParameterNames;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.commons.api.CaptchaApi;
 import cc.elvea.platform.system.config.api.ConfigApi;

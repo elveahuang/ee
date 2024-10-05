@@ -1,6 +1,6 @@
 package cc.elvea.platform.auth.config;
 
-import cc.elvea.platform.commons.context.Context;
+import cc.elvea.platform.commons.core.context.Context;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

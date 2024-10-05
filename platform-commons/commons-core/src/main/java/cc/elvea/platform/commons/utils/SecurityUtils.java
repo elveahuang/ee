@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.utils;
 
 import cc.elvea.platform.commons.constants.SecurityConstants;
-import cc.elvea.platform.commons.security.user.User;
+import cc.elvea.platform.commons.core.security.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

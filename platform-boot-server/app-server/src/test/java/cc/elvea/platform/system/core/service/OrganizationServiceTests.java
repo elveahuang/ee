@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.sequence.Sequence;
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import cc.elvea.platform.system.core.model.dto.OrganizationDto;
 import cc.elvea.platform.system.core.model.dto.OrganizationSaveDto;
 import org.junit.jupiter.api.Assertions;

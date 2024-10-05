@@ -2,10 +2,10 @@ package cc.elvea.platform.system.attachment.web.app;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.core.storage.Storage;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.ServiceException;
-import cc.elvea.platform.commons.storage.Storage;
-import cc.elvea.platform.commons.storage.domain.FileObject;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.commons.web.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;

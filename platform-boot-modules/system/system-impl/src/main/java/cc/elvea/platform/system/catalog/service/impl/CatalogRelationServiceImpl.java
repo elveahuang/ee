@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.catalog.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
-import cc.elvea.platform.commons.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.constants.GlobalConstants;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.catalog.model.dto.CatalogRelationSaveDto;

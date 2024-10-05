@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.service.impl;
 
-import cc.elvea.platform.commons.cache.CacheKey;
+import cc.elvea.platform.commons.core.cache.CacheKey;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.mybatis.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;

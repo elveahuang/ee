@@ -1,7 +1,8 @@
 package cc.elvea.platform.system.configuration;
 
-import cc.elvea.platform.commons.logging.store.LogStore;
-import cc.elvea.platform.system.commons.interceptor.LogInterceptor;
+import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
+import cc.elvea.platform.commons.core.log.domain.UrlLogDto;
+import cc.elvea.platform.commons.core.log.store.LogStore;
 import cc.elvea.platform.system.log.api.LogApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -15,20 +16,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SystemLogConfiguration {
 
-    /**
-     * 日志存储
-     */
     @Bean
     public LogStore logStore(LogApi logApi) {
-        return logApi::saveOperationLog;
-    }
+        return new LogStore() {
+            @Override
+            public void saveOperationLog(OperationLogDto dto) throws Exception {
+                logApi.saveOperationLog(dto);
+            }
 
-    /**
-     * 日志拦截器
-     */
-    @Bean
-    public LogInterceptor logInterceptor() {
-        return new LogInterceptor();
+            @Override
+            public void saveUrlLog(UrlLogDto dto) throws Exception {
+                logApi.saveUrlLogLog(dto);
+            }
+
+        };
     }
 
 }

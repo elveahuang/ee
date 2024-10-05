@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.job.task;
 
-import cc.elvea.platform.commons.job.quartz.QuartzJob;
+import cc.elvea.platform.commons.core.quartz.QuartzJob;
 import lombok.extern.slf4j.Slf4j;
 
 

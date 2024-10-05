@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.announcement.service;
 
-import cc.elvea.platform.commons.sequence.Sequence;
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import cc.elvea.platform.commons.utils.StopWatchUtils;
 import cc.elvea.platform.system.BaseTests;
 import cc.elvea.platform.system.announcement.domain.entity.AnnouncementEntity;

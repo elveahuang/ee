@@ -1,8 +1,8 @@
 package cc.elvea.platform.commons.extensions.captcha.store;
 
-import cc.elvea.platform.commons.cache.CacheKeyGenerator;
-import cc.elvea.platform.commons.cache.SimpleCacheKeyGenerator;
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.extensions.captcha.Captcha;
 
 import java.time.Duration;

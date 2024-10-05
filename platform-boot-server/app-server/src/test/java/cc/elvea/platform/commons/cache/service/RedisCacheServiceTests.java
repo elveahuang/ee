@@ -1,5 +1,7 @@
 package cc.elvea.platform.commons.cache.service;
 
+import cc.elvea.platform.commons.core.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.RedisCacheService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

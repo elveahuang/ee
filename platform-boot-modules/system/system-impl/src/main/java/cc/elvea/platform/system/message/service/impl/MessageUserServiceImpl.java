@@ -34,7 +34,7 @@ public class MessageUserServiceImpl
     public List<MessageUserEntity> findByMessage(Long messageId) {
         Specification<MessageUserEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(MessageUserEntity_.messageId), messageId));
+            predicates.add(builder.equal(root.get(MessageUserEntity_.MESSAGE_ID), messageId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification);

@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.oapis.weixin.storage;
 
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import me.chanjar.weixin.common.bean.WxAccessToken;

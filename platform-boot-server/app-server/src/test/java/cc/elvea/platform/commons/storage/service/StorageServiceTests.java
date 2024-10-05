@@ -1,11 +1,11 @@
 package cc.elvea.platform.commons.storage.service;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.sequence.Sequence;
-import cc.elvea.platform.commons.storage.Storage;
-import cc.elvea.platform.commons.storage.domain.FileObject;
-import cc.elvea.platform.commons.storage.min.MinStorageService;
-import cc.elvea.platform.commons.storage.oss.OssStorageService;
+import cc.elvea.platform.commons.core.sequence.Sequence;
+import cc.elvea.platform.commons.core.storage.Storage;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
+import cc.elvea.platform.commons.core.storage.min.MinStorageService;
+import cc.elvea.platform.commons.core.storage.oss.OssStorageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

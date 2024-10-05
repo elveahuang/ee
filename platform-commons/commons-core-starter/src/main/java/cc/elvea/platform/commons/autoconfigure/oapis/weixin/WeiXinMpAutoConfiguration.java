@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.autoconfigure.oapis.weixin;
 
 import cc.elvea.platform.commons.autoconfigure.oapis.weixin.properties.WeiXinMpProperties;
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.oapis.weixin.config.AppMpConfig;
 import cc.elvea.platform.commons.oapis.weixin.service.WeiXinMpService;
 import cc.elvea.platform.commons.oapis.weixin.service.impl.WeiXinMpServiceImpl;

@@ -1,8 +1,8 @@
 package cc.elvea.platform.commons.autoconfigure.core;
 
 import cc.elvea.platform.commons.autoconfigure.core.properties.RateLimitProperties;
-import cc.elvea.platform.commons.cache.aspect.RateLimitAspect;
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.aspect.RateLimitAspect;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

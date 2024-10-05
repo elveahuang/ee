@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.oapis.weixin.service.impl;
 
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.oapis.weixin.config.AppMaConfig;
 import cc.elvea.platform.commons.oapis.weixin.service.WeiXinMaService;
 import cc.elvea.platform.commons.oapis.weixin.storage.WxMaCacheConfigStorage;

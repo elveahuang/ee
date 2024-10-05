@@ -41,7 +41,7 @@ public class MessageTypeServiceImpl
         return getCacheService().get(cacheKeyGenerator.byCode(code), k -> {
             Specification<MessageTypeEntity> specification = (root, query, builder) -> {
                 List<Predicate> predicates = Lists.newArrayList();
-                predicates.add(builder.equal(root.get(MessageTypeEntity_.code), code));
+                predicates.add(builder.equal(root.get(MessageTypeEntity_.CODE), code));
                 return builder.and(predicates.toArray(new Predicate[0]));
             };
             return this.repository.findOne(specification).orElse(null);

@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.data.mybatis.id;
 
-import cc.elvea.platform.commons.sequence.SequenceManager;
+import cc.elvea.platform.commons.core.sequence.SequenceManager;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 
 /**

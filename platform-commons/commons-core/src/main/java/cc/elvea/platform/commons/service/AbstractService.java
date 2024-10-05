@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.service;
 
-import cc.elvea.platform.commons.sequence.Sequence;
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

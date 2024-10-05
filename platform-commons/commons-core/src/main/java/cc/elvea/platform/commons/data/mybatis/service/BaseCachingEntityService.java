@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.data.mybatis.service;
 
-import cc.elvea.platform.commons.cache.service.CacheService;
+import cc.elvea.platform.commons.core.cache.service.CacheService;
 import cc.elvea.platform.commons.data.domain.IdEntity;
 import cc.elvea.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.elvea.platform.commons.service.CachingEntityService;

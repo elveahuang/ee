@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.job.service.impl;
 
+import cc.elvea.platform.commons.core.quartz.QuartzJobInfo;
+import cc.elvea.platform.commons.core.quartz.QuartzJobManager;
+import cc.elvea.platform.commons.core.quartz.QuartzJobScheduleType;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.commons.job.quartz.QuartzJobInfo;
-import cc.elvea.platform.commons.job.quartz.QuartzJobManager;
-import cc.elvea.platform.commons.job.quartz.QuartzJobScheduleType;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.job.model.entity.JobEntity;
 import cc.elvea.platform.system.job.repository.JobRepository;

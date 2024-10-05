@@ -35,8 +35,8 @@ public class NoticeServiceImpl
         request.setUserId(SecurityUtils.getUid());
         Specification<NoticeEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = org.apache.commons.compress.utils.Lists.newArrayList();
-            predicates.add(builder.equal(root.get(NoticeEntity_.recipientId), request.getUserId()));
-            predicates.add(builder.equal(root.get(NoticeEntity_.active), Boolean.TRUE));
+            predicates.add(builder.equal(root.get(NoticeEntity_.RECIPIENT_ID), request.getUserId()));
+            predicates.add(builder.equal(root.get(NoticeEntity_.ACTIVE), Boolean.TRUE));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findAll(specification, request.getPageable());
@@ -47,7 +47,7 @@ public class NoticeServiceImpl
         Specification<NoticeEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = org.apache.commons.compress.utils.Lists.newArrayList();
             if (request.getUserId() != null && request.getUserId() > 0) {
-                predicates.add(builder.equal(root.get(NoticeEntity_.recipientId), request.getUserId()));
+                predicates.add(builder.equal(root.get(NoticeEntity_.RECIPIENT_ID), request.getUserId()));
             }
             return builder.and(predicates.toArray(new Predicate[0]));
         };

@@ -1,8 +1,9 @@
 package cc.elvea.platform.commons.data.core;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.sequence.Sequence;
+import cc.elvea.platform.commons.core.sequence.Sequence;
 import cc.elvea.platform.commons.utils.StopWatchUtils;
+import cc.elvea.platform.commons.utils.jdbc.Dao;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.Lists;
 import org.junit.jupiter.api.Assertions;

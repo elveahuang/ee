@@ -4,11 +4,15 @@ import cc.elvea.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.elvea.platform.commons.web.i18n.CustomLocaleResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.LocaleResolver;
 
 /**
@@ -29,6 +33,14 @@ public class WebCoreAutoConfiguration {
     @Bean
     public LocaleResolver localeResolver() {
         return new CustomLocaleResolver();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
     }
 
 }
