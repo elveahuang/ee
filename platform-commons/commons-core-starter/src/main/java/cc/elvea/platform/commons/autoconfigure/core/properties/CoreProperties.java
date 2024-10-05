@@ -1,7 +1,6 @@
 package cc.elvea.platform.commons.autoconfigure.core.properties;
 
 import cc.elvea.platform.commons.constants.DateTimeConstants;
-import cc.elvea.platform.commons.core.context.Mode;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,11 +19,6 @@ import java.time.ZoneId;
 public class CoreProperties implements Serializable {
 
     public static final String PREFIX = "platform";
-
-    /**
-     * 模式
-     */
-    private Mode mode = Mode.Production;
 
     /**
      * 调试模式

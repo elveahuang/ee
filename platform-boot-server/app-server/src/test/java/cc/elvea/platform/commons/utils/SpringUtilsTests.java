@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.utils;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.core.context.Context;
+import cc.elvea.platform.commons.core.Context;
 import cc.elvea.platform.commons.core.sequence.Sequence;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

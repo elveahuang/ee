@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.autoconfigure.core;
 
 import cc.elvea.platform.commons.autoconfigure.core.properties.CoreProperties;
-import cc.elvea.platform.commons.core.context.Context;
+import cc.elvea.platform.commons.core.Context;
 import cc.elvea.platform.commons.extensions.i18n.DefaultLanguageResolver;
 import cc.elvea.platform.commons.extensions.i18n.LanguageResolver;
 import cc.elvea.platform.commons.utils.SpringUtils;
@@ -52,7 +52,6 @@ public class CoreAutoConfiguration {
                 .debugEnabled(properties.getDebug().isEnabled())
                 .amqpEnabled(properties.getAmqp().isEnabled())
                 .home(home)
-                .mode(properties.getMode())
                 .build();
     }
 

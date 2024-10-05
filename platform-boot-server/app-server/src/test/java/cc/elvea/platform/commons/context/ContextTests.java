@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.context;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.commons.core.context.Context;
+import cc.elvea.platform.commons.core.Context;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

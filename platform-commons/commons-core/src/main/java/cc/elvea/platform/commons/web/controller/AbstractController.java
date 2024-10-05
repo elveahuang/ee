@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.web.controller;
 
-import cc.elvea.platform.commons.core.context.Context;
+import cc.elvea.platform.commons.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

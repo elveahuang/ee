@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.message.amqp;
 
-import cc.elvea.platform.commons.core.context.Context;
+import cc.elvea.platform.commons.core.Context;
 import cc.elvea.platform.commons.service.AbstractService;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import lombok.extern.slf4j.Slf4j;
