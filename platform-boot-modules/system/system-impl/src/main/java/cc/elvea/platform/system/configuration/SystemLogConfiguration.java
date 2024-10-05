@@ -28,7 +28,6 @@ public class SystemLogConfiguration {
             public void saveUrlLog(UrlLogDto dto) throws Exception {
                 logApi.saveUrlLogLog(dto);
             }
-
         };
     }
 

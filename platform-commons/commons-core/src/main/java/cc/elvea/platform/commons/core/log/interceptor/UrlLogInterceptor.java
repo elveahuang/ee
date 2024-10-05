@@ -6,6 +6,7 @@ import cc.elvea.platform.commons.core.log.store.LogStore;
 import cc.elvea.platform.commons.utils.ServletUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,13 +21,10 @@ import java.time.ZoneOffset;
  * @since 24.1.0
  */
 @Slf4j
+@AllArgsConstructor
 public class UrlLogInterceptor implements HandlerInterceptor {
 
     private final LogStore logStore;
-
-    public UrlLogInterceptor(LogStore logStore) {
-        this.logStore = logStore;
-    }
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request,

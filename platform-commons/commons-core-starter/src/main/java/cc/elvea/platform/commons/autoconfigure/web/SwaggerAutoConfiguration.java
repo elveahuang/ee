@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,21 +22,16 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration {
 
-    private final SwaggerProperties properties;
-
-    public SwaggerAutoConfiguration(SwaggerProperties properties) {
-        this.properties = properties;
+    public SwaggerAutoConfiguration() {
         log.info("SwaggerAutoConfiguration is enabled.");
     }
 
     @Bean
-    public OpenAPI openAPI() {
+    @ConditionalOnMissingBean
+    public OpenAPI openAPI(SwaggerProperties properties) {
         return new OpenAPI()
-                .components(
-                        new Components().addSecuritySchemes("basicScheme",
-                                new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
-                .info(new Info()
-                        .title(properties.getTitle())
+                .components(new Components().addSecuritySchemes("basicScheme", new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
+                .info(new Info().title(properties.getTitle())
                         .version(properties.getVersion())
                         .description(properties.getDescription()));
     }

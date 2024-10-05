@@ -9,6 +9,7 @@ plugins {
     id("application")
     id("java-library")
     id("io.spring.dependency-management") version "1.1.6"
+    id("com.github.spotbugs") version "6.0.23" apply false
     id("org.springframework.boot") version "3.3.4" apply false
     id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
     id("org.graalvm.buildtools.native") version "0.10.3" apply false
@@ -66,12 +67,12 @@ allprojects {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.2")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.3")
-            mavenBom("io.grpc:grpc-bom:1.66.0")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.4")
+            mavenBom("io.grpc:grpc-bom:1.68.0")
             mavenBom("cn.hutool:hutool-bom:5.8.32")
             mavenBom("me.ahoo.cosid:cosid-bom:2.9.8")
-            mavenBom("org.mockito:mockito-bom:5.13.0")
-            mavenBom("io.netty:netty-bom:4.1.113.Final")
+            mavenBom("org.mockito:mockito-bom:5.14.1")
+            mavenBom("io.netty:netty-bom:4.1.114.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.23")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.8")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
@@ -99,9 +100,9 @@ allprojects {
             dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
             dependency("org.mybatis.generator:mybatis-generator-core:1.4.2")
             dependency("com.github.jsqlparser:jsqlparser:5.0")
-            dependency("org.redisson:redisson:3.36.0")
-            dependency("org.redisson:redisson-spring-data-33:3.36.0")
-            dependency("org.redisson:redisson-spring-boot-starter:3.36.0")
+            dependency("org.redisson:redisson:3.37.0")
+            dependency("org.redisson:redisson-spring-data-33:3.37.0")
+            dependency("org.redisson:redisson-spring-boot-starter:3.37.0")
             dependency("org.apache.shardingsphere:shardingsphere-jdbc:5.5.0")
             // others
             dependency("com.nimbusds:nimbus-jose-jwt:9.41.1")
@@ -115,7 +116,7 @@ allprojects {
             dependency("com.maxmind.geoip2:geoip2:4.2.0")
             dependency("org.lionsoul:ip2region:2.7.0")
             dependency("com.squareup.okio:okio:3.9.1")
-            dependency("com.google.guava:guava:33.3.0-jre")
+            dependency("com.google.guava:guava:33.3.1-jre")
             dependency("joda-time:joda-time:2.13.0")
             dependency("com.github.oshi:oshi-core-java11:6.6.4")
             dependency("net.java.dev.jna:jna-platform:5.15.0")
