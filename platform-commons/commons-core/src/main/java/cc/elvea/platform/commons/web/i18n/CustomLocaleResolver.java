@@ -9,8 +9,6 @@ import org.springframework.web.servlet.LocaleResolver;
 import java.util.Locale;
 
 /**
- * 全局异常处理器
- *
  * @author elvea
  * @since 24.1.0
  */

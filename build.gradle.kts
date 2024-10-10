@@ -61,9 +61,7 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.4")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.4")
-            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.3")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
             mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:2023.0.1.2")
             mavenBom("com.tencent.cloud:spring-cloud-tencent-dependencies:1.13.2-2023.0.0")
@@ -76,7 +74,9 @@ allprojects {
             mavenBom("org.apache.groovy:groovy-bom:4.0.23")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.8")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
-            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M2")
+            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M3")
+            mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.4")
+            mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.3")
         }
         dependencies {
             // spring authorization server
@@ -180,13 +180,13 @@ allprojects {
             dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.1")
             dependency("com.alipay.sdk:alipay-sdk-java:4.39.208.ALL")
             dependency("com.qcloud:cos_api:5.6.231")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1105")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1118")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.977")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1103")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1111")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1104")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.978")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1106")
-            dependency("com.larksuite.oapi:oapi-sdk:2.3.4")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1110")
+            dependency("com.larksuite.oapi:oapi-sdk:2.3.5")
             // commons
             dependency("commons-io:commons-io:2.17.0")
             dependency("commons-cli:commons-cli:1.9.0")
@@ -195,7 +195,7 @@ allprojects {
             dependency("commons-beanutils:commons-beanutils:1.9.4")
             dependency("org.apache.commons:commons-pool2:2.12.0")
             dependency("org.apache.commons:commons-email:1.6.0")
-            dependency("org.apache.commons:commons-csv:1.11.0")
+            dependency("org.apache.commons:commons-csv:1.12.0")
             dependency("org.apache.commons:commons-text:1.12.0")
             dependency("org.apache.commons:commons-lang3:3.17.0")
             dependency("org.apache.commons:commons-compress:1.27.1")

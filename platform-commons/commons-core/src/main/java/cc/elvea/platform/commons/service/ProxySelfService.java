@@ -1,5 +1,6 @@
 package cc.elvea.platform.commons.service;
 
+import cc.elvea.platform.commons.exception.SystemException;
 import cc.elvea.platform.commons.utils.GenericsUtils;
 import cc.elvea.platform.commons.utils.SpringUtils;
 
@@ -24,9 +25,8 @@ public interface ProxySelfService<T> {
         try {
             return SpringUtils.getBean(this.getServiceClass());
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new SystemException("Failed to getInstance.", e);
         }
-        return null;
     }
 
     /**

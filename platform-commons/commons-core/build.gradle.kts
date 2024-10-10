@@ -34,9 +34,9 @@ dependencies {
     api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     api("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     // hibernate & redis & cache & mybatis
-    api("com.baomidou:mybatis-plus-annotation")
-    api("org.mybatis:mybatis")
-    api("org.hibernate.orm:hibernate-core")
+    compileOnly("com.baomidou:mybatis-plus-annotation")
+    compileOnly("org.mybatis:mybatis")
+    compileOnly("org.hibernate.orm:hibernate-core")
     compileOnly("org.redisson:redisson")
     compileOnly("me.ahoo.cosid:cosid-spring-redis")
     compileOnly("org.mybatis:mybatis-spring")

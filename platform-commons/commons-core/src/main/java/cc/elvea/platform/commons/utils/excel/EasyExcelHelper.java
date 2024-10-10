@@ -1,7 +1,7 @@
-package cc.elvea.platform.commons.extensions.excel;
+package cc.elvea.platform.commons.utils.excel;
 
-import cc.elvea.platform.commons.extensions.excel.data.AbstractExcelData;
-import cc.elvea.platform.commons.extensions.excel.listener.ReadWithExtraListener;
+import cc.elvea.platform.commons.utils.excel.data.AbstractExcelData;
+import cc.elvea.platform.commons.utils.excel.listener.ReadWithExtraListener;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.annotation.ExcelProperty;

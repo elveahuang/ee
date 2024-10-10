@@ -1,6 +1,5 @@
 package cc.elvea.platform.commons.utils;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

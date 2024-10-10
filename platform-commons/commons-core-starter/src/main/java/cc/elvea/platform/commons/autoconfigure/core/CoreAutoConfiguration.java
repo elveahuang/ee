@@ -32,12 +32,15 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class CoreAutoConfiguration {
 
     public CoreAutoConfiguration() {
-        log.info("CommonsAutoConfiguration is enabled.");
+        log.info("CoreAutoConfiguration is enabled.");
     }
 
-    /**
-     * @return {@link Context}
-     */
+    @Bean
+    @ConditionalOnMissingBean
+    public SpringUtils springUtils() {
+        return new SpringUtils();
+    }
+
     @Bean(name = "context")
     @ConditionalOnMissingBean
     public Context Context(CoreProperties properties) {
@@ -47,7 +50,6 @@ public class CoreAutoConfiguration {
                 .mobile(StringUtils.isNotEmpty(properties.getHome().getMobile()) ? properties.getHome().getMobile() : "")
                 .main(StringUtils.isNotEmpty(properties.getHome().getMain()) ? properties.getHome().getMain() : "")
                 .build();
-
         return Context.builder()
                 .debugEnabled(properties.getDebug().isEnabled())
                 .amqpEnabled(properties.getAmqp().isEnabled())
@@ -55,64 +57,44 @@ public class CoreAutoConfiguration {
                 .build();
     }
 
-    /**
-     * @return {@link SpringUtils}
-     */
-    @Bean
-    @ConditionalOnMissingBean
-    public SpringUtils springUtils() {
-        return new SpringUtils();
-    }
+    // ------------------------------------------------------------------------------------------------------------------------
+    // 时区和日期
+    // ------------------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @return {@link TimeZoneResolver}
-     */
     @Bean
     @ConditionalOnMissingBean
     public TimeZoneResolver timeZoneResolver(CoreProperties properties) {
         return new DefaultTimeZoneResolver(properties.getUserZoneId(), properties.getSystemZoneId());
     }
 
-    /**
-     * @return {@link LegacyDateTimeAnnotationFormatterFactory}
-     */
     @Bean
     @ConditionalOnMissingBean
     public LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory(TimeZoneResolver timeZoneResolver) {
         return new LegacyDateTimeAnnotationFormatterFactory(timeZoneResolver);
     }
 
-    /**
-     * @return {@link StandardDateTimeAnnotationFormatterFactory}
-     */
     @Bean
     @ConditionalOnMissingBean
     public StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory(TimeZoneResolver timeZoneResolver) {
         return new StandardDateTimeAnnotationFormatterFactory(timeZoneResolver);
     }
 
-    /**
-     * @return {@link LanguageResolver}
-     */
     @Bean
     @ConditionalOnMissingBean
     public LanguageResolver languageResolver(CoreProperties properties) {
         return new DefaultLanguageResolver(properties.getLanguage());
     }
 
-    /**
-     * Jackson Customizer
-     */
+    // ------------------------------------------------------------------------------------------------------------------------
+    // Jackson
+    // ------------------------------------------------------------------------------------------------------------------------
+
     @Bean
     public CustomObjectMapperBuilderCustomizer objectMapperBuilderCustomizer() {
         return new CustomObjectMapperBuilderCustomizer();
     }
 
-    /**
-     * CustomObjectMapperBuilderCustomizer
-     */
     public static class CustomObjectMapperBuilderCustomizer implements Jackson2ObjectMapperBuilderCustomizer, Ordered {
-
         @Override
         public void customize(Jackson2ObjectMapperBuilder builder) {
             builder.modulesToInstall(new JavaTimeModule());
@@ -124,7 +106,6 @@ public class CoreAutoConfiguration {
         public int getOrder() {
             return 1;
         }
-
     }
 
 }
