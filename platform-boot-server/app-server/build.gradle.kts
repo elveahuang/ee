@@ -69,15 +69,19 @@ graalvmNative {
         named("main") {
             buildArgs.add("--initialize-at-build-time=org.slf4j")
             buildArgs.add("--initialize-at-build-time=ch.qos.logback")
+            buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory")
             buildArgs.add("--initialize-at-run-time=sun.net.dns.ResolverConfigurationImpl")
             buildArgs.add("--initialize-at-run-time=me.ahoo.cosid.spring.redis.SpringRedisMachineIdDistributor")
             buildArgs.add("--initialize-at-run-time=me.ahoo.cosid.machine.ManualMachineIdDistributor")
             buildArgs.add("--trace-class-initialization=org.springframework.util.ClassUtils")
+            buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
             buildArgs.add("-H:+ReportExceptionStackTraces")
             buildArgs.add("-H:+UnlockExperimentalVMOptions")
             buildArgs.add("-H:+PrintClassInitialization")
-            sharedLibrary.set(false)
+            verbose.set(true)
+            fallback.set(false)
             quickBuild.set(true)
+            sharedLibrary.set(false)
             imageName.set("app")
         }
     }

@@ -11,7 +11,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
     id("com.github.spotbugs") version "6.0.23" apply false
     id("org.springframework.boot") version "3.3.4" apply false
-    id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.0.21" apply false
     id("org.graalvm.buildtools.native") version "0.10.3" apply false
 }
 
@@ -68,12 +68,12 @@ allprojects {
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.3.4")
             mavenBom("io.grpc:grpc-bom:1.68.0")
             mavenBom("cn.hutool:hutool-bom:5.8.32")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.9.8")
-            mavenBom("org.mockito:mockito-bom:5.14.1")
-            mavenBom("io.netty:netty-bom:4.1.114.Final")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.9.9")
+            mavenBom("org.mockito:mockito-bom:5.11.0")
+            mavenBom("io.netty:netty-bom:4.1.113.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.23")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.8")
-            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.20")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.0.21")
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M3")
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.2.4")
             mavenBom("org.springframework.shell:spring-shell-dependencies:3.3.3")
@@ -205,11 +205,19 @@ allprojects {
             dependency("org.webjars:popper.js:2.11.7")
             dependency("org.webjars:bootstrap:5.3.3")
             dependency("org.webjars.npm:bootstrap-icons:1.11.3")
+            // 辅助用于排除重复的依赖
+            dependency("org.antlr:antlr4-runtime:4.13.2")
+            dependency("org.apache.httpcomponents:httpcore:4.4.16")
+            dependency("org.apache.httpcomponents:httpcore-nio:4.4.16")
+            dependency("org.apache.httpcomponents:httpmime:4.5.14")
+            dependency("org.apache.httpcomponents:httpclient:4.5.14")
         }
     }
 
     // 强制排除未使用的库
     configurations.configureEach {
+        exclude(module = "groovy")
+        exclude(module = "groovy-json")
         exclude(module = "android-json")
         exclude(module = "commons-logging")
         exclude(module = "commons-dbcp")
@@ -229,7 +237,21 @@ allprojects {
         exclude(module = "bcpkix-jdk15on")
         exclude(module = "bcprov-jdk15on")
         exclude(module = "bcutil-jdk15on")
+        // shardingsphere
         exclude(module = "shardingsphere-test-util")
+        exclude(module = "shardingsphere-infra-expr-groovy")
+        exclude(module = "shardingsphere-infra-database-clickhouse")
+        exclude(module = "shardingsphere-infra-database-mariadb")
+        exclude(module = "shardingsphere-infra-database-sql92")
+        exclude(module = "shardingsphere-infra-database-sqlserver")
+        exclude(module = "shardingsphere-infra-database-oracle")
+        exclude(module = "shardingsphere-infra-database-opengauss")
+        exclude(module = "shardingsphere-infra-database-h2")
+        exclude(module = "shardingsphere-parser-sql-sql92")
+        exclude(module = "shardingsphere-parser-sql-sqlserver")
+        exclude(module = "shardingsphere-parser-sql-oracle")
+        exclude(module = "shardingsphere-parser-sql-opengauss")
+        exclude(module = "shardingsphere-parser-sql-h2")
     }
 }
 

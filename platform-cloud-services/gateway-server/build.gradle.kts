@@ -20,8 +20,6 @@ dependencies {
     implementation("de.codecentric:spring-boot-admin-starter-client")
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    // others
-    implementation("io.netty:netty-all")
     // development & test
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
