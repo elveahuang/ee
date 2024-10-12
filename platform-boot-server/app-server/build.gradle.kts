@@ -42,7 +42,6 @@ dependencies {
     implementation("com.github.binarywang:weixin-java-miniapp")
     implementation("com.aliyun:aliyun-java-sdk-core")
     implementation("com.aliyun:dingtalk")
-    implementation("com.aliyun:imm20170906")
     implementation("com.aliyun:facebody20191230")
     implementation("com.aliyun:dysmsapi20170525")
     implementation("com.aliyun:alimt20181012")

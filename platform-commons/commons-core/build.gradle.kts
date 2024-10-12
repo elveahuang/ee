@@ -57,7 +57,6 @@ dependencies {
     compileOnly("com.github.binarywang:weixin-java-pay")
     compileOnly("com.aliyun:aliyun-java-sdk-core")
     compileOnly("com.aliyun:dingtalk")
-    compileOnly("com.aliyun:imm20170906")
     compileOnly("com.aliyun:facebody20191230")
     compileOnly("com.aliyun:dysmsapi20170525")
     compileOnly("com.aliyun:alimt20181012")

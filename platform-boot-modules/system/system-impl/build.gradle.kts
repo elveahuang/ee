@@ -19,7 +19,6 @@ dependencies {
     api("com.github.binarywang:weixin-java-miniapp")
     api("com.aliyun:aliyun-java-sdk-core")
     api("com.aliyun:dingtalk")
-    api("com.aliyun:imm20170906")
     api("com.aliyun:facebody20191230")
     api("com.aliyun:dysmsapi20170525")
     api("com.aliyun:alimt20181012")
