@@ -17,8 +17,8 @@ dependencies {
     compileOnly("org.springframework.boot:spring-boot-starter-websocket")
     compileOnly("org.springframework.boot:spring-boot-starter-amqp")
     // spring extensions
-    compileOnly("me.ahoo.cosid:cosid-spring-boot-starter")
     compileOnly("com.baomidou:mybatis-plus-boot-starter")
+    compileOnly("me.ahoo.cosid:cosid-spring-boot-starter")
     // hibernate & redis & cache & mybatis
     compileOnly("org.redisson:redisson")
     compileOnly("org.hibernate.orm:hibernate-core")

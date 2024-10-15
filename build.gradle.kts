@@ -81,6 +81,10 @@ allprojects {
         dependencies {
             // spring authorization server
             dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.3.2")
+            // arthas
+            dependency("com.taobao.arthas:arthas-packaging:4.0.1")
+            dependency("com.taobao.arthas:arthas-agent-attach:4.0.1")
+            dependency("com.taobao.arthas:arthas-spring-boot-starter:4.0.1")
             // mapstruct & lombok
             dependency("org.mapstruct:mapstruct:1.6.2")
             dependency("org.mapstruct:mapstruct-processor:1.6.2")
