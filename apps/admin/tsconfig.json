@@ -1,0 +1,27 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@commons/core/*": ["../../commons/core/src/*"],
+            "@commons/mobile/*": ["../../commons/mobile/src/*"],
+            "@commons/webapp/*": ["../../commons/webapp/src/*"],
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": [
+        "./src/**/*.js",
+        "./src/**/*.jsx",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
+        "./src/**/*.d.ts",
+        "./src/**/*.vue",
+        "../commons/*/src/**/*.js",
+        "../commons/*/src/**/*.jsx",
+        "../commons/*/src/**/*.ts",
+        "../commons/*/src/**/*.tsx",
+        "../commons/*/src/**/*.d.ts",
+        "../commons/*/src/**/*.vue"
+    ],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,12 @@
+@use 'variables';
+
+:export {
+    redColor: variables.$redColor;
+    yellowColor: variables.$yellowColor;
+    greenColor: variables.$greenColor;
+    grayColor: variables.$grayColor;
+    blueColor: variables.$blueColor;
+    purpleColor: variables.$purpleColor;
+    whiteColor: variables.$whiteColor;
+    blackColor: variables.$blackColor;
+}

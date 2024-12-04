@@ -1,0 +1,15 @@
+.app-data-table {
+    @apply w-full;
+}
+
+.app-data-table .app-data-table-toolbar {
+    @apply mb-4 w-full;
+}
+
+.app-data-table .app-data-table-body {
+    @apply w-full;
+}
+
+.app-data-table .app-data-table-footer {
+    @apply mt-4 w-full text-center;
+}

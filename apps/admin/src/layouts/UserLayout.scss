@@ -1,0 +1,56 @@
+.app-layout.app-layout-user {
+    @apply h-full min-h-full;
+    background: var(--app-body-bg-color);
+
+    .app-layout-header {
+        @apply flex w-full items-center justify-center;
+        height: var(--app-header-height);
+        background: var(--app-header-bg-color);
+        border-bottom: 1px solid var(--app-border-color);
+        padding-right: var(--app-padding);
+
+        .app-layout-header-container {
+            @apply container flex items-center justify-center;
+
+            .app-layout-logo {
+                @apply mx-4 flex-none items-center;
+
+                .logo {
+                    height: var(--app-header-height);
+                    line-height: var(--app-header-height);
+                }
+            }
+
+            .app-layout-nav {
+                @apply mx-4 flex-1 items-center;
+            }
+
+            .app-layout-tools {
+                @apply flex flex-none items-center justify-center align-middle;
+                height: var(--app-header-height);
+                line-height: var(--app-header-height);
+            }
+        }
+    }
+
+    .app-layout-container {
+        @apply container mx-auto flex content-center justify-center pt-4;
+        background: var(--app-body-bg-color);
+
+        .app-layout-sider {
+            background: var(--app-body-bg-color);
+            border-right: 0;
+
+            .app-layout-menu {
+                border-inline-end: 0;
+            }
+        }
+
+        .app-layout-content {
+            @apply ml-4 p-0;
+
+            .app-layout-content-container {
+            }
+        }
+    }
+}

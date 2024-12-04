@@ -1,0 +1,18 @@
+{
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.validate": ["javascript", "html", "vue", "json"],
+    "prettier.eslintIntegration": true,
+    "i18n-ally.localesPaths": [
+        "commons/core/src/i18n",
+        "commons/custom/src/i18n",
+        "commons/core/src/i18n/locales",
+        "commons/custom/src/i18n/locales",
+        "commons/mobile/src/components/locale",
+        "commons/webapp/src/components/locale"
+    ]
+}
