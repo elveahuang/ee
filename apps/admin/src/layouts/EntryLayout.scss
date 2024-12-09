@@ -1,0 +1,54 @@
+.app-layout.app-layout-entry {
+    @apply h-full max-h-full w-full max-w-full;
+    background: var(--app-body-bg-color);
+
+    .app-layout-header {
+        @apply flex w-full items-center justify-center;
+        height: var(--app-header-height);
+        background: var(--app-header-bg-color);
+        border-bottom: 1px solid var(--app-border-color);
+        padding-right: var(--app-padding);
+
+        .app-layout-header-container {
+            @apply container flex;
+
+            .app-layout-logo {
+                @apply flex flex-none items-center;
+
+                .logo {
+                    height: var(--app-header-height);
+                    line-height: var(--app-header-height);
+                }
+            }
+
+            .app-layout-nav {
+                @apply mx-4 flex-1 items-center;
+            }
+
+            .app-layout-tools {
+                @apply flex flex-none items-center justify-center align-middle;
+                height: var(--app-header-height);
+                line-height: var(--app-header-height);
+            }
+        }
+    }
+
+    .app-layout-content {
+        @apply flex w-full justify-center;
+        min-height: 600px;
+
+        .app-layout-content-container {
+            @apply container flex justify-center;
+        }
+    }
+
+    .app-layout-footer {
+        @apply flex w-full justify-center;
+        height: var(--app-footer-height);
+        background: var(--app-body-bg-color);
+
+        .app-layout-footer-container {
+            @apply container text-center;
+        }
+    }
+}

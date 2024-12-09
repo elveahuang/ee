@@ -1,0 +1,7 @@
+{
+    "name": "@commons/core",
+    "version": "24.1.0",
+    "dependencies": {
+        "vue": "^3.5.13"
+    }
+}
