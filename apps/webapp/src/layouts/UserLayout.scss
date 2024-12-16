@@ -1,0 +1,53 @@
+.app-layout {
+    @apply h-full min-h-full;
+
+    background: var(--app-content-bg-color);
+
+    .app-layout-header {
+        @apply flex h-full w-full items-center justify-center;
+
+        height: var(--app-header-height);
+        padding-right: var(--app-padding);
+        background: var(--app-header-bg-color);
+
+        .app-layout-header-container {
+            @apply container flex items-center justify-center;
+
+            .app-layout-logo {
+                @apply mx-4 flex-none items-center;
+
+                .logo {
+                    height: var(--app-header-height);
+                    line-height: var(--app-header-height);
+                }
+            }
+
+            .app-layout-nav {
+                @apply mx-4 flex-1 items-center;
+            }
+
+            .app-layout-tools {
+                @apply flex-none items-center justify-end;
+            }
+        }
+    }
+
+    .app-layout-container {
+        @apply container mx-auto flex content-center justify-center pt-4;
+
+        .app-layout-sider {
+            background: var(--app-content-bg-color);
+
+            .app-menu {
+                border-right: none !important;
+            }
+        }
+
+        .app-layout-content {
+            @apply ml-4 p-0;
+
+            .app-layout-content-container {
+            }
+        }
+    }
+}

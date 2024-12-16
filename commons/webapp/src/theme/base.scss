@@ -1,0 +1,162 @@
+:root {
+    --app-white: #fefefe;
+    --app-black: #141414;
+    --app-gray-color: #333;
+    --app-red-color: #f53f3f;
+    --app-yellow-color: #ffd100;
+    --app-green-color: #25ad30;
+    --app-blue-color: #2563eb;
+    --app-purple-color: #9333ea;
+    --app-text-light-color: #333;
+    --app-text-dark-color: #cecece;
+    --app-bg-light-color: #f8f8f8;
+    --app-bg-dark-color: #1f1f1f;
+    --app-border-light-color: #e4e7ed;
+    --app-border-dark-color: #414243;
+    --app-text-color: var(--app-text-light-color);
+    --app-bg-color: var(--app-bg-light-color);
+    --app-border-color: var(--app-border-light-color);
+    --app-primary-color: var(--app-green-color);
+    --app-primary-bg-color: var(--app-white);
+    --app-primary-text-color: var(--app-green-color);
+    --app-header-bg-color: var(--app-white);
+    --app-body-bg-color: var(--app-white);
+    --app-content-bg-color: var(--app-bg-color);
+    --app-divider-height: 16px;
+    --app-header-height: 64px;
+    --app-footer-height: 96px;
+    --app-padding: 16px;
+    --app-margin: 16px;
+    --app-sider-width: 200px;
+    --app-sider-width-collapsed: 64px;
+    --app-sider-height: 64px;
+}
+
+body.dark {
+    --app-primary-color: var(--app-primary-color);
+    --app-primary-bg-color: var(--app-black);
+    --app-primary-text-color: var(--app-white);
+    --app-header-bg-color: var(--app-black);
+    --app-body-bg-color: var(--app-black);
+    --app-content-bg-color: var(--app-dark-bg-color);
+    --app-text-color: var(--app-text-dark-color);
+    --app-bg-color: var(--app-bg-dark-color);
+    --app-border-color: var(--app-border-dark-color);
+}
+
+body.app-theme-gray,
+body.dark.app-theme-gray {
+    --app-primary-color: var(--app-gray-color);
+}
+
+body.app-theme-red,
+body.dark.app-theme-red {
+    --app-primary-color: var(--app-red-color);
+}
+
+body.app-theme-yellow,
+body.dark.app-theme-yellow {
+    --app-primary-color: var(--app-yellow-color);
+}
+
+body.app-theme-green,
+body.dark.app-theme-green {
+    --app-primary-color: var(--app-green-color);
+}
+
+body.app-theme-blue,
+body.dark.app-theme-blue {
+    --app-primary-color: var(--app-blue-color);
+}
+
+body.app-theme-purple,
+body.dark.app-theme-purple {
+    --app-primary-color: var(--app-purple-color);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 框架扩展
+// ---------------------------------------------------------------------------------------------------------------------
+
+// 临时解决办法
+// https://github.com/element-plus/element-plus/issues/11662
+.el-tooltip__trigger,
+.el-dropdown-link:focus-visible,
+.el-dropdown-link:focus {
+    outline: unset !important;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 通用样式
+// ---------------------------------------------------------------------------------------------------------------------
+
+.app-logo {
+    @apply mt-16 text-center;
+}
+
+.app-divider {
+    @apply w-full min-w-full;
+    height: var(--app-divider-height);
+}
+
+.app-text-header {
+    color: var(--app-primary-text-color);
+}
+
+.app-text-primary {
+    color: var(--app-primary-text-color);
+}
+
+.app-text-muted {
+    color: var(--app-primary-text-color);
+}
+
+.app-text {
+    color: var(--app-text-color);
+}
+
+.app-icon,
+.app-icon-primary {
+    color: var(--app-primary-color);
+}
+
+.app-header {
+    background-color: var(--app-header-bg-color) !important;
+}
+
+.app-header-transparent {
+    background-color: transparent !important;
+}
+
+// 弹窗
+
+.app-modal {
+    width: 960px !important;
+}
+
+.app-modal .app-modal-body {
+    @apply p-4;
+}
+
+.app-modal .app-modal-footer {
+    @apply p-4;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 布局样式
+// ---------------------------------------------------------------------------------------------------------------------
+
+html,
+body,
+.app,
+.app-container {
+    @apply m-0 h-full min-h-full p-0;
+    background-color: var(--app-body-bg-color);
+}
+
+.preview-modal img[align='center'] {
+    display: block;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
