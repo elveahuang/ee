@@ -1,0 +1,233 @@
+:root {
+    --app-green-color: #25ad30;
+    --app-blue-color: #2563eb;
+    --app-purple-color: #9333ea;
+    --app-text-light-color: #333;
+    --app-text-dark-color: #cecece;
+    --app-bg-light-color: #f8f8f8;
+    --app-bg-dark-color: #1f1f1f;
+    --app-border-light-color: #e4e7ed;
+    --app-border-dark-color: #414243;
+    --app-text-color: var(--app-text-light-color);
+    --app-bg-color: var(--app-bg-light-color);
+    --app-border-color: var(--app-border-light-color);
+    --app-primary-color: var(--app-green-color);
+    --app-primary-bg-color: var(--app-white);
+    --app-primary-text-color: var(--app-green-color);
+    --app-header-bg-color: var(--app-white);
+    --app-body-bg-color: var(--app-white);
+    --app-content-bg-color: var(--app-bg-color);
+    --app-divider-height: 16px;
+    --app-header-height: 3.6rem;
+    --app-footer-height: 3.6rem;
+    --app-padding: 16px;
+    --app-margin: 16px;
+}
+
+body.dark {
+    --app-primary-color: var(--app-primary-color);
+    --app-primary-bg-color: var(--app-black);
+    --app-primary-text-color: var(--app-white);
+    --app-header-bg-color: var(--app-black);
+    --app-body-bg-color: var(--app-black);
+    --app-content-bg-color: var(--app-dark-bg-color);
+    --app-text-color: var(--app-text-dark-color);
+    --app-bg-color: var(--app-bg-dark-color);
+    --app-border-color: var(--app-border-dark-color);
+}
+
+body.app-theme-gray,
+body.dark.app-theme-gray {
+    --app-primary-color: var(--app-gray-color);
+}
+
+body.app-theme-red,
+body.dark.app-theme-red {
+    --app-primary-color: var(--app-red-color);
+}
+
+body.app-theme-yellow,
+body.dark.app-theme-yellow {
+    --app-primary-color: var(--app-yellow-color);
+}
+
+body.app-theme-green,
+body.dark.app-theme-green {
+    --app-primary-color: var(--app-green-color);
+}
+
+body.app-theme-blue,
+body.dark.app-theme-blue {
+    --app-primary-color: var(--app-blue-color);
+}
+
+body.app-theme-purple,
+body.dark.app-theme-purple {
+    --app-primary-color: var(--app-purple-color);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 框架扩展
+// ---------------------------------------------------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 通用样式
+// ---------------------------------------------------------------------------------------------------------------------
+
+.app-logo {
+    @apply mt-16 text-center;
+}
+
+.app-divider {
+    @apply w-full min-w-full border-0;
+
+    height: var(--van-padding-md);
+}
+
+.app-line {
+    @apply my-1 w-full min-w-full border-t-2 border-gray-100;
+}
+
+.app-text-header {
+    @apply text-lg font-bold;
+
+    color: var(--app-text-color);
+}
+
+.app-text-title {
+    @apply text-lg font-bold;
+
+    color: var(--app-text-color);
+}
+
+.app-text-caption {
+    @apply text-base font-bold;
+
+    color: var(--app-text-color);
+}
+
+.app-text {
+    @apply text-sm;
+
+    color: var(--app-text-color);
+}
+
+.app-text-muted {
+    @apply text-xs;
+
+    color: var(--app-text-color);
+}
+
+.app-text-primary {
+    color: var(--app-primary-color) !important;
+}
+
+.app-text-success {
+    color: var(--app-green-color);
+}
+
+.app-text-danger {
+    color: var(--app-red-color);
+}
+
+.app-text-bold {
+    @apply font-bold;
+}
+
+.app-text-wrap {
+    word-break: break-all !important;
+    word-wrap: break-word !important;
+}
+
+.app-fixed {
+    position: fixed !important;
+}
+
+.app-no-border {
+    @apply border-0;
+}
+
+.app-text-ellipsis,
+.app-text-ellipsis-1 {
+    @apply line-clamp-1 overflow-hidden text-ellipsis;
+}
+
+.app-text-ellipsis-2 {
+    @apply line-clamp-2 overflow-hidden text-ellipsis;
+}
+
+.app-text-ellipsis-3 {
+    @apply line-clamp-3 overflow-hidden text-ellipsis;
+}
+
+.app-text-ellipsis-4 {
+    @apply line-clamp-4 overflow-hidden text-ellipsis;
+}
+
+.app-icon,
+.app-icon-primary {
+    color: var(--app-primary-color);
+}
+
+.app-header {
+    background-color: var(--app-header-bg-color) !important;
+}
+
+.app-bg-transparent {
+    background: transparent !important;
+}
+
+.app-h-bg {
+    background: var(--app-h-bg-color) !important;
+}
+
+.app-no-padding {
+    padding: 0 !important;
+}
+
+.app-no-margin {
+    margin: 0 !important;
+}
+
+.app-video-player {
+    @apply aspect-video w-full overflow-hidden;
+}
+
+.app-video-player-fullscreen {
+    position: fixed !important;
+    inset: 0;
+    z-index: 999;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    transition: transform 0.3s;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// 布局样式
+// ---------------------------------------------------------------------------------------------------------------------
+
+html,
+body {
+    @apply h-full min-h-full;
+    background-color: var(--app-body-bg-color);
+}
+
+.app,
+.app-container {
+    @apply h-full min-h-full;
+    background-color: var(--app-body-bg-color);
+
+    .van-config-provider {
+        @apply h-full min-h-full;
+    }
+
+    .app-page {
+        position: relative;
+
+        .app-page-content {
+            min-height: calc(100vh - var(--app-footer-height)) !important;
+            overflow: hidden !important;
+        }
+    }
+}

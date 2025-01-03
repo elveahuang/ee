@@ -1,0 +1,62 @@
+.app-layout {
+    @apply h-full max-h-full max-w-full bg-cover;
+
+    background-color: var(--app-content-bg-color);
+
+    .app-layout-header {
+        @apply flex w-full items-center justify-center bg-transparent;
+
+        height: var(--app-header-height);
+        background: var(--app-header-bg-color);
+
+        .app-layout-header-container {
+            @apply container flex items-center justify-center;
+
+            .app-layout-logo {
+                @apply flex-none items-center justify-end;
+
+                .logo {
+                    height: var(--app-header-height);
+                    line-height: var(--app-header-height);
+                }
+            }
+
+            .app-layout-nav {
+                @apply ml-4 flex-1 items-center justify-start;
+
+                .app-menu {
+                    border-bottom: none;
+
+                    .app-menu-item {
+                        border-bottom: none;
+                    }
+
+                    .app-menu-item.is-active {
+                        border-bottom: none !important;
+                    }
+                }
+            }
+
+            .app-layout-tools {
+                @apply flex-none items-center justify-end;
+            }
+        }
+    }
+
+    .app-layout-content {
+        @apply flex h-full w-full max-w-full items-center justify-center;
+
+        background-color: var(--app-content-bg-color);
+
+        .app-layout-content-container {
+            background-color: var(--app-content-bg-color);
+        }
+    }
+
+    .app-layout-footer {
+        @apply absolute bottom-0 w-full bg-transparent text-center;
+
+        height: var(--app-footer-height);
+        background-color: var(--app-body-bg-color);
+    }
+}

@@ -1,0 +1,89 @@
+.app-layout.app-layout-main {
+    @apply h-full min-h-full transition-all delay-150 ease-in-out;
+    background: var(--app-body-bg-color);
+
+    .app-layout-header {
+        @apply fixed left-0 top-0 z-50 flex w-full items-center pl-0 transition-all delay-150 ease-in-out;
+        height: var(--app-header-height);
+        background: var(--app-header-bg-color);
+        border-bottom: 1px solid var(--app-border-color);
+        padding-right: var(--app-padding);
+
+        .app-layout-header-container {
+            @apply flex w-full min-w-full items-center;
+
+            .app-layout-trigger {
+                @apply flex flex-none items-center justify-center align-middle;
+                width: var(--app-sider-width-collapsed);
+                height: var(--app-header-height);
+
+                .trigger {
+                    @apply flex cursor-pointer items-center justify-center align-middle;
+                    color: var(--app-primary-color);
+                }
+            }
+
+            .app-layout-logo {
+                @apply flex flex-none items-center;
+
+                .logo {
+                    height: var(--app-header-height);
+                    line-height: var(--app-header-height);
+                }
+            }
+
+            .app-layout-nav {
+                @apply mx-4 flex-1 items-center;
+            }
+
+            .app-layout-tools {
+                @apply flex flex-none items-center justify-center align-middle;
+                height: var(--app-header-height);
+                line-height: var(--app-header-height);
+            }
+        }
+    }
+
+    .app-layout-container {
+        @apply h-full min-h-full;
+
+        .app-layout-sider {
+            @apply fixed left-0 top-0 z-40 h-full overflow-hidden transition-all delay-150 ease-in-out;
+            width: var(--app-sider-width);
+            background: var(--app-sider-bg-color);
+            border-right: 1px solid var(--app-border-color);
+            padding-top: var(--app-sider-height);
+
+            .app-layout-menu {
+                border-inline-end: 0;
+
+                .app-menu {
+                    @apply border-r-0;
+                }
+            }
+        }
+
+        .app-layout-sider.collapsed {
+            @apply transition-all delay-150 ease-in-out;
+            width: var(--app-sider-width-collapsed);
+            background: var(--app-sider-bg-color);
+            padding-top: var(--app-sider-height);
+        }
+
+        .app-layout-content {
+            @apply p-0 transition-all delay-150 ease-in-out;
+            background: var(--app-body-bg-color);
+            padding-top: var(--app-sider-height);
+            padding-left: var(--app-sider-width);
+
+            .app-layout-content-container {
+                @apply p-4;
+            }
+        }
+
+        .app-layout-content.collapsed {
+            @apply transition-all delay-150 ease-in-out;
+            padding-left: var(--app-sider-width-collapsed);
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+node_modules
+build
+dist
+vendor
+temp
+docs/docs/.vitepress/cache
+**/public/wasm

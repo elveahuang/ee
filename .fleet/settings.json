@@ -1,0 +1,49 @@
+{
+    "plugins": [
+        {
+            "type": "add",
+            "pluginName": "fleet.javascript"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.css"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.markdown"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.tailwindcss"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.vue"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.git.frontend"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.image.view"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.json"
+        },
+        {
+            "type": "add",
+            "pluginName": "fleet.shell"
+        }
+    ],
+    "toolchains": [],
+    "nodejs.editor.formatOnSave.stylelint.mode": "Auto",
+    "nodejs.editor.formatOnSave.stylelint.glob": "{**/*,*}.{css,scss,sass,less}",
+    "nodejs.editor.formatOnSave.eslint.mode": "Auto",
+    "nodejs.editor.formatOnSave.eslint.glob": "{**/*,*}.{ts,tsx,mts,js,jsx,cjs,mjs,vue}",
+    "nodejs.editor.formatOnSave.prettier.mode": "Auto",
+    "nodejs.editor.formatOnSave.prettier.glob": "{**/*,*}.{ts,tsx,mts,js,jsx,cjs,mjs,vue,json,md}",
+    "nodejs.typescript.rebuildOnChanges": false,
+    "editor.formatOnSave": true
+}
