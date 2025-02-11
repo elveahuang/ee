@@ -1,0 +1,209 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    thymeleaf:
+        cache: false
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:9292
+                username: admin
+                password: admin
+    datasource:
+        master:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        slave:
+            name: slave
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        job:
+            name: job
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/job?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+    cache:
+        type: redis
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+    jpa:
+        open-in-view: false
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: ee
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+                default-requeue-rejected: true
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+        path: /swagger-ui.html
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    home:
+        admin: http://127.0.0.1:8081
+        mobile: http://127.0.0.1:8082
+        webapp: http://127.0.0.1:8083
+        main: http://127.0.0.1:8084
+    data:
+        core:
+            enabled: true
+        datasource:
+            enabled: true
+            master:
+                enabled: true
+            slave:
+                enabled: true
+            job:
+                enabled: true
+        jpa:
+            enabled: true
+        mybatis:
+            enabled: false
+    jwt:
+        enabled: true
+        strategy: auto
+        public-key-value:
+        private-key-value:
+    amqp:
+        enabled: true
+    http:
+        enabled: true
+        type: okhttp
+        proxy:
+            enabled: false
+            host: 127.0.0.1
+            port: 7890
+    oapis:
+        dingtalk:
+            enabled: false
+            agent-id:
+            app-key:
+            app-secret:
+            corp-id:
+        lark:
+            enabled: false
+            app-type: self_built
+            app-id:
+            app-secret:
+        weixin:
+            cp:
+                enabled: false
+                agent-id:
+                corp-id:
+                corp-secret:
+            mp:
+                enabled: false
+                app-id:
+                app-secret:
+            ma:
+                enabled: false
+                app-id:
+                app-secret:
+    storage:
+        enabled: true
+        type: min
+        min:
+            enabled: true
+            access-key:
+            secret-key:
+            endpoint:
+            bucket-name:
+        oss:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+            endpoint:
+            bucket-name:
+            domain:
+    sms:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+            sign-name:
+            template:
+    mail:
+        enabled: true
+        config:
+            from:
+            host:
+            port: 25
+            username:
+            password:
+    translator:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+    face-body:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+    ip:
+        enabled: true
+        geo-lite:
+            location: file_system
+            path: ip/GeoLite2-City.mmdb
+    coin:
+        enabled: true
+        etherscan:
+            api-key:
+    message:
+        broadcast:
+            enabled: true
+            rabbit:
+                enabled: true
+    test:
+        enabled: false
+        email:
+        mobile:
