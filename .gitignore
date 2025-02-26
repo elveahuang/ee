@@ -1,0 +1,11 @@
+.gradle
+.idea
+
+build
+target
+logs
+temp
+
+/tools/ip
+
+application-local.yml
