@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProperty scop="context"
+                    name="spring.application.name"
+                    source="spring.application.name"
+                    defaultValue="auth-server"/>
+    <!-- 控制台输出格式 -->
+    <property name="pattern.console" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
+    <!-- 日志文件输出格式 -->
+    <property name="pattern.file" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
+    <!-- 日志文件路径 -->
+    <property name="log.path" value="logs/${spring.application.name}"/>
+    <!-- 日志归档策略 -->
+    <property name="rolling.policy.size" value="50MB"/>
+    <property name="rolling.policy.history" value="14"/>
+
+    <!-- 控制台 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern.console}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志 -->
+    <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 错误日志 -->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${rolling.policy.history}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern.file}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志级别控制 -->
+    <logger name="cc.elvea" level="info"/>
+    <logger name="org.springframework" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="debug"/>
+        <appender-ref ref="error"/>
+    </root>
+</configuration>
