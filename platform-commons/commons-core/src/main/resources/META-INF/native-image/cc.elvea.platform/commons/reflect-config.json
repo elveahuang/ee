@@ -1,0 +1,22 @@
+[
+    {
+        "name": "cc.elvea.platform.commons.core.cache.NullValue",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.UrlLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.OperationLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.ApplicationLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    }
+]
