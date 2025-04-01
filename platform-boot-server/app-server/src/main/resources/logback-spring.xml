@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty name="spring.application.name"
+                    source="spring.application.name"
+                    scop="context"
+                    defaultValue="application"/>
+
+    <!-- 日志文件路径 -->
+    <property name="LOG_PATH" value="logs"/>
+    <!-- 日志归档策略 -->
+    <property name="FILE_LOG_ROLLING_POLICY_SIZE" value="20MB"/>
+    <property name="FILE_LOG_ROLLING_POLICY_HISTORY" value="30"/>
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${CONSOLE_LOG_THRESHOLD}</level>
+        </filter>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>${CONSOLE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志 -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!-- 错误日志 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 链接日志 -->
+    <appender name="URL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/url.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/url.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- 时间统计日志 -->
+    <appender name="SW" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sw.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/sw.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <!-- 消息日志 -->
+    <appender name="MESSAGE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/message.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/message.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.security" level="INFO"/>
+    <logger name="cc.elvea" level="INFO"/>
+
+    <logger name="cc.elvea.platform.system.commons.interceptor.LogInterceptor" level="INFO">
+        <appender-ref ref="URL"/>
+    </logger>
+
+    <logger name="cc.elvea.platform.commons.utils.StopWatchUtils" level="INFO">
+        <appender-ref ref="SW"/>
+    </logger>
+
+    <logger name="cc.elvea.platform.system.message" level="INFO">
+        <appender-ref ref="MESSAGE"/>
+    </logger>
+
+    <!-- 开发环境 -->
+    <springProfile name="local | development">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="production | native">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="DEBUG"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+</configuration>
