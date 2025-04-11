@@ -1,0 +1,18 @@
+server:
+    port: 8181
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        allow-circular-references: true
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 1000MB
+            max-request-size: 1000MB
+    application:
+        name: app-server
+    profiles:
+        active: local
+    cloud:
+        compatibility-verifier:
+            enabled: false
