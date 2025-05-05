@@ -1,0 +1,36 @@
+[
+    {
+        "name": "cc.elvea.platform.commons.core.cache.NullValue",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.UrlLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.OperationLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.commons.core.log.domain.ApplicationLogDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "kotlin.reflect.jvm.internal.ReflectionFactoryImpl",
+        "allPublicMethods": true,
+        "allDeclaredFields": true,
+        "allDeclaredMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "kotlin.KotlinVersion",
+        "allPublicMethods": true,
+        "allDeclaredFields": true,
+        "allDeclaredMethods": true,
+        "allDeclaredConstructors": true
+    }
+]
