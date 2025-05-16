@@ -45,8 +45,6 @@ public class IpAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public GeoLite geoLite(IpProperties properties) {
-        System.out.println("Create geoLite.");
-
         GeoLite geoLite = new GeoLite();
         if (StringUtils.isNotEmpty(properties.getGeoLite().getPath())) {
             Resource resource;
