@@ -18,7 +18,6 @@ cc.elvea.platform.commons.autoconfigure.data.JdbcCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.JpaCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.MyBatisCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.data.ElasticsearchCustomAutoConfiguration
-cc.elvea.platform.commons.autoconfigure.data.MongoCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.oapis.weixin.WeiXinCpAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.oapis.weixin.WeiXinMaAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.oapis.weixin.WeiXinMpAutoConfiguration

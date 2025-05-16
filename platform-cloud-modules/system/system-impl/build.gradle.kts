@@ -7,7 +7,7 @@ dependencies {
     api(project(":platform-commons:commons-core"))
     api(project(":platform-commons:commons-mybatis"))
     api(project(":platform-commons:commons-quartz"))
-    api(project(":platform-commons:commons-redisson"))
+    api(project(":platform-commons:commons-redis"))
     api(project(":platform-commons:commons-rabbit"))
     api(project(":platform-commons:commons-oapis"))
     api(project(":platform-commons:commons-security"))

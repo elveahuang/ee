@@ -4,8 +4,9 @@ dependencies {
     api("io.netty:netty-resolver-dns")
     api("io.netty:netty-resolver-dns-native-macos")
     api("io.netty:netty-resolver-dns-classes-macos")
+    api("me.ahoo.cosid:cosid-spring-redis")
 }
 
 tasks.named<Jar>("jar") {
-    archiveBaseName.set("platform-commons-redisson")
+    archiveBaseName.set("platform-commons-redis")
 }

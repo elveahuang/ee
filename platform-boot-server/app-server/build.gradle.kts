@@ -19,9 +19,8 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
     // commons modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-cosid-starter"))
     implementation(project(":platform-commons:commons-rabbit-starter"))
-    implementation(project(":platform-commons:commons-redisson-starter"))
+    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-commons:commons-hibernate-starter"))
     implementation(project(":platform-commons:commons-oapis-starter"))
     implementation(project(":platform-commons:commons-security-starter"))
