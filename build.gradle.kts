@@ -45,8 +45,8 @@ allprojects {
 
     dependencyManagement {
         imports {
+            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.5")
-            mavenBom("org.springframework.ai:spring-ai-bom:1.0.0-M8")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.5")
