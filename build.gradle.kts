@@ -4,7 +4,7 @@ plugins {
     id("application")
     id("java-library")
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.github.spotbugs") version "6.1.5" apply false
+    id("com.github.spotbugs") version "6.1.11" apply false
     id("org.springframework.boot") version "3.4.5" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
@@ -46,7 +46,7 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.5")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.6")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.5")
@@ -79,7 +79,7 @@ allprojects {
             dependency("org.mybatis:mybatis-spring:3.0.4")
             dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
             dependency("org.mybatis.generator:mybatis-generator-core:1.4.2")
-            dependency("com.github.jsqlparser:jsqlparser:5.2")
+            dependency("com.github.jsqlparser:jsqlparser:5.3")
             dependency("org.redisson:redisson:3.40.0")
             dependency("org.redisson:redisson-spring-data-34:3.40.0")
             dependency("org.redisson:redisson-spring-boot-starter:3.40.0")
@@ -110,10 +110,10 @@ allprojects {
             dependency("org.shredzone.acme4j:acme4j-client:3.5.1")
             dependency("org.shredzone.acme4j:acme4j-smime:3.5.1")
             // json & protobuf
-            dependency("org.json:json:20250107")
+            dependency("org.json:json:20250517")
             dependency("com.alibaba:fastjson:2.0.57")
             dependency("com.google.code.gson:gson:2.13.1")
-            dependency("com.google.protobuf:protobuf-java:4.30.2")
+            dependency("com.google.protobuf:protobuf-java:4.31.0")
             // xml & pdf & office & image
             dependency("xalan:xalan:2.7.3")
             dependency("xerces:xercesImpl:2.12.2")
@@ -123,9 +123,9 @@ allprojects {
             dependency("org.apache.poi:poi-ooxml-lite:5.4.1")
             dependency("com.google.zxing:core:3.5.3")
             dependency("com.google.zxing:javase:3.5.3")
-            dependency("org.jodconverter:jodconverter-local:4.4.8")
-            dependency("org.jodconverter:jodconverter-local-lo:4.4.8")
-            dependency("org.jodconverter:jodconverter-remote:4.4.8")
+            dependency("org.jodconverter:jodconverter-local:4.4.9")
+            dependency("org.jodconverter:jodconverter-local-lo:4.4.9")
+            dependency("org.jodconverter:jodconverter-remote:4.4.9")
             dependency("org.jodconverter:jodconverter-spring-boot-starter:4.4.8")
             dependency("org.libreoffice:juh:24.8.4")
             dependency("org.libreoffice:jurt:24.8.4")
@@ -141,7 +141,7 @@ allprojects {
             dependency("com.twelvemonkeys.imageio:imageio-webp:3.12.0")
             // sdk
             dependency("io.minio:minio:8.5.17")
-            dependency("com.larksuite.oapi:oapi-sdk:2.4.15")
+            dependency("com.larksuite.oapi:oapi-sdk:2.4.16")
             dependency("com.github.binarywang:weixin-java-channel:4.7.0")
             dependency("com.github.binarywang:weixin-java-cp:4.7.0")
             dependency("com.github.binarywang:weixin-java-miniapp:4.7.0")
@@ -157,20 +157,20 @@ allprojects {
             // sdk - ai
             dependency("com.openai:openai-java:1.6.1")
             // sdk - aliyun
-            dependency("com.aliyun:dingtalk:2.2.16")
+            dependency("com.aliyun:dingtalk:2.2.17")
             dependency("com.aliyun:alimt20181012:1.5.0")
             dependency("com.aliyun:facebody20191230:5.1.2")
             dependency("com.aliyun:dysmsapi20170525:4.1.0")
             dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.2")
-            dependency("com.alibaba:dashscope-sdk-java:2.20.0")
+            dependency("com.alibaba:dashscope-sdk-java:2.20.1")
             dependency("com.aliyun:aliyun-java-sdk-core:4.7.5")
-            dependency("com.alipay.sdk:alipay-sdk-java:4.40.202.ALL")
+            dependency("com.alipay.sdk:alipay-sdk-java:4.40.217.ALL")
             // sdk - tencent
             dependency("com.qcloud:cos_api:5.6.245")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1260")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1262")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1242")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1179")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1195")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1262")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.1259")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1260")
             // commons
@@ -188,7 +188,7 @@ allprojects {
             dependency("org.apache.commons:commons-collections4:4.5.0")
             // 辅助用于排除重复的依赖
             dependency("com.aliyun:tea-rpc:0.1.3")
-            dependency("com.aliyun:tea-openapi:0.3.6")
+            dependency("com.aliyun:tea-openapi:0.3.8")
             dependency("com.aliyun:tea-rpc-util:0.1.3")
             dependency("org.jodd:jodd-bean:5.1.6")
             dependency("org.jodd:jodd-core:5.3.0")
