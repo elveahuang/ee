@@ -50,7 +50,7 @@ allprojects {
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.5")
-            mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.9.0")
+            mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.8.1")
             mavenBom("cn.hutool:hutool-bom:5.8.38")
             mavenBom("me.ahoo.cosid:cosid-bom:2.12.5")
             mavenBom("org.mockito:mockito-bom:5.14.2")
