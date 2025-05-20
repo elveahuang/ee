@@ -60,7 +60,7 @@ allprojects {
         }
         dependencies {
             // spring authorization server
-            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.4.3")
+            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.5.0")
             // mapstruct & lombok
             dependency("org.mapstruct:mapstruct:1.6.3")
             dependency("org.mapstruct:mapstruct-processor:1.6.3")
