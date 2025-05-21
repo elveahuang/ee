@@ -2,18 +2,16 @@ package cc.elvea.platform.commons.autoconfigure.core;
 
 import cc.elvea.platform.commons.annotations.ds.JobDataSource;
 import cc.elvea.platform.commons.annotations.ds.JobTransactionManager;
-import cc.elvea.platform.commons.autoconfigure.core.properties.QuartzCustomProperties;
-import cc.elvea.platform.commons.autoconfigure.data.DataSourceCustomAutoConfiguration;
 import cc.elvea.platform.commons.core.quartz.QuartzJobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.boot.autoconfigure.quartz.SchedulerFactoryBeanCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -29,10 +27,9 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter({DataSourceAutoConfiguration.class, DataSourceCustomAutoConfiguration.class})
+@AutoConfiguration(after = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ConditionalOnClass({Scheduler.class, SchedulerFactoryBean.class, PlatformTransactionManager.class})
-@ConditionalOnProperty(prefix = QuartzCustomProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties({QuartzProperties.class, QuartzCustomProperties.class})
+@EnableConfigurationProperties({QuartzProperties.class})
 public class QuartzCustomAutoConfiguration {
 
     private final QuartzProperties quartzProperties;
