@@ -164,10 +164,10 @@ allprojects {
             dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.2")
             dependency("com.alibaba:dashscope-sdk-java:2.20.1")
             dependency("com.aliyun:aliyun-java-sdk-core:4.7.5")
-            dependency("com.alipay.sdk:alipay-sdk-java:4.40.217.ALL")
+            dependency("com.alipay.sdk:alipay-sdk-java:4.40.227.ALL")
             // sdk - tencent
-            dependency("com.qcloud:cos_api:5.6.245")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1262")
+            dependency("com.qcloud:cos_api:5.6.246")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1266")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1242")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1179")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1262")
@@ -188,7 +188,7 @@ allprojects {
             dependency("org.apache.commons:commons-collections4:4.5.0")
             // 辅助用于排除重复的依赖
             dependency("com.aliyun:tea-rpc:0.1.3")
-            dependency("com.aliyun:tea-openapi:0.3.8")
+            dependency("com.aliyun:tea-openapi:0.3.9")
             dependency("com.aliyun:tea-rpc-util:0.1.3")
             dependency("org.jodd:jodd-bean:5.1.6")
             dependency("org.jodd:jodd-core:5.3.0")
