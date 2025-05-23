@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.1.11" apply false
-    id("org.springframework.boot") version "3.4.5" apply false
+    id("org.springframework.boot") version "3.5.0" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
 
@@ -49,12 +49,12 @@ allprojects {
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.6")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.5")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.0")
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
             mavenBom("cn.hutool:hutool-bom:5.8.38")
             mavenBom("me.ahoo.cosid:cosid-bom:2.12.5")
-            mavenBom("org.mockito:mockito-bom:5.14.2")
-            mavenBom("io.netty:netty-bom:4.1.119.Final")
+            mavenBom("org.mockito:mockito-bom:5.17.0")
+            mavenBom("io.netty:netty-bom:4.1.121.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.26")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.12")
         }

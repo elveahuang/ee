@@ -17,7 +17,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -48,7 +48,7 @@ public class CaptchaAuthenticationFilter extends OncePerRequestFilter {
         this.configApi = configApi;
         this.captchaApi = captchaApi;
         this.failureHandler = failureHandler;
-        requestMatcher = new AntPathRequestMatcher(OAUTH_TOKEN_ENDPOINT);
+        requestMatcher = PathPatternRequestMatcher.withDefaults().matcher(OAUTH_TOKEN_ENDPOINT);
     }
 
     @Override
