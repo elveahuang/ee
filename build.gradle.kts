@@ -132,7 +132,12 @@ allprojects {
             dependency("org.libreoffice:ridl:24.8.4")
             dependency("org.libreoffice:unoil:24.8.4")
             dependency("org.dom4j:dom4j:2.1.4")
+            dependency("org.apache.pdfbox:fontbox:3.0.5")
+            dependency("org.apache.pdfbox:preflight:3.0.5")
             dependency("org.apache.pdfbox:pdfbox:3.0.5")
+            dependency("org.apache.pdfbox:pdfbox-io:3.0.5")
+            dependency("org.apache.pdfbox:pdfbox-tools:3.0.5")
+            dependency("org.apache.pdfbox:pdfbox-debuger:3.0.5")
             dependency("org.dromara:x-easypdf-pdfbox:3.3.1")
             dependency("org.jsoup:jsoup:1.20.1")
             // image
