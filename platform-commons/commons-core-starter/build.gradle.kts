@@ -19,6 +19,7 @@ dependencies {
     compileOnly(project(":platform-commons:commons-websocket-starter"))
     compileOnly(project(":platform-commons:commons-quartz-starter"))
     compileOnly(project(":platform-commons:commons-security-starter"))
+    compileOnly(project(":platform-commons:commons-rpc-starter"))
     // database
     compileOnly("org.apache.shardingsphere:shardingsphere-jdbc")
 }

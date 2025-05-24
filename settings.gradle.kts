@@ -42,6 +42,8 @@ include("platform-commons:commons-ai")
 include("platform-commons:commons-ai-starter")
 include("platform-commons:commons-crawler")
 include("platform-commons:commons-crawler-starter")
+include("platform-commons:commons-rpc")
+include("platform-commons:commons-rpc-starter")
 // ---------------------------------------------------------------------------------------------------------------------
 // 单体服务
 // ---------------------------------------------------------------------------------------------------------------------

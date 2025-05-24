@@ -27,6 +27,7 @@ dependencies {
     implementation(project(":platform-commons:commons-quartz-starter"))
     implementation(project(":platform-commons:commons-websocket-starter"))
     implementation(project(":platform-commons:commons-ai-starter"))
+    implementation(project(":platform-commons:commons-rpc-starter"))
     // application modules
     implementation(project(":platform-boot-modules:security"))
     implementation(project(":platform-boot-modules:system:system-impl"))

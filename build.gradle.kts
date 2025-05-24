@@ -46,7 +46,7 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.6")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.7")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.0")
@@ -101,7 +101,6 @@ allprojects {
             dependency("net.java.dev.jna:jna-platform:5.17.0")
             dependency("net.logstash.logback:logstash-logback-encoder:8.1")
             dependency("com.github.loki4j:loki-logback-appender:1.6.0")
-            dependency("com.xuxueli:xxl-job-core:3.1.0")
             dependency("net.bytebuddy:byte-buddy:1.17.5")
             dependency("net.bytebuddy:byte-buddy-agent:1.17.5")
             dependency("org.bouncycastle:bcpkix-jdk18on:1.80")
@@ -109,6 +108,10 @@ allprojects {
             dependency("org.bouncycastle:bcutil-jdk18on:1.80")
             dependency("org.shredzone.acme4j:acme4j-client:3.5.1")
             dependency("org.shredzone.acme4j:acme4j-smime:3.5.1")
+            dependency("com.github.briandilley.jsonrpc4j:jsonrpc4j:1.7")
+            // xxl
+            dependency("com.xuxueli:xxl-tool:1.4.2")
+            dependency("com.xuxueli:xxl-job-core:3.1.0")
             // json & protobuf
             dependency("org.json:json:20250517")
             dependency("com.alibaba:fastjson:2.0.57")

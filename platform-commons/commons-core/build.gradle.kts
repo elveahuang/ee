@@ -20,6 +20,7 @@ dependencies {
     compileOnly(project(":platform-commons:commons-oapis"))
     compileOnly(project(":platform-commons:commons-security"))
     compileOnly(project(":platform-commons:commons-websocket"))
+    compileOnly(project(":platform-commons:commons-rpc"))
     // commons
     api("commons-io:commons-io")
     api("commons-codec:commons-codec")
