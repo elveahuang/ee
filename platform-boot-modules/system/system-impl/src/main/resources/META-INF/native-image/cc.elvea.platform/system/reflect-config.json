@@ -1,0 +1,22 @@
+[
+    {
+        "name": "cc.elvea.platform.system.job.task.TestJob",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.system.core.model.dto.UserSessionDto",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.system.announcement.model.request.AnnouncementSearchRequest",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    },
+    {
+        "name": "cc.elvea.platform.system.announcement.model.request.SystemAnnouncementSearchRequest",
+        "allPublicMethods": true,
+        "allDeclaredConstructors": true
+    }
+]
