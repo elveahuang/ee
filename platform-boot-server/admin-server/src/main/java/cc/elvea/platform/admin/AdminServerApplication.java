@@ -2,18 +2,20 @@ package cc.elvea.platform.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 
 /**
  * @author elvea
  */
 @Slf4j
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class AdminServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminServerApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(AdminServerApplication.class, args);
+
+        Environment env = context.getEnvironment();
+        log.info("Application {} started. ", env.getProperty("spring.application.name", "admin-server"));
     }
 
 }

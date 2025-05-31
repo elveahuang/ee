@@ -38,8 +38,9 @@ public class AppServerApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(AppServerApplication.class, args);
+
         Environment env = context.getEnvironment();
-        log.info("Application {} started. ", env.getProperty("spring.application.name", ""));
+        log.info("Application {} started. ", env.getProperty("spring.application.name", "app-server"));
         log.info("Application version - {}. ", GlobalConstants.VERSION);
     }
 
