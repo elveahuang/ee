@@ -4,6 +4,7 @@ dependencies {
     api("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan")
     api("org.springframework.ai:spring-ai-mcp")
     api("org.springframework.ai:spring-ai-openai")
+    api("com.alibaba.cloud.ai:spring-ai-alibaba-core")
 }
 
 tasks.named<Jar>("jar") {

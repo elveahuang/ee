@@ -5,7 +5,7 @@
     <springProperty name="spring.application.name"
                     source="spring.application.name"
                     scop="context"
-                    defaultValue="application"/>
+                    defaultValue="app-server"/>
 
     <!-- 日志文件路径 -->
     <property name="LOG_PATH" value="logs"/>

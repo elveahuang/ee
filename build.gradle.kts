@@ -46,7 +46,7 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
-            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.4.7")
+            mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.0")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
             mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.0")
@@ -162,6 +162,8 @@ allprojects {
             dependency("org.telegram:telegrambots-springboot-longpolling-starter:8.3.0")
             // sdk - ai
             dependency("com.openai:openai-java:1.6.1")
+            dependency("com.alibaba.cloud.ai:spring-ai-alibaba-core:1.0.0.2")
+            dependency("com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope:1.0.0.2")
             // sdk - aliyun
             dependency("com.aliyun:dingtalk:2.2.18")
             dependency("com.aliyun:alimt20181012:1.5.0")

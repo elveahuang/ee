@@ -69,6 +69,8 @@ spring:
     ai:
         openai:
             api-key: xxx
+        dashscope:
+            api-key: xxx
         mcp:
             client:
                 enabled: true
@@ -222,7 +224,7 @@ platform:
             rabbit:
                 enabled: true
     selenium:
-        enabled: false
+        enabled: true
         driver-type: edge
         proxy:
             enabled: false

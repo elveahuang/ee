@@ -52,6 +52,7 @@ include("platform-boot-modules:security")
 include("platform-boot-modules:lxp:lxp-api")
 include("platform-boot-modules:lxp:lxp-impl")
 // 单体服务-应用
+include("platform-boot-server:admin-server")
 include("platform-boot-server:app-server")
 // ---------------------------------------------------------------------------------------------------------------------
 // 微服务
