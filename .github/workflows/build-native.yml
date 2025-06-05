@@ -1,0 +1,37 @@
+name: Native Build
+on:
+    push:
+        branches: [ main ]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: Setup Graalvm
+                uses: graalvm/setup-graalvm@v1
+                with:
+                    java-version: "21"
+                    distribution: "graalvm"
+            -   name: Env
+                run: |
+                    echo "GRAALVM_HOME: $GRAALVM_HOME"
+                    echo "JAVA_HOME: $JAVA_HOME"
+                    java --version
+                    native-image --version
+                    gradle -v
+            -   name: Build
+                run: |
+                    chmod a+x ./gradlew
+                    ./gradlew platform-boot-server:app-server:nativeCompile
+                    cd ./platform-boot-server/app-server/build/native/nativeCompile
+                    zip -qr app.zip *
+            -   name: Deploy
+                uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+                with:
+                    server: ${{ secrets.SERVER_HOST }}
+                    username: ${{ secrets.SERVER_USER }}
+                    ssh_private_key: ${{ secrets.SERVER_KEY }}
+                    local_path: "platform-boot-server/app-server/build/native/nativeCompile/app.zip"
+                    remote_path: "/data/app/deploy"
+                    sftpArgs: "-o ConnectTimeout=5"
