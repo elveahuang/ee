@@ -4,6 +4,7 @@ dependencies {
     api("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan")
     api("org.springframework.ai:spring-ai-mcp")
     api("org.springframework.ai:spring-ai-openai")
+    api("org.springframework.ai:spring-ai-deepseek")
     api("com.alibaba.cloud.ai:spring-ai-alibaba-core")
 }
 

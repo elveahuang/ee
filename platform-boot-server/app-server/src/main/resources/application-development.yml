@@ -64,12 +64,13 @@ spring:
                 quartz:
                     scheduler:
                         instanceId: ${spring.application.name}_${server.port}
-                    jobStore:
-                        isClustered: true
     ai:
         openai:
             api-key: xxx
+            base-url: https://api.deepseek.com
         dashscope:
+            api-key: xxx
+        deepseek:
             api-key: xxx
         mcp:
             client:

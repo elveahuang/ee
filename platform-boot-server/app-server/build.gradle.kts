@@ -18,6 +18,7 @@ dependencies {
     implementation("de.codecentric:spring-boot-admin-starter-client")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
     // commons modules
+    implementation(project(":platform-commons:commons-ai-starter"))
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-commons:commons-rabbit-starter"))
     implementation(project(":platform-commons:commons-redis-starter"))
@@ -26,7 +27,6 @@ dependencies {
     implementation(project(":platform-commons:commons-security-starter"))
     implementation(project(":platform-commons:commons-quartz-starter"))
     implementation(project(":platform-commons:commons-websocket-starter"))
-    implementation(project(":platform-commons:commons-ai-starter"))
     implementation(project(":platform-commons:commons-selenium-starter"))
     // application modules
     implementation(project(":platform-boot-modules:security"))

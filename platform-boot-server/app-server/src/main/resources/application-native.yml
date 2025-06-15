@@ -67,7 +67,10 @@ spring:
     ai:
         openai:
             api-key: xxx
+            base-url: https://api.deepseek.com
         dashscope:
+            api-key: xxx
+        deepseek:
             api-key: xxx
         mcp:
             client:
