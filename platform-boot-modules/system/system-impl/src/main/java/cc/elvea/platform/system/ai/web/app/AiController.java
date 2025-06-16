@@ -7,6 +7,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.deepseek.DeepSeekChatModel;
+import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -41,8 +42,8 @@ public class AiController {
     }
 
     @PostMapping(API_V1__AI__CHAT)
-    public Flux<String> chat(@RequestBody String message) {
-        Flux<ChatResponse> flux = this.model.stream(new Prompt(message));
+    public Flux<String> chat(@RequestBody OpenAiApi.ChatCompletionRequest request) {
+        Flux<ChatResponse> flux = this.model.stream(new Prompt(""));
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 
