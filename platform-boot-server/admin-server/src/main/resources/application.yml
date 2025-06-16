@@ -1,0 +1,9 @@
+server:
+    port: 8282
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    application:
+        name: admin-server
+    profiles:
+        active: local
