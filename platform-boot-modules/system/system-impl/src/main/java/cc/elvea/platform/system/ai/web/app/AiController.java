@@ -43,7 +43,7 @@ public class AiController {
 
     @PostMapping(API_V1__AI__CHAT)
     public Flux<String> chat(@RequestBody OpenAiApi.ChatCompletionRequest request) {
-        Flux<ChatResponse> flux = this.model.stream(new Prompt(""));
+        Flux<ChatResponse> flux = this.model.stream(new Prompt("Tell me a joke"));
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 
