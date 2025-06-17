@@ -23,9 +23,9 @@ dependencies {
     // commons
     api("commons-io:commons-io")
     api("commons-codec:commons-codec")
-    api("org.apache.commons:commons-crypto")
     api("org.apache.commons:commons-pool2")
     api("org.apache.commons:commons-text")
+    api("org.apache.commons:commons-lang3")
     api("org.apache.commons:commons-lang3")
     api("org.apache.commons:commons-collections4")
     // jackson
