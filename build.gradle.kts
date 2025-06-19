@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.1.12" apply false
-    id("org.springframework.boot") version "3.5.0" apply false
+    id("org.springframework.boot") version "3.5.1" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
 
@@ -50,7 +50,7 @@ allprojects {
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.0")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.0")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.1")
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
             mavenBom("cn.hutool:hutool-bom:5.8.38")
             mavenBom("me.ahoo.cosid:cosid-bom:2.13.0")
@@ -61,7 +61,7 @@ allprojects {
         }
         dependencies {
             // spring authorization server
-            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.5.0")
+            dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.5.1")
             // mapstruct & lombok
             dependency("org.mapstruct:mapstruct:1.6.3")
             dependency("org.mapstruct:mapstruct-processor:1.6.3")
@@ -81,9 +81,9 @@ allprojects {
             dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
             dependency("org.mybatis.generator:mybatis-generator-core:1.4.2")
             dependency("com.github.jsqlparser:jsqlparser:5.3")
-            dependency("org.redisson:redisson:3.49.0")
-            dependency("org.redisson:redisson-spring-data-35:3.49.0")
-            dependency("org.redisson:redisson-spring-boot-starter:3.49.0")
+            dependency("org.redisson:redisson:3.50.0")
+            dependency("org.redisson:redisson-spring-data-35:3.50.0")
+            dependency("org.redisson:redisson-spring-boot-starter:3.50.0")
             dependency("org.apache.shardingsphere:shardingsphere-jdbc:5.5.2")
             // others
             dependency("com.nimbusds:nimbus-jose-jwt:10.3")
@@ -94,8 +94,13 @@ allprojects {
             dependency("org.ow2.asm:asm:9.8")
             dependency("joda-time:joda-time:2.14.0")
             dependency("com.maxmind.geoip2:geoip2:4.3.1")
-            dependency("com.squareup.okio:okio:3.12.0")
+            dependency("com.squareup.okio:okio:3.13.0")
             dependency("com.squareup.okhttp3:okhttp:4.12.0")
+            dependency("com.squareup.okhttp3:okhttp-sse:4.12.0")
+            dependency("com.squareup.okhttp3:logging-interceptor:4.12.0")
+            dependency("com.squareup.retrofit2:retrofit:3.0.0")
+            dependency("com.squareup.retrofit2:adapter-rxjava2:3.0.0")
+            dependency("com.squareup.retrofit2:converter-jackson:3.0.0")
             dependency("com.google.guava:guava:33.4.8-jre")
             dependency("com.github.oshi:oshi-core-java11:6.8.2")
             dependency("net.java.dev.jna:jna-platform:5.17.0")

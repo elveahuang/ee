@@ -3,6 +3,7 @@ dependencies {
     api("org.springframework:spring-tx")
     api("org.springframework:spring-web")
     api("org.springframework:spring-context")
+    api("org.springframework.ai:spring-ai-model")
     api("org.springframework.data:spring-data-commons")
     api("org.springframework.data:spring-data-relational")
     api("org.springframework.cloud:spring-cloud-commons")

@@ -1678,3 +1678,27 @@ CREATE TABLE `sys_authorization_consent`
     CONSTRAINT `pk_sys_authorization_consent` PRIMARY KEY (`id`),
     INDEX `ix_sys_authorization_consent` (`client_id`, `principal_name`)
 );
+
+
+-- =====================================================================================================================
+-- AI
+-- =====================================================================================================================
+
+DROP TABLE IF EXISTS `sys_ai_chat_memory`;
+
+CREATE TABLE `sys_ai_chat_memory`
+(
+    `id`               BIGINT UNSIGNED  NOT NULL COMMENT 'ID',
+    `conversation_id`  VARCHAR(100)     NOT NULL,
+    `content`          LONGTEXT         NOT NULL,
+    `type`             VARCHAR(100)     NOT NULL,
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_ai_chat_memory` PRIMARY KEY (`id`),
+    INDEX `ix_sys_ai_chat_memory` (`conversation_id`)
+);
