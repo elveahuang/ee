@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.1.12" apply false
-    id("org.springframework.boot") version "3.5.2" apply false
+    id("org.springframework.boot") version "3.5.3" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
 
@@ -45,7 +45,7 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.2")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.3")
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
             mavenBom("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.0.0.2")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.0")
