@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.1.12" apply false
-    id("org.springframework.boot") version "3.5.1" apply false
+    id("org.springframework.boot") version "3.5.2" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
 
@@ -45,19 +45,20 @@ allprojects {
 
     dependencyManagement {
         imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.2")
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
             mavenBom("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.0.0.2")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.0")
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.1")
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
             mavenBom("cn.hutool:hutool-bom:5.8.38")
             mavenBom("me.ahoo.cosid:cosid-bom:2.13.0")
             mavenBom("org.mockito:mockito-bom:5.17.0")
-            mavenBom("io.netty:netty-bom:4.1.121.Final")
+            mavenBom("io.netty:netty-bom:4.1.122.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.27")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.12")
+            mavenBom("com.github.victools:jsonschema-generator-bom:4.38.0")
         }
         dependencies {
             // spring authorization server
@@ -87,7 +88,7 @@ allprojects {
             dependency("org.apache.shardingsphere:shardingsphere-jdbc:5.5.2")
             // others
             dependency("com.nimbusds:nimbus-jose-jwt:10.3")
-            dependency("com.nimbusds:oauth2-oidc-sdk:11.25")
+            dependency("com.nimbusds:oauth2-oidc-sdk:11.26")
             dependency("org.jetbrains:annotations:26.0.2")
             dependency("com.github.spotbugs:spotbugs-annotations:4.9.3")
             dependency("ognl:ognl:3.4.7")
@@ -99,15 +100,15 @@ allprojects {
             dependency("com.squareup.okhttp3:okhttp-sse:4.12.0")
             dependency("com.squareup.okhttp3:logging-interceptor:4.12.0")
             dependency("com.squareup.retrofit2:retrofit:3.0.0")
-            dependency("com.squareup.retrofit2:adapter-rxjava2:3.0.0")
+            dependency("com.squareup.retrofit2:adapter-rxjava3:3.0.0")
             dependency("com.squareup.retrofit2:converter-jackson:3.0.0")
             dependency("com.google.guava:guava:33.4.8-jre")
             dependency("com.github.oshi:oshi-core-java11:6.8.2")
             dependency("net.java.dev.jna:jna-platform:5.17.0")
             dependency("net.logstash.logback:logstash-logback-encoder:8.1")
             dependency("com.github.loki4j:loki-logback-appender:2.0.0")
-            dependency("net.bytebuddy:byte-buddy:1.17.5")
-            dependency("net.bytebuddy:byte-buddy-agent:1.17.5")
+            dependency("net.bytebuddy:byte-buddy:1.17.6")
+            dependency("net.bytebuddy:byte-buddy-agent:1.17.6")
             dependency("org.bouncycastle:bcpkix-jdk18on:1.81")
             dependency("org.bouncycastle:bcprov-jdk18on:1.81")
             dependency("org.bouncycastle:bcutil-jdk18on:1.81")
