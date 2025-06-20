@@ -29,7 +29,7 @@ public class JpaChatMemoryRepository implements ChatMemoryRepository {
     @Override
     public @NonNull List<Message> findByConversationId(@NonNull String conversationId) {
         List<AiChatMemoryEntity> entityList = this.aiChatMemoryService.findByConversationId(conversationId);
-        if (CollectionUtils.isEmpty(entityList)) {
+        if (CollectionUtils.isNotEmpty(entityList)) {
             return entityList.stream().map((entity) -> {
                 String content = entity.getContent();
                 String type = entity.getType();
@@ -48,11 +48,11 @@ public class JpaChatMemoryRepository implements ChatMemoryRepository {
     public void saveAll(@NonNull String conversationId, @NonNull List<Message> messages) {
         this.aiChatMemoryService.deleteByConversationId(conversationId);
 
-        if (CollectionUtils.isEmpty(messages)) {
+        if (CollectionUtils.isNotEmpty(messages)) {
             List<AiChatMemoryEntity> entityList = messages.stream().map((message) -> AiChatMemoryEntity.builder()
                 .conversationId(conversationId)
                 .content(message.getText())
-                .type(message.getText()).build()
+                .type(message.getMessageType().getValue()).build()
             ).toList();
             this.aiChatMemoryService.saveBatch(entityList);
         }
