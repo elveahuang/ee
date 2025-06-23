@@ -218,8 +218,15 @@ allprojects {
         }
     }
 
-    // 强制排除未使用的库
     configurations.configureEach {
+        // 强制使用指定版本
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.seleniumhq.selenium") {
+                useVersion("4.33.0")
+            }
+        }
+
+        // 强制排除未使用的库
         exclude(module = "groovy")
         exclude(module = "groovy-json")
         exclude(module = "android-json")
