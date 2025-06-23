@@ -45,7 +45,7 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.3")
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
             mavenBom("org.springframework.ai:spring-ai-bom:1.0.0")
             mavenBom("com.alibaba.cloud.ai:spring-ai-alibaba-bom:1.0.0.2")
             mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.0")
