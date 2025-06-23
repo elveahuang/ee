@@ -18,9 +18,12 @@ public class JpaChatMemoryRepository implements ChatMemoryRepository {
 
     private final AiChatMemoryService aiChatMemoryService;
 
+    /**
+     * @see ChatMemoryRepository#findConversationIds()
+     */
     @Override
-    public List<String> findConversationIds() {
-        return List.of();
+    public @NonNull List<String> findConversationIds() {
+        return this.aiChatMemoryService.findConversationIds();
     }
 
     /**

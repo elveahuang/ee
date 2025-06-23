@@ -50,7 +50,16 @@ public class AiChatMemoryServiceImpl
      */
     @Override
     public List<String> findConversationIds() {
-        return List.of();
+        Specification<AiChatMemoryEntity> specification = (root, query, builder) -> {
+            if (query != null) {
+                query.select(root.get(AiChatMemoryEntity_.CONVERSATION_ID)).distinct(true);
+                query.groupBy(root.get(AiChatMemoryEntity_.CONVERSATION_ID));
+            }
+            List<Predicate> predicates = Lists.newArrayList();
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
+        return this.repository.findAll(specification).stream()
+            .map(AiChatMemoryEntity::getConversationId).toList();
     }
 
 }
