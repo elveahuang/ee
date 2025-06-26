@@ -102,9 +102,27 @@
         </encoder>
     </appender>
 
+    <!-- AI -->
+    <appender name="AI" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/ai.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/ai.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${FILE_LOG_ROLLING_POLICY_SIZE}</maxFileSize>
+            <maxHistory>${FILE_LOG_ROLLING_POLICY_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>${FILE_LOG_CHARSET}</charset>
+        </encoder>
+    </appender>
+
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.springframework.security" level="INFO"/>
     <logger name="cc.elvea" level="INFO"/>
+
+    <logger name="cc.elvea.platform.commons.core.ai.advisor.CustomLoggingAdvisor" level="INFO">
+        <appender-ref ref="AI"/>
+    </logger>
 
     <logger name="cc.elvea.platform.system.commons.interceptor.LogInterceptor" level="INFO">
         <appender-ref ref="URL"/>

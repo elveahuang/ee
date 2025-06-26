@@ -9,8 +9,8 @@ import reactor.core.publisher.Flux;
  */
 public interface ChatCompletionService {
 
-    ChatResponse completion(SimpleChatRequest request) throws Exception;
+    ChatResponse chatCompletion(SimpleChatRequest request) throws Exception;
 
-    Flux<ChatResponse> streamCompletion(SimpleChatRequest request) throws Exception;
+    Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) throws Exception;
 
 }

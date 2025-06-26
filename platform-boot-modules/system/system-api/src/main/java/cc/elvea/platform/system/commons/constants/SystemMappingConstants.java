@@ -101,8 +101,8 @@ public interface SystemMappingConstants {
     // -----------------------------------------------------------------------------------------------------------------
 
     String API_V1__AI__CHAT = API_V1_URL_PREFIX + "/ai/chat";
-
-    String API_V1__AI__COMPLETION = API_V1_URL_PREFIX + "/ai/chat/completion";
+    String API_V1__AI__CHAT_STREAM = API_V1_URL_PREFIX + "/ai/chat/stream";
+    String API_V1__AI__COMPLETION = API_V1_URL_PREFIX + "/ai/completion";
 
     // -----------------------------------------------------------------------------------------------------------------
     // 公告模块

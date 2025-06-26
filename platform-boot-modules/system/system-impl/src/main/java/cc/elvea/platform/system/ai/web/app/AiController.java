@@ -10,8 +10,7 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.API_V1__AI__CHAT;
-import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.API_V1__AI__COMPLETION;
+import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.*;
 
 /**
  * @author elvea
@@ -29,19 +28,28 @@ public class AiController {
     @GetMapping(API_V1__AI__CHAT)
     public R<SimpleChatResponse> messages(@RequestParam(value = "conversationId", defaultValue = "") String conversationId) {
         conversationId = StringUtils.isNotEmpty(conversationId) ? conversationId : StringUtils.uuid();
-        SimpleChatResponse response = SimpleChatResponse.builder().conversationId(conversationId).messages(factory.getMessageWindowChatMemory().get(conversationId)).build();
+        SimpleChatResponse response = SimpleChatResponse.builder()
+            .conversationId(conversationId)
+            .messages(factory.getMessageWindowChatMemory().get(conversationId))
+            .build();
         return R.success(response);
     }
 
     @PostMapping(API_V1__AI__CHAT)
-    public Flux<String> chat(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamCompletion(request);
+    public String chatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
+        ChatResponse response = this.factory.getChatCompletionService().chatCompletion(request);
+        return response.getResult().getOutput().getText();
+    }
+
+    @PostMapping(API_V1__AI__CHAT_STREAM)
+    public Flux<String> streamChatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
+        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 
     @PostMapping(API_V1__AI__COMPLETION)
     public Flux<String> completion(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamCompletion(request);
+        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 

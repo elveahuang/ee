@@ -1,7 +1,6 @@
 package cc.elvea.platform.commons.core.ai.advisor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.client.ChatClientMessageAggregator;
 import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;
@@ -23,9 +22,9 @@ import java.util.stream.Collectors;
  * @author elvea
  */
 @Slf4j
-public class CustomizeLoggerAdvisor implements CallAdvisor, StreamAdvisor {
+public class CustomLoggingAdvisor implements CallAdvisor, StreamAdvisor {
 
-    @NotNull
+    @NonNull
     @Override
     public String getName() {
         return this.getClass().getSimpleName();
@@ -48,21 +47,19 @@ public class CustomizeLoggerAdvisor implements CallAdvisor, StreamAdvisor {
             log.info("AI Response is null");
             return;
         }
+
         ChatResponseMetadata responseMetadata = response.getMetadata();
-        // 输出使用的tokens数
         Usage usage = responseMetadata.getUsage();
-        log.info("已使用的总tokens数：{}", usage.getTotalTokens());
-        log.info("输入的tokens数：{}", usage.getPromptTokens());
-        log.info("输出的tokens数：{}", usage.getCompletionTokens());
+        log.info("Tokens ：{}", usage.getTotalTokens());
+        log.info("Input tokens：{}", usage.getPromptTokens());
+        log.info("Output tokens：{}", usage.getCompletionTokens());
+
         AssistantMessage assistantMessage = response.getResult().getOutput();
         List<AssistantMessage.ToolCall> toolCallList = assistantMessage.getToolCalls();
-        // 输出提示信息
         String result = assistantMessage.getText();
-        log.info("问题：{}", result);
-        log.info("选择了 [{}] 个工具来使用", toolCallList.size());
-        String toolCallInfo = toolCallList.stream()
-            .map(toolCall -> String.format("工具名称：%s，参数：%s", toolCall.name(), toolCall.arguments()))
-            .collect(Collectors.joining("\n"));
+        log.info("Prompt：{}", result);
+        log.info("Tools: {}", toolCallList.size());
+        String toolCallInfo = toolCallList.stream().map(toolCall -> String.format("Tool：%s，Params：%s", toolCall.name(), toolCall.arguments())).collect(Collectors.joining("\n"));
         log.info(toolCallInfo);
         log.info("AI Response: {}", assistantMessage.getText());
     }

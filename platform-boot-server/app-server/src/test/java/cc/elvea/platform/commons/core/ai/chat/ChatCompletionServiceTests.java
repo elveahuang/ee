@@ -27,7 +27,7 @@ public class ChatCompletionServiceTests extends BaseTests {
         SimpleChatRequest request = SimpleChatRequest.builder().prompt("你好").conversationId(uuid()).build();
 
         ChatCompletionService chatCompletionService = aiFactory.getChatCompletionService();
-        Flux<ChatResponse> flux = chatCompletionService.streamCompletion(request);
+        Flux<ChatResponse> flux = chatCompletionService.streamChatCompletion(request);
         flux.toIterable().forEach((response) -> {
             try {
                 System.out.println(JacksonUtils.toJson(response));
@@ -45,7 +45,7 @@ public class ChatCompletionServiceTests extends BaseTests {
             }
         });
 
-        ChatResponse response = chatCompletionService.completion(request);
+        ChatResponse response = chatCompletionService.chatCompletion(request);
         System.out.println(JacksonUtils.toJson(response));
     }
 
