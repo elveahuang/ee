@@ -1,13 +1,11 @@
-package cc.elvea.platform.system.ai.model.response;
+package cc.elvea.platform.commons.core.ai.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.ai.chat.messages.Message;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author elvea
@@ -16,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SimpleChatResponse implements Serializable {
+public class SimpleChatRequest implements Serializable {
     private String conversationId;
-    private List<Message> messages;
+    private String prompt;
 }

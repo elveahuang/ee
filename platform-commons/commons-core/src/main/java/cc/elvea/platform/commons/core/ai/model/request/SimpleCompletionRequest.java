@@ -1,4 +1,4 @@
-package cc.elvea.platform.system.ai.model.request;
+package cc.elvea.platform.commons.core.ai.model.request;
 
 import cc.elvea.platform.commons.web.request.Request;
 import lombok.*;
