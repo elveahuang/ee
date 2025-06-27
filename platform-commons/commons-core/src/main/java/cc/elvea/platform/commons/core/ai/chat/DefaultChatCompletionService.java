@@ -2,6 +2,7 @@ package cc.elvea.platform.commons.core.ai.chat;
 
 import cc.elvea.platform.commons.core.ai.advisor.CustomLoggingAdvisor;
 import cc.elvea.platform.commons.core.ai.model.request.SimpleChatRequest;
+import cc.elvea.platform.commons.core.ai.tools.CommonTools;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -23,7 +24,7 @@ public class DefaultChatCompletionService implements ChatCompletionService {
         this.client = ChatClient.builder(model).defaultAdvisors(
             MessageChatMemoryAdvisor.builder(messageWindowChatMemory).build(),
             new CustomLoggingAdvisor()
-        ).build();
+        ).defaultTools(new CommonTools()).build();
     }
 
     @Override
