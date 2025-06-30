@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({AiProperties.class})
 public class AiAutoConfiguration {
 

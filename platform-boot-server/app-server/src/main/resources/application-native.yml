@@ -110,6 +110,8 @@ platform:
         mobile: http://127.0.0.1:8082
         webapp: http://127.0.0.1:8083
         main: http://127.0.0.1:8084
+    ai:
+        enabled: true
     data:
         core:
             enabled: true
@@ -206,7 +208,7 @@ platform:
             access-key-id:
             access-key-secret:
     face-body:
-        enabled: true
+        enabled: false
         type: aliyun
         aliyun:
             enabled: false
@@ -230,6 +232,6 @@ platform:
             host: 127.0.0.1
             port: 7890
     test:
-        enabled: true
+        enabled: false
         email:
         mobile:
