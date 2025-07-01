@@ -42,6 +42,8 @@ include("platform-commons:commons-ai")
 include("platform-commons:commons-ai-starter")
 include("platform-commons:commons-selenium")
 include("platform-commons:commons-selenium-starter")
+include("platform-commons:commons-playwright")
+include("platform-commons:commons-playwright-starter")
 // ---------------------------------------------------------------------------------------------------------------------
 // 单体服务
 // ---------------------------------------------------------------------------------------------------------------------

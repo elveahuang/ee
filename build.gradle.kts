@@ -118,6 +118,7 @@ allprojects {
             dependency("io.github.bonigarcia:webdrivermanager:6.1.0")
             dependency("com.bucket4j:bucket4j_jdk17-core:8.14.0")
             dependency("com.bucket4j:bucket4j_jdk17-redisson:8.14.0")
+            dependency("com.microsoft.playwright:playwright:1.53.0")
             // json & protobuf
             dependency("org.json:json:20250517")
             dependency("com.alibaba:fastjson:2.0.57")
