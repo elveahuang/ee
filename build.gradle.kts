@@ -52,16 +52,18 @@ allprojects {
             mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.8.0")
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
-            mavenBom("cn.hutool:hutool-bom:5.8.38")
+            mavenBom("cn.hutool:hutool-bom:5.8.39")
             mavenBom("me.ahoo.cosid:cosid-bom:2.13.1")
             mavenBom("org.mockito:mockito-bom:5.17.0")
             mavenBom("io.netty:netty-bom:4.1.122.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.27")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.12")
+            mavenBom("org.jetbrains.kotlin:kotlin-bom:2.2.0")
             mavenBom("com.github.victools:jsonschema-generator-bom:4.38.0")
         }
         dependencies {
-            // spring authorization server
+            // spring
+            dependency("org.springframework.retry:spring-retry:2.0.12")
             dependency("org.springframework.security:spring-security-oauth2-authorization-server:1.5.1")
             // mapstruct & lombok
             dependency("org.mapstruct:mapstruct:1.6.3")
@@ -154,7 +156,7 @@ allprojects {
             dependency("com.twelvemonkeys.imageio:imageio-jpeg:3.12.0")
             // sdk
             dependency("io.minio:minio:8.5.17")
-            dependency("com.openai:openai-java:2.11.0")
+            dependency("software.amazon.awssdk:s3:2.31.74")
             dependency("com.larksuite.oapi:oapi-sdk:2.4.19")
             dependency("com.github.binarywang:weixin-java-channel:4.7.0")
             dependency("com.github.binarywang:weixin-java-cp:4.7.0")
@@ -165,6 +167,7 @@ allprojects {
             dependency("org.telegram:telegrambots-client:9.0.0")
             dependency("org.telegram:telegrambots-abilities:9.0.0")
             dependency("org.telegram:telegrambots-springboot-longpolling-starter:9.0.0")
+            dependency("com.openai:openai-java:2.12.0")
             // sdk - aliyun
             dependency("com.aliyun:dingtalk:2.2.25")
             dependency("com.aliyun:alimt20181012:1.5.0")
@@ -219,6 +222,9 @@ allprojects {
         resolutionStrategy.eachDependency {
             if (requested.group == "org.seleniumhq.selenium") {
                 useVersion("4.33.0")
+            }
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion("2.2.0")
             }
         }
 
