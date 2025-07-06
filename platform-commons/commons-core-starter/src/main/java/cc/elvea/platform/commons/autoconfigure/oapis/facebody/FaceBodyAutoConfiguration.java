@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({FaceBodyProperties.class})
-@ConditionalOnProperty(prefix = FaceBodyProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = FaceBodyProperties.PREFIX, name = "enabled", havingValue = "true")
 public class FaceBodyAutoConfiguration {
 
     public FaceBodyAutoConfiguration(FaceBodyProperties properties) {
