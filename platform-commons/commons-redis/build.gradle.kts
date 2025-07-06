@@ -4,9 +4,8 @@ dependencies {
     api("io.netty:netty-resolver-dns")
     api("io.netty:netty-resolver-dns-native-macos")
     api("io.netty:netty-resolver-dns-classes-macos")
+    api("me.ahoo.cosid:cosid-core")
     api("me.ahoo.cosid:cosid-spring-redis")
-    api("com.bucket4j:bucket4j_jdk17-core")
-    api("com.bucket4j:bucket4j_jdk17-redisson")
 }
 
 tasks.named<Jar>("jar") {

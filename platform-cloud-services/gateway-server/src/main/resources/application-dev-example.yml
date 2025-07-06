@@ -34,14 +34,27 @@ spring:
                             predicates:
                                 - Path=/api/**
 ### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
 ### Platform Config
 ### --------------------------------------------------------------------------------------------------------------------
 platform:
     debug:
         enabled: false
-    sequence:
-        enabled: false
-    cache:
-        enabled: true
     websocket:
         enabled: false

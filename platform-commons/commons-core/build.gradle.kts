@@ -60,7 +60,7 @@ dependencies {
     api("org.jsoup:jsoup")
     api("com.maxmind.geoip2:geoip2")
     api("org.json:json:20250517")
-    api("org.aspectj:aspectjweaver")
+    compileOnly("org.aspectj:aspectjweaver")
     compileOnly("org.quartz-scheduler:quartz")
     compileOnly("com.nimbusds:oauth2-oidc-sdk")
     compileOnly("org.thymeleaf:thymeleaf")
