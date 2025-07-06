@@ -14,17 +14,25 @@ spring:
                 url: http://127.0.0.1:9292
                 username: admin
                 password: admin
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
     cloud:
         gateway:
-            routes:
-                -   id: auth-server
-                    uri: lb://auth-server
-                    predicates:
-                        - Path=/oauth/**
-                -   id: system-server
-                    uri: lb://system-server
-                    predicates:
-                        - Path=/api/**
+            server:
+                webmvc:
+                    routes:
+                        -   id: auth-server
+                            uri: lb://auth-server
+                            predicates:
+                                - Path=/oauth/**
+                        -   id: system-server
+                            uri: lb://system-server
+                            predicates:
+                                - Path=/api/**
 ### --------------------------------------------------------------------------------------------------------------------
 ### Platform Config
 ### --------------------------------------------------------------------------------------------------------------------
@@ -34,9 +42,6 @@ platform:
     sequence:
         enabled: false
     cache:
+        enabled: true
+    websocket:
         enabled: false
-        type: redis
-        redis:
-            enabled: false
-        redisson:
-            enabled: false

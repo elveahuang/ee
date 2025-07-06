@@ -6,7 +6,8 @@ plugins {
 
 dependencies {
     // spring
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -15,11 +16,12 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
     implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc")
     // spring extensions
     implementation("de.codecentric:spring-boot-admin-starter-client")
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-redis-starter"))
     // development & test
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }

@@ -4,6 +4,7 @@ import cc.elvea.platform.commons.autoconfigure.message.properties.WebSocketPrope
 import cc.elvea.platform.commons.message.socket.WebSocketSessionHandlerDecoratorFactory;
 import cc.elvea.platform.commons.message.socket.server.SessionHandshakeInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 @EnableWebSocketMessageBroker
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({WebSocketProperties.class})
+@ConditionalOnClass(WebSocketMessageBrokerConfigurer.class)
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class WebSocketMessageBrokerAutoConfiguration implements WebSocketMessageBrokerConfigurer {
 

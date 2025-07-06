@@ -11,12 +11,14 @@ import cc.elvea.platform.commons.message.socket.service.DefaultWebSocketSessionS
 import cc.elvea.platform.commons.message.socket.service.WebSocketService;
 import cc.elvea.platform.commons.message.socket.service.WebSocketSessionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
 
 /**
  * @author elvea
@@ -24,6 +26,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({WebSocketProperties.class})
+@ConditionalOnClass(WebSocketHandlerDecoratorFactory.class)
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class WebSocketCommonAutoConfiguration {
 

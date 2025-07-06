@@ -1,14 +1,14 @@
 package cc.elvea.platform.gateway.filter;
 
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
+
+import java.io.IOException;
 
 /**
  * @author elvea
@@ -16,14 +16,17 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AuthFilter implements GlobalFilter, Ordered {
+public class AuthFilter implements Filter, Ordered {
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-        String authorization = request.getHeaders().getFirst("Authorization");
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String authorization = request.getHeader("Authorization");
         log.info("Authorization : {}", authorization);
-        return chain.filter(exchange);
+        chain.doFilter(request, response);
     }
 
     @Override

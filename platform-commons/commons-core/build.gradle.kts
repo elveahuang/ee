@@ -1,8 +1,9 @@
 dependencies {
     // spring
+    api("org.springframework:spring-aop")
+    api("org.springframework:spring-context")
     api("org.springframework:spring-tx")
     api("org.springframework:spring-web")
-    api("org.springframework:spring-context")
     api("org.springframework.ai:spring-ai-model")
     api("org.springframework.data:spring-data-commons")
     api("org.springframework.data:spring-data-relational")
@@ -59,12 +60,13 @@ dependencies {
     api("com.google.zxing:core")
     api("org.jsoup:jsoup")
     api("com.maxmind.geoip2:geoip2")
+    api("org.json:json:20250517")
+    api("org.aspectj:aspectjweaver")
     compileOnly("org.quartz-scheduler:quartz")
     compileOnly("com.nimbusds:oauth2-oidc-sdk")
     compileOnly("org.thymeleaf:thymeleaf")
     compileOnly("joda-time:joda-time")
     compileOnly("com.squareup.okio:okio")
-    compileOnly("org.aspectj:aspectjweaver")
     compileOnly("org.dom4j:dom4j")
     compileOnly("org.apache.shardingsphere:shardingsphere-jdbc")
     // jakarta
