@@ -21,7 +21,6 @@ dependencies {
     compileOnly(project(":platform-commons:commons-oapis"))
     compileOnly(project(":platform-commons:commons-security"))
     compileOnly(project(":platform-commons:commons-websocket"))
-    compileOnly(project(":platform-commons:commons-playwright"))
     compileOnly(project(":platform-commons:commons-selenium"))
     // commons
     api("commons-io:commons-io")
