@@ -36,7 +36,10 @@ public class AiAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MessageWindowChatMemory messageWindowChatMemory(ChatMemoryRepository chatMemoryRepository) {
-        return MessageWindowChatMemory.builder().chatMemoryRepository(chatMemoryRepository).maxMessages(10).build();
+        return MessageWindowChatMemory.builder()
+            .chatMemoryRepository(chatMemoryRepository)
+            .maxMessages(10)
+            .build();
     }
 
     @Bean
@@ -48,6 +51,7 @@ public class AiAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public AiFactory aiFactory(AiProperties aiProperties,
                                ChatCompletionService defaultChatCompletionService,
                                MessageWindowChatMemory messageWindowChatMemory) {

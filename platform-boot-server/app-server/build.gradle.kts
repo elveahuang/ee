@@ -45,6 +45,7 @@ graalvmNative {
             buildArgs.add("--initialize-at-build-time=org.slf4j")
             buildArgs.add("--initialize-at-build-time=ch.qos.logback")
             buildArgs.add("--initialize-at-build-time=io.netty.util.internal.shaded.org.jctools.util.UnsafeAccess")
+            buildArgs.add("--initialize-at-run-time=org.springframework.ai.chat.client.advisor.api.BaseAdvisor")
             buildArgs.add("--initialize-at-run-time=sun.net.dns.ResolverConfigurationImpl")
             buildArgs.add("--trace-class-initialization=org.springframework.util.ClassUtils")
             buildArgs.add("-H:+PrintClassInitialization")
