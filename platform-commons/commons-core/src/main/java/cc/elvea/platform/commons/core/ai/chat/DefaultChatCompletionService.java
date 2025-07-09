@@ -52,7 +52,6 @@ public class DefaultChatCompletionService implements ChatCompletionService {
         return this.client
             .prompt(request.getPrompt())
             .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()))
-            .tools(customizer.getTools())
             .call()
             .chatResponse();
     }

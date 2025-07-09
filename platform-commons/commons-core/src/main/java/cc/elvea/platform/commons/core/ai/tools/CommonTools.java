@@ -7,7 +7,7 @@ public class CommonTools {
 
     @Tool(description = "问好")
     public String greeting(String name) {
-        return "你好" + name;
+        return "！你好呀" + name;
     }
 
     @Tool(description = "获取版本号")

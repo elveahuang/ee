@@ -26,8 +26,9 @@ public class AiController {
     }
 
     @GetMapping(API_V1__AI__CHAT)
-    public R<SimpleChatResponse> messages(@RequestParam(value = "conversationId", defaultValue = "") String conversationId) {
-        conversationId = StringUtils.isNotEmpty(conversationId) ? conversationId : StringUtils.uuid();
+    public R<SimpleChatResponse> messages(@RequestParam(value = "conversationId", required = false, defaultValue = "") String conversationId,
+                                          @RequestParam(value = "force", required = false, defaultValue = "false") boolean force) {
+        conversationId = (StringUtils.isEmpty(conversationId) || force) ? StringUtils.uuid() : conversationId;
         SimpleChatResponse response = SimpleChatResponse.builder()
             .conversationId(conversationId)
             .messages(factory.getMessageWindowChatMemory().get(conversationId))

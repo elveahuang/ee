@@ -67,6 +67,7 @@ public class CustomLoggingAdvisor implements CallAdvisor, StreamAdvisor {
     @NonNull
     @Override
     public ChatClientResponse adviseCall(@NonNull ChatClientRequest advisedRequest, CallAdvisorChain chain) {
+        log.info("AI adviseCall.");
         ChatClientResponse advisedResponse = chain.nextCall(this.before(advisedRequest));
         this.observeAfter(advisedResponse);
         return advisedResponse;
@@ -75,6 +76,7 @@ public class CustomLoggingAdvisor implements CallAdvisor, StreamAdvisor {
     @NonNull
     @Override
     public Flux<ChatClientResponse> adviseStream(@NonNull ChatClientRequest advisedRequest, StreamAdvisorChain chain) {
+        log.info("AI adviseStream.");
         Flux<ChatClientResponse> advisedResponses = chain.nextStream(this.before(advisedRequest));
         return (new ChatClientMessageAggregator()).aggregateChatClientResponse(advisedResponses, this::observeAfter);
     }

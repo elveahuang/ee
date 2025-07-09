@@ -18,7 +18,7 @@ public interface GlobalConstants {
     /**
      * 全局版本号
      */
-    String VERSION = "25.1.0";
+    String VERSION = "25.1.999";
 
     /**
      * 全局默认编码

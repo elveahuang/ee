@@ -17,4 +17,5 @@ import java.io.Serializable;
 public class SimpleChatRequest implements Serializable {
     private String conversationId;
     private String prompt;
+    private boolean force;
 }

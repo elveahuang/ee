@@ -1,6 +1,7 @@
 package cc.elvea.platform.system.configuration;
 
 import cc.elvea.platform.commons.core.ai.AiCustomizer;
+import cc.elvea.platform.commons.core.ai.tools.CommonTools;
 import cc.elvea.platform.system.ai.service.AiChatMemoryService;
 import cc.elvea.platform.system.ai.support.JpaChatMemoryRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author elvea
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SystemAiConfiguration {
 
     @Bean
@@ -24,7 +25,7 @@ public class SystemAiConfiguration {
 
     @Bean
     public AiCustomizer aiCustomizer() {
-        List<Object> tools = List.of();
+        List<Object> tools = List.of(new CommonTools());
         return AiCustomizer.builder().tools(tools).build();
     }
 

@@ -54,7 +54,7 @@ allprojects {
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
             mavenBom("cn.hutool:hutool-bom:5.8.39")
             mavenBom("me.ahoo.cosid:cosid-bom:2.13.1")
-            mavenBom("org.mockito:mockito-bom:5.17.0")
+            mavenBom("org.mockito:mockito-bom:5.18.0")
             mavenBom("io.netty:netty-bom:4.1.122.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.27")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.12")
@@ -89,7 +89,7 @@ allprojects {
             dependency("org.redisson:redisson-spring-boot-starter:3.50.0")
             dependency("org.apache.shardingsphere:shardingsphere-jdbc:5.5.2")
             // others
-            dependency("com.nimbusds:nimbus-jose-jwt:10.3")
+            dependency("com.nimbusds:nimbus-jose-jwt:10.3.1")
             dependency("com.nimbusds:oauth2-oidc-sdk:11.26")
             dependency("org.jetbrains:annotations:26.0.2")
             dependency("com.github.spotbugs:spotbugs-annotations:4.9.3")
@@ -97,10 +97,10 @@ allprojects {
             dependency("org.ow2.asm:asm:9.8")
             dependency("joda-time:joda-time:2.14.0")
             dependency("com.maxmind.geoip2:geoip2:4.3.1")
-            dependency("com.squareup.okio:okio:3.13.0")
-            dependency("com.squareup.okhttp3:okhttp:4.12.0")
-            dependency("com.squareup.okhttp3:okhttp-sse:4.12.0")
-            dependency("com.squareup.okhttp3:logging-interceptor:4.12.0")
+            dependency("com.squareup.okio:okio:3.15.0")
+            dependency("com.squareup.okhttp3:okhttp:5.0.0")
+            dependency("com.squareup.okhttp3:okhttp-sse:5.0.0")
+            dependency("com.squareup.okhttp3:logging-interceptor:5.0.0")
             dependency("com.squareup.retrofit2:retrofit:3.0.0")
             dependency("com.squareup.retrofit2:adapter-rxjava3:3.0.0")
             dependency("com.squareup.retrofit2:converter-jackson:3.0.0")
@@ -143,20 +143,20 @@ allprojects {
             dependency("org.libreoffice:jurt:24.8.4")
             dependency("org.libreoffice:ridl:24.8.4")
             dependency("org.libreoffice:unoil:24.8.4")
-            dependency("org.dom4j:dom4j:2.1.4")
+            dependency("org.dom4j:dom4j:2.2.0")
             dependency("org.apache.pdfbox:fontbox:3.0.5")
             dependency("org.apache.pdfbox:preflight:3.0.5")
             dependency("org.apache.pdfbox:pdfbox:3.0.5")
             dependency("org.apache.pdfbox:pdfbox-io:3.0.5")
             dependency("org.apache.pdfbox:pdfbox-tools:3.0.5")
             dependency("org.apache.pdfbox:pdfbox-debuger:3.0.5")
-            dependency("org.dromara:x-easypdf-pdfbox:3.4.0")
+            dependency("org.dromara:x-easypdf-pdfbox:3.4.1")
             dependency("org.jsoup:jsoup:1.21.1")
             dependency("net.coobird:thumbnailator:0.4.20")
             dependency("com.twelvemonkeys.imageio:imageio-jpeg:3.12.0")
             // sdk
             dependency("io.minio:minio:8.5.17")
-            dependency("software.amazon.awssdk:s3:2.31.74")
+            dependency("software.amazon.awssdk:s3:2.31.77")
             dependency("com.larksuite.oapi:oapi-sdk:2.4.19")
             dependency("com.github.binarywang:weixin-java-channel:4.7.0")
             dependency("com.github.binarywang:weixin-java-cp:4.7.0")
@@ -169,17 +169,17 @@ allprojects {
             dependency("org.telegram:telegrambots-springboot-longpolling-starter:9.0.0")
             dependency("com.openai:openai-java:2.12.0")
             // sdk - aliyun
-            dependency("com.aliyun:dingtalk:2.2.25")
+            dependency("com.aliyun:dingtalk:2.2.28")
             dependency("com.aliyun:alimt20181012:1.5.0")
             dependency("com.aliyun:facebody20191230:5.1.2")
-            dependency("com.aliyun:dysmsapi20170525:4.1.1")
-            dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.2")
-            dependency("com.alibaba:dashscope-sdk-java:2.20.6")
+            dependency("com.aliyun:dysmsapi20170525:4.1.2")
+            dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.3")
+            dependency("com.alibaba:dashscope-sdk-java:2.20.7")
             dependency("com.aliyun:aliyun-java-sdk-core:4.7.6")
-            dependency("com.alipay.sdk:alipay-sdk-java:4.40.272.ALL")
+            dependency("com.alipay.sdk:alipay-sdk-java:4.40.298.ALL")
             // sdk - tencent
             dependency("com.qcloud:cos_api:5.6.247")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1292")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1295")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1291")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1281")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1262")
@@ -199,7 +199,7 @@ allprojects {
             dependency("org.apache.commons:commons-collections4:4.5.0")
             // 辅助用于排除重复的依赖
             dependency("com.aliyun:tea-rpc:0.1.3")
-            dependency("com.aliyun:tea-openapi:0.3.9")
+            dependency("com.aliyun:tea-openapi:0.3.10")
             dependency("com.aliyun:tea-rpc-util:0.1.3")
             dependency("org.jodd:jodd-bean:5.1.6")
             dependency("org.jodd:jodd-core:5.3.0")
@@ -212,8 +212,8 @@ allprojects {
             dependency("org.apache.httpcomponents:httpmime:4.5.14")
             dependency("org.apache.httpcomponents:httpclient:4.5.14")
             dependency("com.thoughtworks.xstream:xstream:1.4.21")
-            dependency("org.checkerframework:checker-qual:3.49.4")
-            dependency("io.github.classgraph:classgraph:4.8.179")
+            dependency("org.checkerframework:checker-qual:3.49.5")
+            dependency("io.github.classgraph:classgraph:4.8.180")
         }
     }
 
@@ -221,10 +221,16 @@ allprojects {
         // 强制使用指定版本
         resolutionStrategy.eachDependency {
             if (requested.group == "org.seleniumhq.selenium") {
-                useVersion("4.33.0")
+                useVersion("4.34.0")
             }
             if (requested.group == "org.jetbrains.kotlin") {
                 useVersion("2.2.0")
+            }
+            if (requested.group == "org.apache.groovy") {
+                useVersion("4.0.27")
+            }
+            if (requested.group == "org.mockito") {
+                useVersion("5.18.0")
             }
         }
 
