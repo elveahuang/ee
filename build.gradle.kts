@@ -3,8 +3,9 @@ plugins {
     id("java")
     id("application")
     id("java-library")
+    id("com.github.ben-manes.versions") version "0.52.0"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.github.spotbugs") version "6.1.13" apply false
+    id("com.github.spotbugs") version "6.2.1" apply false
     id("org.springframework.boot") version "3.5.3" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
@@ -53,7 +54,7 @@ allprojects {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
             mavenBom("io.modelcontextprotocol.sdk:mcp-bom:0.10.0")
             mavenBom("cn.hutool:hutool-bom:5.8.39")
-            mavenBom("me.ahoo.cosid:cosid-bom:2.13.1")
+            mavenBom("me.ahoo.cosid:cosid-bom:2.13.3")
             mavenBom("org.mockito:mockito-bom:5.18.0")
             mavenBom("io.netty:netty-bom:4.1.122.Final")
             mavenBom("org.apache.groovy:groovy-bom:4.0.27")
@@ -98,7 +99,7 @@ allprojects {
             dependency("joda-time:joda-time:2.14.0")
             dependency("com.maxmind.geoip2:geoip2:4.3.1")
             dependency("com.squareup.okio:okio:3.15.0")
-            dependency("com.squareup.okhttp3:okhttp:5.0.0")
+            dependency("com.squareup.okhttp3:okhttp:5.1.0")
             dependency("com.squareup.okhttp3:okhttp-sse:5.0.0")
             dependency("com.squareup.okhttp3:logging-interceptor:5.0.0")
             dependency("com.squareup.retrofit2:retrofit:3.0.0")
@@ -117,7 +118,7 @@ allprojects {
             dependency("org.shredzone.acme4j:acme4j-client:3.5.1")
             dependency("org.shredzone.acme4j:acme4j-smime:3.5.1")
             dependency("com.xuxueli:xxl-job-core:3.1.1")
-            dependency("io.github.bonigarcia:webdrivermanager:6.1.0")
+            dependency("io.github.bonigarcia:webdrivermanager:6.1.1")
             dependency("com.bucket4j:bucket4j_jdk17-core:8.14.0")
             dependency("com.bucket4j:bucket4j_jdk17-redisson:8.14.0")
             dependency("com.microsoft.playwright:playwright:1.53.0")
@@ -167,7 +168,7 @@ allprojects {
             dependency("org.telegram:telegrambots-client:9.0.0")
             dependency("org.telegram:telegrambots-abilities:9.0.0")
             dependency("org.telegram:telegrambots-springboot-longpolling-starter:9.0.0")
-            dependency("com.openai:openai-java:2.12.0")
+            dependency("com.openai:openai-java:2.12.1")
             // sdk - aliyun
             dependency("com.aliyun:dingtalk:2.2.28")
             dependency("com.aliyun:alimt20181012:1.5.0")
@@ -179,10 +180,10 @@ allprojects {
             dependency("com.alipay.sdk:alipay-sdk-java:4.40.298.ALL")
             // sdk - tencent
             dependency("com.qcloud:cos_api:5.6.247")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1295")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1298")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1291")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1281")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1262")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1297")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.1259")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1292")
             // commons
@@ -194,7 +195,7 @@ allprojects {
             dependency("org.apache.commons:commons-email:1.6.0")
             dependency("org.apache.commons:commons-csv:1.14.0")
             dependency("org.apache.commons:commons-text:1.13.1")
-            dependency("org.apache.commons:commons-lang3:3.17.0")
+            dependency("org.apache.commons:commons-lang3:3.18.0")
             dependency("org.apache.commons:commons-compress:1.27.1")
             dependency("org.apache.commons:commons-collections4:4.5.0")
             // 辅助用于排除重复的依赖
