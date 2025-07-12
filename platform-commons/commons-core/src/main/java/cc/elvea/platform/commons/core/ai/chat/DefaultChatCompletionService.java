@@ -28,11 +28,16 @@ public class DefaultChatCompletionService implements ChatCompletionService {
                                         MessageWindowChatMemory messageWindowChatMemory,
                                         ObjectProvider<AiCustomizer> customizerProvider) {
         AiCustomizer customizer = customizerProvider.getIfAvailable(AiCustomizer::defaultCustomizer);
+
         this.client = ChatClient.builder(model)
             .defaultAdvisors(
-                MessageChatMemoryAdvisor.builder(messageWindowChatMemory).build(),
+                MessageChatMemoryAdvisor
+                    .builder(messageWindowChatMemory)
+                    .scheduler(MessageChatMemoryAdvisor.DEFAULT_SCHEDULER)
+                    .build(),
                 new CustomLoggingAdvisor()
-            ).defaultTools(customizer.getTools().toArray())
+            )
+            .defaultTools(customizer.getTools().toArray())
             .build();
     }
 

@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.lang.NonNull;
+
+import java.util.Set;
 
 /**
  * @author elvea
@@ -63,17 +66,14 @@ public class LogAutoConfiguration {
 
     public static class LogRuntimeHints implements RuntimeHintsRegistrar {
         @Override
-        public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+        public void registerHints(@NonNull RuntimeHints hints, ClassLoader classLoader) {
             log.info("Register RuntimeHints by LogRuntimeHints");
 
-            hints.reflection().registerType(UrlLogDto.class, MemberCategory.values());
-            hints.serialization().registerType(UrlLogDto.class);
-
-            hints.reflection().registerType(OperationLogDto.class, MemberCategory.values());
-            hints.serialization().registerType(OperationLogDto.class);
-
-            hints.reflection().registerType(CaptchaLogDto.class, MemberCategory.values());
-            hints.serialization().registerType(CaptchaLogDto.class);
+            var mcs = MemberCategory.values();
+            for (var type : Set.of(UrlLogDto.class, OperationLogDto.class, CaptchaLogDto.class)) {
+                hints.reflection().registerType(type, mcs);
+                hints.serialization().registerType(type);
+            }
         }
     }
 
