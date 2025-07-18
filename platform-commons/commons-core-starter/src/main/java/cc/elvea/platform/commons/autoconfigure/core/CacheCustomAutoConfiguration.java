@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +37,7 @@ import java.util.function.Consumer;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({RedissonClient.class})
-@EnableConfigurationProperties({CacheCustomProperties.class})
+@EnableConfigurationProperties({CacheCustomProperties.class, RedisProperties.class})
 @ConditionalOnProperty(prefix = CacheCustomProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @ImportRuntimeHints(CacheCustomAutoConfiguration.CacheRuntimeHints.class)
 public class CacheCustomAutoConfiguration {
@@ -66,14 +67,9 @@ public class CacheCustomAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(RedissonCacheService.class)
-    public CacheService cacheService(RedissonClient redissonClient,
-                                     RedissonUtils redissonUtils,
-                                     CacheCustomProperties properties) {
+    public CacheService cacheService(RedissonClient redissonClient, RedissonUtils redissonUtils, CacheCustomProperties properties) {
         log.info("Creating cacheService");
-        return new RedissonCacheService(redissonClient,
-            redissonUtils,
-            properties.isCacheNullValue(),
-            properties.getBatchSize());
+        return new RedissonCacheService(redissonClient, redissonUtils, properties.isCacheNullValue(), properties.getBatchSize());
     }
 
     @Bean
