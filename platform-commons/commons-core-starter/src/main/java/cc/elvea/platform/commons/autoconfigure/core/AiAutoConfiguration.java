@@ -47,7 +47,8 @@ public class AiAutoConfiguration {
 
     public AiAutoConfiguration(AiProperties properties) {
         log.info("AiAutoConfiguration is enabled");
-        log.info("AiAutoConfiguration Vector Store provider - {}", properties.getVectorStore().getProvider());
+        log.info("AiAutoConfiguration Service Provider - {}", properties.getServiceProvider());
+        log.info("AiAutoConfiguration Vector Store Provider - {}", properties.getVectorStoreProvider());
     }
 
     @Bean
@@ -78,7 +79,7 @@ public class AiAutoConfiguration {
     public AiFactory aiFactory(AiProperties aiProperties,
                                ChatCompletionService defaultChatCompletionService,
                                MessageWindowChatMemory messageWindowChatMemory) {
-        return new AiFactoryImpl(aiProperties.getProvider(), defaultChatCompletionService, messageWindowChatMemory);
+        return new AiFactoryImpl(aiProperties.getServiceProvider(), defaultChatCompletionService, messageWindowChatMemory);
     }
 
     @Bean

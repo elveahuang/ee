@@ -1,6 +1,7 @@
 package cc.elvea.platform.commons.core.ai;
 
 import cc.elvea.platform.commons.core.ai.chat.ChatCompletionService;
+import cc.elvea.platform.commons.core.ai.enums.AiServiceProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 
@@ -10,13 +11,13 @@ import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 @Slf4j
 public class AiFactoryImpl implements AiFactory {
 
-    private final AiProvider provider;
+    private final AiServiceProvider provider;
 
     private final ChatCompletionService chatCompletionService;
 
     private final MessageWindowChatMemory messageWindowChatMemory;
 
-    public AiFactoryImpl(AiProvider provider,
+    public AiFactoryImpl(AiServiceProvider provider,
                          ChatCompletionService chatCompletionService,
                          MessageWindowChatMemory messageWindowChatMemory) {
         this.provider = provider;
@@ -31,7 +32,7 @@ public class AiFactoryImpl implements AiFactory {
 
     @Override
     public ChatCompletionService getChatCompletionService() {
-        if (AiProvider.SPRING.equals(this.provider)) {
+        if (AiServiceProvider.SPRING.equals(this.provider)) {
             return chatCompletionService;
         }
         return chatCompletionService;
