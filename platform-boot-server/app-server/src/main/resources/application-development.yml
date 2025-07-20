@@ -80,12 +80,6 @@ spring:
                 type: sync
                 sse-endpoint: /sse
                 sse-message-endpoint: /sse/messages
-        vectorstore:
-            type: redis
-            redis:
-                initialize-schema: true
-                index-name: ee-vector-store-index
-                prefix: vector-store
 ### --------------------------------------------------------------------------------------------------------------------
 ### Spring Extension Config
 ### --------------------------------------------------------------------------------------------------------------------
@@ -118,9 +112,8 @@ platform:
         main: http://127.0.0.1:8084
     ai:
         enabled: true
-        vector-store:
-            enabled: true
-            provider: simple
+        service-provider: spring
+        vector-store-provider: simple
     data:
         core:
             enabled: true
@@ -235,9 +228,9 @@ platform:
                 enabled: true
     selenium:
         enabled: true
-        driver-type: edge
+        driver-type: chrome
         proxy:
-            enabled: false
+            enabled: true
             host: 127.0.0.1
             port: 7890
     test:

@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("com.github.ben-manes.versions") version "0.52.0"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.github.spotbugs") version "6.2.1" apply false
+    id("com.github.spotbugs") version "6.2.2" apply false
     id("org.springframework.boot") version "3.5.3" apply false
     id("org.graalvm.buildtools.native") version "0.10.6" apply false
 }
@@ -82,15 +82,14 @@ allprojects {
             // database & nosql
             dependency("org.mybatis:mybatis:3.5.19")
             dependency("org.mybatis:mybatis-spring:3.0.5")
-            dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
-            dependency("org.mybatis.generator:mybatis-generator-core:1.4.2")
+            dependency("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5")
             dependency("com.github.jsqlparser:jsqlparser:5.3")
             dependency("org.redisson:redisson:3.50.0")
             dependency("org.redisson:redisson-spring-data-35:3.50.0")
             dependency("org.redisson:redisson-spring-boot-starter:3.50.0")
             dependency("org.apache.shardingsphere:shardingsphere-jdbc:5.5.2")
             // others
-            dependency("com.nimbusds:nimbus-jose-jwt:10.3.1")
+            dependency("com.nimbusds:nimbus-jose-jwt:10.4")
             dependency("com.nimbusds:oauth2-oidc-sdk:11.26")
             dependency("org.jetbrains:annotations:26.0.2")
             dependency("com.github.spotbugs:spotbugs-annotations:4.9.3")
@@ -118,7 +117,7 @@ allprojects {
             dependency("org.shredzone.acme4j:acme4j-client:3.5.1")
             dependency("org.shredzone.acme4j:acme4j-smime:3.5.1")
             dependency("com.xuxueli:xxl-job-core:3.1.1")
-            dependency("io.github.bonigarcia:webdrivermanager:6.1.1")
+            dependency("io.github.bonigarcia:webdrivermanager:6.2.0")
             dependency("com.bucket4j:bucket4j_jdk17-core:8.14.0")
             dependency("com.bucket4j:bucket4j_jdk17-redisson:8.14.0")
             dependency("com.microsoft.playwright:playwright:1.53.0")
@@ -179,11 +178,11 @@ allprojects {
             dependency("com.alipay.sdk:alipay-sdk-java:4.40.328.ALL")
             // sdk - tencent
             dependency("com.qcloud:cos_api:5.6.247")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1302")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1303")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1301")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1281")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1297")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.1259")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.1303")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1292")
             // commons
             dependency("commons-io:commons-io:2.19.0")

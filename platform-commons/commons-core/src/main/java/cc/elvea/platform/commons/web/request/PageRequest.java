@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.web.request;
 
-import com.google.common.base.Strings;
+import cc.elvea.platform.commons.utils.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,8 +40,8 @@ public class PageRequest extends Request {
     private String q;
 
     public Pageable getPageable() {
-        if (!Strings.isNullOrEmpty(sort)) {
-            Sort.Direction direction = "desc".equalsIgnoreCase(this.getOrder()) ? Sort.Direction.DESC : Sort.Direction.ASC;
+        if (StringUtils.isNotEmpty(sort)) {
+            Sort.Direction direction = Sort.Direction.fromOptionalString(this.getOrder()).orElse(Sort.Direction.ASC);
             return org.springframework.data.domain.PageRequest.of(this.page - 1, size, Sort.by(direction, sort));
         } else {
             return org.springframework.data.domain.PageRequest.of(this.page - 1, size);

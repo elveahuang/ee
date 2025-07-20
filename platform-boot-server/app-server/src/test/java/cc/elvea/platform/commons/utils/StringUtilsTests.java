@@ -1,8 +1,7 @@
 package cc.elvea.platform.commons.utils;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.security.KeyPair;
 
 /**
  * @author elvea
@@ -10,10 +9,14 @@ import java.security.KeyPair;
 public class StringUtilsTests {
 
     @Test
-    public void test() {
-        KeyPair keyPair = EncryptUtils.generateKeyPair();
-        System.out.println(EncryptUtils.toPublicKeyString(keyPair));
-        System.out.println(EncryptUtils.toPrivateKeyString(keyPair));
+    public void baseTests() {
+        Assertions.assertTrue(StringUtils.isBlank(""));
+        Assertions.assertTrue(StringUtils.isNotBlank("A"));
+        Assertions.assertTrue(StringUtils.isEmpty(""));
+        Assertions.assertTrue(StringUtils.isNotEmpty("A"));
+
+        Assertions.assertEquals(StringUtils.toUpperCase("a"), "A");
+        Assertions.assertEquals(StringUtils.toLowerCase("A"), "a");
     }
 
 }
