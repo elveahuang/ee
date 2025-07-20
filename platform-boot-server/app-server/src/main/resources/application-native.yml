@@ -112,6 +112,8 @@ platform:
         main: http://127.0.0.1:8084
     ai:
         enabled: true
+        service-provider: spring
+        vector-store-provider: simple
     data:
         core:
             enabled: true
