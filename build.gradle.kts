@@ -150,7 +150,7 @@ allprojects {
             dependency("org.apache.pdfbox:pdfbox-io:3.0.5")
             dependency("org.apache.pdfbox:pdfbox-tools:3.0.5")
             dependency("org.apache.pdfbox:pdfbox-debuger:3.0.5")
-            dependency("org.dromara:x-easypdf-pdfbox:3.4.1")
+            dependency("org.dromara:x-easypdf-pdfbox:3.4.2")
             dependency("org.jsoup:jsoup:1.21.1")
             dependency("net.coobird:thumbnailator:0.4.20")
             dependency("com.twelvemonkeys.imageio:imageio-jpeg:3.12.0")
