@@ -29,7 +29,7 @@ dependencies {
     implementation(project(":platform-commons:commons-websocket-starter"))
     implementation(project(":platform-commons:commons-selenium-starter"))
     // application modules
-    implementation(project(":platform-boot-modules:security"))
+    implementation(project(":platform-boot-modules:security:security-core"))
     implementation(project(":platform-boot-modules:system:system-impl"))
     implementation(project(":platform-boot-modules:lxp:lxp-impl"))
     // development & test

@@ -50,7 +50,7 @@ include("platform-commons:commons-playwright-starter")
 // 单体服务-模块
 include("platform-boot-modules:system:system-api")
 include("platform-boot-modules:system:system-impl")
-include("platform-boot-modules:security")
+include("platform-boot-modules:security:security-core")
 include("platform-boot-modules:lxp:lxp-api")
 include("platform-boot-modules:lxp:lxp-impl")
 // 单体服务-应用

@@ -12,5 +12,5 @@ dependencies {
 }
 
 tasks.named<Jar>("jar") {
-    archiveBaseName.set("platform-security")
+    archiveBaseName.set("platform-security-core")
 }
