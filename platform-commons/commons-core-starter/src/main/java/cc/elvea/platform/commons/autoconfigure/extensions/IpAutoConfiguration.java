@@ -53,7 +53,11 @@ public class IpAutoConfiguration {
             } else {
                 resource = new FileSystemResource(properties.getGeoLite().getPath());
             }
-            geoLite.init(resource);
+            if (resource.exists()) {
+                geoLite.init(resource);
+            } else {
+                log.info("GeoLite file not exists - {}", properties.getGeoLite().getPath());
+            }
         }
 
         GlobalIpManager.setGeoLite(geoLite);
