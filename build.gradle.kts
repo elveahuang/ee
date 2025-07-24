@@ -6,8 +6,8 @@ plugins {
     id("com.github.ben-manes.versions") version "0.52.0"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.2.2" apply false
-    id("org.springframework.boot") version "3.5.3" apply false
-    id("org.graalvm.buildtools.native") version "0.10.6" apply false
+    id("org.springframework.boot") version "3.5.4" apply false
+    id("org.graalvm.buildtools.native") version "0.11.0" apply false
 }
 
 allprojects {
@@ -57,7 +57,7 @@ allprojects {
             mavenBom("me.ahoo.cosid:cosid-bom:2.13.3")
             mavenBom("org.mockito:mockito-bom:5.18.0")
             mavenBom("io.netty:netty-bom:4.1.122.Final")
-            mavenBom("org.apache.groovy:groovy-bom:4.0.27")
+            mavenBom("org.apache.groovy:groovy-bom:4.0.28")
             mavenBom("com.baomidou:mybatis-plus-bom:3.5.12")
             mavenBom("org.jetbrains.kotlin:kotlin-bom:2.2.0")
             mavenBom("com.github.victools:jsonschema-generator-bom:4.38.0")
@@ -120,7 +120,7 @@ allprojects {
             dependency("io.github.bonigarcia:webdrivermanager:6.2.0")
             dependency("com.bucket4j:bucket4j_jdk17-core:8.14.0")
             dependency("com.bucket4j:bucket4j_jdk17-redisson:8.14.0")
-            dependency("com.microsoft.playwright:playwright:1.53.0")
+            dependency("com.microsoft.playwright:playwright:1.54.0")
             // json & protobuf
             dependency("org.json:json:20250517")
             dependency("com.alibaba:fastjson:2.0.57")
@@ -135,10 +135,10 @@ allprojects {
             dependency("org.apache.poi:poi-ooxml-lite:5.4.1")
             dependency("com.google.zxing:core:3.5.3")
             dependency("com.google.zxing:javase:3.5.3")
-            dependency("org.jodconverter:jodconverter-local:4.4.9")
-            dependency("org.jodconverter:jodconverter-local-lo:4.4.9")
-            dependency("org.jodconverter:jodconverter-remote:4.4.9")
-            dependency("org.jodconverter:jodconverter-spring-boot-starter:4.4.9")
+            dependency("org.jodconverter:jodconverter-local:4.4.10")
+            dependency("org.jodconverter:jodconverter-local-lo:4.4.10")
+            dependency("org.jodconverter:jodconverter-remote:4.4.10")
+            dependency("org.jodconverter:jodconverter-spring-boot-starter:4.4.10")
             dependency("org.libreoffice:juh:24.8.4")
             dependency("org.libreoffice:jurt:24.8.4")
             dependency("org.libreoffice:ridl:24.8.4")
@@ -166,28 +166,28 @@ allprojects {
             dependency("org.telegram:telegrambots-client:9.0.0")
             dependency("org.telegram:telegrambots-abilities:9.0.0")
             dependency("org.telegram:telegrambots-springboot-longpolling-starter:9.0.0")
-            dependency("com.openai:openai-java:2.12.4")
+            dependency("com.openai:openai-java:2.19.0")
             // sdk - aliyun
-            dependency("com.aliyun:dingtalk:2.2.29")
+            dependency("com.aliyun:dingtalk:2.2.30")
             dependency("com.aliyun:alimt20181012:1.5.1")
             dependency("com.aliyun:facebody20191230:5.1.2")
             dependency("com.aliyun:dysmsapi20170525:4.1.2")
             dependency("com.aliyun.oss:aliyun-sdk-oss:3.18.3")
-            dependency("com.alibaba:dashscope-sdk-java:2.20.8")
+            dependency("com.alibaba:dashscope-sdk-java:2.21.0")
             dependency("com.aliyun:aliyun-java-sdk-core:4.7.6")
-            dependency("com.alipay.sdk:alipay-sdk-java:4.40.328.ALL")
+            dependency("com.alipay.sdk:alipay-sdk-java:4.40.333.ALL")
             // sdk - tencent
             dependency("com.qcloud:cos_api:5.6.247")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1303")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.1307")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.1301")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.1281")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-tmt:3.1.1297")
             dependency("com.tencentcloudapi:tencentcloud-sdk-java-iai:3.1.1303")
-            dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1292")
+            dependency("com.tencentcloudapi:tencentcloud-sdk-java-hunyuan:3.1.1305")
             // commons
-            dependency("commons-io:commons-io:2.19.0")
+            dependency("commons-io:commons-io:2.20.0")
             dependency("commons-net:commons-net:3.11.1")
-            dependency("commons-codec:commons-codec:1.18.0")
+            dependency("commons-codec:commons-codec:1.19.0")
             dependency("commons-beanutils:commons-beanutils:1.11.0")
             dependency("org.apache.commons:commons-pool2:2.12.1")
             dependency("org.apache.commons:commons-email:1.6.0")
@@ -212,7 +212,7 @@ allprojects {
             dependency("org.apache.httpcomponents:httpclient:4.5.14")
             dependency("com.thoughtworks.xstream:xstream:1.4.21")
             dependency("org.checkerframework:checker-qual:3.49.5")
-            dependency("io.github.classgraph:classgraph:4.8.180")
+            dependency("io.github.classgraph:classgraph:4.8.181")
         }
     }
 
