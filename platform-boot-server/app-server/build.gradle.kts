@@ -61,5 +61,5 @@ tasks.withType<ProcessAot> {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveBaseName.set("app-server")
+    archiveBaseName.set("app.jar")
 }

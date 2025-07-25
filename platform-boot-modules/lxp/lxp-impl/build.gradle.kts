@@ -11,6 +11,7 @@ dependencies {
     implementation(rootProject.libs.bundles.wechat)
     implementation(rootProject.libs.bundles.lark)
     implementation(rootProject.libs.bundles.excel)
+    annotationProcessor(rootProject.libs.bundles.springBootProcessor)
     // modules
     api(project(":platform-commons:commons-core"))
     api(project(":platform-boot-modules:system:system-api"))

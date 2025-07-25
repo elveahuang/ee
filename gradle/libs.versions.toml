@@ -192,6 +192,7 @@ jakarta-mail = { module = "jakarta.mail:jakarta.mail-api" }
 jakarta-servlet = { module = "jakarta.servlet:jakarta.servlet-api" }
 jakarta-websocket = { module = "jakarta.websocket:jakarta.websocket-api" }
 jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
+jakarta-json-bind = { module = "jakarta.json.bind:jakarta.json.bind-api" }
 
 commons-io = { module = "commons-io:commons-io", version = "2.20.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.11.1" }
@@ -277,7 +278,7 @@ baseCore = ["mapstruct", "lombok"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseDevelopment = ["spring-boot-devtools"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-jpamodelgen"]
-baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
+baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence", "jakarta-json-bind"]
 baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction"]
 
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
