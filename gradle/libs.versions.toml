@@ -27,7 +27,7 @@ checkerQualVersion = "3.49.3"
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagementVersion" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
 gradle-spotbugs = { id = "com.github.spotbugs", version = "6.2.2" }
-gradle-native = { id = "org.graalvm.buildtools.native", version = "0.11.0" }
+gradle-native = { id = "org.graalvm.buildtools.native", version = "0.10.6" }
 
 [libraries]
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
