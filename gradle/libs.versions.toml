@@ -55,6 +55,8 @@ spring-rabbit = { module = "org.springframework.amqp:spring-rabbit" }
 
 # Spring Boot
 spring-boot = { module = "org.springframework.boot:spring-boot" }
+spring-boot-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
 spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
@@ -289,7 +291,8 @@ image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons", "spring-retry"]
-springBootCommons = ["spring-boot"]
+springBootCommons = ["spring-boot", "spring-boot-autoconfigure"]
+springBootProcessor = ["spring-boot-configuration-processor"]
 springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 
 # Spring Security
