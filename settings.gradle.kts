@@ -21,25 +21,25 @@ include("platform-commons:commons-core-starter")
 // ---------------------------------------------------------------------------------------------------------------------
 // 单体服务
 // ---------------------------------------------------------------------------------------------------------------------
-// 单体服务-模块
+// 应用模块
 include("platform-boot-modules:system:system-api")
 include("platform-boot-modules:system:system-impl")
-include("platform-boot-modules:security:security-core")
+include("platform-boot-modules:system:system-security")
 include("platform-boot-modules:lxp:lxp-api")
 include("platform-boot-modules:lxp:lxp-impl")
-// 单体服务-应用
+// 应用服务
 include("platform-boot-server:admin-server")
 include("platform-boot-server:app-server")
 // ---------------------------------------------------------------------------------------------------------------------
 // 微服务
 // ---------------------------------------------------------------------------------------------------------------------
-// 微服务-模块
+// 应用模块
 include("platform-cloud-modules:system:system-api")
 include("platform-cloud-modules:system:system-impl")
 include("platform-cloud-modules:lxp:lxp-api")
 include("platform-cloud-modules:lxp:lxp-impl")
-// 微服务-基础服务
+// 应用服务
 include("platform-cloud-services:gateway-server")
 include("platform-cloud-services:auth-server")
 include("platform-cloud-services:sba-server")
-include("platform-cloud-services:app-server")
+include("platform-cloud-services:system-server")

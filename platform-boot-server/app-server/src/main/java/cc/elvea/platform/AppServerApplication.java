@@ -1,6 +1,5 @@
 package cc.elvea.platform;
 
-import cc.elvea.platform.commons.constants.GlobalConstants;
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import me.ahoo.cosid.spring.boot.starter.actuate.CosIdEndpointAutoConfiguration;
@@ -8,8 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -37,11 +34,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class AppServerApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(AppServerApplication.class, args);
-
-        Environment env = context.getEnvironment();
-        log.info("Application {} started", env.getProperty("spring.application.name", "app-server"));
-        log.info("Application version - {}", GlobalConstants.VERSION);
+        SpringApplication.run(AppServerApplication.class, args);
     }
 
 }

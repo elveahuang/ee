@@ -2,7 +2,6 @@ import org.springframework.boot.gradle.tasks.aot.ProcessAot
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    id("java-library")
     alias(libs.plugins.gradle.native)
     alias(libs.plugins.spring.boot)
 }
@@ -26,7 +25,7 @@ dependencies {
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-boot-modules:system:system-impl"))
-    implementation(project(":platform-boot-modules:security:security-core"))
+    implementation(project(":platform-boot-modules:system:system-security"))
     implementation(project(":platform-boot-modules:lxp:lxp-impl"))
 }
 

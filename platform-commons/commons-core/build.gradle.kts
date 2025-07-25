@@ -9,6 +9,8 @@ dependencies {
     api(rootProject.libs.bundles.swagger)
     api(rootProject.libs.bundles.baseCommons)
     api(rootProject.libs.bundles.jakartaApi)
+    api(rootProject.libs.bundles.springCommons)
+    api(rootProject.libs.bundles.springBootCommons)
     compileOnly(rootProject.libs.bundles.springAiCommons)
     compileOnly(rootProject.libs.bundles.springSecurityCommons)
     compileOnly(rootProject.libs.bundles.mybatis)

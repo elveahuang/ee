@@ -16,5 +16,5 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("sba-server.jar")
+    archiveFileName.set("admin-server.jar")
 }
