@@ -269,18 +269,14 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
 [bundles]
-baseCore = ["mapstruct", "lombok"]
 baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "asm", "ognl", "jsoup", "geoip", "aspectjweaver", "oauth2-oidc-sdk", "thymeleaf", "joda-time", "okio", "dom4j"]
+baseApacheCommons = ["commons-io", "commons-codec", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-compress", "commons-csv", "commons-email", "commons-net"]
+baseCore = ["mapstruct", "lombok"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseDevelopment = ["spring-boot-devtools"]
-baseCompile = ["jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-jpamodelgen"]
-
-commonsApi = ["commons-io", "commons-codec", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections"]
-commonsCompile = ["commons-compress", "commons-csv", "commons-email", "commons-net"]
-
-jakartaApi = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
-jakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction"]
+baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
+baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction"]
 
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
@@ -298,8 +294,9 @@ springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thym
 
 # Spring Security
 springSecurityCommons = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
-springSecurityCommonsStarter = ["spring-boot-starter-security", "spring-boot-starter-oauth2-resource-server", "spring-boot-starter-oauth2-client"]
-springSecurityServerStarter = ["spring-authorization-server"]
+springSecurityCommonsStarter = ["spring-boot-starter-security", "spring-boot-starter-oauth2-client"]
+springSecurityAuthorizationServerStarter = ["spring-authorization-server"]
+springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-server"]
 
 # Spring Cloud
 springCloudCommons = ["spring-cloud-openfeign-core"]
@@ -368,8 +365,5 @@ cos = ["cos_api"]
 storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
 
 # 文档转换
-office = [
-    "jodconverter-local", "jodconverter-local-lo", "jodconverter-remote",
-    "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"
-]
+office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]
 officeStarter = ["jodconverter-spring-boot-starter"]

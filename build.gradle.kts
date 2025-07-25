@@ -146,7 +146,7 @@ allprojects {
 subprojects {
     dependencies {
         implementation(rootProject.libs.bundles.baseCore)
-        compileOnly(rootProject.libs.bundles.baseCompile)
+        compileOnly(rootProject.libs.bundles.baseJakartaCompile)
         testImplementation(rootProject.libs.bundles.baseTest)
         annotationProcessor(rootProject.libs.bundles.baseAnnotationProcessor)
         testAnnotationProcessor(rootProject.libs.bundles.baseAnnotationProcessor)

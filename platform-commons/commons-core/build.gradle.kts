@@ -1,22 +1,21 @@
 dependencies {
     // libs
+    api(rootProject.libs.bundles.baseCommons)
+    api(rootProject.libs.bundles.baseJakarta)
+    api(rootProject.libs.bundles.baseApacheCommons)
     api(rootProject.libs.bundles.springCommons)
-    api(rootProject.libs.bundles.commonsApi)
+    api(rootProject.libs.bundles.springBootCommons)
     api(rootProject.libs.bundles.http)
     api(rootProject.libs.bundles.database)
     api(rootProject.libs.bundles.json)
     api(rootProject.libs.bundles.hutool)
     api(rootProject.libs.bundles.swagger)
-    api(rootProject.libs.bundles.baseCommons)
-    api(rootProject.libs.bundles.jakartaApi)
     api(rootProject.libs.bundles.springCommons)
-    api(rootProject.libs.bundles.springBootCommons)
     compileOnly(rootProject.libs.bundles.springAiCommons)
     compileOnly(rootProject.libs.bundles.springSecurityCommons)
     compileOnly(rootProject.libs.bundles.mybatis)
     compileOnly(rootProject.libs.bundles.hibernate)
     compileOnly(rootProject.libs.bundles.selenium)
-    compileOnly(rootProject.libs.bundles.playwright)
     compileOnly(rootProject.libs.bundles.elastic)
     compileOnly(rootProject.libs.bundles.rabbit)
     compileOnly(rootProject.libs.bundles.quartz)
@@ -40,8 +39,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.office)
-    compileOnly(rootProject.libs.bundles.commonsCompile)
-    compileOnly(rootProject.libs.bundles.jakartaCompile)
 }
 
 tasks.named<Jar>("jar") {

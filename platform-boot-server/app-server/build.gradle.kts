@@ -11,6 +11,8 @@ dependencies {
     implementation(rootProject.libs.bundles.springAiCommonsStarter)
     implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
+    implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.rabbitStarter)
