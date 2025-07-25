@@ -5,6 +5,7 @@ cc.elvea.platform.commons.autoconfigure.core.CacheCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.HttpAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.LogAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.QuartzCustomAutoConfiguration
+cc.elvea.platform.commons.autoconfigure.core.SecurityCustomAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.MailAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.SequenceAutoConfiguration
 cc.elvea.platform.commons.autoconfigure.core.TemplateAutoConfiguration

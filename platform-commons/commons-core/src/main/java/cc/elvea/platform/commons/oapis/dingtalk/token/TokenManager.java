@@ -1,6 +1,5 @@
 package cc.elvea.platform.commons.oapis.dingtalk.token;
 
-
 import cc.elvea.platform.commons.oapis.dingtalk.cache.Cache;
 import cc.elvea.platform.commons.oapis.dingtalk.config.AppConfig;
 import cc.elvea.platform.commons.utils.StringUtils;

@@ -3,38 +3,31 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("java-library")
-    id("org.springframework.boot")
-    id("org.graalvm.buildtools.native")
+    alias(libs.plugins.gradle.native)
+    alias(libs.plugins.spring.boot)
 }
 
 dependencies {
-    // spring
-    implementation("org.springframework.boot:spring-boot-starter-aop")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-mail")
-    // spring extensions
-    implementation("de.codecentric:spring-boot-admin-starter-client")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
-    // commons modules
-    implementation(project(":platform-commons:commons-ai-starter"))
+    // libs
+    implementation(rootProject.libs.bundles.springAiCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootAdminClientStarter)
+    implementation(rootProject.libs.bundles.redisStarter)
+    implementation(rootProject.libs.bundles.rabbitStarter)
+    implementation(rootProject.libs.bundles.quartzStarter)
+    implementation(rootProject.libs.bundles.swaggerStarter)
+    implementation(rootProject.libs.bundles.hibernateStarter)
+    implementation(rootProject.libs.bundles.websocketStarter)
+    implementation(rootProject.libs.bundles.seleniumStarter)
+    implementation(rootProject.libs.bundles.im)
+    // development
+    developmentOnly(rootProject.libs.bundles.baseDevelopment)
+    // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-rabbit-starter"))
-    implementation(project(":platform-commons:commons-redis-starter"))
-    implementation(project(":platform-commons:commons-hibernate-starter"))
-    implementation(project(":platform-commons:commons-oapis-starter"))
-    implementation(project(":platform-commons:commons-security-starter"))
-    implementation(project(":platform-commons:commons-quartz-starter"))
-    implementation(project(":platform-commons:commons-websocket-starter"))
-    implementation(project(":platform-commons:commons-selenium-starter"))
-    // application modules
-    implementation(project(":platform-boot-modules:security:security-core"))
     implementation(project(":platform-boot-modules:system:system-impl"))
+    implementation(project(":platform-boot-modules:security:security-core"))
     implementation(project(":platform-boot-modules:lxp:lxp-impl"))
-    // development & test
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    testImplementation("jakarta.servlet:jakarta.servlet-api")
 }
 
 graalvmNative {
@@ -67,5 +60,5 @@ tasks.withType<ProcessAot> {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("app.jar")
+    archiveBaseName.set("app-server")
 }

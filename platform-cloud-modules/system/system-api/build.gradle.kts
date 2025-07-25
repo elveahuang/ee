@@ -1,10 +1,10 @@
 dependencies {
-    // spring
-    api("org.springframework.cloud:spring-cloud-openfeign-core")
+    // libs
+    implementation(rootProject.libs.bundles.excel)
+    implementation(rootProject.libs.bundles.springSecurityCommons)
+    implementation(rootProject.libs.bundles.springCloudCommons)
     // modules
     api(project(":platform-commons:commons-core"))
-    // jakarta
-    compileOnly("jakarta.servlet:jakarta.servlet-api")
 }
 
 tasks.named<Jar>("jar") {

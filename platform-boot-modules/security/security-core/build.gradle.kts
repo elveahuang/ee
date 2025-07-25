@@ -1,14 +1,14 @@
 dependencies {
-    // spring
-    api("org.springframework.security:spring-security-oauth2-resource-server")
-    api("org.springframework.security:spring-security-oauth2-authorization-server")
-    // commons modules
-    api(project(":platform-commons:commons-core"))
-    api(project(":platform-commons:commons-security"))
-    // application modules
-    api(project(":platform-boot-modules:system:system-api"))
-    // jakarta
-    compileOnly("jakarta.servlet:jakarta.servlet-api")
+    // libs
+    implementation(rootProject.libs.bundles.springBootCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityServerStarter)
+    implementation(rootProject.libs.bundles.springBootAdminClientStarter)
+    implementation(rootProject.libs.bundles.swaggerStarter)
+    implementation(rootProject.libs.bundles.redisStarter)
+    // modules
+    implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-boot-modules:system:system-api"))
 }
 
 tasks.named<Jar>("jar") {
