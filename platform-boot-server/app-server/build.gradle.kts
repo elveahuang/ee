@@ -46,7 +46,7 @@ graalvmNative {
             buildArgs.add("-H:+ReportExceptionStackTraces")
             buildArgs.add("-H:+UnlockExperimentalVMOptions")
             buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
-            buildArgs.add("-J-Xmx8G")
+            buildArgs.add("-J-Xmx16G")
             verbose.set(true)
             fallback.set(false)
             quickBuild.set(true)

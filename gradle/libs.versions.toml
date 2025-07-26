@@ -21,7 +21,7 @@ okhttpVersion = "5.1.0"
 swaggerVersion = "2.2.34"
 springdocVersion = "2.8.9"
 bouncycastleVersion = "1.81"
-checkerQualVersion = "3.49.3"
+checkerQualVersion = "3.49.5"
 
 [plugins]
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagementVersion" }
@@ -95,12 +95,11 @@ spring-cloud-starter-loadbalancer = { module = "org.springframework.cloud:spring
 spring-cloud-starter-openfeign = { module = "org.springframework.cloud:spring-cloud-starter-openfeign" }
 
 # Spring AI
-openai-java = { module = "com.openai:openai-java", version = "2.19.0" }
 spring-ai-model = { module = "org.springframework.ai:spring-ai-model" }
+spring-ai-model-chat-memory-repository-jdbc = { module = "org.springframework.ai:spring-ai-model-chat-memory-repository-jdbc" }
 spring-ai-client-chat = { module = "org.springframework.ai:spring-ai-client-chat" }
 spring-ai-deepseek = { module = "org.springframework.ai:spring-ai-deepseek" }
 spring-ai-openai = { module = "org.springframework.ai:spring-ai-openai" }
-spring-ai-model-chat-memory-repository-jdbc = { module = "org.springframework.ai:spring-ai-model-chat-memory-repository-jdbc" }
 spring-ai-mcp = { module = "org.springframework.ai:spring-ai-mcp" }
 spring-ai-rag = { module = "org.springframework.ai:spring-ai-rag" }
 spring-ai-advisors-vector-store = { module = "org.springframework.ai:spring-ai-advisors-vector-store" }
@@ -177,11 +176,11 @@ alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.247" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1307" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1308" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1303" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.20" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.21" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
 
@@ -234,6 +233,7 @@ okhttp-jvm = { module = "com.squareup.okhttp3:okhttp-jvm", version = "okhttpVers
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version = "okhttpVersion" }
 hc = { module = "org.apache.httpcomponents.client5:httpclient5" }
 
+# Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 thymeleaf = { module = "org.thymeleaf:thymeleaf" }
 quartz = { module = "org.quartz-scheduler:quartz" }
@@ -248,11 +248,12 @@ joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.3.1" }
 guava = { module = "com.google.guava:guava", version = "33.4.8-jre" }
 nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.4" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.26" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.26.1" }
 checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.3" }
+openai-java = { module = "com.openai:openai-java", version = "2.19.1" }
 
 # MapStruct & Lombok
 lombok = { module = "org.projectlombok:lombok", version = "1.18.38" }
@@ -293,7 +294,7 @@ image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons", "spring-retry"]
 springBootCommons = ["spring-boot", "spring-boot-autoconfigure"]
-springBootProcessor = ["spring-boot-configuration-processor"]
+springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 
 # Spring Security

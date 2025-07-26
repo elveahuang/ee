@@ -2,8 +2,9 @@ dependencies {
     // libs
     implementation(rootProject.libs.bundles.springCommons)
     implementation(rootProject.libs.bundles.springAiCommons)
-    implementation(rootProject.libs.bundles.springBootCommons)
     implementation(rootProject.libs.bundles.springSecurityCommons)
+    implementation(rootProject.libs.bundles.springBootCommons)
+    annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
@@ -12,7 +13,6 @@ dependencies {
     implementation(rootProject.libs.bundles.lark)
     implementation(rootProject.libs.bundles.excel)
     implementation(rootProject.libs.bundles.swagger)
-    annotationProcessor(rootProject.libs.bundles.springBootProcessor)
     // modules
     api(project(":platform-commons:commons-core"))
     api(project(":platform-boot-modules:system:system-api"))
