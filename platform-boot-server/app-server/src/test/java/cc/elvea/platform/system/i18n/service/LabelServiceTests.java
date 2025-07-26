@@ -1,7 +1,8 @@
 package cc.elvea.platform.system.i18n.service;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.system.i18n.enums.LabelTypeEnum;
+import cc.elvea.platform.system.commons.enums.LabelTypeEnum;
+import cc.elvea.platform.system.commons.service.LabelService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

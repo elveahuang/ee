@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.catalog.model.dto.CatalogRelationSaveDto;
+import cc.elvea.platform.system.commons.model.dto.CatalogRelationSaveDto;
 
 /**
  * @author elvea

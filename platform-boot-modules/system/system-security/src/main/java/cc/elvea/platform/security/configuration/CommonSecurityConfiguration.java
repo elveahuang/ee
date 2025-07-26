@@ -7,7 +7,7 @@ import cc.elvea.platform.security.CustomUserDetailsService;
 import cc.elvea.platform.security.web.CustomAuthenticationFailureHandler;
 import cc.elvea.platform.security.web.authentication.CaptchaAuthenticationFilter;
 import cc.elvea.platform.system.commons.manager.CaptchaManager;
-import cc.elvea.platform.system.config.manager.ConfigManager;
+import cc.elvea.platform.system.commons.manager.ConfigManager;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.extern.slf4j.Slf4j;

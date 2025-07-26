@@ -2,7 +2,7 @@ package cc.elvea.platform.auth.security;
 
 import cc.elvea.platform.commons.core.security.user.User;
 import cc.elvea.platform.commons.utils.CollectionUtils;
-import cc.elvea.platform.system.core.manager.UserApi;
+import cc.elvea.platform.system.core.api.UserApi;
 import cc.elvea.platform.system.core.model.dto.UserLoginDto;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;

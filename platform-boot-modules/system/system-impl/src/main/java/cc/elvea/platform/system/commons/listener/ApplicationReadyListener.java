@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.commons.listener;
 
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.system.job.service.JobService;
+import cc.elvea.platform.system.commons.service.JobService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

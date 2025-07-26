@@ -7,7 +7,7 @@ import cc.elvea.platform.commons.exception.InvalidCaptchaException;
 import cc.elvea.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.commons.manager.CaptchaManager;
-import cc.elvea.platform.system.config.manager.ConfigManager;
+import cc.elvea.platform.system.commons.manager.ConfigManager;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

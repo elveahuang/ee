@@ -1,7 +1,7 @@
 package cc.elvea.platform.auth.security.web;
 
 import cc.elvea.platform.commons.utils.SecurityUtils;
-import cc.elvea.platform.system.core.manager.UserSessionApi;
+import cc.elvea.platform.system.core.api.UserSessionApi;
 import cc.elvea.platform.system.core.helper.UserSessionHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
