@@ -1,8 +1,8 @@
 package cc.elvea.platform.auth.security;
 
 import cc.elvea.platform.auth.security.utils.OAuth2Utils;
-import cc.elvea.platform.system.security.api.AuthorizationApi;
-import cc.elvea.platform.system.security.api.ClientApi;
+import cc.elvea.platform.system.security.manager.AuthorizationApi;
+import cc.elvea.platform.system.security.manager.ClientApi;
 import cc.elvea.platform.system.security.model.dto.AuthorizationDto;
 import cc.elvea.platform.system.security.model.dto.ClientDto;
 import lombok.AllArgsConstructor;

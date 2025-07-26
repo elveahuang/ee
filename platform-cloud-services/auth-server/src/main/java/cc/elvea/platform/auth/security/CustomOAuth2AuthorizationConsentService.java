@@ -1,6 +1,6 @@
 package cc.elvea.platform.auth.security;
 
-import cc.elvea.platform.system.security.api.AuthorizationConsentApi;
+import cc.elvea.platform.system.security.manager.AuthorizationConsentApi;
 import cc.elvea.platform.system.security.model.dto.AuthorizationConsentDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

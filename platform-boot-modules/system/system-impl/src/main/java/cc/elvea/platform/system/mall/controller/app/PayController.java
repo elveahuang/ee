@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.mall.api.PayApi;
+import cc.elvea.platform.system.mall.manager.PayManager;
 import cc.elvea.platform.system.mall.model.vo.PayTypeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,7 +25,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "PayController", description = "支付控制器")
 public class PayController extends AbstractController {
 
-    private final PayApi payApi;
+    private final PayManager payManager;
 
     @Authenticated
     @Operation(summary = "获取当前可用支付方式")
@@ -33,7 +33,7 @@ public class PayController extends AbstractController {
     @OperationLog("获取当前可用支付方式")
     @PostMapping(API_V1__PAY__TYPE)
     public R<List<PayTypeVo>> payTypeList() {
-        return R.success(this.payApi.getPayTypeList());
+        return R.success(this.payManager.getPayTypeList());
     }
 
 }

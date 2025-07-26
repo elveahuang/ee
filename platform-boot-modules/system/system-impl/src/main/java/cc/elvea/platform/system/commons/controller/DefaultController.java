@@ -3,7 +3,7 @@ package cc.elvea.platform.system.commons.controller;
 import cc.elvea.platform.commons.annotations.Anonymous;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
-import cc.elvea.platform.system.commons.api.CoreApi;
+import cc.elvea.platform.system.commons.manager.CoreManager;
 import cc.elvea.platform.system.commons.model.vo.InitializeVo;
 import cc.elvea.platform.system.commons.model.vo.VersionVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "DefaultController", description = "默认控制器")
 public class DefaultController {
 
-    private final CoreApi coreApi;
+    private final CoreManager coreManager;
 
     @Anonymous
     @OperationLog("获取应用初始数据")
@@ -31,7 +31,7 @@ public class DefaultController {
     @ApiResponse(description = "获取应用初始数据")
     @PostMapping(API_V1_INITIALIZE)
     public R<InitializeVo> initialize() {
-        return R.success(coreApi.initialize());
+        return R.success(coreManager.initialize());
     }
 
     @Anonymous
@@ -49,7 +49,7 @@ public class DefaultController {
     @ApiResponse(description = "首页")
     @PostMapping(API_V1_HOME)
     public R<InitializeVo> home() {
-        return R.success(coreApi.initialize());
+        return R.success(coreManager.initialize());
     }
 
 }

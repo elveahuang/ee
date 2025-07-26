@@ -1,7 +1,8 @@
 dependencies {
     // libs
-    compileOnly(rootProject.libs.bundles.springBootCommons)
-    compileOnly(rootProject.libs.bundles.springBootCommonsStarter)
+    api(rootProject.libs.bundles.springBootCommons)
+    api(rootProject.libs.bundles.springBootCommonsStarter)
+    annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
     compileOnly(rootProject.libs.bundles.springAiCommons)
     compileOnly(rootProject.libs.bundles.springAiCommonsStarter)
     compileOnly(rootProject.libs.bundles.springSecurityCommons)

@@ -10,7 +10,7 @@ import cc.elvea.platform.commons.extensions.captcha.domain.CaptchaCodeDto;
 import cc.elvea.platform.commons.extensions.captcha.domain.CaptchaDto;
 import cc.elvea.platform.commons.extensions.captcha.request.CaptchaRequest;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.commons.api.CaptchaApi;
+import cc.elvea.platform.system.commons.manager.CaptchaManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +29,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "CaptchaController", description = "验证码控制器")
 public class CaptchaController extends AbstractController {
 
-    private final CaptchaApi captchaApi;
+    private final CaptchaManager captchaManager;
 
     @Anonymous
     @RateLimiter
@@ -39,7 +39,7 @@ public class CaptchaController extends AbstractController {
     @PostMapping(API_V1_CAPTCHA_CODE)
     public R<CaptchaCodeDto> captchaCode() throws Exception {
         CaptchaRequest request = CaptchaRequest.builder().type(CaptchaTypeEnum.CODE).size(4).build();
-        Captcha captcha = this.captchaApi.generate(request);
+        Captcha captcha = this.captchaManager.generate(request);
         return R.success(CaptchaCodeDto.builder().key(captcha.getKey()).image(captcha.getImage()).build());
     }
 
@@ -51,7 +51,7 @@ public class CaptchaController extends AbstractController {
     @PostMapping(API_V1_CAPTCHA_MAIL)
     public R<CaptchaDto> captchaEmail(@RequestParam String email) throws Exception {
         CaptchaRequest request = CaptchaRequest.builder().type(CaptchaTypeEnum.MAIL).size(6).email(email).build();
-        Captcha captcha = this.captchaApi.generate(request);
+        Captcha captcha = this.captchaManager.generate(request);
         return R.success(CaptchaDto.builder().key(captcha.getKey()).build());
     }
 
@@ -63,7 +63,7 @@ public class CaptchaController extends AbstractController {
     @PostMapping(API_V1_CAPTCHA_SMS)
     public R<CaptchaDto> captchaMobile(@RequestParam String mobileCountryCode, @RequestParam String mobileNumber) throws Exception {
         CaptchaRequest request = CaptchaRequest.builder().type(CaptchaTypeEnum.SMS).mobileCountryCode(mobileCountryCode).mobileNumber(mobileNumber).size(6).build();
-        Captcha captcha = this.captchaApi.generate(request);
+        Captcha captcha = this.captchaManager.generate(request);
         return R.success(CaptchaDto.builder().key(captcha.getKey()).build());
     }
 

@@ -1,6 +1,6 @@
 package cc.elvea.platform.auth.security;
 
-import cc.elvea.platform.system.security.api.ClientApi;
+import cc.elvea.platform.system.security.manager.ClientApi;
 import cc.elvea.platform.system.security.model.dto.ClientDto;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;

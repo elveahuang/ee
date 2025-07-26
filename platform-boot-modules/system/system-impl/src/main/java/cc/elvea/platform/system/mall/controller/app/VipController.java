@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.mall.api.VipApi;
+import cc.elvea.platform.system.mall.manager.VipManager;
 import cc.elvea.platform.system.mall.model.vo.VipTypeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,7 +25,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "VipController", description = "会员控制器")
 public class VipController extends AbstractController {
 
-    private final VipApi vipApi;
+    private final VipManager vipManager;
 
     @Authenticated
     @Operation(summary = "获取当前会员类型")
@@ -33,7 +33,7 @@ public class VipController extends AbstractController {
     @OperationLog("获取当前会员类型")
     @PostMapping(API_V1__VIP__TYPE)
     public R<List<VipTypeVo>> typeList() {
-        return R.success(this.vipApi.getTypeList());
+        return R.success(this.vipManager.getTypeList());
     }
 
 }

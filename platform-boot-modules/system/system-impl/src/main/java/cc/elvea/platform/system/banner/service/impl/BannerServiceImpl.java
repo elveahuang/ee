@@ -2,13 +2,13 @@ package cc.elvea.platform.system.banner.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.attachment.api.AttachmentApi;
+import cc.elvea.platform.system.attachment.manager.AttachmentManager;
 import cc.elvea.platform.system.banner.model.entity.BannerEntity;
 import cc.elvea.platform.system.banner.model.form.BannerForm;
 import cc.elvea.platform.system.banner.model.request.BannerSearchRequest;
 import cc.elvea.platform.system.banner.repository.BannerRepository;
 import cc.elvea.platform.system.banner.service.BannerService;
-import cc.elvea.platform.system.dict.api.DictApi;
+import cc.elvea.platform.system.dict.manager.DictManager;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -27,9 +27,9 @@ public class BannerServiceImpl
     extends BaseCachingEntityService<BannerEntity, Long, BannerRepository>
     implements BannerService {
 
-    private DictApi dictApi;
+    private DictManager dictManager;
 
-    private AttachmentApi attachmentApi;
+    private AttachmentManager attachmentManager;
 
     /**
      * @see BannerService#saveBanner(BannerForm)

@@ -2,7 +2,7 @@ package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.message.rabbit.AbstractAmqpService;
 import cc.elvea.platform.system.commons.constants.SystemAmqpConstants;
-import cc.elvea.platform.system.message.api.MessageApi;
+import cc.elvea.platform.system.message.manager.MessageManager;
 import cc.elvea.platform.system.message.model.dto.SendMessageAmqpDto;
 import cc.elvea.platform.system.message.service.MessageAmqpService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
 @RabbitListener(queues = SystemAmqpConstants.MESSAGE_QUEUE)
 public class MessageAmqpServiceImpl extends AbstractAmqpService<SendMessageAmqpDto> implements MessageAmqpService {
 
-    private MessageApi messageApi;
+    private MessageManager messageManager;
 
     @Override
     public void execute(SendMessageAmqpDto dto) throws Exception {
-        this.messageApi.sendMessage(dto.getId());
+        this.messageManager.sendMessage(dto.getId());
     }
 
     @Override
@@ -33,8 +33,8 @@ public class MessageAmqpServiceImpl extends AbstractAmqpService<SendMessageAmqpD
     }
 
     @Autowired
-    public void setMessageApi(MessageApi messageApi) {
-        this.messageApi = messageApi;
+    public void setMessageApi(MessageManager messageManager) {
+        this.messageManager = messageManager;
     }
 
 }

@@ -1,6 +1,6 @@
 package cc.elvea.platform.security;
 
-import cc.elvea.platform.system.security.api.AuthorizationConsentApi;
+import cc.elvea.platform.system.security.manager.AuthorizationConsentManager;
 import cc.elvea.platform.system.security.model.dto.AuthorizationConsentDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,21 +22,21 @@ import java.util.Set;
 @AllArgsConstructor
 public class CustomOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
 
-    private final AuthorizationConsentApi authorizationConsentApi;
+    private final AuthorizationConsentManager authorizationConsentManager;
 
     @Override
     public void save(OAuth2AuthorizationConsent authorizationConsent) {
-        this.authorizationConsentApi.save(toDto(authorizationConsent));
+        this.authorizationConsentManager.save(toDto(authorizationConsent));
     }
 
     @Override
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
-        this.authorizationConsentApi.deleteByKey(authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
+        this.authorizationConsentManager.deleteByKey(authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
     }
 
     @Override
     public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
-        return toObject(this.authorizationConsentApi.findByKey(registeredClientId, principalName));
+        return toObject(this.authorizationConsentManager.findByKey(registeredClientId, principalName));
     }
 
     private OAuth2AuthorizationConsent toObject(AuthorizationConsentDto dto) {

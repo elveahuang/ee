@@ -6,7 +6,7 @@ import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.annotations.RateLimiter;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.utils.SecurityUtils;
-import cc.elvea.platform.system.core.api.AccountApi;
+import cc.elvea.platform.system.core.manager.AccountManager;
 import cc.elvea.platform.system.core.model.dto.AccountForgotPasswordDto;
 import cc.elvea.platform.system.core.model.dto.AccountInfoDto;
 import cc.elvea.platform.system.core.model.form.*;
@@ -31,7 +31,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "AccountController", description = "账号控制器")
 public class AccountController {
 
-    private final AccountApi accountApi;
+    private final AccountManager accountManager;
 
     @Anonymous
     @OperationLog("检查用户名是否可用")
@@ -40,7 +40,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_USERNAME)
     @RateLimiter(type = IP)
     public R<Boolean> checkUsername(AccountCheckRequest request) {
-        return R.success(accountApi.check(request));
+        return R.success(accountManager.check(request));
     }
 
     @Anonymous
@@ -50,7 +50,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_EMAIL)
     @RateLimiter(type = IP)
     public R<Boolean> checkEmail(AccountCheckRequest request) {
-        return R.success(accountApi.check(request));
+        return R.success(accountManager.check(request));
     }
 
     @Anonymous
@@ -60,7 +60,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_MOBILE)
     @RateLimiter(type = IP)
     public R<Boolean> checkMobile(AccountCheckRequest request) {
-        return R.success(accountApi.check(request));
+        return R.success(accountManager.check(request));
     }
 
     @Authenticated
@@ -69,7 +69,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__INFO)
     public R<AccountInfoDto> user() {
         String curUsername = SecurityUtils.getUsername();
-        return R.success(this.accountApi.getUserInfo(curUsername));
+        return R.success(this.accountManager.getUserInfo(curUsername));
     }
 
     @Anonymous
@@ -78,7 +78,7 @@ public class AccountController {
     @ApiResponse(description = "用户注册")
     @PostMapping(API_V1__ACCOUNT__REGISTER)
     public R<?> register(@Valid AccountRegisterForm form) {
-        return accountApi.register(form);
+        return accountManager.register(form);
     }
 
     @Anonymous
@@ -87,7 +87,7 @@ public class AccountController {
     @OperationLog("退出登录")
     @PostMapping(API_V1__ACCOUNT__LOGOUT)
     public R<?> logout() {
-        return accountApi.logout();
+        return accountManager.logout();
     }
 
     @Anonymous
@@ -96,7 +96,7 @@ public class AccountController {
     @OperationLog("忘记密码")
     @PostMapping(API_V1__ACCOUNT__FORGOT_PASSWORD)
     public R<AccountForgotPasswordDto> forgotPassword(@Valid AccountForgotPasswordForm form) {
-        return accountApi.forgotPassword(form);
+        return accountManager.forgotPassword(form);
     }
 
     @Anonymous
@@ -105,7 +105,7 @@ public class AccountController {
     @OperationLog("重置密码")
     @PostMapping(API_V1__ACCOUNT__RESET_PASSWORD)
     public R<?> resetPassword(@Valid AccountResetPasswordForm form) {
-        return accountApi.resetPassword(form);
+        return accountManager.resetPassword(form);
     }
 
     @Authenticated
@@ -114,7 +114,7 @@ public class AccountController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__ACCOUNT__CHANGE_PASSWORD)
     public R<?> changePassword(@Valid AccountChangePasswordForm form) {
-        return accountApi.changePassword(form);
+        return accountManager.changePassword(form);
     }
 
     @Authenticated
@@ -123,7 +123,7 @@ public class AccountController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__ACCOUNT__UPDATE)
     public R<?> updateAccount(@Valid AccountBaseForm form) {
-        return accountApi.updateAccount(form);
+        return accountManager.updateAccount(form);
     }
 
 }

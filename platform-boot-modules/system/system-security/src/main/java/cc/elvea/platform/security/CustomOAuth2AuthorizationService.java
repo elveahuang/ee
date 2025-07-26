@@ -5,10 +5,10 @@ import cc.elvea.platform.commons.enums.ActionTypeEnum;
 import cc.elvea.platform.commons.utils.SecurityUtils;
 import cc.elvea.platform.commons.utils.ServletUtils;
 import cc.elvea.platform.security.utils.OAuth2Utils;
-import cc.elvea.platform.system.core.api.UserSessionApi;
+import cc.elvea.platform.system.core.manager.UserSessionManager;
 import cc.elvea.platform.system.core.model.dto.UserSessionDto;
-import cc.elvea.platform.system.security.api.AuthorizationApi;
-import cc.elvea.platform.system.security.api.ClientApi;
+import cc.elvea.platform.system.security.manager.AuthorizationManager;
+import cc.elvea.platform.system.security.manager.ClientManager;
 import cc.elvea.platform.system.security.model.dto.AuthorizationDto;
 import cc.elvea.platform.system.security.model.dto.ClientDto;
 import lombok.AllArgsConstructor;
@@ -43,17 +43,17 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
-    private final ClientApi clientApi;
+    private final ClientManager clientManager;
 
-    private final UserSessionApi userSessionApi;
+    private final UserSessionManager userSessionManager;
 
-    private final AuthorizationApi authorizationApi;
+    private final AuthorizationManager authorizationManager;
 
     private final TokenSettings tokenSettings;
 
     @Override
     public void save(OAuth2Authorization authorization) {
-        this.authorizationApi.save(toEntity(authorization));
+        this.authorizationManager.save(toEntity(authorization));
 
         // 保存用户会话记录
         try {
@@ -77,7 +77,7 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
                     .clientId(authorization.getRegisteredClientId())
                     .clientName(authorization.getRegisteredClientId())
                     .build();
-                this.userSessionApi.saveUserSession(userSession);
+                this.userSessionManager.saveUserSession(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);
@@ -86,12 +86,12 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
 
     @Override
     public void remove(OAuth2Authorization authorization) {
-        this.authorizationApi.deleteById(Long.valueOf(authorization.getId()));
+        this.authorizationManager.deleteById(Long.valueOf(authorization.getId()));
     }
 
     @Override
     public OAuth2Authorization findById(String id) {
-        return toObject(this.authorizationApi.findByUuid(id), tokenSettings);
+        return toObject(this.authorizationManager.findByUuid(id), tokenSettings);
     }
 
     @Override
@@ -99,13 +99,13 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
         AuthorizationDto authorization = null;
         if (tokenType != null) {
             if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByState(token);
+                authorization = this.authorizationManager.findByState(token);
             } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByAuthorizationCodeValue(token);
+                authorization = this.authorizationManager.findByAuthorizationCodeValue(token);
             } else if (OAuth2ParameterNames.ACCESS_TOKEN.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByAccessTokenValue(token);
+                authorization = this.authorizationManager.findByAccessTokenValue(token);
             } else if (OAuth2ParameterNames.REFRESH_TOKEN.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByRefreshTokenValue(token);
+                authorization = this.authorizationManager.findByRefreshTokenValue(token);
             }
         }
         return toObject(authorization, tokenSettings);
@@ -113,7 +113,7 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
 
     private OAuth2Authorization toObject(AuthorizationDto dto, TokenSettings tokenSettings) {
         if (dto != null) {
-            ClientDto clientDto = this.clientApi.findByClientId(dto.getClientId());
+            ClientDto clientDto = this.clientManager.findByClientId(dto.getClientId());
             if (clientDto == null) {
                 throw new DataRetrievalFailureException("Invalid Client with id '" + dto.getClientId() + "'.");
             }

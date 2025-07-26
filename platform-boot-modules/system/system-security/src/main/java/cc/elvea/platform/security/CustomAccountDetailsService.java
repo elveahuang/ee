@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.core.security.user.User;
 import cc.elvea.platform.commons.enums.MobileCountryCodeEnum;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.RegexUtils;
-import cc.elvea.platform.system.core.api.AccountApi;
+import cc.elvea.platform.system.core.manager.AccountManager;
 import cc.elvea.platform.system.core.model.dto.AccountLoginInfoDto;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
@@ -30,17 +30,17 @@ import java.util.stream.Collectors;
 @Qualifier("accountDetailsService")
 public class CustomAccountDetailsService implements UserDetailsService {
 
-    private final AccountApi accountApi;
+    private final AccountManager accountManager;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AccountLoginInfoDto account;
         if (RegexUtils.checkEmail(username)) {
-            account = accountApi.findByEmail(username);
+            account = accountManager.findByEmail(username);
         } else if (RegexUtils.checkMobile(username)) {
-            account = accountApi.findByMobile(MobileCountryCodeEnum.ZH_CN.getCode(), username);
+            account = accountManager.findByMobile(MobileCountryCodeEnum.ZH_CN.getCode(), username);
         } else {
-            account = accountApi.findByUsername(username);
+            account = accountManager.findByUsername(username);
         }
         if (null == account) {
             throw new UsernameNotFoundException(username);

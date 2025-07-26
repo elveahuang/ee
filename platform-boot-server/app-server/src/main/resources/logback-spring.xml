@@ -136,19 +136,9 @@
         <appender-ref ref="MESSAGE"/>
     </logger>
 
-    <!-- 开发环境 -->
-    <springProfile name="local | development">
-        <root level="INFO">
-            <appender-ref ref="CONSOLE"/>
-        </root>
-    </springProfile>
-
-    <!-- 生产环境 -->
-    <springProfile name="production | native">
-        <root level="INFO">
-            <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="DEBUG"/>
-            <appender-ref ref="ERROR"/>
-        </root>
-    </springProfile>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DEBUG"/>
+        <appender-ref ref="ERROR"/>
+    </root>
 </configuration>

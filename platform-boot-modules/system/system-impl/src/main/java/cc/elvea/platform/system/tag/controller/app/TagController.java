@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.tag.api.TagApi;
+import cc.elvea.platform.system.tag.manager.TagManager;
 import cc.elvea.platform.system.tag.model.request.TagSearchRequest;
 import cc.elvea.platform.system.tag.model.request.TagTypeRequest;
 import cc.elvea.platform.system.tag.model.vo.TagTypeVo;
@@ -28,7 +28,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "TagController", description = "标签控制器")
 public class TagController extends AbstractController {
 
-    private final TagApi tagApi;
+    private final TagManager tagManager;
 
     @Authenticated
     @Operation(summary = "获取标签类型")
@@ -36,7 +36,7 @@ public class TagController extends AbstractController {
     @OperationLog("获取标签类型")
     @PostMapping(API_V1__TAG__TYPE)
     public R<TagTypeVo> type(TagTypeRequest request) {
-        return R.success(tagApi.getTagType(request));
+        return R.success(tagManager.getTagType(request));
     }
 
     @Authenticated
@@ -45,7 +45,7 @@ public class TagController extends AbstractController {
     @OperationLog("搜索标签")
     @PostMapping(API_V1__TAG__SEARCH)
     public R<Page<TagVo>> search(TagSearchRequest request) {
-        return R.success(tagApi.search(request));
+        return R.success(tagManager.search(request));
     }
 
 }

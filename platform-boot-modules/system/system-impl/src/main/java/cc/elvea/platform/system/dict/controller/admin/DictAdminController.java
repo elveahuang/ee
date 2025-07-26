@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.dict.api.DictApi;
+import cc.elvea.platform.system.dict.manager.DictManager;
 import cc.elvea.platform.system.dict.model.entity.DictItemEntity;
 import cc.elvea.platform.system.dict.model.form.DictForm;
 import cc.elvea.platform.system.dict.model.request.DictSearchRequest;
@@ -30,7 +30,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "DictAdminController", description = "字典后台管理控制器")
 public class DictAdminController extends AbstractController {
 
-    private final DictApi dictApi;
+    private final DictManager dictManager;
 
     private final DictItemService dictItemService;
 
@@ -60,7 +60,7 @@ public class DictAdminController extends AbstractController {
     @OperationLog("保存标签")
     @PostMapping(API_V1_ADMIN__DICT__SAVE)
     public R<?> save(DictForm form) {
-        dictApi.save(form);
+        dictManager.save(form);
         return R.success();
     }
 

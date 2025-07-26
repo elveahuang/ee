@@ -9,7 +9,7 @@ import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.ServiceException;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.attachment.api.AttachmentApi;
+import cc.elvea.platform.system.attachment.manager.AttachmentManager;
 import cc.elvea.platform.system.attachment.model.AttachmentFile;
 import cc.elvea.platform.system.attachment.model.AttachmentParameter;
 import cc.elvea.platform.system.attachment.model.request.AttachmentRelationRequest;
@@ -45,7 +45,7 @@ public class AttachmentController extends AbstractController {
 
     private final StorageFactory storage;
 
-    private final AttachmentApi attachmentApi;
+    private final AttachmentManager attachmentManager;
 
     @Authenticated
     @Operation(summary = "获取附件类型")
@@ -53,7 +53,7 @@ public class AttachmentController extends AbstractController {
     @OperationLog("获取附件类型")
     @PostMapping(API_V1__ATTACHMENT__TYPE)
     public R<AttachmentTypeVo> getAttachmentType(AttachmentTypeRequest request) {
-        return R.success(attachmentApi.getAttachmentType(request));
+        return R.success(attachmentManager.getAttachmentType(request));
     }
 
     @Authenticated
@@ -62,7 +62,7 @@ public class AttachmentController extends AbstractController {
     @OperationLog("获取附件")
     @PostMapping(API_V1__ATTACHMENT__GET)
     public R<AttachmentVo> getAttachment(AttachmentRelationRequest request) {
-        return R.success(attachmentApi.getAttachment(request));
+        return R.success(attachmentManager.getAttachment(request));
     }
 
     @Authenticated
@@ -102,7 +102,7 @@ public class AttachmentController extends AbstractController {
         List<AttachmentFile> result = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(files)) {
             for (MultipartFile file : files) {
-                result.add(this.attachmentApi.uploadAttachmentFile(parameter, file));
+                result.add(this.attachmentManager.uploadAttachmentFile(parameter, file));
             }
         }
         return R.success(result);

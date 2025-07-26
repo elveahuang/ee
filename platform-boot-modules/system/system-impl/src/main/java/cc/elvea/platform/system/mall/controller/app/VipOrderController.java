@@ -4,8 +4,8 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.mall.api.OrderApi;
-import cc.elvea.platform.system.mall.api.VipApi;
+import cc.elvea.platform.system.mall.manager.OrderManager;
+import cc.elvea.platform.system.mall.manager.VipManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,9 +25,9 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "VipController", description = "会员控制器")
 public class VipOrderController extends AbstractController {
 
-    private final VipApi vipApi;
+    private final VipManager vipManager;
 
-    private final OrderApi orderApi;
+    private final OrderManager orderManager;
 
     @Authenticated
     @Operation(summary = "确认订单")

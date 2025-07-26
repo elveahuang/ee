@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.tag.api.TagApi;
+import cc.elvea.platform.system.tag.manager.TagManager;
 import cc.elvea.platform.system.tag.model.entity.TagEntity;
 import cc.elvea.platform.system.tag.model.form.TagForm;
 import cc.elvea.platform.system.tag.model.request.TagSearchRequest;
@@ -29,7 +29,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "SystemTagController", description = "标签系统控制器")
 public class TagAdminController extends AbstractController {
 
-    private final TagApi tagApi;
+    private final TagManager tagManager;
 
     private final TagService tagService;
 
@@ -59,7 +59,7 @@ public class TagAdminController extends AbstractController {
     @OperationLog("保存标签")
     @PostMapping(API_V1_ADMIN__TAG__SAVE)
     public R<Page<TagEntity>> save(TagForm form) {
-        tagApi.save(form);
+        tagManager.save(form);
         return R.success();
     }
 

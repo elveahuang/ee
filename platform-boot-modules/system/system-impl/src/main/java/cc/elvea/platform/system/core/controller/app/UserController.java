@@ -6,7 +6,7 @@ import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.annotations.RateLimiter;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.utils.SecurityUtils;
-import cc.elvea.platform.system.core.api.UserApi;
+import cc.elvea.platform.system.core.manager.UserManager;
 import cc.elvea.platform.system.core.model.dto.UserForgotPasswordDto;
 import cc.elvea.platform.system.core.model.dto.UserInfoDto;
 import cc.elvea.platform.system.core.model.form.*;
@@ -31,7 +31,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "UserController", description = "用户控制器")
 public class UserController {
 
-    private final UserApi userApi;
+    private final UserManager userManager;
 
     @Anonymous
     @OperationLog("检查用户名是否可用")
@@ -40,7 +40,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_USERNAME)
     @RateLimiter(type = IP)
     public R<Boolean> checkUsername(UserCheckRequest request) {
-        return R.success(userApi.check(request));
+        return R.success(userManager.check(request));
     }
 
     @Anonymous
@@ -50,7 +50,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_EMAIL)
     @RateLimiter(type = IP)
     public R<Boolean> checkEmail(UserCheckRequest request) {
-        return R.success(userApi.check(request));
+        return R.success(userManager.check(request));
     }
 
     @Anonymous
@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_MOBILE)
     @RateLimiter(type = IP)
     public R<Boolean> checkMobile(UserCheckRequest request) {
-        return R.success(userApi.check(request));
+        return R.success(userManager.check(request));
     }
 
     @Authenticated
@@ -69,7 +69,7 @@ public class UserController {
     @GetMapping(API_V1__USER__INFO)
     public R<UserInfoDto> user() {
         String curUsername = SecurityUtils.getUsername();
-        return R.success(this.userApi.getUserInfo(curUsername));
+        return R.success(this.userManager.getUserInfo(curUsername));
     }
 
     @Anonymous
@@ -78,7 +78,7 @@ public class UserController {
     @ApiResponse(description = "用户注册")
     @PostMapping(API_V1__USER__REGISTER)
     public R<?> register(@Valid UserRegisterForm form) {
-        return userApi.register(form);
+        return userManager.register(form);
     }
 
     @Anonymous
@@ -87,7 +87,7 @@ public class UserController {
     @OperationLog("退出登录")
     @PostMapping(API_V1__USER__LOGOUT)
     public R<?> logout() {
-        return userApi.logout();
+        return userManager.logout();
     }
 
     @Anonymous
@@ -96,7 +96,7 @@ public class UserController {
     @OperationLog("忘记密码")
     @PostMapping(API_V1__USER__FORGOT_PASSWORD)
     public R<UserForgotPasswordDto> forgotPassword(@Valid UserForgotPasswordForm form) {
-        return userApi.forgotPassword(form);
+        return userManager.forgotPassword(form);
     }
 
     @Anonymous
@@ -105,7 +105,7 @@ public class UserController {
     @OperationLog("重置密码")
     @PostMapping(API_V1__USER__RESET_PASSWORD)
     public R<?> resetPassword(@Valid UserResetPasswordForm form) {
-        return userApi.resetPassword(form);
+        return userManager.resetPassword(form);
     }
 
     @Authenticated
@@ -114,7 +114,7 @@ public class UserController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__USER__CHANGE_PASSWORD)
     public R<?> changePassword(@Valid UserChangePasswordForm form) {
-        return userApi.changePassword(form);
+        return userManager.changePassword(form);
     }
 
     @Authenticated
@@ -123,7 +123,7 @@ public class UserController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__USER__ACCOUNT)
     public R<?> updateAccount(@Valid UserBaseForm form) {
-        return userApi.updateAccount(form);
+        return userManager.updateAccount(form);
     }
 
 }

@@ -1,11 +1,11 @@
 package cc.elvea.platform.auth;
 
 import cc.elvea.platform.commons.constants.GlobalConstants;
-import cc.elvea.platform.system.core.api.UserApi;
-import cc.elvea.platform.system.core.api.UserSessionApi;
-import cc.elvea.platform.system.security.api.AuthorizationApi;
-import cc.elvea.platform.system.security.api.AuthorizationConsentApi;
-import cc.elvea.platform.system.security.api.ClientApi;
+import cc.elvea.platform.system.core.manager.UserApi;
+import cc.elvea.platform.system.core.manager.UserSessionApi;
+import cc.elvea.platform.system.security.manager.AuthorizationApi;
+import cc.elvea.platform.system.security.manager.AuthorizationConsentApi;
+import cc.elvea.platform.system.security.manager.ClientApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

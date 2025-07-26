@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
 import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.system.dict.api.DictApi;
+import cc.elvea.platform.system.dict.manager.DictManager;
 import cc.elvea.platform.system.dict.model.request.DictSearchRequest;
 import cc.elvea.platform.system.dict.model.request.DictTypeRequest;
 import cc.elvea.platform.system.dict.model.vo.DictItemVo;
@@ -28,7 +28,7 @@ import static cc.elvea.platform.system.commons.constants.SystemMappingConstants.
 @Tag(name = "DictController", description = "字典控制器")
 public class DictController extends AbstractController {
 
-    private final DictApi dictApi;
+    private final DictManager dictManager;
 
     @Authenticated
     @Operation(summary = "获取字典类型")
@@ -36,7 +36,7 @@ public class DictController extends AbstractController {
     @OperationLog("获取字典类型")
     @PostMapping(API_V1__DICT__TYPE)
     public R<DictTypeVo> type(DictTypeRequest request) {
-        return R.success(dictApi.getDictType(request));
+        return R.success(dictManager.getDictType(request));
     }
 
     @Authenticated
@@ -45,7 +45,7 @@ public class DictController extends AbstractController {
     @OperationLog("搜索字典项")
     @PostMapping(API_V1__DICT__SEARCH)
     public R<Page<DictItemVo>> search(DictSearchRequest request) {
-        return R.success(dictApi.search(request));
+        return R.success(dictManager.search(request));
     }
 
 }

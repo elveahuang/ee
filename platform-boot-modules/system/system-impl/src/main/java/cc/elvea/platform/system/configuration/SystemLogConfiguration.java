@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.elvea.platform.commons.core.log.domain.OperationLogDto;
 import cc.elvea.platform.commons.core.log.domain.UrlLogDto;
 import cc.elvea.platform.commons.core.log.store.LogStore;
-import cc.elvea.platform.system.log.api.LogApi;
+import cc.elvea.platform.system.log.manager.LogManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,21 +17,21 @@ import org.springframework.context.annotation.Configuration;
 public class SystemLogConfiguration {
 
     @Bean
-    public LogStore logStore(LogApi logApi) {
+    public LogStore logStore(LogManager logManager) {
         return new LogStore() {
             @Override
             public void saveApplicationLog(ApplicationLogDto dto) throws Exception {
-                logApi.saveApplicationLog(dto);
+                logManager.saveApplicationLog(dto);
             }
 
             @Override
             public void saveOperationLog(OperationLogDto dto) throws Exception {
-                logApi.saveOperationLog(dto);
+                logManager.saveOperationLog(dto);
             }
 
             @Override
             public void saveUrlLog(UrlLogDto dto) throws Exception {
-                logApi.saveUrlLogLog(dto);
+                logManager.saveUrlLogLog(dto);
             }
         };
     }
