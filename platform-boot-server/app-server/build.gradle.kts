@@ -22,8 +22,7 @@ dependencies {
     implementation(rootProject.libs.bundles.websocketStarter)
     implementation(rootProject.libs.bundles.seleniumStarter)
     implementation(rootProject.libs.bundles.im)
-    // development
-    developmentOnly(rootProject.libs.bundles.baseDevelopment)
+    developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-boot-modules:system:system-impl"))

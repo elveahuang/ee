@@ -58,6 +58,8 @@ spring-boot = { module = "org.springframework.boot:spring-boot" }
 spring-boot-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure" }
 spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
@@ -81,6 +83,7 @@ spring-data-elasticsearch = { module = "org.springframework.data:spring-data-ela
 # Spring Security
 spring-security-core = { module = "org.springframework.security:spring-security-core" }
 spring-security-web = { module = "org.springframework.security:spring-security-web" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
 spring-security-oauth2-jose = { module = "org.springframework.security:spring-security-oauth2-jose" }
 spring-security-oauth2-core = { module = "org.springframework.security:spring-security-oauth2-core" }
 spring-security-oauth2-resource-server = { module = "org.springframework.security:spring-security-oauth2-resource-server" }
@@ -267,8 +270,6 @@ swagger-models-jakarta = { module = "io.swagger.core.v3:swagger-models-jakarta",
 springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
 
 # Test
-spring-security-test = { module = "org.springframework.security:spring-security-test" }
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
@@ -277,7 +278,6 @@ baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "asm", "ognl", "jsoup", 
 baseApacheCommons = ["commons-io", "commons-codec", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-compress", "commons-csv", "commons-email", "commons-net"]
 baseCore = ["mapstruct", "lombok"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
-baseDevelopment = ["spring-boot-devtools"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-jpamodelgen"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence", "jakarta-json-bind"]
 baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction"]
@@ -293,7 +293,8 @@ image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons", "spring-retry"]
-springBootCommons = ["spring-boot", "spring-boot-autoconfigure"]
+springBootCommons = ["spring-boot", "spring-boot-autoconfigure", "spring-boot-starter-actuator"]
+springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 

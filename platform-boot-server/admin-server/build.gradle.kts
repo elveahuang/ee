@@ -10,8 +10,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
     implementation(rootProject.libs.bundles.springCloudCommonsStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
-    // development
-    developmentOnly(rootProject.libs.bundles.baseDevelopment)
+    developmentOnly(rootProject.libs.bundles.springBootDevtools)
 }
 
 tasks.named<BootJar>("bootJar") {
