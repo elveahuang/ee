@@ -46,6 +46,8 @@ graalvmNative {
             buildArgs.add("-H:+ReportExceptionStackTraces")
             buildArgs.add("-H:+UnlockExperimentalVMOptions")
             buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
+            buildArgs.add("-H:-DeadlockWatchdogExitOnTimeout")
+            buildArgs.add("-H:DeadlockWatchdogInterval=0")
             buildArgs.add("-J-Xmx16G")
             verbose.set(true)
             fallback.set(false)
