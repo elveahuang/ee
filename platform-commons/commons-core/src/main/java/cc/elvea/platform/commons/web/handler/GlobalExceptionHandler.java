@@ -1,11 +1,11 @@
 package cc.elvea.platform.commons.web.handler;
 
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.ServiceException;
 import cc.elvea.platform.commons.exception.SystemException;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import cc.elvea.platform.commons.utils.ServletUtils;
+import cc.elvea.platform.commons.web.response.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;

@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.commons.controller.admin;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.model.entity.AnnouncementEntity;
 import cc.elvea.platform.system.commons.model.form.AnnouncementForm;
 import cc.elvea.platform.system.commons.model.request.SystemAnnouncementDeleteRequest;

@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.controller.home;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.core.model.dto.UserForgotPasswordDto;
 import cc.elvea.platform.system.core.model.dto.UserRegisterDto;
 import cc.elvea.platform.system.core.model.vo.UserInfoVo;

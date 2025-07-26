@@ -17,10 +17,3 @@
 | sba-server     | 9292 | config/application-dev/sba-server     | config/application-prod/sba-server     |
 | auth-server    | 9393 | config/application-dev/auth-server    | config/application-prod/auth-server    |
 | system-server  | 9494 | config/application-dev/system-server  | config/application-prod/system-server  |
-| lxp-server     | 9595 | config/application-dev/lxp-server     | config/application-prod/lxp-server     |
-
-## 依赖版本更新
-
-```shell
-gradle dependencyUpdates -Drevision=release
-```

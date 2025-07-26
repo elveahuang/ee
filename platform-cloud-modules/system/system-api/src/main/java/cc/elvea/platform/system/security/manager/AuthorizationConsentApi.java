@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.manager;
 
-import cc.elvea.platform.commons.base.R;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.constants.SystemServiceConstants;
 import cc.elvea.platform.system.security.model.dto.AuthorizationConsentDto;
 import org.springframework.cloud.openfeign.FeignClient;

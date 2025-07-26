@@ -504,7 +504,7 @@ values (1000001, 'VIP', 'VIP');
 truncate `sys_job`;
 
 insert into `sys_job` (`id`, `code`, `classname`, `status`, `type`, `unit`, `period`)
-values (1, 'TEST', 'cc.elvea.platform.system.job.task.TestJob', 1, 'period', 'm', 3);
+values (1, 'TEST', 'cc.elvea.platform.system.commons.jobs.TestJob', 1, 'period', 'm', 3);
 
 -- ==============================¬=======================================================================================
 -- OAuth

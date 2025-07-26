@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.base;
+package cc.elvea.platform.commons.web.response;
 
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;

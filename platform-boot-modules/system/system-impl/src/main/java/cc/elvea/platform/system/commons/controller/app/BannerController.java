@@ -2,8 +2,8 @@ package cc.elvea.platform.system.commons.controller.app;
 
 import cc.elvea.platform.commons.annotations.Anonymous;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.model.entity.BannerEntity;
 import cc.elvea.platform.system.commons.model.request.BannerSearchRequest;
 import cc.elvea.platform.system.commons.service.BannerService;

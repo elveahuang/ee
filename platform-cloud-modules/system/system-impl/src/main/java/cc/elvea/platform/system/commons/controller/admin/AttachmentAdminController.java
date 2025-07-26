@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.commons.controller.admin;
 
-import cc.elvea.platform.commons.base.R;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.service.AttachmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

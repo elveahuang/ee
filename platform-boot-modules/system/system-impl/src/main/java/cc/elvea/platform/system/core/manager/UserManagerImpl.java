@@ -1,12 +1,12 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.enums.ActionTypeEnum;
 import cc.elvea.platform.commons.enums.CaptchaTypeEnum;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
 import cc.elvea.platform.commons.extensions.captcha.service.CaptchaService;
 import cc.elvea.platform.commons.utils.*;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.core.model.converter.AuthorityConverter;
 import cc.elvea.platform.system.core.model.converter.RoleConverter;
 import cc.elvea.platform.system.core.model.converter.UserConverter;

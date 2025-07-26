@@ -2,7 +2,7 @@ package cc.elvea.platform.system.commons.controller;
 
 import cc.elvea.platform.commons.annotations.Anonymous;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.manager.CoreManager;
 import cc.elvea.platform.system.commons.model.vo.InitializeVo;
 import cc.elvea.platform.system.commons.model.vo.VersionVo;

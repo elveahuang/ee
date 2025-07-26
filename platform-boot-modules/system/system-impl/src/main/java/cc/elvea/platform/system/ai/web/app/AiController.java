@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.ai.web.app;
 
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.core.ai.AiFactory;
 import cc.elvea.platform.commons.core.ai.model.request.SimpleChatRequest;
 import cc.elvea.platform.commons.core.ai.model.response.SimpleChatResponse;
 import cc.elvea.platform.commons.utils.StringUtils;
+import cc.elvea.platform.commons.web.response.R;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,5 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.enums.ActionTypeEnum;
 import cc.elvea.platform.commons.enums.CaptchaTypeEnum;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
@@ -10,6 +9,7 @@ import cc.elvea.platform.commons.utils.ObjectUtils;
 import cc.elvea.platform.commons.utils.SecurityUtils;
 import cc.elvea.platform.commons.utils.SpringUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.core.model.converter.AccountConverter;
 import cc.elvea.platform.system.core.model.dto.AccountForgotPasswordDto;
 import cc.elvea.platform.system.core.model.dto.AccountInfoDto;

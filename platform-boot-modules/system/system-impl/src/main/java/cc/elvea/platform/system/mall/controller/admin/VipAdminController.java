@@ -2,8 +2,8 @@ package cc.elvea.platform.system.mall.controller.admin;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

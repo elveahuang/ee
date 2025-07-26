@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.commons.controller;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.constants.GlobalConstants;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import com.google.common.collect.Maps;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

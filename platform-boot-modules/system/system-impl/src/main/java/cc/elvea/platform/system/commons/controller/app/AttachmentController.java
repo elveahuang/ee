@@ -2,13 +2,13 @@ package cc.elvea.platform.system.commons.controller.app;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.core.storage.StorageFactory;
 import cc.elvea.platform.commons.core.storage.model.FileObject;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.ServiceException;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.manager.AttachmentManager;
 import cc.elvea.platform.system.commons.model.AttachmentFile;
 import cc.elvea.platform.system.commons.model.AttachmentParameter;

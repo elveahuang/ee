@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.api;
 
-import cc.elvea.platform.commons.base.R;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.constants.SystemServiceConstants;
 import cc.elvea.platform.system.core.model.dto.UserSessionDto;
 import lombok.extern.slf4j.Slf4j;

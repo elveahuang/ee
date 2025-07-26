@@ -2,8 +2,8 @@ package cc.elvea.platform.system.commons.controller.admin;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.manager.DictManager;
 import cc.elvea.platform.system.commons.model.entity.DictItemEntity;
 import cc.elvea.platform.system.commons.model.entity.TagEntity;

@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.api;
 
-import cc.elvea.platform.commons.base.R;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.SpringUtils;
+import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.core.model.converter.AuthorityConverter;
 import cc.elvea.platform.system.core.model.converter.RoleConverter;
 import cc.elvea.platform.system.core.model.converter.UserConverter;
