@@ -238,7 +238,6 @@ hc = { module = "org.apache.httpcomponents.client5:httpclient5" }
 
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
-thymeleaf = { module = "org.thymeleaf:thymeleaf" }
 quartz = { module = "org.quartz-scheduler:quartz" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
@@ -257,6 +256,10 @@ objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.3" }
 openai-java = { module = "com.openai:openai-java", version = "2.19.1" }
+
+# Thymeleaf
+thymeleaf = { module = "org.thymeleaf:thymeleaf" }
+thymeleaf-spring = { module = "org.thymeleaf:thymeleaf-spring6" }
 
 # MapStruct & Lombok
 lombok = { module = "org.projectlombok:lombok", version = "1.18.38" }
@@ -341,6 +344,9 @@ elasticStarter = ["spring-boot-starter-data-elasticsearch"]
 websocket = ["spring-websocket"]
 websocketStarter = ["spring-boot-starter-websocket"]
 
+# Thymeleaf
+thymeleaf = ["thymeleaf", "thymeleaf-spring"]
+
 # 定时任务
 quartz = ["quartz", "quartz-jobs"]
 quartzStarter = ["spring-boot-starter-quartz"]
@@ -356,6 +362,10 @@ playwrightStarter = ["playwright"]
 swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
 swaggerStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-starter-webmvc"]
 
+# 文档转换
+office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]
+officeStarter = ["jodconverter-spring-boot-starter"]
+
 # 开放接口
 telegram = ["telegrambots-client", "telegrambots-abilities"]
 im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
@@ -369,7 +379,3 @@ minio = ["minio"]
 oss = ["aliyun-sdk-oss"]
 cos = ["cos_api"]
 storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
-
-# 文档转换
-office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]
-officeStarter = ["jodconverter-spring-boot-starter"]
