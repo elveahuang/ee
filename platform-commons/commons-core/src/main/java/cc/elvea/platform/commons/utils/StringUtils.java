@@ -81,4 +81,12 @@ public abstract class StringUtils extends org.springframework.util.StringUtils {
         return isNotEmpty(text) ? text.toLowerCase() : null;
     }
 
+    public static boolean startsWith(String text, String prefix) {
+        return isNotEmpty(text) && text.startsWith(prefix);
+    }
+
+    public static boolean endsWith(String text, String suffix) {
+        return isNotEmpty(text) && text.endsWith(suffix);
+    }
+
 }
