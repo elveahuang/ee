@@ -16,21 +16,21 @@ spring:
             name: master
             type: com.zaxxer.hikari.HikariDataSource
             driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
             username: root
             password: root
         slave:
             name: slave
             type: com.zaxxer.hikari.HikariDataSource
             driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/ee?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
             username: root
             password: root
         job:
             name: job
             type: com.zaxxer.hikari.HikariDataSource
             driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/job?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            url: jdbc:mysql://127.0.0.1:3306/ee_quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
             username: root
             password: root
     cache:

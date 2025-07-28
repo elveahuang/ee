@@ -27,7 +27,6 @@ dependencies {
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-boot-modules:system:system-impl"))
     implementation(project(":platform-boot-modules:system:system-security"))
-    implementation(project(":platform-boot-modules:lxp:lxp-impl"))
 }
 
 graalvmNative {

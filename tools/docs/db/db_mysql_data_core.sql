@@ -373,7 +373,7 @@ values (1000001, 'zh_cn', 'zh', 'cn', 'label_lang_zh_cn', '简体中文', 1, 1),
 
 truncate sys_label;
 
-insert into sys_label (`id`, `code`, `zh_label`, `en_label`)
+insert into sys_label (`id`, `code`, `zh_cn_label`, `en_label`)
 values (10010000101, 'label_lang_type__zh_cn', '简体中文', 'Simplified Chinese'),
        (10010000102, 'label_lang_type__zh_tw', '繁体中文', 'Traditional Chinese'),
        (10010000103, 'label_lang_type__en_us', '英文', 'English'),

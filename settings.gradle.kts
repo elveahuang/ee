@@ -25,8 +25,6 @@ include("platform-commons:commons-core-starter")
 include("platform-boot-modules:system:system-api")
 include("platform-boot-modules:system:system-impl")
 include("platform-boot-modules:system:system-security")
-include("platform-boot-modules:lxp:lxp-api")
-include("platform-boot-modules:lxp:lxp-impl")
 // 应用服务
 include("platform-boot-server:admin-server")
 include("platform-boot-server:app-server")

@@ -2,11 +2,11 @@ package cc.elvea.platform.system.tag.manager;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.system.commons.constants.SystemTagConstants;
-import cc.elvea.platform.system.commons.manager.TagManager;
-import cc.elvea.platform.system.commons.model.request.TagRelationSaveRequest;
-import cc.elvea.platform.system.commons.model.request.TagTypeRequest;
-import cc.elvea.platform.system.commons.model.vo.TagTypeVo;
-import cc.elvea.platform.system.commons.model.vo.TagVo;
+import cc.elvea.platform.system.core.manager.TagManager;
+import cc.elvea.platform.system.core.model.request.TagRelationSaveRequest;
+import cc.elvea.platform.system.core.model.request.TagTypeRequest;
+import cc.elvea.platform.system.core.model.vo.TagTypeVo;
+import cc.elvea.platform.system.core.model.vo.TagVo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

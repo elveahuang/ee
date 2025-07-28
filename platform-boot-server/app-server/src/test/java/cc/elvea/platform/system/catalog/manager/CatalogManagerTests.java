@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.catalog.manager;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.system.commons.manager.CatalogManager;
+import cc.elvea.platform.system.core.manager.CatalogManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

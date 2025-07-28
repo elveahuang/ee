@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {
     "cc.elvea.platform.configuration",
     "cc.elvea.platform.commons",
-    "cc.elvea.platform.lxp",
     "cc.elvea.platform.security",
     "cc.elvea.platform.system",
 }, exclude = {
@@ -24,11 +23,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     CosIdEndpointAutoConfiguration.class
 })
 @EntityScan(basePackages = {
-    "cc.elvea.platform.lxp.**.entity",
     "cc.elvea.platform.system.**.entity",
 })
 @EnableJpaRepositories(basePackages = {
-    "cc.elvea.platform.lxp.**.repository",
     "cc.elvea.platform.system.**.repository",
 }, repositoryBaseClass = BaseEntityRepositoryImpl.class)
 public class AppServerApplication {
