@@ -3,15 +3,14 @@ package cc.elvea.platform.system.core.jobs;
 import cc.elvea.platform.commons.core.quartz.QuartzJob;
 import lombok.extern.slf4j.Slf4j;
 
-
 /**
  * @author elvea
  */
 @Slf4j
-public class TestJob extends QuartzJob {
+public class ExampleJob extends QuartzJob {
 
     /**
-     * 子类中实现任务的操作
+     * @see QuartzJob#execute()
      */
     protected void execute() {
         log.info("TestJob.execute...");
