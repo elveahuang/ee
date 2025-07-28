@@ -1,6 +1,5 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.manager.LabelManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -6,7 +6,6 @@ import cc.elvea.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
 import cc.elvea.platform.commons.extensions.captcha.request.CaptchaRequest;
 import cc.elvea.platform.commons.extensions.captcha.service.CaptchaService;
 import cc.elvea.platform.system.commons.constants.SystemMessageConstants;
-import cc.elvea.platform.system.core.manager.CaptchaManager;
 import cc.elvea.platform.system.message.enums.MessageTargetTypeEnum;
 import cc.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import cc.elvea.platform.system.message.manager.MessageManager;
