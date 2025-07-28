@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.core.cache.UserRoleCacheKeyGenerator;
-import cc.elvea.platform.system.core.model.entity.UserRoleEntity;
+import cc.elvea.platform.system.core.domain.entity.UserRoleEntity;
 import cc.elvea.platform.system.core.repository.UserRoleRepository;
 import cc.elvea.platform.system.core.service.UserRoleService;
 import org.springframework.data.domain.Example;

@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.core.model.dto.*;
+import cc.elvea.platform.system.core.domain.dto.*;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

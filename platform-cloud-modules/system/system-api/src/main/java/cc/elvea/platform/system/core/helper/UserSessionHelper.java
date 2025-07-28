@@ -2,7 +2,7 @@ package cc.elvea.platform.system.core.helper;
 
 
 import cc.elvea.platform.commons.utils.ServletUtils;
-import cc.elvea.platform.system.core.model.dto.UserSessionDto;
+import cc.elvea.platform.system.core.domain.dto.UserSessionDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 

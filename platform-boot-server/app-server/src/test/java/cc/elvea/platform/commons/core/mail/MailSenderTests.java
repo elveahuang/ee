@@ -2,7 +2,7 @@ package cc.elvea.platform.commons.core.mail;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.autoconfigure.core.properties.TestProperties;
-import cc.elvea.platform.commons.core.mail.model.MailBody;
+import cc.elvea.platform.commons.core.mail.domain.MailBody;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

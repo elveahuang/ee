@@ -2,8 +2,8 @@ package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.message.rabbit.AbstractAmqpService;
 import cc.elvea.platform.system.commons.constants.SystemAmqpConstants;
+import cc.elvea.platform.system.message.domain.dto.SendMessageAmqpDto;
 import cc.elvea.platform.system.message.manager.MessageManager;
-import cc.elvea.platform.system.message.model.dto.SendMessageAmqpDto;
 import cc.elvea.platform.system.message.service.MessageAmqpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

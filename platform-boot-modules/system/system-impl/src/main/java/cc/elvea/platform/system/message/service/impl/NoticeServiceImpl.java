@@ -2,8 +2,8 @@ package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseEntityService;
 import cc.elvea.platform.commons.utils.SecurityUtils;
-import cc.elvea.platform.system.message.model.entity.NoticeEntity;
-import cc.elvea.platform.system.message.model.entity.NoticeEntity_;
+import cc.elvea.platform.system.message.domain.entity.NoticeEntity;
+import cc.elvea.platform.system.message.domain.entity.NoticeEntity_;
 import cc.elvea.platform.system.message.repository.NoticeRepository;
 import cc.elvea.platform.system.message.request.NoticeSearchRequest;
 import cc.elvea.platform.system.message.service.NoticeService;

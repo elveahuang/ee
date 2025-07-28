@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.manager;
 
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.system.core.model.converter.ConfigConverter;
-import cc.elvea.platform.system.core.model.dto.ConfigDto;
+import cc.elvea.platform.system.core.domain.converter.ConfigConverter;
+import cc.elvea.platform.system.core.domain.dto.ConfigDto;
 import cc.elvea.platform.system.core.service.ConfigService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

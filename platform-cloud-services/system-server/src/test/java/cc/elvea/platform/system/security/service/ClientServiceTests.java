@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.security.service;
 
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.security.model.entity.ClientEntity;
+import cc.elvea.platform.system.security.domain.entity.ClientEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

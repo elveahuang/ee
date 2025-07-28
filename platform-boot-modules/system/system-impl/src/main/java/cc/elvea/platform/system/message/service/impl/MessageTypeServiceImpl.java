@@ -2,8 +2,8 @@ package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.message.cache.MessageTypeCacheKeyGenerator;
-import cc.elvea.platform.system.message.model.entity.MessageTypeEntity;
-import cc.elvea.platform.system.message.model.entity.MessageTypeEntity_;
+import cc.elvea.platform.system.message.domain.entity.MessageTypeEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageTypeEntity_;
 import cc.elvea.platform.system.message.repository.MessageTypeRepository;
 import cc.elvea.platform.system.message.service.MessageTypeService;
 import jakarta.persistence.criteria.Predicate;

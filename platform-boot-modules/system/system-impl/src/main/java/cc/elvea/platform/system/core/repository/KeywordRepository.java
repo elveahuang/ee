@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.repository;
 
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.elvea.platform.system.core.model.entity.KeywordEntity;
+import cc.elvea.platform.system.core.domain.entity.KeywordEntity;
 import org.springframework.stereotype.Repository;
 
 /**

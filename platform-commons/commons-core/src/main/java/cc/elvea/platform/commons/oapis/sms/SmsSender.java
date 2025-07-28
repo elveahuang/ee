@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.oapis.sms;
 
-import cc.elvea.platform.commons.oapis.sms.model.SmsBody;
+import cc.elvea.platform.commons.oapis.sms.domain.SmsBody;
 
 /**
  * @author elvea

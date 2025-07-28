@@ -2,10 +2,10 @@ package cc.elvea.platform.system.mall.controller.app;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
+import cc.elvea.platform.system.mall.domain.vo.PayTypeVo;
 import cc.elvea.platform.system.mall.manager.PayManager;
-import cc.elvea.platform.system.mall.model.vo.PayTypeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.mybatis.service.BaseEntityService;
+import cc.elvea.platform.system.core.domain.entity.CatalogTypeEntity;
 import cc.elvea.platform.system.core.mapper.CatalogTypeMapper;
-import cc.elvea.platform.system.core.model.entity.CatalogTypeEntity;
 import cc.elvea.platform.system.core.service.CatalogTypeService;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;

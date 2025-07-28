@@ -1,11 +1,11 @@
 package cc.elvea.platform.system.core.controller;
 
 import cc.elvea.platform.commons.constants.DateTimeConstants;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.utils.DateUtils;
 import cc.elvea.platform.commons.utils.JacksonUtils;
-import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.BaseWebTests;
-import cc.elvea.platform.system.core.model.dto.UserRegisterDto;
+import cc.elvea.platform.system.core.domain.dto.UserRegisterDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

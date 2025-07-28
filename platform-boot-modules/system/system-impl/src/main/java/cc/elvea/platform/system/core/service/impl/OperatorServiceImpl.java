@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
-import cc.elvea.platform.system.core.model.entity.OperatorEntity;
+import cc.elvea.platform.system.core.domain.entity.OperatorEntity;
 import cc.elvea.platform.system.core.repository.OperatorRepository;
 import cc.elvea.platform.system.core.service.ConfigService;
 import cc.elvea.platform.system.core.service.OperatorService;

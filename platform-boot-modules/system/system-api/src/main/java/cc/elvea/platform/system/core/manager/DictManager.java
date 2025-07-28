@@ -1,13 +1,13 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.model.form.DictForm;
-import cc.elvea.platform.system.core.model.request.DictRelationRequest;
-import cc.elvea.platform.system.core.model.request.DictRelationSaveRequest;
-import cc.elvea.platform.system.core.model.request.DictSearchRequest;
-import cc.elvea.platform.system.core.model.request.DictTypeRequest;
-import cc.elvea.platform.system.core.model.vo.DictItemVo;
-import cc.elvea.platform.system.core.model.vo.DictRelationVo;
-import cc.elvea.platform.system.core.model.vo.DictTypeVo;
+import cc.elvea.platform.system.core.domain.form.DictForm;
+import cc.elvea.platform.system.core.domain.request.DictRelationRequest;
+import cc.elvea.platform.system.core.domain.request.DictRelationSaveRequest;
+import cc.elvea.platform.system.core.domain.request.DictSearchRequest;
+import cc.elvea.platform.system.core.domain.request.DictTypeRequest;
+import cc.elvea.platform.system.core.domain.vo.DictItemVo;
+import cc.elvea.platform.system.core.domain.vo.DictRelationVo;
+import cc.elvea.platform.system.core.domain.vo.DictTypeVo;
 import org.springframework.data.domain.Page;
 
 /**

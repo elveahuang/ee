@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.DictItemEntity;
-import cc.elvea.platform.system.core.model.request.DictRelationRequest;
-import cc.elvea.platform.system.core.model.request.DictSearchRequest;
+import cc.elvea.platform.system.core.domain.entity.DictItemEntity;
+import cc.elvea.platform.system.core.domain.request.DictRelationRequest;
+import cc.elvea.platform.system.core.domain.request.DictSearchRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

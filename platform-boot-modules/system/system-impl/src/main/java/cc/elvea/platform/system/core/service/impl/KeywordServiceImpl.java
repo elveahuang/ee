@@ -3,7 +3,7 @@ package cc.elvea.platform.system.core.service.impl;
 import cc.elvea.platform.commons.core.cache.CacheKeyGenerator;
 import cc.elvea.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.core.model.entity.KeywordEntity;
+import cc.elvea.platform.system.core.domain.entity.KeywordEntity;
 import cc.elvea.platform.system.core.repository.KeywordRepository;
 import cc.elvea.platform.system.core.service.KeywordService;
 import lombok.extern.slf4j.Slf4j;

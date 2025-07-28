@@ -1,8 +1,8 @@
 package cc.elvea.platform.security;
 
 import cc.elvea.platform.security.utils.OAuth2Utils;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 import cc.elvea.platform.system.security.manager.ClientManager;
-import cc.elvea.platform.system.security.model.dto.ClientDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;

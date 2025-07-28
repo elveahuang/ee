@@ -2,7 +2,7 @@ package cc.elvea.platform.system.security.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.security.model.entity.AuthorizationConsentEntity;
+import cc.elvea.platform.system.security.domain.entity.AuthorizationConsentEntity;
 
 /**
  * @author elvea

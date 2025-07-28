@@ -3,7 +3,7 @@ package cc.elvea.platform.commons.core.mail.spring;
 import cc.elvea.platform.commons.constants.GlobalConstants;
 import cc.elvea.platform.commons.core.mail.MailConfig;
 import cc.elvea.platform.commons.core.mail.MailSender;
-import cc.elvea.platform.commons.core.mail.model.MailBody;
+import cc.elvea.platform.commons.core.mail.domain.MailBody;
 import cc.elvea.platform.commons.enums.SslProtocolTypeEnum;
 import cc.elvea.platform.commons.utils.StringUtils;
 import jakarta.mail.internet.InternetAddress;

@@ -1,11 +1,11 @@
 package cc.elvea.platform.system.core.controller.home;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.core.model.dto.UserForgotPasswordDto;
-import cc.elvea.platform.system.core.model.dto.UserRegisterDto;
-import cc.elvea.platform.system.core.model.vo.UserInfoVo;
+import cc.elvea.platform.system.core.domain.dto.UserForgotPasswordDto;
+import cc.elvea.platform.system.core.domain.dto.UserRegisterDto;
+import cc.elvea.platform.system.core.domain.vo.UserInfoVo;
 import cc.elvea.platform.system.core.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

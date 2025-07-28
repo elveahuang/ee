@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.security.manager;
 
-import cc.elvea.platform.commons.web.response.R;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.system.commons.constants.SystemServiceConstants;
-import cc.elvea.platform.system.security.model.dto.ClientDto;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;

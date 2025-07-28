@@ -6,7 +6,7 @@ import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
 import cc.elvea.platform.system.core.cache.UserAuthorityCacheKeyGenerator;
-import cc.elvea.platform.system.core.model.entity.AuthorityEntity;
+import cc.elvea.platform.system.core.domain.entity.AuthorityEntity;
 import cc.elvea.platform.system.core.repository.AuthorityRepository;
 import cc.elvea.platform.system.core.service.AuthorityService;
 import cc.elvea.platform.system.core.service.RoleAuthorityService;

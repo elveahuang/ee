@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.repository;
 
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.elvea.platform.system.core.model.entity.JobParamEntity;
+import cc.elvea.platform.system.core.domain.entity.JobParamEntity;
 import org.springframework.stereotype.Repository;
 
 /**

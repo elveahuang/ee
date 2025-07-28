@@ -1,13 +1,13 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.model.form.TagForm;
-import cc.elvea.platform.system.core.model.request.TagRelationRequest;
-import cc.elvea.platform.system.core.model.request.TagRelationSaveRequest;
-import cc.elvea.platform.system.core.model.request.TagSearchRequest;
-import cc.elvea.platform.system.core.model.request.TagTypeRequest;
-import cc.elvea.platform.system.core.model.vo.TagRelationVo;
-import cc.elvea.platform.system.core.model.vo.TagTypeVo;
-import cc.elvea.platform.system.core.model.vo.TagVo;
+import cc.elvea.platform.system.core.domain.form.TagForm;
+import cc.elvea.platform.system.core.domain.request.TagRelationRequest;
+import cc.elvea.platform.system.core.domain.request.TagRelationSaveRequest;
+import cc.elvea.platform.system.core.domain.request.TagSearchRequest;
+import cc.elvea.platform.system.core.domain.request.TagTypeRequest;
+import cc.elvea.platform.system.core.domain.vo.TagRelationVo;
+import cc.elvea.platform.system.core.domain.vo.TagTypeVo;
+import cc.elvea.platform.system.core.domain.vo.TagVo;
 import org.springframework.data.domain.Page;
 
 /**

@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.DictTypeEntity;
-import cc.elvea.platform.system.core.model.vo.DictTypeVo;
+import cc.elvea.platform.system.core.domain.entity.DictTypeEntity;
+import cc.elvea.platform.system.core.domain.vo.DictTypeVo;
 
 /**
  * @author elvea

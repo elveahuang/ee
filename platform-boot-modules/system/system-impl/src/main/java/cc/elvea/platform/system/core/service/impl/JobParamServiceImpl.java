@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.core.model.entity.JobParamEntity;
+import cc.elvea.platform.system.core.domain.entity.JobParamEntity;
 import cc.elvea.platform.system.core.repository.JobParamRepository;
 import cc.elvea.platform.system.core.service.JobParamService;
 import lombok.AllArgsConstructor;

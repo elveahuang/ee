@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.model.dto.CatalogRelationSaveDto;
+import cc.elvea.platform.system.core.domain.dto.CatalogRelationSaveDto;
 import cc.elvea.platform.system.core.service.EntityRelationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

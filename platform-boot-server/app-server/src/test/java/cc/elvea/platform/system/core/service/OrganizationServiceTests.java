@@ -2,8 +2,8 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.core.sequence.Sequence;
-import cc.elvea.platform.system.core.model.dto.OrganizationDto;
-import cc.elvea.platform.system.core.model.dto.OrganizationSaveDto;
+import cc.elvea.platform.system.core.domain.dto.OrganizationDto;
+import cc.elvea.platform.system.core.domain.dto.OrganizationSaveDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

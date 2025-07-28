@@ -1,15 +1,15 @@
 package cc.elvea.platform.system.core.manager;
 
 import cc.elvea.platform.commons.core.storage.StorageFactory;
-import cc.elvea.platform.commons.core.storage.model.FileObject;
-import cc.elvea.platform.system.core.model.AttachmentFile;
-import cc.elvea.platform.system.core.model.AttachmentParameter;
-import cc.elvea.platform.system.core.model.request.AttachmentRelationRequest;
-import cc.elvea.platform.system.core.model.request.AttachmentRelationSaveRequest;
-import cc.elvea.platform.system.core.model.request.AttachmentTypeRequest;
-import cc.elvea.platform.system.core.model.vo.AttachmentRelationVo;
-import cc.elvea.platform.system.core.model.vo.AttachmentTypeVo;
-import cc.elvea.platform.system.core.model.vo.AttachmentVo;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
+import cc.elvea.platform.system.core.domain.AttachmentFile;
+import cc.elvea.platform.system.core.domain.AttachmentParameter;
+import cc.elvea.platform.system.core.domain.request.AttachmentRelationRequest;
+import cc.elvea.platform.system.core.domain.request.AttachmentRelationSaveRequest;
+import cc.elvea.platform.system.core.domain.request.AttachmentTypeRequest;
+import cc.elvea.platform.system.core.domain.vo.AttachmentRelationVo;
+import cc.elvea.platform.system.core.domain.vo.AttachmentTypeVo;
+import cc.elvea.platform.system.core.domain.vo.AttachmentVo;
 import cc.elvea.platform.system.core.service.AttachmentFileService;
 import cc.elvea.platform.system.core.service.AttachmentTypeService;
 import lombok.AllArgsConstructor;

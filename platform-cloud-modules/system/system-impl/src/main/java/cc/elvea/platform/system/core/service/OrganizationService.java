@@ -2,9 +2,9 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.core.model.dto.OrganizationDto;
-import cc.elvea.platform.system.core.model.dto.OrganizationSaveDto;
-import cc.elvea.platform.system.core.model.entity.OrganizationEntity;
+import cc.elvea.platform.system.core.domain.dto.OrganizationDto;
+import cc.elvea.platform.system.core.domain.dto.OrganizationSaveDto;
+import cc.elvea.platform.system.core.domain.entity.OrganizationEntity;
 
 import java.util.List;
 

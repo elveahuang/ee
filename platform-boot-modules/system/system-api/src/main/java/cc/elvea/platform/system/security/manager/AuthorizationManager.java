@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.manager;
 
-import cc.elvea.platform.system.security.model.dto.AuthorizationDto;
+import cc.elvea.platform.system.security.domain.dto.AuthorizationDto;
 
 /**
  * @author elvea

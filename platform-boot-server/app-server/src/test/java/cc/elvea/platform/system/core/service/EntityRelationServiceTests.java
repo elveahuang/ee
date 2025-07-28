@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.system.core.model.entity.EntityRelationEntity;
+import cc.elvea.platform.system.core.domain.entity.EntityRelationEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

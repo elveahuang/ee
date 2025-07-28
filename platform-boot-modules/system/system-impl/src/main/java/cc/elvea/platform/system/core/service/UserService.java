@@ -2,9 +2,9 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.core.model.entity.UserEntity;
-import cc.elvea.platform.system.core.model.form.UserForm;
-import cc.elvea.platform.system.core.model.request.UserCheckRequest;
+import cc.elvea.platform.system.core.domain.entity.UserEntity;
+import cc.elvea.platform.system.core.domain.form.UserForm;
+import cc.elvea.platform.system.core.domain.request.UserCheckRequest;
 
 /**
  * @author elvea

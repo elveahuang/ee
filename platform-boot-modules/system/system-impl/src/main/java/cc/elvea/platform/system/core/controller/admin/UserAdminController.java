@@ -1,12 +1,12 @@
 package cc.elvea.platform.system.core.controller.admin;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.core.model.entity.UserEntity;
-import cc.elvea.platform.system.core.model.form.UserForm;
-import cc.elvea.platform.system.core.model.request.UserDeleteRequest;
-import cc.elvea.platform.system.core.model.request.UserSearchRequest;
+import cc.elvea.platform.system.core.domain.entity.UserEntity;
+import cc.elvea.platform.system.core.domain.form.UserForm;
+import cc.elvea.platform.system.core.domain.request.UserDeleteRequest;
+import cc.elvea.platform.system.core.domain.request.UserSearchRequest;
 import cc.elvea.platform.system.core.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

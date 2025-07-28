@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.core.storage;
 
-import cc.elvea.platform.commons.core.storage.model.FileObject;
-import cc.elvea.platform.commons.core.storage.model.FileParameter;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
+import cc.elvea.platform.commons.core.storage.domain.FileParameter;
 import cc.elvea.platform.commons.utils.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.TagEntity;
-import cc.elvea.platform.system.core.model.request.TagRelationRequest;
-import cc.elvea.platform.system.core.model.request.TagSearchRequest;
+import cc.elvea.platform.system.core.domain.entity.TagEntity;
+import cc.elvea.platform.system.core.domain.request.TagRelationRequest;
+import cc.elvea.platform.system.core.domain.request.TagSearchRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

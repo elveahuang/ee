@@ -12,7 +12,7 @@ import cc.elvea.platform.commons.oapis.translator.TranslatorFactory;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.commons.enums.LabelTypeEnum;
-import cc.elvea.platform.system.core.model.entity.LabelEntity;
+import cc.elvea.platform.system.core.domain.entity.LabelEntity;
 import cc.elvea.platform.system.core.repository.LabelRepository;
 import cc.elvea.platform.system.core.service.LabelService;
 import com.google.common.collect.Maps;

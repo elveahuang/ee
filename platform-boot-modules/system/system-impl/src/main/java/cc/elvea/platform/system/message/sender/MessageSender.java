@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.message.sender;
 
-import cc.elvea.platform.system.message.model.dto.SendMessageDto;
+import cc.elvea.platform.system.message.domain.dto.SendMessageDto;
 
 /**
  * @author elvea

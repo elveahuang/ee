@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.provider;
 
-import cc.elvea.platform.system.core.model.dto.LinkDto;
+import cc.elvea.platform.system.core.domain.dto.LinkDto;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**

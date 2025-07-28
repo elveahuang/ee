@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.core.model.entity.AttachmentRelationEntity;
+import cc.elvea.platform.system.core.domain.entity.AttachmentRelationEntity;
 import cc.elvea.platform.system.core.repository.AttachmentRelationRepository;
 import cc.elvea.platform.system.core.service.AttachmentRelationFileService;
 import lombok.extern.slf4j.Slf4j;

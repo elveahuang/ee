@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.core.model.entity.CaptchaLogEntity;
+import cc.elvea.platform.system.core.domain.entity.CaptchaLogEntity;
 import cc.elvea.platform.system.core.repository.CaptchaLogRepository;
 import cc.elvea.platform.system.core.service.CaptchaLogService;
 import lombok.AllArgsConstructor;

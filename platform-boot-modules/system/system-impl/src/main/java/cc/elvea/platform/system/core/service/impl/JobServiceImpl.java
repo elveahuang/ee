@@ -5,7 +5,7 @@ import cc.elvea.platform.commons.core.quartz.QuartzJobManager;
 import cc.elvea.platform.commons.core.quartz.QuartzJobScheduleType;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
-import cc.elvea.platform.system.core.model.entity.JobEntity;
+import cc.elvea.platform.system.core.domain.entity.JobEntity;
 import cc.elvea.platform.system.core.repository.JobRepository;
 import cc.elvea.platform.system.core.service.JobService;
 import lombok.AllArgsConstructor;

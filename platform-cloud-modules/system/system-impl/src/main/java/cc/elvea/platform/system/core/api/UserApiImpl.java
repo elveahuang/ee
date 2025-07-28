@@ -1,15 +1,15 @@
 package cc.elvea.platform.system.core.api;
 
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.core.model.converter.AuthorityConverter;
-import cc.elvea.platform.system.core.model.converter.RoleConverter;
-import cc.elvea.platform.system.core.model.converter.UserConverter;
-import cc.elvea.platform.system.core.model.dto.UserLoginDto;
-import cc.elvea.platform.system.core.model.entity.AuthorityEntity;
-import cc.elvea.platform.system.core.model.entity.RoleEntity;
-import cc.elvea.platform.system.core.model.entity.UserEntity;
+import cc.elvea.platform.system.core.domain.converter.AuthorityConverter;
+import cc.elvea.platform.system.core.domain.converter.RoleConverter;
+import cc.elvea.platform.system.core.domain.converter.UserConverter;
+import cc.elvea.platform.system.core.domain.dto.UserLoginDto;
+import cc.elvea.platform.system.core.domain.entity.AuthorityEntity;
+import cc.elvea.platform.system.core.domain.entity.RoleEntity;
+import cc.elvea.platform.system.core.domain.entity.UserEntity;
 import cc.elvea.platform.system.core.service.AuthorityService;
 import cc.elvea.platform.system.core.service.RoleService;
 import cc.elvea.platform.system.core.service.UserService;
@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * @author elvea
  */
-@AllArgsConstructor
 @RestController
+@AllArgsConstructor
 public class UserApiImpl implements UserApi {
 
     private final UserService userService;

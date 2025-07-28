@@ -5,7 +5,7 @@ import cc.elvea.platform.commons.data.mybatis.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.security.cache.AuthorizationCacheKeyGenerator;
-import cc.elvea.platform.system.security.model.entity.AuthorizationEntity;
+import cc.elvea.platform.system.security.domain.entity.AuthorizationEntity;
 import cc.elvea.platform.system.security.repository.AuthorizationMapper;
 import cc.elvea.platform.system.security.service.AuthorizationService;
 import org.springframework.stereotype.Service;

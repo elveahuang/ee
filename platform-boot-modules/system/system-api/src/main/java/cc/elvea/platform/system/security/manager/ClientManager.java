@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.security.manager;
 
-import cc.elvea.platform.system.security.model.dto.ClientDto;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 
 /**
  * @author elvea

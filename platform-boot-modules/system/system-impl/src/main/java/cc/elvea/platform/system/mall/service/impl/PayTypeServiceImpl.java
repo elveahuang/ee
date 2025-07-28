@@ -3,7 +3,7 @@ package cc.elvea.platform.system.mall.service.impl;
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.commons.enums.ActiveTypeEnum;
 import cc.elvea.platform.system.commons.enums.StatusTypeEnum;
-import cc.elvea.platform.system.mall.model.entity.PayTypeEntity;
+import cc.elvea.platform.system.mall.domain.entity.PayTypeEntity;
 import cc.elvea.platform.system.mall.repository.PayTypeRepository;
 import cc.elvea.platform.system.mall.service.PayTypeService;
 import lombok.AllArgsConstructor;

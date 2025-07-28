@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.mall.repository;
 
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.elvea.platform.system.mall.model.entity.OrderEntity;
+import cc.elvea.platform.system.mall.domain.entity.OrderEntity;
 import org.springframework.stereotype.Repository;
 
 /**

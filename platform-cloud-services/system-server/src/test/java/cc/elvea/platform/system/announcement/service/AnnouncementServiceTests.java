@@ -3,7 +3,7 @@ package cc.elvea.platform.system.announcement.service;
 import cc.elvea.platform.commons.core.sequence.Sequence;
 import cc.elvea.platform.commons.utils.StopWatchUtils;
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.core.model.entity.AnnouncementEntity;
+import cc.elvea.platform.system.core.domain.entity.AnnouncementEntity;
 import cc.elvea.platform.system.core.service.AnnouncementService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

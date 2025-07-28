@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.core.model.entity.CatalogEntity;
+import cc.elvea.platform.system.core.domain.entity.CatalogEntity;
 import cc.elvea.platform.system.core.repository.CatalogRepository;
 import cc.elvea.platform.system.core.service.CatalogService;
 import lombok.extern.slf4j.Slf4j;

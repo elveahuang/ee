@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.controller;
 
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.commons.constants.SystemMappingConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

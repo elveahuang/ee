@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.controller.admin;
 
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.request.PageRequest;
-import cc.elvea.platform.commons.web.response.R;
 import cc.elvea.platform.system.core.service.AnnouncementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

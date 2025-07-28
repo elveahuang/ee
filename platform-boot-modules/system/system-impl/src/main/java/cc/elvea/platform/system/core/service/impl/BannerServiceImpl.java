@@ -2,11 +2,11 @@ package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
+import cc.elvea.platform.system.core.domain.entity.BannerEntity;
+import cc.elvea.platform.system.core.domain.form.BannerForm;
+import cc.elvea.platform.system.core.domain.request.BannerSearchRequest;
 import cc.elvea.platform.system.core.manager.AttachmentManager;
 import cc.elvea.platform.system.core.manager.DictManager;
-import cc.elvea.platform.system.core.model.entity.BannerEntity;
-import cc.elvea.platform.system.core.model.form.BannerForm;
-import cc.elvea.platform.system.core.model.request.BannerSearchRequest;
 import cc.elvea.platform.system.core.repository.BannerRepository;
 import cc.elvea.platform.system.core.service.BannerService;
 import lombok.AllArgsConstructor;

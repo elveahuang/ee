@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.core.storage.utils;
 
 import cc.elvea.platform.commons.constants.DateTimeConstants;
-import cc.elvea.platform.commons.core.storage.model.FileParameter;
+import cc.elvea.platform.commons.core.storage.domain.FileParameter;
 import cc.elvea.platform.commons.utils.DateTimeUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cn.hutool.core.util.IdUtil;

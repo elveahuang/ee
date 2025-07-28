@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.security.manager;
 
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.system.security.model.converter.ClientConverter;
-import cc.elvea.platform.system.security.model.dto.ClientDto;
+import cc.elvea.platform.system.security.domain.converter.ClientConverter;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 import cc.elvea.platform.system.security.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

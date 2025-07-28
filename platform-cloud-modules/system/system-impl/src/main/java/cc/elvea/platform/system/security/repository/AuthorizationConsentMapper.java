@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.security.repository;
 
 import cc.elvea.platform.commons.data.mybatis.mapper.BaseEntityMapper;
-import cc.elvea.platform.system.security.model.entity.AuthorizationConsentEntity;
+import cc.elvea.platform.system.security.domain.entity.AuthorizationConsentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

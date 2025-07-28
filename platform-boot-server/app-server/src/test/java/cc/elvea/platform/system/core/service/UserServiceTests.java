@@ -3,7 +3,7 @@ package cc.elvea.platform.system.core.service;
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.core.cache.CacheKey;
 import cc.elvea.platform.commons.core.sequence.Sequence;
-import cc.elvea.platform.system.core.model.entity.UserEntity;
+import cc.elvea.platform.system.core.domain.entity.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;

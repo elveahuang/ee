@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.core.model.dto.UserSessionDto;
+import cc.elvea.platform.commons.domain.R;
+import cc.elvea.platform.system.core.domain.dto.UserSessionDto;
 import cc.elvea.platform.system.core.service.UserSessionAmqpService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

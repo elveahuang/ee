@@ -1,6 +1,6 @@
 package cc.elvea.platform.commons.core.mail;
 
-import cc.elvea.platform.commons.core.mail.model.MailBody;
+import cc.elvea.platform.commons.core.mail.domain.MailBody;
 
 /**
  * @author elvea

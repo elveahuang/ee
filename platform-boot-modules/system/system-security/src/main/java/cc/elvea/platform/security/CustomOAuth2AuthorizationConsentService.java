@@ -1,7 +1,7 @@
 package cc.elvea.platform.security;
 
+import cc.elvea.platform.system.security.domain.dto.AuthorizationConsentDto;
 import cc.elvea.platform.system.security.manager.AuthorizationConsentManager;
-import cc.elvea.platform.system.security.model.dto.AuthorizationConsentDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

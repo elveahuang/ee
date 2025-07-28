@@ -1,11 +1,11 @@
 package cc.elvea.platform.system.security.api;
 
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.commons.web.response.R;
+import cc.elvea.platform.system.security.domain.converter.AuthorizationConverter;
+import cc.elvea.platform.system.security.domain.dto.AuthorizationDto;
+import cc.elvea.platform.system.security.domain.entity.AuthorizationEntity;
 import cc.elvea.platform.system.security.manager.AuthorizationApi;
-import cc.elvea.platform.system.security.model.converter.AuthorizationConverter;
-import cc.elvea.platform.system.security.model.dto.AuthorizationDto;
-import cc.elvea.platform.system.security.model.entity.AuthorizationEntity;
 import cc.elvea.platform.system.security.service.AuthorizationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

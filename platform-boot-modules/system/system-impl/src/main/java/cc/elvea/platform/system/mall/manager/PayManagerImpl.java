@@ -2,9 +2,9 @@ package cc.elvea.platform.system.mall.manager;
 
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.commons.utils.SpringUtils;
-import cc.elvea.platform.system.mall.model.converter.PayTypeConverter;
-import cc.elvea.platform.system.mall.model.entity.PayTypeEntity;
-import cc.elvea.platform.system.mall.model.vo.PayTypeVo;
+import cc.elvea.platform.system.mall.domain.converter.PayTypeConverter;
+import cc.elvea.platform.system.mall.domain.entity.PayTypeEntity;
+import cc.elvea.platform.system.mall.domain.vo.PayTypeVo;
 import cc.elvea.platform.system.mall.service.PayTypeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

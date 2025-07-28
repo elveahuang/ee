@@ -6,7 +6,7 @@ import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.commons.constants.SystemCacheConstants;
 import cc.elvea.platform.system.core.cache.UserRoleCacheKeyGenerator;
-import cc.elvea.platform.system.core.model.entity.RoleEntity;
+import cc.elvea.platform.system.core.domain.entity.RoleEntity;
 import cc.elvea.platform.system.core.repository.RoleRepository;
 import cc.elvea.platform.system.core.service.RoleService;
 import cc.elvea.platform.system.core.service.UserRoleService;

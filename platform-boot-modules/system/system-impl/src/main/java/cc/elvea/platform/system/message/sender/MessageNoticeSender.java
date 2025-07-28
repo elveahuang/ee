@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.message.sender;
 
 import cc.elvea.platform.commons.utils.ExceptionUtils;
-import cc.elvea.platform.system.message.model.dto.SendMessageDto;
-import cc.elvea.platform.system.message.model.entity.NoticeEntity;
+import cc.elvea.platform.system.message.domain.dto.SendMessageDto;
+import cc.elvea.platform.system.message.domain.entity.NoticeEntity;
 import cc.elvea.platform.system.message.service.MessageContentService;
 import cc.elvea.platform.system.message.service.NoticeService;
 import lombok.extern.slf4j.Slf4j;

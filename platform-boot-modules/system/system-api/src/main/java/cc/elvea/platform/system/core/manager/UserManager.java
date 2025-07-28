@@ -1,11 +1,11 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.core.model.dto.UserForgotPasswordDto;
-import cc.elvea.platform.system.core.model.dto.UserInfoDto;
-import cc.elvea.platform.system.core.model.dto.UserLoginInfoDto;
-import cc.elvea.platform.system.core.model.form.*;
-import cc.elvea.platform.system.core.model.request.UserCheckRequest;
+import cc.elvea.platform.commons.domain.R;
+import cc.elvea.platform.system.core.domain.dto.UserForgotPasswordDto;
+import cc.elvea.platform.system.core.domain.dto.UserInfoDto;
+import cc.elvea.platform.system.core.domain.dto.UserLoginInfoDto;
+import cc.elvea.platform.system.core.domain.form.*;
+import cc.elvea.platform.system.core.domain.request.UserCheckRequest;
 
 /**
  * @author elvea

@@ -2,8 +2,8 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.utils.CollectionUtils;
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.core.model.dto.RoleAuthoritySaveDto;
-import cc.elvea.platform.system.core.model.entity.RoleAuthorityEntity;
+import cc.elvea.platform.system.core.domain.dto.RoleAuthoritySaveDto;
+import cc.elvea.platform.system.core.domain.entity.RoleAuthorityEntity;
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -84,6 +84,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnClass({VectorStore.class})
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "vector-store.provider", havingValue = "elastic")
     public VectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
         ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
@@ -100,6 +101,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnClass({VectorStore.class})
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "vector-store.provider", havingValue = "simple", matchIfMissing = true)
     public VectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
         return SimpleVectorStore.builder(embeddingModel).build();

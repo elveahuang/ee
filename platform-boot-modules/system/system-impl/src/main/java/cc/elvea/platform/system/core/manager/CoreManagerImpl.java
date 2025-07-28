@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.model.vo.InitializeVo;
+import cc.elvea.platform.system.core.domain.vo.InitializeVo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

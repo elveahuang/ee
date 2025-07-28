@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;
 import cc.elvea.platform.system.commons.enums.ActiveTypeEnum;
 import cc.elvea.platform.system.commons.enums.StatusTypeEnum;
-import cc.elvea.platform.system.mall.model.entity.VipItemEntity;
+import cc.elvea.platform.system.mall.domain.entity.VipItemEntity;
 import cc.elvea.platform.system.mall.repository.VipItemRepository;
 import cc.elvea.platform.system.mall.service.VipItemService;
 import lombok.AllArgsConstructor;

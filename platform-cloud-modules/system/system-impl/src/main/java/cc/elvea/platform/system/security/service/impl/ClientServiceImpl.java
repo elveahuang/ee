@@ -6,7 +6,7 @@ import cc.elvea.platform.commons.data.mybatis.service.BaseCachingEntityService;
 import cc.elvea.platform.commons.utils.ObjectUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import cc.elvea.platform.system.security.cache.ClientCacheKeyGenerator;
-import cc.elvea.platform.system.security.model.entity.ClientEntity;
+import cc.elvea.platform.system.security.domain.entity.ClientEntity;
 import cc.elvea.platform.system.security.repository.ClientMapper;
 import cc.elvea.platform.system.security.service.ClientService;
 import lombok.extern.slf4j.Slf4j;

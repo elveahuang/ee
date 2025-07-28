@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.core.model.dto.PositionDto;
-import cc.elvea.platform.system.core.model.dto.PositionSaveDto;
+import cc.elvea.platform.system.core.domain.dto.PositionDto;
+import cc.elvea.platform.system.core.domain.dto.PositionSaveDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

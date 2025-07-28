@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseEntityService;
-import cc.elvea.platform.system.message.model.entity.MessageHistoryEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageHistoryEntity;
 import cc.elvea.platform.system.message.repository.MessageHistoryRepository;
 import cc.elvea.platform.system.message.service.MessageHistoryService;
 import lombok.AllArgsConstructor;

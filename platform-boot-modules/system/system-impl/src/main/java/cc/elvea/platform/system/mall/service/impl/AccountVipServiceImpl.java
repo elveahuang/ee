@@ -2,7 +2,7 @@ package cc.elvea.platform.system.mall.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.elvea.platform.system.commons.enums.ActiveTypeEnum;
-import cc.elvea.platform.system.mall.model.entity.AccountVipEntity;
+import cc.elvea.platform.system.mall.domain.entity.AccountVipEntity;
 import cc.elvea.platform.system.mall.repository.AccountVipRepository;
 import cc.elvea.platform.system.mall.service.AccountVipService;
 import lombok.AllArgsConstructor;

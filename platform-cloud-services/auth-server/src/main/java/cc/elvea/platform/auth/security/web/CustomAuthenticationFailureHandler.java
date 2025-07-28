@@ -1,9 +1,9 @@
 package cc.elvea.platform.auth.security.web;
 
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.enums.ResponseCodeEnum;
 import cc.elvea.platform.commons.exception.InvalidCaptchaException;
 import cc.elvea.platform.commons.utils.ServletUtils;
-import cc.elvea.platform.commons.web.response.R;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.AnnouncementEntity;
-import cc.elvea.platform.system.core.model.form.AnnouncementForm;
-import cc.elvea.platform.system.core.model.request.AnnouncementSearchRequest;
-import cc.elvea.platform.system.core.model.request.SystemAnnouncementSearchRequest;
+import cc.elvea.platform.system.core.domain.entity.AnnouncementEntity;
+import cc.elvea.platform.system.core.domain.form.AnnouncementForm;
+import cc.elvea.platform.system.core.domain.request.AnnouncementSearchRequest;
+import cc.elvea.platform.system.core.domain.request.SystemAnnouncementSearchRequest;
 import org.springframework.data.domain.Page;
 
 /**

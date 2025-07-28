@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.service;
 
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.message.model.entity.MessageHistoryEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageHistoryEntity;
 
 /**
  * @author elvea

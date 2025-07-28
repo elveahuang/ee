@@ -2,10 +2,10 @@ package cc.elvea.platform.system.message.controller.app;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.utils.SecurityUtils;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
-import cc.elvea.platform.system.message.model.entity.NoticeEntity;
+import cc.elvea.platform.system.message.domain.entity.NoticeEntity;
 import cc.elvea.platform.system.message.request.NoticeSearchRequest;
 import cc.elvea.platform.system.message.service.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;

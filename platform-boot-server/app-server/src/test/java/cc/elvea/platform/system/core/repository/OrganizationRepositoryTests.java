@@ -2,7 +2,7 @@ package cc.elvea.platform.system.core.repository;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.utils.CollectionUtils;
-import cc.elvea.platform.system.core.model.entity.OrganizationEntity;
+import cc.elvea.platform.system.core.domain.entity.OrganizationEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

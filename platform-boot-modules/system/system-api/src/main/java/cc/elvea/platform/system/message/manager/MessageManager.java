@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.message.manager;
 
-import cc.elvea.platform.system.message.model.dto.CreateMessageDto;
+import cc.elvea.platform.system.message.domain.dto.CreateMessageDto;
 
 /**
  * @author elvea

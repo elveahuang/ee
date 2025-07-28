@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.TagRelationEntity;
-import cc.elvea.platform.system.core.model.request.TagRelationDeleteRequest;
-import cc.elvea.platform.system.core.model.request.TagRelationRequest;
-import cc.elvea.platform.system.core.model.request.TagRelationSaveRequest;
+import cc.elvea.platform.system.core.domain.entity.TagRelationEntity;
+import cc.elvea.platform.system.core.domain.request.TagRelationDeleteRequest;
+import cc.elvea.platform.system.core.domain.request.TagRelationRequest;
+import cc.elvea.platform.system.core.domain.request.TagRelationSaveRequest;
 
 import java.util.List;
 

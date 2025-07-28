@@ -2,8 +2,8 @@ package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.mybatis.service.BaseEntityService;
 import cc.elvea.platform.commons.utils.CollectionUtils;
+import cc.elvea.platform.system.core.domain.entity.CatalogRelationEntity;
 import cc.elvea.platform.system.core.mapper.CatalogRelationMapper;
-import cc.elvea.platform.system.core.model.entity.CatalogRelationEntity;
 import cc.elvea.platform.system.core.service.CatalogRelationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;

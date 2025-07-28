@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseEntityService;
+import cc.elvea.platform.system.message.domain.entity.MessageContentEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageContentEntity_;
 import cc.elvea.platform.system.message.enums.MessageStatusEnum;
-import cc.elvea.platform.system.message.model.entity.MessageContentEntity;
-import cc.elvea.platform.system.message.model.entity.MessageContentEntity_;
 import cc.elvea.platform.system.message.repository.MessageContentRepository;
 import cc.elvea.platform.system.message.service.MessageContentService;
 import jakarta.persistence.criteria.Predicate;

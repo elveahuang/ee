@@ -2,10 +2,10 @@ package cc.elvea.platform.commons.core.ai.chat;
 
 import cc.elvea.platform.commons.core.ai.AiCustomizer;
 import cc.elvea.platform.commons.core.ai.advisor.CustomLoggingAdvisor;
-import cc.elvea.platform.commons.core.ai.model.request.SimpleChatRequest;
-import cc.elvea.platform.commons.core.ai.model.request.SimpleChatRequestCustomizer;
-import cc.elvea.platform.commons.core.ai.model.request.SimpleCompletionRequest;
-import cc.elvea.platform.commons.core.ai.model.request.SimpleCompletionRequestCustomizer;
+import cc.elvea.platform.commons.core.ai.domain.request.SimpleChatRequest;
+import cc.elvea.platform.commons.core.ai.domain.request.SimpleChatRequestCustomizer;
+import cc.elvea.platform.commons.core.ai.domain.request.SimpleCompletionRequest;
+import cc.elvea.platform.commons.core.ai.domain.request.SimpleCompletionRequestCustomizer;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;

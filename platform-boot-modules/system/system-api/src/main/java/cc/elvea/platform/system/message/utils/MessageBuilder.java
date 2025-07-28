@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.message.utils;
 
+import cc.elvea.platform.system.message.domain.dto.CreateMessageDto;
+import cc.elvea.platform.system.message.domain.dto.MessageUserDto;
 import cc.elvea.platform.system.message.enums.MessageTargetTypeEnum;
 import cc.elvea.platform.system.message.enums.MessageTemplateTypeEnum;
 import cc.elvea.platform.system.message.enums.MessageUserTypeEnum;
-import cc.elvea.platform.system.message.model.dto.CreateMessageDto;
-import cc.elvea.platform.system.message.model.dto.MessageUserDto;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.util.CollectionUtils;

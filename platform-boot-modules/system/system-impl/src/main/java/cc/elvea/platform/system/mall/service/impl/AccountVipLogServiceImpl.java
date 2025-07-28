@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.mall.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.mall.model.entity.AccountVipLogEntity;
+import cc.elvea.platform.system.mall.domain.entity.AccountVipLogEntity;
 import cc.elvea.platform.system.mall.repository.AccountVipLogRepository;
 import cc.elvea.platform.system.mall.service.AccountVipLogService;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
 package cc.elvea.platform.system.message.service;
 
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.message.model.dto.MessageRecipientDto;
-import cc.elvea.platform.system.message.model.dto.MessageSenderDto;
-import cc.elvea.platform.system.message.model.entity.MessageUserEntity;
+import cc.elvea.platform.system.message.domain.dto.MessageRecipientDto;
+import cc.elvea.platform.system.message.domain.dto.MessageSenderDto;
+import cc.elvea.platform.system.message.domain.entity.MessageUserEntity;
 
 import java.util.List;
 

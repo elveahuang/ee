@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.message.model.entity.MessageTemplateTypeEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageTemplateTypeEntity;
 
 /**
  * @author elvea

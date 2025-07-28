@@ -2,7 +2,7 @@ package cc.elvea.platform.commons.core.ai.chat;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.core.ai.AiFactory;
-import cc.elvea.platform.commons.core.ai.model.request.SimpleChatRequest;
+import cc.elvea.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

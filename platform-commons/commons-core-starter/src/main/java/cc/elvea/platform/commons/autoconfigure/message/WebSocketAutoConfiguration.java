@@ -4,6 +4,7 @@ import cc.elvea.platform.commons.autoconfigure.message.properties.WebSocketPrope
 import cc.elvea.platform.commons.message.socket.handler.MessageWebSocketHandler;
 import cc.elvea.platform.commons.message.socket.server.SessionHandshakeInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({WebSocketProperties.class})
-@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnClass({WebSocketConfigurer.class})
+@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WebSocketAutoConfiguration implements WebSocketConfigurer {
 
     private final MessageWebSocketHandler messageWebSocketHandler;

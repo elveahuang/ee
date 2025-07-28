@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.dto.PositionDeleteDto;
-import cc.elvea.platform.system.core.model.dto.PositionDto;
-import cc.elvea.platform.system.core.model.dto.PositionSaveDto;
-import cc.elvea.platform.system.core.model.entity.PositionEntity;
+import cc.elvea.platform.system.core.domain.dto.PositionDeleteDto;
+import cc.elvea.platform.system.core.domain.dto.PositionDto;
+import cc.elvea.platform.system.core.domain.dto.PositionSaveDto;
+import cc.elvea.platform.system.core.domain.entity.PositionEntity;
 
 /**
  * @author elvea

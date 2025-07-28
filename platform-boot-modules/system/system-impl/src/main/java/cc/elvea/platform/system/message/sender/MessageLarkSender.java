@@ -4,7 +4,7 @@ import cc.elvea.platform.commons.oapis.lark.message.LarkMessagePayload;
 import cc.elvea.platform.commons.oapis.lark.service.LarkService;
 import cc.elvea.platform.commons.utils.ExceptionUtils;
 import cc.elvea.platform.commons.utils.GsonUtils;
-import cc.elvea.platform.system.message.model.dto.SendMessageDto;
+import cc.elvea.platform.system.message.domain.dto.SendMessageDto;
 import cc.elvea.platform.system.message.service.MessageContentService;
 import com.lark.oapi.service.im.v1.enums.CreateMessageReceiveIdTypeEnum;
 import com.lark.oapi.service.im.v1.model.CreateMessageReq;

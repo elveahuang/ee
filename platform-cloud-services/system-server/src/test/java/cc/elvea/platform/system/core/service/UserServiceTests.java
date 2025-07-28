@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.system.BaseTests;
-import cc.elvea.platform.system.core.model.dto.UserRegisterDto;
-import cc.elvea.platform.system.core.model.entity.UserEntity;
+import cc.elvea.platform.system.core.domain.dto.UserRegisterDto;
+import cc.elvea.platform.system.core.domain.entity.UserEntity;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

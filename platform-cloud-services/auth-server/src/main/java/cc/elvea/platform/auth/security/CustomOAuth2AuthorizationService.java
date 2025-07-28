@@ -1,10 +1,10 @@
 package cc.elvea.platform.auth.security;
 
 import cc.elvea.platform.auth.security.utils.OAuth2Utils;
+import cc.elvea.platform.system.security.domain.dto.AuthorizationDto;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 import cc.elvea.platform.system.security.manager.AuthorizationApi;
 import cc.elvea.platform.system.security.manager.ClientApi;
-import cc.elvea.platform.system.security.model.dto.AuthorizationDto;
-import cc.elvea.platform.system.security.model.dto.ClientDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataRetrievalFailureException;

@@ -2,13 +2,13 @@ package cc.elvea.platform.system.core.controller.app;
 
 import cc.elvea.platform.commons.annotations.Authenticated;
 import cc.elvea.platform.commons.annotations.OperationLog;
+import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.web.controller.AbstractController;
-import cc.elvea.platform.commons.web.response.R;
+import cc.elvea.platform.system.core.domain.request.DictSearchRequest;
+import cc.elvea.platform.system.core.domain.request.DictTypeRequest;
+import cc.elvea.platform.system.core.domain.vo.DictItemVo;
+import cc.elvea.platform.system.core.domain.vo.DictTypeVo;
 import cc.elvea.platform.system.core.manager.DictManager;
-import cc.elvea.platform.system.core.model.request.DictSearchRequest;
-import cc.elvea.platform.system.core.model.request.DictTypeRequest;
-import cc.elvea.platform.system.core.model.vo.DictItemVo;
-import cc.elvea.platform.system.core.model.vo.DictTypeVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

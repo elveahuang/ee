@@ -1,8 +1,8 @@
 package cc.elvea.platform.commons.core.storage.cos;
 
 import cc.elvea.platform.commons.core.storage.StorageService;
-import cc.elvea.platform.commons.core.storage.model.FileObject;
-import cc.elvea.platform.commons.core.storage.model.FileParameter;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
+import cc.elvea.platform.commons.core.storage.domain.FileParameter;
 import cc.elvea.platform.commons.core.storage.utils.StorageUtils;
 import cc.elvea.platform.commons.exception.ServiceException;
 import com.qcloud.cos.COSClient;

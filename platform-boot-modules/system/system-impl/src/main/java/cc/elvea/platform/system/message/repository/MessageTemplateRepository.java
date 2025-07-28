@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.repository;
 
 import cc.elvea.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.elvea.platform.system.message.model.entity.MessageTemplateEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageTemplateEntity;
 import org.springframework.stereotype.Repository;
 
 /**

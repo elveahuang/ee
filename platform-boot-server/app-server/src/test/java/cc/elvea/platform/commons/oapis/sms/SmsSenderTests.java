@@ -2,7 +2,7 @@ package cc.elvea.platform.commons.oapis.sms;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.commons.autoconfigure.core.properties.TestProperties;
-import cc.elvea.platform.commons.oapis.sms.model.SmsBody;
+import cc.elvea.platform.commons.oapis.sms.domain.SmsBody;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

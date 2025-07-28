@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.core.storage.min;
 
-import cc.elvea.platform.commons.core.storage.model.AbstractFileObject;
-import cc.elvea.platform.commons.core.storage.model.FileObject;
+import cc.elvea.platform.commons.core.storage.domain.AbstractFileObject;
+import cc.elvea.platform.commons.core.storage.domain.FileObject;
 import cc.elvea.platform.commons.enums.StorageTypeEnum;
 import io.minio.GenericResponse;
 import lombok.*;

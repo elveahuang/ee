@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.DictRelationEntity;
-import cc.elvea.platform.system.core.model.request.DictRelationDeleteRequest;
-import cc.elvea.platform.system.core.model.request.DictRelationRequest;
-import cc.elvea.platform.system.core.model.request.DictRelationSaveRequest;
+import cc.elvea.platform.system.core.domain.entity.DictRelationEntity;
+import cc.elvea.platform.system.core.domain.request.DictRelationDeleteRequest;
+import cc.elvea.platform.system.core.domain.request.DictRelationRequest;
+import cc.elvea.platform.system.core.domain.request.DictRelationSaveRequest;
 
 import java.util.List;
 

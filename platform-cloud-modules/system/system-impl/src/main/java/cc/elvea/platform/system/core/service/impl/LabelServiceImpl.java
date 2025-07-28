@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service.impl;
 
 import cc.elvea.platform.commons.data.mybatis.service.BaseEntityService;
+import cc.elvea.platform.system.core.domain.entity.LabelEntity;
 import cc.elvea.platform.system.core.mapper.LangLabelMapper;
-import cc.elvea.platform.system.core.model.entity.LabelEntity;
 import cc.elvea.platform.system.core.service.LabelService;
 import org.springframework.stereotype.Service;
 

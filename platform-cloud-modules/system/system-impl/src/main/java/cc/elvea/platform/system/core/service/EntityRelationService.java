@@ -2,8 +2,8 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.core.model.dto.EntityRelationSaveDto;
-import cc.elvea.platform.system.core.model.entity.EntityRelationEntity;
+import cc.elvea.platform.system.core.domain.dto.EntityRelationSaveDto;
+import cc.elvea.platform.system.core.domain.entity.EntityRelationEntity;
 
 import java.util.List;
 

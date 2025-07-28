@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.message.service;
 
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.message.model.entity.MessageContentEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageContentEntity;
 
 import java.util.List;
 

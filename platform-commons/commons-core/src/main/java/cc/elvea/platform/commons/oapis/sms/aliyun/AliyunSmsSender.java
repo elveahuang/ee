@@ -1,7 +1,7 @@
 package cc.elvea.platform.commons.oapis.sms.aliyun;
 
 import cc.elvea.platform.commons.oapis.sms.SmsSender;
-import cc.elvea.platform.commons.oapis.sms.model.SmsBody;
+import cc.elvea.platform.commons.oapis.sms.domain.SmsBody;
 import cc.elvea.platform.commons.utils.GsonUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import com.aliyun.dysmsapi20170525.Client;

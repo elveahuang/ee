@@ -3,7 +3,7 @@ package cc.elvea.platform.security.utils;
 import cc.elvea.platform.commons.core.security.jackson.LongMixin;
 import cc.elvea.platform.commons.core.security.jackson.UserMixin;
 import cc.elvea.platform.commons.core.security.user.User;
-import cc.elvea.platform.system.security.model.dto.ClientDto;
+import cc.elvea.platform.system.security.domain.dto.ClientDto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.jackson2.CoreJackson2Module;

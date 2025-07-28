@@ -2,10 +2,10 @@ package cc.elvea.platform.system.core.controller;
 
 import cc.elvea.platform.commons.annotations.Anonymous;
 import cc.elvea.platform.commons.annotations.OperationLog;
-import cc.elvea.platform.commons.web.response.R;
+import cc.elvea.platform.commons.domain.R;
+import cc.elvea.platform.system.core.domain.vo.InitializeVo;
+import cc.elvea.platform.system.core.domain.vo.VersionVo;
 import cc.elvea.platform.system.core.manager.CoreManager;
-import cc.elvea.platform.system.core.model.vo.InitializeVo;
-import cc.elvea.platform.system.core.model.vo.VersionVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

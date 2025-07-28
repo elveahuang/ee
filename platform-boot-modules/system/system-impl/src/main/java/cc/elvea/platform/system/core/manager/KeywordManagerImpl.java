@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.core.manager;
 
-import cc.elvea.platform.system.core.model.entity.KeywordEntity;
+import cc.elvea.platform.system.core.domain.entity.KeywordEntity;
 import cc.elvea.platform.system.core.service.KeywordService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

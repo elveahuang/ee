@@ -2,11 +2,11 @@ package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
 import cc.elvea.platform.commons.service.EntityService;
-import cc.elvea.platform.system.core.model.dto.AccountDto;
-import cc.elvea.platform.system.core.model.entity.AccountEntity;
-import cc.elvea.platform.system.core.model.form.AccountForm;
-import cc.elvea.platform.system.core.model.request.AccountCheckRequest;
-import cc.elvea.platform.system.core.model.request.AccountSearchRequest;
+import cc.elvea.platform.system.core.domain.dto.AccountDto;
+import cc.elvea.platform.system.core.domain.entity.AccountEntity;
+import cc.elvea.platform.system.core.domain.form.AccountForm;
+import cc.elvea.platform.system.core.domain.request.AccountCheckRequest;
+import cc.elvea.platform.system.core.domain.request.AccountSearchRequest;
 import org.springframework.data.domain.Page;
 
 /**

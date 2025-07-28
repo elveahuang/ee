@@ -2,7 +2,7 @@ package cc.elvea.platform.system.core.controller;
 
 import cc.elvea.platform.commons.web.controller.AbstractController;
 import cc.elvea.platform.system.commons.constants.SystemMappingConstants;
-import cc.elvea.platform.system.core.model.dto.LinkDto;
+import cc.elvea.platform.system.core.domain.dto.LinkDto;
 import cc.elvea.platform.system.core.service.LinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

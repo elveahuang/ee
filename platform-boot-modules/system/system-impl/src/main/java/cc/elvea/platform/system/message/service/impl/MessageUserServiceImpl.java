@@ -1,10 +1,10 @@
 package cc.elvea.platform.system.message.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseEntityService;
-import cc.elvea.platform.system.message.model.dto.MessageRecipientDto;
-import cc.elvea.platform.system.message.model.dto.MessageSenderDto;
-import cc.elvea.platform.system.message.model.entity.MessageUserEntity;
-import cc.elvea.platform.system.message.model.entity.MessageUserEntity_;
+import cc.elvea.platform.system.message.domain.dto.MessageRecipientDto;
+import cc.elvea.platform.system.message.domain.dto.MessageSenderDto;
+import cc.elvea.platform.system.message.domain.entity.MessageUserEntity;
+import cc.elvea.platform.system.message.domain.entity.MessageUserEntity_;
 import cc.elvea.platform.system.message.repository.MessageUserRepository;
 import cc.elvea.platform.system.message.service.MessageUserService;
 import jakarta.persistence.criteria.Predicate;

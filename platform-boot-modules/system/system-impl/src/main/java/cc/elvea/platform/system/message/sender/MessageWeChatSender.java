@@ -3,7 +3,7 @@ package cc.elvea.platform.system.message.sender;
 import cc.elvea.platform.commons.oapis.weixin.service.WeiXinMpService;
 import cc.elvea.platform.commons.utils.ExceptionUtils;
 import cc.elvea.platform.commons.utils.GsonUtils;
-import cc.elvea.platform.system.message.model.dto.SendMessageDto;
+import cc.elvea.platform.system.message.domain.dto.SendMessageDto;
 import cc.elvea.platform.system.message.service.MessageContentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

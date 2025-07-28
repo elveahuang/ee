@@ -1,8 +1,8 @@
 package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.core.model.entity.AttachmentTypeEntity;
-import cc.elvea.platform.system.core.model.vo.AttachmentTypeVo;
+import cc.elvea.platform.system.core.domain.entity.AttachmentTypeEntity;
+import cc.elvea.platform.system.core.domain.vo.AttachmentTypeVo;
 
 /**
  * @author elvea

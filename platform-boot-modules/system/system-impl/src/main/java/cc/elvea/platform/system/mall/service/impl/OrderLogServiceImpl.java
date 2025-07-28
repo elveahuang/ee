@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.mall.service.impl;
 
 import cc.elvea.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.elvea.platform.system.mall.model.entity.OrderLogEntity;
+import cc.elvea.platform.system.mall.domain.entity.OrderLogEntity;
 import cc.elvea.platform.system.mall.repository.OrderLogRepository;
 import cc.elvea.platform.system.mall.service.OrderLogService;
 import lombok.AllArgsConstructor;
