@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.oapis.sms.model;
+package cc.elvea.platform.commons.oapis.sms.domain;
 
 import com.google.common.collect.Maps;
 import lombok.Builder;

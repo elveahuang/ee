@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.storage.model;
+package cc.elvea.platform.commons.core.storage.domain;
 
 import cc.elvea.platform.commons.enums.FileAccessTypeEnum;
 import lombok.AllArgsConstructor;

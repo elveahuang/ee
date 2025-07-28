@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.ai.model.request;
+package cc.elvea.platform.commons.core.ai.domain.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

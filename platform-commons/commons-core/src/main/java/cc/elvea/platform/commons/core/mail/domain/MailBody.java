@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.mail.model;
+package cc.elvea.platform.commons.core.mail.domain;
 
 import lombok.Builder;
 import lombok.Data;
