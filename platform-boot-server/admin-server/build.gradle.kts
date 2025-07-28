@@ -1,3 +1,4 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
@@ -16,4 +17,8 @@ dependencies {
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveBaseName.set("admin.jar")
+}
+
+tasks.named<BootBuildImage>("bootBuildImage") {
+    builder = "bellsoft/buildpacks.builder:musl"
 }
