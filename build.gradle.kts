@@ -74,6 +74,15 @@ allprojects {
             dependency(rootProject.libs.objenesis.get().toString())
             dependency(rootProject.libs.annotations.get().toString())
             dependency(rootProject.libs.spotbugs.annotations.get().toString())
+            // 特殊处理
+            dependency(
+                mapOf(
+                    "group" to "io.netty",
+                    "name" to "netty-resolver-dns-native-macos",
+                    "version" to rootProject.libs.versions.nettyVersion.get(),
+                    "classifier" to "osx-aarch_64"
+                )
+            )
         }
     }
 
@@ -142,6 +151,12 @@ allprojects {
         exclude(module = "shardingsphere-parser-sql-oracle")
         exclude(module = "shardingsphere-parser-sql-opengauss")
         exclude(module = "shardingsphere-parser-sql-h2")
+        exclude(module = "selenium-devtools-v136")
+        exclude(module = "selenium-devtools-v137")
+        exclude(module = "selenium-ie-driver")
+        exclude(module = "selenium-firefox-driver")
+        exclude(module = "selenium-safari-driver")
+        exclude(group = "com.github.docker-java")
     }
 }
 

@@ -2,6 +2,8 @@ package cc.elvea.platform.commons.oapis.lark.service;
 
 import cc.elvea.platform.commons.oapis.lark.bean.JsapiSignature;
 import cc.elvea.platform.commons.oapis.lark.config.AppConfig;
+import cc.elvea.platform.commons.oapis.lark.message.LarkMessagePayload;
+import cc.elvea.platform.commons.oapis.lark.message.LarkMessageResponse;
 import com.lark.oapi.Client;
 import com.lark.oapi.core.Config;
 import com.lark.oapi.service.contact.ContactService;
@@ -103,5 +105,7 @@ public interface LarkService {
      * @return {@link ImService}
      */
     ImService getImService(AppConfig appConfig);
+
+    LarkMessageResponse createMessage(LarkMessagePayload payload) throws Exception;
 
 }

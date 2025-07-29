@@ -6,15 +6,22 @@ import cc.elvea.platform.commons.oapis.lark.GlobalTokenManager;
 import cc.elvea.platform.commons.oapis.lark.bean.JsapiSignature;
 import cc.elvea.platform.commons.oapis.lark.cache.Cache;
 import cc.elvea.platform.commons.oapis.lark.config.AppConfig;
+import cc.elvea.platform.commons.oapis.lark.message.LarkMessagePayload;
+import cc.elvea.platform.commons.oapis.lark.message.LarkMessageResponse;
 import cc.elvea.platform.commons.oapis.lark.service.LarkService;
 import cc.elvea.platform.commons.oapis.lark.token.TicketManager;
 import cc.elvea.platform.commons.oapis.lark.token.TokenManager;
 import cc.elvea.platform.commons.utils.EncryptUtils;
+import cc.elvea.platform.commons.utils.GsonUtils;
 import cc.elvea.platform.commons.utils.StringUtils;
 import com.lark.oapi.Client;
 import com.lark.oapi.core.Config;
 import com.lark.oapi.service.contact.ContactService;
 import com.lark.oapi.service.im.ImService;
+import com.lark.oapi.service.im.v1.enums.CreateMessageReceiveIdTypeEnum;
+import com.lark.oapi.service.im.v1.model.CreateMessageReq;
+import com.lark.oapi.service.im.v1.model.CreateMessageReqBody;
+import com.lark.oapi.service.im.v1.model.CreateMessageResp;
 
 /**
  * @author elvea
@@ -188,6 +195,24 @@ public class LarkServiceImpl implements LarkService {
     @Override
     public ImService getImService(AppConfig appConfig) {
         return new ImService(this.appConfig.getConfig());
+    }
+
+    /**
+     * @see LarkService#createMessage(LarkMessagePayload)
+     */
+    @Override
+    public LarkMessageResponse createMessage(LarkMessagePayload payload) throws Exception {
+        CreateMessageReqBody messageReqBody = CreateMessageReqBody.newBuilder()
+            .content(GsonUtils.toJson(payload.getJson()))
+            .msgType(payload.getType())
+            .receiveId(payload.getReceiveId())
+            .build();
+        CreateMessageReq messageReq = CreateMessageReq.newBuilder()
+            .createMessageReqBody(messageReqBody)
+            .receiveIdType(CreateMessageReceiveIdTypeEnum.USER_ID)
+            .build();
+        CreateMessageResp resp = getImService().message().create(messageReq);
+        return LarkMessageResponse.builder().code(resp.getCode()).build();
     }
 
     public void setAppConfig(AppConfig appConfig) {

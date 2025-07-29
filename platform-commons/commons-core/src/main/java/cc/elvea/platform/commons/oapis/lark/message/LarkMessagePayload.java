@@ -13,6 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class LarkMessagePayload implements Serializable {
     private String type;
+    private String receiveId;
+    private String json;
     @JsonRawValue
     private Object content;
 }

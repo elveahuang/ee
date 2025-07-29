@@ -1,15 +1,12 @@
 package cc.elvea.platform.system.message.sender;
 
 import cc.elvea.platform.commons.oapis.lark.message.LarkMessagePayload;
+import cc.elvea.platform.commons.oapis.lark.message.LarkMessageResponse;
 import cc.elvea.platform.commons.oapis.lark.service.LarkService;
 import cc.elvea.platform.commons.utils.ExceptionUtils;
 import cc.elvea.platform.commons.utils.GsonUtils;
 import cc.elvea.platform.system.message.domain.dto.SendMessageDto;
 import cc.elvea.platform.system.message.service.MessageContentService;
-import com.lark.oapi.service.im.v1.enums.CreateMessageReceiveIdTypeEnum;
-import com.lark.oapi.service.im.v1.model.CreateMessageReq;
-import com.lark.oapi.service.im.v1.model.CreateMessageReqBody;
-import com.lark.oapi.service.im.v1.model.CreateMessageResp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,17 +35,7 @@ public class MessageLarkSender implements MessageSender {
 
             // 发送飞书消息
             LarkMessagePayload payload = GsonUtils.parse(message.getContent(), LarkMessagePayload.class);
-            CreateMessageReqBody messageReqBody = CreateMessageReqBody.newBuilder()
-                .content(GsonUtils.toJson(message.getContent()))
-                .msgType(payload.getType())
-                .receiveId(message.getRecipient().getUsername())
-                .build();
-            CreateMessageReq messageReq = CreateMessageReq.newBuilder()
-                .createMessageReqBody(messageReqBody)
-                .receiveIdType(CreateMessageReceiveIdTypeEnum.USER_ID)
-                .build();
-            CreateMessageResp resp = larkService.getImService().message().create(messageReq);
-
+            LarkMessageResponse resp = this.larkService.createMessage(payload);
             log.info("Send lark message. message id [{}]. message content id [{}]. result - [{}].", message.getId(), message.getContentId(), GsonUtils.toJson(resp));
             if (resp.getCode() == 0) {
                 // 设置消息内容发送状态

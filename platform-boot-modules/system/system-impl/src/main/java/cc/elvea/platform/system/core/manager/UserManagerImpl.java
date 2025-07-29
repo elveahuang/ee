@@ -23,7 +23,7 @@ import cc.elvea.platform.system.core.service.AuthorityService;
 import cc.elvea.platform.system.core.service.RoleService;
 import cc.elvea.platform.system.core.service.UserService;
 import cc.elvea.platform.system.core.service.UserSessionAmqpService;
-import com.lark.oapi.core.utils.Lists;
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

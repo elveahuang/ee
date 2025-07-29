@@ -12,6 +12,7 @@ dependencies {
     api(rootProject.libs.bundles.thymeleaf)
     api(rootProject.libs.bundles.swagger)
     api(rootProject.libs.bundles.springCommons)
+    compileOnly(rootProject.libs.bundles.baseApacheCommonsExtra)
     compileOnly(rootProject.libs.bundles.springAiCommons)
     compileOnly(rootProject.libs.bundles.springSecurityCommons)
     compileOnly(rootProject.libs.bundles.mybatis)
@@ -22,6 +23,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.websocket)
     compileOnly(rootProject.libs.bundles.redis)
+    compileOnly(rootProject.libs.bundles.html)
     compileOnly(rootProject.libs.bundles.excel)
     compileOnly(rootProject.libs.bundles.pdf)
     compileOnly(rootProject.libs.bundles.image)
@@ -40,6 +42,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.office)
+    compileOnly(rootProject.libs.bundles.openai)
 }
 
 tasks.named<Jar>("jar") {

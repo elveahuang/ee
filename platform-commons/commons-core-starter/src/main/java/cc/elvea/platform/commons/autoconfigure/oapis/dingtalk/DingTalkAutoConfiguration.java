@@ -7,8 +7,10 @@ import cc.elvea.platform.commons.oapis.dingtalk.cache.DefaultCache;
 import cc.elvea.platform.commons.oapis.dingtalk.config.AppConfig;
 import cc.elvea.platform.commons.oapis.dingtalk.service.DingTalkService;
 import cc.elvea.platform.commons.oapis.dingtalk.service.impl.DingTalkServiceImpl;
+import com.aliyun.dingtalkoauth2_1_0.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({DingTalkProperties.class})
+@ConditionalOnClass({Client.class})
 @ConditionalOnProperty(prefix = DingTalkProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DingTalkAutoConfiguration {
 

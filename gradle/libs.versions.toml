@@ -3,9 +3,7 @@ springAiVersion = "1.0.0"
 springAiAlibabaVersion = "1.0.0.2"
 springBootVersion = "3.5.4"
 springBootAdminVersion = "3.5.1"
-springAuthorizationServerVersion = "1.5.1"
 springDependencyManagementVersion = "1.1.7"
-springRetryVersion = "2.0.12"
 springCloudVersion = "2025.0.0"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.123.Final"
@@ -16,7 +14,6 @@ hutoolVersion = "5.8.39"
 mockitoVersion = "5.18.0"
 seleniumVersion = "4.34.0"
 mybatisPlusVersion = "3.5.12"
-hibernateVersion = "6.6.22.Final"
 okhttpVersion = "5.1.0"
 swaggerVersion = "2.2.34"
 springdocVersion = "2.8.9"
@@ -39,11 +36,10 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
-netty-bom = { module = "io.netty:netty-bom", version.ref = "nettyVersion" }
 
 # Spring
-spring-retry = { module = "org.springframework.retry:spring-retry", version.ref = "springRetryVersion" }
-spring-authorization-server = { module = "org.springframework.security:spring-security-oauth2-authorization-server", version.ref = "springAuthorizationServerVersion" }
+spring-retry = { module = "org.springframework.retry:spring-retry" }
+
 spring-tx = { module = "org.springframework:spring-tx" }
 spring-aop = { module = "org.springframework:spring-aop" }
 spring-web = { module = "org.springframework:spring-web" }
@@ -73,6 +69,7 @@ spring-boot-starter-websocket = { module = "org.springframework.boot:spring-boot
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
 spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-boot-starter-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-authorization-server" }
 
 # Spring Data
 spring-data-commons = { module = "org.springframework.data:spring-data-commons" }
@@ -119,6 +116,10 @@ spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencie
 spring-boot-admin-starter-client = { module = "de.codecentric:spring-boot-admin-starter-client" }
 spring-boot-admin-starter-server = { module = "de.codecentric:spring-boot-admin-starter-server" }
 
+# Netty
+netty-bom = { module = "io.netty:netty-bom", version.ref = "nettyVersion" }
+netty-resolver-dns-native-macos = { module = "io.netty:netty-resolver-dns-native-macos", version.ref = "nettyVersion" }
+
 # MyBatis
 mybatis = { module = "org.mybatis:mybatis", version = "3.5.19" }
 mybatis-spring = { module = "org.mybatis:mybatis-spring", version = "3.0.5" }
@@ -131,8 +132,10 @@ mybatis-plus-jsqlparser = { module = "com.baomidou:mybatis-plus-jsqlparser" }
 mybatis-plus-spring-boot-starter = { module = "com.baomidou:mybatis-plus-spring-boot3-starter" }
 
 # Hibernate
-hibernate-core = { module = "org.hibernate.orm:hibernate-core", version.ref = "hibernateVersion" }
-hibernate-jpamodelgen = { module = "org.hibernate.orm:hibernate-jpamodelgen", version.ref = "hibernateVersion" }
+hibernate-core = { module = "org.hibernate.orm:hibernate-core" }
+hibernate-core-annotation-processor = { module = "org.hibernate.orm:hibernate-jpamodelgen" }
+hibernate-validator = { module = "org.hibernate.validator:hibernate-validator" }
+hibernate-validator-annotation-processor = { module = "org.hibernate.validator:hibernate-validator-annotation-processor" }
 
 # Database
 jsqlparser = "com.github.jsqlparser:jsqlparser:5.3"
@@ -141,6 +144,7 @@ pgsql = { module = "org.postgresql:postgresql" }
 mysql = { module = "com.mysql:mysql-connector-j" }
 
 # Redis
+jedis = { module = "redis.clients:jedis" }
 redisson = { module = "org.redisson:redisson", version = "3.50.0" }
 redisson-spring-data = { module = "org.redisson:redisson-spring-data-35", version = "3.50.0" }
 redisson-spring-boot-starter = { module = "org.redisson:redisson-spring-boot-starter", version = "3.50.0" }
@@ -161,7 +165,8 @@ poi-ooxml = { module = "org.apache.poi:poi-ooxml", version = "5.4.1" }
 poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version = "5.4.1" }
 fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.2.0" }
 pdfbox = { module = "org.apache.pdfbox:pdfbox", version = "3.0.5" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.2" }
+fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.5" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.3" }
 thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.20" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
 zxing-core = { module = "com.google.zxing:core", version = "3.5.3" }
@@ -277,22 +282,25 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
 [bundles]
-baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "asm", "ognl", "jsoup", "geoip", "aspectjweaver", "oauth2-oidc-sdk", "thymeleaf", "joda-time", "okio", "dom4j"]
-baseApacheCommons = ["commons-io", "commons-codec", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-compress", "commons-csv", "commons-email", "commons-net"]
 baseCore = ["mapstruct", "lombok"]
+baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "geoip", "asm", "ognl", "jsoup", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
+baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections"]
+baseApacheCommonsExtra = ["commons-email", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
-baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-jpamodelgen"]
-baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence", "jakarta-json-bind"]
-baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction"]
+baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
+baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
+baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json-bind"]
 
-http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
-hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
-database = ["pgsql", "mysql"]
-json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
+html = ["jsoup"]
 sharding = ["sharding"]
-excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel"]
-pdf = ["pdfbox", "x-easypdf-pdfbox"]
+openai = ["openai-java"]
+database = ["pgsql", "mysql"]
+pdf = ["pdfbox", "fontbox", "x-easypdf-pdfbox"]
 image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
+hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
+excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel"]
+http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
+json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons", "spring-retry"]
@@ -303,9 +311,10 @@ springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thym
 
 # Spring Security
 springSecurityCommons = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
-springSecurityCommonsStarter = ["spring-boot-starter-security", "spring-boot-starter-oauth2-client"]
-springSecurityAuthorizationServerStarter = ["spring-authorization-server"]
+springSecurityCommonsStarter = ["spring-boot-starter-security"]
+springSecurityAuthorizationServerStarter = ["spring-boot-starter-oauth2-authorization-server"]
 springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-server"]
+springSecurityClientStarter = ["spring-boot-starter-oauth2-client"]
 
 # Spring Cloud
 springCloudCommons = ["spring-cloud-openfeign-core"]
@@ -313,7 +322,7 @@ springCloudCommonsStarter = ["spring-cloud-starter-consul-discovery", "spring-cl
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 
 # Spring AI
-springAiCommons = ["openai-java", "spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
+springAiCommons = ["spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
 springAiCommonsStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
 
 # Spring Boot Admin
@@ -329,7 +338,7 @@ hibernate = ["spring-data-jpa", "hibernate-core"]
 hibernateStarter = ["spring-boot-starter-jdbc", "spring-boot-starter-data-jpa"]
 
 # Redis
-redis = ["redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis"]
+redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis", "netty-resolver-dns-native-macos"]
 redisStarter = ["redisson-spring-boot-starter", "cosid-spring-boot-starter"]
 
 # RabbitMQ
@@ -367,15 +376,15 @@ office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", 
 officeStarter = ["jodconverter-spring-boot-starter"]
 
 # 开放接口
-telegram = ["telegrambots-client", "telegrambots-abilities"]
-im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
 lark = ["oapi-sdk"]
 dingtalk = ["dingtalk"]
 wechat = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp"]
+im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
+minio = ["minio"]
+cos = ["cos_api"]
+oss = ["aliyun-sdk-oss"]
+storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
+telegram = ["telegrambots-client", "telegrambots-abilities"]
 facebody = ["facebody", "tencentcloud-sdk-java-iai", "tencentcloud-sdk-java-common"]
 translate = ["alimt", "tencentcloud-sdk-java-tmt"]
 sms = ["dysmsapi", "tencentcloud-sdk-java-sms", "tencentcloud-sdk-java-common"]
-minio = ["minio"]
-oss = ["aliyun-sdk-oss"]
-cos = ["cos_api"]
-storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
