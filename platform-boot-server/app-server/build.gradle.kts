@@ -20,7 +20,7 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
     implementation(rootProject.libs.bundles.seleniumStarter)
-    implementation(rootProject.libs.bundles.wechat)
+    implementation(rootProject.libs.bundles.im)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))

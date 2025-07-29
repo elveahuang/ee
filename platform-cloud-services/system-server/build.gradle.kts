@@ -6,10 +6,12 @@ plugins {
 
 dependencies {
     // libs
+    implementation(rootProject.libs.bundles.springBootCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootAdminClientStarter)
+    implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springAiCommonsStarter)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
     implementation(rootProject.libs.bundles.springCloudCommonsStarter)
-    implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.swaggerStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)
     implementation(rootProject.libs.bundles.rabbitStarter)
