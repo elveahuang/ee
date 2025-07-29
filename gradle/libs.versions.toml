@@ -283,7 +283,7 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
 [bundles]
 baseCore = ["mapstruct", "lombok"]
-baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "geoip", "asm", "ognl", "jsoup", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
+baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "geoip", "asm", "ognl", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
 baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections"]
 baseApacheCommonsExtra = ["commons-email", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
