@@ -72,17 +72,10 @@ allprojects {
             dependency(rootProject.libs.commons.beanutils.get().toString())
             dependency(rootProject.libs.checker.qual.get().toString())
             dependency(rootProject.libs.objenesis.get().toString())
+            dependency(rootProject.libs.guava.get().toString())
+            dependency(rootProject.libs.json.get().toString())
             dependency(rootProject.libs.annotations.get().toString())
             dependency(rootProject.libs.spotbugs.annotations.get().toString())
-            // 特殊处理
-            dependency(
-                mapOf(
-                    "group" to "io.netty",
-                    "name" to "netty-resolver-dns-native-macos",
-                    "version" to rootProject.libs.versions.nettyVersion.get(),
-                    "classifier" to "osx-aarch_64"
-                )
-            )
         }
     }
 

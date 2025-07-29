@@ -6,9 +6,9 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.swaggerStarter)
-    implementation(rootProject.libs.bundles.redisStarter)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-boot-modules:system:system-api"))
 }
 

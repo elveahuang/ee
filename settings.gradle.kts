@@ -18,6 +18,8 @@ rootProject.name = "ee"
 // 公共模块
 include("platform-commons:commons-core")
 include("platform-commons:commons-core-starter")
+include("platform-commons:commons-redis")
+include("platform-commons:commons-redis-starter")
 // ---------------------------------------------------------------------------------------------------------------------
 // 单体服务
 // ---------------------------------------------------------------------------------------------------------------------

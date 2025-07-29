@@ -15,10 +15,10 @@ dependencies {
     implementation(rootProject.libs.bundles.rabbitStarter)
     implementation(rootProject.libs.bundles.quartzStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
-    implementation(rootProject.libs.bundles.redisStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-cloud-modules:system:system-impl"))
     implementation(project(":platform-cloud-modules:lxp:lxp-impl"))
 }

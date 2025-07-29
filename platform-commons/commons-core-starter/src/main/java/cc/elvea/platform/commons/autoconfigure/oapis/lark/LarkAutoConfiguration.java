@@ -7,8 +7,11 @@ import cc.elvea.platform.commons.oapis.lark.cache.RedisCache;
 import cc.elvea.platform.commons.oapis.lark.config.AppConfig;
 import cc.elvea.platform.commons.oapis.lark.service.LarkService;
 import cc.elvea.platform.commons.oapis.lark.service.impl.LarkServiceImpl;
+import com.lark.oapi.Client;
+import com.lark.oapi.core.cache.ICache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,6 +24,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({LarkProperties.class})
+@ConditionalOnClass({ICache.class, Client.class})
 @ConditionalOnProperty(prefix = LarkProperties.PREFIX, name = "enabled", havingValue = "true")
 public class LarkAutoConfiguration {
 

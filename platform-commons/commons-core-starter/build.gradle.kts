@@ -23,8 +23,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.quartzStarter)
     compileOnly(rootProject.libs.bundles.websocket)
     compileOnly(rootProject.libs.bundles.websocketStarter)
-    compileOnly(rootProject.libs.bundles.redis)
-    compileOnly(rootProject.libs.bundles.redisStarter)
     compileOnly(rootProject.libs.bundles.office)
     compileOnly(rootProject.libs.bundles.officeStarter)
     compileOnly(rootProject.libs.bundles.sharding)
@@ -33,6 +31,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.html)
     // modules
     api(project(":platform-commons:commons-core"))
+    compileOnly(project(":platform-commons:commons-redis-starter"))
 }
 
 tasks.named<Jar>("jar") {

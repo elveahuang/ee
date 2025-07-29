@@ -43,6 +43,8 @@ dependencies {
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.office)
     compileOnly(rootProject.libs.bundles.openai)
+    // modules
+    api(project(":platform-commons:commons-redis"))
 }
 
 tasks.named<Jar>("jar") {

@@ -38,8 +38,6 @@ groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVer
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
 
 # Spring
-spring-retry = { module = "org.springframework.retry:spring-retry" }
-
 spring-tx = { module = "org.springframework:spring-tx" }
 spring-aop = { module = "org.springframework:spring-aop" }
 spring-web = { module = "org.springframework:spring-web" }
@@ -116,10 +114,6 @@ spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencie
 spring-boot-admin-starter-client = { module = "de.codecentric:spring-boot-admin-starter-client" }
 spring-boot-admin-starter-server = { module = "de.codecentric:spring-boot-admin-starter-server" }
 
-# Netty
-netty-bom = { module = "io.netty:netty-bom", version.ref = "nettyVersion" }
-netty-resolver-dns-native-macos = { module = "io.netty:netty-resolver-dns-native-macos", version.ref = "nettyVersion" }
-
 # MyBatis
 mybatis = { module = "org.mybatis:mybatis", version = "3.5.19" }
 mybatis-spring = { module = "org.mybatis:mybatis-spring", version = "3.0.5" }
@@ -142,6 +136,10 @@ jsqlparser = "com.github.jsqlparser:jsqlparser:5.3"
 sharding = { module = "org.apache.shardingsphere:shardingsphere-jdbc", version = "5.5.2" }
 pgsql = { module = "org.postgresql:postgresql" }
 mysql = { module = "com.mysql:mysql-connector-j" }
+
+# Netty
+netty-bom = { module = "io.netty:netty-bom", version.ref = "nettyVersion" }
+netty-resolver-dns-native-macos = { module = "io.netty:netty-resolver-dns-native-macos", version.ref = "nettyVersion" }
 
 # Redis
 jedis = { module = "redis.clients:jedis" }
@@ -303,7 +301,7 @@ http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 
 # Spring Boot
-springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons", "spring-retry"]
+springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
 springBootCommons = ["spring-boot", "spring-boot-autoconfigure", "spring-boot-starter-actuator"]
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
@@ -338,7 +336,7 @@ hibernate = ["spring-data-jpa", "hibernate-core"]
 hibernateStarter = ["spring-boot-starter-jdbc", "spring-boot-starter-data-jpa"]
 
 # Redis
-redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis", "netty-resolver-dns-native-macos"]
+redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis"]
 redisStarter = ["redisson-spring-boot-starter", "cosid-spring-boot-starter"]
 
 # RabbitMQ

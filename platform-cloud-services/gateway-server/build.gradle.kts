@@ -10,10 +10,10 @@ dependencies {
     implementation(rootProject.libs.bundles.springCloudCommonsStarter)
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.redisStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-redis-starter"))
 }
 
 tasks.named<BootJar>("bootJar") {
