@@ -13,7 +13,6 @@ dependencies {
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-redis-starter"))
 }
 
 tasks.named<BootJar>("bootJar") {

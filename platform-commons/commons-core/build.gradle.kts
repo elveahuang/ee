@@ -19,6 +19,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.hibernate)
     compileOnly(rootProject.libs.bundles.selenium)
     compileOnly(rootProject.libs.bundles.elastic)
+    compileOnly(rootProject.libs.bundles.redis)
     compileOnly(rootProject.libs.bundles.rabbit)
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.websocket)
@@ -42,8 +43,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.office)
     compileOnly(rootProject.libs.bundles.openai)
-    // modules
-    api(project(":platform-commons:commons-redis"))
 }
 
 tasks.named<Jar>("jar") {

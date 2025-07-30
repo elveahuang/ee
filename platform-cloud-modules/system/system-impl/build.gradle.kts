@@ -4,6 +4,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springAiCommons)
     implementation(rootProject.libs.bundles.springBootCommons)
     implementation(rootProject.libs.bundles.springSecurityCommons)
+    implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.mybatis)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
@@ -11,7 +12,6 @@ dependencies {
     implementation(rootProject.libs.bundles.excel)
     // modules
     api(project(":platform-commons:commons-core"))
-    api(project(":platform-commons:commons-redis"))
     api(project(":platform-cloud-modules:system:system-api"))
 }
 

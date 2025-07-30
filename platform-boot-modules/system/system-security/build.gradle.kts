@@ -8,7 +8,6 @@ dependencies {
     implementation(rootProject.libs.bundles.swaggerStarter)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-boot-modules:system:system-api"))
 }
 

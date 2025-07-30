@@ -5,6 +5,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springBootCommons)
     annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
+    implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
@@ -13,7 +14,6 @@ dependencies {
     implementation(rootProject.libs.bundles.swagger)
     // modules
     api(project(":platform-commons:commons-core"))
-    api(project(":platform-commons:commons-redis"))
     api(project(":platform-boot-modules:system:system-api"))
 }
 

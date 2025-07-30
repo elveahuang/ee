@@ -15,6 +15,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.rabbitStarter)
+    implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.quartzStarter)
     implementation(rootProject.libs.bundles.swaggerStarter)
     implementation(rootProject.libs.bundles.hibernateStarter)
@@ -24,7 +25,6 @@ dependencies {
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-boot-modules:system:system-impl"))
     implementation(project(":platform-boot-modules:system:system-security"))
 }

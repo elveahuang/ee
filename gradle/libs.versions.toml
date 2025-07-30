@@ -25,6 +25,7 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 spring-boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
 gradle-spotbugs = { id = "com.github.spotbugs", version = "6.2.2" }
 gradle-native = { id = "org.graalvm.buildtools.native", version = "0.10.6" }
+gradle-osdetector = { id = "com.google.osdetector", version = "1.7.3" }
 
 [libraries]
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
@@ -344,7 +345,7 @@ hibernate = ["spring-data-jpa", "hibernate-core"]
 hibernateStarter = ["spring-boot-starter-jdbc", "spring-boot-starter-data-jpa"]
 
 # Redis
-redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis"]
+redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis", "netty-resolver-dns-native-macos"]
 redisStarter = ["redisson-spring-boot-starter", "cosid-spring-boot-starter"]
 
 # RabbitMQ

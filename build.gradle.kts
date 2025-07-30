@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.spring.boot).apply(false)
     alias(libs.plugins.gradle.spotbugs).apply(false)
     alias(libs.plugins.gradle.native).apply(false)
+    alias(libs.plugins.gradle.osdetector).apply(false)
 }
 
 allprojects {
@@ -107,6 +108,11 @@ allprojects {
             }
             if (requested.group == "org.bouncycastle") {
                 useVersion(rootProject.libs.versions.bouncycastleVersion.get())
+            }
+            if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
+                this.artifactSelection {
+                    this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
+                }
             }
         }
 

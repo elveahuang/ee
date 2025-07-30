@@ -9,6 +9,8 @@ dependencies {
     compileOnly(rootProject.libs.bundles.springSecurityCommonsStarter)
     compileOnly(rootProject.libs.bundles.mybatis)
     compileOnly(rootProject.libs.bundles.mybatisStarter)
+    compileOnly(rootProject.libs.bundles.redis)
+    compileOnly(rootProject.libs.bundles.redisStarter)
     compileOnly(rootProject.libs.bundles.hibernate)
     compileOnly(rootProject.libs.bundles.hibernateStarter)
     compileOnly(rootProject.libs.bundles.selenium)
@@ -31,7 +33,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.html)
     // modules
     api(project(":platform-commons:commons-core"))
-    compileOnly(project(":platform-commons:commons-redis-starter"))
 }
 
 tasks.named<Jar>("jar") {

@@ -9,8 +9,9 @@ dependencies {
     // libs
     implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
-    implementation(rootProject.libs.bundles.springCloudCommonsStarter)
-    implementation(rootProject.libs.bundles.springBootAdminServerStarter)
+    implementation(rootProject.libs.bundles.springBootAdminServerStarter) {
+        exclude(group = "org.springframework.boot", module = "spring-boot-starter-webflux")
+    }
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
 }
 

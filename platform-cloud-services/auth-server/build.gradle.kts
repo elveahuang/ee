@@ -12,12 +12,12 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springCloudCommonsStarter)
+    implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.swaggerStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
-    implementation(project(":platform-commons:commons-redis-starter"))
     implementation(project(":platform-cloud-modules:system:system-api"))
 }
 
