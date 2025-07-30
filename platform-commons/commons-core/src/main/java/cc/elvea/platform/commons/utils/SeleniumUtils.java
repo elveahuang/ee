@@ -14,10 +14,10 @@ import java.util.Map;
 public abstract class SeleniumUtils {
 
     public static <T extends ChromiumOptions<T>> T withDefaultOptions(T options) {
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-dev-shm-usage");

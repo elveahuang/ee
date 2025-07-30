@@ -167,7 +167,6 @@ allprojects {
         exclude(module = "selenium-devtools-v137")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
-        exclude(module = "selenium-remote-driver")
         exclude(module = "selenium-ie-driver")
     }
 }
