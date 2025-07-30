@@ -4,7 +4,6 @@ import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.commons.utils.SpringUtils;
 import cc.elvea.platform.system.security.domain.converter.ClientConverter;
 import cc.elvea.platform.system.security.domain.dto.ClientDto;
-import cc.elvea.platform.system.security.manager.ClientApi;
 import cc.elvea.platform.system.security.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

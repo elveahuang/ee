@@ -1,4 +1,4 @@
-package cc.elvea.platform.system.security.manager;
+package cc.elvea.platform.system.security.api;
 
 import cc.elvea.platform.commons.domain.R;
 import cc.elvea.platform.system.commons.constants.SystemServiceConstants;
