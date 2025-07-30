@@ -1,6 +1,6 @@
 package cc.elvea.platform.system.configuration;
 
-import cc.elvea.platform.system.ai.mcp.service.GreetingService;
+import cc.elvea.platform.system.ai.service.GreetingService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.ToolCallbackProvider;

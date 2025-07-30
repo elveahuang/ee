@@ -2,7 +2,7 @@ package cc.elvea.platform.system.message.service;
 
 import cc.elvea.platform.commons.service.EntityService;
 import cc.elvea.platform.system.message.domain.entity.NoticeEntity;
-import cc.elvea.platform.system.message.request.NoticeSearchRequest;
+import cc.elvea.platform.system.message.domain.request.NoticeSearchRequest;
 import org.springframework.data.domain.Page;
 
 /**

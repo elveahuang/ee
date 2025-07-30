@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.ai.service;
 
 import cc.elvea.platform.commons.service.CachingEntityService;
-import cc.elvea.platform.system.ai.model.entity.AiChatMemoryEntity;
+import cc.elvea.platform.system.ai.domain.entity.AiChatMemoryEntity;
 
 import java.util.List;
 

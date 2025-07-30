@@ -1,7 +1,7 @@
 package cc.elvea.platform.system.ai.support;
 
 import cc.elvea.platform.commons.utils.CollectionUtils;
-import cc.elvea.platform.system.ai.model.entity.AiChatMemoryEntity;
+import cc.elvea.platform.system.ai.domain.entity.AiChatMemoryEntity;
 import cc.elvea.platform.system.ai.service.AiChatMemoryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
