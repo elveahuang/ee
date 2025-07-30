@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.security.jackson;
+package cc.elvea.platform.commons.security.jackson;
 
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import cc.elvea.platform.commons.utils.StringUtils;

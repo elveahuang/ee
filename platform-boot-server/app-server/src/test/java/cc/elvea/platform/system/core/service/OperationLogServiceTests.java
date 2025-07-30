@@ -1,8 +1,7 @@
-package cc.elvea.platform.system.log.service;
+package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.system.core.domain.entity.OperationLogEntity;
-import cc.elvea.platform.system.core.service.OperationLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

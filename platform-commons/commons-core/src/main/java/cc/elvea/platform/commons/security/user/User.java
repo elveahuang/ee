@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.security.user;
+package cc.elvea.platform.commons.security.user;
 
 import com.google.common.collect.Maps;
 import lombok.Getter;

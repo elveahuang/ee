@@ -33,8 +33,8 @@ public class AnnouncementServiceTests extends BaseTests {
         List<AnnouncementEntity> entities = new ArrayList<>();
         for (int i = 0; i < 100000; i++) {
             AnnouncementEntity entity = new AnnouncementEntity();
-            entity.setTitle("Title - " + this.sequence.nextIdAsString());
-            entity.setContent("Content - " + this.sequence.nextIdAsString());
+            entity.setTitle("Title - " + this.sequence.generateCode());
+            entity.setContent("Content - " + this.sequence.generateCode());
             entities.add(entity);
         }
 

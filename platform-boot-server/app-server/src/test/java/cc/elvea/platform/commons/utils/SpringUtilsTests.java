@@ -30,4 +30,8 @@ public class SpringUtilsTests extends BaseTests {
         Assertions.assertNotNull(sequence);
     }
 
+    @Test
+    public void txTest() {
+    }
+
 }

@@ -1,7 +1,7 @@
 package cc.elvea.platform.security;
 
-import cc.elvea.platform.commons.core.security.user.User;
 import cc.elvea.platform.commons.enums.ActionTypeEnum;
+import cc.elvea.platform.commons.security.user.User;
 import cc.elvea.platform.commons.utils.SecurityUtils;
 import cc.elvea.platform.commons.utils.ServletUtils;
 import cc.elvea.platform.security.utils.OAuth2Utils;

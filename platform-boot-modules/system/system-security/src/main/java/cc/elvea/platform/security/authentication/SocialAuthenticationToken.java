@@ -1,6 +1,6 @@
 package cc.elvea.platform.security.authentication;
 
-import cc.elvea.platform.commons.core.security.CustomAuthorizationGrantType;
+import cc.elvea.platform.commons.security.CustomAuthorizationGrantType;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.lang.Nullable;

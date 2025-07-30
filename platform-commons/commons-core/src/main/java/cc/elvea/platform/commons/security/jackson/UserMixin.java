@@ -1,6 +1,6 @@
-package cc.elvea.platform.commons.core.security.jackson;
+package cc.elvea.platform.commons.security.jackson;
 
-import cc.elvea.platform.commons.core.security.user.User;
+import cc.elvea.platform.commons.security.user.User;
 import cc.elvea.platform.commons.utils.JacksonUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

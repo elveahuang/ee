@@ -1,9 +1,8 @@
-package cc.elvea.platform.system.tag.service;
+package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
 import cc.elvea.platform.system.commons.constants.SystemTagConstants;
 import cc.elvea.platform.system.core.domain.entity.TagRelationEntity;
-import cc.elvea.platform.system.core.service.TagRelationService;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

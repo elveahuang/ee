@@ -1,7 +1,6 @@
-package cc.elvea.platform.system.catalog.manager;
+package cc.elvea.platform.system.core.service;
 
 import cc.elvea.platform.BaseTests;
-import cc.elvea.platform.system.core.manager.CatalogManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author elvea
  */
-public class CatalogManagerTests extends BaseTests {
+public class CatalogTypeServiceTests extends BaseTests {
 
     @Autowired
-    CatalogManager catalogManager;
+    CatalogTypeService catalogTypeService;
 
     @Test
     public void test() {
-        Assertions.assertNotNull(catalogManager);
+        Assertions.assertNotNull(catalogTypeService);
     }
 
 }

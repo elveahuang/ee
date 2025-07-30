@@ -1,4 +1,4 @@
-package cc.elvea.platform.commons.core.security;
+package cc.elvea.platform.commons.security;
 
 /**
  * @author elvea

@@ -1,6 +1,6 @@
 package cc.elvea.platform.auth.security.authentication;
 
-import cc.elvea.platform.commons.core.security.CustomAuthorizationGrantType;
+import cc.elvea.platform.commons.security.CustomAuthorizationGrantType;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
