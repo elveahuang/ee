@@ -175,14 +175,14 @@ minio = { module = "io.minio:minio", version = "8.5.17" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
-dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.29" }
+dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.32" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.247" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1308" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1312" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1303" }
@@ -193,11 +193,12 @@ telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", versi
 jakarta-annotation = { module = "jakarta.annotation:jakarta.annotation-api" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api" }
 jakarta-persistence = { module = "jakarta.persistence:jakarta.persistence-api" }
+jakarta-json = { module = "jakarta.json:jakarta.json-api" }
 jakarta-mail = { module = "jakarta.mail:jakarta.mail-api" }
 jakarta-servlet = { module = "jakarta.servlet:jakarta.servlet-api" }
+jakarta-json-bind = { module = "jakarta.json.bind:jakarta.json.bind-api" }
 jakarta-websocket = { module = "jakarta.websocket:jakarta.websocket-api" }
 jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
-jakarta-json-bind = { module = "jakarta.json.bind:jakarta.json.bind-api" }
 
 commons-io = { module = "commons-io:commons-io", version = "2.20.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.11.1" }
@@ -282,7 +283,7 @@ swagger-annotations-jakarta = { module = "io.swagger.core.v3:swagger-annotations
 swagger-models-jakarta = { module = "io.swagger.core.v3:swagger-models-jakarta", version.ref = "swaggerVersion" }
 springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
 
-# Test
+# JUnit
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
@@ -294,7 +295,7 @@ baseApacheCommonsExtra = ["commons-email", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
-baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json-bind"]
+baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
 
 html = ["jsoup"]
 sharding = ["sharding"]
