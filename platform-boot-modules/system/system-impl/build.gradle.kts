@@ -8,12 +8,12 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
-    implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.wechat)
     implementation(rootProject.libs.bundles.excel)
     implementation(rootProject.libs.bundles.swagger)
     // modules
     api(project(":platform-commons:commons-core"))
+    api(project(":platform-commons:commons-redis"))
     api(project(":platform-boot-modules:system:system-api"))
 }
 

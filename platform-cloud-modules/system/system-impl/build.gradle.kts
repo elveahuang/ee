@@ -7,11 +7,11 @@ dependencies {
     implementation(rootProject.libs.bundles.mybatis)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
-    implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.wechat)
     implementation(rootProject.libs.bundles.excel)
     // modules
     api(project(":platform-commons:commons-core"))
+    api(project(":platform-commons:commons-redis"))
     api(project(":platform-cloud-modules:system:system-api"))
 }
 

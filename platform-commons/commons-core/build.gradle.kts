@@ -22,7 +22,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.rabbit)
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.websocket)
-    compileOnly(rootProject.libs.bundles.redis)
     compileOnly(rootProject.libs.bundles.html)
     compileOnly(rootProject.libs.bundles.excel)
     compileOnly(rootProject.libs.bundles.pdf)

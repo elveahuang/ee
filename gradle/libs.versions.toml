@@ -1,5 +1,5 @@
 [versions]
-springAiVersion = "1.0.0"
+springAiVersion = "1.0.1"
 springAiAlibabaVersion = "1.0.0.2"
 springBootVersion = "3.5.4"
 springBootAdminVersion = "3.5.1"
@@ -238,6 +238,13 @@ okhttp-sse = { module = "com.squareup.okhttp3:okhttp-sse", version = "okhttpVers
 okhttp-jvm = { module = "com.squareup.okhttp3:okhttp-jvm", version = "okhttpVersion" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version = "okhttpVersion" }
 hc = { module = "org.apache.httpcomponents.client5:httpclient5" }
+
+# HttpComponents
+httpcore-core = { module = "org.apache.httpcomponents:httpcore", version = "4.4.16" }
+httpcore-nio = { module = "org.apache.httpcomponents:httpcore-nio", version = "4.4.16" }
+httpclient = { module = "org.apache.httpcomponents:httpclient", version = "4.5.14" }
+httpasyncclient = { module = "org.apache.httpcomponents:httpasyncclient", version = "4.1.5" }
+httpmime = { module = "org.apache.httpcomponents:httpmime", version = "4.5.14" }
 
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
