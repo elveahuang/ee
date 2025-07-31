@@ -17,3 +17,12 @@
 | sba-server     | 9292 | config/application-dev/sba-server     | config/application-prod/sba-server     |
 | auth-server    | 9393 | config/application-dev/auth-server    | config/application-prod/auth-server    |
 | system-server  | 9494 | config/application-dev/system-server  | config/application-prod/system-server  |
+
+## Gradle Wrapper
+
+```bash
+# 官方
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.3-bin.zip
+# 腾讯云
+distributionUrl=https\://mirrors.cloud.tencent.com/gradle//gradle-8.14.3-bin.zip
+```
