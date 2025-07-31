@@ -268,6 +268,8 @@ objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.3" }
 openai-java = { module = "com.openai:openai-java", version = "2.19.1" }
+logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
+logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
 
 # Thymeleaf
 thymeleaf = { module = "org.thymeleaf:thymeleaf" }
@@ -308,6 +310,7 @@ hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
 excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
+logging = ["logback-logstash-encoder", "logback-loki-appender"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]

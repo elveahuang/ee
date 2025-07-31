@@ -19,6 +19,7 @@ dependencies {
     implementation(rootProject.libs.bundles.quartzStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
+    implementation(rootProject.libs.bundles.logging)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-cloud-modules:system:system-impl"))

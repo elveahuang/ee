@@ -11,6 +11,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
+    implementation(rootProject.libs.bundles.logging)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
 }
