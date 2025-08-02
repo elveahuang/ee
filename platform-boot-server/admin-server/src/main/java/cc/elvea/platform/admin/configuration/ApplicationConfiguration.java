@@ -1,4 +1,4 @@
-package cc.elvea.platform.sba.configuration;
+package cc.elvea.platform.admin.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;

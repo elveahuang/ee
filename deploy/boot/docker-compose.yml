@@ -1,12 +1,24 @@
-version: '3.9'
+version: "3.9"
 services:
-    ee-admin:
-        image: ee:1.0
-        container_name: boot-admin
+    boot-app-server:
+        image: boot/boot-app-server:latest
+        container_name: boot-app-server
+        ports:
+            - "8080:8080"
         volumes:
-            - /data/app/deploy/boot/admin.jar:/app/app.jar
-    ee-app:
-        image: ee:1.0
-        container_name: boot-app
+            - /data/app/docker/app.jar:/app/app.jar
+            - /data/app/docker/app-server/logs/:/app/logs
+            - /data/app/docker/app-server/config/:/app/config
+        privileged: true
+        network_mode: "host"
+    boot-admin-server:
+        image: boot/boot-admin-server:latest
+        container_name: boot-admin-server
+        ports:
+            - "8181:8080"
         volumes:
-            - /data/app/deploy/boot/app.jar:/app/app.jar
+            - /data/app/docker/admin.jar:/app/app.jar
+            - /data/app/docker/admin-server/logs/:/app/logs
+            - /data/app/docker/admin-server/config/:/app/config
+        privileged: true
+        network_mode: "host"
