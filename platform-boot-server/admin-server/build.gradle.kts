@@ -16,13 +16,16 @@ dependencies {
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set("app.jar")
+    manifest {
+        attributes("Spring-Boot-Native-Processed" to "false")
+    }
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
-    builder = "bellsoft/buildpacks.builder:musl"
-    environment.put("JAVA_TOOL_OPTIONS", "-XX:+UseZGC")
-    environment.put("BP_SPRING_AOT_ENABLED", "false")
-    environment.put("BP_NATIVE_IMAGE", "false")
-    environment.put("BP_JVM_CDS_ENABLED", "true")
-    environment.put("BP_JVM_VERSION", "21")
+    builder = "paketobuildpacks/builder-noble-java-tiny"
+    environment = mapOf(
+        "BP_JVM_VERSION" to "21",
+        "BP_NATIVE_IMAGE" to "false",
+        "BP_SPRING_AOT_ENABLED" to "false",
+    )
 }
