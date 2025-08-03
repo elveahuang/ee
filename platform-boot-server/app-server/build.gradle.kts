@@ -39,12 +39,16 @@ tasks.named<BootJar>("bootJar") {
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
-    builder = "paketobuildpacks/builder-noble-java-tiny"
+    builder = "bellsoft/buildpacks.builder:musl"
     environment = mapOf(
-        "BP_JVM_VERSION" to "21",
         "BP_NATIVE_IMAGE" to "false",
-        "BP_SPRING_AOT_ENABLED" to "false",
+        "BP_JVM_VERSION" to "21",
+        "BP_JVM_CDS_ENABLED" to "true",
+        "BP_SPRING_AOT_ENABLED" to "true",
+        "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
+        "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError"
     )
+    cleanCache = true
 }
 
 graalvmNative {
