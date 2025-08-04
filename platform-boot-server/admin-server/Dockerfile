@@ -1,5 +1,5 @@
 # 镜像
-FROM bellsoft/liberica-openjdk-rocky:21-cds
+FROM bellsoft/liberica-openjdk-rocky:21
 MAINTAINER elvea
 # 处理构建文件
 RUN mkdir -p /app

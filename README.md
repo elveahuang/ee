@@ -31,6 +31,12 @@ distributionUrl=https\://mirrors.cloud.tencent.com/gradle//gradle-8.14.3-bin.zip
 
 ### dependency-mapping
 
+下载连接
+
+```shell
+https://packages.bell-sw.com/alpaquita/java/21.0.8+12/bellsoft-jre21.0.8+12-linux-aarch64-musl-lite.tar.gz
+```
+
 #### syft
 
 https://github.com/paketo-buildpacks/syft
@@ -62,3 +68,25 @@ echo "dependency-mapping" >> type
 echo "https://elvea.cn/tools/buildpacks/bellsoft-jre21.0.8+12-linux-amd64.tar.gz" >> 40db0d81616324c50186b374c16af77fc34f4e37b88c746c465d82d39f2dd8b5
 echo "https://elvea.cn/tools/buildpacks/bellsoft-jre21.0.8+12-linux-aarch64.tar.gz" >> 3a0ae444096c154d1bcbbacc90664464a63437adb01f7dc95b523e5d82074821
 ```
+
+#### bellsoft/buildpacks.builder
+
+https://github.com/bell-sw/buildpacks/liberica
+
+| SHA256                                                           | URL                                                                                                        |
+|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| 51198b180dbfde5fd60b9e5f6603c4f21e813cf939ff531d6a5ee43d212ef4fb | https://packages.bell-sw.com/alpaquita/java/21.0.8+12/bellsoft-jre21.0.8+12-linux-aarch64-musl-lite.tar.gz |
+
+```bash
+mkdir -p ./tools/buildpacks/bindings/dependency-mapping
+echo "dependency-mapping" >> type
+echo "https://elvea.cn/tools/buildpacks/bellsoft-jre21.0.8+12-linux-aarch64-musl-lite.tar.gz" >> 51198b180dbfde5fd60b9e5f6603c4f21e813cf939ff531d6a5ee43d212ef4fb
+```
+
+#### Builders
+
+| SHA256                                   | URL             |
+|------------------------------------------|-----------------|
+| bellsoft/buildpacks.builder:musl         | Alpaquita Linux |
+| paketobuildpacks/builder-noble-java-tiny | Ubuntu 24.4     |
+| paketobuildpacks/builder-jammy-java-tiny | Ubuntu 22.04    |

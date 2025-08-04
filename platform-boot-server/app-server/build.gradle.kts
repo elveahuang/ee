@@ -39,7 +39,7 @@ tasks.named<BootJar>("bootJar") {
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
-    builder = "paketobuildpacks/builder-noble-java-tiny:latest"
+    builder = "bellsoft/buildpacks.builder:musl"
     environment = mapOf(
         "BP_LOG_LEVEL" to "debug",
         "BP_JVM_VERSION" to "21",
