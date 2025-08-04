@@ -76,11 +76,13 @@ https://github.com/bell-sw/buildpacks/liberica
 | SHA256                                                           | URL                                                                                                        |
 |------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | 51198b180dbfde5fd60b9e5f6603c4f21e813cf939ff531d6a5ee43d212ef4fb | https://packages.bell-sw.com/alpaquita/java/21.0.8+12/bellsoft-jre21.0.8+12-linux-aarch64-musl-lite.tar.gz |
+| c67f917a0fb18d7adb27e44adcc0a705402157667df17e5d9e72741ec7c44f07 | https://packages.bell-sw.com/alpaquita/java/21.0.8+12/bellsoft-jre21.0.8+12-linux-x64-musl-lite.tar.gz     |
 
 ```bash
 mkdir -p ./tools/buildpacks/bindings/dependency-mapping
 echo "dependency-mapping" >> type
 echo "https://elvea.cn/tools/buildpacks/bellsoft-jre21.0.8+12-linux-aarch64-musl-lite.tar.gz" >> 51198b180dbfde5fd60b9e5f6603c4f21e813cf939ff531d6a5ee43d212ef4fb
+echo "https://elvea.cn/tools/buildpacks/bellsoft-jre21.0.8+12-linux-x64-musl-lite.tar.gz" >> c67f917a0fb18d7adb27e44adcc0a705402157667df17e5d9e72741ec7c44f07
 ```
 
 #### Builders
