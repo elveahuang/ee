@@ -25,15 +25,13 @@ tasks.named<BootBuildImage>("bootBuildImage") {
     builder = "paketobuildpacks/builder-noble-java-tiny:latest"
     environment = mapOf(
         "BP_LOG_LEVEL" to "debug",
-        "BP_NATIVE_IMAGE" to "false",
         "BP_JVM_VERSION" to "21",
-        "BP_JVM_CDS_ENABLED" to "false",
-        "BP_SPRING_AOT_ENABLED" to "false",
         "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
         "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
     )
     bindings = listOf(
-        "$rootDir/tools/buildpacks/bindings:/platform/bindings"
+        "$rootDir/tools/buildpacks/bindings-remote:/platform/bindings"
     )
     cleanCache = true
+    imageName = "boot-admin-server"
 }

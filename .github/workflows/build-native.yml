@@ -11,8 +11,8 @@ jobs:
             -   name: Setup Graalvm
                 uses: graalvm/setup-graalvm@v1
                 with:
-                    java-version: "21"
                     distribution: "liberica"
+                    java-version: "21"
             -   name: Env
                 run: |
                     echo "GRAALVM_HOME: $GRAALVM_HOME"
