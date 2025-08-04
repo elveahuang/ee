@@ -1,6 +1,6 @@
 # 镜像
-FROM bellsoft/liberica-openjdk-rocky:21
-MAINTAINER elvea
+FROM bellsoft/liberica-openjdk-rocky:21-cds
+LABEL maintainer="Elvea Huang"
 # 处理构建文件
 RUN mkdir -p /app
 COPY ./build/libs/app.jar /app/app.jar
