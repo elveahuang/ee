@@ -5,13 +5,12 @@ plugins {
 }
 
 dependencies {
-    // libs
     implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.springCloudCommonsStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
-    implementation(rootProject.libs.bundles.logging)
 }
 
 tasks.named<BootJar>("bootJar") {

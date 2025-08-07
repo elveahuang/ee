@@ -1,12 +1,14 @@
 server:
-    port: 9292
+    port: 9393
 spring:
     main:
         allow-bean-definition-overriding: true
+        allow-circular-references: true
+        web-application-type: servlet
     application:
         name: auth-server
     profiles:
-        active: dev
+        active: local
     config:
         import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
     cloud:
@@ -23,7 +25,7 @@ spring:
                 enabled: true
                 format: yaml
                 prefixes: "config"
-                default-context: "application"
+                default-context: "ee"
                 profile-separator: "-"
                 data-key: ${spring.application.name}
                 watch:

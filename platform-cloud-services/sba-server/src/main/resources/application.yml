@@ -1,12 +1,14 @@
 server:
-    port: 9494
+    port: 9292
 spring:
     main:
         allow-bean-definition-overriding: true
+        allow-circular-references: true
+        web-application-type: servlet
     application:
         name: sba-server
     profiles:
-        active: dev
+        active: local
     config:
         import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
     cloud:
@@ -23,9 +25,9 @@ spring:
                 enabled: true
                 format: yaml
                 prefixes: "config"
-                default-context: ${spring.application.name}
-                profile-separator: "::"
-                data-key: "application"
+                default-context: "ee"
+                profile-separator: "-"
+                data-key: ${spring.application.name}
                 watch:
                     enabled: true
                     delay: 3000

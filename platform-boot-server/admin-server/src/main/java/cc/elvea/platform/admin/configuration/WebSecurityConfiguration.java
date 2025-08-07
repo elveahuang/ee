@@ -1,30 +1,29 @@
 package cc.elvea.platform.admin.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
-import java.util.UUID;
+import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * @author elvea
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableAdminServer
-public class ApplicationConfiguration {
+public class WebSecurityConfiguration {
 
     private final AdminServerProperties adminServer;
 
-    public ApplicationConfiguration(AdminServerProperties adminServer) {
+    public WebSecurityConfiguration(AdminServerProperties adminServer) {
         this.adminServer = adminServer;
     }
 
@@ -40,24 +39,20 @@ public class ApplicationConfiguration {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(this.adminServer.path("/assets/**")).permitAll()
                 .requestMatchers(this.adminServer.path("/login")).permitAll()
-                .requestMatchers(this.adminServer.path("/instances/**")).permitAll()
-                .requestMatchers(this.adminServer.path("/actuator/**")).permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().authenticated()
+            )
             .formLogin(formLogin -> formLogin
                 .loginPage(this.adminServer.path("/login"))
-                .successHandler(successHandler))
-            .logout(logout -> logout
-                .logoutUrl(this.adminServer.path("/logout")))
-            .csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .successHandler(successHandler)
+            )
+            .logout(logout -> logout.logoutUrl(this.adminServer.path("/logout")))
+            .httpBasic(Customizer.withDefaults())
+            .csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .ignoringRequestMatchers(
-                    PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, this.adminServer.path("/instances")),
-                    PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.DELETE, this.adminServer.path("/instances/*")),
-                    PathPatternRequestMatcher.withDefaults().matcher(this.adminServer.path("/actuator/**"))
-                ))
-            .rememberMe(rememberMe -> rememberMe
-                .key(UUID.randomUUID().toString())
-                .tokenValiditySeconds(1209600));
+                    PathPatternRequestMatcher.withDefaults().matcher(POST, this.adminServer.path("/instances")),
+                    PathPatternRequestMatcher.withDefaults().matcher(DELETE, this.adminServer.path("/instances/*")),
+                    PathPatternRequestMatcher.withDefaults().matcher(this.adminServer.path("/actuator/*")))
+            );
         return http.build();
     }
 

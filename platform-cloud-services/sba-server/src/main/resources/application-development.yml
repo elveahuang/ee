@@ -8,7 +8,9 @@ spring:
             password: admin
     boot:
         admin:
+            context-path: /devops/sba
             ui:
                 title: Admin Console
+                public-url: http://ee.e.cn/devops/sba
             discovery:
                 ignored-services: consul
