@@ -10,6 +10,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
     implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
+    implementation(rootProject.libs.bundles.logging)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
 }
 

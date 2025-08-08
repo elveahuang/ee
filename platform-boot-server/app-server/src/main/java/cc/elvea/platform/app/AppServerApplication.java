@@ -14,7 +14,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Slf4j
 @SpringBootApplication(scanBasePackages = {
-    "cc.elvea.platform.configuration",
     "cc.elvea.platform.commons",
     "cc.elvea.platform.security",
     "cc.elvea.platform.system",

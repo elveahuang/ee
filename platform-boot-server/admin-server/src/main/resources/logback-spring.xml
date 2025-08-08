@@ -6,6 +6,12 @@
                     source="spring.application.name"
                     scop="context"
                     defaultValue="admin-server"/>
+
+    <springProperty name="loki.url"
+                    source="platform.log"
+                    scop="context"
+                    defaultValue="http://192.168.0.222:3100/loki/api/v1/push"/>
+
     <!-- 日志文件路径 -->
     <property name="log.path" value="logs/${spring.application.name}"/>
     <!-- 控制台输出格式 -->
@@ -17,14 +23,28 @@
     <property name="rolling.policy.history" value="7"/>
 
     <!-- 控制台 -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${pattern.console}</pattern>
         </encoder>
     </appender>
 
-    <!-- 系统日志 -->
-    <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 日志中心 -->
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <message class="com.github.loki4j.logback.JsonLayout"/>
+        <http>
+            <url>${loki.url}</url>
+        </http>
+        <labels>
+            app = ${spring.application.name}
+            host = ${HOSTNAME}
+            level = %level
+        </labels>
+        <verbose>true</verbose>
+    </appender>
+
+    <!-- 日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -36,25 +56,13 @@
         </encoder>
     </appender>
 
-    <!-- 错误日志 -->
-    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/error.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>${rolling.policy.size}</maxFileSize>
-            <maxHistory>${rolling.policy.history}</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${pattern.file}</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="org.springframework" level="debug"/>
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="LOKI"/>
+    </root>
+    <logger name="org.springframework" level="info"/>
+    <logger name="com.github.loki4j.logback" level="info"/>
     <logger name="cc.elvea" level="info"/>
 
-    <root level="info">
-        <appender-ref ref="console"/>
-        <appender-ref ref="debug"/>
-        <appender-ref ref="error"/>
-    </root>
 </configuration>
