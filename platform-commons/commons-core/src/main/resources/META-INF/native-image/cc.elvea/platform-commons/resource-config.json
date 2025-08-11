@@ -1,2 +1,13 @@
 {
+    "resources": [
+        {
+            "pattern": "logging/logback/console-appender.xml"
+        },
+        {
+            "pattern": "logging/logback/file-appender.xml"
+        },
+        {
+            "pattern": "logging/logback/loki-appender.xml"
+        }
+    ]
 }

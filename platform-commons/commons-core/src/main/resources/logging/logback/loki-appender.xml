@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <springProperty name="LOG_LOKI_URL" source="logging.loki.url" scop="context" defaultValue=""/>
+    <springProperty name="LOG_LOKI_URL" source="logging.loki.url" scop="context" defaultValue="http://localhost:3100/loki/api/v1/push"/>
 
     <springProperty name="LOG_LOKI_USER" source="logging.loki.user" scop="context" defaultValue=""/>
 
@@ -18,6 +18,7 @@
         </http>
         <batch>
             <maxBytes>65536</maxBytes>
+            <drainOnStop>false</drainOnStop>
         </batch>
         <verbose>true</verbose>
         <labels>
