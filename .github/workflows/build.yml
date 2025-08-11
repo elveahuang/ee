@@ -1,4 +1,4 @@
-name: Native Build
+name: Build
 on:
     push:
         branches: [ main ]
