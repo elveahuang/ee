@@ -12,6 +12,8 @@ dependencies {
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
     implementation(rootProject.libs.bundles.logging)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
+    // modules
+    implementation(project(":platform-commons:commons-core-starter"))
 }
 
 tasks.named<BootJar>("bootJar") {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <springProperty name="LOG_LOKI_URL" source="logging.loki.url" scop="context" defaultValue="http://127.0.0.1:3100/loki/api/v1/push"/>
+
+    <springProperty name="LOG_LOKI_USER" source="logging.loki.user" scop="context" defaultValue=""/>
+
+    <springProperty name="LOG_LOKI_PASS" source="logging.loki.pass" scop="context" defaultValue=""/>
+
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <message class="com.github.loki4j.logback.JsonLayout"/>
+        <http>
+            <url>${LOG_LOKI_URL}</url>
+            <auth>
+                <username>${LOG_LOKI_USER}</username>
+                <password>${LOG_LOKI_PASS}</password>
+            </auth>
+            <requestTimeoutMs>15000</requestTimeoutMs>
+        </http>
+        <batch>
+            <maxBytes>65536</maxBytes>
+        </batch>
+        <verbose>true</verbose>
+        <labels>
+            app = ${spring.application.name}
+            host = ${HOSTNAME}
+            level = %level
+        </labels>
+    </appender>
+</included>

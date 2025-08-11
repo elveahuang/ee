@@ -141,6 +141,8 @@ platform:
         private-key-value:
     amqp:
         enabled: true
+    captcha:
+        enabled: true
     http:
         enabled: true
         type: okhttp

@@ -1,84 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <springProperty name="APP_NAME"
-                    source="spring.application.name"
-                    scop="context"
-                    defaultValue="admin-server"/>
+    <springProfile name="development | dev">
+        <include resource="logging/logback/console-appender.xml"/>
 
-    <springProperty name="LOKI_URL"
-                    source="platform.log.loki.url"
-                    scop="context"
-                    defaultValue="http://127.0.0.1:3100/loki/api/v1/push"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
 
-    <springProperty name="LOKI_USER"
-                    source="platform.log.loki.user"
-                    scop="context"
-                    defaultValue=""/>
+    <springProfile name="production | native | local">
+        <include resource="logging/logback/file-appender.xml"/>
+        <include resource="logging/logback/console-appender.xml"/>
+        <include resource="logging/logback/loki-appender.xml"/>
 
-    <springProperty name="LOKI_PASS"
-                    source="platform.log.loki.pass"
-                    scop="context"
-                    defaultValue=""/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="LOKI"/>
+        </root>
+    </springProfile>
 
-    <!-- 日志文件路径 -->
-    <property name="log.path" value="logs"/>
-    <!-- 控制台输出格式 -->
-    <property name="pattern.console" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
-    <!-- 日志文件输出格式 -->
-    <property name="pattern.file" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5le] [%t] [%F:%L] - %m%n"/>
-    <!-- 日志归档策略 -->
-    <property name="rolling.policy.size" value="50MB"/>
-    <property name="rolling.policy.history" value="7"/>
-
-    <!-- 控制台 -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${pattern.console}</pattern>
-        </encoder>
-    </appender>
-
-    <!-- 日志中心 -->
-    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <message class="com.github.loki4j.logback.JsonLayout"/>
-        <http>
-            <url>${LOKI_URL}</url>
-            <auth>
-                <username>${LOKI_USER}</username>
-                <password>${LOKI_PASS}</password>
-            </auth>
-        </http>
-        <batch>
-            <maxBytes>65536</maxBytes>
-        </batch>
-        <labels>
-            app = ${APP_NAME}
-            host = ${HOSTNAME}
-            level = %level
-        </labels>
-        <verbose>true</verbose>
-    </appender>
-
-    <!-- 日志文件 -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/debug.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <maxFileSize>${rolling.policy.size}</maxFileSize>
-            <maxHistory>${rolling.policy.history}</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${pattern.file}</pattern>
-        </encoder>
-    </appender>
-
-    <root level="info">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="LOKI"/>
-    </root>
-    <logger name="org.springframework" level="info"/>
-    <logger name="com.github.loki4j.logback" level="info"/>
-    <logger name="cc.elvea" level="info"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="cc.elvea" level="INFO"/>
 </configuration>

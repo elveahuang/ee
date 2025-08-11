@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({CaptchaProperties.class})
-@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CaptchaAutoConfiguration {
 
     public CaptchaAutoConfiguration() {

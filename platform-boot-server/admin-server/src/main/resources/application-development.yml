@@ -8,5 +8,15 @@ spring:
             password: admin
     boot:
         admin:
+            context-path: /devops/sba
             ui:
                 title: Admin Console
+                public-url: https://ee.elvea.cn/devops/sba
+### --------------------------------------------------------------------------------------------------------------------
+### Logging
+### --------------------------------------------------------------------------------------------------------------------
+logging:
+    loki:
+        url: http://127.0.0.1:3100/loki/api/v1/push
+        user:
+        pass:
