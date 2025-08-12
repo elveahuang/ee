@@ -26,7 +26,7 @@ jobs:
                     ./gradlew platform-boot-server:app-server:nativeCompile
 
                     mkdir -p ./dist
-                    cp ./platform-boot-server/app-server/build/native/nativeCompile/** ./dist/
+                    cp -r ./platform-boot-server/app-server/build/native/nativeCompile/** ./dist/
                     cd ./dist
                     zip -qr native.zip *
             -   name: Deploy

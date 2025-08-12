@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <springProfile name="development | dev">
+    <springProfile name="development | dev | local">
         <include resource="logging/logback/console-appender.xml"/>
 
         <root level="INFO">
@@ -10,7 +10,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="production | native | local">
+    <springProfile name="production | native">
         <include resource="logging/logback/file-appender.xml"/>
         <include resource="logging/logback/console-appender.xml"/>
         <include resource="logging/logback/loki-appender.xml"/>

@@ -9,6 +9,7 @@ spring:
                 url: http://127.0.0.1:8282
                 username: admin
                 password: admin
+                api-path: /devops/sba/instances
     datasource:
         master:
             name: master
@@ -227,7 +228,7 @@ platform:
         enabled: true
         geo-lite:
             location: file_system
-            path: ip/GeoLite2-City.mmdb
+            path: ./ip/GeoLite2-City.mmdb
     message:
         broadcast:
             enabled: true

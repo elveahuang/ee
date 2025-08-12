@@ -4,6 +4,7 @@ spring:
     main:
         allow-bean-definition-overriding: true
         allow-circular-references: true
+        web-application-type: servlet
     servlet:
         multipart:
             enabled: true
@@ -13,6 +14,3 @@ spring:
         name: app-server
     profiles:
         active: local
-    cloud:
-        compatibility-verifier:
-            enabled: false
