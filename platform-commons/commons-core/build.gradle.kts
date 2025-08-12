@@ -38,6 +38,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.cos)
     compileOnly(rootProject.libs.bundles.oss)
     compileOnly(rootProject.libs.bundles.minio)
+    compileOnly(rootProject.libs.bundles.s3)
     compileOnly(rootProject.libs.bundles.telegram)
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.sharding)

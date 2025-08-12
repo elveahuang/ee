@@ -5,6 +5,7 @@ springBootVersion = "3.5.4"
 springBootAdminVersion = "3.5.1"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
+springGrpcVersion = "0.10.0"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.123.Final"
 cosidVersion = "2.13.3"
@@ -32,6 +33,7 @@ spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref =
 spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
+spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
 jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version = "4.38.0" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
@@ -173,10 +175,11 @@ zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.32.20" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
-dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.32" }
+dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.33" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
@@ -187,7 +190,7 @@ tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1303" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.21" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.22" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
 
@@ -393,7 +396,8 @@ im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "di
 minio = ["minio"]
 cos = ["cos_api"]
 oss = ["aliyun-sdk-oss"]
-storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
+s3 = ["s3"]
+storage = ["cos_api", "minio", "aliyun-sdk-oss", "aliyun-java-sdk-core", "s3"]
 telegram = ["telegrambots-client", "telegrambots-abilities"]
 facebody = ["facebody", "tencentcloud-sdk-java-iai", "tencentcloud-sdk-java-common"]
 translate = ["alimt", "tencentcloud-sdk-java-tmt"]
