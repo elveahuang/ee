@@ -5,5 +5,7 @@ build
 target
 logs
 temp
+dist
 
 application-local.yml
+application-production.yml
