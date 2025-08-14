@@ -1,0 +1,19 @@
+package top.baihu.platform.commons.core.cache.service;
+
+import org.junit.jupiter.api.Assertions;
+import org.springframework.beans.factory.annotation.Autowired;
+import top.baihu.platform.BaseTests;
+
+/**
+ * @author elvea
+ */
+public class CacheServiceTests extends BaseTests {
+
+    @Autowired
+    CacheService cacheService;
+
+    public void base() throws Exception {
+        Assertions.assertNotNull(this.cacheService);
+    }
+
+}

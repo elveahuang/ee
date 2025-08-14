@@ -1,0 +1,13 @@
+{
+    "resources": [
+        {
+            "pattern": "top/baihu/logging/logback/console-appender.xml"
+        },
+        {
+            "pattern": "top/baihu/logging/logback/file-appender.xml"
+        },
+        {
+            "pattern": "top/baihu/logging/logback/loki-appender.xml"
+        }
+    ]
+}

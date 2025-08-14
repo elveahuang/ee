@@ -48,7 +48,7 @@
     </appender>
 
     <!-- 日志级别控制 -->
-    <logger name="cc.elvea" level="info"/>
+    <logger name="top.baihu" level="info"/>
     <logger name="org.springframework" level="info"/>
 
     <root level="info">

@@ -1,0 +1,23 @@
+package top.baihu.platform.system.core.domain.converter;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import top.baihu.platform.system.core.domain.dto.OrganizationDto;
+import top.baihu.platform.system.core.domain.dto.OrganizationSaveDto;
+import top.baihu.platform.system.core.domain.entity.OrganizationEntity;
+
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
+
+/**
+ * @author elvea
+ */
+@Mapper(componentModel = SPRING)
+public interface OrganizationConverter {
+
+    @Mapping(target = "rootInd", ignore = true)
+    @Mapping(target = "defaultInd", ignore = true)
+    OrganizationEntity saveDto2Entity(OrganizationSaveDto saveDto);
+
+    OrganizationDto entity2Dto(OrganizationEntity entity);
+
+}

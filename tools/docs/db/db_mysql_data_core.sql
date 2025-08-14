@@ -504,7 +504,7 @@ values (1000001, 'VIP', 'VIP');
 truncate `sys_job`;
 
 insert into `sys_job` (`id`, `code`, `classname`, `status`, `type`, `unit`, `period`)
-values (1, 'EXAMPLE', 'cc.elvea.platform.system.core.jobs.ExampleJob', 1, 'period', 'm', 3);
+values (1, 'EXAMPLE', 'top.baihu.platform.system.core.jobs.ExampleJob', 1, 'period', 'm', 3);
 
 -- ==============================¬=======================================================================================
 -- OAuth
