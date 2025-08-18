@@ -1,0 +1,19 @@
+package cc.wdev.platform.system.core.domain.request;
+
+import cc.wdev.platform.commons.web.request.Request;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.*;
+
+/**
+ * @author elvea
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class TagDeleteRequest extends Request {
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long[] ids;
+}

@@ -1,1 +1,1 @@
-org.springframework.context.ApplicationListener=top.baihu.platform.system.core.listener.ApplicationReadyListener
+org.springframework.context.ApplicationListener=cc.wdev.platform.system.core.listener.ApplicationReadyListener

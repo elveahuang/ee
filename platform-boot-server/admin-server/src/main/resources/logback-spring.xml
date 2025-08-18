@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <springProfile name="development | dev | local">
-        <include resource="top/baihu/logging/logback/console-appender.xml"/>
+        <include resource="cc.wdev/logging/logback/console-appender.xml"/>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
@@ -11,9 +11,9 @@
     </springProfile>
 
     <springProfile name="production | native">
-        <include resource="top/baihu/logging/logback/file-appender.xml"/>
-        <include resource="top/baihu/logging/logback/console-appender.xml"/>
-        <include resource="top/baihu/logging/logback/loki-appender.xml"/>
+        <include resource="cc.wdev/logging/logback/file-appender.xml"/>
+        <include resource="cc.wdev/logging/logback/console-appender.xml"/>
+        <include resource="cc.wdev/logging/logback/loki-appender.xml"/>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
@@ -23,5 +23,5 @@
     </springProfile>
 
     <logger name="org.springframework" level="INFO"/>
-    <logger name="top.baihu" level="INFO"/>
+    <logger name="cc.wdev" level="INFO"/>
 </configuration>

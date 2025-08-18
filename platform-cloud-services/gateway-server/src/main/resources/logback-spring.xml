@@ -48,7 +48,7 @@
     </appender>
 
     <!-- 日志级别控制 -->
-    <logger name="top.baihu" level="info"/>
+    <logger name="cc.wdev" level="info"/>
     <logger name="org.springframework" level="info"/>
 
     <root level="info">
