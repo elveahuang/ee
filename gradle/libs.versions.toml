@@ -13,7 +13,8 @@ kotlinVersion = "2.2.0"
 groovyVersion = "4.0.28"
 hutoolVersion = "5.8.39"
 mockitoVersion = "5.18.0"
-seleniumVersion = "4.34.0"
+seleniumVersion = "4.35.0"
+playwrightVersion = "1.54.0"
 mybatisPlusVersion = "3.5.12"
 okhttpVersion = "5.1.0"
 swaggerVersion = "2.2.36"
@@ -155,9 +156,9 @@ cosid-spring-redis = { module = "me.ahoo.cosid:cosid-spring-redis" }
 cosid-spring-boot-starter = { module = "me.ahoo.cosid:cosid-spring-boot-starter" }
 
 # Selenium * Playwright
-playwright = { module = "com.microsoft.playwright:playwright", version = "1.54.0" }
-selenium-api = { module = "org.seleniumhq.selenium:selenium-api", version = "4.34.0" }
-selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version = "4.34.0" }
+playwright = { module = "com.microsoft.playwright:playwright", version.ref = "playwrightVersion" }
+selenium-api = { module = "org.seleniumhq.selenium:selenium-api", version.ref = "seleniumVersion" }
+selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumVersion" }
 selenium-web-driver-manager = { module = "io.github.bonigarcia:webdrivermanager", version = "6.2.0" }
 
 # PDF & Excel & Image
@@ -176,10 +177,14 @@ zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
 tika-core = { module = "org.apache.tika:tika-core", version = "3.2.2" }
 tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standard-package", version = "3.2.2" }
 tess4j = { module = "net.sourceforge.tess4j:tess4j", version = "5.16.0" }
-ffmpeg-core = { module = "org.bytedeco:ffmpeg", version = "7.1.1-1.5.12" }
-ffmpeg-platform = { module = "org.bytedeco:ffmpeg-platform", version = "7.1.1-1.5.12" }
+javacpp-core = { module = "org.bytedeco:javacpp", version = "1.5.12" }
+javacpp-platform = { module = "org.bytedeco:javacpp-platform", version = "1.5.12" }
 javacv-core = { module = "org.bytedeco:javacv", version = "1.5.12" }
 javacv-platform = { module = "org.bytedeco:javacv-platform", version = "1.5.12" }
+ffmpeg-core = { module = "org.bytedeco:ffmpeg", version = "7.1.1-1.5.12" }
+ffmpeg-platform = { module = "org.bytedeco:ffmpeg-platform", version = "7.1.1-1.5.12" }
+tesseract-core = { module = "org.bytedeco:tesseract", version = "5.5.1-1.5.12" }
+tesseract-platform = { module = "org.bytedeco:tesseract-platform", version = "5.5.1-1.5.12" }
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
@@ -322,8 +327,8 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel", "poi-scratchpad"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ocr = ["tess4j", "javacv-core", "javacv-platform"]
-ffmpeg = ["ffmpeg-core", "ffmpeg-platform"]
+ocr = ["tess4j", "javacpp-core", "javacpp-platform", "javacv-core", "javacv-platform", "tesseract-core", "tesseract-platform"]
+ffmpeg = ["javacpp-core", "javacpp-platform", "ffmpeg-core", "ffmpeg-platform"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
@@ -385,10 +390,7 @@ quartzStarter = ["spring-boot-starter-quartz"]
 
 # 爬虫
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
-seleniumStarter = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
-
 playwright = ["playwright"]
-playwrightStarter = ["playwright"]
 
 # 接口文档
 swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]

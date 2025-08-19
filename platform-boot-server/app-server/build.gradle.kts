@@ -21,7 +21,7 @@ dependencies {
     implementation(rootProject.libs.bundles.swaggerStarter)
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
-    implementation(rootProject.libs.bundles.seleniumStarter)
+    implementation(rootProject.libs.bundles.selenium)
     implementation(rootProject.libs.bundles.im)
     implementation(rootProject.libs.bundles.logging)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)

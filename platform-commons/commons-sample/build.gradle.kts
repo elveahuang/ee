@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityClientStarter)
     implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.mybatis)
     implementation(rootProject.libs.bundles.mybatisStarter)
@@ -16,6 +17,9 @@ dependencies {
     implementation(rootProject.libs.bundles.pdf)
     implementation(rootProject.libs.bundles.ocr)
     implementation(rootProject.libs.bundles.image)
+    implementation(rootProject.libs.bundles.ffmpeg)
+    implementation(rootProject.libs.bundles.selenium)
+    implementation(rootProject.libs.bundles.playwright)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))

@@ -90,6 +90,9 @@ allprojects {
             if (requested.group == "org.seleniumhq.selenium") {
                 useVersion(rootProject.libs.versions.seleniumVersion.get())
             }
+            if (requested.group == "com.microsoft.playwright") {
+                useVersion(rootProject.libs.versions.playwrightVersion.get())
+            }
             if (requested.group == "org.jetbrains.kotlin") {
                 useVersion(rootProject.libs.versions.kotlinVersion.get())
             }
