@@ -26,6 +26,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.html)
     compileOnly(rootProject.libs.bundles.excel)
     compileOnly(rootProject.libs.bundles.pdf)
+    compileOnly(rootProject.libs.bundles.ocr)
     compileOnly(rootProject.libs.bundles.image)
     compileOnly(rootProject.libs.bundles.im)
     compileOnly(rootProject.libs.bundles.dingtalk)

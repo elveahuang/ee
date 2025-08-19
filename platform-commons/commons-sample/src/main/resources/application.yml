@@ -1,0 +1,11 @@
+server:
+    port: 8383
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        allow-circular-references: true
+        web-application-type: servlet
+    application:
+        name: sample-server
+    profiles:
+        active: local

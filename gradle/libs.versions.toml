@@ -16,7 +16,7 @@ mockitoVersion = "5.18.0"
 seleniumVersion = "4.34.0"
 mybatisPlusVersion = "3.5.12"
 okhttpVersion = "5.1.0"
-swaggerVersion = "2.2.34"
+swaggerVersion = "2.2.36"
 springdocVersion = "2.8.9"
 bouncycastleVersion = "1.81"
 checkerQualVersion = "3.49.5"
@@ -164,6 +164,7 @@ selenium-web-driver-manager = { module = "io.github.bonigarcia:webdrivermanager"
 poi = { module = "org.apache.poi:poi", version = "5.4.1" }
 poi-ooxml = { module = "org.apache.poi:poi-ooxml", version = "5.4.1" }
 poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version = "5.4.1" }
+poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version = "5.4.1" }
 fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.2.0" }
 pdfbox = { module = "org.apache.pdfbox:pdfbox", version = "3.0.5" }
 fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.5" }
@@ -172,10 +173,17 @@ thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.20" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
 zxing-core = { module = "com.google.zxing:core", version = "3.5.3" }
 zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
+tika-core = { module = "org.apache.tika:tika-core", version = "3.2.2" }
+tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standard-package", version = "3.2.2" }
+tess4j = { module = "net.sourceforge.tess4j:tess4j", version = "5.16.0" }
+ffmpeg-core = { module = "org.bytedeco:ffmpeg", version = "7.1.1-1.5.12" }
+ffmpeg-platform = { module = "org.bytedeco:ffmpeg-platform", version = "7.1.1-1.5.12" }
+javacv-core = { module = "org.bytedeco:javacv", version = "1.5.12" }
+javacv-platform = { module = "org.bytedeco:javacv-platform", version = "1.5.12" }
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.32.20" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.32.25" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
@@ -185,11 +193,11 @@ dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-cos_api = { module = "com.qcloud:cos_api", version = "5.6.247" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1312" }
+cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1322" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
-tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1303" }
+tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.22" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
@@ -205,15 +213,15 @@ jakarta-websocket = { module = "jakarta.websocket:jakarta.websocket-api" }
 jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
 
 commons-io = { module = "commons-io:commons-io", version = "2.20.0" }
-commons-net = { module = "commons-net:commons-net", version = "3.11.1" }
+commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
 commons-codec = { module = "commons-codec:commons-codec", version = "1.19.0" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
 commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.12.1" }
 commons-email = { module = "org.apache.commons:commons-email", version = "1.6.0" }
-commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.0" }
-commons-text = { module = "org.apache.commons:commons-text", version = "1.13.1" }
+commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
+commons-text = { module = "org.apache.commons:commons-text", version = "1.14.0" }
 commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.18.0" }
-commons-compress = { module = "org.apache.commons:commons-compress", version = "1.27.1" }
+commons-compress = { module = "org.apache.commons:commons-compress", version = "1.28.0" }
 commons-collections = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
 
 jodconverter-local = { module = "org.jodconverter:jodconverter-local", version = "4.4.10" }
@@ -260,17 +268,17 @@ ognl = { module = "ognl:ognl", version = "3.4.7" }
 asm = { module = "org.ow2.asm:asm", version = "9.8" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.1" }
-okio = { module = "com.squareup.okio:okio", version = "3.15.0" }
+okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.3.1" }
 guava = { module = "com.google.guava:guava", version = "33.4.8-jre" }
-nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.4" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.26.1" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.4.2" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.27.1" }
 checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
-spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.3" }
-openai-java = { module = "com.openai:openai-java", version = "2.19.1" }
+spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.4" }
+openai-java = { module = "com.openai:openai-java", version = "3.0.3" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
 logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
 
@@ -307,13 +315,15 @@ html = ["jsoup"]
 sharding = ["sharding"]
 openai = ["openai-java"]
 database = ["pgsql", "mysql"]
-pdf = ["pdfbox", "fontbox", "x-easypdf-pdfbox"]
+pdf = ["pdfbox", "fontbox", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
 image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
-excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel"]
+excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel", "poi-scratchpad"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
+ocr = ["tess4j", "javacv-core", "javacv-platform"]
+ffmpeg = ["ffmpeg-core", "ffmpeg-platform"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
