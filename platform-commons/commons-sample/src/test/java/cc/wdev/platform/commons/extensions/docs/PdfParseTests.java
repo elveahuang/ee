@@ -23,7 +23,7 @@ public class PdfParseTests {
 
     @Test
     public void baseTest() throws TikaException, IOException, SAXException {
-        File root = new File("." + File.separator + "temp" + File.separator);
+        File root = new File("temp" + File.separator);
         File file = new File(root.getAbsolutePath(), "pdf.pdf");
 
         Tika tika = new Tika();
@@ -36,7 +36,7 @@ public class PdfParseTests {
         ParseContext context = new ParseContext();
         FileInputStream inputStream = new FileInputStream(file);
         parser.parse(inputStream, bodyContentHandler, metadata, context);
-        System.out.println(bodyContentHandler.toString());
+        log.info("Content : {}", bodyContentHandler);
         String[] names = metadata.names();
         for (String name : names) {
             System.out.println(name);

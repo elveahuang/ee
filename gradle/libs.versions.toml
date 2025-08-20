@@ -176,7 +176,6 @@ zxing-core = { module = "com.google.zxing:core", version = "3.5.3" }
 zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
 tika-core = { module = "org.apache.tika:tika-core", version = "3.2.2" }
 tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standard-package", version = "3.2.2" }
-tess4j = { module = "net.sourceforge.tess4j:tess4j", version = "5.16.0" }
 javacpp-core = { module = "org.bytedeco:javacpp", version = "1.5.12" }
 javacpp-platform = { module = "org.bytedeco:javacpp-platform", version = "1.5.12" }
 javacv-core = { module = "org.bytedeco:javacv", version = "1.5.12" }
@@ -185,6 +184,8 @@ ffmpeg-core = { module = "org.bytedeco:ffmpeg", version = "7.1.1-1.5.12" }
 ffmpeg-platform = { module = "org.bytedeco:ffmpeg-platform", version = "7.1.1-1.5.12" }
 tesseract-core = { module = "org.bytedeco:tesseract", version = "5.5.1-1.5.12" }
 tesseract-platform = { module = "org.bytedeco:tesseract-platform", version = "5.5.1-1.5.12" }
+opencv-core = { module = "org.bytedeco:opencv", version = "4.11.0-1.5.12" }
+opencv-platform = { module = "org.bytedeco:opencv-platform", version = "4.11.0-1.5.12" }
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
@@ -327,8 +328,9 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel", "poi-scratchpad"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ocr = ["tess4j", "javacpp-core", "javacpp-platform", "javacv-core", "javacv-platform", "tesseract-core", "tesseract-platform"]
-ffmpeg = ["javacpp-core", "javacpp-platform", "ffmpeg-core", "ffmpeg-platform"]
+ffmpeg = ["javacpp-core", "javacpp-platform", "javacv-core", "javacv-platform", "ffmpeg-core", "ffmpeg-platform"]
+opencv = ["javacpp-core", "javacpp-platform", "javacv-core", "javacv-platform", "opencv-core", "opencv-platform"]
+tesseract = ["javacpp-core", "javacpp-platform", "tesseract-core", "tesseract-platform"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
