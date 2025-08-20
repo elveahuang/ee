@@ -16,12 +16,8 @@ dependencies {
     implementation(rootProject.libs.bundles.logging)
     implementation(rootProject.libs.bundles.pdf)
     implementation(rootProject.libs.bundles.image)
-    implementation(rootProject.libs.bundles.ffmpeg)
-    implementation(rootProject.libs.bundles.opencv)
-    implementation(rootProject.libs.bundles.tesseract)
-    implementation(rootProject.libs.bundles.selenium)
-    implementation(rootProject.libs.bundles.playwright)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-javacv"))
 }

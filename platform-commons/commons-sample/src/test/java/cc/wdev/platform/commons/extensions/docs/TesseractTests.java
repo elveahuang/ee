@@ -24,7 +24,7 @@ public class TesseractTests {
 
         BytePointer outText;
         try (TessBaseAPI api = new TessBaseAPI()) {
-            if (api.Init("/Users/elvea/Workspace/tools/tessdata", "eng") != 0) {
+            if (api.Init("D:\\Workspace\\tools\\tessdata", "eng") != 0) {
                 System.err.println("Could not initialize tesseract.");
                 System.exit(1);
             }
