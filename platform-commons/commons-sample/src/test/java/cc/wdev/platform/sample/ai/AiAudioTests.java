@@ -40,6 +40,17 @@ public class AiAudioTests extends BaseTests {
     }
 
     @Test
+    public void requestParamTest() throws Exception {
+        new AudioTranscriptionPrompt(
+            new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
+            DashScopeAudioTranscriptionOptions.builder()
+                .withModel(DEFAULT_MODEL)
+                .withFormat(DashScopeAudioTranscriptionOptions.AudioFormat.MP3)
+                .build()
+        );
+    }
+
+    @Test
     public void sttTest() throws Exception {
         File root = new File("temp" + File.separator);
         File audio = new File(root.getAbsolutePath(), "audio.mp3");
@@ -49,7 +60,6 @@ public class AiAudioTests extends BaseTests {
 
         AudioTranscriptionResponse response = transcriptionModel.call(
             new AudioTranscriptionPrompt(
-//                new FileSystemResource(audio),
                 new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
                 DashScopeAudioTranscriptionOptions.builder()
                     .withModel(DEFAULT_MODEL)
@@ -59,6 +69,25 @@ public class AiAudioTests extends BaseTests {
         );
         String text = response.getResult().getOutput();
         Assertions.assertNotNull(text);
+    }
+
+    @Test
+    public void streamTest() throws Exception {
+        File root = new File("temp" + File.separator);
+        File audio = new File(root.getAbsolutePath(), "audio.mp3");
+        if (!audio.exists()) {
+            log.info("Audio not exists");
+        }
+
+        transcriptionModel.stream(
+            new AudioTranscriptionPrompt(
+                new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
+                DashScopeAudioTranscriptionOptions.builder()
+                    .withModel(DEFAULT_MODEL)
+                    .withFormat(DashScopeAudioTranscriptionOptions.AudioFormat.MP3)
+                    .build()
+            )
+        );
     }
 
     @Test
