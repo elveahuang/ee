@@ -1,5 +1,6 @@
 -- =====================================================================================================================
 -- 实体数据
+-- 1000000 - 租户
 -- 1001000 - 账号
 -- 1002000 - 角色
 -- 1003000 - 用户
@@ -11,11 +12,20 @@
 -- 内置账号
 --
 
+truncate sys_tenant;
+
+insert into sys_tenant (`id`, `code`, `title`, `account_count`)
+values (1000000, 'ROOT', 'Root', 0);
+
+--
+-- 内置账号
+--
+
 truncate sys_account;
 
-insert into sys_account (`id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
+insert into sys_account (`id`, `tenant_id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
                          `display_name`, `birthday`, `active`, `created_at`, `password`)
-values (1001001, 'test', 'huang@elvea.cn', '0086', '13800138000', 'test', now(), 1, now(),
+values (1001001, 1000000, 'test', 'huang@elvea.cn', '0086', '13800138000', 'test', now(), 1, now(),
         '$2a$10$/ax0s7CATLLmYwvedSmZZumjHgaspXxWb4uv2ywzi9fNU6M4AJqpq');
 
 --
@@ -35,9 +45,9 @@ values (1002001, 'SYSTEM_ADMINISTRATOR', 'System Administrator', 'label_role_sys
 
 truncate sys_user;
 
-insert into sys_user (`id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
+insert into sys_user (`id`, `tenant_id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
                       `display_name`, `birthday`, `active`, `created_at`, `password`)
-values (1003001, 'admin', 'me@elvea.cn', '0086', '13500000000', 'Administrator', now(), 1, now(),
+values (1003001, 1000000, 'admin', 'me@elvea.cn', '0086', '13500000000', 'Administrator', now(), 1, now(),
         '$2a$10$MLkjYEPJkO6KNrfUUBld6eWVr1G09nugg5UpIQVUtsQ.3Z9U2lOSK');
 
 --

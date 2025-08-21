@@ -1,6 +1,6 @@
 [versions]
 springAiVersion = "1.0.1"
-springAiAlibabaVersion = "1.0.0.2"
+springAiAlibabaVersion = "1.0.0.3"
 springBootVersion = "3.5.4"
 springBootAdminVersion = "3.5.1"
 springDependencyManagementVersion = "1.1.7"
@@ -9,7 +9,7 @@ springGrpcVersion = "0.10.0"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.123.Final"
 cosidVersion = "2.13.3"
-kotlinVersion = "2.2.0"
+kotlinVersion = "2.2.10"
 groovyVersion = "4.0.28"
 hutoolVersion = "5.8.39"
 mockitoVersion = "5.18.0"
@@ -21,11 +21,12 @@ swaggerVersion = "2.2.36"
 springdocVersion = "2.8.9"
 bouncycastleVersion = "1.81"
 checkerQualVersion = "3.49.5"
+jsonSchemaGeneratorVersion = "4.38.0"
 
 [plugins]
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagementVersion" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
-gradle-spotbugs = { id = "com.github.spotbugs", version = "6.2.2" }
+gradle-spotbugs = { id = "com.github.spotbugs", version = "6.2.5" }
 gradle-native = { id = "org.graalvm.buildtools.native", version = "0.10.6" }
 gradle-osdetector = { id = "com.google.osdetector", version = "1.7.3" }
 
@@ -35,7 +36,7 @@ spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom",
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
 spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
-jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version = "4.38.0" }
+jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version.ref = "jsonSchemaGeneratorVersion" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
@@ -113,6 +114,9 @@ spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-star
 spring-ai-starter-mcp-server = { module = "org.springframework.ai:spring-ai-starter-mcp-server" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
 
+# Spring AI Alibaba
+spring-ai-alibaba-starter-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope", version.ref = "springAiAlibabaVersion" }
+
 # Spring Boot Admin
 spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencies", version.ref = "springBootAdminVersion" }
 spring-boot-admin-starter-client = { module = "de.codecentric:spring-boot-admin-starter-client" }
@@ -179,7 +183,7 @@ tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standar
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.32.25" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.32.26" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
@@ -190,7 +194,7 @@ alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1322" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1324" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
@@ -274,7 +278,8 @@ checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "ch
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.4" }
-openai-java = { module = "com.openai:openai-java", version = "3.0.3" }
+openai-java = { module = "com.openai:openai-java", version = "3.1.2" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.4" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
 logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
 
@@ -341,6 +346,7 @@ springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 # Spring AI
 springAiCommons = ["spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
 springAiCommonsStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
+springAiAlibabaStarter = ["dashscope-sdk-java", "spring-ai-alibaba-starter-dashscope"]
 
 # Spring Boot Admin
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]

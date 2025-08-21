@@ -3,10 +3,12 @@ plugins {
 }
 
 dependencies {
+    implementation(rootProject.libs.bundles.springAiCommonsStarter)
+    implementation(rootProject.libs.bundles.springAiAlibabaStarter)
+    implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.springSecurityCommons)
     implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
     implementation(rootProject.libs.bundles.springSecurityClientStarter)
-    implementation(rootProject.libs.bundles.springBootCommonsStarter)
     implementation(rootProject.libs.bundles.mybatis)
     implementation(rootProject.libs.bundles.mybatisStarter)
     implementation(rootProject.libs.bundles.hibernate)

@@ -4,6 +4,7 @@ var tesseractVersion = "5.5.1-$javaCppVersion"
 var leptonicaVersion = "1.85.0-$javaCppVersion"
 
 dependencies {
+    // javacv & javacpp
     api("org.bytedeco:javacv:$javaCppVersion") {
         exclude(group = "org.bytedeco", module = "artoolkitplus")
         exclude(group = "org.bytedeco", module = "flycapture")
@@ -16,7 +17,6 @@ dependencies {
         exclude(group = "org.bytedeco", module = "openblas")
         exclude(group = "org.bytedeco", module = "videoinput")
     }
-    // javacpp
     api(group = "org.bytedeco", name = "javacpp-platform", version = javaCppVersion) {
         exclude(group = "org.bytedeco", module = "javacpp")
     }

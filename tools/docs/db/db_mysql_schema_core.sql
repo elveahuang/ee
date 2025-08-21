@@ -3,55 +3,29 @@
 -- =====================================================================================================================
 
 --
--- 账号表
+-- 实体表
+-- 用户表和账号表的基础表
 --
 
-DROP TABLE IF EXISTS `sys_account`;
+DROP TABLE IF EXISTS `sys_entity`;
 
-CREATE TABLE `sys_account`
+CREATE TABLE `sys_entity`
 (
-    `id`                   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
-    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
-    `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
-    `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
-    `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
-    `email`                VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '电子邮箱',
-    `mobile_country_code`  VARCHAR(10)      NOT NULL DEFAULT '' COMMENT '手机国家区号',
-    `mobile_number`        VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '手机号码',
-    `password`             VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '密码',
-    `id_card_type`         VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件类型',
-    `id_card_no`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件号码',
-    `sex`                  VARCHAR(10)      NOT NULL DEFAULT '' COMMENT '性别',
-    `birthday`             DATE COMMENT '生日',
-    `description`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `last_login_status`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录状态',
-    `last_login_at`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录时间',
-    `last_login_ip`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录IP',
-    `password_expire_at`   VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '密码过期时间',
-    `password_error_at`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后一次输入错误密码的时间',
-    `password_error_count` INT UNSIGNED     NOT NULL DEFAULT 0 COMMENT '输入错误密码的次数',
-    `telegram`             VARCHAR(255)     NOT NULL DEFAULT '' COMMENT 'Telegram',
-    `registration`         DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '注册时间',
-    `invite_code`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '邀请码',
-    `invite_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '邀请人',
-    `status`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
-    `source`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
-    `active`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    `last_modified_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
-    `last_modified_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
-    `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
-    `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
-    CONSTRAINT `pk_sys_account` PRIMARY KEY (`id`),
-    INDEX `ix_sys_account__active` (`active`),
-    INDEX `ix_sys_account__uuid` (`uuid`),
-    INDEX `ix_sys_account__username` (`username`),
-    INDEX `ix_sys_account__email` (`email`),
-    INDEX `ix_sys_account__mobile` (`mobile_country_code`, `mobile_number`),
-    INDEX `ix_sys_account__invite_code` (`invite_code`),
-    INDEX `ix_sys_account__invite_by` (`invite_by`)
-) COMMENT '账号表';
+    `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `uuid`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
+    `status`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
+    `source`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
+    `active`           TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`       DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_entity` PRIMARY KEY (`id`),
+    INDEX `ix_sys_entity__active` (`active`),
+    INDEX `ix_sys_entity__uuid` (`uuid`)
+) COMMENT '实体表';
 
 --
 -- 会员类型表
@@ -62,7 +36,8 @@ DROP TABLE IF EXISTS `sys_vip_type`;
 CREATE TABLE `sys_vip_type`
 (
     `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
-    `code`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '唯一编号',
+    `biz_type`         VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '业务类型',
+    `code`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
     `privilege`        VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '特权',
@@ -114,6 +89,129 @@ CREATE TABLE `sys_vip_item`
     CONSTRAINT `pk_sys_vip_item` PRIMARY KEY (`id`),
     INDEX `ix_sys_vip_item__code` (`code`)
 ) COMMENT '会员套餐表';
+
+--
+-- 租户表
+--
+
+DROP TABLE IF EXISTS `sys_tenant`;
+
+CREATE TABLE `sys_tenant`
+(
+    `id`                     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `uuid`                   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '租户标识',
+    `code`                   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '租户编号',
+    `title`                  VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '名称',
+    `details`                VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '简介',
+    `address`                VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '地址',
+    `domain`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '域名',
+    `contact_user_name`      VARCHAR(50)      NOT NULL DEFAULT '' comment '联系人',
+    `contact_phone`          VARCHAR(50)      NOT NULL DEFAULT '' comment '联系电话',
+    `company_name`           VARCHAR(50)      NOT NULL DEFAULT '' comment '企业名称',
+    `company_license_number` VARCHAR(50)      NOT NULL DEFAULT '' comment '统一社会信用代码',
+    `registration_date`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '注册时间',
+    `expiration_date`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '到期时间'',',
+    `account_count`          INT              NOT NULL DEFAULT 0 COMMENT '租户用户数',
+    `description`            VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注说明',
+    `status`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
+    `active`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`             DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at`       DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`             DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_tenant` PRIMARY KEY (`id`),
+    INDEX `ix_sys_tenant__active` (`active`),
+    INDEX `ix_sys_tenant__uuid` (`uuid`),
+    INDEX `ix_sys_tenant__code` (`code`)
+) COMMENT '租户表';
+
+--
+-- 账号会员关联表
+--
+
+DROP TABLE IF EXISTS `sys_tenant_vip`;
+
+CREATE TABLE `sys_tenant_vip`
+(
+    `id`                BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `vip_type_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
+    `trial_start_date`  DATETIME COMMENT '会员试用开始时间',
+    `trial_end_date`    DATETIME COMMENT '会员试用结束时间',
+    `registration_date` DATETIME COMMENT '会员注册时间',
+    `expiration_date`   DATETIME COMMENT '会员到期时间',
+    `description`       VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注说明',
+    `active`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`        DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_tenant_vip` PRIMARY KEY (`id`),
+    INDEX `ix_sys_tenant_vip__account_id` (`tenant_id`),
+    INDEX `ix_sys_tenant_vip__vip_type_id` (`vip_type_id`)
+) COMMENT '租户会员关联表';
+
+-- =====================================================================================================================
+-- 前台系统基础表
+-- =====================================================================================================================
+
+--
+-- 账号表
+--
+
+DROP TABLE IF EXISTS `sys_account`;
+
+CREATE TABLE `sys_account`
+(
+    `id`                   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `entity_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
+    `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
+    `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
+    `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
+    `email`                VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '电子邮箱',
+    `mobile_country_code`  VARCHAR(10)      NOT NULL DEFAULT '' COMMENT '手机国家区号',
+    `mobile_number`        VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '手机号码',
+    `password`             VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '密码',
+    `id_card_type`         VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件类型',
+    `id_card_no`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件号码',
+    `sex`                  VARCHAR(10)      NOT NULL DEFAULT '' COMMENT '性别',
+    `birthday`             DATE COMMENT '生日',
+    `description`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `last_login_status`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录状态',
+    `last_login_at`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录时间',
+    `last_login_ip`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录IP',
+    `password_expire_at`   VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '密码过期时间',
+    `password_error_at`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后一次输入错误密码的时间',
+    `password_error_count` INT UNSIGNED     NOT NULL DEFAULT 0 COMMENT '输入错误密码的次数',
+    `telegram`             VARCHAR(255)     NOT NULL DEFAULT '' COMMENT 'Telegram',
+    `registration`         DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '注册时间',
+    `invite_code`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '邀请码',
+    `invite_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '邀请人',
+    `status`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
+    `source`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
+    `active`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `last_modified_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '最后修改人',
+    `last_modified_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '最后修改时间',
+    `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT `pk_sys_account` PRIMARY KEY (`id`),
+    INDEX `ix_sys_account__active` (`active`),
+    INDEX `ix_sys_account__uuid` (`uuid`),
+    INDEX `ix_sys_account__username` (`username`),
+    INDEX `ix_sys_account__email` (`email`),
+    INDEX `ix_sys_account__mobile` (`mobile_country_code`, `mobile_number`),
+    INDEX `ix_sys_account__invite_code` (`invite_code`),
+    INDEX `ix_sys_account__invite_by` (`invite_by`)
+) COMMENT '账号表';
+
 
 --
 -- 账号会员关联表
@@ -413,6 +511,8 @@ DROP TABLE IF EXISTS `sys_organization`;
 CREATE TABLE `sys_organization`
 (
     `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `tenant_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `parent_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '父级ID',
     `code`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `label`            VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '文本',
     `title`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
@@ -441,6 +541,8 @@ DROP TABLE IF EXISTS `sys_position`;
 CREATE TABLE `sys_position`
 (
     `id`               BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `tenant_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `parent_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '父级ID',
     `code`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `label`            VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '文本',
     `title`            VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
@@ -469,6 +571,7 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
     `id`                   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'ID',
+    `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
     `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
     `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
