@@ -7,7 +7,7 @@ springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
 springGrpcVersion = "0.10.0"
 mcpVersion = "0.10.0"
-nettyVersion = "4.1.123.Final"
+nettyVersion = "4.1.124.Final"
 cosidVersion = "2.13.3"
 kotlinVersion = "2.2.10"
 groovyVersion = "4.0.28"
@@ -198,6 +198,7 @@ tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1318" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.22" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
@@ -294,6 +295,7 @@ mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version = 
 lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-binding", version = "0.2.0" }
 
 # Swagger
+swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swaggerVersion" }
 swagger-annotations-jakarta = { module = "io.swagger.core.v3:swagger-annotations-jakarta", version.ref = "swaggerVersion" }
 swagger-models-jakarta = { module = "io.swagger.core.v3:swagger-models-jakarta", version.ref = "swaggerVersion" }
 springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
@@ -314,15 +316,15 @@ baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "j
 
 html = ["jsoup"]
 sharding = ["sharding"]
-openai = ["openai-java"]
 database = ["pgsql", "mysql"]
 pdf = ["pdfbox", "fontbox", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
 image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
-excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "fastexcel", "poi-scratchpad"]
+excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
+ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 
 # Spring Boot
 springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
@@ -339,14 +341,14 @@ springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-serv
 springSecurityClientStarter = ["spring-boot-starter-oauth2-client"]
 
 # Spring Cloud
-springCloudCommons = ["spring-cloud-openfeign-core"]
+springCloudCommons = ["spring-cloud-commons", "spring-cloud-openfeign-core"]
 springCloudCommonsStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud-starter-consul-config", "spring-cloud-starter-loadbalancer", "spring-cloud-starter-openfeign"]
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 
 # Spring AI
 springAiCommons = ["spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
 springAiCommonsStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
-springAiAlibabaStarter = ["dashscope-sdk-java", "spring-ai-alibaba-starter-dashscope"]
+springAiAlibabaStarter = ["spring-ai-alibaba-starter-dashscope"]
 
 # Spring Boot Admin
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
@@ -388,7 +390,7 @@ selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
 playwright = ["playwright"]
 
 # 接口文档
-swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
+swagger = ["swagger-annotations", "swagger-annotations-jakarta", "swagger-models-jakarta"]
 swaggerStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-starter-webmvc"]
 
 # 文档转换

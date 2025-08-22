@@ -1,12 +1,22 @@
 package cc.wdev.platform.commons.autoconfigure.core;
 
+import cc.wdev.platform.commons.autoconfigure.core.properties.AiAliyunProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.AiProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.AiTencentProperties;
 import cc.wdev.platform.commons.core.ai.AiCustomizer;
 import cc.wdev.platform.commons.core.ai.AiFactory;
 import cc.wdev.platform.commons.core.ai.AiFactoryImpl;
+import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunConfig;
+import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactory;
+import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactoryImpl;
 import cc.wdev.platform.commons.core.ai.chat.ChatCompletionService;
 import cc.wdev.platform.commons.core.ai.chat.DefaultChatCompletionService;
+import cc.wdev.platform.commons.core.ai.tencent.AiTencentConfig;
+import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactory;
+import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactoryImpl;
 import cc.wdev.platform.commons.core.ai.tools.CommonTools;
+import com.alibaba.dashscope.Version;
+import com.tencentcloudapi.hunyuan.v20230901.HunyuanClient;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RestClient;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
@@ -37,11 +47,14 @@ import java.util.Set;
 
 import static org.springframework.ai.vectorstore.elasticsearch.SimilarityFunction.cosine;
 
+/**
+ * @author elvea
+ */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({ChatModel.class, ChatMemoryRepository.class, MessageWindowChatMemory.class})
 @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true")
-@EnableConfigurationProperties({AiProperties.class})
+@EnableConfigurationProperties({AiProperties.class, AiTencentProperties.class, AiAliyunProperties.class})
 @ImportRuntimeHints(AiAutoConfiguration.AiRuntimeHints.class)
 public class AiAutoConfiguration {
 
@@ -107,6 +120,30 @@ public class AiAutoConfiguration {
         return SimpleVectorStore.builder(embeddingModel).build();
     }
 
+    /**
+     * 阿里云 - 义气大模型
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnClass({Version.class})
+    @ConditionalOnProperty(prefix = AiTencentProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+    public AiTencentFactory aiTencentFactory(AiTencentProperties properties) {
+        AiTencentConfig config = AiTencentConfig.builder().apiKey(properties.getApiKey()).build();
+        return new AiTencentFactoryImpl(config);
+    }
+
+    /**
+     * 腾讯云 - 混元大模型
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnClass({HunyuanClient.class})
+    @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+    public AiAliyunFactory aiTencentFactory(AiAliyunProperties properties) {
+        AiAliyunConfig config = AiAliyunConfig.builder().apiKey(properties.getApiKey()).build();
+        return new AiAliyunFactoryImpl(config);
+    }
+
     public static class AiRuntimeHints implements RuntimeHintsRegistrar {
         @Override
         public void registerHints(@NonNull RuntimeHints hints, ClassLoader classLoader) {
@@ -118,4 +155,5 @@ public class AiAutoConfiguration {
             }
         }
     }
+
 }

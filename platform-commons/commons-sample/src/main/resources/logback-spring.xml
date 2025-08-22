@@ -23,5 +23,7 @@
     </springProfile>
 
     <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.web.client" level="DEBUG"/>
+    <logger name="org.apache.hc" level="DEBUG"/>
     <logger name="cc.wdev" level="INFO"/>
 </configuration>

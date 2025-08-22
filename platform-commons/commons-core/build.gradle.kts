@@ -43,7 +43,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.office)
-    compileOnly(rootProject.libs.bundles.openai)
+    compileOnly(rootProject.libs.bundles.ai)
 }
 
 tasks.named<Jar>("jar") {

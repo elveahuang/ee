@@ -30,6 +30,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.im)
     compileOnly(rootProject.libs.bundles.telegram)
     compileOnly(rootProject.libs.bundles.html)
+    compileOnly(rootProject.libs.bundles.ai)
     // modules
     api(project(":platform-commons:commons-core"))
 }

@@ -5,6 +5,11 @@ import com.alibaba.cloud.ai.dashscope.api.DashScopeAudioTranscriptionApi;
 import com.alibaba.cloud.ai.dashscope.audio.DashScopeAudioTranscriptionOptions;
 import com.alibaba.cloud.ai.dashscope.audio.transcription.AudioTranscriptionModel;
 import com.alibaba.cloud.ai.dashscope.common.DashScopeException;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversation;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationParam;
+import com.alibaba.dashscope.aigc.multimodalconversation.MultiModalConversationResult;
+import com.alibaba.dashscope.common.MultiModalMessage;
+import com.alibaba.dashscope.common.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,11 +20,15 @@ import org.springframework.core.io.UrlResource;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static com.alibaba.cloud.ai.dashscope.audio.DashScopeAudioTranscriptionOptions.AudioFormat.MP3;
 
 /**
  * @author elvea
@@ -27,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class AiAudioTests extends BaseTests {
 
-    private final String DEFAULT_MODEL = DashScopeAudioTranscriptionApi.AudioTranscriptionModel.PARAFORMER_REALTIME_V2.getValue();
+    private final String MODEL = DashScopeAudioTranscriptionApi.AudioTranscriptionModel.PARAFORMER_REALTIME_V1.getValue();
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -40,14 +49,21 @@ public class AiAudioTests extends BaseTests {
     }
 
     @Test
-    public void requestParamTest() throws Exception {
-        new AudioTranscriptionPrompt(
-            new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
-            DashScopeAudioTranscriptionOptions.builder()
-                .withModel(DEFAULT_MODEL)
-                .withFormat(DashScopeAudioTranscriptionOptions.AudioFormat.MP3)
-                .build()
-        );
+    public void dashScopeTest() throws Exception {
+        File root = new File("temp" + File.separator);
+        File audio = new File(root, "audio.mp3");
+        String audioPath = audio.getAbsolutePath();
+
+        MultiModalConversation conv = new MultiModalConversation();
+        MultiModalMessage userMessage = MultiModalMessage.builder()
+            .role(Role.USER.getValue())
+            .content(List.of(Collections.singletonMap("audio", audioPath)))
+            .build();
+        MultiModalConversationParam param = MultiModalConversationParam.builder()
+            .message(userMessage)
+            .build();
+        MultiModalConversationResult result = conv.call(param);
+        Assertions.assertNotNull(result);
     }
 
     @Test
@@ -55,16 +71,12 @@ public class AiAudioTests extends BaseTests {
         File root = new File("temp" + File.separator);
         File audio = new File(root.getAbsolutePath(), "audio.mp3");
         if (!audio.exists()) {
-            log.info("Audio not exists");
+            log.info("Audio File not exists");
         }
-
         AudioTranscriptionResponse response = transcriptionModel.call(
             new AudioTranscriptionPrompt(
                 new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
-                DashScopeAudioTranscriptionOptions.builder()
-                    .withModel(DEFAULT_MODEL)
-                    .withFormat(DashScopeAudioTranscriptionOptions.AudioFormat.MP3)
-                    .build()
+                DashScopeAudioTranscriptionOptions.builder().withModel(MODEL).build()
             )
         );
         String text = response.getResult().getOutput();
@@ -83,8 +95,8 @@ public class AiAudioTests extends BaseTests {
             new AudioTranscriptionPrompt(
                 new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
                 DashScopeAudioTranscriptionOptions.builder()
-                    .withModel(DEFAULT_MODEL)
-                    .withFormat(DashScopeAudioTranscriptionOptions.AudioFormat.MP3)
+                    .withModel(MODEL)
+                    .withFormat(MP3)
                     .build()
             )
         );
@@ -104,7 +116,7 @@ public class AiAudioTests extends BaseTests {
             AudioTranscriptionResponse submitResponse = transcriptionModel.asyncCall(
                 new AudioTranscriptionPrompt(
                     new UrlResource("https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/xgplayer-demo-720p.mp4"),
-                    DashScopeAudioTranscriptionOptions.builder().withModel(DEFAULT_MODEL).build()
+                    DashScopeAudioTranscriptionOptions.builder().withModel("paraformer-v2").build()
                 )
             );
 

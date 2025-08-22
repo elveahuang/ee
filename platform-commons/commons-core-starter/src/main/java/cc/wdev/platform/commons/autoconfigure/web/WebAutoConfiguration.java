@@ -2,10 +2,10 @@ package cc.wdev.platform.commons.autoconfigure.web;
 
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.core.log.interceptor.UrlLogInterceptor;
-import cc.wdev.platform.commons.utils.JacksonUtils;
 import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
+import cc.wdev.platform.commons.web.converter.json.JacksonHttpMessageConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -84,7 +84,7 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     public RestClientCustomizer restClientCustomizer() {
         return builder -> builder.messageConverters(converters -> {
             converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter);
-            converters.add(new MappingJackson2HttpMessageConverter(JacksonUtils.getObjectMapper()));
+            converters.add(new JacksonHttpMessageConverter());
         });
     }
 
