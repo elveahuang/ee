@@ -120,6 +120,12 @@ platform:
         enabled: true
         service-provider: spring
         vector-store-provider: simple
+        tencent:
+            enabled: true
+            api-key: xxx
+        aliyun:
+            enabled: true
+            api-key: xxx
     data:
         core:
             enabled: true
