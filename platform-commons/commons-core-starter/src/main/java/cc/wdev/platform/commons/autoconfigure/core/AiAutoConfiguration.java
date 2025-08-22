@@ -139,7 +139,7 @@ public class AiAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnClass({HunyuanClient.class})
     @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    public AiAliyunFactory aiTencentFactory(AiAliyunProperties properties) {
+    public AiAliyunFactory aiAliyunFactory(AiAliyunProperties properties) {
         AiAliyunConfig config = AiAliyunConfig.builder().apiKey(properties.getApiKey()).build();
         return new AiAliyunFactoryImpl(config);
     }
