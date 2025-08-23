@@ -47,13 +47,13 @@ public abstract class BaseEntity extends AbstractEntity {
     @LastModifiedDate
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
-    private LocalDateTime lastModifiedAt;
+    private LocalDateTime updatedAt;
     /**
      * 最后修改人
      */
     @LastModifiedBy
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long lastModifiedBy;
+    private Long updatedBy;
     /**
      * 删除时间
      */

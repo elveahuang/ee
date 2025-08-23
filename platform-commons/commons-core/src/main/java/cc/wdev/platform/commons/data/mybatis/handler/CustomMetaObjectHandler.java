@@ -19,14 +19,14 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
         LocalDateTime now = LocalDateTime.now();
         this.strictInsertFill(metaObject, "createdAt", LocalDateTime.class, now);
         this.strictInsertFill(metaObject, "createdBy", Long.class, getCurUserId());
-        this.strictInsertFill(metaObject, "lastModifiedAt", LocalDateTime.class, now);
-        this.strictInsertFill(metaObject, "lastModifiedBy", Long.class, getCurUserId());
+        this.strictInsertFill(metaObject, "updatedAt", LocalDateTime.class, now);
+        this.strictInsertFill(metaObject, "updatedBy", Long.class, getCurUserId());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("lastModifiedAt", LocalDateTime.now(), metaObject);
-        this.setFieldValByName("lastModifiedBy", getCurUserId(), metaObject);
+        this.setFieldValByName("updatedAt", LocalDateTime.now(), metaObject);
+        this.setFieldValByName("updatedBy", getCurUserId(), metaObject);
     }
 
     private Long getCurUserId() {
