@@ -111,6 +111,9 @@ allprojects {
             if (requested.group == "org.bouncycastle") {
                 useVersion(rootProject.libs.versions.bouncycastleVersion.get())
             }
+            if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
+                useVersion("2.41.0")
+            }
             if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
                 this.artifactSelection {
                     this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
@@ -171,8 +174,8 @@ allprojects {
         exclude(module = "shardingsphere-parser-sql-statement-presto")
         exclude(module = "shardingsphere-parser-sql-statement-sql92")
         exclude(module = "shardingsphere-parser-sql-statement-sqlserver")
-        exclude(module = "selenium-devtools-v136")
         exclude(module = "selenium-devtools-v137")
+        exclude(module = "selenium-devtools-v138")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")
