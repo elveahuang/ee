@@ -5,7 +5,7 @@ import cc.wdev.platform.system.core.domain.entity.OperatorEntity;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * @author elvea
  */
 @Repository
 public interface OperatorRepository extends BaseEntityRepository<OperatorEntity, Long> {

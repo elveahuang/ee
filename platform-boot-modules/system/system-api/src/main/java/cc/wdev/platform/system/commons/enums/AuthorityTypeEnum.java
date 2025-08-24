@@ -1,23 +1,25 @@
-package cc.wdev.platform.system.core.enums;
+package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.Getter;
 
 /**
- * 权限分组
+ * 权限类型
  *
  * @author elvea
  */
 @Getter
-public enum AuthorityGroupTypeEnum implements BaseEnum<Integer> {
-    PLATFORM(1, "PLATFORM", "平台"),
-    SYSTEM(2, "SYSTEM", "系统");
+public enum AuthorityTypeEnum implements BaseEnum<Integer> {
+    MODULE(1, "MODULE", "模块"),
+    CATALOG(2, "CATALOG", "分组"),
+    RESOURCE(3, "RESOURCE", "资源"),
+    PERMISSION(4, "PERMISSION", "权限");
 
     private final Integer value;
     private final String code;
     private final String description;
 
-    AuthorityGroupTypeEnum(final Integer value, final String code, final String description) {
+    AuthorityTypeEnum(final Integer value, final String code, final String description) {
         this.value = value;
         this.code = code;
         this.description = description;
@@ -30,7 +32,7 @@ public enum AuthorityGroupTypeEnum implements BaseEnum<Integer> {
 
     @Override
     public String getLabel() {
-        return "label_authority_group_type__" + this.code.toLowerCase();
+        return "label_authority_type__" + this.code.toLowerCase();
     }
 
 }

@@ -1,15 +1,17 @@
 -- =====================================================================================================================
--- 前台系统基础表
+-- 基础表
 -- =====================================================================================================================
 
 --
--- 账号表
--- 用户和会员的基础表
+-- 主体表
+-- 用户体系和账号体系的上层抽象
+-- 用户体系用于后台系统
+-- 账号体系用于前台系统
 --
 
-DROP TABLE IF EXISTS `sys_account`;
+DROP TABLE IF EXISTS `sys_subject`;
 
-CREATE TABLE `sys_account`
+CREATE TABLE `sys_subject`
 (
     `id`         BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
     `uuid`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
@@ -22,9 +24,64 @@ CREATE TABLE `sys_account`
     `updated_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at` DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_account__active` (`active`),
-    INDEX `ix_sys_account__uuid` (`uuid`)
-) COMMENT '账号表';
+    INDEX `ix_sys_subject__active` (`active`),
+    INDEX `ix_sys_subject__uuid` (`uuid`)
+) COMMENT '主体表';
+
+--
+-- 支付类型表
+--
+
+DROP TABLE IF EXISTS `sys_pay_type`;
+
+CREATE TABLE `sys_pay_type`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
+    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
+    `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
+    `icon_name`   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标',
+    `icon_color`  VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标颜色',
+    `coin_ind`    TINYINT          NOT NULL DEFAULT 0 COMMENT '是否是加密货币支付',
+    `wallet`      VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '钱包地址，仅对数字货币支付有效',
+    `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
+    `idx`         INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
+    INDEX `ix_sys_pay_type__code` (`code`)
+) COMMENT '支付类型表';
+
+--
+-- 订单类型表
+--
+
+DROP TABLE IF EXISTS `sys_order_type`;
+
+CREATE TABLE `sys_order_type`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
+    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
+    `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
+    INDEX `ix_sys_order_type__code` (`code`)
+) COMMENT '订单类型表';
 
 --
 -- 会员类型表
@@ -96,7 +153,6 @@ DROP TABLE IF EXISTS `sys_tenant`;
 CREATE TABLE `sys_tenant`
 (
     `id`                     BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `uuid`                   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '租户标识',
     `code`                   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '租户编号',
     `title`                  VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '名称',
     `details`                VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '简介',
@@ -119,7 +175,6 @@ CREATE TABLE `sys_tenant`
     `deleted_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`             DATETIME(3)      NULL COMMENT '删除时间',
     INDEX `ix_sys_tenant__active` (`active`),
-    INDEX `ix_sys_tenant__uuid` (`uuid`),
     INDEX `ix_sys_tenant__code` (`code`)
 ) COMMENT '租户表';
 
@@ -150,22 +205,45 @@ CREATE TABLE `sys_tenant_vip`
     INDEX `ix_sys_tenant_vip__vip_type_id` (`vip_type_id`)
 ) COMMENT '租户会员关联表';
 
--- =====================================================================================================================
--- 前台系统基础表
--- =====================================================================================================================
+--
+-- 租户会员开通记录表
+--
+
+DROP TABLE IF EXISTS `sys_tenant_vip_log`;
+
+CREATE TABLE `sys_tenant_vip_log`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `vip_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
+    `order_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '关联订单ID',
+    `quota`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '额度',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `log_type`    TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '日志类型',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
+    INDEX `ix_sys_account_vip_log__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_account_vip_log__vip_type_id` (`vip_type_id`),
+    INDEX `ix_sys_account_vip_log__order_id` (`order_id`)
+) COMMENT '会员开通记录表';
 
 --
 -- 账号表
 --
 
-DROP TABLE IF EXISTS `sys_member`;
+DROP TABLE IF EXISTS `sys_account`;
 
-CREATE TABLE `sys_member`
+CREATE TABLE `sys_account`
 (
     `id`                   BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `entity_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
+    `subject_type`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体类型',
+    `subject_id`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体ID',
     `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
     `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
     `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
@@ -197,24 +275,25 @@ CREATE TABLE `sys_member`
     `updated_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_member__active` (`active`),
-    INDEX `ix_sys_member__uuid` (`uuid`),
-    INDEX `ix_sys_member__username` (`username`),
-    INDEX `ix_sys_member__email` (`email`),
-    INDEX `ix_sys_member__mobile` (`mobile_country_code`, `mobile_number`),
-    INDEX `ix_sys_member__invite_code` (`invite_code`),
-    INDEX `ix_sys_member__invite_by` (`invite_by`)
+    INDEX `ix_sys_account__active` (`active`),
+    INDEX `ix_sys_account__username` (`username`),
+    INDEX `ix_sys_account__email` (`email`),
+    INDEX `ix_sys_account__mobile` (`mobile_country_code`, `mobile_number`),
+    INDEX `ix_sys_account__subject` (`subject_type`, `subject_id`),
+    INDEX `ix_sys_account__invite_code` (`invite_code`),
+    INDEX `ix_sys_account__invite_by` (`invite_by`)
 ) COMMENT '账号表';
 
 --
 -- 账号会员关联表
 --
 
-DROP TABLE IF EXISTS `sys_member_vip`;
+DROP TABLE IF EXISTS `sys_account_vip`;
 
-CREATE TABLE `sys_member_vip`
+CREATE TABLE `sys_account_vip`
 (
     `id`                BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `account_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '账号ID',
     `vip_type_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
     `trial_start_date`  DATETIME COMMENT '会员试用开始时间',
@@ -233,14 +312,15 @@ CREATE TABLE `sys_member_vip`
 ) COMMENT '账号会员关联表';
 
 --
--- 会员开通记录表
+-- 账号会员开通记录表
 --
 
-DROP TABLE IF EXISTS `sys_member_vip_log`;
+DROP TABLE IF EXISTS `sys_account_vip_log`;
 
-CREATE TABLE `sys_member_vip_log`
+CREATE TABLE `sys_account_vip_log`
 (
     `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `account_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '账号ID',
     `vip_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
     `order_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '关联订单ID',
@@ -260,60 +340,6 @@ CREATE TABLE `sys_member_vip_log`
 ) COMMENT '会员开通记录表';
 
 --
--- 支付类型表
---
-
-DROP TABLE IF EXISTS `sys_pay_type`;
-
-CREATE TABLE `sys_pay_type`
-(
-    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
-    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
-    `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
-    `icon_name`   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标',
-    `icon_color`  VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标颜色',
-    `coin_ind`    TINYINT          NOT NULL DEFAULT 0 COMMENT '是否是加密货币支付',
-    `wallet`      VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '钱包地址，仅对数字货币支付有效',
-    `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
-    `idx`         INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
-    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
-    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
-    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
-    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
-    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_pay_type__code` (`code`)
-) COMMENT '支付类型表';
-
---
--- 订单类型表
---
-
-DROP TABLE IF EXISTS `sys_order_type`;
-
-CREATE TABLE `sys_order_type`
-(
-    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
-    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
-    `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
-    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
-    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
-    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
-    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
-    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_order_type__code` (`code`)
-) COMMENT '订单类型表';
-
---
 -- 订单表
 --
 
@@ -322,7 +348,8 @@ DROP TABLE IF EXISTS `sys_order`;
 CREATE TABLE `sys_order`
 (
     `id`            BIGINT UNSIGNED         NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `user_id`       BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '用户ID',
+    `tenant_id`     BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_id`     BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '实体ID',
     `order_type_id` BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '订单类型ID',
     `pay_type_id`   BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '支付类型ID',
     `order_sn`      VARCHAR(50)             NOT NULL DEFAULT '' COMMENT '订单编号',
@@ -340,7 +367,7 @@ CREATE TABLE `sys_order`
     `updated_at`    DATETIME(3)             NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by`    BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`    DATETIME(3)             NULL COMMENT '删除时间',
-    INDEX `ix_sys_order__user_id` (`user_id`)
+    INDEX `ix_sys_order__user_id` (`entity_id`)
 ) COMMENT '订单表';
 
 --
@@ -352,7 +379,8 @@ DROP TABLE IF EXISTS `sys_order_item`;
 CREATE TABLE `sys_order_item`
 (
     `id`           BIGINT UNSIGNED         NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `user_id`      BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '用户ID',
+    `tenant_id`    BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_id`    BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '实体ID',
     `order_id`     BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '订单ID',
     `item_id`      BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '商品ID',
     `quantity`     INT UNSIGNED            NOT NULL DEFAULT 0 COMMENT '商品数量',
@@ -366,7 +394,8 @@ CREATE TABLE `sys_order_item`
     `deleted_by`   BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`   DATETIME(3)             NULL COMMENT '删除时间',
     INDEX `ix_sys_order_item__order_id` (`order_id`),
-    INDEX `ix_sys_order_item__user_id` (`user_id`)
+    INDEX `ix_sys_order_item__entity_id` (`entity_id`),
+    INDEX `ix_sys_order_item__tenant_id` (`tenant_id`)
 ) COMMENT '订单明细表';
 
 --
@@ -378,6 +407,7 @@ DROP TABLE IF EXISTS `sys_order_pay`;
 CREATE TABLE `sys_order_pay`
 (
     `id`               BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `order_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '订单ID',
     `pay_type_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '支付类型ID',
     `pay_type`         VARCHAR(200)     NOT NULL DEFAULT '' COMMENT '支付方式',
@@ -412,7 +442,8 @@ DROP TABLE IF EXISTS `sys_order_log`;
 CREATE TABLE `sys_order_log`
 (
     `id`         BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `user_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '用户ID',
+    `tenant_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `order_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '订单ID',
     `details`    TEXT COMMENT '日志详情',
     `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
@@ -423,12 +454,9 @@ CREATE TABLE `sys_order_log`
     `deleted_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at` DATETIME(3)      NULL COMMENT '删除时间',
     INDEX `ix_sys_order_log__order_id` (`order_id`),
-    INDEX `ix_sys_order_log__user_id` (`user_id`)
+    INDEX `ix_sys_order_log__entity_id` (`entity_id`),
+    INDEX `ix_sys_order_log__tenant_id` (`tenant_id`)
 ) COMMENT '订单日志表';
-
--- =====================================================================================================================
--- 后台管理核心基础表
--- =====================================================================================================================
 
 --
 -- 权限表
@@ -439,7 +467,6 @@ DROP TABLE IF EXISTS `sys_authority`;
 CREATE TABLE `sys_authority`
 (
     `id`                   BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `parent_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'Parent ID',
     `code`                 VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编码',
     `title`                VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
@@ -460,6 +487,24 @@ CREATE TABLE `sys_authority`
     INDEX `ix_sys_authority__parent_id` (`parent_id`),
     INDEX `ix_sys_authority__code` (`code`)
 ) COMMENT '权限表';
+
+--
+-- 租户-权限关联表
+--
+
+DROP TABLE IF EXISTS `sys_tenant_authority`;
+
+CREATE TABLE `sys_tenant_authority`
+(
+    `id`           BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
+    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_tenant_authority__authority_id` (`authority_id`)
+) COMMENT '租户-权限关联表';
 
 --
 -- 角色表
@@ -556,8 +601,8 @@ CREATE TABLE `sys_user`
 (
     `id`                   BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
     `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `account_id`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '账号ID',
-    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户标识',
+    `subject_type`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体类型',
+    `subject_id`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体ID',
     `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
     `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
     `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
@@ -590,7 +635,6 @@ CREATE TABLE `sys_user`
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
     INDEX `ix_sys_user__active` (`active`),
-    INDEX `ix_sys_user__uuid` (`uuid`),
     INDEX `ix_sys_user__username` (`username`),
     INDEX `ix_sys_user__email` (`email`),
     INDEX `ix_sys_user__mobile` (`mobile_country_code`, `mobile_number`),
@@ -636,6 +680,7 @@ CREATE TABLE `sys_role_authority`
     `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    INDEX `ix_sys_role_authority__tenant_id` (`tenant_id`),
     INDEX `ix_sys_role_authority__role_id` (`role_id`),
     INDEX `ix_sys_role_authority__authority_id` (`authority_id`)
 ) COMMENT '角色-权限关联表';
@@ -655,6 +700,7 @@ CREATE TABLE `sys_user_role`
     `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    INDEX `ix_sys_user_role__tenant_id` (`tenant_id`),
     INDEX `ix_sys_user_role__role_id` (`role_id`),
     INDEX `ix_sys_user_role__user_id` (`user_id`)
 ) COMMENT '用户-角色关联表';
@@ -678,22 +724,25 @@ CREATE TABLE `sys_entity_relation`
     `active`         TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    INDEX `ix_sys_entity_relation__tenant_id` (`tenant_id`),
     INDEX `ix_sys_entity_relation__ancestor_id` (`ancestor_id`),
     INDEX `ix_sys_entity_relation__entity_id` (`entity_id`),
     INDEX `ix_sys_entity_relation__relation_type` (`relation_type`)
 ) COMMENT '实体关联表';
 
 --
--- 用户登录会话记录
+-- 登录会话记录
 --
 
-DROP TABLE IF EXISTS `sys_user_session`;
+DROP TABLE IF EXISTS `sys_login_session`;
 
-CREATE TABLE `sys_user_session`
+CREATE TABLE `sys_login_session`
 (
     `id`                   BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
     `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `user_id`              BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT 'User ID',
+    `subject_type`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体类型',
+    `subject_id`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体ID',
+    `entity_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `session_id`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT 'Session ID',
     `username`             VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '用户名',
     `host`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户登录主机',
@@ -722,10 +771,11 @@ CREATE TABLE `sys_user_session`
     `updated_at`           DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_user_session__user_id` (`user_id`),
-    INDEX `ix_sys_user_session__session_id` (`session_id`),
-    INDEX `ix_sys_user_session__username` (`username`)
-) COMMENT '用户登录会话记录';
+    INDEX `ix_sys_login_session__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_login_session__entity_id` (`entity_id`),
+    INDEX `ix_sys_login_session__session_id` (`session_id`),
+    INDEX `ix_sys_login_session__username` (`username`)
+) COMMENT '登录会话记录';
 
 --
 -- 系统设置表
@@ -756,12 +806,15 @@ CREATE TABLE `sys_config`
     `updated_at`    DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`    DATETIME(3)      NULL COMMENT '删除时间',
+    INDEX `ix_sys_config__tenant_id` (`tenant_id`),
     INDEX `ix_sys_config__key` (`config_key`),
     INDEX `ix_sys_config__group` (`config_group`)
 ) COMMENT '系统设置表';
 
 --
 -- 系统关键字表
+-- tenant_id = 0 : 系统全局关键字
+-- tenant_id > 0 : 租户专用关键字
 --
 
 DROP TABLE IF EXISTS `sys_keyword`;
@@ -800,6 +853,24 @@ CREATE TABLE `sys_lang`
     `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     INDEX `ix_sys_lang__code` (`code`)
 ) COMMENT '语言表';
+
+--
+-- 租户-语言关联表
+--
+
+DROP TABLE IF EXISTS `sys_tenant_lang`;
+
+CREATE TABLE `sys_tenant_lang`
+(
+    `id`         BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `tenant_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `lang_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '语言ID',
+    `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    INDEX `ix_sys_role_authority__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_role_authority__lang_id` (`lang_id`)
+) COMMENT '角色-权限关联表';
 
 --
 -- 多语言文本表
@@ -1628,7 +1699,7 @@ CREATE TABLE `sys_job_param`
 
 CREATE OR REPLACE VIEW sys_v_operator (`type`, `id`, `username`) AS
 SELECT sm.id as `id`, 'account' as `type`, sm.username as 'username'
-FROM sys_member sm
+FROM sys_account sm
 UNION
 SELECT su.id as `id`, 'user' as `type`, su.username as 'username'
 FROM sys_user su;
@@ -1738,17 +1809,49 @@ CREATE TABLE `sys_authorization_consent`
 );
 
 -- =====================================================================================================================
--- AI
+-- AI Chat Memory
 -- =====================================================================================================================
+
+--
+-- 对话类型
+--
+
+DROP TABLE IF EXISTS `sys_ai_chat_type`;
+
+CREATE TABLE `sys_ai_chat_type`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
+    `code`        VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编号',
+    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
+    `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
+    `description` VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
+    `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
+    INDEX `ix_sys_ai_chat_type__code` (`code`)
+);
+
+--
+-- 对话记录
+--
 
 DROP TABLE IF EXISTS `sys_ai_chat_memory`;
 
 CREATE TABLE `sys_ai_chat_memory`
 (
     `id`              BIGINT UNSIGNED  NOT NULL COMMENT 'ID' AUTO_INCREMENT PRIMARY KEY,
-    `conversation_id` VARCHAR(100)     NOT NULL,
-    `content`         LONGTEXT         NOT NULL,
-    `type`            VARCHAR(100)     NOT NULL,
+    `tenant_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `subject_type`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体类型',
+    `subject_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '主体类型',
+    `entity_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '用户ID',
+    `conversation_id` VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '会话标识，一般格式为UUID',
+    `content`         LONGTEXT         NULL COMMENT '对话内容',
+    `type`            VARCHAR(100)     NOT NULL default '' COMMENT '对话类型',
     `active`          TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
@@ -1756,5 +1859,7 @@ CREATE TABLE `sys_ai_chat_memory`
     `updated_at`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
     `deleted_by`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`      DATETIME(3)      NULL COMMENT '删除时间',
-    INDEX `ix_sys_ai_chat_memory` (`conversation_id`)
+    INDEX `ix_sys_ai_chat_memory__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_ai_chat_memory__conversation_id` (`conversation_id`),
+    INDEX `ix_sys_ai_chat_memory__uid` (`subject_type`, `subject_id`, `entity_id`)
 );

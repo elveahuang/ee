@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.enums;
+package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.system.core.provider.UserLinkProvider;
