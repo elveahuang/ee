@@ -36,8 +36,8 @@ public class UserSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionD
         if (ActionTypeEnum.DELETE.equals(dto.getActionType())) {
             if (entity != null) {
                 entity.setEndDatetime(localDateTime);
-                entity.setLastModifiedBy(dto.getUserId());
-                entity.setLastModifiedAt(localDateTime);
+                entity.setUpdatedBy(dto.getUserId());
+                entity.setUpdatedAt(localDateTime);
                 entity.setDeletedBy(dto.getUserId());
                 entity.setDeletedAt(localDateTime);
                 this.userSessionService.save(entity);
@@ -54,8 +54,8 @@ public class UserSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionD
             entity.setUa(dto.getUa());
             entity.setHost(dto.getHost());
             entity.setLastAccessDatetime(localDateTime);
-            entity.setLastModifiedBy(dto.getUserId());
-            entity.setLastModifiedAt(localDateTime);
+            entity.setUpdatedBy(dto.getUserId());
+            entity.setUpdatedAt(localDateTime);
             this.userSessionService.save(entity);
         }
     }
