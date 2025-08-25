@@ -4,21 +4,21 @@ import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.Getter;
 
 /**
- * 会员体系业务类型
- * 1. TENANT    - 租户会员体系
- * 2. ACCOUNT   - 账号会员体系
+ * 开放平台类型
+ * 1. WECHAT    - 微信
+ * 2. WECOM     - 企微
  *
  * @author elvea
  */
 @Getter
-public enum VipBizTypeEnum implements BaseEnum<String> {
-    TENANT("TENANT", "租户业务类型"),
-    ACCOUNT("ACCOUNT", "会员业务类型");
+public enum OpenIdTypeEnum implements BaseEnum<String> {
+    WECHAT("WECHAT", "微信"),
+    WECOM("WECOM", "企微");
 
     private final String code;
     private final String description;
 
-    VipBizTypeEnum(final String code, final String description) {
+    OpenIdTypeEnum(final String code, final String description) {
         this.code = code;
         this.description = description;
     }

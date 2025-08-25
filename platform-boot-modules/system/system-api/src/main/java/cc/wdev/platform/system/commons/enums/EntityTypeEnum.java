@@ -5,11 +5,14 @@ import lombok.Getter;
 
 /**
  * 主体类型
+ * 1. USER      - 用户体系，适用于后台系统
+ * 2. ACCOUNT   - 账号体系，适用于前台系统
  *
  * @author elvea
  */
 @Getter
-public enum SubjectTypeEnum implements BaseEnum<Integer> {
+public enum EntityTypeEnum implements BaseEnum<Integer> {
+    TENANT(0, "TENANT", "组户"),
     USER(1, "USER", "用户"),
     ACCOUNT(2, "ACCOUNT", "账号");
 
@@ -17,7 +20,7 @@ public enum SubjectTypeEnum implements BaseEnum<Integer> {
     private final String code;
     private final String description;
 
-    SubjectTypeEnum(final Integer value, final String code, final String description) {
+    EntityTypeEnum(final Integer value, final String code, final String description) {
         this.value = value;
         this.code = code;
         this.description = description;
