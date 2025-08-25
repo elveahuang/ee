@@ -260,15 +260,18 @@ httpclient = { module = "org.apache.httpcomponents:httpclient", version = "4.5.1
 httpasyncclient = { module = "org.apache.httpcomponents:httpasyncclient", version = "4.1.5" }
 httpmime = { module = "org.apache.httpcomponents:httpmime", version = "4.5.14" }
 
+# Job
+quartz = { module = "org.quartz-scheduler:quartz" }
+quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
+xxl-job-core = { module = "com.xuxueli:xxl-job-core", version = "3.2.0" }
+
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
-quartz = { module = "org.quartz-scheduler:quartz" }
-aspectjweaver = { module = "org.aspectj:aspectjweaver" }
-quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
 ognl = { module = "ognl:ognl", version = "3.4.7" }
 asm = { module = "org.ow2.asm:asm", version = "9.8" }
+aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.21.1" }
+jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.3.1" }
@@ -327,27 +330,27 @@ logging = ["logback-logstash-encoder", "logback-loki-appender"]
 ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 
 # Spring Boot
-springCommons = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
-springBootCommons = ["spring-boot", "spring-boot-autoconfigure", "spring-boot-starter-actuator"]
+springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
-springBootCommonsStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
+springBootCore = ["spring-boot", "spring-boot-autoconfigure", "spring-boot-starter-actuator"]
+springBootCoreStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 
 # Spring Security
-springSecurityCommons = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
-springSecurityCommonsStarter = ["spring-boot-starter-security"]
+springSecurityCore = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
+springSecurityCoreStarter = ["spring-boot-starter-security"]
 springSecurityAuthorizationServerStarter = ["spring-boot-starter-oauth2-authorization-server"]
 springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-server"]
 springSecurityClientStarter = ["spring-boot-starter-oauth2-client"]
 
 # Spring Cloud
-springCloudCommons = ["spring-cloud-commons", "spring-cloud-openfeign-core"]
-springCloudCommonsStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud-starter-consul-config", "spring-cloud-starter-loadbalancer", "spring-cloud-starter-openfeign"]
+springCloudCore = ["spring-cloud-commons", "spring-cloud-openfeign-core"]
+springCloudCoreStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud-starter-consul-config", "spring-cloud-starter-loadbalancer", "spring-cloud-starter-openfeign"]
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 
 # Spring AI
-springAiCommons = ["spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
-springAiCommonsStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
+springAiCore = ["spring-ai-client-chat", "spring-ai-deepseek", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
+springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
 springAiAlibabaStarter = ["spring-ai-alibaba-starter-dashscope"]
 
 # Spring Boot Admin
@@ -384,6 +387,8 @@ thymeleaf = ["thymeleaf", "thymeleaf-spring"]
 # 定时任务
 quartz = ["quartz", "quartz-jobs"]
 quartzStarter = ["spring-boot-starter-quartz"]
+xxlJobCore = ["xxl-job-core"]
+xxlJobStarter = ["xxl-job-core"]
 
 # 爬虫
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]

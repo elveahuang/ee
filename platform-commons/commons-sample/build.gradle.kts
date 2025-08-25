@@ -5,11 +5,13 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springAiCommonsStarter)
+    implementation(rootProject.libs.bundles.springAiCore)
+    implementation(rootProject.libs.bundles.springAiCoreStarter)
     implementation(rootProject.libs.bundles.springAiAlibabaStarter)
-    implementation(rootProject.libs.bundles.springBootCommonsStarter)
-    implementation(rootProject.libs.bundles.springSecurityCommons)
-    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootCore)
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springSecurityCore)
+    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityClientStarter)
     implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.redisStarter)
@@ -17,6 +19,8 @@ dependencies {
     implementation(rootProject.libs.bundles.mybatisStarter)
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.hibernateStarter)
+    implementation(rootProject.libs.bundles.xxlJobCore)
+    implementation(rootProject.libs.bundles.xxlJobStarter)
     implementation(rootProject.libs.bundles.ai)
     implementation(rootProject.libs.bundles.pdf)
     implementation(rootProject.libs.bundles.image)

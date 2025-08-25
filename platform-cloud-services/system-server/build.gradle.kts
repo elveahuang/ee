@@ -6,12 +6,15 @@ plugins {
 
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springBootCommonsStarter)
+    implementation(rootProject.libs.bundles.springAiCore)
+    implementation(rootProject.libs.bundles.springAiCoreStarter)
+    implementation(rootProject.libs.bundles.springBootCore)
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springCloudCore)
+    implementation(rootProject.libs.bundles.springCloudCoreStarter)
+    implementation(rootProject.libs.bundles.springSecurityCore)
+    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.springSecurityCommons)
-    implementation(rootProject.libs.bundles.springAiCommonsStarter)
-    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
-    implementation(rootProject.libs.bundles.springCloudCommonsStarter)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.swaggerStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)

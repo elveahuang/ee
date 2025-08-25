@@ -1,9 +1,9 @@
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springCommons)
-    implementation(rootProject.libs.bundles.springAiCommons)
-    implementation(rootProject.libs.bundles.springSecurityCommons)
-    implementation(rootProject.libs.bundles.springBootCommons)
+    implementation(rootProject.libs.bundles.springCore)
+    implementation(rootProject.libs.bundles.springAiCore)
+    implementation(rootProject.libs.bundles.springBootCore)
+    implementation(rootProject.libs.bundles.springSecurityCore)
     annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
     implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.hibernate)

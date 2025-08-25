@@ -9,12 +9,22 @@ CREATE DATABASE IF NOT EXISTS `ee_platform`
     DEFAULT COLLATE `utf8mb4_0900_ai_ci`;
 
 -- =====================================================================================================================
--- 建库 - 定时任务库
+-- 建库 - 定时任务库 - Quartz
 -- =====================================================================================================================
 
 DROP DATABASE IF EXISTS `ee_quartz`;
 
 CREATE DATABASE IF NOT EXISTS `ee_quartz`
+    DEFAULT CHARACTER SET `utf8mb4`
+    DEFAULT COLLATE `utf8mb4_0900_ai_ci`;
+
+-- =====================================================================================================================
+-- 建库 - 定时任务库 - XXL Job
+-- =====================================================================================================================
+
+DROP DATABASE IF EXISTS `ee_xxl_job`;
+
+CREATE DATABASE IF NOT EXISTS `ee_xxl_job`
     DEFAULT CHARACTER SET `utf8mb4`
     DEFAULT COLLATE `utf8mb4_0900_ai_ci`;
 

@@ -10,8 +10,8 @@ import lombok.Getter;
  */
 @Getter
 public enum SubjectTypeEnum implements BaseEnum<Integer> {
-    ACCOUNT(1, "ACCOUNT", "账号"),
-    USER(2, "USER", "用户");
+    USER(1, "USER", "用户"),
+    ACCOUNT(2, "ACCOUNT", "账号");
 
     private final Integer value;
     private final String code;

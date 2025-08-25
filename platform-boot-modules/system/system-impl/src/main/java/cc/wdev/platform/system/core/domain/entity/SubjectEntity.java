@@ -23,4 +23,5 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class SubjectEntity extends BaseEntity {
+    private String uuid;
 }

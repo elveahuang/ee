@@ -1,7 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
-import cc.wdev.platform.system.core.provider.UserLinkProvider;
 import lombok.Getter;
 
 /**
@@ -9,18 +8,16 @@ import lombok.Getter;
  */
 @Getter
 public enum LinkTypeEnum implements BaseEnum<String> {
-    USER("user", "label_link_type__user", "用户主页短链接", UserLinkProvider.class);
+    USER("user", "label_link_type__user", "用户主页短链接");
 
     private final String code;
     private final String label;
     private final String description;
-    private final Class<?> provider;
 
-    LinkTypeEnum(String code, String label, String description, Class<?> provider) {
+    LinkTypeEnum(String code, String label, String description) {
         this.code = code;
         this.label = label;
         this.description = description;
-        this.provider = provider;
     }
 
     @Override

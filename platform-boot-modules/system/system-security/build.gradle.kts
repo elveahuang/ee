@@ -1,7 +1,7 @@
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springBootCommonsStarter)
-    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)

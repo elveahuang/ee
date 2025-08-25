@@ -6,8 +6,8 @@ plugins {
 
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springSecurityCommonsStarter)
-    implementation(rootProject.libs.bundles.springCloudCommonsStarter)
+    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
+    implementation(rootProject.libs.bundles.springCloudCoreStarter)
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)

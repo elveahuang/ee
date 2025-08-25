@@ -1,12 +1,12 @@
 dependencies {
     // libs
-    api(rootProject.libs.bundles.springBootCommons)
-    api(rootProject.libs.bundles.springBootCommonsStarter)
+    api(rootProject.libs.bundles.springBootCore)
+    api(rootProject.libs.bundles.springBootCoreStarter)
     annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
-    compileOnly(rootProject.libs.bundles.springAiCommons)
-    compileOnly(rootProject.libs.bundles.springAiCommonsStarter)
-    compileOnly(rootProject.libs.bundles.springSecurityCommons)
-    compileOnly(rootProject.libs.bundles.springSecurityCommonsStarter)
+    compileOnly(rootProject.libs.bundles.springAiCore)
+    compileOnly(rootProject.libs.bundles.springAiCoreStarter)
+    compileOnly(rootProject.libs.bundles.springSecurityCore)
+    compileOnly(rootProject.libs.bundles.springSecurityCoreStarter)
     compileOnly(rootProject.libs.bundles.mybatis)
     compileOnly(rootProject.libs.bundles.mybatisStarter)
     compileOnly(rootProject.libs.bundles.redis)
