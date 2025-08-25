@@ -5,15 +5,18 @@ import lombok.Getter;
 
 /**
  * 开放平台类型
- * 1. WECHAT    - 微信
- * 2. WECOM     - 企微
  *
  * @author elvea
  */
 @Getter
 public enum OpenIdTypeEnum implements BaseEnum<String> {
     WECHAT("WECHAT", "微信"),
-    WECOM("WECOM", "企微");
+    WXWORK("WXWORK", "企微"),
+    FEISHU("FEISHU", "飞书"),
+    DINGTALK("DINGTALK", "钉钉"),
+    QQ("QQ", "QQ"),
+    GITHUB("GITHUB", "Github"),
+    GOOGLE("GOOGLE", "Google");
 
     private final String code;
     private final String description;
