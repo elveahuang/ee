@@ -311,7 +311,7 @@ public abstract class ServletUtils {
     }
 
     /**
-     * 设置最后修改时间
+     * 设置修改时间
      *
      * @param response         {@link HttpServletResponse}
      * @param lastModifiedDate 最后修改时间

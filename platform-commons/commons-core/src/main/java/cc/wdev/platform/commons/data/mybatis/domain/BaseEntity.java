@@ -36,18 +36,18 @@ public abstract class BaseEntity extends AbstractEntity {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createdBy;
     /**
-     * 最后修改时间
+     * 修改时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
-    private LocalDateTime lastModifiedAt;
+    private LocalDateTime updatedAt;
     /**
-     * 最后修改人
+     * 修改人
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long lastModifiedBy;
+    private Long updatedBy;
     /**
      * 删除时间
      */

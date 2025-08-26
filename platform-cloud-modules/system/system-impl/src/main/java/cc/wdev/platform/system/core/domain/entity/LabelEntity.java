@@ -70,13 +70,13 @@ public class LabelEntity implements IdEntity {
     @CreatedBy
     private Long createdBy;
     /**
-     * 最后修改时间
+     * 修改时间
      */
     @LastModifiedDate
-    private LocalDateTime lastModifiedAt;
+    private LocalDateTime updatedAt;
     /**
-     * 最后修改人
+     * 修改人
      */
     @LastModifiedBy
-    private Long lastModifiedBy;
+    private Long updatedBy;
 }

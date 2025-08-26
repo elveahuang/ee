@@ -65,11 +65,11 @@ public class AccountDto implements Serializable {
      */
     private String description;
     /**
-     * 最后修改时间
+     * 修改时间
      */
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
-    private LocalDateTime lastModifiedAt;
+    private LocalDateTime updatedAt;
     /**
      * 用户所属角色
      */

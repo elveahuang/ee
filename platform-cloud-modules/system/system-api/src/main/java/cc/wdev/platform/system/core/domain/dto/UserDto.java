@@ -58,13 +58,13 @@ public class UserDto implements Serializable {
      */
     private Long createdBy;
     /**
-     * 最后修改时间
+     * 修改时间
      */
-    private LocalDateTime lastModifiedAt;
+    private LocalDateTime updatedAt;
     /**
-     * 最后修改人
+     * 修改人
      */
-    private Long lastModifiedBy;
+    private Long updatedBy;
     /**
      * 删除时间
      */
