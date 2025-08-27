@@ -6,5 +6,5 @@ import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
 /**
  * @author elvea
  */
-public interface UserSessionAmqpService extends AmqpService<UserSessionDto> {
+public interface LoginSessionAmqpService extends AmqpService<UserSessionDto> {
 }

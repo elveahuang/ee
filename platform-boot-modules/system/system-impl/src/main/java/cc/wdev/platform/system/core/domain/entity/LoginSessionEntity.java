@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @DynamicUpdate
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-public class UserSessionEntity extends BaseEntity {
+public class LoginSessionEntity extends BaseEntity {
     /**
      * 会话标识
      */

@@ -19,7 +19,7 @@ import cc.wdev.platform.system.core.domain.entity.AccountEntity;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.AccountCheckRequest;
 import cc.wdev.platform.system.core.service.AccountService;
-import cc.wdev.platform.system.core.service.UserSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,7 +39,7 @@ public class AccountManagerImpl implements AccountManager {
 
     private final CaptchaService captchaService;
 
-    private final UserSessionAmqpService userSessionAmqpService;
+    private final LoginSessionAmqpService loginSessionAmqpService;
 
     /**
      * @see AccountManager#check(AccountCheckRequest)
@@ -251,7 +251,7 @@ public class AccountManagerImpl implements AccountManager {
                     .userId(uid)
                     .username(userName)
                     .build();
-                this.userSessionAmqpService.send(userSession);
+                this.loginSessionAmqpService.send(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);

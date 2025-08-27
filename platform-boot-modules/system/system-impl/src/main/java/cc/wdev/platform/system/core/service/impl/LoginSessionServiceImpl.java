@@ -4,10 +4,10 @@ import cc.wdev.platform.commons.core.cache.CacheKeyGenerator;
 import cc.wdev.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.system.commons.constants.SystemCacheConstants;
-import cc.wdev.platform.system.core.domain.entity.UserSessionEntity;
+import cc.wdev.platform.system.core.domain.entity.LoginSessionEntity;
 import cc.wdev.platform.system.core.domain.entity.UserSessionEntity_;
-import cc.wdev.platform.system.core.repository.UserSessionRepository;
-import cc.wdev.platform.system.core.service.UserSessionService;
+import cc.wdev.platform.system.core.repository.LoginSessionRepository;
+import cc.wdev.platform.system.core.service.LoginSessionService;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,12 +17,12 @@ import java.util.List;
 
 /**
  * @author elvea
- * @see UserSessionService
+ * @see LoginSessionService
  * @see BaseCachingEntityService
  */
 @Service
-public class UserSessionServiceImpl extends BaseCachingEntityService<UserSessionEntity, Long, UserSessionRepository>
-    implements UserSessionService {
+public class LoginSessionServiceImpl extends BaseCachingEntityService<LoginSessionEntity, Long, LoginSessionRepository>
+    implements LoginSessionService {
 
     private final CacheKeyGenerator cacheKeyGenerator = SimpleCacheKeyGenerator.builder().prefix(SystemCacheConstants.USER_SESSION).build();
 
@@ -32,11 +32,11 @@ public class UserSessionServiceImpl extends BaseCachingEntityService<UserSession
     }
 
     /**
-     * @see UserSessionService#findBySessionId(String)
+     * @see LoginSessionService#findBySessionId(String)
      */
     @Override
-    public UserSessionEntity findBySessionId(String sessionId) {
-        Specification<UserSessionEntity> specification = (root, query, builder) -> {
+    public LoginSessionEntity findBySessionId(String sessionId) {
+        Specification<LoginSessionEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.get(UserSessionEntity_.SESSION_ID), sessionId));
             return builder.and(predicates.toArray(new Predicate[0]));

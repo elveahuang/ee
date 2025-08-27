@@ -6,9 +6,9 @@ import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
 import cc.wdev.platform.system.core.domain.converter.UserSessionConverter;
 import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
-import cc.wdev.platform.system.core.domain.entity.UserSessionEntity;
-import cc.wdev.platform.system.core.service.UserSessionAmqpService;
-import cc.wdev.platform.system.core.service.UserSessionService;
+import cc.wdev.platform.system.core.domain.entity.LoginSessionEntity;
+import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -21,18 +21,18 @@ import java.time.LocalDateTime;
 @Slf4j
 @Service
 @RabbitListener(queues = SystemAmqpConstants.USER_SESSION)
-public class UserSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionDto> implements UserSessionAmqpService {
+public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionDto> implements LoginSessionAmqpService {
 
-    private final UserSessionService userSessionService;
+    private final LoginSessionService userSessionService;
 
-    public UserSessionAmqpServiceImpl(UserSessionService userSessionService) {
+    public LoginSessionAmqpServiceImpl(LoginSessionService userSessionService) {
         this.userSessionService = userSessionService;
     }
 
     @Override
     public void execute(UserSessionDto dto) {
         LocalDateTime localDateTime = this.getCurLocalDateTime();
-        UserSessionEntity entity = this.userSessionService.findBySessionId(dto.getSessionId());
+        LoginSessionEntity entity = this.userSessionService.findBySessionId(dto.getSessionId());
         if (ActionTypeEnum.DELETE.equals(dto.getActionType())) {
             if (entity != null) {
                 entity.setEndDatetime(localDateTime);

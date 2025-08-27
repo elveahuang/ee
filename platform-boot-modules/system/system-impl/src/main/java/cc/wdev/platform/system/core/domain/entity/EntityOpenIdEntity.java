@@ -1,6 +1,8 @@
 package cc.wdev.platform.system.core.domain.entity;
 
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
@@ -18,10 +20,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sys_subject")
+@Table(name = "sys_entity_open_id")
 @DynamicUpdate
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-public class SubjectEntity extends BaseEntity {
-    private String uuid;
+public class EntityOpenIdEntity extends BaseEntity {
+    /**
+     * 租户ID
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long tenantId;
 }

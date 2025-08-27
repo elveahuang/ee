@@ -10,9 +10,9 @@ import lombok.Getter;
  */
 @Getter
 public enum AuthorityTypeEnum implements BaseEnum<Integer> {
-    MODULE(1, "MODULE", "模块"),
-    CATALOG(2, "CATALOG", "分组"),
-    RESOURCE(3, "RESOURCE", "资源"),
+    SECTION(1, "SECTION", "版块"),
+    GROUP(2, "GROUP", "分组"),
+    MODULE(3, "MODULE", "模块"),
     PERMISSION(4, "PERMISSION", "权限");
 
     private final Integer value;

@@ -3,7 +3,7 @@ package cc.wdev.platform.system.core.web.admin;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
 import cc.wdev.platform.system.commons.constants.SystemMappingConstants;
-import cc.wdev.platform.system.core.service.UserSessionService;
+import cc.wdev.platform.system.core.service.LoginSessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "UserSessionAdminController", description = "用户会话后台控制器")
 public class UserSessionAdminController extends AbstractController {
 
-    private final UserSessionService userSessionService;
+    private final LoginSessionService userSessionService;
 
     @PermitAll
     @Operation(summary = "获取当前用户信息")

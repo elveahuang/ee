@@ -4,21 +4,25 @@ import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.Getter;
 
 /**
- * 权限分组
+ * 业务类型
  *
  * @author elvea
  */
 @Getter
-public enum AuthorityGroupTypeEnum implements BaseEnum<Integer> {
-    PLATFORM(1, "PLATFORM", "平台"),
-    SYSTEM(2, "SYSTEM", "系统"),
-    MEMBER(3, "MEMBER", "会员");
+public enum BizTypeEnum implements BaseEnum<Integer> {
+    GLOBAL(1, "GLOBAL", "全局"),
+    PLATFORM(2, "PLATFORM", "平台"),
+    SYSTEM(3, "SYSTEM", "系统"),
+    TENANT(4, "TENANT", "租户"),
+    IDENTITY(5, "IDENTITY", "全局实体"),
+    USER(6, "TENANT", "租户"),
+    ACCOUNT(7, "ACCOUNT", "账号");
 
     private final Integer value;
     private final String code;
     private final String description;
 
-    AuthorityGroupTypeEnum(final Integer value, final String code, final String description) {
+    BizTypeEnum(final Integer value, final String code, final String description) {
         this.value = value;
         this.code = code;
         this.description = description;
@@ -31,7 +35,7 @@ public enum AuthorityGroupTypeEnum implements BaseEnum<Integer> {
 
     @Override
     public String getLabel() {
-        return "label_authority_group_type__" + this.code.toLowerCase();
+        return "label_vip_biz_type__" + this.code.toLowerCase();
     }
 
 }

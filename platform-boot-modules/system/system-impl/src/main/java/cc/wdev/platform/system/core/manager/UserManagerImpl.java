@@ -22,7 +22,7 @@ import cc.wdev.platform.system.core.domain.request.UserCheckRequest;
 import cc.wdev.platform.system.core.service.AuthorityService;
 import cc.wdev.platform.system.core.service.RoleService;
 import cc.wdev.platform.system.core.service.UserService;
-import cc.wdev.platform.system.core.service.UserSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class UserManagerImpl implements UserManager {
 
     private final CaptchaService captchaService;
 
-    private final UserSessionAmqpService userSessionAmqpService;
+    private final LoginSessionAmqpService loginSessionAmqpService;
 
     /**
      * @see UserManager#check(UserCheckRequest)
@@ -262,7 +262,7 @@ public class UserManagerImpl implements UserManager {
                     .userId(uid)
                     .username(userName)
                     .build();
-                this.userSessionAmqpService.send(userSession);
+                this.loginSessionAmqpService.send(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);
