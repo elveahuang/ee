@@ -23,16 +23,16 @@ import java.time.LocalDateTime;
 @RabbitListener(queues = SystemAmqpConstants.USER_SESSION)
 public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionDto> implements LoginSessionAmqpService {
 
-    private final LoginSessionService userSessionService;
+    private final LoginSessionService loginSessionService;
 
-    public LoginSessionAmqpServiceImpl(LoginSessionService userSessionService) {
-        this.userSessionService = userSessionService;
+    public LoginSessionAmqpServiceImpl(LoginSessionService loginSessionService) {
+        this.loginSessionService = loginSessionService;
     }
 
     @Override
     public void execute(UserSessionDto dto) {
         LocalDateTime localDateTime = this.getCurLocalDateTime();
-        LoginSessionEntity entity = this.userSessionService.findBySessionId(dto.getSessionId());
+        LoginSessionEntity entity = this.loginSessionService.findBySessionId(dto.getSessionId());
         if (ActionTypeEnum.DELETE.equals(dto.getActionType())) {
             if (entity != null) {
                 entity.setEndDatetime(localDateTime);
@@ -40,7 +40,7 @@ public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSession
                 entity.setUpdatedAt(localDateTime);
                 entity.setDeletedBy(dto.getUserId());
                 entity.setDeletedAt(localDateTime);
-                this.userSessionService.save(entity);
+                this.loginSessionService.save(entity);
             }
         } else {
             if (entity != null) {
@@ -56,7 +56,7 @@ public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSession
             entity.setLastAccessDatetime(localDateTime);
             entity.setUpdatedBy(dto.getUserId());
             entity.setUpdatedAt(localDateTime);
-            this.userSessionService.save(entity);
+            this.loginSessionService.save(entity);
         }
     }
 

@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.system.commons.constants.SystemCacheConstants;
 import cc.wdev.platform.system.core.domain.entity.LoginSessionEntity;
-import cc.wdev.platform.system.core.domain.entity.UserSessionEntity_;
+import cc.wdev.platform.system.core.domain.entity.LoginSessionEntity_;
 import cc.wdev.platform.system.core.repository.LoginSessionRepository;
 import cc.wdev.platform.system.core.service.LoginSessionService;
 import jakarta.persistence.criteria.Predicate;
@@ -38,7 +38,7 @@ public class LoginSessionServiceImpl extends BaseCachingEntityService<LoginSessi
     public LoginSessionEntity findBySessionId(String sessionId) {
         Specification<LoginSessionEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
-            predicates.add(builder.equal(root.get(UserSessionEntity_.SESSION_ID), sessionId));
+            predicates.add(builder.equal(root.get(LoginSessionEntity_.SESSION_ID), sessionId));
             return builder.and(predicates.toArray(new Predicate[0]));
         };
         return this.repository.findOne(specification).orElse(null);
