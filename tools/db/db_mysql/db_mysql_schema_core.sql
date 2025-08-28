@@ -97,6 +97,70 @@ CREATE TABLE `sys_authority`
 ) COMMENT '权限表';
 
 --
+-- 套餐
+--
+
+DROP TABLE IF EXISTS `sys_package`;
+
+CREATE TABLE `sys_package`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `code`        VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编码',
+    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
+    `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '多语言文本',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `sort_order`  INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
+    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
+    `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
+    CONSTRAINT PRIMARY KEY (`id`)
+) COMMENT '套餐';
+
+--
+-- 套餐-权限关联表
+--
+
+DROP TABLE IF EXISTS `sys_package_authority`;
+
+CREATE TABLE `sys_package_authority`
+(
+    `id`           BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `package_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '套餐ID',
+    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
+    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_tenant_authority__authority_id` (`authority_id`)
+) COMMENT '产品功能包-权限关联表';
+
+--
+-- 产品功能包-权限关联表
+--
+
+DROP TABLE IF EXISTS `sys_package_tenant`;
+
+CREATE TABLE `sys_package_tenant`
+(
+    `id`         BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `package_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
+    `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_tenant_authority__package_id` (`package_id`)
+) COMMENT '产品功能包-权限关联表';
+
+--
 -- 租户-权限关联表
 --
 
