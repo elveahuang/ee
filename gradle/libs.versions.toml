@@ -12,12 +12,12 @@ nettyVersion = "4.1.124.Final"
 cosidVersion = "2.13.3"
 redissonVersion = "3.51.0"
 kotlinVersion = "2.2.10"
-groovyVersion = "4.0.28"
+groovyVersion = "5.0.0"
 hutoolVersion = "5.8.40"
-mockitoVersion = "5.18.0"
+mockitoVersion = "5.19.0"
 seleniumVersion = "4.35.0"
 seleniumWdmVersion = "6.2.0"
-playwrightVersion = "1.54.0"
+playwrightVersion = "1.55.0"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "3.0.5"
 mybatisSpringStarterVersion = "3.0.5"
@@ -30,7 +30,7 @@ bouncycastleVersion = "1.81"
 checkerQualVersion = "3.49.5"
 jsonSchemaGeneratorVersion = "4.38.0"
 gradleSpotbugsVersion = "6.2.5"
-gradleNativeVersion = "0.10.6"
+gradleNativeVersion = "0.11.0"
 gradleOSDetectorVersion = "1.7.3"
 
 [plugins]
@@ -191,7 +191,7 @@ tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standar
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.32.29" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.32.31" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
@@ -203,7 +203,7 @@ aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "
 dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.5" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1326" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1329" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
@@ -285,15 +285,15 @@ jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.3.1" }
+objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 guava = { module = "com.google.guava:guava", version = "33.4.8-jre" }
+annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.4.2" }
 oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.27.1" }
-checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
-objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
-annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.4" }
-logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
 logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
+logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
+checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
 
 # Thymeleaf
 thymeleaf = { module = "org.thymeleaf:thymeleaf" }
