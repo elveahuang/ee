@@ -1,9 +1,11 @@
 -- =====================================================================================================================
--- 基础表
+-- 核心基础表
 -- =====================================================================================================================
 
+USE ee_platform;
+
 --
--- 主体表
+-- 身份主体表
 -- 用户体系和账号体系的上层抽象
 -- 用户体系用于后台系统
 -- 账号体系用于前台系统
@@ -27,7 +29,7 @@ CREATE TABLE `sys_identity`
     CONSTRAINT PRIMARY KEY (`id`),
     INDEX `ix_sys_identity__active` (`active`),
     INDEX `ix_sys_identity__uuid` (`uuid`)
-) COMMENT '主体表';
+) COMMENT '身份主体表';
 
 --
 -- 租户表
@@ -38,20 +40,21 @@ DROP TABLE IF EXISTS `sys_tenant`;
 CREATE TABLE `sys_tenant`
 (
     `id`                     BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `code`                   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '租户编号',
+    `code`                   VARCHAR(20)      NOT NULL DEFAULT '' COMMENT '租户编号',
     `title`                  VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '名称',
-    `details`                VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '简介',
+    `details`                LONGTEXT         NULL COMMENT '简介',
     `address`                VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '地址',
     `domain`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '域名',
-    `contact_user_name`      VARCHAR(50)      NOT NULL DEFAULT '' comment '联系人',
+    `contact_user`           VARCHAR(50)      NOT NULL DEFAULT '' comment '联系人',
     `contact_phone`          VARCHAR(50)      NOT NULL DEFAULT '' comment '联系电话',
     `company_name`           VARCHAR(50)      NOT NULL DEFAULT '' comment '企业名称',
     `company_license_number` VARCHAR(50)      NOT NULL DEFAULT '' comment '统一社会信用代码',
     `registration_date`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '注册时间',
     `expiration_date`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '到期时间',
-    `root_ind`               TINYINT          NOT NULL DEFAULT 0 COMMENT '是否顶层租户，顶层租户拥有最大的权限',
     `account_count`          INT              NOT NULL DEFAULT 0 COMMENT '租户用户数',
+    `root_ind`               TINYINT          NOT NULL DEFAULT 0 COMMENT '是否顶层租户，顶层租户拥有最大的权限',
     `description`            VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注说明',
+    `source`                 TINYINT UNSIGNED NOT NULL DEFAULT 2 COMMENT '来源',
     `status`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
     `active`                 TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -67,6 +70,8 @@ CREATE TABLE `sys_tenant`
 
 --
 -- 权限表
+-- biz_type - TENANT - 租户套餐功能权限
+-- biz_type - MEMBER - 会员套餐功能权限
 --
 
 DROP TABLE IF EXISTS `sys_authority`;
@@ -78,10 +83,11 @@ CREATE TABLE `sys_authority`
     `code`                 VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编码',
     `title`                VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`                VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '多语言文本',
+    `idx`                  INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
     `description`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `authority_group_type` VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '权限分组类型',
-    `authority_type`       VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '权限类型',
-    `sort_order`           INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
+    `authority_type`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限类型',
+    `authority_group_type` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限分组类型',
+    `authority_biz_type`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限业务类型',
     `status`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
     `source`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
     `active`               TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
@@ -111,10 +117,11 @@ CREATE TABLE `sys_pay_type`
     `icon_name`   VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标',
     `icon_color`  VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '图标颜色',
     `coin_ind`    TINYINT          NOT NULL DEFAULT 0 COMMENT '是否是加密货币支付',
-    `wallet`      VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '钱包地址，仅对数字货币支付有效',
+    `coin_wallet` VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '钱包地址，仅对数字货币支付有效',
     `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
     `idx`         INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
     `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
     `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -136,11 +143,11 @@ DROP TABLE IF EXISTS `sys_order_type`;
 CREATE TABLE `sys_order_type`
 (
     `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
     `callback`    VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '回调服务类',
     `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
+    `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
     `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -167,13 +174,14 @@ CREATE TABLE `sys_package`
     `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
     `privilege`   VARCHAR(1000)    NOT NULL DEFAULT '' COMMENT '特权',
-    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `default_ind` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否默认',
     `trial_ind`   TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否允许试用',
     `trial_limit` INT UNSIGNED     NOT NULL DEFAULT 60 COMMENT '试用时长，单位是自然天',
     `level`       INT UNSIGNED     NOT NULL DEFAULT 1 COMMENT '会员等级，等级越高显示优先级越高',
-    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
+    `idx`         INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
+    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
@@ -200,12 +208,13 @@ CREATE TABLE `sys_package_item`
     `code`                  VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '编号',
     `title`                 VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '标题',
     `label`                 VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '文本',
-    `description`           VARCHAR(255)            NOT NULL DEFAULT '' COMMENT '备注',
     `automatic_renewal_ind` TINYINT UNSIGNED        NOT NULL DEFAULT 0 COMMENT '是否自动续费',
     `list_price`            NUMERIC(10, 6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '划线价格',
     `price`                 NUMERIC(10, 6) UNSIGNED NOT NULL DEFAULT 0 COMMENT '价格',
     `date_unit`             INT UNSIGNED            NOT NULL DEFAULT 0 COMMENT '单位',
     `date_value`            INT UNSIGNED            NOT NULL DEFAULT 0 COMMENT '单位',
+    `idx`                   INT UNSIGNED            NOT NULL DEFAULT 999 COMMENT '序号',
+    `description`           VARCHAR(255)            NOT NULL DEFAULT '' COMMENT '备注',
     `status`                TINYINT UNSIGNED        NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`                TINYINT UNSIGNED        NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`            BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -670,9 +679,9 @@ CREATE TABLE `sys_user`
     `deleted_by`           BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`           DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT UNIQUE (`username`),
+    CONSTRAINT UNIQUE (`email`),
     INDEX `ix_sys_user__active` (`active`),
-    INDEX `ix_sys_user__username` (`username`),
-    INDEX `ix_sys_user__email` (`email`),
     INDEX `ix_sys_user__mobile` (`mobile_country_code`, `mobile_number`),
     INDEX `ix_sys_user__invite_code` (`invite_code`),
     INDEX `ix_sys_user__invite_by` (`invite_by`)
@@ -813,8 +822,9 @@ CREATE TABLE `sys_config`
     `config_key`     VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '参数名',
     `config_value`   VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '参数值',
     `default_value`  VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '默认值',
-    `description`    VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
+    `extra`          VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '附加信息',
     `help`           VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '帮助信息',
+    `description`    VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
     `source`         TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
     `active`         TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -940,9 +950,9 @@ CREATE TABLE `sys_entity_label`
     `tenant_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `lang_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '语言ID',
     `lang_code`       VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '语言编号',
-    `entity_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `entity_class`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '实体类名',
     `entity_property` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '实体属性',
+    `entity_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `zh_cn_label`     VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '简体中文',
     `zh_tw_label`     VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '繁体中文',
     `en_label`        VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '英语',
@@ -972,6 +982,7 @@ CREATE TABLE `sys_catalog_type`
     `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '名称',
+    `extra`       VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '附加信息',
     `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
@@ -998,8 +1009,8 @@ CREATE TABLE `sys_catalog`
     `type_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '分类类型ID',
     `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`       VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '标题',
-    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '简介',
     `root_ind`    TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否顶层',
+    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '简介',
     `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -1127,6 +1138,7 @@ CREATE TABLE `sys_tag_type`
     `code`        VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
+    `extra`       VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '附加信息',
     `description` VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
     `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
@@ -1176,18 +1188,19 @@ CREATE TABLE `sys_tag_relation`
 (
     `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `target_type` VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
-    `target_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体ID',
-    `type_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '标签类型ID',
-    `item_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '标签ID',
+    `tag_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '标签类型ID',
+    `tag_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '标签ID',
+    `biz_type`    VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '业务类型',
+    `entity_type` VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '实体类型',
+    `entity_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
     `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_tag_relation__type_id` (`type_id`),
-    INDEX `ix_sys_tag_relation__tag_id` (`item_id`),
-    INDEX `ix_sys_tag_relation__target_type` (`target_type`),
-    INDEX `ix_sys_tag_relation__target_id` (`target_id`)
+    INDEX `ix_sys_tag_relation__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_tag_relation__tag_type_id` (`tag_type_id`),
+    INDEX `ix_sys_tag_relation__tag_id` (`tag_id`),
+    INDEX `ix_sys_tag_relation__entity_id` (`entity_type`, `entity_id`)
 ) COMMENT '标签关联表';
 
 --
@@ -1202,10 +1215,11 @@ CREATE TABLE `sys_attachment_type`
     `code`         VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
-    `description`  VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
     `ext`          VARCHAR(255)     NULL COMMENT '文件后缀',
     `file_types`   VARCHAR(255)     NULL COMMENT '类型关联',
-    `multiple_ind` TINYINT UNSIGNED          DEFAULT '0' NOT NULL COMMENT '是否多选',
+    `multiple_ind` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否多选',
+    `extra`        VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '附加信息',
+    `description`  VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '备注',
     `source`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数据来源',
     `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
@@ -1226,27 +1240,28 @@ DROP TABLE IF EXISTS `sys_attachment_file`;
 
 CREATE TABLE `sys_attachment_file`
 (
-    `id`                BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `attachment_type`   VARCHAR(180)     NOT NULL DEFAULT '' COMMENT '附件类型',
-    `content_type`      VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '文件大小',
-    `storage_type`      VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '文件大小',
-    `access_type`       VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '文件访问类型',
-    `original_filename` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '原始文件名',
-    `filename`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '文件名',
-    `file_key`          VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '文件标识',
-    `size`              BIGINT           NOT NULL DEFAULT 0 COMMENT '文件大小',
-    `url`               VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '文件链接',
-    `extra`             TEXT             NULL COMMENT '附加信息',
-    `active`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    `updated_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
-    `updated_at`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
-    `deleted_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
-    `deleted_at`        DATETIME(3)      NULL COMMENT '删除时间',
+    `id`                 BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `attachment_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '附件类型ID',
+    `content_type`       VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '文件大小',
+    `storage_type`       VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '文件大小',
+    `access_type`        VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '文件访问类型',
+    `original_filename`  VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '原始文件名',
+    `filename`           VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '文件名',
+    `file_key`           VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '文件标识',
+    `size`               BIGINT           NOT NULL DEFAULT 0 COMMENT '文件大小',
+    `url`                VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT '文件链接',
+    `extra`              TEXT             NULL COMMENT '附加信息',
+    `active`             TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`         DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `updated_by`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
+    `updated_at`         DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
+    `deleted_by`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
+    `deleted_at`         DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_attachment_file__attachment_type` (`attachment_type`)
+    INDEX `ix_sys_attachment_file__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_attachment_file__attachment_type_id` (`attachment_type_id`)
 ) COMMENT '附件文件表';
 
 --
@@ -1260,15 +1275,15 @@ CREATE TABLE `sys_attachment_relation`
     `id`            BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `tenant_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `attachment_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '附件ID',
-    `target_type`   VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
-    `target_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体',
+    `entity_type`   VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
+    `entity_id`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体',
     `active`        TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`    DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_attachment_relation__tenant_id` (`tenant_id`),
     INDEX `ix_sys_attachment_relation__attachment_id` (`attachment_id`),
-    INDEX `ix_sys_attachment_relation__target_type` (`target_type`),
-    INDEX `ix_sys_attachment_relation__target_id` (`target_id`)
+    INDEX `ix_sys_attachment_relation__entity_id` (`entity_type`, `entity_id`)
 ) COMMENT '附件关联表';
 
 --
@@ -1280,7 +1295,6 @@ DROP TABLE IF EXISTS `sys_url_log`;
 CREATE TABLE `sys_url_log`
 (
     `id`         BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `path`       VARCHAR(250) COMMENT '路径',
     `start_time` DATETIME(3)      NULL COMMENT '开始时间',
     `end_time`   DATETIME(3)      NULL COMMENT '结束时间',
@@ -1293,32 +1307,35 @@ CREATE TABLE `sys_url_log`
 ) COMMENT '链接日志';
 
 --
--- 链接统计日志
+-- 登录日志表
 --
 
-DROP TABLE IF EXISTS `sys_url_stat_log`;
+DROP TABLE IF EXISTS `sys_login_log`;
 
-CREATE TABLE `sys_url_stat_log`
+CREATE TABLE `sys_login_log`
 (
-    `id`                BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `path`              VARCHAR(250) COMMENT '路径',
-    `avg_time`          LONG COMMENT '平均执行时长',
-    `max_time`          LONG COMMENT '最大执行时长',
-    `min_time`          LONG COMMENT '最小执行时长',
-    `total_time`        LONG COMMENT '总执行时长',
-    `total_num`         LONG COMMENT '总执行次数',
-    `total_success_num` LONG COMMENT '总执行成功次数',
-    `total_error_num`   LONG COMMENT '总执行失败次数',
-    `active`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`        DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `id`             BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_type`    VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
+    `entity_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体',
+    `host`           VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户登录主机',
+    `user_agent`     VARCHAR(2000)    NOT NULL DEFAULT '' COMMENT 'User Agent',
+    `client_id`      VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '客户端编号',
+    `client_name`    VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '客户端名称',
+    `client_version` VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '客户端版本',
+    `details`        VARCHAR(250) COMMENT '详情',
+    `exception`      TEXT COMMENT '异常',
+    `success`        TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '登录状态',
+    `active`         TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`     DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_url_stat_log__path` (`path`)
-) COMMENT '链接统计日志';
+    INDEX `ix_sys_login_log__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_login_log__entity_id` (`entity_type`, `entity_id`)
+) COMMENT '登录日志表';
 
 --
--- 系统操作日志表
+-- 操作日志表
 --
 
 DROP TABLE IF EXISTS `sys_operation_log`;
@@ -1327,6 +1344,8 @@ CREATE TABLE `sys_operation_log`
 (
     `id`                    BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `tenant_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_type`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
+    `entity_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体',
     `class_name`            VARCHAR(250) COMMENT '类名',
     `method_name`           VARCHAR(250) COMMENT '方法名',
     `request_ip`            VARCHAR(250) COMMENT '请求IP',
@@ -1339,13 +1358,15 @@ CREATE TABLE `sys_operation_log`
     `start_time`            DATETIME(3) COMMENT '开始时间',
     `end_time`              DATETIME(3) COMMENT '结束时间',
     `exec_time`             LONG COMMENT '执行时长',
-    `details`               TEXT COMMENT '日志详情',
-    `exception`             LONGTEXT COMMENT '异常信息',
+    `details`               VARCHAR(250) COMMENT '详情',
+    `exception`             TEXT COMMENT '异常',
     `active`                TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`            DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    CONSTRAINT PRIMARY KEY (`id`)
-) COMMENT '系统操作日志表';
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_operation_log__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_operation_log__entity_id` (`entity_type`, `entity_id`)
+) COMMENT '操作日志表';
 
 --
 -- 验证码发送日志表
@@ -1366,7 +1387,8 @@ CREATE TABLE `sys_captcha_log`
     `active`              TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
     `created_by`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at`          DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    CONSTRAINT PRIMARY KEY (`id`)
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_captcha_log__tenant_id` (`tenant_id`)
 ) COMMENT '验证码发送日志表';
 
 --
@@ -1385,6 +1407,7 @@ CREATE TABLE `sys_search_log`
     `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
     `created_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_search_log__tenant_id` (`tenant_id`),
     INDEX `ix_sys_search_log__user_id` (`user_id`)
 ) COMMENT '用户搜索日志表';
 
@@ -1661,8 +1684,8 @@ CREATE TABLE `sys_announcement`
     `title`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `content`           TEXT             NULL COMMENT '内容',
     `status`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '发布状态',
-    `start_datetime`    DATETIME(3)      NOT NULL DEFAULT '1970-01-01 00:00:00.000' COMMENT '发布期限',
-    `end_datetime`      DATETIME(3)      NOT NULL DEFAULT '9999-12-31 23:59:59.000' COMMENT '发布期限',
+    `start_datetime`    DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '发布期限',
+    `end_datetime`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '发布期限',
     `allow_comment_ind` TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '是否允许评论',
     `description`       VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `active`            TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
@@ -1739,7 +1762,7 @@ DROP TABLE IF EXISTS `sys_job_param`;
 CREATE TABLE `sys_job_param`
 (
     `id`          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `job_id`      BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Job ID',
+    `job_id`      BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '任务ID',
     `param_name`  VARCHAR(150)    NOT NULL DEFAULT '' COMMENT '参数名',
     `param_value` VARCHAR(255)    NOT NULL DEFAULT '' COMMENT '参数值',
     CONSTRAINT PRIMARY KEY (`id`),
@@ -1814,18 +1837,18 @@ CREATE TABLE `sys_authorization`
     `authorization_code_issued_at`  DATETIME,
     `authorization_code_expires_at` DATETIME,
     `authorization_code_metadata`   TEXT,
-    `access_token_value`            VARCHAR(5000),
+    `access_token_value`            TEXT,
     `access_token_issued_at`        DATETIME,
     `access_token_expires_at`       DATETIME,
     `access_token_metadata`         TEXT,
     `access_token_type`             VARCHAR(100),
     `access_token_scopes`           VARCHAR(2000),
-    `oidc_id_token_value`           VARCHAR(2000),
+    `oidc_id_token_value`           TEXT,
     `oidc_id_token_issued_at`       DATETIME,
     `oidc_id_token_expires_at`      DATETIME,
     `oidc_id_token_metadata`        TEXT,
     `oidc_id_token_claims`          TEXT,
-    `refresh_token_value`           VARCHAR(2000),
+    `refresh_token_value`           TEXT,
     `refresh_token_issued_at`       DATETIME,
     `refresh_token_expires_at`      DATETIME,
     `refresh_token_metadata`        TEXT,

@@ -22,9 +22,9 @@ CREATE DATABASE IF NOT EXISTS `ee_quartz`
 -- 建库 - 定时任务库 - XXL Job
 -- =====================================================================================================================
 
-DROP DATABASE IF EXISTS `ee_xxl`;
+DROP DATABASE IF EXISTS `ee_xxl_job`;
 
-CREATE DATABASE IF NOT EXISTS `ee_xxl`
+CREATE DATABASE IF NOT EXISTS `ee_xxl_job`
     DEFAULT CHARACTER SET `utf8mb4`
     DEFAULT COLLATE `utf8mb4_0900_ai_ci`;
 
