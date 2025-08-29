@@ -97,89 +97,6 @@ CREATE TABLE `sys_authority`
 ) COMMENT '权限表';
 
 --
--- 套餐
---
-
-DROP TABLE IF EXISTS `sys_package`;
-
-CREATE TABLE `sys_package`
-(
-    `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `code`        VARCHAR(100)     NOT NULL DEFAULT '' COMMENT '编码',
-    `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
-    `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '多语言文本',
-    `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
-    `sort_order`  INT UNSIGNED     NOT NULL DEFAULT 999 COMMENT '序号',
-    `status`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
-    `source`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '来源',
-    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    `updated_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '修改人',
-    `updated_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '修改时间',
-    `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
-    `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
-    CONSTRAINT PRIMARY KEY (`id`)
-) COMMENT '套餐';
-
---
--- 套餐-权限关联表
---
-
-DROP TABLE IF EXISTS `sys_package_authority`;
-
-CREATE TABLE `sys_package_authority`
-(
-    `id`           BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `package_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '套餐ID',
-    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
-    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
-    INDEX `ix_sys_tenant_authority__authority_id` (`authority_id`)
-) COMMENT '产品功能包-权限关联表';
-
---
--- 产品功能包-权限关联表
---
-
-DROP TABLE IF EXISTS `sys_package_tenant`;
-
-CREATE TABLE `sys_package_tenant`
-(
-    `id`         BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `package_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
-    `active`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at` DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
-    INDEX `ix_sys_tenant_authority__package_id` (`package_id`)
-) COMMENT '产品功能包-权限关联表';
-
---
--- 租户-权限关联表
---
-
-DROP TABLE IF EXISTS `sys_tenant_authority`;
-
-CREATE TABLE `sys_tenant_authority`
-(
-    `id`           BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
-    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
-    CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_tenant_authority__tenant_id` (`tenant_id`),
-    INDEX `ix_sys_tenant_authority__authority_id` (`authority_id`)
-) COMMENT '租户-权限关联表';
-
---
 -- 支付类型表
 --
 
@@ -237,15 +154,15 @@ CREATE TABLE `sys_order_type`
 ) COMMENT '订单类型表';
 
 --
--- 会员类型表
+-- 套餐表
 --
 
-DROP TABLE IF EXISTS `sys_vip_type`;
+DROP TABLE IF EXISTS `sys_package`;
 
-CREATE TABLE `sys_vip_type`
+CREATE TABLE `sys_package`
 (
     `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `biz_type`    VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '业务类型',
+    `biz_type`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '业务类型',
     `code`        VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '编号',
     `title`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '标题',
     `label`       VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '文本',
@@ -265,20 +182,21 @@ CREATE TABLE `sys_vip_type`
     `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_vip_type__biz_type` (`biz_type`),
-    INDEX `ix_sys_vip_type__code` (`code`)
-) COMMENT '会员类型表';
+    INDEX `ix_sys_package__biz_type` (`biz_type`),
+    INDEX `ix_sys_package__code` (`code`)
+) COMMENT '套餐表';
 
 --
--- 会员套餐表
+-- 套餐明细表
 --
 
-DROP TABLE IF EXISTS `sys_vip_item`;
+DROP TABLE IF EXISTS `sys_package_item`;
 
-CREATE TABLE `sys_vip_item`
+CREATE TABLE `sys_package_item`
 (
     `id`                    BIGINT UNSIGNED         NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `vip_type_id`           BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '会员类型ID',
+    `biz_type`              BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '业务类型',
+    `package_id`            BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '套餐ID',
     `code`                  VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '编号',
     `title`                 VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '标题',
     `label`                 VARCHAR(150)            NOT NULL DEFAULT '' COMMENT '文本',
@@ -297,24 +215,66 @@ CREATE TABLE `sys_vip_item`
     `deleted_by`            BIGINT UNSIGNED         NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`            DATETIME(3)             NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_vip_item__code` (`code`)
-) COMMENT '会员套餐表';
+    INDEX `ix_sys_package_item__code` (`code`)
+) COMMENT '套餐明细表';
 
 --
--- 会员套餐关联表
+-- 套餐-权限关联表
+--
+
+DROP TABLE IF EXISTS `sys_package_authority`;
+
+CREATE TABLE `sys_package_authority`
+(
+    `id`           BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `biz_type`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '业务类型',
+    `package_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
+    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_package_authority__authority_id` (`authority_id`),
+    INDEX `ix_sys_package_authority__package_id` (`biz_type`, `package_id`)
+) COMMENT '套餐-权限关联表';
+
+--
+-- 实体-权限关联表
+--
+
+DROP TABLE IF EXISTS `sys_entity_authority`;
+
+CREATE TABLE `sys_entity_authority`
+(
+    `id`           BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `biz_type`     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '业务类型',
+    `entity_type`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体类型',
+    `entity_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `authority_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
+    `active`       TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`   DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_entity_authority__entity` (`biz_type`, `entity_type`, `entity_id`, `tenant_id`)
+) COMMENT '实体-权限关联表';
+
+--
+-- 套餐实体关联表
 -- entity_type  - TENANT     - 租户会员套餐
 -- entity_type  - ACCOUNT    - 账号会员套餐
 --
 
-DROP TABLE IF EXISTS `sys_vip_relation`;
+DROP TABLE IF EXISTS `sys_entity_package`;
 
-CREATE TABLE `sys_vip_relation`
+CREATE TABLE `sys_entity_package`
 (
     `id`                BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `biz_type`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '业务类型',
     `entity_type`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体类型',
     `entity_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
-    `tenant_id`         BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `vip_type_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
+    `package_id`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '权限ID',
     `trial_start_date`  DATETIME COMMENT '会员试用开始时间',
     `trial_end_date`    DATETIME COMMENT '会员试用结束时间',
     `registration_date` DATETIME COMMENT '会员注册时间',
@@ -328,23 +288,25 @@ CREATE TABLE `sys_vip_relation`
     `deleted_by`        BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`        DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_vip_relation__account_id` (`tenant_id`),
-    INDEX `ix_sys_vip_relation__vip_type_id` (`vip_type_id`)
-) COMMENT '会员套餐关联表';
+    INDEX `ix_sys_package_entity__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_package_entity__entity_id` (`biz_type`, `entity_type`, `entity_id`),
+    INDEX `ix_sys_package_entity__package_id` (`package_id`)
+) COMMENT '套餐实体关联表';
 
 --
--- 会员套餐开通记录表
+-- 实体套餐开通记录表
 --
 
-DROP TABLE IF EXISTS `sys_vip_log`;
+DROP TABLE IF EXISTS `sys_package_log`;
 
-CREATE TABLE `sys_vip_log`
+CREATE TABLE `sys_package_log`
 (
     `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `entity_type` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '用户ID',
-    `entity_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '用户ID',
     `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `vip_type_id` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '会员类型ID',
+    `biz_type`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '业务类型',
+    `entity_type` BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体类型',
+    `entity_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `package_id`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '套餐ID',
     `order_id`    BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '关联订单ID',
     `quota`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '额度',
     `description` VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
@@ -357,10 +319,10 @@ CREATE TABLE `sys_vip_log`
     `deleted_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '删除人',
     `deleted_at`  DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
-    INDEX `ix_sys_vip_log__tenant_id` (`tenant_id`),
-    INDEX `ix_sys_vip_log__vip_type_id` (`vip_type_id`),
-    INDEX `ix_sys_vip_log__order_id` (`order_id`)
-) COMMENT '会员套餐开通记录表';
+    INDEX `ix_sys_package_log__tenant_id` (`tenant_id`),
+    INDEX `ix_sys_package_log__entity_id` (`biz_type`, `entity_type`, `entity_id`),
+    INDEX `ix_sys_package_log__package_id` (`package_id`)
+) COMMENT '实体套餐开通记录表';
 
 --
 -- 订单表
