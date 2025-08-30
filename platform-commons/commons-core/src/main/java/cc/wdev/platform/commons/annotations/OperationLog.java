@@ -12,6 +12,12 @@ import java.lang.annotation.*;
 @Documented
 public @interface OperationLog {
 
+    String module() default "";
+
     String value() default "";
+
+    boolean request() default true;
+
+    boolean response() default true;
 
 }

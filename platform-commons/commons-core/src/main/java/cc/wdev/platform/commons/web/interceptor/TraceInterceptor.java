@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.web.interceptor;
 
+import cc.wdev.platform.commons.utils.MDCUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ public class TraceInterceptor implements HandlerInterceptor {
     public boolean preHandle(@NonNull HttpServletRequest request,
                              @NonNull HttpServletResponse response,
                              @NonNull Object handler) throws Exception {
+        MDCUtils.handleRequest(request, response);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 

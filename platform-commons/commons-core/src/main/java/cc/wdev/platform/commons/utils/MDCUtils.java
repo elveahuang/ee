@@ -14,6 +14,8 @@ import static cc.wdev.platform.commons.constants.GlobalConstants.REQUEST_ID_KEY;
  */
 public abstract class MDCUtils {
 
+    private final static String REQUEST_ID = "REQUEST_ID";
+
     public static void handleRequest(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
@@ -29,21 +31,17 @@ public abstract class MDCUtils {
         } else {
             MDC.setContextMap(context);
         }
-        if (MDCUtils.getRequestId() == null) {
-            MDCUtils.setRequestId();
+        if (StringUtils.isEmpty(getRequestId())) {
+            MDCUtils.setRequestId(StringUtils.uuid());
         }
     }
 
-    public static void setRequestId() {
-        MDC.put(REQUEST_ID_KEY, StringUtils.uuid());
-    }
-
     public static void setRequestId(String requestId) {
-        MDC.put(REQUEST_ID_KEY, requestId);
+        MDC.put(REQUEST_ID, requestId);
     }
 
     public static String getRequestId() {
-        return MDC.get(REQUEST_ID_KEY);
+        return MDC.get(REQUEST_ID);
     }
 
     public static void clear() {
