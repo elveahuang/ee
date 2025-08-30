@@ -16,6 +16,12 @@ public abstract class MDCUtils {
 
     private final static String REQUEST_ID = "REQUEST_ID";
 
+    public static void handleAspect() {
+        if (StringUtils.isEmpty(getRequestId())) {
+            MDCUtils.setRequestId(StringUtils.uuid());
+        }
+    }
+
     public static void handleRequest(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
