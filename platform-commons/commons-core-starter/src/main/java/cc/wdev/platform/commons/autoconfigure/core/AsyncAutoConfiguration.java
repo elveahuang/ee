@@ -1,14 +1,10 @@
 package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
-import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.core.async.AsyncTaskDecorator;
-import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -48,14 +44,6 @@ public class AsyncAutoConfiguration implements AsyncConfigurer {
         executor.setTaskDecorator(new AsyncTaskDecorator());
         executor.initialize();
         return executor;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = WebProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    public TraceInterceptor traceInterceptor() {
-        log.info("Creating TraceInterceptor");
-        return new TraceInterceptor();
     }
 
 }

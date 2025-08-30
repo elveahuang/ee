@@ -2,6 +2,7 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
+import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.utils.SpringUtils;
@@ -13,10 +14,12 @@ import cc.wdev.platform.commons.utils.time.DefaultTimeZoneResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
+import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -67,6 +70,18 @@ public class CoreAutoConfiguration {
             .amqpEnabled(properties.getAmqp().isEnabled())
             .home(home)
             .build();
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------------
+    // 日志跟踪
+    // ------------------------------------------------------------------------------------------------------------------------
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = WebProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+    public TraceInterceptor traceInterceptor() {
+        log.info("Creating TraceInterceptor");
+        return new TraceInterceptor();
     }
 
     // ------------------------------------------------------------------------------------------------------------------------

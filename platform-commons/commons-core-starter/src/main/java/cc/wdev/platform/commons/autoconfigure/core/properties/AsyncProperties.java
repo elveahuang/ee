@@ -18,9 +18,9 @@ public class AsyncProperties {
 
     private int maxPoolSize = 50;
 
-    private int keepAliveSeconds = 50;
+    private int keepAliveSeconds = 60;
 
-    private int queueCapacity = 50;
+    private int queueCapacity = 10000;
 
     private String threadNamePrefix = "async-thread-";
 
