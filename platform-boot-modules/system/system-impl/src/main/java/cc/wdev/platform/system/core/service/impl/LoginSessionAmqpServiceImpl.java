@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.message.rabbit.AbstractAmqpService;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
 import cc.wdev.platform.system.core.domain.converter.UserSessionConverter;
-import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
+import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
 import cc.wdev.platform.system.core.domain.entity.LoginSessionEntity;
 import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import cc.wdev.platform.system.core.service.LoginSessionService;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Slf4j
 @Service
 @RabbitListener(queues = SystemAmqpConstants.USER_SESSION)
-public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSessionDto> implements LoginSessionAmqpService {
+public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<LoginSessionDto> implements LoginSessionAmqpService {
 
     private final LoginSessionService loginSessionService;
 
@@ -30,15 +30,15 @@ public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSession
     }
 
     @Override
-    public void execute(UserSessionDto dto) {
+    public void execute(LoginSessionDto dto) {
         LocalDateTime localDateTime = this.getCurLocalDateTime();
         LoginSessionEntity entity = this.loginSessionService.findBySessionId(dto.getSessionId());
         if (ActionTypeEnum.DELETE.equals(dto.getActionType())) {
             if (entity != null) {
                 entity.setEndDatetime(localDateTime);
-                entity.setUpdatedBy(dto.getUserId());
+                entity.setUpdatedBy(dto.getEntityId());
                 entity.setUpdatedAt(localDateTime);
-                entity.setDeletedBy(dto.getUserId());
+                entity.setDeletedBy(dto.getEntityId());
                 entity.setDeletedAt(localDateTime);
                 this.loginSessionService.save(entity);
             }
@@ -48,13 +48,13 @@ public class LoginSessionAmqpServiceImpl extends AbstractAmqpService<UserSession
             } else {
                 entity = SpringUtils.getBean(UserSessionConverter.class).dto2Entity(dto);
                 entity.setStartDatetime(localDateTime);
-                entity.setCreatedBy(dto.getUserId());
+                entity.setCreatedBy(dto.getEntityId());
                 entity.setCreatedAt(localDateTime);
             }
             entity.setUa(dto.getUa());
             entity.setHost(dto.getHost());
             entity.setLastAccessDatetime(localDateTime);
-            entity.setUpdatedBy(dto.getUserId());
+            entity.setUpdatedBy(dto.getEntityId());
             entity.setUpdatedAt(localDateTime);
             this.loginSessionService.save(entity);
         }

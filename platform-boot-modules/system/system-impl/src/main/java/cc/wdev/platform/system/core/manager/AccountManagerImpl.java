@@ -10,11 +10,12 @@ import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SecurityUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
+import cc.wdev.platform.system.commons.enums.EntityTypeEnum;
 import cc.wdev.platform.system.core.domain.converter.AccountConverter;
 import cc.wdev.platform.system.core.domain.dto.AccountForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.AccountInfoDto;
 import cc.wdev.platform.system.core.domain.dto.AccountLoginInfoDto;
-import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
+import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
 import cc.wdev.platform.system.core.domain.entity.AccountEntity;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.AccountCheckRequest;
@@ -245,10 +246,11 @@ public class AccountManagerImpl implements AccountManager {
             log.info("Account logout username - [{}}] - uid - [{}]. - sid - [{}].", userName, uid, sid);
 
             if (StringUtils.isNotEmpty(sid)) {
-                UserSessionDto userSession = UserSessionDto.builder()
+                LoginSessionDto userSession = LoginSessionDto.builder()
                     .actionType(ActionTypeEnum.DELETE)
                     .sessionId(sid)
-                    .userId(uid)
+                    .entityType(EntityTypeEnum.ACCOUNT.getValue())
+                    .entityId(uid)
                     .username(userName)
                     .build();
                 this.loginSessionAmqpService.send(userSession);

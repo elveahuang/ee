@@ -19,7 +19,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UserForm implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
-    protected Long id;
+    private Long tenantId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
     @NotEmpty(message = "{system__validation__user__username_not_empty}")
     private String username;
     @NotEmpty

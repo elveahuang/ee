@@ -5,8 +5,8 @@ import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.SecurityUtils;
 import cc.wdev.platform.commons.utils.ServletUtils;
 import cc.wdev.platform.security.utils.OAuth2Utils;
-import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
-import cc.wdev.platform.system.core.manager.UserSessionManager;
+import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
+import cc.wdev.platform.system.core.manager.LoginSessionManager;
 import cc.wdev.platform.system.security.domain.dto.AuthorizationDto;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
 import cc.wdev.platform.system.security.manager.AuthorizationManager;
@@ -45,7 +45,7 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
 
     private final ClientManager clientManager;
 
-    private final UserSessionManager userSessionManager;
+    private final LoginSessionManager loginSessionManager;
 
     private final AuthorizationManager authorizationManager;
 
@@ -66,10 +66,10 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
             }
 
             if (user != null) {
-                UserSessionDto userSession = UserSessionDto.builder()
+                LoginSessionDto userSession = LoginSessionDto.builder()
                     .actionType(ActionTypeEnum.SAVE)
                     .sessionId(authorization.getId())
-                    .userId(user.getId())
+                    .entityId(user.getId())
                     .username(authorization.getPrincipalName())
                     .success(Boolean.TRUE)
                     .ua(ServletUtils.getUserAgent())
@@ -77,7 +77,7 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
                     .clientId(authorization.getRegisteredClientId())
                     .clientName(authorization.getRegisteredClientId())
                     .build();
-                this.userSessionManager.saveUserSession(userSession);
+                this.loginSessionManager.saveUserSession(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);

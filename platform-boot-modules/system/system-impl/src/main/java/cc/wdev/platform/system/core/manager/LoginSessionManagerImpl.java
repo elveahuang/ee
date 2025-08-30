@@ -1,7 +1,7 @@
 package cc.wdev.platform.system.core.manager;
 
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
+import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
 import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @AllArgsConstructor
-public class UserSessionManagerImpl implements UserSessionManager {
+public class LoginSessionManagerImpl implements LoginSessionManager {
 
     private final LoginSessionAmqpService loginSessionAmqpService;
 
     /**
-     * @see UserSessionManager#saveUserSession(UserSessionDto)
+     * @see LoginSessionManager#saveUserSession(LoginSessionDto)
      */
     @Override
-    public R<Boolean> saveUserSession(UserSessionDto userSession) throws Exception {
-        this.loginSessionAmqpService.send(userSession);
+    public R<Boolean> saveUserSession(LoginSessionDto dto) throws Exception {
+        this.loginSessionAmqpService.send(dto);
         return R.success(Boolean.TRUE);
     }
 

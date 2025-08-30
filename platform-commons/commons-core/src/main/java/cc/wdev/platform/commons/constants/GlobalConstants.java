@@ -65,4 +65,6 @@ public interface GlobalConstants {
      */
     int DEFAULT_SMTP_PORT = 25;
 
+    String REQUEST_ID_KEY = "X-Request-ID";
+
 }

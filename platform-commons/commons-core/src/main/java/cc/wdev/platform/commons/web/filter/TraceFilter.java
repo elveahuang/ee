@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.web.filter;
 
 import cc.wdev.platform.commons.utils.MDCUtils;
-import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,21 +11,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class GlobalRequestFilter extends OncePerRequestFilter {
-
-    private static final String KEY_REQUEST_ID = "x-request-id";
+public class TraceFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain chain) throws ServletException, IOException {
         try {
-            String requestId = request.getHeader(KEY_REQUEST_ID);
-            if (StringUtils.isEmpty(requestId)) {
-                requestId = StringUtils.uuid();
-            }
-            MDCUtils.setRequestId(requestId);
-            response.addHeader(KEY_REQUEST_ID, requestId);
+            MDCUtils.handleRequest(request, response);
             chain.doFilter(request, response);
         } finally {
             MDC.clear();

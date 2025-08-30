@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.autoconfigure.core;
 
+import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
@@ -28,7 +29,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CoreProperties.class})
+@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class})
 public class CoreAutoConfiguration {
 
     public CoreAutoConfiguration(CoreProperties properties) {

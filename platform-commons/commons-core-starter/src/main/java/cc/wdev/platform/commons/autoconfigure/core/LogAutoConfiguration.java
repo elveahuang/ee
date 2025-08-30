@@ -5,10 +5,10 @@ import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.core.log.aspect.OperationLogAspect;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
-import cc.wdev.platform.commons.core.log.interceptor.UrlLogInterceptor;
 import cc.wdev.platform.commons.core.log.store.DefaultLogStore;
 import cc.wdev.platform.commons.core.log.store.LogStore;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
+import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
@@ -51,7 +51,7 @@ public class LogAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OperationLogAspect optLogAspect(LogStore logStore) {
+    public OperationLogAspect operationLogAspect(LogStore logStore) {
         log.info("Creating OperationLogAspect");
         return new OperationLogAspect(logStore);
     }
@@ -59,9 +59,9 @@ public class LogAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = WebProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    public UrlLogInterceptor urlLogInterceptor(LogStore logStore) {
-        log.info("Creating UrlLogInterceptor");
-        return new UrlLogInterceptor(logStore);
+    public LogInterceptor logInterceptor(LogStore logStore) {
+        log.info("Creating LogInterceptor");
+        return new LogInterceptor(logStore);
     }
 
     public static class LogRuntimeHints implements RuntimeHintsRegistrar {

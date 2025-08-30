@@ -7,22 +7,23 @@ import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
 import cc.wdev.platform.commons.extensions.captcha.service.CaptchaService;
 import cc.wdev.platform.commons.utils.*;
+import cc.wdev.platform.system.commons.enums.EntityTypeEnum;
 import cc.wdev.platform.system.core.domain.converter.AuthorityConverter;
 import cc.wdev.platform.system.core.domain.converter.RoleConverter;
 import cc.wdev.platform.system.core.domain.converter.UserConverter;
+import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
 import cc.wdev.platform.system.core.domain.dto.UserForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.UserInfoDto;
 import cc.wdev.platform.system.core.domain.dto.UserLoginInfoDto;
-import cc.wdev.platform.system.core.domain.dto.UserSessionDto;
 import cc.wdev.platform.system.core.domain.entity.AuthorityEntity;
 import cc.wdev.platform.system.core.domain.entity.RoleEntity;
 import cc.wdev.platform.system.core.domain.entity.UserEntity;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.UserCheckRequest;
 import cc.wdev.platform.system.core.service.AuthorityService;
+import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import cc.wdev.platform.system.core.service.RoleService;
 import cc.wdev.platform.system.core.service.UserService;
-import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -256,10 +257,11 @@ public class UserManagerImpl implements UserManager {
             log.info("User logout username - [{}}] - uid - [{}]. - sid - [{}].", userName, uid, sid);
 
             if (StringUtils.isNotEmpty(sid)) {
-                UserSessionDto userSession = UserSessionDto.builder()
+                LoginSessionDto userSession = LoginSessionDto.builder()
                     .actionType(ActionTypeEnum.DELETE)
                     .sessionId(sid)
-                    .userId(uid)
+                    .entityType(EntityTypeEnum.USER.getValue())
+                    .entityId(uid)
                     .username(userName)
                     .build();
                 this.loginSessionAmqpService.send(userSession);

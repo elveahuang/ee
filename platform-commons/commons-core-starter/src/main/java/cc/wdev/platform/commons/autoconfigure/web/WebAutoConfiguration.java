@@ -1,11 +1,12 @@
 package cc.wdev.platform.commons.autoconfigure.web;
 
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
-import cc.wdev.platform.commons.core.log.interceptor.UrlLogInterceptor;
 import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.web.converter.json.JacksonHttpMessageConverter;
+import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
+import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -42,20 +43,25 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
 
     private final StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory;
 
-    private final UrlLogInterceptor urlLogInterceptor;
+    private final LogInterceptor logInterceptor;
+
+    private final TraceInterceptor traceInterceptor;
 
     public WebAutoConfiguration(LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory,
                                 StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory,
-                                UrlLogInterceptor urlLogInterceptor) {
+                                LogInterceptor logInterceptor,
+                                TraceInterceptor traceInterceptor) {
         log.info("WebAutoConfiguration is enabled");
         this.legacyDateTimeAnnotationFormatterFactory = legacyDateTimeAnnotationFormatterFactory;
         this.standardDateTimeAnnotationFormatterFactory = standardDateTimeAnnotationFormatterFactory;
-        this.urlLogInterceptor = urlLogInterceptor;
+        this.logInterceptor = logInterceptor;
+        this.traceInterceptor = traceInterceptor;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(this.urlLogInterceptor);
+        registry.addInterceptor(this.traceInterceptor);
+        registry.addInterceptor(this.logInterceptor);
     }
 
     @Override

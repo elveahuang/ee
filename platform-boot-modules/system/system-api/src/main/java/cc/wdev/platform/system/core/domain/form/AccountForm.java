@@ -23,7 +23,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class AccountForm implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
-    protected Long id;
+    private Long tenantId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
     private String username;
     private String password;
     private String email;
@@ -33,5 +35,4 @@ public class AccountForm implements Serializable {
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDate birthday;
     private String description;
-
 }

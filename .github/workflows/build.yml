@@ -28,12 +28,12 @@ jobs:
                     cp ./platform-boot-server/app-server/build/libs/app.jar ./dist/app.jar
                     cd ./dist
                     zip -qr app.zip *
-            -   name: Deploy
-                uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-                with:
-                    server: ${{ secrets.SERVER_HOST }}
-                    username: ${{ secrets.SERVER_USER }}
-                    ssh_private_key: ${{ secrets.SERVER_KEY }}
-                    local_path: "dist/app.zip"
-                    remote_path: "/data/app/deploy"
-                    sftpArgs: "-o ConnectTimeout=5"
+#            -   name: Deploy
+#                uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+#                with:
+#                    server: ${{ secrets.SERVER_HOST }}
+#                    username: ${{ secrets.SERVER_USER }}
+#                    ssh_private_key: ${{ secrets.SERVER_KEY }}
+#                    local_path: "dist/app.zip"
+#                    remote_path: "/data/app/deploy"
+#                    sftpArgs: "-o ConnectTimeout=5"

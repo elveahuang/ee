@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @AllArgsConstructor
 @RestController
-@Tag(name = "UserSessionAdminController", description = "用户会话后台控制器")
-public class UserSessionAdminController extends AbstractController {
+@Tag(name = "LoginSessionAdminController", description = "会话后台控制器")
+public class LoginSessionAdminController extends AbstractController {
 
     private final LoginSessionService userSessionService;
 

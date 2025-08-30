@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="cc/wdev/logging/logback/base.xml"/>
 
     <springProfile name="development | dev | local">
         <include resource="cc/wdev/logging/logback/console-appender.xml"/>

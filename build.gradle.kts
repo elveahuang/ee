@@ -179,6 +179,8 @@ allprojects {
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")
+        exclude(module = "kotlin-stdlib-jdk7")
+        exclude(module = "kotlin-stdlib-jdk8")
     }
 }
 

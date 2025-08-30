@@ -1,6 +1,8 @@
 package cc.wdev.platform.system.core.domain.entity;
 
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
@@ -25,6 +27,11 @@ import java.time.LocalDate;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class AccountEntity extends BaseEntity {
+    /**
+     * 租户IO
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long tenantId;
     /**
      * 用户名
      */

@@ -1,6 +1,8 @@
 package cc.wdev.platform.system.core.domain.dto;
 
 import cc.wdev.platform.commons.enums.ActionTypeEnum;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,19 +18,29 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSessionDto implements Serializable {
+public class LoginSessionDto implements Serializable {
     /**
      * 操作类型
      */
     private ActionTypeEnum actionType;
     /**
+     * 租户ID
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long tenantId;
+    /**
+     * 实体类型
+     */
+    private Integer entityType;
+    /**
+     * 实体标识
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long entityId;
+    /**
      * 会话标识
      */
     private String sessionId;
-    /**
-     * 用户ID
-     */
-    private Long userId;
     /**
      * 用户名
      */

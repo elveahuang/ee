@@ -4,6 +4,8 @@ import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
@@ -23,19 +25,29 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sys_user_session")
+@Table(name = "sys_login_session")
 @DynamicUpdate
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class LoginSessionEntity extends BaseEntity {
     /**
+     * 租户标识
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long tenantId;
+    /**
+     * 实体类型
+     */
+    private Integer entityType;
+    /**
+     * 实体标识
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long entityId;
+    /**
      * 会话标识
      */
     private String sessionId;
-    /**
-     * 用户ID
-     */
-    private Long userId;
     /**
      * 用户名
      */
