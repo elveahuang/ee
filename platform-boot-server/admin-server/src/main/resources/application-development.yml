@@ -11,4 +11,4 @@ spring:
             context-path: /devops/sba
             ui:
                 title: Admin Console
-                public-url: https://ee.elvea.cn/devops/sba
+                public-url: https://boot.wdev.cc/devops/sba

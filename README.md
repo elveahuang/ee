@@ -6,17 +6,17 @@
 
 | Server       | Port |
 |--------------|------|
-| app-server   | 8181 |
 | admin-server | 8282 |
+| app-server   | 8181 |
 
 ## 微服务
 
 | Server         | Port | Consul Development Key                | Consul Production Key                  |
 |----------------|------|---------------------------------------|----------------------------------------|
-| gateway-server | 9191 | config/application-dev/gateway-server | config/application-prod/gateway-server |
-| sba-server     | 9292 | config/application-dev/sba-server     | config/application-prod/sba-server     |
-| auth-server    | 9393 | config/application-dev/auth-server    | config/application-prod/auth-server    |
-| system-server  | 9494 | config/application-dev/system-server  | config/application-prod/system-server  |
+| gateway-server | 8181 | config/application-dev/gateway-server | config/application-prod/gateway-server |
+| sba-server     | 8282 | config/application-dev/sba-server     | config/application-prod/sba-server     |
+| auth-server    | 8383 | config/application-dev/auth-server    | config/application-prod/auth-server    |
+| system-server  | 8484 | config/application-dev/system-server  | config/application-prod/system-server  |
 
 ## Gradle Wrapper
 
