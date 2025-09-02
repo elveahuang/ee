@@ -11,6 +11,6 @@ spring:
             context-path: /devops/sba
             ui:
                 title: Admin Console
-                public-url: http://ee.e.cn/devops/sba
+                public-url: http://cloud.wdev.cc/devops/sba
             discovery:
                 ignored-services: consul

@@ -6,13 +6,13 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springSecurityCore)
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
     implementation(rootProject.libs.bundles.logging)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
-    implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-commons:commons-core"))
 }
 
 tasks.named<BootJar>("bootJar") {
