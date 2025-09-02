@@ -5,8 +5,9 @@ import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.web.converter.json.JacksonHttpMessageConverter;
-import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
+import cc.wdev.platform.commons.web.filter.TraceFilter;
 import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
+import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestClientCustomizer;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -23,6 +25,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.LocaleResolver;
@@ -83,6 +86,22 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return new CorsFilter(source);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
+
+    @Bean
+    public FilterRegistrationBean<TraceFilter> registration() {
+        FilterRegistrationBean<TraceFilter> registration = new FilterRegistrationBean<>(new TraceFilter());
+        registration.setEnabled(true);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return registration;
     }
 
     @Bean

@@ -21,7 +21,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({WebSocketProperties.class})
 @ConditionalOnClass({WebSocketConfigurer.class})
-@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class WebSocketAutoConfiguration implements WebSocketConfigurer {
 
     private final MessageWebSocketHandler messageWebSocketHandler;

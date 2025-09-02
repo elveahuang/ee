@@ -8,7 +8,9 @@ import cc.wdev.platform.commons.extensions.captcha.service.DefaultCaptchaService
 import cc.wdev.platform.commons.extensions.captcha.store.CaptchaStore;
 import cc.wdev.platform.commons.extensions.captcha.store.DefaultCaptchaStore;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,7 +23,8 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({CaptchaProperties.class})
-@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnClass(RedissonClient.class)
+@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CaptchaAutoConfiguration {
 
     public CaptchaAutoConfiguration() {
@@ -29,19 +32,19 @@ public class CaptchaAutoConfiguration {
     }
 
     @Bean("mailCaptchaProvider")
-    @ConditionalOnMissingBean()
+    @ConditionalOnMissingBean
     public MailCaptchaProvider mailCaptchaProvider() {
         return new DefaultMailCaptchaProvider();
     }
 
     @Bean("smsCaptchaProvider")
-    @ConditionalOnMissingBean()
+    @ConditionalOnMissingBean
     public SmsCaptchaProvider smsCaptchaProvider() {
         return new DefaultSmsCaptchaProvider();
     }
 
     @Bean("codeCaptchaProvider")
-    @ConditionalOnMissingBean()
+    @ConditionalOnMissingBean
     public CodeCaptchaProvider codeCaptchaProvider() {
         return new DefaultCodeCaptchaProvider();
     }

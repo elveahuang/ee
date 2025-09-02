@@ -28,7 +28,10 @@ public abstract class MDCUtils {
             requestId = StringUtils.uuid();
         }
         MDCUtils.setRequestId(requestId);
-        response.addHeader(REQUEST_ID_KEY, requestId);
+
+        if (!response.getHeaderNames().contains(REQUEST_ID_KEY)) {
+            response.addHeader(REQUEST_ID_KEY, requestId);
+        }
     }
 
     public static void setAsyncContext(Map<String, String> context) {
