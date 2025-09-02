@@ -1,12 +1,14 @@
 package cc.wdev.platform.commons.extensions.docs;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.Frame;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Properties;
 
 import static org.bytedeco.ffmpeg.global.avcodec.AV_CODEC_ID_MP3;
 
@@ -15,6 +17,15 @@ import static org.bytedeco.ffmpeg.global.avcodec.AV_CODEC_ID_MP3;
  */
 @Slf4j
 public class VideoTests {
+
+    @Test
+    public void loaderTest() {
+        Properties properties = Loader.loadProperties();
+        log.info(properties.getProperty("platform.extension"));
+        log.info(properties.getProperty("platform"));
+        log.info(System.getProperty("java.library.path"));
+        Loader.load(org.bytedeco.ffmpeg.global.avutil.class);
+    }
 
     @Test
     public void videoTest() throws Exception {
