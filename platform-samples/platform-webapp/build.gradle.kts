@@ -34,19 +34,19 @@ dependencies {
     implementation(project(":platform-commons:commons-javacv"))
 }
 
-var clearLibs = tasks.register<Delete>("clearLibs") {
+tasks.register<Delete>("clearLibs") {
     delete(layout.buildDirectory.dir("libs/libs-internal"));
     delete(layout.buildDirectory.dir("libs/libs-external"));
 }
 
-var copyInternalLibs = tasks.register<Copy>("copyInternalLibs") {
+tasks.register<Copy>("copyInternalLibs") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     include("**/platform-*.jar")
     into(layout.buildDirectory.dir("libs/libs-internal"))
 }
 
-var copyExternalLibs = tasks.register<Copy>("copyExternalLibs") {
+tasks.register<Copy>("copyExternalLibs") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     exclude("**/platform-*.jar")
@@ -55,9 +55,9 @@ var copyExternalLibs = tasks.register<Copy>("copyExternalLibs") {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    dependsOn(clearLibs)
-    dependsOn(copyExternalLibs)
-    dependsOn(copyInternalLibs)
+    dependsOn("clearLibs")
+    dependsOn("copyExternalLibs")
+    dependsOn("copyInternalLibs")
     exclude("*.jar")
     manifest {
         attributes["Manifest-Version"] = 1.0

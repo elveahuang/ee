@@ -121,7 +121,7 @@ spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-st
 spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-starter-mcp-client" }
 spring-ai-starter-mcp-server = { module = "org.springframework.ai:spring-ai-starter-mcp-server" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
-spring-ai-alibaba-graph = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-graph", version.ref = "springAiAlibabaVersion" }
+spring-ai-alibaba-core = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-core", version.ref = "springAiAlibabaVersion" }
 spring-ai-alibaba-graph-core = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-graph-core", version.ref = "springAiAlibabaVersion" }
 spring-ai-alibaba-starter-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope", version.ref = "springAiAlibabaVersion" }
 
@@ -203,13 +203,15 @@ aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "
 dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.5" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1329" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1333" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1318" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.23" }
-openai-java = { module = "com.openai:openai-java", version = "3.1.2" }
+openai-java = { module = "com.openai:openai-java", version = "3.2.1" }
+zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.4.1" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.29" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
 
@@ -318,8 +320,7 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 [bundles]
 baseCore = ["mapstruct", "lombok"]
 baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "geoip", "asm", "ognl", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
-baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections"]
-baseApacheCommonsExtra = ["commons-email", "commons-net", "commons-csv"]
+baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv", "commons-email"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
@@ -335,7 +336,7 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
+ai = ["ark-sdk", "zai-sdk", "openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 
 # Spring Boot
 springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
@@ -359,7 +360,7 @@ springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 # Spring AI
 springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
 springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
-springAiAlibabaCore = ["spring-ai-alibaba-graph-core", "spring-ai-alibaba-graph"]
+springAiAlibabaCore = ["spring-ai-alibaba-graph-core", "spring-ai-alibaba-core"]
 springAiAlibabaStarter = ["spring-ai-alibaba-starter-dashscope"]
 
 # Spring Boot Admin
