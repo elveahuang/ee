@@ -20,6 +20,8 @@ spring:
             database: 11
             password: redis
     ai:
+        model:
+            chat: deepseek
         openai:
             api-key: xxx
             base-url: https://api.deepseek.com/v1/completions

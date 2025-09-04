@@ -7,6 +7,7 @@ plugins {
 dependencies {
     implementation(rootProject.libs.bundles.springAiCore)
     implementation(rootProject.libs.bundles.springAiCoreStarter)
+    implementation(rootProject.libs.bundles.springAiAlibabaCore)
     implementation(rootProject.libs.bundles.springAiAlibabaStarter)
     implementation(rootProject.libs.bundles.springBootCore)
     implementation(rootProject.libs.bundles.springBootCoreStarter)

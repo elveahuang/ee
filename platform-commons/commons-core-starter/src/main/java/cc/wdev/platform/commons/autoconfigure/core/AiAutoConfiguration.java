@@ -23,9 +23,9 @@ import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.deepseek.DeepSeekChatModel;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.TokenCountBatchingStrategy;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
@@ -81,7 +81,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ChatCompletionService chatCompletionService(DeepSeekChatModel model,
+    public ChatCompletionService chatCompletionService(OpenAiChatModel model,
                                                        MessageWindowChatMemory messageWindowChatMemory,
                                                        ObjectProvider<AiCustomizer> customizerProvider) {
         return new DefaultChatCompletionService(model, messageWindowChatMemory, customizerProvider);

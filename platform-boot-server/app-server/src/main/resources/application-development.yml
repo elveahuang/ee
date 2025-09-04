@@ -64,11 +64,14 @@ spring:
                     scheduler:
                         instanceId: ${spring.application.name}_${server.port}
     ai:
+        model:
+            chat: openai
         openai:
             api-key: xxx
             base-url: https://api.deepseek.com
-        deepseek:
-            api-key: xxx
+            chat:
+                options:
+                    model: deepseek-chat
         mcp:
             client:
                 enabled: true

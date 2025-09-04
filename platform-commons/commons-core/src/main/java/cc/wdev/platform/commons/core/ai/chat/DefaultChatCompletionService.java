@@ -10,7 +10,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.deepseek.DeepSeekChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.ObjectProvider;
 import reactor.core.publisher.Flux;
@@ -24,7 +24,7 @@ public class DefaultChatCompletionService implements ChatCompletionService {
 
     private final ChatClient client;
 
-    public DefaultChatCompletionService(DeepSeekChatModel model,
+    public DefaultChatCompletionService(OpenAiChatModel model,
                                         MessageWindowChatMemory messageWindowChatMemory,
                                         ObjectProvider<AiCustomizer> customizerProvider) {
         AiCustomizer customizer = customizerProvider.getIfAvailable(AiCustomizer::defaultCustomizer);
