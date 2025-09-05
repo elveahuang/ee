@@ -18,8 +18,8 @@ include("platform-commons:commons-core")
 include("platform-commons:commons-core-starter")
 include("platform-commons:commons-javacv")
 // 示例模块
-include("platform-samples:platform-exec")
-include("platform-samples:platform-webapp")
+include("platform-samples:samples-console")
+include("platform-samples:samples-webapp")
 // -----------------------------------------------------------------------
 // 单体服务
 // -----------------------------------------------------------------------

@@ -7,3 +7,7 @@ tasks.register<Copy>("copyLibs") {
     from(configurations.runtimeClasspath)
     into(layout.buildDirectory.dir("libs-external"))
 }
+
+tasks.named<Jar>("jar") {
+    archiveBaseName.set("platform-sample-console")
+}

@@ -56,3 +56,7 @@ dependencies {
     api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion, classifier = "macosx-arm64")
     api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion, classifier = "windows-x86_64")
 }
+
+tasks.named<Jar>("jar") {
+    archiveBaseName.set("platform-commons-javacv")
+}

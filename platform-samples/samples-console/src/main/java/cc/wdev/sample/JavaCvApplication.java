@@ -1,4 +1,4 @@
-package cc.wdev.app;
+package cc.wdev.sample;
 
 import org.bytedeco.javacpp.Loader;
 
@@ -12,8 +12,9 @@ public class JavaCvApplication {
         System.out.println(properties.getProperty("platform.extension"));
         System.out.println(properties.getProperty("platform"));
         System.out.println(System.getProperty("java.library.path"));
-        Loader.load(org.bytedeco.ffmpeg.ffmpeg.class);
         Loader.load(org.bytedeco.ffmpeg.global.avutil.class);
+        Loader.load(org.bytedeco.tesseract.global.tesseract.class);
+        Loader.load(org.bytedeco.leptonica.global.leptonica.class);
     }
 
 }
