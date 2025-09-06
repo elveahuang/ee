@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.storage.utils;
+package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;

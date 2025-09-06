@@ -6,9 +6,9 @@ springBootAdminVersion = "3.5.2"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
 springGrpcVersion = "0.10.0"
-springdocVersion = "2.8.11"
+springDocVersion = "2.8.12"
 mcpVersion = "0.10.0"
-nettyVersion = "4.1.124.Final"
+nettyVersion = "4.1.126.Final"
 cosidVersion = "2.13.3"
 redissonVersion = "3.51.0"
 kotlinVersion = "2.2.10"
@@ -27,6 +27,7 @@ shardingSpherePlusVersion = "5.5.2"
 okhttpVersion = "5.1.0"
 swaggerVersion = "2.2.36"
 bouncycastleVersion = "1.81"
+errorProneAnnotationsVersion = "2.41.0"
 checkerQualVersion = "3.49.5"
 jsonSchemaGeneratorVersion = "4.38.0"
 gradleSpotbugsVersion = "6.2.5"
@@ -191,7 +192,7 @@ tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standar
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.32.31" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.33.3" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
@@ -200,7 +201,7 @@ facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.5" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
 tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1333" }
@@ -209,9 +210,9 @@ tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-jav
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1318" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.23" }
-openai-java = { module = "com.openai:openai-java", version = "3.2.1" }
 zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.4.1" }
-ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.29" }
+openai-java = { module = "com.openai:openai-java", version = "3.4.1" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.30" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
 
@@ -279,9 +280,9 @@ xxl-job-core = { module = "com.xuxueli:xxl-job-core", version = "3.2.0" }
 
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
+aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 ognl = { module = "ognl:ognl", version = "3.4.7" }
 asm = { module = "org.ow2.asm:asm", version = "9.8" }
-aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
@@ -302,7 +303,7 @@ thymeleaf = { module = "org.thymeleaf:thymeleaf" }
 thymeleaf-spring = { module = "org.thymeleaf:thymeleaf-spring6" }
 
 # MapStruct & Lombok
-lombok = { module = "org.projectlombok:lombok", version = "1.18.38" }
+lombok = { module = "org.projectlombok:lombok", version = "1.18.40" }
 mapstruct = { module = "org.mapstruct:mapstruct", version = "1.6.3" }
 mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version = "1.6.3" }
 lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-binding", version = "0.2.0" }
@@ -311,7 +312,7 @@ lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-bindin
 swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swaggerVersion" }
 swagger-annotations-jakarta = { module = "io.swagger.core.v3:swagger-annotations-jakarta", version.ref = "swaggerVersion" }
 swagger-models-jakarta = { module = "io.swagger.core.v3:swagger-models-jakarta", version.ref = "swaggerVersion" }
-springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdocVersion" }
+springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springDocVersion" }
 
 # JUnit
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }

@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.core.storage.min;
 import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
-import cc.wdev.platform.commons.core.storage.utils.StorageUtils;
+import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.JacksonUtils;
 import cn.hutool.core.util.StrUtil;

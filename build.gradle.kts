@@ -87,6 +87,12 @@ allprojects {
     configurations.configureEach {
         // 强制使用指定版本
         resolutionStrategy.eachDependency {
+            if (requested.group == "io.netty") {
+                useVersion(rootProject.libs.versions.nettyVersion.get())
+            }
+            if (requested.group == "org.mockito") {
+                useVersion(rootProject.libs.versions.mockitoVersion.get())
+            }
             if (requested.group == "org.seleniumhq.selenium") {
                 useVersion(rootProject.libs.versions.seleniumVersion.get())
             }
@@ -99,9 +105,6 @@ allprojects {
             if (requested.group == "org.apache.groovy") {
                 useVersion(rootProject.libs.versions.groovyVersion.get())
             }
-            if (requested.group == "org.mockito") {
-                useVersion(rootProject.libs.versions.mockitoVersion.get())
-            }
             if (requested.group == "com.squareup.okhttp3") {
                 useVersion(rootProject.libs.versions.okhttpVersion.get())
             }
@@ -112,7 +115,7 @@ allprojects {
                 useVersion(rootProject.libs.versions.bouncycastleVersion.get())
             }
             if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
-                useVersion("2.41.0")
+                useVersion(rootProject.libs.versions.errorProneAnnotationsVersion.get())
             }
             if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
                 this.artifactSelection {

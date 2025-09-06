@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.sequence.Sequence;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
 import cc.wdev.platform.commons.core.storage.StorageService;
-import cc.wdev.platform.commons.core.storage.utils.StorageUtils;
+import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.enums.LangTypeEnum;
 import cc.wdev.platform.commons.oapis.translator.Translator;
