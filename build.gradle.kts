@@ -122,6 +122,9 @@ allprojects {
             if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
                 useVersion(rootProject.libs.versions.errorProneAnnotationsVersion.get())
             }
+            if (requested.module.toString() == "com.auth0:java-jwt") {
+                useVersion(rootProject.libs.versions.javaJwtVersion.get())
+            }
         }
 
         // 强制排除未使用的库
