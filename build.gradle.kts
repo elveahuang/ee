@@ -90,6 +90,11 @@ allprojects {
             if (requested.group == "io.netty") {
                 useVersion(rootProject.libs.versions.nettyVersion.get())
             }
+            if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
+                this.artifactSelection {
+                    this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
+                }
+            }
             if (requested.group == "org.mockito") {
                 useVersion(rootProject.libs.versions.mockitoVersion.get())
             }
@@ -116,11 +121,6 @@ allprojects {
             }
             if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
                 useVersion(rootProject.libs.versions.errorProneAnnotationsVersion.get())
-            }
-            if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
-                this.artifactSelection {
-                    this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
-                }
             }
         }
 
