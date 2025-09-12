@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.core.storage;
 
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
-import cc.wdev.platform.commons.core.storage.min.MinStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.AllArgsConstructor;
@@ -21,15 +21,15 @@ import java.io.Serializable;
 public class StorageConfig implements Serializable {
 
     @Builder.Default
-    private StorageTypeEnum type = StorageTypeEnum.MIN;
+    private StorageTypeEnum type = StorageTypeEnum.AWS;
 
     @Builder.Default
-    private CosStorageConfig cos = new CosStorageConfig();
+    private AwsStorageConfig aws = new AwsStorageConfig();
 
     @Builder.Default
     private OssStorageConfig oss = new OssStorageConfig();
 
     @Builder.Default
-    private MinStorageConfig min = new MinStorageConfig();
+    private CosStorageConfig cos = new CosStorageConfig();
 
 }

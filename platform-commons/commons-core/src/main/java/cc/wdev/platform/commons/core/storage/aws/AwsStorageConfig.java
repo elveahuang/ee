@@ -1,16 +1,15 @@
-package cc.wdev.platform.commons.core.storage.min;
+package cc.wdev.platform.commons.core.storage.aws;
 
 import lombok.Data;
+import software.amazon.awssdk.regions.Region;
 
 import java.io.Serializable;
 
 /**
- * MinIO配置参数
- *
  * @author elvea
  */
 @Data
-public class MinStorageConfig implements Serializable {
+public class AwsStorageConfig implements Serializable {
     /**
      * 是否启用
      */
@@ -28,11 +27,11 @@ public class MinStorageConfig implements Serializable {
      */
     private String secretKey = "";
     /**
+     * Region
+     */
+    private String region = Region.US_EAST_1.toString();
+    /**
      * BucketName
      */
     private String bucketName = "";
-    /**
-     * 自定义域名
-     */
-    private String domain = "";
 }

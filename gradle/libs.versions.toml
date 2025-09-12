@@ -7,6 +7,7 @@ springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
 springGrpcVersion = "0.10.0"
 springDocVersion = "2.8.12"
+awsSdkVersion = "2.33.7"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.127.Final"
 cosidVersion = "2.13.3"
@@ -53,6 +54,7 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
+awssdk-bom = { module = " software.amazon.awssdk:bom", version.ref = "awsSdkVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -192,8 +194,10 @@ tika-core = { module = "org.apache.tika:tika-core", version = "3.2.2" }
 tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standard-package", version = "3.2.2" }
 
 # SDK
-minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.33.7" }
+awssdk-sdk = { module = "software.amazon.awssdk:s3", version.ref = "awsSdkVersion" }
+awssdk-apache-client = { module = "software.amazon.awssdk:apache-client", version.ref = "awsSdkVersion" }
+awssdk-netty-client = { module = "software.amazon.awssdk:netty-nio-client", version.ref = "awsSdkVersion" }
+awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager", version.ref = "awsSdkVersion" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
@@ -419,11 +423,9 @@ lark = ["oapi-sdk"]
 dingtalk = ["dingtalk"]
 wechat = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp"]
 im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
-minio = ["minio"]
 cos = ["cos_api"]
 oss = ["aliyun-java-sdk-core", "aliyun-sdk-oss"]
-s3 = ["s3"]
-storage = ["cos_api", "minio", "aliyun-sdk-oss", "s3"]
+storage = ["awssdk-sdk", "awssdk-netty-client", "awssdk-apache-client", "awssdk-transfer-manager", "cos_api", "aliyun-sdk-oss"]
 telegram = ["telegrambots-client", "telegrambots-abilities"]
 facebody = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-iai", "facebody"]
 translate = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-tmt", "alimt"]

@@ -17,9 +17,8 @@ rootProject.name = "ee"
 include("platform-commons:commons-core")
 include("platform-commons:commons-core-starter")
 include("platform-commons:commons-javacv")
-// 示例模块
-include("platform-samples:samples-console")
-include("platform-samples:samples-webapp")
+include("platform-commons:commons-console")
+include("platform-commons:commons-webapp")
 // -----------------------------------------------------------------------
 // 单体服务
 // -----------------------------------------------------------------------

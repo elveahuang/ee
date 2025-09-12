@@ -97,4 +97,8 @@ public abstract class StorageUtils {
         return tmpFile;
     }
 
+    public static Boolean isPathStyle(String endpoint) {
+        return false;
+    }
+
 }

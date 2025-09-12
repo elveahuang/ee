@@ -6,8 +6,7 @@ import java.io.Serializable;
  * @author elvea
  */
 public enum StorageTypeEnum implements Serializable {
-    DEFAULT,
-    MIN,
+    AWS,
     OSS,
     COS,
 }

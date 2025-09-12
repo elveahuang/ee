@@ -1,11 +1,11 @@
 package cc.wdev.platform.commons.core.storage;
 
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageServiceImpl;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageService;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageServiceImpl;
-import cc.wdev.platform.commons.core.storage.min.MinStorageConfig;
-import cc.wdev.platform.commons.core.storage.min.MinStorageService;
-import cc.wdev.platform.commons.core.storage.min.MinStorageServiceImpl;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageServiceImpl;
@@ -21,16 +21,16 @@ public record StorageFactory(StorageConfig config) {
         return switch (this.config.getType()) {
             case COS -> getCosStorageService();
             case OSS -> getOssStorageService();
-            default -> getMinStorageService();
+            default -> getAwsStorageService();
         };
     }
 
-    public MinStorageService getMinStorageService() {
-        return this.getMinStorageService(this.config.getMin());
+    public AwsStorageService getAwsStorageService() {
+        return this.getAwsStorageService(this.config.getAws());
     }
 
-    public MinStorageService getMinStorageService(MinStorageConfig config) {
-        return new MinStorageServiceImpl(config);
+    public AwsStorageService getAwsStorageService(AwsStorageConfig config) {
+        return new AwsStorageServiceImpl(config);
     }
 
     public OssStorageService getOssStorageService() {

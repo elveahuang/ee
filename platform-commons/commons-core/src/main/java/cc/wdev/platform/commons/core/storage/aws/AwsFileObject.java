@@ -1,9 +1,9 @@
-package cc.wdev.platform.commons.core.storage.min;
+package cc.wdev.platform.commons.core.storage.aws;
 
 import cc.wdev.platform.commons.core.storage.domain.AbstractFileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
-import io.minio.GenericResponse;
+import com.qcloud.cos.model.COSObject;
 import lombok.*;
 
 import java.io.File;
@@ -16,10 +16,10 @@ import java.io.File;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class MinFileObject extends AbstractFileObject<GenericResponse> implements FileObject<GenericResponse> {
+public class AwsFileObject extends AbstractFileObject<COSObject> implements FileObject<COSObject> {
 
     @Builder.Default
-    private StorageTypeEnum storageType = StorageTypeEnum.MIN;
+    private StorageTypeEnum storageType = StorageTypeEnum.COS;
 
     private String key;
 
@@ -27,6 +27,6 @@ public class MinFileObject extends AbstractFileObject<GenericResponse> implement
 
     private File object;
 
-    private GenericResponse response;
+    private COSObject response;
 
 }

@@ -22,22 +22,19 @@ public class StorageAutoConfiguration {
     public StorageAutoConfiguration(StorageProperties properties) {
         log.info("StorageAutoConfiguration is enabled");
         log.info("Current Storage is {}", properties.getType());
-        log.info("Min Storage is {}", properties.getMin().isEnabled());
+        log.info("Aws Storage is {}", properties.getAws().isEnabled());
         log.info("COS Storage is {}", properties.getCos().isEnabled());
         log.info("OSS Storage is {}", properties.getOss().isEnabled());
     }
 
-    /**
-     * @return {@link StorageFactory}
-     */
     @Bean
     @ConditionalOnMissingBean
-    StorageFactory storageManager(StorageProperties properties) {
+    public StorageFactory storageManager(StorageProperties properties) {
         StorageConfig config = StorageConfig.builder()
             .type(properties.getType())
             .cos(properties.getCos())
             .oss(properties.getOss())
-            .min(properties.getMin())
+            .aws(properties.getAws())
             .build();
         return new StorageFactory(config);
     }

@@ -1,9 +1,9 @@
 package cc.wdev.platform.commons.core.storage.oss;
 
 import cc.wdev.platform.commons.core.storage.StorageService;
+import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
-import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.JacksonUtils;
 import cn.hutool.core.util.StrUtil;
@@ -141,7 +141,7 @@ public class OssStorageServiceImpl implements OssStorageService, StorageService 
             String key = StorageUtils.generateKey(parameter, name, path);
 
             PutObjectResult result = client.putObject(this.getBucketName(), key, is);
-            log.error("OSS putObject response - [{}].", JacksonUtils.toJson(result));
+            log.info("OSS putObject response - [{}].", JacksonUtils.toJson(result));
 
             return getFile(key, false);
         } finally {

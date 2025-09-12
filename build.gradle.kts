@@ -60,6 +60,7 @@ allprojects {
             mavenBom(rootProject.libs.kotlin.bom.get().toString())
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.bom.get().toString())
+            mavenBom(rootProject.libs.awssdk.bom.get().toString())
         }
         dependencies {
             dependency(rootProject.libs.nimbus.jose.jwt.get().toString())

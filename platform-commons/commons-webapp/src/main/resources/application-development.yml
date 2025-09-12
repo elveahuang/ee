@@ -1,0 +1,61 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    security:
+        user:
+            name: admin
+            password: admin
+    datasource:
+        name: master
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/ee_sample?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: root
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+    ai:
+        model:
+            chat: openai
+            image: openai
+            moderation: openai
+            embedding:
+                text: openai
+                multimodal: openai
+            audio:
+                speech: openai
+                transcription: openai
+        openai:
+            api-key: xxx
+            base-url: https://api.deepseek.com/v1/completions
+            chat:
+                options:
+                    model: deepseek-chat
+        dashscope:
+            api-key: xxx
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    cache:
+        enabled: true
+    data:
+        core:
+            enabled: true
+        jpa:
+            enabled: true
+        mybatis:
+            enabled: true
+    storage:
+        enabled: true
+        oss:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+            endpoint:
+            bucket-name:

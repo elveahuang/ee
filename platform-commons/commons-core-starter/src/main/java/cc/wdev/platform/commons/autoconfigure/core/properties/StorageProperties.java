@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.autoconfigure.core.properties;
 
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
-import cc.wdev.platform.commons.core.storage.min.MinStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.Data;
@@ -21,15 +21,15 @@ public class StorageProperties {
 
     private boolean enabled = false;
 
-    private StorageTypeEnum type = StorageTypeEnum.MIN;
+    private StorageTypeEnum type = StorageTypeEnum.AWS;
+
+    @NestedConfigurationProperty
+    private AwsStorageConfig aws = new AwsStorageConfig();
 
     @NestedConfigurationProperty
     private CosStorageConfig cos = new CosStorageConfig();
 
     @NestedConfigurationProperty
     private OssStorageConfig oss = new OssStorageConfig();
-
-    @NestedConfigurationProperty
-    private MinStorageConfig min = new MinStorageConfig();
 
 }
