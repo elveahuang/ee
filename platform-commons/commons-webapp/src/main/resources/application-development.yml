@@ -53,6 +53,13 @@ platform:
             enabled: true
     storage:
         enabled: true
+        type: aws
+        aws:
+            enabled: false
+            access-key:
+            secret-key:
+            endpoint:
+            bucket-name:
         oss:
             enabled: false
             access-key-id:

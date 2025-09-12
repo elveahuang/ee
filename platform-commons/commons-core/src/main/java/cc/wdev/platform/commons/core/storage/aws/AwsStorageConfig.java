@@ -15,6 +15,12 @@ public class AwsStorageConfig implements Serializable {
      */
     private boolean enabled = false;
     /**
+     * 附加参数
+     * 需要根据实际服务商进行中配置
+     */
+    private boolean pathStyleEnabled = false;
+    private boolean chunkedEncodingEnabled = false;
+    /**
      * Endpoint
      */
     private String endpoint = "";
@@ -29,9 +35,9 @@ public class AwsStorageConfig implements Serializable {
     /**
      * Region
      */
-    private String region = Region.US_EAST_1.toString();
+    private String region = Region.AWS_CN_GLOBAL.toString();
     /**
-     * BucketName
+     * Bucket
      */
     private String bucketName = "";
 }

@@ -25,6 +25,10 @@ public record StorageFactory(StorageConfig config) {
         };
     }
 
+    public StorageConfig getConfig() {
+        return this.config;
+    }
+
     public AwsStorageService getAwsStorageService() {
         return this.getAwsStorageService(this.config.getAws());
     }

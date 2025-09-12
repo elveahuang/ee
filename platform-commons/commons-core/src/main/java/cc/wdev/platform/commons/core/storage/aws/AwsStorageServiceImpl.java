@@ -5,6 +5,7 @@ import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
 import cc.wdev.platform.commons.exception.ServiceException;
+import cn.hutool.core.io.IoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -14,6 +15,7 @@ import software.amazon.awssdk.core.async.BlockingInputStreamAsyncRequestBody;
 import software.amazon.awssdk.http.nio.netty.NettyNioAsyncHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3AsyncClient;
+import software.amazon.awssdk.services.s3.S3Configuration;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.transfer.s3.S3TransferManager;
@@ -21,6 +23,7 @@ import software.amazon.awssdk.transfer.s3.model.CompletedUpload;
 import software.amazon.awssdk.transfer.s3.model.Upload;
 import software.amazon.awssdk.transfer.s3.progress.LoggingTransferListener;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -44,15 +47,19 @@ public record AwsStorageServiceImpl(AwsStorageConfig config) implements AwsStora
      */
     @Override
     public S3AsyncClient getClient() {
-        StaticCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(
-            AwsBasicCredentials.create(this.config.getAccessKey(), this.config.getSecretKey()));
+        StaticCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(AwsBasicCredentials.create(this.config.getAccessKey(), this.config.getSecretKey()));
 
         return S3AsyncClient.builder()
             .credentialsProvider(credentialsProvider)
             .region(Region.of(this.config.getRegion()))
             .endpointOverride(URI.create(this.config.getEndpoint()))
-            .forcePathStyle(StorageUtils.isPathStyle(this.config.getEndpoint()))
-            .httpClient(NettyNioAsyncHttpClient.builder().connectionTimeout(Duration.ofSeconds(60)).build())
+            .httpClient(NettyNioAsyncHttpClient.builder()
+                .connectionTimeout(Duration.ofSeconds(60))
+                .build())
+            .serviceConfiguration(S3Configuration.builder()
+                .pathStyleAccessEnabled(this.config.isPathStyleEnabled())
+                .chunkedEncodingEnabled(this.config.isChunkedEncodingEnabled())
+                .build())
             .build();
     }
 
@@ -139,9 +146,14 @@ public record AwsStorageServiceImpl(AwsStorageConfig config) implements AwsStora
     @Override
     public FileObject<?> uploadFile(InputStream is, FileParameter parameter) {
         S3AsyncClient client = null;
+        S3TransferManager transferManager = null;
         try {
+            if (!(is instanceof ByteArrayInputStream)) {
+                is = new ByteArrayInputStream(IoUtil.readBytes(is));
+            }
+
             client = this.getClient();
-            S3TransferManager transferManager = this.getTransferManager(client);
+            transferManager = this.getTransferManager(client);
 
             String key = StorageUtils.generateFileKey(parameter);
 
