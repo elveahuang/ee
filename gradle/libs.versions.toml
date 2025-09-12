@@ -11,7 +11,7 @@ mcpVersion = "0.10.0"
 nettyVersion = "4.1.127.Final"
 cosidVersion = "2.13.3"
 redissonVersion = "3.51.0"
-kotlinVersion = "2.2.10"
+kotlinVersion = "2.2.20"
 groovyVersion = "5.0.0"
 hutoolVersion = "5.8.40"
 mockitoVersion = "5.19.0"
@@ -193,29 +193,29 @@ tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standar
 
 # SDK
 minio = { module = "io.minio:minio", version = "8.5.17" }
-s3 = { module = "software.amazon.awssdk:s3", version = "2.33.3" }
+s3 = { module = "software.amazon.awssdk:s3", version = "2.33.7" }
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
-dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.33" }
+dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.34" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.6" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.8" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-cos_api = { module = "com.qcloud:cos_api", version = "5.6.251" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1333" }
+cos_api = { module = "com.qcloud:cos_api", version = "5.6.253" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1337" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1297" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1318" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1337" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.23" }
-zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.4.1" }
-openai-java = { module = "com.openai:openai-java", version = "3.4.1" }
-ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.30" }
-telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.0.0" }
-telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.0.0" }
+zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.5" }
+openai-java = { module = "com.openai:openai-java", version = "3.5.1" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.31" }
+telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.1.0" }
+telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.1.0" }
 
 jakarta-annotation = { module = "jakarta.annotation:jakarta.annotation-api" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api" }
@@ -249,7 +249,7 @@ libreoffice-ridl = { module = "org.libreoffice:ridl", version = "24.8.4" }
 libreoffice-unoil = { module = "org.libreoffice:unoil", version = "24.8.4" }
 
 json = { module = "org.json:json", version = "20250517" }
-gson = { module = "com.google.code.gson:gson", version = "2.13.1" }
+gson = { module = "com.google.code.gson:gson", version = "2.13.2" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
@@ -288,12 +288,12 @@ dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
-geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.3.1" }
+geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.4.0" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 guava = { module = "com.google.guava:guava", version = "33.4.8-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2" }
-nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.4.2" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.27.1" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.5" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.28" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.4" }
 logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
