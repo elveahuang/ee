@@ -39,5 +39,5 @@ public class AwsStorageConfig implements Serializable {
     /**
      * Bucket
      */
-    private String bucketName = "";
+    private String bucket = "";
 }

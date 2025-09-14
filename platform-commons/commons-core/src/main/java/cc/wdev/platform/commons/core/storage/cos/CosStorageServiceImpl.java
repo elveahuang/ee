@@ -1,9 +1,10 @@
 package cc.wdev.platform.commons.core.storage.cos;
 
 import cc.wdev.platform.commons.core.storage.StorageService;
+import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
-import cc.wdev.platform.commons.core.storage.StorageUtils;
+import cc.wdev.platform.commons.core.storage.domain.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
@@ -19,6 +20,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * 阿里云存储服务
@@ -28,24 +30,15 @@ import java.io.InputStream;
  * @see StorageService
  */
 @Slf4j
-public class CosStorageServiceImpl implements CosStorageService, StorageService {
-
-    private final CosStorageConfig config;
-
-    /**
-     * 构造函数
-     *
-     * @param config 存储设置
-     */
-    public CosStorageServiceImpl(CosStorageConfig config) {
-        this.config = config;
-    }
+public record CosStorageServiceImpl(CosStorageConfig config) implements CosStorageService, StorageService {
 
     /**
      * @see CosStorageService#getClient()
      */
     @Override
     public COSClient getClient() {
+        log.info("Create COS Client. {}", config.getAccessKey());
+
         COSCredentials credentials = new BasicCOSCredentials(this.config.getAccessKey(), this.config.getSecretKey());
         Region region = new Region(this.config.getEndpoint());
         ClientConfig clientConfig = new ClientConfig(region);
@@ -67,7 +60,7 @@ public class CosStorageServiceImpl implements CosStorageService, StorageService 
      */
     @Override
     public String getBucketName() {
-        return this.config.getBucketName();
+        return this.config.getBucket();
     }
 
     /**
@@ -79,10 +72,18 @@ public class CosStorageServiceImpl implements CosStorageService, StorageService 
     }
 
     /**
-     * @see StorageService#getFile(String, boolean)
+     * @see StorageService#getUrl(GenerateUrlRequest)
      */
     @Override
-    public FileObject<?> getFile(String path, boolean withLocalTempFile) {
+    public FileObject<?> getUrl(GenerateUrlRequest request) {
+        return null;
+    }
+
+    /**
+     * @see StorageService#getFile(String)
+     */
+    @Override
+    public FileObject<?> getFile(String path) {
         COSClient client = null;
         try {
             client = getClient();
@@ -91,12 +92,9 @@ public class CosStorageServiceImpl implements CosStorageService, StorageService 
             COSObject object = client.getObject(getBucketName(), path);
 
             // 创建本地临时目录文件
-            File localTempFile = null;
-            if (withLocalTempFile) {
-                localTempFile = StorageUtils.newTempFile(StorageUtils.generateFilename(path));
-                try (InputStream is = new FileInputStream(localTempFile)) {
-                    FileUtils.writeByteArrayToFile(localTempFile, IOUtils.toByteArray(is));
-                }
+            File localTempFile = StorageUtils.newTempFile(StorageUtils.generateFilename(path));
+            try (InputStream is = new FileInputStream(localTempFile)) {
+                FileUtils.writeByteArrayToFile(localTempFile, IOUtils.toByteArray(is));
             }
 
             // 构建文件信息
@@ -109,6 +107,9 @@ public class CosStorageServiceImpl implements CosStorageService, StorageService 
         }
     }
 
+    /**
+     * @see StorageService#uploadFile(InputStream, FileParameter)
+     */
     @Override
     public FileObject<?> uploadFile(InputStream is, FileParameter parameter) {
         COSClient client = null;
@@ -120,6 +121,14 @@ public class CosStorageServiceImpl implements CosStorageService, StorageService 
         } finally {
             this.closeClient(client);
         }
+    }
+
+    /**
+     * @see StorageService#download(String, OutputStream)
+     */
+    @Override
+    public void download(String key, OutputStream out) {
+
     }
 
 }

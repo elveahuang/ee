@@ -26,7 +26,15 @@ public class CosStorageConfig implements Serializable {
      */
     private String secretKey = "";
     /**
-     * BucketName
+     * Bucket
      */
-    private String bucketName = "";
+    private String bucket = "";
+    /**
+     * 区域
+     */
+    private String region = "";
+    /**
+     * 域名
+     */
+    private String domain = "";
 }

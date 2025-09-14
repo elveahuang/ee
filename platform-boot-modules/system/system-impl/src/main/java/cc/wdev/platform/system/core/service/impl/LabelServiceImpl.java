@@ -119,7 +119,7 @@ public class LabelServiceImpl extends BaseCachingEntityService<LabelEntity, Long
                 JsonObject json = new JsonObject();
                 labelMap.get(langTypeEnum).forEach(json::addProperty);
 
-                StorageService storageService = this.storage.getMinStorageService();
+                StorageService storageService = this.storage.getStorageService();
 
                 String tempFileName = StorageUtils.generateExtFilename("properties");
                 File tempFile = StorageUtils.newTempFile(tempFileName);

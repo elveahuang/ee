@@ -3,8 +3,8 @@ package cc.wdev.platform.commons.core.storage.aws;
 import cc.wdev.platform.commons.core.storage.domain.AbstractFileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
-import com.qcloud.cos.model.COSObject;
 import lombok.*;
+import software.amazon.awssdk.services.s3.model.S3Response;
 
 import java.io.File;
 
@@ -16,10 +16,10 @@ import java.io.File;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class AwsFileObject extends AbstractFileObject<COSObject> implements FileObject<COSObject> {
+public class AwsFileObject extends AbstractFileObject<S3Response> implements FileObject<S3Response> {
 
     @Builder.Default
-    private StorageTypeEnum storageType = StorageTypeEnum.COS;
+    private StorageTypeEnum storageType = StorageTypeEnum.AWS;
 
     private String key;
 
@@ -27,6 +27,6 @@ public class AwsFileObject extends AbstractFileObject<COSObject> implements File
 
     private File object;
 
-    private COSObject response;
+    private S3Response response;
 
 }

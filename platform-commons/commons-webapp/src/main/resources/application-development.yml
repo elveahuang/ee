@@ -59,10 +59,14 @@ platform:
             access-key:
             secret-key:
             endpoint:
-            bucket-name:
+            bucket:
+            region:
+            path-style-enabled: false
+            chunked-encoding-enabled: false
         oss:
             enabled: false
             access-key-id:
             access-key-secret:
             endpoint:
-            bucket-name:
+            bucket:
+            region:

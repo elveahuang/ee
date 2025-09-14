@@ -4,37 +4,35 @@ import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
+import cc.wdev.platform.commons.core.storage.domain.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
-import cn.hutool.core.io.IoUtil;
+import cc.wdev.platform.commons.utils.JacksonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.core.async.BlockingInputStreamAsyncRequestBody;
-import software.amazon.awssdk.http.nio.netty.NettyNioAsyncHttpClient;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3AsyncClient;
+import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3Configuration;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-import software.amazon.awssdk.transfer.s3.S3TransferManager;
-import software.amazon.awssdk.transfer.s3.model.CompletedUpload;
-import software.amazon.awssdk.transfer.s3.model.Upload;
-import software.amazon.awssdk.transfer.s3.progress.LoggingTransferListener;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
-import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 
 /**
- * 亚马逊存储服务
- *
  * @author elvea
  * @see AwsStorageService
  * @see StorageService
@@ -46,36 +44,20 @@ public record AwsStorageServiceImpl(AwsStorageConfig config) implements AwsStora
      * @see AwsStorageService#getClient()
      */
     @Override
-    public S3AsyncClient getClient() {
-        StaticCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(AwsBasicCredentials.create(this.config.getAccessKey(), this.config.getSecretKey()));
-
-        return S3AsyncClient.builder()
-            .credentialsProvider(credentialsProvider)
-            .region(Region.of(this.config.getRegion()))
+    public S3Client getClient() {
+        return S3Client.builder()
             .endpointOverride(URI.create(this.config.getEndpoint()))
-            .httpClient(NettyNioAsyncHttpClient.builder()
-                .connectionTimeout(Duration.ofSeconds(60))
-                .build())
-            .serviceConfiguration(S3Configuration.builder()
-                .pathStyleAccessEnabled(this.config.isPathStyleEnabled())
-                .chunkedEncodingEnabled(this.config.isChunkedEncodingEnabled())
-                .build())
+            .region(Region.of(this.config.getRegion()))
+            .credentialsProvider(this.getCredentialsProvider())
+            .serviceConfiguration(this.getS3Configuration())
             .build();
     }
 
     /**
-     * @see AwsStorageService#getTransferManager(S3AsyncClient)
+     * @see AwsStorageService#closeClient(S3Client)
      */
     @Override
-    public S3TransferManager getTransferManager(S3AsyncClient client) {
-        return S3TransferManager.builder().s3Client(client).build();
-    }
-
-    /**
-     * @see AwsStorageService#closeClient(S3AsyncClient)
-     */
-    @Override
-    public void closeClient(S3AsyncClient client) {
+    public void closeClient(S3Client client) {
         if (client != null) {
             client.close();
         }
@@ -86,7 +68,7 @@ public record AwsStorageServiceImpl(AwsStorageConfig config) implements AwsStora
      */
     @Override
     public String getBucketName() {
-        return this.config.getBucketName();
+        return this.config.getBucket();
     }
 
     /**
@@ -97,86 +79,109 @@ public record AwsStorageServiceImpl(AwsStorageConfig config) implements AwsStora
         return null;
     }
 
-    /**
-     * @see StorageService#getFile(String, boolean)
-     */
     @Override
-    public FileObject<?> getFile(String path, boolean withLocalTempFile) {
-        S3AsyncClient client = null;
-        try {
-            client = getClient();
+    public FileObject<?> getUrl(GenerateUrlRequest request) {
+        try (S3Presigner s3Presigner = getS3Presigner()) {
+            GetObjectRequest objectRequest = GetObjectRequest.builder()
+                .bucket(this.getBucketName())
+                .key(request.getKey())
+                .build();
 
-            // 获取云存储文件信息
-            GetObjectRequest request = GetObjectRequest.builder()
-                .bucket(this.config.getBucketName())
-                .key(path).build();
-            CompletableFuture<GetObjectResponse> future = client.getObject(request, Paths.get(path));
-            future.whenComplete((response, e) -> {
-                try {
-                    if (response != null) {
-                        System.out.println("Object downloaded. Details: " + response);
-                    } else {
-                        log.error("Object error. ", e);
-                    }
-                } finally {
-                    log.info("Object downloaded. Details: %s");
-                }
-            });
-            future.join();
+            GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(10))
+                .getObjectRequest(objectRequest)
+                .build();
 
-            // 创建本地临时目录文件
-            File localTempFile = null;
-            if (withLocalTempFile) {
-                localTempFile = StorageUtils.newTempFile(StorageUtils.generateFilename(path));
-                try (InputStream is = new FileInputStream(localTempFile)) {
-                    FileUtils.writeByteArrayToFile(localTempFile, IOUtils.toByteArray(is));
-                }
-            }
-
-            // 构建文件信息
-            return AwsFileObject.builder().key(path).object(localTempFile).build();
-        } catch (Exception e) {
-            log.error("fail to get aws file with key - {}", path, e);
-            throw new ServiceException("Fail to get AWS file.", e);
-        } finally {
-            this.closeClient(client);
+            PresignedGetObjectRequest presignedRequest = s3Presigner.presignGetObject(presignRequest);
+            log.info("Presigned URL: [{}]", presignedRequest.url().toString());
+            log.info("HTTP method: [{}]", presignedRequest.httpRequest().method());
+            return AwsFileObject.builder().key(request.getKey()).url(presignedRequest.url().toExternalForm()).build();
         }
     }
 
+    /**
+     * @see StorageService#getFile(String)
+     */
     @Override
-    public FileObject<?> uploadFile(InputStream is, FileParameter parameter) {
-        S3AsyncClient client = null;
-        S3TransferManager transferManager = null;
-        try {
-            if (!(is instanceof ByteArrayInputStream)) {
-                is = new ByteArrayInputStream(IoUtil.readBytes(is));
-            }
-
-            client = this.getClient();
-            transferManager = this.getTransferManager(client);
-
-            String key = StorageUtils.generateFileKey(parameter);
-
-            BlockingInputStreamAsyncRequestBody body = BlockingInputStreamAsyncRequestBody.builder()
-                .contentLength(parameter.getSize())
-                .subscribeTimeout(Duration.ofSeconds(120))
+    public FileObject<?> getFile(String path) {
+        try (S3Client client = getClient()) {
+            GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(this.config.getBucket())
+                .key(path)
                 .build();
 
-            Upload upload = transferManager.upload(builder -> builder.requestBody(body)
-                .addTransferListener(LoggingTransferListener.create())
-                .putObjectRequest(y -> y.bucket(this.config.getBucketName())
-                    .key(key)
-                    .contentType(parameter.getContentType())
-                    .build())
-                .build());
-            body.writeInputStream(is);
-
-            CompletedUpload uploadResult = upload.completionFuture().join();
-            String eTag = uploadResult.response().eTag();
-            return AwsFileObject.builder().build();
-        } finally {
-            this.closeClient(client);
+            try (ResponseInputStream<GetObjectResponse> is = client.getObject(request)) {
+                File localTempFile = StorageUtils.newTempFile(StorageUtils.generateFilename(path));
+                FileUtils.writeByteArrayToFile(localTempFile, IOUtils.toByteArray(is));
+                // 构建文件信息
+                return AwsFileObject.builder().key(path).object(localTempFile).build();
+            }
+        } catch (Exception e) {
+            throw new ServiceException("Fail to get AWS file.", e);
         }
+    }
+
+    /**
+     * @see StorageService#uploadFile(InputStream, FileParameter)
+     */
+    @Override
+    public FileObject<?> uploadFile(InputStream is, FileParameter parameter) throws Exception {
+        try (S3Client client = this.getClient()) {
+            // 处理上传文件参数
+            String key = StorageUtils.generateFileKey(parameter);
+            PutObjectRequest request = PutObjectRequest.builder()
+                .key(key)
+                .bucket(this.config.getBucket())
+                .build();
+            RequestBody body = RequestBody.fromInputStream(is, parameter.getSize());
+
+            // 上传文件
+            PutObjectResponse response = client.putObject(request, body);
+            log.info("AWS putObject response - [{}].", JacksonUtils.toJson(response));
+
+            return AwsFileObject.builder().key(key).response(response).build();
+        }
+    }
+
+    /**
+     * @see StorageService#download(String, OutputStream)
+     */
+    @Override
+    public void download(String path, OutputStream os) {
+        try (S3Client client = this.getClient()) {
+            GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(this.config.getBucket())
+                .key(path)
+                .build();
+            try (ResponseInputStream<GetObjectResponse> is = client.getObject(request)) {
+                log.info("AWS getObject download response - [{}].", JacksonUtils.toJson(is.response()));
+
+                is.transferTo(os);
+            }
+        } catch (Exception e) {
+            throw new ServiceException("Fail to download AWS file.", e);
+        }
+    }
+
+    private S3Presigner getS3Presigner() {
+        return S3Presigner.builder()
+            .s3Client(getClient())
+            .endpointOverride(URI.create(this.config.getEndpoint()))
+            .region(Region.of(this.config.getRegion()))
+            .credentialsProvider(this.getCredentialsProvider())
+            .serviceConfiguration(this.getS3Configuration())
+            .build();
+    }
+
+    private S3Configuration getS3Configuration() {
+        return S3Configuration.builder()
+            .pathStyleAccessEnabled(this.config.isPathStyleEnabled())
+            .chunkedEncodingEnabled(this.config.isChunkedEncodingEnabled())
+            .build();
+    }
+
+    private AwsCredentialsProvider getCredentialsProvider() {
+        return StaticCredentialsProvider.create(AwsBasicCredentials.create(this.config.getAccessKey(), this.config.getSecretKey()));
     }
 
 }

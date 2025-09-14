@@ -2,13 +2,11 @@ package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.core.storage.domain.FileObject;
 import cc.wdev.platform.commons.core.storage.domain.FileParameter;
+import cc.wdev.platform.commons.core.storage.domain.GenerateUrlRequest;
 import cc.wdev.platform.commons.utils.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * 存储服务
@@ -18,16 +16,21 @@ import java.io.InputStream;
 public interface StorageService {
 
     /**
-     * 获取文件信息
+     * 获取文件链接
      */
-    default FileObject<?> getFile(String path) {
-        return this.getFile(path, false);
+    default FileObject<?> getUrl(String key) {
+        return this.getUrl(GenerateUrlRequest.builder().key(key).build());
     }
+
+    /**
+     * 获取文件链接
+     */
+    FileObject<?> getUrl(GenerateUrlRequest request);
 
     /**
      * 获取文件信息
      */
-    FileObject<?> getFile(String path, boolean withLocalTempFile);
+    FileObject<?> getFile(String key);
 
     /**
      * 上传文件
@@ -73,5 +76,11 @@ public interface StorageService {
      * 上传文件
      */
     FileObject<?> uploadFile(InputStream is, FileParameter parameter) throws Exception;
+
+    /**
+     * 下载文件
+     */
+    default void download(String key, OutputStream out) {
+    }
 
 }

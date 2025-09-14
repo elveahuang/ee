@@ -28,11 +28,15 @@ public class OssStorageConfig implements Serializable {
      */
     private String accessKeySecret = "";
     /**
-     * Bucket Name
+     * Bucket
      */
-    private String bucketName = "";
+    private String bucket = "";
     /**
-     * 自定义域名
+     * 区域
+     */
+    private String region = "";
+    /**
+     * 域名
      */
     private String domain = "";
 }
