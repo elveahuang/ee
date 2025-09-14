@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.core.storage.model.FileParameter;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.core.storage.model.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.JacksonUtils;
@@ -25,6 +26,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 /**
@@ -157,14 +159,38 @@ public record OssStorageService(OssStorageConfig config) implements StorageServi
         try {
             client = getClient();
 
-            String name = StorageUtils.generateFilename(parameter);
-            String path = StorageUtils.generatePath(parameter);
-            String key = StorageUtils.generateKey(parameter, name, path);
+            // 处理请求参数
+            String key = StorageUtils.generateFileKey(parameter);
 
-            PutObjectResult result = client.putObject(this.getBucket(), key, is);
-            log.info("OSS putObject response - [{}].", JacksonUtils.toJson(result));
+            // 上传文件
+            PutObjectResult response = client.putObject(this.getBucket(), key, is);
+            log.info("OSS putObject response - [{}].", JacksonUtils.toJson(response));
 
-            return OssFileObject.builder().response(result).key(key).build();
+            // 处理响应结果
+            FileUploadResult result = FileUploadResult.builder().key(key).build();
+            return OssFileObject.builder().response(response).result(result).key(key).build();
+        } finally {
+            this.closeClient(client);
+        }
+    }
+
+    /**
+     * @see StorageService#download(String, OutputStream)
+     */
+    @Override
+    public void download(String key, OutputStream out) {
+        OSS client = null;
+        try {
+            client = getClient();
+
+            OSSObject object = client.getObject(new GetObjectRequest(getBucket(), key));
+            log.info("OSS getObject download response - [{}].", JacksonUtils.toJson(object.getResponse()));
+
+            try (InputStream is = object.getObjectContent()) {
+                is.transferTo(out);
+            }
+        } catch (Exception e) {
+            throw new ServiceException("Fail to download OSS file.", e);
         } finally {
             this.closeClient(client);
         }

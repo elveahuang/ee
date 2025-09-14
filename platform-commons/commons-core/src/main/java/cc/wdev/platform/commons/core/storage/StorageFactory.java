@@ -6,10 +6,7 @@ import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageService;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
-import com.aliyun.oss.OSS;
-import com.qcloud.cos.COSClient;
 import lombok.extern.slf4j.Slf4j;
-import software.amazon.awssdk.services.s3.S3Client;
 
 /**
  * @author elvea
@@ -29,27 +26,27 @@ public record StorageFactory(StorageConfig config) {
         return this.config;
     }
 
-    public StorageService<S3Client> getAwsStorageService() {
+    public AwsStorageService getAwsStorageService() {
         return this.getAwsStorageService(this.config.getAws());
     }
 
-    public StorageService<S3Client> getAwsStorageService(AwsStorageConfig config) {
+    public AwsStorageService getAwsStorageService(AwsStorageConfig config) {
         return new AwsStorageService(config);
     }
 
-    public StorageService<OSS> getOssStorageService() {
+    public OssStorageService getOssStorageService() {
         return this.getOssStorageService(this.config.getOss());
     }
 
-    public StorageService<OSS> getOssStorageService(OssStorageConfig config) {
+    public OssStorageService getOssStorageService(OssStorageConfig config) {
         return new OssStorageService(config);
     }
 
-    public StorageService<COSClient> getCosStorageService() {
+    public CosStorageService getCosStorageService() {
         return this.getCosStorageService(this.config.getCos());
     }
 
-    public StorageService<COSClient> getCosStorageService(CosStorageConfig config) {
+    public CosStorageService getCosStorageService(CosStorageConfig config) {
         return new CosStorageService(config);
     }
 

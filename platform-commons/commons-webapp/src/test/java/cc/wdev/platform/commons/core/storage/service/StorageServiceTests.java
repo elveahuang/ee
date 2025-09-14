@@ -2,8 +2,9 @@ package cc.wdev.platform.commons.core.storage.service;
 
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
-import cc.wdev.platform.commons.core.storage.StorageService;
+import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
 import cc.wdev.platform.commons.core.storage.model.FileObject;
+import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class StorageServiceTests extends BaseTests {
 
     @Test
     public void awsStorageServiceTest() throws Exception {
-        StorageService<?> service = this.storage.getAwsStorageService();
+        AwsStorageService service = this.storage.getAwsStorageService();
         Assertions.assertNotNull(service);
 
         ClassPathResource resource = new ClassPathResource("html/tpl.html");
@@ -36,7 +37,7 @@ public class StorageServiceTests extends BaseTests {
 
     @Test
     public void ossStorageServiceTest() throws Exception {
-        StorageService<?> service = this.storage.getOssStorageService();
+        OssStorageService service = this.storage.getOssStorageService();
         Assertions.assertNotNull(service);
 
         ClassPathResource resource = new ClassPathResource("html/tpl.html");

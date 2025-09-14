@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.core.storage.oss;
 
 import cc.wdev.platform.commons.core.storage.model.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import com.aliyun.oss.model.GenericResult;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,8 @@ public class OssFileObject implements FileObject<GenericResult> {
     private File object;
 
     private String url;
+
+    private FileUploadResult result;
 
     private GenericResult response;
 

@@ -4,8 +4,10 @@ import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.core.storage.model.FileParameter;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.core.storage.model.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
+import cc.wdev.platform.commons.utils.JacksonUtils;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -118,13 +120,21 @@ public record CosStorageService(CosStorageConfig config) implements StorageServi
      * @see StorageService#uploadFile(InputStream, FileParameter)
      */
     @Override
-    public FileObject<?> uploadFile(InputStream is, FileParameter parameter) {
+    public FileObject<?> uploadFile(InputStream is, FileParameter parameter) throws Exception {
         COSClient client = null;
         try {
             client = this.getClient();
+
+            // 处理请求参数
             String key = StorageUtils.generateFileKey(parameter);
-            PutObjectResult result = client.putObject(getBucket(), key, is, null);
-            return CosFileObject.builder().build();
+
+            // 上传文件
+            PutObjectResult response = client.putObject(getBucket(), key, is, null);
+            log.info("OSS putObject response - [{}].", JacksonUtils.toJson(response));
+
+            // 处理响应结果
+            FileUploadResult result = FileUploadResult.builder().key(key).build();
+            return CosFileObject.builder().result(result).key(key).build();
         } finally {
             this.closeClient(client);
         }
@@ -135,7 +145,21 @@ public record CosStorageService(CosStorageConfig config) implements StorageServi
      */
     @Override
     public void download(String key, OutputStream out) {
+        COSClient client = null;
+        try {
+            client = getClient();
 
+            COSObject object = client.getObject(getBucket(), key);
+            log.info("OSS getObject download response - [{}].", JacksonUtils.toJson(object.getKey()));
+
+            try (InputStream is = object.getObjectContent()) {
+                is.transferTo(out);
+            }
+        } catch (Exception e) {
+            throw new ServiceException("Fail to download COS file.", e);
+        } finally {
+            this.closeClient(client);
+        }
     }
 
 }

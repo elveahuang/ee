@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.core.storage.cos;
 
 import cc.wdev.platform.commons.core.storage.model.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import com.qcloud.cos.model.COSObject;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,8 @@ public class CosFileObject implements FileObject<COSObject> {
     private String url;
 
     private File object;
+
+    private FileUploadResult result;
 
     private COSObject response;
 

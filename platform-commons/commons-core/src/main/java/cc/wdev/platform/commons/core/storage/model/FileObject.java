@@ -31,6 +31,11 @@ public interface FileObject<R> extends Serializable {
     File getObject();
 
     /**
+     * 上传结果
+     */
+    FileUploadResult getResult();
+
+    /**
      * 服务响应
      */
     R getResponse();

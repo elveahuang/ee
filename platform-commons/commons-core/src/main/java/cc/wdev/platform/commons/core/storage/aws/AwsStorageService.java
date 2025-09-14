@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.StorageUtils;
 import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.core.storage.model.FileParameter;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.core.storage.model.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.JacksonUtils;
@@ -138,7 +139,7 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
     @Override
     public FileObject<?> uploadFile(InputStream is, FileParameter parameter) throws Exception {
         try (S3Client client = this.getClient()) {
-            // 处理上传文件参数
+            // 处理请求参数
             String key = StorageUtils.generateFileKey(parameter);
             PutObjectRequest request = PutObjectRequest.builder()
                 .key(key)
@@ -150,7 +151,9 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
             PutObjectResponse response = client.putObject(request, body);
             log.info("AWS putObject response - [{}].", JacksonUtils.toJson(response));
 
-            return AwsFileObject.builder().key(key).response(response).etag(response.eTag()).build();
+            // 处理响应结果
+            FileUploadResult result = FileUploadResult.builder().key(key).build();
+            return AwsFileObject.builder().key(key).response(response).etag(response.eTag()).result(result).build();
         }
     }
 
@@ -164,9 +167,9 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
                 .bucket(this.config.getBucket())
                 .key(path)
                 .build();
+
             try (ResponseInputStream<GetObjectResponse> is = client.getObject(request)) {
                 log.info("AWS getObject download response - [{}].", JacksonUtils.toJson(is.response()));
-
                 is.transferTo(os);
             }
         } catch (Exception e) {

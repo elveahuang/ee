@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.core.storage.aws;
 
 import cc.wdev.platform.commons.core.storage.model.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,5 +32,7 @@ public class AwsFileObject implements FileObject<S3Response> {
     private File object;
 
     private S3Response response;
+
+    private FileUploadResult result;
 
 }
