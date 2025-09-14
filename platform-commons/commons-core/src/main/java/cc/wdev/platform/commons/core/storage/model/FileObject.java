@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.storage.domain;
+package cc.wdev.platform.commons.core.storage.model;
 
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 
@@ -13,7 +13,7 @@ public interface FileObject<R> extends Serializable {
     /**
      * 存储类型
      */
-    StorageTypeEnum getStorageType();
+    StorageTypeEnum getType();
 
     /**
      * 文件标识

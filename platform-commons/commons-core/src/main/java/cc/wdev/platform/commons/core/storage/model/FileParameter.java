@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.storage.domain;
+package cc.wdev.platform.commons.core.storage.model;
 
 import cc.wdev.platform.commons.enums.FileAccessTypeEnum;
 import lombok.AllArgsConstructor;

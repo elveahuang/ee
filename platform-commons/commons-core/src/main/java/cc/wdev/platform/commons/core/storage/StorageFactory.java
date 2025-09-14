@@ -2,14 +2,14 @@ package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
-import cc.wdev.platform.commons.core.storage.aws.AwsStorageServiceImpl;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
 import cc.wdev.platform.commons.core.storage.cos.CosStorageService;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageServiceImpl;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
-import cc.wdev.platform.commons.core.storage.oss.OssStorageServiceImpl;
+import com.aliyun.oss.OSS;
+import com.qcloud.cos.COSClient;
 import lombok.extern.slf4j.Slf4j;
+import software.amazon.awssdk.services.s3.S3Client;
 
 /**
  * @author elvea
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public record StorageFactory(StorageConfig config) {
 
-    public StorageService getStorageService() {
+    public StorageService<?> getStorageService() {
         return switch (this.config.getType()) {
             case COS -> getCosStorageService();
             case OSS -> getOssStorageService();
@@ -29,28 +29,28 @@ public record StorageFactory(StorageConfig config) {
         return this.config;
     }
 
-    public AwsStorageService getAwsStorageService() {
+    public StorageService<S3Client> getAwsStorageService() {
         return this.getAwsStorageService(this.config.getAws());
     }
 
-    public AwsStorageService getAwsStorageService(AwsStorageConfig config) {
-        return new AwsStorageServiceImpl(config);
+    public StorageService<S3Client> getAwsStorageService(AwsStorageConfig config) {
+        return new AwsStorageService(config);
     }
 
-    public OssStorageService getOssStorageService() {
+    public StorageService<OSS> getOssStorageService() {
         return this.getOssStorageService(this.config.getOss());
     }
 
-    public OssStorageService getOssStorageService(OssStorageConfig config) {
-        return new OssStorageServiceImpl(config);
+    public StorageService<OSS> getOssStorageService(OssStorageConfig config) {
+        return new OssStorageService(config);
     }
 
-    public CosStorageService getCosStorageService() {
+    public StorageService<COSClient> getCosStorageService() {
         return this.getCosStorageService(this.config.getCos());
     }
 
-    public CosStorageService getCosStorageService(CosStorageConfig config) {
-        return new CosStorageServiceImpl(config);
+    public StorageService<COSClient> getCosStorageService(CosStorageConfig config) {
+        return new CosStorageService(config);
     }
 
 }

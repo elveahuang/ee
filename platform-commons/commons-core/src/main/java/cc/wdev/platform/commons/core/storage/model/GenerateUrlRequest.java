@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.storage.domain;
+package cc.wdev.platform.commons.core.storage.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,10 +1,12 @@
 package cc.wdev.platform.commons.core.storage.cos;
 
-import cc.wdev.platform.commons.core.storage.domain.AbstractFileObject;
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import com.qcloud.cos.model.COSObject;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.File;
 
@@ -15,11 +17,10 @@ import java.io.File;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class CosFileObject extends AbstractFileObject<COSObject> implements FileObject<COSObject> {
+public class CosFileObject implements FileObject<COSObject> {
 
     @Builder.Default
-    private StorageTypeEnum storageType = StorageTypeEnum.COS;
+    private StorageTypeEnum type = StorageTypeEnum.COS;
 
     private String key;
 

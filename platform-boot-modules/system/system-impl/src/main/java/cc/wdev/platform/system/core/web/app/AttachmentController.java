@@ -3,7 +3,7 @@ package cc.wdev.platform.system.core.web.app;
 import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;

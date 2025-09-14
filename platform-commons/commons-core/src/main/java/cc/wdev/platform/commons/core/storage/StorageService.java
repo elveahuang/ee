@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.core.storage;
 
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
-import cc.wdev.platform.commons.core.storage.domain.FileParameter;
-import cc.wdev.platform.commons.core.storage.domain.GenerateUrlRequest;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileParameter;
+import cc.wdev.platform.commons.core.storage.model.GenerateUrlRequest;
 import cc.wdev.platform.commons.utils.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +13,32 @@ import java.io.*;
  *
  * @author elvea
  */
-public interface StorageService {
+public interface StorageService<C> {
+
+    /**
+     * 获取客户端
+     */
+    C getClient();
+
+    /**
+     * 关闭客户端
+     */
+    void closeClient(C client);
+
+    /**
+     * 获取存储桶名称
+     */
+    String getBucket();
+
+    /**
+     * 自定义域名
+     */
+    String getEndpoint();
+
+    /**
+     * 自定义域名
+     */
+    String getDomain();
 
     /**
      * 获取文件链接

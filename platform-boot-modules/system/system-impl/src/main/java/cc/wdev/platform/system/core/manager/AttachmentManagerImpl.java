@@ -1,7 +1,7 @@
 package cc.wdev.platform.system.core.manager;
 
 import cc.wdev.platform.commons.core.storage.StorageFactory;
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.system.core.domain.AttachmentFile;
 import cc.wdev.platform.system.core.domain.AttachmentParameter;
 import cc.wdev.platform.system.core.domain.request.AttachmentRelationRequest;

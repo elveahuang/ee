@@ -1,10 +1,12 @@
 package cc.wdev.platform.commons.core.storage.oss;
 
-import cc.wdev.platform.commons.core.storage.domain.AbstractFileObject;
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import com.aliyun.oss.model.GenericResult;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.File;
 
@@ -15,11 +17,10 @@ import java.io.File;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class OssFileObject extends AbstractFileObject<GenericResult> implements FileObject<GenericResult> {
+public class OssFileObject implements FileObject<GenericResult> {
 
     @Builder.Default
-    private StorageTypeEnum storageType = StorageTypeEnum.OSS;
+    private StorageTypeEnum type = StorageTypeEnum.OSS;
 
     private String key;
 

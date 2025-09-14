@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.constants.DateTimeConstants;
-import cc.wdev.platform.commons.core.storage.domain.FileParameter;
+import cc.wdev.platform.commons.core.storage.model.FileParameter;
 import cc.wdev.platform.commons.utils.DateTimeUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cn.hutool.core.util.IdUtil;

@@ -2,9 +2,8 @@ package cc.wdev.platform.commons.core.storage.service;
 
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
-import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
-import cc.wdev.platform.commons.core.storage.domain.FileObject;
-import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
+import cc.wdev.platform.commons.core.storage.StorageService;
+import cc.wdev.platform.commons.core.storage.model.FileObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,36 +19,36 @@ public class StorageServiceTests extends BaseTests {
 
     @Test
     public void awsStorageServiceTest() throws Exception {
-        AwsStorageService service = this.storage.getAwsStorageService();
+        StorageService<?> service = this.storage.getAwsStorageService();
         Assertions.assertNotNull(service);
 
         ClassPathResource resource = new ClassPathResource("html/tpl.html");
-        FileObject<?> object = service.uploadFile(resource.getFile());
-        Assertions.assertNotNull(object);
+        FileObject<?> uploadFileObject = service.uploadFile(resource.getFile());
+        Assertions.assertNotNull(uploadFileObject);
 
-        String key = object.getKey();
-        FileObject<?> fileObject = service.getFile(key);
-        Assertions.assertNotNull(fileObject.getObject());
+        String key = uploadFileObject.getKey();
+        FileObject<?> getFileObject = service.getFile(key);
+        Assertions.assertNotNull(getFileObject.getObject());
 
-        FileObject<?> urlFileObject = service.getUrl(key);
-        Assertions.assertNotNull(urlFileObject.getUrl());
+        FileObject<?> getUrlObject = service.getUrl(key);
+        Assertions.assertNotNull(getUrlObject.getUrl());
     }
 
     @Test
     public void ossStorageServiceTest() throws Exception {
-        OssStorageService service = this.storage.getOssStorageService();
+        StorageService<?> service = this.storage.getOssStorageService();
         Assertions.assertNotNull(service);
 
         ClassPathResource resource = new ClassPathResource("html/tpl.html");
-        FileObject<?> object = service.uploadFile(resource.getFile());
-        Assertions.assertNotNull(object);
+        FileObject<?> uploadFileObject = service.uploadFile(resource.getFile());
+        Assertions.assertNotNull(uploadFileObject);
 
-        String key = object.getKey();
-        FileObject<?> fileObject = service.getFile(key);
-        Assertions.assertNotNull(fileObject.getUrl());
+        String key = uploadFileObject.getKey();
+        FileObject<?> getFileObject = service.getFile(key);
+        Assertions.assertNotNull(getFileObject.getUrl());
 
-        FileObject<?> urlFileObject = service.getUrl(key);
-        Assertions.assertNotNull(urlFileObject.getUrl());
+        FileObject<?> getUrlObject = service.getUrl(key);
+        Assertions.assertNotNull(getUrlObject.getUrl());
     }
 
 }
