@@ -8,8 +8,8 @@ dependencies {
     implementation(rootProject.libs.bundles.mybatis)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
-    implementation(rootProject.libs.bundles.wechat)
     implementation(rootProject.libs.bundles.excel)
+    implementation(rootProject.libs.bundles.im)
     // modules
     api(project(":platform-commons:commons-core"))
     api(project(":platform-cloud-modules:system:system-api"))

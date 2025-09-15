@@ -9,7 +9,7 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.quartz)
-    implementation(rootProject.libs.bundles.wechat)
+    implementation(rootProject.libs.bundles.im)
     implementation(rootProject.libs.bundles.excel)
     implementation(rootProject.libs.bundles.swagger)
     // modules

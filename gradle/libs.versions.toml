@@ -401,10 +401,9 @@ websocketStarter = ["spring-boot-starter-websocket"]
 thymeleaf = ["thymeleaf", "thymeleaf-spring"]
 
 # 定时任务
+xxl = ["xxl-job-core"]
 quartz = ["quartz", "quartz-jobs"]
 quartzStarter = ["spring-boot-starter-quartz"]
-xxlJobCore = ["xxl-job-core"]
-xxlJobStarter = ["xxl-job-core"]
 
 # 爬虫
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
@@ -419,14 +418,9 @@ office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", 
 officeStarter = ["jodconverter-spring-boot-starter"]
 
 # 开放接口
-lark = ["oapi-sdk"]
-dingtalk = ["dingtalk"]
-wechat = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp"]
 im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
-cos = ["cos_api"]
-oss = ["aliyun-java-sdk-core", "aliyun-sdk-oss"]
+sms = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-sms", "dysmsapi"]
 storage = ["awssdk-sdk", "awssdk-netty-client", "awssdk-apache-client", "awssdk-transfer-manager", "cos_api", "aliyun-sdk-oss"]
 telegram = ["telegrambots-client", "telegrambots-abilities"]
 facebody = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-iai", "facebody"]
 translate = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-tmt", "alimt"]
-sms = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-sms", "dysmsapi"]
