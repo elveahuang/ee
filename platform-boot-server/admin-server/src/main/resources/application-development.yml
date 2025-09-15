@@ -8,7 +8,7 @@ spring:
             password: admin
     boot:
         admin:
-            context-path: /devops/sba
+            context-path: /devops/sba/
             ui:
                 title: Admin Console
-                public-url: http://boot.wdev.cc/devops/sba
+                public-url: /devops/sba/

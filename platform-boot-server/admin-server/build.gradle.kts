@@ -7,9 +7,10 @@ plugins {
 
 dependencies {
     implementation(rootProject.libs.bundles.springBootCoreStarter)
-    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
+    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.logging)
+    implementation(rootProject.libs.bundles.storage)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core"))
@@ -17,7 +18,7 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("app.jar")
+    archiveFileName.set("admin.jar")
     manifest {
         attributes("Spring-Boot-Native-Processed" to "false")
     }
