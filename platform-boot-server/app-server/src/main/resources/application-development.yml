@@ -188,20 +188,22 @@ platform:
                 app-secret:
     storage:
         enabled: true
-        type: min
-        min:
+        type: aws
+        aws:
             enabled: true
             access-key:
             secret-key:
             endpoint:
-            bucket-name:
+            bucket:
+            path-style-enabled: true
+            chunked-encoding-enabled: false
         oss:
-            enabled: false
+            enabled: true
             access-key-id:
             access-key-secret:
             endpoint:
-            bucket-name:
-            domain:
+            bucket:
+            region:
     sms:
         enabled: true
         type: aliyun
