@@ -24,7 +24,7 @@ jobs:
                     ./gradlew clean bootJar
 
                     mkdir -p ./dist
-                    cp ./platform-boot-server/admin-server/build/libs/app.jar ./dist/admin.jar
+                    cp ./platform-boot-server/admin-server/build/libs/admin.jar ./dist/admin.jar
                     cp ./platform-boot-server/app-server/build/libs/app.jar ./dist/app.jar
                     cd ./dist
                     zip -qr app.zip *
