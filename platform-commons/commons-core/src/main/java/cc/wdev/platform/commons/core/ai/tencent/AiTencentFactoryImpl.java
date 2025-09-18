@@ -6,15 +6,13 @@ import lombok.extern.slf4j.Slf4j;
  * @author elvea
  */
 @Slf4j
-public class AiTencentFactoryImpl implements AiTencentFactory {
+public record AiTencentFactoryImpl(AiTencentConfig config) implements AiTencentFactory {
 
-    private final AiTencentConfig config;
-
-    public AiTencentFactoryImpl(AiTencentConfig config) {
-        this.config = config;
-    }
-
-    private AiTencentConfig getConfig() {
+    /**
+     * @see AiTencentFactory#getConfig()
+     */
+    @Override
+    public AiTencentConfig getConfig() {
         return this.config;
     }
 

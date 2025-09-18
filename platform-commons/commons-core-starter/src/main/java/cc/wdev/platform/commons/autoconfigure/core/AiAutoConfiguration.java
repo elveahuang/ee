@@ -15,8 +15,6 @@ import cc.wdev.platform.commons.core.ai.tencent.AiTencentConfig;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactory;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactoryImpl;
 import cc.wdev.platform.commons.core.ai.tools.CommonTools;
-import com.alibaba.dashscope.Version;
-import com.tencentcloudapi.hunyuan.v20230901.HunyuanClient;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RestClient;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
@@ -121,11 +119,10 @@ public class AiAutoConfiguration {
     }
 
     /**
-     * 阿里云 - 义气大模型
+     * 腾讯云大模型
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass({Version.class})
     @ConditionalOnProperty(prefix = AiTencentProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
     public AiTencentFactory aiTencentFactory(AiTencentProperties properties) {
         AiTencentConfig config = AiTencentConfig.builder().apiKey(properties.getApiKey()).build();
@@ -133,14 +130,16 @@ public class AiAutoConfiguration {
     }
 
     /**
-     * 腾讯云 - 混元大模型
+     * 阿里云大模型
      */
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass({HunyuanClient.class})
     @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
     public AiAliyunFactory aiAliyunFactory(AiAliyunProperties properties) {
-        AiAliyunConfig config = AiAliyunConfig.builder().apiKey(properties.getApiKey()).build();
+        AiAliyunConfig config = AiAliyunConfig.builder()
+            .apiKey(properties.getApiKey())
+            .transcription(properties.getTranscription())
+            .build();
         return new AiAliyunFactoryImpl(config);
     }
 

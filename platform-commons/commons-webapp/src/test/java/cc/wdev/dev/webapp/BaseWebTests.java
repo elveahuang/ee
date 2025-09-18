@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -31,6 +32,8 @@ public abstract class BaseWebTests {
 
     protected WebTestClient client;
 
+    protected MockMvcTester tester;
+
     @Autowired
     private WebApplicationContext wac;
 
@@ -38,6 +41,7 @@ public abstract class BaseWebTests {
     public void setUp() {
         mvc = MockMvcBuilders.webAppContextSetup(wac).apply(springSecurity()).build();
         client = MockMvcWebTestClient.bindToApplicationContext(wac).build();
+        tester = MockMvcTester.from(wac);
     }
 
 }

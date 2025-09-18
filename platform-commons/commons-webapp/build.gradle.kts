@@ -29,6 +29,7 @@ dependencies {
     implementation(rootProject.libs.bundles.logging)
     implementation(rootProject.libs.bundles.selenium)
     implementation(rootProject.libs.bundles.playwright)
+    implementation(rootProject.libs.bundles.webjars)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))

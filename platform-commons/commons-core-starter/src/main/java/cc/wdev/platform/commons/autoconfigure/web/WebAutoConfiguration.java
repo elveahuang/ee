@@ -80,15 +80,6 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    @Primary
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return new CorsFilter(source);
-    }
-
-    @Bean
     @ConditionalOnMissingBean
     public CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -97,7 +88,15 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean<TraceFilter> registration() {
+    @Primary
+    @ConditionalOnMissingBean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public CorsFilter corsFilter(CorsConfigurationSource source) {
+        return new CorsFilter(source);
+    }
+
+    @Bean
+    public FilterRegistrationBean<TraceFilter> traceFilterRegistration() {
         FilterRegistrationBean<TraceFilter> registration = new FilterRegistrationBean<>(new TraceFilter());
         registration.setEnabled(true);
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);

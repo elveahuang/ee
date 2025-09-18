@@ -11,5 +11,7 @@ import java.io.Serializable;
 @Data
 @Builder
 public class AiTencentConfig implements Serializable {
+
     private String apiKey;
+
 }

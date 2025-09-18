@@ -1,3 +1,4 @@
+cc.wdev.platform.commons.autoconfigure.core.AiAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.CoreAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.AsyncAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.JwtAutoConfiguration
