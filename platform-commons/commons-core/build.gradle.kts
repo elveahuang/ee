@@ -27,6 +27,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.pdf)
     compileOnly(rootProject.libs.bundles.image)
     compileOnly(rootProject.libs.bundles.im)
+    compileOnly(rootProject.libs.bundles.ip)
     compileOnly(rootProject.libs.bundles.facebody)
     compileOnly(rootProject.libs.bundles.translate)
     compileOnly(rootProject.libs.bundles.sms)

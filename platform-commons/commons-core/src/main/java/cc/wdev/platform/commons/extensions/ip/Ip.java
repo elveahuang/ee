@@ -16,8 +16,13 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ip implements Serializable {
+
     private String ip;
+
+    private String details;
+
     private Country country;
+
     private City city;
 
     @Data
@@ -38,4 +43,5 @@ public class Ip implements Serializable {
         private String name;
         private Map<String, String> label;
     }
+
 }

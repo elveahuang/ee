@@ -154,6 +154,7 @@ hibernate-validator-annotation-processor = { module = "org.hibernate.validator:h
 # Database
 pgsql = { module = "org.postgresql:postgresql" }
 mysql = { module = "com.mysql:mysql-connector-j" }
+mariadb = { module = "org.mariadb.jdbc:mariadb-java-client" }
 jsqlparser = { module = "com.github.jsqlparser:jsqlparser", version.ref = "jsqlparserPlusVersion" }
 sharding = { module = "org.apache.shardingsphere:shardingsphere-jdbc", version.ref = "shardingSpherePlusVersion" }
 
@@ -293,6 +294,7 @@ jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.4.0" }
+ip2region = { module = "org.lionsoul:ip2region", version = "3.1.0" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
@@ -332,7 +334,7 @@ webjars-bootstrap-icons = { module = "org.webjars.npm:bootstrap-icons", version 
 
 [bundles]
 baseCore = ["mapstruct", "lombok"]
-baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "geoip", "asm", "ognl", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
+baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
 baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv", "commons-email"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
@@ -341,7 +343,8 @@ baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "j
 
 html = ["jsoup"]
 sharding = ["sharding"]
-database = ["pgsql", "mysql"]
+ip = ["geoip", "ip2region"]
+database = ["pgsql", "mysql", "mariadb"]
 pdf = ["pdfbox", "fontbox", "jsoup", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
 image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
 hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]

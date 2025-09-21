@@ -1,15 +1,17 @@
 package cc.wdev.platform.commons.autoconfigure.extensions;
 
 import cc.wdev.platform.commons.autoconfigure.extensions.properties.IpProperties;
-import cc.wdev.platform.commons.extensions.ip.GeoLite;
 import cc.wdev.platform.commons.extensions.ip.GlobalIpManager;
 import cc.wdev.platform.commons.extensions.ip.LocationEnum;
+import cc.wdev.platform.commons.extensions.ip.geoip2.GeoLite;
+import cc.wdev.platform.commons.extensions.ip.ip2region.Ip2Region;
 import cc.wdev.platform.commons.utils.StringUtils;
 import com.maxmind.db.Metadata;
 import com.maxmind.db.Network;
 import com.maxmind.db.Networks;
 import com.maxmind.db.Reader;
 import lombok.extern.slf4j.Slf4j;
+import org.lionsoul.ip2region.xdb.Searcher;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -32,7 +34,6 @@ import java.util.function.Consumer;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({GeoLite.class})
 @ConditionalOnProperty(prefix = IpProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({IpProperties.class})
 @ImportRuntimeHints({IpAutoConfiguration.IpRuntimeHints.class})
@@ -45,6 +46,7 @@ public class IpAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnClass({GeoLite.class})
     @ConditionalOnMissingBean
     public GeoLite geoLite(IpProperties properties) {
         GeoLite geoLite = new GeoLite();
@@ -64,6 +66,29 @@ public class IpAutoConfiguration {
 
         GlobalIpManager.setGeoLite(geoLite);
         return geoLite;
+    }
+
+    @Bean
+    @ConditionalOnClass({Searcher.class})
+    @ConditionalOnMissingBean
+    public Ip2Region ip2Region(IpProperties properties) {
+        Ip2Region ip2Region = new Ip2Region();
+        if (StringUtils.isNotEmpty(properties.getIp2region().getPath())) {
+            Resource resource;
+            if (LocationEnum.CLASSPATH.equals(properties.getIp2region().getLocation())) {
+                resource = new ClassPathResource(properties.getIp2region().getPath());
+            } else {
+                resource = new FileSystemResource(properties.getIp2region().getPath());
+            }
+            if (resource.exists()) {
+                ip2Region.init(resource);
+            } else {
+                log.info("Ip2Region file not exists - {}", properties.getIp2region().getPath());
+            }
+        }
+
+        GlobalIpManager.setIp2Region(ip2Region);
+        return ip2Region;
     }
 
     public static class IpRuntimeHints implements RuntimeHintsRegistrar {

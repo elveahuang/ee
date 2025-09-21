@@ -21,6 +21,7 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.storage)
+    implementation(rootProject.libs.bundles.ip)
     implementation(rootProject.libs.bundles.im)
     implementation(rootProject.libs.bundles.ai)
     implementation(rootProject.libs.bundles.pdf)
