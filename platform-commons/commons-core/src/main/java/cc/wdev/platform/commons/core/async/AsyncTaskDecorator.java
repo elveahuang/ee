@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.core.async;
 
-import cc.wdev.platform.commons.utils.MDCUtils;
+import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import org.slf4j.MDC;
 import org.springframework.core.task.TaskDecorator;
 import org.springframework.lang.NonNull;
@@ -24,13 +24,13 @@ public class AsyncTaskDecorator implements TaskDecorator {
         Map<String, String> context = MDC.getCopyOfContextMap();
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         return () -> {
-            MDCUtils.setAsyncContext(context);
+            MdcContext.setAsyncContext(context);
             RequestContextHolder.setRequestAttributes(attributes);
 
             try {
                 runnable.run();
             } finally {
-                MDCUtils.clear();
+                MdcContext.clear();
                 RequestContextHolder.resetRequestAttributes();
             }
         };

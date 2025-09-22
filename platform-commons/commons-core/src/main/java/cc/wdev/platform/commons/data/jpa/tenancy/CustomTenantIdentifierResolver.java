@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.data.jpa.tenancy;
 
-import cc.wdev.platform.commons.core.tenancy.TenantContext;
+import cc.wdev.platform.commons.core.tenant.TenantContext;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
 /**

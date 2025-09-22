@@ -25,11 +25,17 @@ public class AiFactoryImpl implements AiFactory {
         this.messageWindowChatMemory = messageWindowChatMemory;
     }
 
+    /**
+     * @see AiFactory#getMessageWindowChatMemory()
+     */
     @Override
     public MessageWindowChatMemory getMessageWindowChatMemory() {
         return messageWindowChatMemory;
     }
 
+    /**
+     * @see AiFactory#getChatCompletionService()
+     */
     @Override
     public ChatCompletionService getChatCompletionService() {
         if (AiServiceProvider.SPRING.equals(this.provider)) {

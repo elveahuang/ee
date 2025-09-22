@@ -11,5 +11,12 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @TableName("sp_user")
 public class MpUserEntity extends BaseEntity {
+    /**
+     * 租户
+     */
+    private Long tenantId;
+    /**
+     * 用户名
+     */
     private String username;
 }

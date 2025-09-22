@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.tenancy;
+package cc.wdev.platform.commons.core.tenant;
 
 import jakarta.servlet.http.HttpServletRequest;
 

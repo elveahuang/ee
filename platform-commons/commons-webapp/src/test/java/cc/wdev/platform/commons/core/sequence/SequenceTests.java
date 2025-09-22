@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * IdWorkerTests
- *
  * @author elvea
  */
 public class SequenceTests extends BaseTests {

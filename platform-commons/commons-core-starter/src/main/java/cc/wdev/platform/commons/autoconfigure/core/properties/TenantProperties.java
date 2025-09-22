@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-@ConfigurationProperties(TenancyProperties.PREFIX)
-public class TenancyProperties implements Serializable {
+@ConfigurationProperties(TenantProperties.PREFIX)
+public class TenantProperties implements Serializable {
 
-    public static final String PREFIX = "platform.tenancy";
+    public static final String PREFIX = "platform.tenant";
 
     private boolean enabled = false;
 

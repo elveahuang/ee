@@ -16,8 +16,8 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class StorageConfig implements Serializable {
 
     @Builder.Default

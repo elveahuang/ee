@@ -86,3 +86,7 @@ platform:
             endpoint:
             bucket:
             region:
+    tenant:
+        enabled: true
+        ignore-tables:
+            - sys_tenant

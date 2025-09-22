@@ -5,8 +5,8 @@ import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.store.LogStore;
 import cc.wdev.platform.commons.utils.AopUtils;
 import cc.wdev.platform.commons.utils.ExceptionUtils;
-import cc.wdev.platform.commons.utils.MDCUtils;
 import cc.wdev.platform.commons.utils.ServletUtils;
+import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class OperationLogAspect {
      */
     @Before(value = "@annotation(operationLog)")
     public void boBefore(JoinPoint joinPoint, OperationLog operationLog) {
-        MDCUtils.handleAspect();
+        MdcContext.handleAspect();
 
         StopWatch stopWatch = new StopWatch();
         threadLocal.set(stopWatch);

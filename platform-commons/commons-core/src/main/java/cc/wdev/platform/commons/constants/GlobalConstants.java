@@ -18,7 +18,7 @@ public interface GlobalConstants {
     /**
      * 全局版本号
      */
-    String VERSION = "25.1.999";
+    String VERSION = "26.1.0";
 
     /**
      * 全局默认编码
@@ -28,7 +28,7 @@ public interface GlobalConstants {
     /**
      * 全局默认编码
      */
-    String ENCODING = "UTF-8";
+    String ENCODING = StandardCharsets.UTF_8.displayName();
 
     /**
      * 默认语言
@@ -65,10 +65,19 @@ public interface GlobalConstants {
      */
     int DEFAULT_SMTP_PORT = 25;
 
+    /**
+     *
+     */
     String REQUEST_ID_KEY = "X-Request-ID";
-
+    
+    /**
+     *
+     */
     String TENANT_ID_KEY = "X-Tenant-ID";
 
+    /**
+     *
+     */
     String TENANT_CODE_KEY = "X-Tenant-Code";
 
 }

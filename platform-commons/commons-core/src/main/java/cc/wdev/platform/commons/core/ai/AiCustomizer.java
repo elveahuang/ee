@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AiCustomizer {
+
     @Builder.Default
     private List<Object> tools = List.of();
 

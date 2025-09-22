@@ -1,7 +1,7 @@
 package cc.wdev.dev.webapp.configuration;
 
-import cc.wdev.platform.commons.core.tenancy.Tenant;
-import cc.wdev.platform.commons.core.tenancy.TenantStore;
+import cc.wdev.platform.commons.core.tenant.Tenant;
+import cc.wdev.platform.commons.core.tenant.TenantStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

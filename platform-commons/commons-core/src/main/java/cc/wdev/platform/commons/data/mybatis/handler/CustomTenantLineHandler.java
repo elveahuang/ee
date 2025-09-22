@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.data.mybatis.handler;
 
-import cc.wdev.platform.commons.core.tenancy.TenantContext;
+import cc.wdev.platform.commons.core.tenant.TenantContext;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.List;
  * @see MetaObjectHandler
  */
 @Slf4j
-public record CustomTenantHandler(List<String> ignoreTableList) implements TenantLineHandler {
+public record CustomTenantLineHandler(List<String> ignoreTableList) implements TenantLineHandler {
 
     @Override
     public Expression getTenantId() {

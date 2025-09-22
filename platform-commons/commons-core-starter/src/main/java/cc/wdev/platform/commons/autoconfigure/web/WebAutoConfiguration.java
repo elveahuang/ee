@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.autoconfigure.web;
 
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
-import cc.wdev.platform.commons.core.tenancy.TenantResolver;
+import cc.wdev.platform.commons.core.tenant.TenantResolver;
 import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;

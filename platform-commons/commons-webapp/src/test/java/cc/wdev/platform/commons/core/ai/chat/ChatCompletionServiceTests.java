@@ -12,6 +12,9 @@ import reactor.core.publisher.Flux;
 
 import static cn.hutool.core.util.StrUtil.uuid;
 
+/**
+ * @author elvea
+ */
 public class ChatCompletionServiceTests extends BaseTests {
 
     @Autowired

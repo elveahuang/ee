@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.TenantId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Setter
@@ -20,5 +21,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class JpaUserEntity extends BaseEntity {
+    /**
+     * 租户
+     */
+    @TenantId
+    private Long tenantId;
+    /**
+     * 用户名
+     */
     private String username;
 }

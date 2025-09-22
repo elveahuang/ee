@@ -1,5 +1,6 @@
-package cc.wdev.platform.commons.utils;
+package cc.wdev.platform.commons.utils.mdc;
 
+import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
@@ -12,22 +13,22 @@ import static cc.wdev.platform.commons.constants.GlobalConstants.REQUEST_ID_KEY;
 /**
  * @author elvea
  */
-public abstract class MDCUtils {
+public abstract class MdcContext {
 
     private final static String REQUEST_ID = "REQUEST_ID";
 
     public static void handleAspect() {
         if (StringUtils.isEmpty(getRequestId())) {
-            MDCUtils.setRequestId(StringUtils.uuid());
+            MdcContext.setRequestId(StringUtils.uuid());
         }
     }
 
-    public static void handleRequest(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+    public static void handleServletRequest(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
             requestId = StringUtils.uuid();
         }
-        MDCUtils.setRequestId(requestId);
+        MdcContext.setRequestId(requestId);
 
         if (!response.getHeaderNames().contains(REQUEST_ID_KEY)) {
             response.addHeader(REQUEST_ID_KEY, requestId);
@@ -36,12 +37,12 @@ public abstract class MDCUtils {
 
     public static void setAsyncContext(Map<String, String> context) {
         if (context == null) {
-            MDCUtils.clear();
+            MdcContext.clear();
         } else {
             MDC.setContextMap(context);
         }
         if (StringUtils.isEmpty(getRequestId())) {
-            MDCUtils.setRequestId(StringUtils.uuid());
+            MdcContext.setRequestId(StringUtils.uuid());
         }
     }
 

@@ -7,6 +7,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * @author elvea
+ */
 public class DefaultControllerTests extends BaseWebTests {
 
     @Test

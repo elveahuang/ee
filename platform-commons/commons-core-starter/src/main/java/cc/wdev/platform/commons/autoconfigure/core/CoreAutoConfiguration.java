@@ -2,12 +2,12 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
-import cc.wdev.platform.commons.autoconfigure.core.properties.TenancyProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.TenantProperties;
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
-import cc.wdev.platform.commons.core.tenancy.DefaultTenantResolver;
-import cc.wdev.platform.commons.core.tenancy.TenantStore;
+import cc.wdev.platform.commons.core.tenant.DefaultTenantResolver;
+import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
@@ -35,13 +35,15 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class, TenancyProperties.class})
+@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class, TenantProperties.class})
 public class CoreAutoConfiguration {
 
-    public CoreAutoConfiguration(CoreProperties properties) {
+    public CoreAutoConfiguration(CoreProperties properties, TenantProperties tenantProperties) {
         log.info("CoreAutoConfiguration is enabled");
         log.info("CoreAutoConfiguration debug {}", properties.getDebug().isEnabled() ? "enabled" : "disabled");
         log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
+        log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
+        log.info("CoreAutoConfiguration multi-tenant {}", tenantProperties.isEnabled() ? "enabled" : "disabled");
     }
 
     @Bean

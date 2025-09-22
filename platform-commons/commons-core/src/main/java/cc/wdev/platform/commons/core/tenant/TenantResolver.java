@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.tenancy;
+package cc.wdev.platform.commons.core.tenant;
 
 import cc.wdev.platform.commons.utils.ServletUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ public interface TenantResolver {
     }
 
     default Tenant getDefaultTenant() {
-        return Tenant.builder().id(1L).build();
+        return Tenant.defaultTenant;
     }
 
 }

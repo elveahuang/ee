@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.tenancy;
+package cc.wdev.platform.commons.core.tenant;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +15,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tenant implements Serializable {
+
+    public static final Tenant defaultTenant = Tenant.builder().id(1L).build();
+
     private Long id;
+
 }

@@ -1,15 +1,17 @@
 package cc.wdev.platform.commons.autoconfigure.data;
 
-import cc.wdev.platform.commons.autoconfigure.core.properties.TenancyProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.TenantProperties;
 import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomProperties;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
-import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantHandler;
+import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantLineHandler;
 import cc.wdev.platform.commons.data.mybatis.id.CustomIdentifierGenerator;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
@@ -36,11 +38,11 @@ import java.util.List;
 @ConditionalOnProperty(prefix = MyBatisCustomProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MyBatisCustomAutoConfiguration {
 
-    TenancyProperties tenancyProperties;
+    private final TenantProperties tenantProperties;
 
-    public MyBatisCustomAutoConfiguration(TenancyProperties tenancyProperties) {
+    public MyBatisCustomAutoConfiguration(TenantProperties tenantProperties) {
         log.info("CustomMyBatisAutoConfiguration is enabled");
-        this.tenancyProperties = tenancyProperties;
+        this.tenantProperties = tenantProperties;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -50,26 +52,27 @@ public class MyBatisCustomAutoConfiguration {
     /**
      * 主键生成采用自定义的雪花算法
      */
-    @Bean("mpIdentifierGenerator")
+    @Bean("mybatisIdentifierGenerator")
     @ConditionalOnMissingBean
     public IdentifierGenerator mpIdentifierGenerator() {
         return new CustomIdentifierGenerator();
     }
 
-    @Bean
+    @Bean("mybatisMetaObjectHandler")
     @ConditionalOnMissingBean
-    public CustomMetaObjectHandler customMetaObjectHandler() {
+    public MetaObjectHandler customMetaObjectHandler() {
         return new CustomMetaObjectHandler();
     }
 
-    @Bean
+    @Bean("mybatisTenantLineHandler")
     @ConditionalOnMissingBean
-    public CustomTenantHandler customTenantHandler() {
+    @ConditionalOnProperty(prefix = TenantProperties.PREFIX, name = "enabled", havingValue = "true")
+    public TenantLineHandler mybatisTenantLineHandler() {
         List<String> tables = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(this.tenancyProperties.getIgnoreTables())) {
-            tables.addAll(this.tenancyProperties.getIgnoreTables());
+        if (CollectionUtils.isNotEmpty(this.tenantProperties.getIgnoreTables())) {
+            tables.addAll(this.tenantProperties.getIgnoreTables());
         }
-        return new CustomTenantHandler(tables);
+        return new CustomTenantLineHandler(tables);
     }
 
     /**
@@ -77,16 +80,16 @@ public class MyBatisCustomAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) CustomTenantHandler customTenantHandler) {
+    public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler mybatisTenantLineHandler) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         // 防止全表更新与删除
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         // 多租户插件
-        if (this.tenancyProperties != null && this.tenancyProperties.isEnabled()) {
+        if (this.tenantProperties != null && this.tenantProperties.isEnabled()) {
             TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
-            tenantInterceptor.setTenantLineHandler(customTenantHandler);
+            tenantInterceptor.setTenantLineHandler(mybatisTenantLineHandler);
             interceptor.addInnerInterceptor(tenantInterceptor);
         }
         return interceptor;

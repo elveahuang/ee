@@ -1,4 +1,7 @@
-package cc.wdev.platform.commons.core.tenancy;
+package cc.wdev.platform.commons.core.tenant;
+
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author elvea
@@ -7,8 +10,8 @@ public class TenantContext {
 
     private static final ThreadLocal<Long> threadLocal = new ThreadLocal<>();
 
-    public static void handleRequest(TenantResolver tenantResolver) {
-        Tenant tenant = tenantResolver.resolveTenant();
+    public static void handleServletRequest(TenantResolver tenantResolver, ServletRequest request) {
+        Tenant tenant = tenantResolver.resolveTenant((HttpServletRequest) request);
         setTenantId(tenant.getId());
     }
 
@@ -17,6 +20,9 @@ public class TenantContext {
     }
 
     public static Long getTenantId() {
+        if (threadLocal.get() == null) {
+            return Tenant.defaultTenant.getId();
+        }
         return threadLocal.get();
     }
 

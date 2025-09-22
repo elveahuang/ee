@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.web.filter;
 
-import cc.wdev.platform.commons.utils.MDCUtils;
+import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,10 +16,8 @@ public class TraceFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
-        HttpServletRequest servletRequest = (HttpServletRequest) request;
-        HttpServletResponse servletResponse = (HttpServletResponse) response;
         try {
-            MDCUtils.handleRequest(servletRequest, servletResponse);
+            MdcContext.handleServletRequest((HttpServletRequest) request, (HttpServletResponse) response);
             chain.doFilter(request, response);
         } finally {
             MDC.clear();
