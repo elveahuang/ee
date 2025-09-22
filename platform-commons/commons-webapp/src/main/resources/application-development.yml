@@ -19,14 +19,16 @@ spring:
             port: 6379
             database: 11
             password: redis
+    elasticsearch:
+        uris: http://localhost:9200
+        username: elastic
+        password: elastic
     ai:
         model:
             chat: openai
             image: openai
             moderation: openai
-            embedding:
-                text: openai
-                multimodal: openai
+            embedding: openai
             audio:
                 speech: openai
                 transcription: openai
@@ -44,6 +46,12 @@ spring:
 platform:
     cache:
         enabled: true
+    ai:
+        enabled: true
+        vector-store-provider: simple
+        aliyun:
+            enabled: true
+            api-key:
     data:
         core:
             enabled: true
@@ -51,6 +59,14 @@ platform:
             enabled: true
         mybatis:
             enabled: true
+    ip:
+        enabled: true
+        geo-lite:
+            location: file_system
+            path: GeoLite2-City.mmdb
+        ip2region:
+            location: file_system
+            path: ip2region.xdb
     storage:
         enabled: true
         type: aws

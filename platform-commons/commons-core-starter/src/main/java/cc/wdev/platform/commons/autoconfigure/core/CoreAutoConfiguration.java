@@ -2,9 +2,12 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.TenancyProperties;
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
+import cc.wdev.platform.commons.core.tenancy.DefaultTenantResolver;
+import cc.wdev.platform.commons.core.tenancy.TenantStore;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
@@ -32,7 +35,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class})
+@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class, TenancyProperties.class})
 public class CoreAutoConfiguration {
 
     public CoreAutoConfiguration(CoreProperties properties) {
@@ -110,6 +113,23 @@ public class CoreAutoConfiguration {
     @ConditionalOnMissingBean
     public LanguageResolver languageResolver(CoreProperties properties) {
         return new DefaultLanguageResolver(properties.getLanguage());
+    }
+
+    // ------------------------------------------------------------------------------------------------------------------------
+    // Multi Tenancy
+    // ------------------------------------------------------------------------------------------------------------------------
+
+    @Bean
+    @ConditionalOnMissingBean
+    public TenantStore tenantStore() {
+        return new TenantStore() {
+        };
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DefaultTenantResolver tenantResolver(TenantStore tenantStore) {
+        return new DefaultTenantResolver(tenantStore);
     }
 
     // ------------------------------------------------------------------------------------------------------------------------

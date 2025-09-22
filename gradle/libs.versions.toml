@@ -186,9 +186,14 @@ poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version = "5.4.1" }
 fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.3.0" }
 pdfbox = { module = "org.apache.pdfbox:pdfbox", version = "3.0.5" }
 fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.5" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.4" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.5" }
+scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
+scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
+scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
 thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.20" }
+imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.12.0" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
+imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.12.0" }
 zxing-core = { module = "com.google.zxing:core", version = "3.5.3" }
 zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
 tika-core = { module = "org.apache.tika:tika-core", version = "3.2.3" }
@@ -204,21 +209,21 @@ weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.34" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
-dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.1.2" }
+dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.2.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
 dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.8" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.255" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1339" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1341" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1338" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1337" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.23" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.24" }
 zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.5" }
-openai-java = { module = "com.openai:openai-java", version = "3.5.3" }
-ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.34" }
+openai-java = { module = "com.openai:openai-java", version = "3.6.0" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.35" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.1.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.1.0" }
 
@@ -261,6 +266,7 @@ jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-dat
 jackson-datatype-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8" }
 
 hutool-bom = { module = "cn.hutool:hutool-bom", version.ref = "hutoolVersion" }
+hutool-core = { module = "cn.hutool:hutool-core" }
 hutool-captcha = { module = "cn.hutool:hutool-captcha" }
 hutool-dfa = { module = "cn.hutool:hutool-dfa" }
 hutool-extra = { module = "cn.hutool:hutool-extra" }
@@ -346,8 +352,8 @@ sharding = ["sharding"]
 ip = ["geoip", "ip2region"]
 database = ["pgsql", "mysql", "mariadb"]
 pdf = ["pdfbox", "fontbox", "jsoup", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
-image = ["thumbnailator", "imageio-jpeg", "zxing-core", "zxing-javase"]
-hutool = ["hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
+image = ["thumbnailator", "imageio-core", "imageio-jpeg", "imageio-webp", "zxing-core", "zxing-javase", "scrimage-core", "scrimage-webp", "scrimage-filters"]
+hutool = ["hutool-core", "hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
 excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]

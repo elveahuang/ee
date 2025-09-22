@@ -1,14 +1,17 @@
 package cc.wdev.platform.commons.autoconfigure.web;
 
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
+import cc.wdev.platform.commons.core.tenancy.TenantResolver;
 import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.web.converter.json.JacksonHttpMessageConverter;
+import cc.wdev.platform.commons.web.filter.TenantFilter;
 import cc.wdev.platform.commons.web.filter.TraceFilter;
 import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
 import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -96,8 +99,18 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public FilterRegistrationBean<TraceFilter> traceFilterRegistration() {
         FilterRegistrationBean<TraceFilter> registration = new FilterRegistrationBean<>(new TraceFilter());
+        registration.setEnabled(true);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return registration;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public FilterRegistrationBean<TenantFilter> tenantFilterRegistration(@Autowired(required = false) TenantResolver tenantResolver) {
+        FilterRegistrationBean<TenantFilter> registration = new FilterRegistrationBean<>(new TenantFilter(tenantResolver));
         registration.setEnabled(true);
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return registration;
