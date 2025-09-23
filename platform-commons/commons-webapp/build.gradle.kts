@@ -70,5 +70,6 @@ tasks.named<BootJar>("bootJar") {
             if (it.name.startsWith("platform-")) "./libs-internal/" + it.name else "./libs-external/" + it.name
         }
     }
-    archiveFileName.set("sample.jar")
+    mainClass.set("cc.wdev.dev.webapp.WebappApplication")
+    archiveFileName.set("webapp.jar")
 }
