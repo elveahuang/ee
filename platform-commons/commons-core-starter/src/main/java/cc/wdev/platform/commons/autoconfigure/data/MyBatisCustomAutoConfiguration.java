@@ -1,18 +1,19 @@
 package cc.wdev.platform.commons.autoconfigure.data;
 
-import cc.wdev.platform.commons.autoconfigure.core.properties.TenantProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomProperties;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantLineHandler;
 import cc.wdev.platform.commons.data.mybatis.id.CustomIdentifierGenerator;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +32,18 @@ import java.util.List;
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(MyBatisCustomProperties.class)
-@ConditionalOnClass({MybatisPlusPropertiesCustomizer.class})
+@ConditionalOnClass({MybatisPlusAutoConfiguration.class})
 @ConditionalOnProperty(prefix = MyBatisCustomProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MyBatisCustomAutoConfiguration {
 
-    private final TenantProperties tenantProperties;
+    private final CoreProperties coreProperties;
 
-    public MyBatisCustomAutoConfiguration(TenantProperties tenantProperties) {
-        log.info("CustomMyBatisAutoConfiguration is enabled");
-        this.tenantProperties = tenantProperties;
+    public MyBatisCustomAutoConfiguration(CoreProperties coreProperties) {
+        log.info("MyBatisCustomAutoConfiguration is enabled");
+        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+
+        this.coreProperties = coreProperties;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -52,46 +53,45 @@ public class MyBatisCustomAutoConfiguration {
     /**
      * 主键生成采用自定义的雪花算法
      */
-    @Bean("mybatisIdentifierGenerator")
+    @Bean("mpIdentifierGenerator")
     @ConditionalOnMissingBean
     public IdentifierGenerator mpIdentifierGenerator() {
         return new CustomIdentifierGenerator();
     }
 
-    @Bean("mybatisMetaObjectHandler")
+    @Bean("mpMetaObjectHandler")
     @ConditionalOnMissingBean
-    public MetaObjectHandler customMetaObjectHandler() {
+    public MetaObjectHandler mpMetaObjectHandler() {
         return new CustomMetaObjectHandler();
     }
 
-    @Bean("mybatisTenantLineHandler")
+    @Bean("mpTenantLineHandler")
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = TenantProperties.PREFIX, name = "enabled", havingValue = "true")
-    public TenantLineHandler mybatisTenantLineHandler() {
+    @ConditionalOnProperty(prefix = CoreProperties.PREFIX, name = "enabled", havingValue = "true")
+    public TenantLineHandler mpTenantLineHandler() {
         List<String> tables = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(this.tenantProperties.getIgnoreTables())) {
-            tables.addAll(this.tenantProperties.getIgnoreTables());
+        if (CollectionUtils.isNotEmpty(this.coreProperties.getMultiTenancy().getExcludes())) {
+            tables.addAll(this.coreProperties.getMultiTenancy().getExcludes());
         }
         return new CustomTenantLineHandler(tables);
     }
 
-    /**
-     * 拦截器
-     */
     @Bean
     @ConditionalOnMissingBean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler mybatisTenantLineHandler) {
+    public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler mpTenantLineHandler) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        // 多租户插件，需要放在第一位
+        if (this.coreProperties.getMultiTenancy().isEnabled()) {
+            TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
+            tenantInterceptor.setTenantLineHandler(mpTenantLineHandler);
+            interceptor.addInnerInterceptor(tenantInterceptor);
+        }
         // 分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         // 防止全表更新与删除
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
-        // 多租户插件
-        if (this.tenantProperties != null && this.tenantProperties.isEnabled()) {
-            TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
-            tenantInterceptor.setTenantLineHandler(mybatisTenantLineHandler);
-            interceptor.addInnerInterceptor(tenantInterceptor);
-        }
+        // 乐观锁
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         return interceptor;
     }
 

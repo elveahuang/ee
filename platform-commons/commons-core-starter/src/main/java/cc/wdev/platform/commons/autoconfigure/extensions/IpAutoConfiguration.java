@@ -21,7 +21,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -33,7 +32,6 @@ import java.util.function.Consumer;
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(prefix = IpProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({IpProperties.class})
 @ImportRuntimeHints({IpAutoConfiguration.IpRuntimeHints.class})

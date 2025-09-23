@@ -2,6 +2,7 @@ package cc.wdev.platform.commons.autoconfigure.core.properties;
 
 import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.constants.GlobalConstants;
+import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -46,6 +47,12 @@ public class CoreProperties implements Serializable {
      */
     @NestedConfigurationProperty
     private Home home = Home.builder().build();
+
+    /**
+     * 多租户配置
+     */
+    @NestedConfigurationProperty
+    private TenantConfig multiTenancy = TenantConfig.builder().build();
 
     /**
      * 指定用户时区

@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @NoArgsConstructor
-@ConfigurationProperties(JdbcCustomProperties.PREFIX)
-public class JdbcCustomProperties {
+@ConfigurationProperties(DataJdbcProperties.PREFIX)
+public class DataJdbcProperties {
 
     public static final String PREFIX = "platform.data.jdbc";
 

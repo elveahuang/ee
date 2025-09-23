@@ -25,7 +25,6 @@ import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.context.annotation.Primary;
 
@@ -35,7 +34,6 @@ import java.util.function.Consumer;
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({RedissonClient.class})
 @EnableConfigurationProperties({CacheCustomProperties.class, RedisProperties.class})
 @ConditionalOnProperty(prefix = CacheCustomProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

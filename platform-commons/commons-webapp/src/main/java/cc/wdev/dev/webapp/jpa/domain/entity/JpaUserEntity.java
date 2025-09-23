@@ -1,13 +1,13 @@
 package cc.wdev.dev.webapp.jpa.domain.entity;
 
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import cc.wdev.platform.commons.data.jpa.tenant.TenantId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.TenantId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Setter

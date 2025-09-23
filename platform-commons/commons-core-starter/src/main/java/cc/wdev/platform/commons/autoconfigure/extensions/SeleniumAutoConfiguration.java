@@ -11,13 +11,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({SeleniumProperties.class})
 @ConditionalOnClass({SeleniumManager.class})
 @ConditionalOnProperty(prefix = SeleniumProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -26,7 +26,6 @@ import static cc.wdev.platform.commons.constants.DataSourceConstants.*;
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore({DataSourceAutoConfiguration.class})
 @ConditionalOnProperty(prefix = DataSourceCustomProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(DataSourceCustomProperties.class)

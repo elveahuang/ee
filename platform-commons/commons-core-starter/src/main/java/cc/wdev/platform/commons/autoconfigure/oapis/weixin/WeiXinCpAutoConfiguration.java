@@ -10,13 +10,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({WeiXinCpProperties.class})
 @ConditionalOnProperty(prefix = WeiXinCpProperties.PREFIX, name = "enabled", havingValue = "true")
 public class WeiXinCpAutoConfiguration {

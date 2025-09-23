@@ -14,7 +14,6 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ElasticsearchCustomProperties.class)
 @ConditionalOnClass({ElasticsearchDataAutoConfiguration.class})
 @ConditionalOnProperty(prefix = ElasticsearchCustomProperties.PREFIX, name = "enabled", havingValue = "true")

@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.longpolling.util.TelegramOkHttpClientFactory;
 
 import java.net.InetSocketAddress;
@@ -19,7 +18,6 @@ import java.net.Proxy;
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({TelegramProperties.class})
 @ConditionalOnClass({TelegramOkHttpClientFactory.class})
 @ConditionalOnProperty(prefix = TelegramProperties.PREFIX, name = "enabled", havingValue = "true")

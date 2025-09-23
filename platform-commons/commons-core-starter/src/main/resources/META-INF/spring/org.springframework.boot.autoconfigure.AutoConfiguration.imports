@@ -16,7 +16,6 @@ cc.wdev.platform.commons.autoconfigure.web.SwaggerAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.web.WebAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.data.DataCoreAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.data.DataSourceCustomAutoConfiguration
-cc.wdev.platform.commons.autoconfigure.data.JdbcCustomAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.data.JpaCustomAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.data.MyBatisCustomAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.data.ElasticsearchCustomAutoConfiguration

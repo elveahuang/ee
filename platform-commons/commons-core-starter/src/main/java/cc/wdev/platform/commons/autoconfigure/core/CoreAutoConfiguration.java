@@ -2,11 +2,12 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
-import cc.wdev.platform.commons.autoconfigure.core.properties.TenantProperties;
 import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.core.tenant.DefaultTenantResolver;
+import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
+import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
@@ -21,29 +22,41 @@ import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.lang.NonNull;
 
 /**
  * @author elvea
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class, TenantProperties.class})
-public class CoreAutoConfiguration {
+@EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class})
+public class CoreAutoConfiguration implements ApplicationContextAware {
 
-    public CoreAutoConfiguration(CoreProperties properties, TenantProperties tenantProperties) {
+    private final CoreProperties properties;
+
+    public CoreAutoConfiguration(CoreProperties properties) {
         log.info("CoreAutoConfiguration is enabled");
         log.info("CoreAutoConfiguration debug {}", properties.getDebug().isEnabled() ? "enabled" : "disabled");
         log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
-        log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
-        log.info("CoreAutoConfiguration multi-tenant {}", tenantProperties.isEnabled() ? "enabled" : "disabled");
+        log.info("CoreAutoConfiguration multi-tenancy {}", properties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+
+        this.properties = properties;
+    }
+
+    @Override
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
+        log.info("CoreAutoConfiguration GlobalTenantManager initialize ...");
+        TenantConfig config = TenantConfig.builder().enabled(properties.getMultiTenancy().isEnabled()).build();
+        GlobalTenantManager.setConfig(config);
     }
 
     @Bean
