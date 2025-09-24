@@ -6,8 +6,8 @@ import cc.wdev.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
 import cc.wdev.platform.commons.security.CustomAuthorizationGrantType;
 import cc.wdev.platform.commons.security.CustomParameterNames;
 import cc.wdev.platform.commons.utils.StringUtils;
-import cc.wdev.platform.system.core.manager.CaptchaManager;
-import cc.wdev.platform.system.core.manager.ConfigManager;
+import cc.wdev.platform.system.core.api.CaptchaApi;
+import cc.wdev.platform.system.core.api.ConfigApi;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,19 +34,19 @@ public class CaptchaAuthenticationFilter extends OncePerRequestFilter {
 
     private final RequestMatcher requestMatcher;
 
-    private final ConfigManager configManager;
+    private final ConfigApi configApi;
 
-    private final CaptchaManager captchaManager;
+    private final CaptchaApi captchaApi;
 
     private final AuthenticationFailureHandler failureHandler;
 
     public CaptchaAuthenticationFilter(
-        ConfigManager configManager,
-        CaptchaManager captchaManager,
+        ConfigApi configApi,
+        CaptchaApi captchaApi,
         AuthenticationFailureHandler failureHandler
     ) {
-        this.configManager = configManager;
-        this.captchaManager = captchaManager;
+        this.configApi = configApi;
+        this.captchaApi = captchaApi;
         this.failureHandler = failureHandler;
         requestMatcher = PathPatternRequestMatcher.withDefaults().matcher(OAUTH_TOKEN_ENDPOINT);
     }
@@ -57,7 +57,7 @@ public class CaptchaAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain chain) throws ServletException, IOException {
 
         // 检查系统是否启用验证码
-        if (!this.configManager.getBoolean(LOGIN_CAPTCHA_ENABLED, false)) {
+        if (!this.configApi.getBoolean(LOGIN_CAPTCHA_ENABLED, false)) {
             log.info("Captcha is disabled.");
             chain.doFilter(request, response);
             return;
@@ -87,7 +87,7 @@ public class CaptchaAuthenticationFilter extends OncePerRequestFilter {
                     .key(captchaKey)
                     .value(captchaValue)
                     .build();
-                if (!this.captchaManager.check(captchaCheckRequest)) {
+                if (!this.captchaApi.check(captchaCheckRequest)) {
                     throw new InvalidCaptchaException("Invalid Captcha.");
                 }
             } catch (AuthenticationException ex) {

@@ -4,8 +4,8 @@ import cc.wdev.platform.commons.enums.MobileCountryCodeEnum;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.RegexUtils;
+import cc.wdev.platform.system.core.api.AccountApi;
 import cc.wdev.platform.system.core.domain.dto.AccountLoginInfoDto;
-import cc.wdev.platform.system.core.manager.AccountManager;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,17 +30,17 @@ import java.util.stream.Collectors;
 @Qualifier("accountDetailsService")
 public class CustomAccountDetailsService implements UserDetailsService {
 
-    private final AccountManager accountManager;
+    private final AccountApi accountApi;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AccountLoginInfoDto account;
         if (RegexUtils.checkEmail(username)) {
-            account = accountManager.findByEmail(username);
+            account = accountApi.findByEmail(username);
         } else if (RegexUtils.checkMobile(username)) {
-            account = accountManager.findByMobile(MobileCountryCodeEnum.ZH_CN.getCode(), username);
+            account = accountApi.findByMobile(MobileCountryCodeEnum.ZH_CN.getCode(), username);
         } else {
-            account = accountManager.findByUsername(username);
+            account = accountApi.findByUsername(username);
         }
         if (null == account) {
             throw new UsernameNotFoundException(username);

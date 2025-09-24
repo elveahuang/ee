@@ -6,8 +6,8 @@ import cc.wdev.platform.security.CustomAuthenticationProvider;
 import cc.wdev.platform.security.CustomUserDetailsService;
 import cc.wdev.platform.security.web.CustomAuthenticationFailureHandler;
 import cc.wdev.platform.security.web.authentication.CaptchaAuthenticationFilter;
-import cc.wdev.platform.system.core.manager.CaptchaManager;
-import cc.wdev.platform.system.core.manager.ConfigManager;
+import cc.wdev.platform.system.core.api.CaptchaApi;
+import cc.wdev.platform.system.core.api.ConfigApi;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +40,10 @@ public class CommonSecurityConfiguration {
     }
 
     @Bean
-    public CaptchaAuthenticationFilter captchaAuthenticationFilter(ConfigManager configManager,
-                                                                   CaptchaManager captchaManager,
+    public CaptchaAuthenticationFilter captchaAuthenticationFilter(ConfigApi configApi,
+                                                                   CaptchaApi captchaApi,
                                                                    CustomAuthenticationFailureHandler failureHandler) {
-        return new CaptchaAuthenticationFilter(configManager, captchaManager, failureHandler);
+        return new CaptchaAuthenticationFilter(configApi, captchaApi, failureHandler);
     }
 
     @Bean

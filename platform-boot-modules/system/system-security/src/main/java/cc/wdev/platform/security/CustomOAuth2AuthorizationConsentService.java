@@ -1,7 +1,7 @@
 package cc.wdev.platform.security;
 
+import cc.wdev.platform.system.security.api.AuthorizationConsentApi;
 import cc.wdev.platform.system.security.domain.dto.AuthorizationConsentDto;
-import cc.wdev.platform.system.security.manager.AuthorizationConsentManager;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,21 +22,21 @@ import java.util.Set;
 @AllArgsConstructor
 public class CustomOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
 
-    private final AuthorizationConsentManager authorizationConsentManager;
+    private final AuthorizationConsentApi authorizationConsentApi;
 
     @Override
     public void save(OAuth2AuthorizationConsent authorizationConsent) {
-        this.authorizationConsentManager.save(toDto(authorizationConsent));
+        this.authorizationConsentApi.save(toDto(authorizationConsent));
     }
 
     @Override
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
-        this.authorizationConsentManager.deleteByKey(authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
+        this.authorizationConsentApi.deleteByKey(authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
     }
 
     @Override
     public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
-        return toObject(this.authorizationConsentManager.findByKey(registeredClientId, principalName));
+        return toObject(this.authorizationConsentApi.findByKey(registeredClientId, principalName));
     }
 
     private OAuth2AuthorizationConsent toObject(AuthorizationConsentDto dto) {

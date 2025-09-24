@@ -4,8 +4,8 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.mall.manager.OrderManager;
-import cc.wdev.platform.system.mall.manager.VipManager;
+import cc.wdev.platform.system.mall.api.OrderApi;
+import cc.wdev.platform.system.mall.api.VipApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,9 +25,9 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.A
 @Tag(name = "VipController", description = "会员控制器")
 public class VipOrderController extends AbstractController {
 
-    private final VipManager vipManager;
+    private final VipApi vipApi;
 
-    private final OrderManager orderManager;
+    private final OrderApi orderApi;
 
     @Authenticated
     @Operation(summary = "确认订单")

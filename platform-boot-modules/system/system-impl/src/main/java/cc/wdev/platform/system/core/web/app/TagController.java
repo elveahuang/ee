@@ -4,11 +4,11 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.core.api.TagApi;
 import cc.wdev.platform.system.core.domain.request.TagSearchRequest;
 import cc.wdev.platform.system.core.domain.request.TagTypeRequest;
 import cc.wdev.platform.system.core.domain.vo.TagTypeVo;
 import cc.wdev.platform.system.core.domain.vo.TagVo;
-import cc.wdev.platform.system.core.manager.TagManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +28,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.A
 @Tag(name = "TagController", description = "标签控制器")
 public class TagController extends AbstractController {
 
-    private final TagManager tagManager;
+    private final TagApi tagApi;
 
     @Authenticated
     @Operation(summary = "获取标签类型")
@@ -36,7 +36,7 @@ public class TagController extends AbstractController {
     @OperationLog("获取标签类型")
     @PostMapping(API_V1__TAG__TYPE)
     public R<TagTypeVo> type(TagTypeRequest request) {
-        return R.success(tagManager.getTagType(request));
+        return R.success(tagApi.getTagType(request));
     }
 
     @Authenticated
@@ -45,7 +45,7 @@ public class TagController extends AbstractController {
     @OperationLog("搜索标签")
     @PostMapping(API_V1__TAG__SEARCH)
     public R<Page<TagVo>> search(TagSearchRequest request) {
-        return R.success(tagManager.search(request));
+        return R.success(tagApi.search(request));
     }
 
 }

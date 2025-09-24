@@ -6,11 +6,11 @@ import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.annotations.RateLimiter;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.utils.SecurityUtils;
+import cc.wdev.platform.system.core.api.AccountApi;
 import cc.wdev.platform.system.core.domain.dto.AccountForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.AccountInfoDto;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.AccountCheckRequest;
-import cc.wdev.platform.system.core.manager.AccountManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +31,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.*
 @Tag(name = "AccountController", description = "账号控制器")
 public class AccountController {
 
-    private final AccountManager accountManager;
+    private final AccountApi accountApi;
 
     @Anonymous
     @OperationLog("检查用户名是否可用")
@@ -40,7 +40,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_USERNAME)
     @RateLimiter(type = IP)
     public R<Boolean> checkUsername(AccountCheckRequest request) {
-        return R.success(accountManager.check(request));
+        return R.success(accountApi.check(request));
     }
 
     @Anonymous
@@ -50,7 +50,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_EMAIL)
     @RateLimiter(type = IP)
     public R<Boolean> checkEmail(AccountCheckRequest request) {
-        return R.success(accountManager.check(request));
+        return R.success(accountApi.check(request));
     }
 
     @Anonymous
@@ -60,7 +60,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__CHECK_MOBILE)
     @RateLimiter(type = IP)
     public R<Boolean> checkMobile(AccountCheckRequest request) {
-        return R.success(accountManager.check(request));
+        return R.success(accountApi.check(request));
     }
 
     @Authenticated
@@ -69,7 +69,7 @@ public class AccountController {
     @GetMapping(API_V1__ACCOUNT__INFO)
     public R<AccountInfoDto> user() {
         String curUsername = SecurityUtils.getUsername();
-        return R.success(this.accountManager.getUserInfo(curUsername));
+        return R.success(this.accountApi.getUserInfo(curUsername));
     }
 
     @Anonymous
@@ -78,7 +78,7 @@ public class AccountController {
     @ApiResponse(description = "用户注册")
     @PostMapping(API_V1__ACCOUNT__REGISTER)
     public R<?> register(@Valid AccountRegisterForm form) {
-        return accountManager.register(form);
+        return accountApi.register(form);
     }
 
     @Anonymous
@@ -87,7 +87,7 @@ public class AccountController {
     @OperationLog("退出登录")
     @PostMapping(API_V1__ACCOUNT__LOGOUT)
     public R<?> logout() {
-        return accountManager.logout();
+        return accountApi.logout();
     }
 
     @Anonymous
@@ -96,7 +96,7 @@ public class AccountController {
     @OperationLog("忘记密码")
     @PostMapping(API_V1__ACCOUNT__FORGOT_PASSWORD)
     public R<AccountForgotPasswordDto> forgotPassword(@Valid AccountForgotPasswordForm form) {
-        return accountManager.forgotPassword(form);
+        return accountApi.forgotPassword(form);
     }
 
     @Anonymous
@@ -105,7 +105,7 @@ public class AccountController {
     @OperationLog("重置密码")
     @PostMapping(API_V1__ACCOUNT__RESET_PASSWORD)
     public R<?> resetPassword(@Valid AccountResetPasswordForm form) {
-        return accountManager.resetPassword(form);
+        return accountApi.resetPassword(form);
     }
 
     @Authenticated
@@ -114,7 +114,7 @@ public class AccountController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__ACCOUNT__CHANGE_PASSWORD)
     public R<?> changePassword(@Valid AccountChangePasswordForm form) {
-        return accountManager.changePassword(form);
+        return accountApi.changePassword(form);
     }
 
     @Authenticated
@@ -123,7 +123,7 @@ public class AccountController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__ACCOUNT__UPDATE)
     public R<?> updateAccount(@Valid AccountBaseForm form) {
-        return accountManager.updateAccount(form);
+        return accountApi.updateAccount(form);
     }
 
 }

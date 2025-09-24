@@ -4,11 +4,11 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.core.api.DictApi;
 import cc.wdev.platform.system.core.domain.entity.DictItemEntity;
 import cc.wdev.platform.system.core.domain.entity.TagEntity;
 import cc.wdev.platform.system.core.domain.form.DictForm;
 import cc.wdev.platform.system.core.domain.request.DictSearchRequest;
-import cc.wdev.platform.system.core.manager.DictManager;
 import cc.wdev.platform.system.core.service.DictItemService;
 import cc.wdev.platform.system.core.service.DictTypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +30,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.*
 @Tag(name = "DictAdminController", description = "字典后台管理控制器")
 public class DictAdminController extends AbstractController {
 
-    private final DictManager dictManager;
+    private final DictApi dictApi;
 
     private final DictItemService dictItemService;
 
@@ -60,7 +60,7 @@ public class DictAdminController extends AbstractController {
     @OperationLog("保存标签")
     @PostMapping(API_V1_ADMIN__DICT__SAVE)
     public R<?> save(DictForm form) {
-        dictManager.save(form);
+        dictApi.save(form);
         return R.success();
     }
 

@@ -4,10 +4,10 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.core.api.TagApi;
 import cc.wdev.platform.system.core.domain.entity.TagEntity;
 import cc.wdev.platform.system.core.domain.form.TagForm;
 import cc.wdev.platform.system.core.domain.request.TagSearchRequest;
-import cc.wdev.platform.system.core.manager.TagManager;
 import cc.wdev.platform.system.core.service.TagService;
 import cc.wdev.platform.system.core.service.TagTypeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +29,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.*
 @Tag(name = "SystemTagController", description = "标签系统控制器")
 public class TagAdminController extends AbstractController {
 
-    private final TagManager tagManager;
+    private final TagApi tagApi;
 
     private final TagService tagService;
 
@@ -59,7 +59,7 @@ public class TagAdminController extends AbstractController {
     @OperationLog("保存标签")
     @PostMapping(API_V1_ADMIN__TAG__SAVE)
     public R<Page<TagEntity>> save(TagForm form) {
-        tagManager.save(form);
+        tagApi.save(form);
         return R.success();
     }
 

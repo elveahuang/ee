@@ -4,11 +4,11 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.core.api.DictApi;
 import cc.wdev.platform.system.core.domain.request.DictSearchRequest;
 import cc.wdev.platform.system.core.domain.request.DictTypeRequest;
 import cc.wdev.platform.system.core.domain.vo.DictItemVo;
 import cc.wdev.platform.system.core.domain.vo.DictTypeVo;
-import cc.wdev.platform.system.core.manager.DictManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +28,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.A
 @Tag(name = "DictController", description = "字典控制器")
 public class DictController extends AbstractController {
 
-    private final DictManager dictManager;
+    private final DictApi dictApi;
 
     @Authenticated
     @Operation(summary = "获取字典类型")
@@ -36,7 +36,7 @@ public class DictController extends AbstractController {
     @OperationLog("获取字典类型")
     @PostMapping(API_V1__DICT__TYPE)
     public R<DictTypeVo> type(DictTypeRequest request) {
-        return R.success(dictManager.getDictType(request));
+        return R.success(dictApi.getDictType(request));
     }
 
     @Authenticated
@@ -45,7 +45,7 @@ public class DictController extends AbstractController {
     @OperationLog("搜索字典项")
     @PostMapping(API_V1__DICT__SEARCH)
     public R<Page<DictItemVo>> search(DictSearchRequest request) {
-        return R.success(dictManager.search(request));
+        return R.success(dictApi.search(request));
     }
 
 }

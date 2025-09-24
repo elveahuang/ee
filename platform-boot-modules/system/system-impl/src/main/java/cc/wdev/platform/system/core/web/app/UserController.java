@@ -6,11 +6,11 @@ import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.annotations.RateLimiter;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.utils.SecurityUtils;
+import cc.wdev.platform.system.core.api.UserApi;
 import cc.wdev.platform.system.core.domain.dto.UserForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.UserInfoDto;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.UserCheckRequest;
-import cc.wdev.platform.system.core.manager.UserManager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +31,7 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.*
 @Tag(name = "UserController", description = "用户控制器")
 public class UserController {
 
-    private final UserManager userManager;
+    private final UserApi userApi;
 
     @Anonymous
     @OperationLog("检查用户名是否可用")
@@ -40,7 +40,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_USERNAME)
     @RateLimiter(type = IP)
     public R<Boolean> checkUsername(UserCheckRequest request) {
-        return R.success(userManager.check(request));
+        return R.success(userApi.check(request));
     }
 
     @Anonymous
@@ -50,7 +50,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_EMAIL)
     @RateLimiter(type = IP)
     public R<Boolean> checkEmail(UserCheckRequest request) {
-        return R.success(userManager.check(request));
+        return R.success(userApi.check(request));
     }
 
     @Anonymous
@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping(API_V1__USER__CHECK_MOBILE)
     @RateLimiter(type = IP)
     public R<Boolean> checkMobile(UserCheckRequest request) {
-        return R.success(userManager.check(request));
+        return R.success(userApi.check(request));
     }
 
     @Authenticated
@@ -69,7 +69,7 @@ public class UserController {
     @GetMapping(API_V1__USER__INFO)
     public R<UserInfoDto> user() {
         String curUsername = SecurityUtils.getUsername();
-        return R.success(this.userManager.getUserInfo(curUsername));
+        return R.success(this.userApi.getUserInfo(curUsername));
     }
 
     @Anonymous
@@ -78,7 +78,7 @@ public class UserController {
     @ApiResponse(description = "用户注册")
     @PostMapping(API_V1__USER__REGISTER)
     public R<?> register(@Valid UserRegisterForm form) {
-        return userManager.register(form);
+        return userApi.register(form);
     }
 
     @Anonymous
@@ -87,7 +87,7 @@ public class UserController {
     @OperationLog("退出登录")
     @PostMapping(API_V1__USER__LOGOUT)
     public R<?> logout() {
-        return userManager.logout();
+        return userApi.logout();
     }
 
     @Anonymous
@@ -96,7 +96,7 @@ public class UserController {
     @OperationLog("忘记密码")
     @PostMapping(API_V1__USER__FORGOT_PASSWORD)
     public R<UserForgotPasswordDto> forgotPassword(@Valid UserForgotPasswordForm form) {
-        return userManager.forgotPassword(form);
+        return userApi.forgotPassword(form);
     }
 
     @Anonymous
@@ -105,7 +105,7 @@ public class UserController {
     @OperationLog("重置密码")
     @PostMapping(API_V1__USER__RESET_PASSWORD)
     public R<?> resetPassword(@Valid UserResetPasswordForm form) {
-        return userManager.resetPassword(form);
+        return userApi.resetPassword(form);
     }
 
     @Authenticated
@@ -114,7 +114,7 @@ public class UserController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__USER__CHANGE_PASSWORD)
     public R<?> changePassword(@Valid UserChangePasswordForm form) {
-        return userManager.changePassword(form);
+        return userApi.changePassword(form);
     }
 
     @Authenticated
@@ -123,7 +123,7 @@ public class UserController {
     @OperationLog("编辑个人资料")
     @PostMapping(API_V1__USER__ACCOUNT)
     public R<?> updateAccount(@Valid UserBaseForm form) {
-        return userManager.updateAccount(form);
+        return userApi.updateAccount(form);
     }
 
 }

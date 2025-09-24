@@ -9,13 +9,13 @@ import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.core.api.AttachmentApi;
 import cc.wdev.platform.system.core.domain.AttachmentFile;
 import cc.wdev.platform.system.core.domain.AttachmentParameter;
 import cc.wdev.platform.system.core.domain.request.AttachmentRelationRequest;
 import cc.wdev.platform.system.core.domain.request.AttachmentTypeRequest;
 import cc.wdev.platform.system.core.domain.vo.AttachmentTypeVo;
 import cc.wdev.platform.system.core.domain.vo.AttachmentVo;
-import cc.wdev.platform.system.core.manager.AttachmentManager;
 import com.google.common.collect.Lists;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -45,7 +45,7 @@ public class AttachmentController extends AbstractController {
 
     private final StorageFactory storage;
 
-    private final AttachmentManager attachmentManager;
+    private final AttachmentApi attachmentApi;
 
     @Authenticated
     @Operation(summary = "获取附件类型")
@@ -53,7 +53,7 @@ public class AttachmentController extends AbstractController {
     @OperationLog("获取附件类型")
     @PostMapping(API_V1__ATTACHMENT__TYPE)
     public R<AttachmentTypeVo> getAttachmentType(AttachmentTypeRequest request) {
-        return R.success(attachmentManager.getAttachmentType(request));
+        return R.success(attachmentApi.getAttachmentType(request));
     }
 
     @Authenticated
@@ -62,7 +62,7 @@ public class AttachmentController extends AbstractController {
     @OperationLog("获取附件")
     @PostMapping(API_V1__ATTACHMENT__GET)
     public R<AttachmentVo> getAttachment(AttachmentRelationRequest request) {
-        return R.success(attachmentManager.getAttachment(request));
+        return R.success(attachmentApi.getAttachment(request));
     }
 
     @Authenticated
@@ -102,7 +102,7 @@ public class AttachmentController extends AbstractController {
         List<AttachmentFile> result = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(files)) {
             for (MultipartFile file : files) {
-                result.add(this.attachmentManager.uploadAttachmentFile(parameter, file));
+                result.add(this.attachmentApi.uploadAttachmentFile(parameter, file));
             }
         }
         return R.success(result);
