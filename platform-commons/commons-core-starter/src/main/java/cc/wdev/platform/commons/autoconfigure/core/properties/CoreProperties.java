@@ -20,6 +20,8 @@ public class CoreProperties implements Serializable {
 
     public static final String PREFIX = "platform";
 
+    public static final String TENANCY_PREFIX = PREFIX + ".tenancy";
+
     /**
      * 应用标题
      */
@@ -52,7 +54,7 @@ public class CoreProperties implements Serializable {
      * 多租户配置
      */
     @NestedConfigurationProperty
-    private TenantConfig multiTenancy = TenantConfig.builder().build();
+    private TenantConfig tenancy = TenantConfig.builder().build();
 
     /**
      * 指定用户时区

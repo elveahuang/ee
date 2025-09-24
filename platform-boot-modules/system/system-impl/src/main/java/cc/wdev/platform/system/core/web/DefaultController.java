@@ -3,7 +3,7 @@ package cc.wdev.platform.system.core.web;
 import cc.wdev.platform.commons.annotations.Anonymous;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.system.core.api.CoreApi;
+import cc.wdev.platform.system.core.feign.CoreApi;
 import cc.wdev.platform.system.core.domain.vo.InitializeVo;
 import cc.wdev.platform.system.core.domain.vo.VersionVo;
 import io.swagger.v3.oas.annotations.Operation;

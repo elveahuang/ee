@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.core.log.store.LogStore;
-import cc.wdev.platform.system.core.api.LogApi;
+import cc.wdev.platform.system.core.feign.LogApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

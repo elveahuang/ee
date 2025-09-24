@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,6 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.A
  * @author elvea
  */
 @RestController
-@AllArgsConstructor
 @Tag(name = "TestController", description = "测试验证专用控制器")
 public class TestController extends AbstractController {
 
@@ -75,6 +75,11 @@ public class TestController extends AbstractController {
         @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
         @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
         LocalDateTime localDateTime = LocalDateTime.now();
+    }
+
+    @Autowired(required = false)
+    public void setBroadcastManager(BroadcastManager broadcastManager) {
+        this.broadcastManager = broadcastManager;
     }
 
 }

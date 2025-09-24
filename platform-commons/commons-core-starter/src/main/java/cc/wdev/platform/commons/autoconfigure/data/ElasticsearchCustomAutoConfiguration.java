@@ -2,6 +2,7 @@ package cc.wdev.platform.commons.autoconfigure.data;
 
 import cc.wdev.platform.commons.autoconfigure.data.properties.ElasticsearchCustomProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration;
@@ -13,6 +14,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @EnableConfigurationProperties(ElasticsearchCustomProperties.class)
 @ConditionalOnClass({ElasticsearchDataAutoConfiguration.class})
 @ConditionalOnProperty(prefix = ElasticsearchCustomProperties.PREFIX, name = "enabled", havingValue = "true")

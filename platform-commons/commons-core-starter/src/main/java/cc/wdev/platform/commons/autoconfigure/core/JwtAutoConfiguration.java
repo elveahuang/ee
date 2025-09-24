@@ -12,6 +12,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,6 +33,7 @@ import java.util.UUID;
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @EnableConfigurationProperties({JwtProperties.class})
 @ConditionalOnClass({JwtEncoder.class, JwtDecoder.class})
 @ConditionalOnProperty(prefix = JwtProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

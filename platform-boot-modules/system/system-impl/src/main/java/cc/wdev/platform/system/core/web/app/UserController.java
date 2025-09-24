@@ -6,7 +6,7 @@ import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.annotations.RateLimiter;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.utils.SecurityUtils;
-import cc.wdev.platform.system.core.api.UserApi;
+import cc.wdev.platform.system.core.feign.UserApi;
 import cc.wdev.platform.system.core.domain.dto.UserForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.UserInfoDto;
 import cc.wdev.platform.system.core.domain.form.*;

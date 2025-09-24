@@ -16,6 +16,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.aot.hint.TypeHint;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,6 +33,7 @@ import java.util.function.Consumer;
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @ConditionalOnProperty(prefix = IpProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({IpProperties.class})
 @ImportRuntimeHints({IpAutoConfiguration.IpRuntimeHints.class})

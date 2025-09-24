@@ -17,6 +17,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.aot.hint.TypeHint;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,6 +35,7 @@ import java.util.function.Consumer;
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @ConditionalOnClass({RedissonClient.class})
 @EnableConfigurationProperties({CacheCustomProperties.class, RedisProperties.class})
 @ConditionalOnProperty(prefix = CacheCustomProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

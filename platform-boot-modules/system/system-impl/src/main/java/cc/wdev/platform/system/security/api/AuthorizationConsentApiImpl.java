@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.security.api;
+package cc.wdev.platform.system.security.feign;
 
 import cc.wdev.platform.system.security.domain.dto.AuthorizationConsentDto;
 import lombok.AllArgsConstructor;

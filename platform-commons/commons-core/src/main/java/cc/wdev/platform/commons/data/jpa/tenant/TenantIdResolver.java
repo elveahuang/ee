@@ -8,7 +8,7 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
  * @author elvea
  */
 @Slf4j
-public record TenantIdResolver(boolean multiTenancyEnabled) implements CurrentTenantIdentifierResolver<Long> {
+public class TenantIdResolver implements CurrentTenantIdentifierResolver<Long> {
 
     /**
      * @see CurrentTenantIdentifierResolver#resolveCurrentTenantIdentifier()

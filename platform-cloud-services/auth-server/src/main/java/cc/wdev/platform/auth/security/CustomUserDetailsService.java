@@ -2,8 +2,8 @@ package cc.wdev.platform.auth.security;
 
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
-import cc.wdev.platform.system.core.api.UserApi;
 import cc.wdev.platform.system.core.domain.dto.UserLoginDto;
+import cc.wdev.platform.system.core.feign.UserFeignClient;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserApi userApi;
+    private final UserFeignClient userFeignClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserLoginDto user = userApi.findByUsername(username).getData();
+        UserLoginDto user = userFeignClient.findByUsername(username).getData();
         if (null == user) {
             throw new UsernameNotFoundException(username);
         }

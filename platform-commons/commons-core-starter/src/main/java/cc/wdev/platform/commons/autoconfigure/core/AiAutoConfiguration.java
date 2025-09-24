@@ -32,6 +32,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -48,6 +49,7 @@ import static org.springframework.ai.vectorstore.elasticsearch.SimilarityFunctio
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @ConditionalOnClass({ChatModel.class, ChatMemoryRepository.class, MessageWindowChatMemory.class})
 @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties({AiProperties.class, AiTencentProperties.class, AiAliyunProperties.class})

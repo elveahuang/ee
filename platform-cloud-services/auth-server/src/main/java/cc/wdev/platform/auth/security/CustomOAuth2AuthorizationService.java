@@ -1,10 +1,10 @@
 package cc.wdev.platform.auth.security;
 
 import cc.wdev.platform.auth.security.utils.OAuth2Utils;
-import cc.wdev.platform.system.security.api.AuthorizationApi;
-import cc.wdev.platform.system.security.api.ClientApi;
 import cc.wdev.platform.system.security.domain.dto.AuthorizationDto;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
+import cc.wdev.platform.system.security.feign.AuthorizationFeignClient;
+import cc.wdev.platform.system.security.feign.ClientFeignClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -34,23 +34,23 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
-    private final AuthorizationApi authorizationApi;
+    private final AuthorizationFeignClient authorizationFeignClient;
 
-    private final ClientApi clientApi;
+    private final ClientFeignClient clientFeignClient;
 
     @Override
     public void save(OAuth2Authorization authorization) {
-        this.authorizationApi.save(toEntity(authorization));
+        this.authorizationFeignClient.save(toEntity(authorization));
     }
 
     @Override
     public void remove(OAuth2Authorization authorization) {
-        this.authorizationApi.deleteById(Long.valueOf(authorization.getId()));
+        this.authorizationFeignClient.deleteById(Long.valueOf(authorization.getId()));
     }
 
     @Override
     public OAuth2Authorization findById(String id) {
-        return toObject(this.authorizationApi.findById(Long.valueOf(id)).getData());
+        return toObject(this.authorizationFeignClient.findById(Long.valueOf(id)).getData());
     }
 
     @Override
@@ -58,13 +58,13 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
         AuthorizationDto authorization = null;
         if (tokenType != null) {
             if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByState(token).getData();
+                authorization = this.authorizationFeignClient.findByState(token).getData();
             } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByAuthorizationCodeValue(token).getData();
+                authorization = this.authorizationFeignClient.findByAuthorizationCodeValue(token).getData();
             } else if (OAuth2ParameterNames.ACCESS_TOKEN.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByAccessTokenValue(token).getData();
+                authorization = this.authorizationFeignClient.findByAccessTokenValue(token).getData();
             } else if (OAuth2ParameterNames.REFRESH_TOKEN.equals(tokenType.getValue())) {
-                authorization = this.authorizationApi.findByRefreshTokenValue(token).getData();
+                authorization = this.authorizationFeignClient.findByRefreshTokenValue(token).getData();
             }
         }
         return toObject(authorization);
@@ -72,7 +72,7 @@ public class CustomOAuth2AuthorizationService implements OAuth2AuthorizationServ
 
     private OAuth2Authorization toObject(AuthorizationDto dto) {
         if (dto != null) {
-            ClientDto clientDto = this.clientApi.findByClientId(dto.getClientId()).getData();
+            ClientDto clientDto = this.clientFeignClient.findByClientId(dto.getClientId()).getData();
             if (clientDto == null) {
                 throw new DataRetrievalFailureException("Invalid Client with id '" + dto.getClientId() + "'");
             }

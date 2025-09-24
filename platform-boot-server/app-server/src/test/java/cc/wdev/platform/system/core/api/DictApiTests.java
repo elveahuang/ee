@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.api;
+package cc.wdev.platform.system.core.feign;
 
 import cc.wdev.platform.BaseTests;
 import cc.wdev.platform.system.commons.constants.SystemDictConstants;

@@ -1,7 +1,7 @@
 package cc.wdev.platform.auth.security.web;
 
 import cc.wdev.platform.commons.utils.SecurityUtils;
-import cc.wdev.platform.system.core.api.UserSessionApi;
+import cc.wdev.platform.system.core.feign.UserSessionFeignClient;
 import cc.wdev.platform.system.core.helper.UserSessionHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,10 +20,10 @@ import java.io.IOException;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final UserSessionApi userSessionApi;
+    private final UserSessionFeignClient userSessionFeignClient;
 
-    public CustomAuthenticationSuccessHandler(UserSessionApi userSessionApi) {
-        this.userSessionApi = userSessionApi;
+    public CustomAuthenticationSuccessHandler(UserSessionFeignClient userSessionFeignClient) {
+        this.userSessionFeignClient = userSessionFeignClient;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // 保持用户成功登录记录
         for (int i = 0; i < 1; i++) {
             try {
-                this.userSessionApi.saveUserSession(UserSessionHelper.userSession(id, username, true, request));
+                this.userSessionFeignClient.saveUserSession(UserSessionHelper.userSession(id, username, true, request));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

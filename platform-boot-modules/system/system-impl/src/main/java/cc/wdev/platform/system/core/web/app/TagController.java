@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.core.api.TagApi;
+import cc.wdev.platform.system.core.feign.TagApi;
 import cc.wdev.platform.system.core.domain.request.TagSearchRequest;
 import cc.wdev.platform.system.core.domain.request.TagTypeRequest;
 import cc.wdev.platform.system.core.domain.vo.TagTypeVo;

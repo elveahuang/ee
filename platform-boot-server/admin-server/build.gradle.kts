@@ -18,10 +18,11 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("admin.jar")
     manifest {
         attributes("Spring-Boot-Native-Processed" to "false")
     }
+    mainClass.set("cc.wdev.platform.admin.AdminServerApplication")
+    archiveFileName.set("admin.jar")
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {

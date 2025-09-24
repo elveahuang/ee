@@ -11,6 +11,7 @@ import cc.wdev.platform.commons.message.socket.service.DefaultWebSocketSessionSe
 import cc.wdev.platform.commons.message.socket.service.WebSocketService;
 import cc.wdev.platform.commons.message.socket.service.WebSocketSessionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,6 +24,7 @@ import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @EnableConfigurationProperties({WebSocketProperties.class})
 @ConditionalOnClass(WebSocketHandlerDecoratorFactory.class)
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

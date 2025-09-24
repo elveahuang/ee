@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.core.api.DictApi;
+import cc.wdev.platform.system.core.feign.DictApi;
 import cc.wdev.platform.system.core.domain.entity.DictItemEntity;
 import cc.wdev.platform.system.core.domain.entity.TagEntity;
 import cc.wdev.platform.system.core.domain.form.DictForm;

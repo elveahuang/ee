@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.enums.MobileCountryCodeEnum;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.RegexUtils;
-import cc.wdev.platform.system.core.api.UserApi;
+import cc.wdev.platform.system.core.feign.UserApi;
 import cc.wdev.platform.system.core.domain.dto.UserLoginInfoDto;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;

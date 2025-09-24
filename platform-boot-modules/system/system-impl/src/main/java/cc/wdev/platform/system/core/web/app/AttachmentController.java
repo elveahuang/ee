@@ -9,7 +9,7 @@ import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.core.api.AttachmentApi;
+import cc.wdev.platform.system.core.feign.AttachmentApi;
 import cc.wdev.platform.system.core.domain.AttachmentFile;
 import cc.wdev.platform.system.core.domain.AttachmentParameter;
 import cc.wdev.platform.system.core.domain.request.AttachmentRelationRequest;

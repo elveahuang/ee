@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.api;
+package cc.wdev.platform.system.core.feign;
 
 import cc.wdev.platform.BaseTests;
 import org.junit.jupiter.api.Assertions;

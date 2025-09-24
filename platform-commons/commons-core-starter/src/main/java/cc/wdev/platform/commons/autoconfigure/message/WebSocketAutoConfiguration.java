@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.autoconfigure.message.properties.WebSocketProper
 import cc.wdev.platform.commons.message.socket.handler.MessageWebSocketHandler;
 import cc.wdev.platform.commons.message.socket.server.SessionHandshakeInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,6 +17,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @EnableWebSocket
 @EnableConfigurationProperties({WebSocketProperties.class})
 @ConditionalOnClass({WebSocketConfigurer.class})

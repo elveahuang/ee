@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.LogProperties;
-import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.WebProperties;
 import cc.wdev.platform.commons.core.log.aspect.OperationLogAspect;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
@@ -14,7 +14,7 @@ import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -30,7 +30,7 @@ import java.util.Set;
  */
 @Slf4j
 @EnableAspectJAutoProxy
-@AutoConfigureAfter(CoreAutoConfiguration.class)
+@AutoConfiguration(after = CoreAutoConfiguration.class)
 @EnableConfigurationProperties(LogProperties.class)
 @ConditionalOnProperty(prefix = LogProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @ImportRuntimeHints(LogAutoConfiguration.LogRuntimeHints.class)

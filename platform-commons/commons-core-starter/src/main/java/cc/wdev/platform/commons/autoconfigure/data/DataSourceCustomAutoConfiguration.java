@@ -6,7 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -25,7 +25,7 @@ import static cc.wdev.platform.commons.constants.DataSourceConstants.*;
  * @author elvea
  */
 @Slf4j
-@AutoConfigureBefore({DataSourceAutoConfiguration.class})
+@AutoConfiguration(before = {DataSourceAutoConfiguration.class})
 @ConditionalOnProperty(prefix = DataSourceCustomProperties.PREFIX, name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(DataSourceCustomProperties.class)
 public class DataSourceCustomAutoConfiguration {

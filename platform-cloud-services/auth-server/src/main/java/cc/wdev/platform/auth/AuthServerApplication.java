@@ -1,11 +1,11 @@
 package cc.wdev.platform.auth;
 
 import cc.wdev.platform.commons.constants.GlobalConstants;
-import cc.wdev.platform.system.core.api.UserApi;
-import cc.wdev.platform.system.core.api.UserSessionApi;
-import cc.wdev.platform.system.security.api.AuthorizationApi;
-import cc.wdev.platform.system.security.api.AuthorizationConsentApi;
-import cc.wdev.platform.system.security.api.ClientApi;
+import cc.wdev.platform.system.core.feign.UserFeignClient;
+import cc.wdev.platform.system.core.feign.UserSessionFeignClient;
+import cc.wdev.platform.system.security.feign.AuthorizationConsentFeignClient;
+import cc.wdev.platform.system.security.feign.AuthorizationFeignClient;
+import cc.wdev.platform.system.security.feign.ClientFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +20,7 @@ import org.springframework.core.env.Environment;
 @Slf4j
 @SpringBootApplication
 @EnableFeignClients(basePackageClasses = {
-    UserApi.class, UserSessionApi.class, ClientApi.class, AuthorizationConsentApi.class, AuthorizationApi.class
+    UserFeignClient.class, UserSessionFeignClient.class, ClientFeignClient.class, AuthorizationConsentFeignClient.class, AuthorizationFeignClient.class
 })
 @EnableDiscoveryClient
 public class AuthServerApplication {

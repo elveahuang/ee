@@ -2,7 +2,7 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
-import cc.wdev.platform.commons.autoconfigure.web.properties.WebProperties;
+import cc.wdev.platform.commons.autoconfigure.core.properties.WebProperties;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.core.tenant.DefaultTenantResolver;
@@ -47,7 +47,7 @@ public class CoreAutoConfiguration implements ApplicationContextAware {
         log.info("CoreAutoConfiguration is enabled");
         log.info("CoreAutoConfiguration debug {}", properties.getDebug().isEnabled() ? "enabled" : "disabled");
         log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
-        log.info("CoreAutoConfiguration multi-tenancy {}", properties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+        log.info("CoreAutoConfiguration multi-tenancy {}", properties.getTenancy().isEnabled() ? "enabled" : "disabled");
 
         this.properties = properties;
     }
@@ -55,7 +55,7 @@ public class CoreAutoConfiguration implements ApplicationContextAware {
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         log.info("CoreAutoConfiguration GlobalTenantManager initialize ...");
-        TenantConfig config = TenantConfig.builder().enabled(properties.getMultiTenancy().isEnabled()).build();
+        TenantConfig config = TenantConfig.builder().enabled(properties.getTenancy().isEnabled()).build();
         GlobalTenantManager.setConfig(config);
     }
 

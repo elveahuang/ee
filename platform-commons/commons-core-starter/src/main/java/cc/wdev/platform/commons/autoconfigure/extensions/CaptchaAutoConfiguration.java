@@ -10,6 +10,7 @@ import cc.wdev.platform.commons.extensions.captcha.store.DefaultCaptchaStore;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Bean;
  * @author elvea
  */
 @Slf4j
+@AutoConfiguration
 @EnableConfigurationProperties({CaptchaProperties.class})
 @ConditionalOnClass(RedissonClient.class)
 @ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

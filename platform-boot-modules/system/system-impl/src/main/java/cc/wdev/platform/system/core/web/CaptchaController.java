@@ -10,7 +10,7 @@ import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaCodeDto;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaDto;
 import cc.wdev.platform.commons.extensions.captcha.request.CaptchaRequest;
 import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.core.api.CaptchaApi;
+import cc.wdev.platform.system.core.feign.CaptchaApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

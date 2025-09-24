@@ -34,10 +34,10 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("app.jar")
     manifest {
         attributes("Spring-Boot-Native-Processed" to "false")
     }
+    archiveFileName.set("app.jar")
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {

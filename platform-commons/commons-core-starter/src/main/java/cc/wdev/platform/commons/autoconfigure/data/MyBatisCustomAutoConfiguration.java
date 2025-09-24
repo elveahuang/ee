@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.autoconfigure.data;
 
+import cc.wdev.platform.commons.autoconfigure.core.CoreAutoConfiguration;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomProperties;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
@@ -19,6 +20,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerIntercept
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,16 +34,17 @@ import java.util.List;
  * @author elvea
  */
 @Slf4j
-@EnableConfigurationProperties(MyBatisCustomProperties.class)
+@AutoConfiguration(after = {CoreAutoConfiguration.class})
 @ConditionalOnClass({MybatisPlusAutoConfiguration.class})
 @ConditionalOnProperty(prefix = MyBatisCustomProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableConfigurationProperties(MyBatisCustomProperties.class)
 public class MyBatisCustomAutoConfiguration {
 
     private final CoreProperties coreProperties;
 
     public MyBatisCustomAutoConfiguration(CoreProperties coreProperties) {
         log.info("MyBatisCustomAutoConfiguration is enabled");
-        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getTenancy().isEnabled() ? "enabled" : "disabled");
 
         this.coreProperties = coreProperties;
     }
@@ -67,11 +70,11 @@ public class MyBatisCustomAutoConfiguration {
 
     @Bean("mpTenantLineHandler")
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = CoreProperties.PREFIX, name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = CoreProperties.TENANCY_PREFIX, name = "enabled", havingValue = "true")
     public TenantLineHandler mpTenantLineHandler() {
         List<String> tables = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(this.coreProperties.getMultiTenancy().getExcludes())) {
-            tables.addAll(this.coreProperties.getMultiTenancy().getExcludes());
+        if (CollectionUtils.isNotEmpty(this.coreProperties.getTenancy().getExcludes())) {
+            tables.addAll(this.coreProperties.getTenancy().getExcludes());
         }
         return new CustomTenantLineHandler(tables);
     }
@@ -81,7 +84,7 @@ public class MyBatisCustomAutoConfiguration {
     public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler mpTenantLineHandler) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 多租户插件，需要放在第一位
-        if (this.coreProperties.getMultiTenancy().isEnabled()) {
+        if (this.coreProperties.getTenancy().isEnabled()) {
             TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
             tenantInterceptor.setTenantLineHandler(mpTenantLineHandler);
             interceptor.addInnerInterceptor(tenantInterceptor);
