@@ -18,7 +18,7 @@ import java.util.List;
 public class TenantConfig implements Serializable {
 
     @Builder.Default
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @Builder.Default
     private long rootTenantId = 1L;

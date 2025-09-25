@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 }, repositoryBaseClass = BaseEntityRepositoryImpl.class)
 public class WebappApplication {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(WebappApplication.class, args);
     }
 

@@ -57,7 +57,7 @@ public abstract class JdbcUtils {
             return DbPostgresDialect.INSTANCE;
         }
 
-        log.info(String.format("Couldn't determine Dialect for \"%s\". use DbMySqlDialect.", name));
+        log.info("Couldn't determine Dialect for {}. use DbMySqlDialect.", name);
         return new DbMySqlDialect(getIdentifierProcessing(metaData));
     }
 
@@ -79,7 +79,6 @@ public abstract class JdbcUtils {
         try {
             // 获取数据库类型
             DbDialect dialect = getDialect(con);
-
             statement = con.createStatement();
 
             // 创建临时表
@@ -112,8 +111,13 @@ public abstract class JdbcUtils {
         if (!Strings.isNullOrEmpty(temporaryTableName) && temporaryTableName.startsWith("tmp_")) {
             Statement statement = null;
             try {
+                // 获取数据库类型
+                DbDialect dialect = getDialect(con);
                 statement = con.createStatement();
-                statement.execute(String.format("drop table %s", temporaryTableName));
+
+                // 执行删除表语句
+                String sql = dialect.temporaryTable().dropSimpleTemporaryTable(temporaryTableName);
+                statement.executeUpdate(sql);
             } catch (Exception e) {
                 log.error("Drop temporary table {} failure.", temporaryTableName, e);
                 throw new SQLException(String.format("Drop temporary table %s failure.", temporaryTableName));

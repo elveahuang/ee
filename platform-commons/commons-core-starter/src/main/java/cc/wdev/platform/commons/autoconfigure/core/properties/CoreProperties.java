@@ -54,7 +54,7 @@ public class CoreProperties implements Serializable {
      * 多租户配置
      */
     @NestedConfigurationProperty
-    private TenantConfig tenancy = TenantConfig.builder().build();
+    private TenantConfig multiTenancy = TenantConfig.builder().build();
 
     /**
      * 指定用户时区

@@ -16,4 +16,6 @@ public class MyBatisCustomProperties {
 
     private boolean enabled = false;
 
+    private boolean showSql = true;
+
 }

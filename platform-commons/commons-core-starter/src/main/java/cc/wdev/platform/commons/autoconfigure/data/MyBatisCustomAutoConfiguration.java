@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomPrope
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantLineHandler;
 import cc.wdev.platform.commons.data.mybatis.id.CustomIdentifierGenerator;
+import cc.wdev.platform.commons.data.mybatis.log.MyBatisLog;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
@@ -18,8 +19,12 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.logging.stdout.StdOutImpl;
+import org.apache.ibatis.logging.nologging.NoLoggingImpl;
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,8 +32,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author elvea
@@ -42,11 +50,33 @@ public class MyBatisCustomAutoConfiguration {
 
     private final CoreProperties coreProperties;
 
-    public MyBatisCustomAutoConfiguration(CoreProperties coreProperties) {
-        log.info("MyBatisCustomAutoConfiguration is enabled");
-        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getTenancy().isEnabled() ? "enabled" : "disabled");
+    private final MyBatisCustomProperties properties;
 
+    public MyBatisCustomAutoConfiguration(MyBatisCustomProperties properties, CoreProperties coreProperties) {
+        log.info("MyBatisCustomAutoConfiguration is enabled");
+        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+
+        this.properties = properties;
         this.coreProperties = coreProperties;
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // MyBatis
+    // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * 数据库字典
+     */
+    @Bean("mybatisDatabaseIdProvider")
+    @ConditionalOnMissingBean
+    public DatabaseIdProvider databaseIdProvider() {
+        Properties properties = new Properties();
+        properties.put("PgSQL", "postgresql");
+        properties.put("MySQL", "mysql");
+
+        DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();
+        databaseIdProvider.setProperties(properties);
+        return databaseIdProvider;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -54,7 +84,7 @@ public class MyBatisCustomAutoConfiguration {
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * 主键生成采用自定义的雪花算法
+     * 主键生成器
      */
     @Bean("mpIdentifierGenerator")
     @ConditionalOnMissingBean
@@ -73,18 +103,23 @@ public class MyBatisCustomAutoConfiguration {
     @ConditionalOnProperty(prefix = CoreProperties.TENANCY_PREFIX, name = "enabled", havingValue = "true")
     public TenantLineHandler mpTenantLineHandler() {
         List<String> tables = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(this.coreProperties.getTenancy().getExcludes())) {
-            tables.addAll(this.coreProperties.getTenancy().getExcludes());
+        if (CollectionUtils.isNotEmpty(this.coreProperties.getMultiTenancy().getExcludes())) {
+            tables.addAll(this.coreProperties.getMultiTenancy().getExcludes());
         }
         return new CustomTenantLineHandler(tables);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(@Autowired(required = false) TenantLineHandler mpTenantLineHandler) {
+    public MybatisPlusInterceptor mybatisPlusInterceptor(
+        @Qualifier("mpTenantLineHandler") @Autowired(required = false) TenantLineHandler mpTenantLineHandler
+    ) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 多租户插件，需要放在第一位
-        if (this.coreProperties.getTenancy().isEnabled()) {
+        if (this.coreProperties.getMultiTenancy().isEnabled() && mpTenantLineHandler == null) {
+            log.info("Multi-tenancy is enabled, but mpTenantLineHandler is null.");
+        } else if (this.coreProperties.getMultiTenancy().isEnabled()) {
+            log.info("Multi-tenancy is enabled, init TenantLineInnerInterceptor.");
             TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
             tenantInterceptor.setTenantLineHandler(mpTenantLineHandler);
             interceptor.addInnerInterceptor(tenantInterceptor);
@@ -99,14 +134,29 @@ public class MyBatisCustomAutoConfiguration {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // MyBatis
+    // MyBatis Plus Configuration Customizer
     // -----------------------------------------------------------------------------------------------------------------
 
     @Bean
     @ConditionalOnMissingBean
-    public ConfigurationCustomizer configurationCustomizer() {
+    public ConfigurationCustomizer configurationCustomizer(
+        DatabaseIdProvider databaseIdProvider,
+        DataSource dataSource
+    ) throws SQLException {
+        String databaseId = databaseIdProvider.getDatabaseId(dataSource);
+
+        log.info("Create MyBatis Configuration Customizer");
+        log.info("MyBatis databaseId - {}", databaseId);
+        log.info("MyBatis showSql - {}", this.properties.isShowSql());
+
         return configuration -> {
-            configuration.setLogImpl(StdOutImpl.class);
+            if (this.properties.isShowSql()) {
+                configuration.setLogImpl(MyBatisLog.class);
+            } else {
+                configuration.setLogImpl(NoLoggingImpl.class);
+            }
+            configuration.setDatabaseId(databaseId);
+            configuration.setJdbcTypeForNull(JdbcType.NULL);
             configuration.setMapUnderscoreToCamelCase(true);
         };
     }

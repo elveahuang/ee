@@ -1,5 +1,5 @@
 # 镜像
-FROM bellsoft/liberica-openjdk-rocky:25-cds
+FROM bellsoft/liberica-openjdk-rocky:latest
 LABEL maintainer="Elvea Huang"
 # 处理构建文件
 RUN mkdir -p /app

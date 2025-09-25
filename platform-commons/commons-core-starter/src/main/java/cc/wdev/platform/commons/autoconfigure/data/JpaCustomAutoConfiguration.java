@@ -14,6 +14,7 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.id.IdentifierGenerator;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -40,13 +41,13 @@ import org.springframework.lang.NonNull;
 @EnableJpaRepositories(repositoryBaseClass = BaseEntityRepositoryImpl.class)
 public class JpaCustomAutoConfiguration implements ApplicationContextAware {
 
-    private final JpaCustomProperties properties;
-
     private final CoreProperties coreProperties;
+
+    private final JpaCustomProperties properties;
 
     public JpaCustomAutoConfiguration(JpaCustomProperties properties, CoreProperties coreProperties) {
         log.info("JpaCustomAutoConfiguration is enabled");
-        log.info("JpaCustomAutoConfiguration multi-tenancy {}", coreProperties.getTenancy().isEnabled() ? "enabled" : "disabled");
+        log.info("JpaCustomAutoConfiguration multi-tenancy {}", coreProperties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
 
         this.properties = properties;
         this.coreProperties = coreProperties;
@@ -55,7 +56,7 @@ public class JpaCustomAutoConfiguration implements ApplicationContextAware {
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         log.info("CoreAutoConfiguration GlobalTenantManager initialize ...");
-        TenantConfig config = TenantConfig.builder().enabled(coreProperties.getTenancy().isEnabled()).build();
+        TenantConfig config = TenantConfig.builder().enabled(coreProperties.getMultiTenancy().isEnabled()).build();
         GlobalTenantManager.setConfig(config);
     }
 
@@ -73,13 +74,22 @@ public class JpaCustomAutoConfiguration implements ApplicationContextAware {
     }
 
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(@Autowired(required = false) CurrentTenantIdentifierResolver<Long> jpaTenantIdentifierResolver) {
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(
+        @Qualifier("jpaTenantIdentifierResolver") @Autowired(required = false) CurrentTenantIdentifierResolver<Long> jpaTenantIdentifierResolver
+    ) {
+        log.info("Create Hibernate Configuration Customizer");
+        log.info("Hibernate showSql - {}", this.properties.isShowSql());
+        log.info("Hibernate formatSql - {}", this.properties.isFormatSql());
+
         return properties -> {
             properties.put("hibernate.show_sql", this.properties.isShowSql());
             properties.put("hibernate.format_sql", this.properties.isFormatSql());
 
             // 开启多租户解析器
-            if (this.coreProperties.getTenancy().isEnabled()) {
+            if (this.coreProperties.getMultiTenancy().isEnabled() && jpaTenantIdentifierResolver == null) {
+                log.info("Multi-tenancy is enabled, but jpaTenantIdentifierResolver is null.");
+            } else if (this.coreProperties.getMultiTenancy().isEnabled()) {
+                log.info("Multi-tenancy is enabled, init CurrentTenantIdentifierResolver.");
                 properties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, jpaTenantIdentifierResolver);
             }
         };
