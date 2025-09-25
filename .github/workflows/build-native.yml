@@ -1,34 +1,35 @@
 name: Build Native
 on:
     push:
-        branches: [ main ]
+        branches: [main]
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout
-                uses: actions/checkout@v4
-            -   name: Setup Graalvm
-                uses: graalvm/setup-graalvm@v1
-                with:
-                    distribution: "graalvm"
-                    java-version: "25"
-            -   name: Env
-                run: |
-                    echo "GRAALVM_HOME: $GRAALVM_HOME"
-                    echo "JAVA_HOME: $JAVA_HOME"
-                    java --version
-                    native-image --version
-                    gradle -v
-            -   name: Build
-                run: |
-                    chmod a+x ./gradlew
-                    ./gradlew platform-boot-server:app-server:nativeCompile
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Setup Graalvm
+              uses: graalvm/setup-graalvm@v1
+              with:
+                  distribution: "graalvm"
+                  java-version: "25"
+            - name: Env
+              run: |
+                  echo "JAVA_HOME: $JAVA_HOME"
+                  java --version
+                  gradle -v
+                  echo "GRAALVM_HOME: $GRAALVM_HOME"
+                  native-image --version
+            - name: Build
+              run: |
+                  chmod a+x ./gradlew
+                  ./gradlew platform-boot-server:app-server:nativeCompile
 
-                    mkdir -p ./dist
-                    cp -r ./platform-boot-server/app-server/build/native/nativeCompile/** ./dist/
-                    cd ./dist
-                    zip -qr native.zip *
+                  mkdir -p ./dist
+                  cp -r ./platform-boot-server/app-server/build/native/nativeCompile/** ./dist/
+                  cd ./dist
+                  zip -qr native.zip *
+
 #            -   name: Deploy
 #                uses: wlixcc/SFTP-Deploy-Action@v1.2.6
 #                with:

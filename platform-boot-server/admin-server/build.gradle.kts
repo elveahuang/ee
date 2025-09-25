@@ -21,7 +21,6 @@ tasks.named<BootJar>("bootJar") {
     manifest {
         attributes("Spring-Boot-Native-Processed" to "false")
     }
-    mainClass.set("cc.wdev.platform.admin.AdminServerApplication")
     archiveFileName.set("admin.jar")
 }
 
@@ -29,7 +28,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
     builder = "bellsoft/buildpacks.builder:musl"
     environment = mapOf(
         "BP_LOG_LEVEL" to "debug",
-        "BP_JVM_VERSION" to "21",
+        "BP_JVM_VERSION" to "25",
         "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
         "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
     )
