@@ -1,6 +1,6 @@
 [versions]
 springAiVersion = "1.0.2"
-springAiAlibabaVersion = "1.0.0.3"
+springAiAlibabaVersion = "1.0.0.4"
 springBootVersion = "3.5.6"
 springBootAdminVersion = "3.5.5"
 springDependencyManagementVersion = "1.1.7"
