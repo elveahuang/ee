@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.core;
 
 import cc.wdev.dev.webapp.BaseTests;
+import cc.wdev.platform.commons.utils.MessageSourceUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,11 @@ public class ContextTests extends BaseTests {
     @Test
     public void bastTest() {
         Assertions.assertNotNull(context);
-        String text = this.context.getMessage("system__label__app_title", Locale.CHINA);
+    }
+
+    @Test
+    public void messageSourceTest() {
+        String text = MessageSourceUtils.getMessage("system__label__app_title", Locale.CHINA);
         Assertions.assertNotNull(text);
     }
 

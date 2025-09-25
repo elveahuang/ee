@@ -1,7 +1,7 @@
 package cc.wdev.platform.security;
 
-import cc.wdev.platform.system.security.feign.AuthorizationConsentApi;
 import cc.wdev.platform.system.security.domain.dto.AuthorizationConsentDto;
+import cc.wdev.platform.system.security.feign.AuthorizationConsentApi;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

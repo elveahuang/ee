@@ -2,7 +2,7 @@ package cc.wdev.platform.system.core.feign;
 
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.system.core.domain.dto.LoginSessionDto;
-import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionRabbitService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class LoginSessionApiImpl implements LoginSessionApi {
 
-    private final LoginSessionAmqpService loginSessionAmqpService;
+    private final LoginSessionRabbitService loginSessionRabbitService;
 
     /**
      * @see LoginSessionApi#saveUserSession(LoginSessionDto)
      */
     @Override
     public R<Boolean> saveUserSession(LoginSessionDto dto) throws Exception {
-        this.loginSessionAmqpService.send(dto);
+        this.loginSessionRabbitService.send(dto);
         return R.success(Boolean.TRUE);
     }
 

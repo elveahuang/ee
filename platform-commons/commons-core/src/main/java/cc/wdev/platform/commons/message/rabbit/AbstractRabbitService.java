@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Slf4j
 @Transactional
-public abstract class AbstractAmqpService<T> extends AbstractService implements AmqpService<T> {
+public abstract class AbstractRabbitService<T> extends AbstractService implements RabbitService<T> {
 
     protected Context context;
 
     protected RabbitTemplate rabbitTemplate;
 
     /**
-     * @see AmqpService#send(Object)
+     * @see RabbitService#send(Object)
      */
     @Override
     public void send(T body) throws Exception {
@@ -30,7 +30,7 @@ public abstract class AbstractAmqpService<T> extends AbstractService implements 
     }
 
     /**
-     * @see AmqpService#send(String, Object)
+     * @see RabbitService#send(String, Object)
      */
     @Override
     public void send(String routingKey, T body) throws Exception {
@@ -44,7 +44,7 @@ public abstract class AbstractAmqpService<T> extends AbstractService implements 
     }
 
     /**
-     * @see AmqpService#send(String, Object)
+     * @see RabbitService#send(String, Object)
      */
     @Override
     public void send(String exchange, String routingKey, T body) throws Exception {
@@ -77,7 +77,7 @@ public abstract class AbstractAmqpService<T> extends AbstractService implements 
     }
 
     protected boolean isEnabled() {
-        return context.isAmqpEnabled();
+        return context.getRabbit().isEnabled();
     }
 
     public abstract void execute(T t) throws Exception;

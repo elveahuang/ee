@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.autoconfigure.data;
 import cc.wdev.platform.commons.autoconfigure.core.CoreAutoConfiguration;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomProperties;
+import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantLineHandler;
 import cc.wdev.platform.commons.data.mybatis.id.CustomIdentifierGenerator;
@@ -48,16 +49,16 @@ import java.util.Properties;
 @EnableConfigurationProperties(MyBatisCustomProperties.class)
 public class MyBatisCustomAutoConfiguration {
 
-    private final CoreProperties coreProperties;
-
     private final MyBatisCustomProperties properties;
 
-    public MyBatisCustomAutoConfiguration(MyBatisCustomProperties properties, CoreProperties coreProperties) {
+    private final Context context;
+
+    public MyBatisCustomAutoConfiguration(MyBatisCustomProperties properties, Context context) {
         log.info("MyBatisCustomAutoConfiguration is enabled");
-        log.info("MyBatisCustomAutoConfiguration multi-tenancy {}", coreProperties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
+        log.info("MyBatisCustomAutoConfiguration tenancy {}", context.getTenancy().isEnabled() ? "enabled" : "disabled");
 
         this.properties = properties;
-        this.coreProperties = coreProperties;
+        this.context = context;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -103,8 +104,8 @@ public class MyBatisCustomAutoConfiguration {
     @ConditionalOnProperty(prefix = CoreProperties.TENANCY_PREFIX, name = "enabled", havingValue = "true")
     public TenantLineHandler mpTenantLineHandler() {
         List<String> tables = new ArrayList<>();
-        if (CollectionUtils.isNotEmpty(this.coreProperties.getMultiTenancy().getExcludes())) {
-            tables.addAll(this.coreProperties.getMultiTenancy().getExcludes());
+        if (CollectionUtils.isNotEmpty(this.context.getTenancy().getExcludes())) {
+            tables.addAll(this.context.getTenancy().getExcludes());
         }
         return new CustomTenantLineHandler(tables);
     }
@@ -116,10 +117,10 @@ public class MyBatisCustomAutoConfiguration {
     ) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 多租户插件，需要放在第一位
-        if (this.coreProperties.getMultiTenancy().isEnabled() && mpTenantLineHandler == null) {
-            log.info("Multi-tenancy is enabled, but mpTenantLineHandler is null.");
-        } else if (this.coreProperties.getMultiTenancy().isEnabled()) {
-            log.info("Multi-tenancy is enabled, init TenantLineInnerInterceptor.");
+        if (this.context.getTenancy().isEnabled() && mpTenantLineHandler == null) {
+            log.info("Tenancy is enabled, but mpTenantLineHandler is null.");
+        } else if (this.context.getTenancy().isEnabled()) {
+            log.info("Tenancy is enabled, init TenantLineInnerInterceptor.");
             TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
             tenantInterceptor.setTenantLineHandler(mpTenantLineHandler);
             interceptor.addInnerInterceptor(tenantInterceptor);
@@ -134,7 +135,7 @@ public class MyBatisCustomAutoConfiguration {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // MyBatis Plus Configuration Customizer
+    // MyBatis Configuration Customizer
     // -----------------------------------------------------------------------------------------------------------------
 
     @Bean

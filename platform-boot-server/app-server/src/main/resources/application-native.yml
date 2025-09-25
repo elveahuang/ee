@@ -119,6 +119,8 @@ platform:
         mobile: http://127.0.0.1:8082
         webapp: http://127.0.0.1:8083
         main: http://127.0.0.1:8084
+    tenancy:
+        enabled: false
     ai:
         enabled: true
         service-provider: spring
@@ -149,7 +151,7 @@ platform:
         strategy: auto
         public-key-value:
         private-key-value:
-    amqp:
+    rabbit:
         enabled: true
     captcha:
         enabled: true

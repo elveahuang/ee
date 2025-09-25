@@ -33,7 +33,7 @@ public class WebSecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.debug(this.context.isDebugEnabled());
+        return (web) -> web.debug(this.context.getDebug().isEnabled());
     }
 
     /**

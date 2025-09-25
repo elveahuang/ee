@@ -4,9 +4,9 @@ import cc.wdev.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
-import cc.wdev.platform.system.core.service.CaptchaLogAmqpService;
-import cc.wdev.platform.system.core.service.OperationLogAmqpService;
-import cc.wdev.platform.system.core.service.UrlLogAmqpService;
+import cc.wdev.platform.system.core.service.CaptchaLogRabbitService;
+import cc.wdev.platform.system.core.service.OperationLogRabbitService;
+import cc.wdev.platform.system.core.service.UrlLogRabbitService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class LogApiImpl implements LogApi {
 
-    private final CaptchaLogAmqpService captchaLogAmqpService;
+    private final CaptchaLogRabbitService captchaLogRabbitService;
 
-    private final OperationLogAmqpService operationLogAmqpService;
+    private final OperationLogRabbitService operationLogRabbitService;
 
-    private final UrlLogAmqpService urlLogAmqpService;
+    private final UrlLogRabbitService urlLogRabbitService;
 
     @Override
     public void saveApplicationLog(ApplicationLogDto dto) {
@@ -31,17 +31,17 @@ public class LogApiImpl implements LogApi {
 
     @Override
     public void saveUrlLogLog(UrlLogDto captchaLog) throws Exception {
-        this.urlLogAmqpService.send(captchaLog);
+        this.urlLogRabbitService.send(captchaLog);
     }
 
     @Override
     public void saveCaptchaLog(CaptchaLogDto captchaLog) throws Exception {
-        this.captchaLogAmqpService.send(captchaLog);
+        this.captchaLogRabbitService.send(captchaLog);
     }
 
     @Override
     public void saveOperationLog(OperationLogDto operationLog) throws Exception {
-        this.operationLogAmqpService.send(operationLog);
+        this.operationLogRabbitService.send(operationLog);
     }
 
 }

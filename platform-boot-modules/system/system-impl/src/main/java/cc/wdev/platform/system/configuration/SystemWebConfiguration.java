@@ -27,8 +27,8 @@ public class SystemWebConfiguration implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(@Nullable ViewResolverRegistry registry) {
         Map<String, String> vars = Maps.newHashMap();
-        vars.put("applicationName", context.getApplicationName());
-        vars.put("applicationVersion", context.getApplicationVersion());
+        vars.put("applicationName", context.getApp().getApplicationName());
+        vars.put("applicationVersion", context.getApp().getApplicationVersion());
         this.thymeleafViewResolver.setStaticVariables(vars);
     }
 

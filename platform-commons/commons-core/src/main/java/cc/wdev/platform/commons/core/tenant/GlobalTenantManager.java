@@ -11,7 +11,7 @@ public class GlobalTenantManager {
         return GlobalTenantManager.config;
     }
 
-    public static void setConfig(TenantConfig config) {
+    public static void init(TenantConfig config) {
         GlobalTenantManager.config = config;
     }
 

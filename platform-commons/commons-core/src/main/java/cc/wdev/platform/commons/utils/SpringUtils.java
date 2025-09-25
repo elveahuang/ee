@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.Nullable;
+import org.springframework.lang.NonNull;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -23,10 +23,13 @@ import java.util.function.Function;
 @Slf4j
 public class SpringUtils implements ApplicationContextAware {
 
-    private static ApplicationContext applicationContext = null;
+    private static ApplicationContext applicationContext;
 
+    /**
+     * @see ApplicationContextAware#setApplicationContext(ApplicationContext)
+     */
     @Override
-    public void setApplicationContext(@Nullable ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         Assert.notNull(applicationContext, "applicationContext must not be null.");
         SpringUtils.applicationContext = applicationContext;
     }

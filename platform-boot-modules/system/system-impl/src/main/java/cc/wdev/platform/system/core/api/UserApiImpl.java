@@ -21,7 +21,7 @@ import cc.wdev.platform.system.core.domain.entity.UserEntity;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.UserCheckRequest;
 import cc.wdev.platform.system.core.service.AuthorityService;
-import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionRabbitService;
 import cc.wdev.platform.system.core.service.RoleService;
 import cc.wdev.platform.system.core.service.UserService;
 import com.google.common.collect.Lists;
@@ -51,7 +51,7 @@ public class UserApiImpl implements UserApi {
 
     private final CaptchaService captchaService;
 
-    private final LoginSessionAmqpService loginSessionAmqpService;
+    private final LoginSessionRabbitService loginSessionRabbitService;
 
     /**
      * @see UserApi#check(UserCheckRequest)
@@ -264,7 +264,7 @@ public class UserApiImpl implements UserApi {
                     .entityId(uid)
                     .username(userName)
                     .build();
-                this.loginSessionAmqpService.send(userSession);
+                this.loginSessionRabbitService.send(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);

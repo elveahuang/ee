@@ -46,6 +46,8 @@ spring:
 platform:
     cache:
         enabled: true
+    tenancy:
+        enabled: true
     ai:
         enabled: true
         vector-store-provider: simple
@@ -86,7 +88,3 @@ platform:
             endpoint:
             bucket:
             region:
-    tenant:
-        enabled: true
-        ignore-tables:
-            - sys_tenant

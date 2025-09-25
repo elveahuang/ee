@@ -1,5 +1,7 @@
 package cc.wdev.platform.commons.service;
 
+import cc.wdev.platform.commons.core.sequence.SequenceManager;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,19 +26,16 @@ public interface Service {
         return LocalDate.now();
     }
 
-    /**
-     *
-     */
-    Long generateId();
+    default Long generateId() {
+        return SequenceManager.getSequence().nextId();
+    }
 
-    /**
-     *
-     */
-    String generateIdAsString();
+    default String generateIdAsString() {
+        return String.valueOf(SequenceManager.getSequence().nextId());
+    }
 
-    /**
-     *
-     */
-    String generateCode(String prefix);
+    default String generateCode(String prefix) {
+        return String.format("%s-%s", prefix, generateIdAsString());
+    }
 
 }

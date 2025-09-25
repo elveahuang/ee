@@ -3,14 +3,13 @@ package cc.wdev.platform.commons.autoconfigure.core;
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.WebProperties;
-import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.core.tenant.DefaultTenantResolver;
 import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
-import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.core.tenant.TenantStore;
+import cc.wdev.platform.commons.utils.EnvironmentUtils;
+import cc.wdev.platform.commons.utils.MessageSourceUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
-import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
 import cc.wdev.platform.commons.utils.i18n.LanguageResolver;
 import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
@@ -22,41 +21,26 @@ import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.lang.NonNull;
 
 /**
  * @author elvea
  */
 @Slf4j
 @EnableConfigurationProperties({CoreProperties.class, AsyncProperties.class})
-public class CoreAutoConfiguration implements ApplicationContextAware {
+public class CoreAutoConfiguration {
 
     private final CoreProperties properties;
 
     public CoreAutoConfiguration(CoreProperties properties) {
         log.info("CoreAutoConfiguration is enabled");
-        log.info("CoreAutoConfiguration debug {}", properties.getDebug().isEnabled() ? "enabled" : "disabled");
-        log.info("CoreAutoConfiguration amqp {}", properties.getAmqp().isEnabled() ? "enabled" : "disabled");
-        log.info("CoreAutoConfiguration multi-tenancy {}", properties.getMultiTenancy().isEnabled() ? "enabled" : "disabled");
-
         this.properties = properties;
-    }
-
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
-        log.info("CoreAutoConfiguration GlobalTenantManager initialize ...");
-        TenantConfig config = TenantConfig.builder().enabled(properties.getMultiTenancy().isEnabled()).build();
-        GlobalTenantManager.setConfig(config);
     }
 
     @Bean
@@ -65,28 +49,34 @@ public class CoreAutoConfiguration implements ApplicationContextAware {
         return new SpringUtils();
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    public EnvironmentUtils environmentUtils() {
+        return new EnvironmentUtils();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public MessageSourceUtils messageSourceUtils() {
+        return new MessageSourceUtils();
+    }
+
     @Bean(name = "context")
     @ConditionalOnMissingBean
-    public Context Context(CoreProperties properties) {
-        Context.Home home = Context.Home.builder()
-            .admin(StringUtils.isNotEmpty(properties.getHome().getAdmin()) ? properties.getHome().getAdmin() : "")
-            .webapp(StringUtils.isNotEmpty(properties.getHome().getWebapp()) ? properties.getHome().getWebapp() : "")
-            .mobile(StringUtils.isNotEmpty(properties.getHome().getMobile()) ? properties.getHome().getMobile() : "")
-            .main(StringUtils.isNotEmpty(properties.getHome().getMain()) ? properties.getHome().getMain() : "")
-            .build();
+    public Context Context() {
+        log.info("Context init...");
+        log.info("Context Debug {}", this.properties.getDebug().isEnabled() ? "enabled" : "disabled");
+        log.info("Context Rabbit {}", this.properties.getRabbit().isEnabled() ? "enabled" : "disabled");
+        log.info("Context Tenancy {}", this.properties.getTenancy().isEnabled() ? "enabled" : "disabled");
 
-        String applicationTitle = StringUtils.isEmpty(properties.getApplicationName()) ?
-            GlobalConstants.NAME : properties.getApplicationName();
-
-        String applicationVersion = StringUtils.isEmpty(properties.getApplicationVersion()) ?
-            GlobalConstants.VERSION : properties.getApplicationVersion();
+        GlobalTenantManager.init(this.properties.getTenancy());
 
         return Context.builder()
-            .applicationName(applicationTitle)
-            .applicationVersion(applicationVersion)
-            .debugEnabled(properties.getDebug().isEnabled())
-            .amqpEnabled(properties.getAmqp().isEnabled())
-            .home(home)
+            .app(properties.getApp())
+            .debug(properties.getDebug())
+            .home(properties.getHome())
+            .rabbit(properties.getRabbit())
+            .tenancy(properties.getTenancy())
             .build();
     }
 
@@ -108,8 +98,8 @@ public class CoreAutoConfiguration implements ApplicationContextAware {
 
     @Bean
     @ConditionalOnMissingBean
-    public TimeZoneResolver timeZoneResolver(CoreProperties properties) {
-        return new DefaultTimeZoneResolver(properties.getUserZoneId(), properties.getSystemZoneId());
+    public TimeZoneResolver timeZoneResolver(Context context) {
+        return new DefaultTimeZoneResolver(context.getApp().getUserZoneId(), context.getApp().getSystemZoneId());
     }
 
     @Bean
@@ -126,8 +116,8 @@ public class CoreAutoConfiguration implements ApplicationContextAware {
 
     @Bean
     @ConditionalOnMissingBean
-    public LanguageResolver languageResolver(CoreProperties properties) {
-        return new DefaultLanguageResolver(properties.getLanguage());
+    public LanguageResolver languageResolver(Context context) {
+        return new DefaultLanguageResolver(context.getApp().getLanguage());
     }
 
     // ------------------------------------------------------------------------------------------------------------------------

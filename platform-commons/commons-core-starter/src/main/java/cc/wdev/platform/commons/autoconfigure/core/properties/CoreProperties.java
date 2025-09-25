@@ -1,15 +1,13 @@
 package cc.wdev.platform.commons.autoconfigure.core.properties;
 
-import cc.wdev.platform.commons.constants.DateTimeConstants;
-import cc.wdev.platform.commons.constants.GlobalConstants;
+import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.core.tenant.TenantConfig;
-import lombok.Builder;
+import cc.wdev.platform.commons.message.rabbit.RabbitConfig;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.io.Serializable;
-import java.time.ZoneId;
 
 /**
  * @author elvea
@@ -23,93 +21,33 @@ public class CoreProperties implements Serializable {
     public static final String TENANCY_PREFIX = PREFIX + ".tenancy";
 
     /**
-     * 应用标题
+     * 基本信息
      */
-    private String applicationName = GlobalConstants.NAME;
-
-    /**
-     * 应用版本
-     */
-    private String applicationVersion = GlobalConstants.VERSION;
+    @NestedConfigurationProperty
+    private Context.App app = Context.App.builder().build();
 
     /**
      * 调试模式
      */
     @NestedConfigurationProperty
-    private Debug debug = Debug.builder().build();
-
-    /**
-     * 消息队列
-     */
-    @NestedConfigurationProperty
-    private Amqp amqp = Amqp.builder().build();
+    private Context.Debug debug = Context.Debug.builder().build();
 
     /**
      * 应用主页配置
      */
     @NestedConfigurationProperty
-    private Home home = Home.builder().build();
+    private Context.Home home = Context.Home.builder().build();
+
+    /**
+     * 消息队列
+     */
+    @NestedConfigurationProperty
+    private RabbitConfig rabbit = RabbitConfig.builder().build();
 
     /**
      * 多租户配置
      */
     @NestedConfigurationProperty
-    private TenantConfig multiTenancy = TenantConfig.builder().build();
-
-    /**
-     * 指定用户时区
-     */
-    private ZoneId userZoneId = DateTimeConstants.ZONE_ID_DEFAULT;
-
-    /**
-     * 指定系统时区
-     */
-    private ZoneId systemZoneId = DateTimeConstants.ZONE_ID_DEFAULT;
-
-    /**
-     * 指定系统语言
-     */
-    private String language = "zh_CN";
-
-    @Data
-    @Builder
-    public static class Debug {
-        /**
-         * 是否启用调试模式
-         */
-        @Builder.Default
-        private boolean enabled = false;
-    }
-
-    @Data
-    @Builder
-    public static class Amqp {
-        /**
-         * 是否启用消息队列
-         */
-        @Builder.Default
-        private boolean enabled = true;
-    }
-
-    @Data
-    @Builder
-    public static class Home {
-        /**
-         * 默认主页
-         */
-        private String main;
-        /**
-         * 管理端主页
-         */
-        private String admin;
-        /**
-         * 电脑端主页
-         */
-        private String webapp;
-        /**
-         * 移动端主页
-         */
-        private String mobile;
-    }
+    private TenantConfig tenancy = TenantConfig.builder().build();
 
 }

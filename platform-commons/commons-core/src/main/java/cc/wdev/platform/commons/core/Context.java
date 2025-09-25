@@ -1,39 +1,38 @@
 package cc.wdev.platform.commons.core;
 
+import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.constants.GlobalConstants;
+import cc.wdev.platform.commons.core.tenant.TenantConfig;
+import cc.wdev.platform.commons.message.rabbit.RabbitConfig;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeansException;
-import org.springframework.context.*;
-import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.core.env.Environment;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
-import java.util.Locale;
+import java.time.ZoneId;
 
 /**
  * @author elvea
  */
 @Builder
-public class Context implements Serializable, ApplicationContextAware, MessageSourceAware, EnvironmentAware {
+public class Context implements Serializable, ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
 
     @Setter
     @Getter
     @Builder.Default
-    private String applicationName = GlobalConstants.NAME;
+    private Context.App app = Context.App.builder().build();
 
     @Setter
     @Getter
     @Builder.Default
-    private String applicationVersion = GlobalConstants.VERSION;
-
-    @Setter
-    @Getter
-    @Builder.Default
-    private boolean debugEnabled = false;
+    private Context.Debug debug = Context.Debug.builder().build();
 
     @Setter
     @Getter
@@ -43,115 +42,70 @@ public class Context implements Serializable, ApplicationContextAware, MessageSo
     @Setter
     @Getter
     @Builder.Default
-    private boolean amqpEnabled = false;
+    private RabbitConfig rabbit = RabbitConfig.builder().build();
 
-    private Environment environment;
+    @Setter
+    @Getter
+    @Builder.Default
+    private TenantConfig tenancy = TenantConfig.builder().build();
 
-    private MessageSource messageSource;
-
-    private ApplicationContext applicationContext;
-
-    private MessageSourceAccessor messageSourceAccessor;
-
+    /**
+     * @see ApplicationContextAware#setApplicationContext(ApplicationContext)
+     */
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
 
-    @Override
-    public void setMessageSource(@NonNull MessageSource messageSource) {
-        this.messageSource = messageSource;
-        this.messageSourceAccessor = new MessageSourceAccessor(messageSource);
-    }
+    @Data
+    @Builder
+    public static class Home implements Serializable {
 
-    @Override
-    public void setEnvironment(@NonNull Environment environment) {
-        this.environment = environment;
-    }
+        @Builder.Default
+        private String main = "";
 
-    /**
-     * 获取配置项
-     *
-     * @param key 配置项
-     * @return String
-     */
-    public String getProperty(String key) {
-        return this.getProperty(key, "");
-    }
+        @Builder.Default
+        private String admin = "";
 
-    /**
-     * 获取配置项
-     *
-     * @param key          配置项
-     * @param defaultValue 默认值
-     * @return String
-     */
-    public String getProperty(String key, String defaultValue) {
-        return this.environment.getProperty(key, defaultValue);
-    }
+        @Builder.Default
+        private String webapp = "";
 
-    /**
-     * 获取配置项
-     *
-     * @param key   配置项
-     * @param clazz 返回值类型
-     * @return T
-     */
-    public <T> T getProperty(String key, Class<T> clazz) {
-        return this.environment.getProperty(key, clazz);
-    }
+        @Builder.Default
+        private String mobile = "";
 
-    /**
-     * 获取配置项
-     *
-     * @param key          配置项
-     * @param clazz        返回值类型
-     * @param defaultValue 默认值
-     * @return T
-     */
-    public <T> T getProperty(String key, Class<T> clazz, T defaultValue) {
-        return this.environment.getProperty(key, clazz, defaultValue);
-    }
-
-    /**
-     * 获取多语言文本
-     */
-    public String getMessage(String code, Locale locale) {
-        return this.messageSourceAccessor.getMessage(code, locale);
-    }
-
-    /**
-     * 获取多语言文本
-     */
-    public String getMessage(String code, String defaultMessage, Locale locale) {
-        return this.messageSourceAccessor.getMessage(code, defaultMessage, locale);
-    }
-
-    /**
-     * 获取多语言文本
-     */
-    public String getMessage(String code, Object[] args, Locale locale) {
-        return this.messageSourceAccessor.getMessage(code, args, locale);
-    }
-
-    /**
-     * 获取多语言文本
-     */
-    public String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {
-        return this.messageSourceAccessor.getMessage(code, args, defaultMessage, locale);
     }
 
     @Data
     @Builder
-    public static class Home implements Serializable {
+    public static class Debug implements Serializable {
+
+        /**
+         * 是否开启调试模式
+         */
         @Builder.Default
-        private String main = "";
+        private boolean enabled = false;
+
+    }
+
+    @Data
+    @Builder
+    public static class App implements Serializable {
+
         @Builder.Default
-        private String admin = "";
+        private String applicationName = GlobalConstants.NAME;
+
         @Builder.Default
-        private String webapp = "";
+        private String applicationVersion = GlobalConstants.VERSION;
+
         @Builder.Default
-        private String mobile = "";
+        private ZoneId userZoneId = DateTimeConstants.ZONE_ID_DEFAULT;
+
+        @Builder.Default
+        private ZoneId systemZoneId = DateTimeConstants.ZONE_ID_DEFAULT;
+
+        @Builder.Default
+        private String language = "zh_CN";
+
     }
 
 }

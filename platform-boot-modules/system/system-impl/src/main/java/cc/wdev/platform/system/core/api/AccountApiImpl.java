@@ -20,7 +20,7 @@ import cc.wdev.platform.system.core.domain.entity.AccountEntity;
 import cc.wdev.platform.system.core.domain.form.*;
 import cc.wdev.platform.system.core.domain.request.AccountCheckRequest;
 import cc.wdev.platform.system.core.service.AccountService;
-import cc.wdev.platform.system.core.service.LoginSessionAmqpService;
+import cc.wdev.platform.system.core.service.LoginSessionRabbitService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +40,7 @@ public class AccountApiImpl implements AccountApi {
 
     private final CaptchaService captchaService;
 
-    private final LoginSessionAmqpService loginSessionAmqpService;
+    private final LoginSessionRabbitService loginSessionRabbitService;
 
     /**
      * @see AccountApi#check(AccountCheckRequest)
@@ -253,7 +253,7 @@ public class AccountApiImpl implements AccountApi {
                     .entityId(uid)
                     .username(userName)
                     .build();
-                this.loginSessionAmqpService.send(userSession);
+                this.loginSessionRabbitService.send(userSession);
             }
         } catch (Exception e) {
             log.error("Failed to save UserSession.", e);

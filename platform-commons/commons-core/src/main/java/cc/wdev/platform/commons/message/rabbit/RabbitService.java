@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.message.rabbit;
 /**
  * @author elvea
  */
-public interface AmqpService<T> {
+public interface RabbitService<T> {
 
     /**
      * 发送消息
