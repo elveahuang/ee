@@ -2,10 +2,10 @@ package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.AsyncProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
-import cc.wdev.platform.commons.autoconfigure.core.properties.WebProperties;
 import cc.wdev.platform.commons.core.Context;
-import cc.wdev.platform.commons.core.tenant.DefaultTenantResolver;
+import cc.wdev.platform.commons.core.tenant.DefaultTenantStore;
 import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
+import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.EnvironmentUtils;
 import cc.wdev.platform.commons.utils.MessageSourceUtils;
@@ -17,12 +17,10 @@ import cc.wdev.platform.commons.utils.time.DefaultTimeZoneResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
-import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -63,13 +61,13 @@ public class CoreAutoConfiguration {
 
     @Bean(name = "context")
     @ConditionalOnMissingBean
-    public Context Context() {
+    public Context Context(TenantStore tenantStore, TenantConfig tenantConfig) {
         log.info("Context init...");
         log.info("Context Debug {}", this.properties.getDebug().isEnabled() ? "enabled" : "disabled");
         log.info("Context Rabbit {}", this.properties.getRabbit().isEnabled() ? "enabled" : "disabled");
         log.info("Context Tenancy {}", this.properties.getTenancy().isEnabled() ? "enabled" : "disabled");
 
-        GlobalTenantManager.init(this.properties.getTenancy());
+        GlobalTenantManager.init(tenantStore, tenantConfig);
 
         return Context.builder()
             .app(properties.getApp())
@@ -81,15 +79,19 @@ public class CoreAutoConfiguration {
     }
 
     // ------------------------------------------------------------------------------------------------------------------------
-    // 日志跟踪
+    // Multi Tenancy
     // ------------------------------------------------------------------------------------------------------------------------
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = WebProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    public TraceInterceptor traceInterceptor() {
-        log.info("Creating TraceInterceptor");
-        return new TraceInterceptor();
+    public TenantStore tenantStore() {
+        return new DefaultTenantStore();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public TenantConfig tenantConfig() {
+        return this.properties.getTenancy();
     }
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -118,23 +120,6 @@ public class CoreAutoConfiguration {
     @ConditionalOnMissingBean
     public LanguageResolver languageResolver(Context context) {
         return new DefaultLanguageResolver(context.getApp().getLanguage());
-    }
-
-    // ------------------------------------------------------------------------------------------------------------------------
-    // Multi Tenancy
-    // ------------------------------------------------------------------------------------------------------------------------
-
-    @Bean
-    @ConditionalOnMissingBean
-    public TenantStore tenantStore() {
-        return new TenantStore() {
-        };
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public DefaultTenantResolver tenantResolver(TenantStore tenantStore) {
-        return new DefaultTenantResolver(tenantStore);
     }
 
     // ------------------------------------------------------------------------------------------------------------------------

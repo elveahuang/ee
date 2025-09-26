@@ -1,17 +1,13 @@
 package cc.wdev.platform.commons.autoconfigure.core;
 
 import cc.wdev.platform.commons.autoconfigure.core.properties.WebProperties;
-import cc.wdev.platform.commons.core.tenant.TenantResolver;
 import cc.wdev.platform.commons.utils.i18n.CustomLocaleResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.web.converter.json.JacksonHttpMessageConverter;
-import cc.wdev.platform.commons.web.filter.TenantFilter;
-import cc.wdev.platform.commons.web.filter.TraceFilter;
+import cc.wdev.platform.commons.web.filter.GlobalFilter;
 import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
-import cc.wdev.platform.commons.web.interceptor.TraceInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -51,22 +47,17 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
 
     private final LogInterceptor logInterceptor;
 
-    private final TraceInterceptor traceInterceptor;
-
     public WebAutoConfiguration(LegacyDateTimeAnnotationFormatterFactory legacyDateTimeAnnotationFormatterFactory,
                                 StandardDateTimeAnnotationFormatterFactory standardDateTimeAnnotationFormatterFactory,
-                                LogInterceptor logInterceptor,
-                                TraceInterceptor traceInterceptor) {
+                                LogInterceptor logInterceptor) {
         log.info("WebAutoConfiguration is enabled");
         this.legacyDateTimeAnnotationFormatterFactory = legacyDateTimeAnnotationFormatterFactory;
         this.standardDateTimeAnnotationFormatterFactory = standardDateTimeAnnotationFormatterFactory;
         this.logInterceptor = logInterceptor;
-        this.traceInterceptor = traceInterceptor;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(this.traceInterceptor);
         registry.addInterceptor(this.logInterceptor);
     }
 
@@ -100,17 +91,8 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
 
     @Bean
     @ConditionalOnMissingBean
-    public FilterRegistrationBean<TraceFilter> traceFilterRegistration() {
-        FilterRegistrationBean<TraceFilter> registration = new FilterRegistrationBean<>(new TraceFilter());
-        registration.setEnabled(true);
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return registration;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public FilterRegistrationBean<TenantFilter> tenantFilterRegistration(@Autowired(required = false) TenantResolver tenantResolver) {
-        FilterRegistrationBean<TenantFilter> registration = new FilterRegistrationBean<>(new TenantFilter(tenantResolver));
+    public FilterRegistrationBean<GlobalFilter> globalFilterRegistration() {
+        FilterRegistrationBean<GlobalFilter> registration = new FilterRegistrationBean<>(new GlobalFilter());
         registration.setEnabled(true);
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return registration;

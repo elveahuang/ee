@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.utils.mdc;
 import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.lang.NonNull;
 
@@ -13,9 +14,10 @@ import static cc.wdev.platform.commons.constants.GlobalConstants.REQUEST_ID_KEY;
 /**
  * @author elvea
  */
+@Slf4j
 public abstract class MdcContext {
 
-    private final static String REQUEST_ID = "REQUEST_ID";
+    private final static String REQUEST_ID = "requestId";
 
     public static void handleAspect() {
         if (StringUtils.isEmpty(getRequestId())) {
@@ -24,14 +26,18 @@ public abstract class MdcContext {
     }
 
     public static void handleServletRequest(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response) {
+        log.info("[MdcContext] handleServletRequest start");
+
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
             requestId = StringUtils.uuid();
+            log.info("[MdcContext] generate requestId [{}]", requestId);
         }
         MdcContext.setRequestId(requestId);
 
         if (!response.getHeaderNames().contains(REQUEST_ID_KEY)) {
-            response.addHeader(REQUEST_ID_KEY, requestId);
+            log.info("[MdcContext] set requestId [{}]", requestId);
+            response.setHeader(REQUEST_ID_KEY, requestId);
         }
     }
 
@@ -55,6 +61,7 @@ public abstract class MdcContext {
     }
 
     public static void clear() {
+        log.info("[MdcContext] clear context");
         MDC.clear();
     }
 

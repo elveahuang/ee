@@ -68,16 +68,16 @@ public interface GlobalConstants {
     /**
      *
      */
-    String REQUEST_ID_KEY = "X-Request-ID";
+    String REQUEST_ID_KEY = "x-request-id";
 
     /**
      *
      */
-    String TENANT_ID_KEY = "X-Tenant-ID";
+    String TENANT_ID_KEY = "x-tenant-id";
 
     /**
      *
      */
-    String TENANT_CODE_KEY = "X-Tenant-Code";
+    String TENANT_CODE_KEY = "x-tenant-code";
 
 }
