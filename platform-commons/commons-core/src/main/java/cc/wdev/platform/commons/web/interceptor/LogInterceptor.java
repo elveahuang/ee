@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.web.interceptor;
 
+import cc.wdev.platform.commons.core.log.config.LogConfig;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.core.log.store.LogStore;
 import cc.wdev.platform.commons.utils.ServletUtils;
@@ -18,7 +19,7 @@ import java.time.ZoneOffset;
  * @author elvea
  */
 @Slf4j
-public record LogInterceptor(LogStore logStore) implements HandlerInterceptor {
+public record LogInterceptor(LogStore store, LogConfig config) implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request,
@@ -54,7 +55,7 @@ public record LogInterceptor(LogStore logStore) implements HandlerInterceptor {
             dto.setStartTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime), ZoneOffset.systemDefault()));
             dto.setEndTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneOffset.systemDefault()));
             dto.setExecTime(execTime);
-            logStore.saveUrlLog(dto);
+            store.saveUrlLog(dto);
         } catch (Exception e) {
             log.error("Fail to save url - [{}] log", request.getRequestURI(), e);
         }

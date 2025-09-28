@@ -20,10 +20,12 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 public abstract class SimpleEntity extends AbstractEntity {
+
     /**
      * 启用状态
      */
     private Boolean active;
+
     /**
      * 创建时间
      */
@@ -31,10 +33,12 @@ public abstract class SimpleEntity extends AbstractEntity {
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime createdAt;
+
     /**
      * 创建人
      */
     @CreatedBy
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createdBy;
+
 }

@@ -1,52 +1,43 @@
 package cc.wdev.platform.commons.core.log.aspect;
 
 import cc.wdev.platform.commons.annotations.OperationLog;
+import cc.wdev.platform.commons.core.log.config.LogConfig;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.store.LogStore;
+import cc.wdev.platform.commons.core.tenant.TenantContext;
 import cc.wdev.platform.commons.utils.AopUtils;
 import cc.wdev.platform.commons.utils.ExceptionUtils;
 import cc.wdev.platform.commons.utils.ServletUtils;
 import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.util.StopWatch;
 
 /**
  * @author elvea
  */
 @Slf4j
 @Aspect
-@AllArgsConstructor
-public class OperationLogAspect {
-
-    private final LogStore logStore;
-
-    private static final ThreadLocal<StopWatch> threadLocal = new ThreadLocal<>();
+public record OperationLogAspect(LogStore store, LogConfig config) {
 
     /**
      * 执行前
      */
     @Before(value = "@annotation(operationLog)")
-    public void boBefore(JoinPoint joinPoint, OperationLog operationLog) {
+    public void boBefore(JoinPoint point, OperationLog operationLog) {
         MdcContext.handleAspect();
-
-        StopWatch stopWatch = new StopWatch();
-        threadLocal.set(stopWatch);
-        stopWatch.start();
     }
 
     /**
      * 执行成功并返回
      */
     @AfterReturning(pointcut = "@annotation(operationLog)", returning = "result")
-    public void doAfterReturning(JoinPoint joinPoint, OperationLog operationLog, Object result) {
-        outputLog(joinPoint, operationLog, null, result);
+    public void doAfterReturning(JoinPoint point, OperationLog operationLog, Object result) {
+        outputLog(point, operationLog, null, result);
     }
 
     /**
@@ -59,25 +50,24 @@ public class OperationLogAspect {
 
     private void outputLog(JoinPoint joinPoint, OperationLog operationLog, Throwable e, Object result) {
         try {
-            StopWatch stopWatch = threadLocal.get();
-            stopWatch.stop();
-
             HttpServletRequest request = ServletUtils.getRequest();
 
             OperationLogDto dto = OperationLogDto.builder()
                 .className(AopUtils.getJoinPointClass(joinPoint))
                 .methodName(AopUtils.getJoinPointMethod(joinPoint))
+                .tenantId(TenantContext.getTenantId())
                 .requestUri(request.getRequestURI())
-                .httpMethod(request.getMethod())
+                .requestMethod(request.getMethod())
+                .requestId(MdcContext.getRequestId())
                 .requestIp(ServletUtils.getHost(request))
                 .requestUa(ServletUtils.getUserAgent(request))
                 .requestParams(ServletUtils.getParameterAsJson(request))
-                .requestHeaderParams(ServletUtils.getHeaderAsJson(request))
-                .execTime(stopWatch.getTotalTimeMillis())
+                .requestHeaders(ServletUtils.getHeaderAsJson(request))
                 .exception(e != null ? ExceptionUtils.getStackTraceAsString(e) : "")
                 .details(operationLog.value())
                 .build();
-            logStore.saveOperationLog(dto);
+
+            store.saveOperationLog(dto);
         } catch (Exception ex) {
             log.error("Failed to save operation log", ex);
         }

@@ -19,6 +19,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.selenium)
     compileOnly(rootProject.libs.bundles.elastic)
     compileOnly(rootProject.libs.bundles.redis)
+    compileOnly(rootProject.libs.bundles.caffeine)
     compileOnly(rootProject.libs.bundles.rabbit)
     compileOnly(rootProject.libs.bundles.quartz)
     compileOnly(rootProject.libs.bundles.websocket)

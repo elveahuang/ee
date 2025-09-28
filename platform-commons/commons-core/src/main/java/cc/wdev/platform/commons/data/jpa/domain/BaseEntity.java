@@ -24,10 +24,12 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 public abstract class BaseEntity extends AbstractEntity {
+
     /**
      * 启用状态
      */
     private Boolean active;
+
     /**
      * 创建时间
      */
@@ -35,12 +37,14 @@ public abstract class BaseEntity extends AbstractEntity {
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime createdAt;
+
     /**
      * 创建人
      */
     @CreatedBy
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createdBy;
+
     /**
      * 修改时间
      */
@@ -48,18 +52,21 @@ public abstract class BaseEntity extends AbstractEntity {
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime updatedAt;
+
     /**
      * 修改人
      */
     @LastModifiedBy
     @JsonSerialize(using = ToStringSerializer.class)
     private Long updatedBy;
+
     /**
      * 删除时间
      */
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime deletedAt;
+
     /**
      * 删除人
      */

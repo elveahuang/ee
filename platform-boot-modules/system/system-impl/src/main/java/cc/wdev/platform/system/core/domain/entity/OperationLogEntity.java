@@ -37,6 +37,10 @@ public class OperationLogEntity extends SimpleEntity {
      */
     private String methodName;
     /**
+     * 请求ID
+     */
+    private String requestId;
+    /**
      * 请求IP
      */
     private String requestIp;
@@ -51,7 +55,7 @@ public class OperationLogEntity extends SimpleEntity {
     /**
      * 请求类型
      */
-    private String httpMethod;
+    private String requestMethod;
     /**
      * 请求参数
      */
@@ -59,11 +63,7 @@ public class OperationLogEntity extends SimpleEntity {
     /**
      * 请求头参数
      */
-    private String requestHeaderParams;
-    /**
-     * 注解参数
-     */
-    private String annotationParams;
+    private String requestHeaders;
     /**
      * 日志的开始时间
      */

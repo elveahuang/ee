@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.web.filter;
 
 import cc.wdev.platform.commons.core.tenant.TenantContext;
+import cc.wdev.platform.commons.security.auth.AuthContext;
 import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,10 @@ public class GlobalFilter implements Filter {
             log.info("[GlobalFilter] Init Tenant Context");
             TenantContext.handleServletRequest(request);
 
+            // 初始化认证上下文
+            log.info("[GlobalFilter] Init Auth Context");
+            AuthContext.handleServletRequest(request);
+
             // 记录执行时间
             startTime = System.currentTimeMillis();
             chain.doFilter(request, response);
@@ -45,6 +50,9 @@ public class GlobalFilter implements Filter {
 
             log.info("[GlobalFilter] Clear MDC Context");
             TenantContext.clear();
+
+            log.info("[GlobalFilter] Clear Auth Context");
+            AuthContext.clear();
 
             log.info("[GlobalFilter] doFilter end");
         }

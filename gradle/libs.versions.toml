@@ -8,6 +8,7 @@ springCloudVersion = "2025.0.0"
 springGrpcVersion = "0.10.0"
 springDocVersion = "2.8.13"
 awsSdkVersion = "2.29.52"
+grpcVersion = "1.75.0"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.127.Final"
 cosidVersion = "2.13.3"
@@ -54,7 +55,8 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
-awssdk-bom = { module = " software.amazon.awssdk:bom", version.ref = "awsSdkVersion" }
+awssdk-bom = { module = "software.amazon.awssdk:bom", version.ref = "awsSdkVersion" }
+grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -172,6 +174,10 @@ cosid-core = { module = "me.ahoo.cosid:cosid-core", version.ref = "cosidVersion"
 cosid-spring-redis = { module = "me.ahoo.cosid:cosid-spring-redis", version.ref = "cosidVersion" }
 cosid-spring-boot-starter = { module = "me.ahoo.cosid:cosid-spring-boot-starter", version.ref = "cosidVersion" }
 
+# Caffeine
+caffeine-core = { module = "com.github.ben-manes.caffeine:caffeine" }
+caffeine-guava = { module = "com.github.ben-manes.caffeine:guava" }
+
 # Selenium * Playwright
 playwright = { module = "com.microsoft.playwright:playwright", version.ref = "playwrightVersion" }
 selenium-api = { module = "org.seleniumhq.selenium:selenium-api", version.ref = "seleniumVersion" }
@@ -212,7 +218,7 @@ facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.2.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.8" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.11" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
 cos_api = { module = "com.qcloud:cos_api", version = "5.6.255" }
 tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1341" }
@@ -221,9 +227,9 @@ tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-jav
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1337" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.24" }
-zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.5" }
-openai-java = { module = "com.openai:openai-java", version = "3.6.0" }
-ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.35" }
+zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.5.1" }
+openai-java = { module = "com.openai:openai-java", version = "3.7.1" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.36" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.1.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.1.0" }
 
@@ -351,6 +357,7 @@ html = ["jsoup"]
 sharding = ["sharding"]
 ip = ["geoip", "ip2region"]
 database = ["pgsql", "mysql", "mariadb"]
+caffeine = ["caffeine-core", "caffeine-guava"]
 pdf = ["pdfbox", "fontbox", "jsoup", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
 image = ["thumbnailator", "imageio-core", "imageio-jpeg", "imageio-webp", "zxing-core", "zxing-javase", "scrimage-core", "scrimage-webp", "scrimage-filters"]
 hutool = ["hutool-core", "hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]

@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.core.log.store;
 
+import cc.wdev.platform.commons.core.log.config.LogConfig;
 import cc.wdev.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
@@ -9,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author elvea
  */
 @Slf4j
-public class DefaultLogStore implements LogStore {
+public record DefaultLogStore(LogConfig config) implements LogStore {
 
     /**
      * @see LogStore#saveApplicationLog(ApplicationLogDto)

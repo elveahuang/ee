@@ -7,13 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author elvea
  */
 @Slf4j
-@Transactional
 public abstract class AbstractRabbitService<T> extends AbstractService implements RabbitService<T> {
 
     protected Context context;
@@ -35,10 +33,9 @@ public abstract class AbstractRabbitService<T> extends AbstractService implement
     @Override
     public void send(String routingKey, T body) throws Exception {
         if (this.isEnabled()) {
-            log.info("RabbitMQ is enabled. send...");
+            log.info("RabbitMQ is enabled. send [{}]...", routingKey);
             this.rabbitTemplate.convertAndSend(routingKey, body);
         } else {
-            log.info("RabbitMQ is disabled. execute...");
             this.execute(body);
         }
     }
@@ -49,10 +46,9 @@ public abstract class AbstractRabbitService<T> extends AbstractService implement
     @Override
     public void send(String exchange, String routingKey, T body) throws Exception {
         if (this.isEnabled()) {
-            log.info("RabbitMQ is enabled. send...");
+            log.info("RabbitMQ is enabled. send [{}][{}]...", exchange, routingKey);
             this.rabbitTemplate.convertAndSend(exchange, routingKey, body);
         } else {
-            log.info("RabbitMQ is disabled. execute...");
             this.execute(body);
         }
     }

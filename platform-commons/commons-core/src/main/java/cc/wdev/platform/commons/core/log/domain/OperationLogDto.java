@@ -18,6 +18,10 @@ import java.time.LocalDateTime;
 @ToString
 public class OperationLogDto implements Serializable {
     /**
+     * 租户ID
+     */
+    private Long tenantId;
+    /**
      * 类名
      */
     private String className;
@@ -25,6 +29,10 @@ public class OperationLogDto implements Serializable {
      * 函数名
      */
     private String methodName;
+    /**
+     * 请求ID
+     */
+    private String requestId;
     /**
      * 请求IP
      */
@@ -40,7 +48,7 @@ public class OperationLogDto implements Serializable {
     /**
      * 请求类型
      */
-    private String httpMethod;
+    private String requestMethod;
     /**
      * 请求参数
      */
@@ -48,11 +56,7 @@ public class OperationLogDto implements Serializable {
     /**
      * 请求头参数
      */
-    private String requestHeaderParams;
-    /**
-     * 注解参数
-     */
-    private String annotationParams;
+    private String requestHeaders;
     /**
      * 日志的开始时间
      */
