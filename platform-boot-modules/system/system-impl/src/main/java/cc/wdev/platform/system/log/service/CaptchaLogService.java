@@ -1,7 +1,7 @@
-package cc.wdev.platform.system.core.service;
+package cc.wdev.platform.system.log.service;
 
 import cc.wdev.platform.commons.service.CachingEntityService;
-import cc.wdev.platform.system.core.domain.entity.CaptchaLogEntity;
+import cc.wdev.platform.system.log.domain.entity.CaptchaLogEntity;
 
 /**
  * @author elvea

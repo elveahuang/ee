@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.domain.entity;
+package cc.wdev.platform.system.log.domain.entity;
 
 import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
 import jakarta.persistence.Entity;

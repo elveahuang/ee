@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.service.impl;
+package cc.wdev.platform.system.log.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
@@ -6,9 +6,9 @@ import cc.wdev.platform.commons.message.rabbit.AbstractRabbitService;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
 import cc.wdev.platform.system.core.domain.converter.CaptchaLogConverter;
-import cc.wdev.platform.system.core.domain.entity.CaptchaLogEntity;
-import cc.wdev.platform.system.core.service.CaptchaLogRabbitService;
-import cc.wdev.platform.system.core.service.CaptchaLogService;
+import cc.wdev.platform.system.log.domain.entity.CaptchaLogEntity;
+import cc.wdev.platform.system.log.service.CaptchaLogRabbitService;
+import cc.wdev.platform.system.log.service.CaptchaLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;

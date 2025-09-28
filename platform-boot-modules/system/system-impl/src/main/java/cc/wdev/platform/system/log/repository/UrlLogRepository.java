@@ -1,7 +1,7 @@
-package cc.wdev.platform.system.core.repository;
+package cc.wdev.platform.system.log.repository;
 
 import cc.wdev.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.wdev.platform.system.core.domain.entity.UrlLogEntity;
+import cc.wdev.platform.system.log.domain.entity.UrlLogEntity;
 import org.springframework.stereotype.Repository;
 
 /**

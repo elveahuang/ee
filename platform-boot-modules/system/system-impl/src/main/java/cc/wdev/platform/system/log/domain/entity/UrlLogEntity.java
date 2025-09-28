@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.domain.entity;
+package cc.wdev.platform.system.log.domain.entity;
 
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
@@ -23,47 +23,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "sys_operation_log")
+@Table(name = "sys_url_log")
 @DynamicUpdate
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
-public class OperationLogEntity extends SimpleEntity {
+public class UrlLogEntity extends SimpleEntity {
     /**
-     * 类名
+     * 路径
      */
-    private String className;
-    /**
-     * 函数名
-     */
-    private String methodName;
-    /**
-     * 请求ID
-     */
-    private String requestId;
-    /**
-     * 请求IP
-     */
-    private String requestIp;
-    /**
-     * 请求UA
-     */
-    private String requestUa;
-    /**
-     * 请求地址
-     */
-    private String requestUri;
-    /**
-     * 请求类型
-     */
-    private String requestMethod;
-    /**
-     * 请求参数
-     */
-    private String requestParams;
-    /**
-     * 请求头参数
-     */
-    private String requestHeaders;
+    private String path;
     /**
      * 日志的开始时间
      */
@@ -80,12 +48,4 @@ public class OperationLogEntity extends SimpleEntity {
      * 执行时长
      */
     private Long execTime;
-    /**
-     * 日志详情
-     */
-    private String details;
-    /**
-     * 错误日志详细信息
-     */
-    private String exception;
 }

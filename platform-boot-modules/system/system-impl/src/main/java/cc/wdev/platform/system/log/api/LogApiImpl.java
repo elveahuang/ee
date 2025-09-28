@@ -1,12 +1,12 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.log.api;
 
 import cc.wdev.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;
 import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
-import cc.wdev.platform.system.core.service.CaptchaLogRabbitService;
-import cc.wdev.platform.system.core.service.OperationLogRabbitService;
-import cc.wdev.platform.system.core.service.UrlLogRabbitService;
+import cc.wdev.platform.system.log.service.CaptchaLogRabbitService;
+import cc.wdev.platform.system.log.service.OperationLogRabbitService;
+import cc.wdev.platform.system.log.service.UrlLogRabbitService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.log.api;
 
 import cc.wdev.platform.commons.core.log.domain.ApplicationLogDto;
 import cc.wdev.platform.commons.core.log.domain.OperationLogDto;

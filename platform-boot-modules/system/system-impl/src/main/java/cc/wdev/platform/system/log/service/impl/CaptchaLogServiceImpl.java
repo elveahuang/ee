@@ -1,9 +1,9 @@
-package cc.wdev.platform.system.core.service.impl;
+package cc.wdev.platform.system.log.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.wdev.platform.system.core.domain.entity.CaptchaLogEntity;
-import cc.wdev.platform.system.core.repository.CaptchaLogRepository;
-import cc.wdev.platform.system.core.service.CaptchaLogService;
+import cc.wdev.platform.system.log.domain.entity.CaptchaLogEntity;
+import cc.wdev.platform.system.log.repository.CaptchaLogRepository;
+import cc.wdev.platform.system.log.service.CaptchaLogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

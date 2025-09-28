@@ -1,9 +1,9 @@
-package cc.wdev.platform.system.core.service.impl;
+package cc.wdev.platform.system.log.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseEntityService;
-import cc.wdev.platform.system.core.domain.entity.UrlLogEntity;
-import cc.wdev.platform.system.core.repository.UrlLogRepository;
-import cc.wdev.platform.system.core.service.UrlLogService;
+import cc.wdev.platform.system.log.domain.entity.UrlLogEntity;
+import cc.wdev.platform.system.log.repository.UrlLogRepository;
+import cc.wdev.platform.system.log.service.UrlLogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
