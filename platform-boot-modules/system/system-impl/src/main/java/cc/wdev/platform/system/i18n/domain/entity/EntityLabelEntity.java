@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.domain.entity;
+package cc.wdev.platform.system.i18n.domain.entity;
 
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

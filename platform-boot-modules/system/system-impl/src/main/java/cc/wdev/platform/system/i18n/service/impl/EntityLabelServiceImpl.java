@@ -1,9 +1,9 @@
-package cc.wdev.platform.system.core.service.impl;
+package cc.wdev.platform.system.i18n.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.wdev.platform.system.core.domain.entity.EntityLabelEntity;
 import cc.wdev.platform.system.core.repository.EntityLabelRepository;
-import cc.wdev.platform.system.core.service.EntityLabelService;
+import cc.wdev.platform.system.i18n.domain.entity.EntityLabelEntity;
+import cc.wdev.platform.system.i18n.service.EntityLabelService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

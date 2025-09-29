@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.service;
+package cc.wdev.platform.system.i18n.service;
 
 /**
  * @author elvea

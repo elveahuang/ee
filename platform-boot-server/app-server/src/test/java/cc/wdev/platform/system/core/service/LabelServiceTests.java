@@ -2,6 +2,7 @@ package cc.wdev.platform.system.core.service;
 
 import cc.wdev.platform.BaseTests;
 import cc.wdev.platform.system.commons.enums.LabelTypeEnum;
+import cc.wdev.platform.system.i18n.service.LabelService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

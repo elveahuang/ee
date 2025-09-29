@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.message.rabbit.AbstractRabbitService;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
-import cc.wdev.platform.system.core.domain.converter.UrlLogConverter;
+import cc.wdev.platform.system.log.domain.converter.UrlLogConverter;
 import cc.wdev.platform.system.log.domain.entity.UrlLogEntity;
 import cc.wdev.platform.system.log.service.UrlLogRabbitService;
 import cc.wdev.platform.system.log.service.UrlLogService;

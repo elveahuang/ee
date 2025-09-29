@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.service.impl;
+package cc.wdev.platform.system.i18n.service.impl;
 
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.sequence.Sequence;
@@ -12,9 +12,9 @@ import cc.wdev.platform.commons.oapis.translator.TranslatorFactory;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.system.commons.enums.LabelTypeEnum;
-import cc.wdev.platform.system.core.domain.entity.LabelEntity;
 import cc.wdev.platform.system.core.repository.LabelRepository;
-import cc.wdev.platform.system.core.service.LabelService;
+import cc.wdev.platform.system.i18n.domain.entity.LabelEntity;
+import cc.wdev.platform.system.i18n.service.LabelService;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.service;
+package cc.wdev.platform.system.i18n.service;
 
 import cc.wdev.platform.system.commons.enums.LabelTypeEnum;
 
