@@ -4,6 +4,8 @@ import cc.wdev.platform.commons.autoconfigure.core.CoreAutoConfiguration;
 import cc.wdev.platform.commons.autoconfigure.core.properties.CoreProperties;
 import cc.wdev.platform.commons.autoconfigure.data.properties.MyBatisCustomProperties;
 import cc.wdev.platform.commons.core.Context;
+import cc.wdev.platform.commons.core.tenant.TenantConfig;
+import cc.wdev.platform.commons.core.tenant.TenantConfigCustomizer;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomMetaObjectHandler;
 import cc.wdev.platform.commons.data.mybatis.handler.CustomTenantLineHandler;
 import cc.wdev.platform.commons.data.mybatis.id.CustomIdentifierGenerator;
@@ -24,6 +26,7 @@ import org.apache.ibatis.logging.nologging.NoLoggingImpl;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -35,7 +38,6 @@ import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -102,12 +104,19 @@ public class MyBatisCustomAutoConfiguration {
     @Bean("mpTenantLineHandler")
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = CoreProperties.TENANCY_PREFIX, name = "enabled", havingValue = "true")
-    public TenantLineHandler mpTenantLineHandler() {
-        List<String> tables = new ArrayList<>();
+    public TenantLineHandler mpTenantLineHandler(ObjectProvider<List<TenantConfigCustomizer>> customizers) {
+        TenantConfig config = TenantConfig.builder().build();
+        // 从全局多租户配置中获取排除的表
         if (CollectionUtils.isNotEmpty(this.context.getTenancy().getExcludes())) {
-            tables.addAll(this.context.getTenancy().getExcludes());
+            config.getExcludes().addAll(this.context.getTenancy().getExcludes());
         }
-        return new CustomTenantLineHandler(tables);
+        // 从自定义配置中获取排除的表
+        if (CollectionUtils.isNotEmpty(customizers.getIfAvailable())) {
+            for (TenantConfigCustomizer customizer : customizers.getIfAvailable()) {
+                customizer.customize(config);
+            }
+        }
+        return new CustomTenantLineHandler(config.getExcludes());
     }
 
     @Bean

@@ -502,6 +502,7 @@ CREATE TABLE `sys_account`
     `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `entity_type`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体类型',
     `entity_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT 'UUID',
     `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
     `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
     `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
@@ -513,6 +514,7 @@ CREATE TABLE `sys_account`
     `id_card_no`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件号码',
     `sex`                  VARCHAR(10)      NOT NULL DEFAULT '' COMMENT '性别',
     `birthday`             DATE COMMENT '生日',
+    `signature`            VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '个性签名',
     `description`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `last_login_status`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录状态',
     `last_login_at`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录时间',
@@ -647,6 +649,7 @@ CREATE TABLE `sys_user`
     `tenant_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `entity_type`          BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体类型',
     `entity_id`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `uuid`                 VARCHAR(150)     NOT NULL DEFAULT '' COMMENT 'UUID',
     `username`             VARCHAR(150)     NOT NULL DEFAULT '' COMMENT '用户名',
     `name`                 VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '姓名',
     `display_name`         VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '昵称',
@@ -658,6 +661,7 @@ CREATE TABLE `sys_user`
     `id_card_no`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '证件号码',
     `sex`                  VARCHAR(20)      NOT NULL DEFAULT '' COMMENT '性别',
     `birthday`             DATE COMMENT '生日',
+    `signature`            VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '个性签名',
     `description`          VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '备注',
     `last_login_status`    VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录状态',
     `last_login_at`        VARCHAR(255)     NOT NULL DEFAULT '' COMMENT '最后登录时间',
@@ -1342,31 +1346,53 @@ DROP TABLE IF EXISTS `sys_operation_log`;
 
 CREATE TABLE `sys_operation_log`
 (
-    `id`                    BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
-    `tenant_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
-    `entity_type`           VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '目标类型',
-    `entity_id`             BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '目标实体',
-    `class_name`            VARCHAR(250) COMMENT '类名',
-    `method_name`           VARCHAR(250) COMMENT '方法名',
-    `request_ip`            VARCHAR(250) COMMENT '请求IP',
-    `request_ua`            TEXT COMMENT '请求UA',
-    `request_uri`           TEXT COMMENT '请求地址',
-    `http_method`           VARCHAR(250) COMMENT '请求类型',
-    `request_params`        TEXT COMMENT '请求参数',
-    `request_header_params` TEXT COMMENT '请求头',
-    `annotation_params`     TEXT COMMENT '注解参数',
-    `start_time`            DATETIME(3) COMMENT '开始时间',
-    `end_time`              DATETIME(3) COMMENT '结束时间',
-    `exec_time`             LONG COMMENT '执行时长',
-    `details`               VARCHAR(250) COMMENT '详情',
-    `exception`             TEXT COMMENT '异常',
-    `active`                TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
-    `created_by`            BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
-    `created_at`            DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    `id`              BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `entity_type`     VARCHAR(50)      NOT NULL DEFAULT '' COMMENT '实体类型',
+    `entity_id`       BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '实体ID',
+    `class_name`      VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '类名',
+    `method_name`     VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '方法名',
+    `request_id`      VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '请求ID',
+    `request_ip`      VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '请求IP',
+    `request_method`  VARCHAR(250)     NOT NULL DEFAULT '' COMMENT '请求类型',
+    `request_ua`      TEXT COMMENT '请求UA',
+    `request_uri`     TEXT COMMENT '请求地址',
+    `request_params`  TEXT COMMENT '请求参数',
+    `request_headers` TEXT COMMENT '请求头',
+    `start_time`      DATETIME(3) COMMENT '开始时间',
+    `end_time`        DATETIME(3) COMMENT '结束时间',
+    `exec_time`       INT UNSIGNED     NOT NULL DEFAULT 0 COMMENT '执行时长',
+    `details`         VARCHAR(250) COMMENT '详情',
+    `exception`       TEXT COMMENT '异常',
+    `active`          TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`      DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
     CONSTRAINT PRIMARY KEY (`id`),
     INDEX `ix_sys_operation_log__tenant_id` (`tenant_id`),
     INDEX `ix_sys_operation_log__entity_id` (`entity_type`, `entity_id`)
 ) COMMENT '操作日志表';
+
+--
+-- 系统日志表
+--
+
+DROP TABLE IF EXISTS `sys_application_log`;
+
+CREATE TABLE `sys_application_log`
+(
+    `id`          BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`   BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
+    `class_name`  VARCHAR(250) COMMENT '类名',
+    `method_name` VARCHAR(250) COMMENT '方法名',
+    `request_id`  VARCHAR(250) COMMENT '请求ID',
+    `details`     VARCHAR(250) COMMENT '详情',
+    `exception`   TEXT COMMENT '异常',
+    `active`      TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '启用状态',
+    `created_by`  BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '创建人',
+    `created_at`  DATETIME(3)      NOT NULL DEFAULT NOW(3) COMMENT '创建时间',
+    CONSTRAINT PRIMARY KEY (`id`),
+    INDEX `ix_sys_application_log__tenant_id` (`tenant_id`)
+) COMMENT '系统日志表';
 
 --
 -- 验证码发送日志表
@@ -1827,6 +1853,7 @@ DROP TABLE IF EXISTS `sys_authorization`;
 CREATE TABLE `sys_authorization`
 (
     `id`                            BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`                     BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `uuid`                          VARCHAR(200)     NOT NULL DEFAULT '',
     `client_id`                     VARCHAR(100)     NOT NULL DEFAULT '',
     `principal_name`                VARCHAR(200),
@@ -1872,6 +1899,7 @@ DROP TABLE IF EXISTS `sys_authorization_consent`;
 CREATE TABLE `sys_authorization_consent`
 (
     `id`             BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `tenant_id`      BIGINT UNSIGNED  NOT NULL DEFAULT 0 COMMENT '租户ID',
     `uuid`           VARCHAR(100)     NOT NULL,
     `client_id`      VARCHAR(100)     NOT NULL,
     `principal_name` VARCHAR(200)     NOT NULL,
@@ -1885,7 +1913,7 @@ CREATE TABLE `sys_authorization_consent`
     `deleted_at`     DATETIME(3)      NULL COMMENT '删除时间',
     CONSTRAINT PRIMARY KEY (`id`),
     INDEX `ix_sys_authorization_consent` (`client_id`, `principal_name`)
-);
+) COMMENT '授权记录';
 
 -- =====================================================================================================================
 -- AI Chat Memory

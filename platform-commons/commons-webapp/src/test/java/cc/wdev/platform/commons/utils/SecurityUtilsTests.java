@@ -10,9 +10,17 @@ public class SecurityUtilsTests extends BaseTests {
 
     @Test
     public void passwordTest() {
-        String password = SecurityUtils.encode("test");
-        log.info("password: {}", password);
-        Assertions.assertTrue(SecurityUtils.matches("test", password));
+        String plainPassword, encryptedPassword;
+
+        plainPassword = "admin";
+        encryptedPassword = SecurityUtils.encode(plainPassword);
+        log.info("plainPassword : {} | encryptedPassword : {}", plainPassword, encryptedPassword);
+        Assertions.assertTrue(SecurityUtils.matches(plainPassword, encryptedPassword));
+
+        plainPassword = "test";
+        encryptedPassword = SecurityUtils.encode(plainPassword);
+        log.info("plainPassword : {} | encryptedPassword : {}", plainPassword, encryptedPassword);
+        Assertions.assertTrue(SecurityUtils.matches(plainPassword, encryptedPassword));
     }
 
 }

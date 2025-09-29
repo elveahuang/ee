@@ -23,7 +23,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @DynamicInsert
 @EntityListeners(AuditingEntityListener.class)
 public class TenantEntity extends BaseEntity {
-    private String uuid;
     private String code;
     private String title;
     private String details;

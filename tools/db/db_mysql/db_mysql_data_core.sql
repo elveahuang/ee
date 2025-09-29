@@ -34,18 +34,22 @@ values (1000001, 'ROOT', 'Root', 0, '顶层租户'),
 truncate sys_identity;
 
 insert into sys_identity (`id`, `uuid`, `source`, `active`, `created_at`, `updated_at`)
-values (1001001, '1001001', 1, 1, now(), now());
-
---
--- 内置用户
---
+values (1001001, '1001001', 1, 1, now(), now()),
+       (1001002, '1001002', 1, 1, now(), now());
 
 truncate sys_user;
 
 insert into sys_user (`id`, `tenant_id`, `entity_type`, `entity_id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
                       `display_name`, `birthday`, `active`, `created_at`, `password`)
 values (1002001, 1000001, 1, 1001001, 'admin', 'ee@elvea.cn', '0086', '13500000000', 'Administrator', now(), 1, now(),
-        '$2a$10$MLkjYEPJkO6KNrfUUBld6eWVr1G09nugg5UpIQVUtsQ.3Z9U2lOSK');
+        '$2a$10$Ef.pnezRUx3LPk1SCpy2PeHI/o..a4EGqOyZ69B0Qs/HvGA5Vq/uK');
+
+truncate sys_account;
+
+insert into sys_account (`id`, `tenant_id`, `entity_type`, `entity_id`, `username`, `email`, `mobile_country_code`, `mobile_number`,
+                         `display_name`, `birthday`, `active`, `created_at`, `password`)
+values (1003001, 1000001, 2, 1001002, 'test', 'me@elvea.cn', '0086', '13500000000', 'Administrator', now(), 1, now(),
+        '$2a$10$3HKECKLohGTOQ1bmvKfS5.Erln4wQ1xY/rRunUVtRVl.tz9DlVOVm');
 
 --
 -- 角色

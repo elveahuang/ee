@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.compress.utils.Lists;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,6 +25,6 @@ public class TenantConfig implements Serializable {
     private long rootTenantId = 1L;
 
     @Builder.Default
-    private List<String> excludes = List.of();
+    private List<String> excludes = Lists.newArrayList();
 
 }

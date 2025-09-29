@@ -9,6 +9,8 @@ public interface SystemCacheConstants {
     // System - Core
     // ========================================================================
 
+    String TENANT = "tenant";
+
     String ACTOR = "actor";
 
     String ACCOUNT = "account";
