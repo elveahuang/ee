@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.security.feign;
+package cc.wdev.platform.system.security.api;
 
 import cc.wdev.platform.system.security.domain.dto.AuthorizationConsentDto;
 

@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.core.api;
 
 import cc.wdev.platform.commons.core.storage.StorageFactory;
 import cc.wdev.platform.commons.core.storage.model.FileObject;

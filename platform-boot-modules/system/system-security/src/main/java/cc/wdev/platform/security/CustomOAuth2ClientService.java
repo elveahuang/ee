@@ -1,8 +1,8 @@
 package cc.wdev.platform.security;
 
 import cc.wdev.platform.security.utils.OAuth2Utils;
+import cc.wdev.platform.system.security.api.ClientApi;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
-import cc.wdev.platform.system.security.feign.ClientApi;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;

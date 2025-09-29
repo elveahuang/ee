@@ -2,11 +2,11 @@ package cc.wdev.platform.system.core.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.service.EntityService;
+import cc.wdev.platform.system.core.api.AttachmentApi;
+import cc.wdev.platform.system.core.api.DictApi;
 import cc.wdev.platform.system.core.domain.entity.BannerEntity;
 import cc.wdev.platform.system.core.domain.form.BannerForm;
 import cc.wdev.platform.system.core.domain.request.BannerSearchRequest;
-import cc.wdev.platform.system.core.feign.AttachmentApi;
-import cc.wdev.platform.system.core.feign.DictApi;
 import cc.wdev.platform.system.core.repository.BannerRepository;
 import cc.wdev.platform.system.core.service.BannerService;
 import lombok.AllArgsConstructor;

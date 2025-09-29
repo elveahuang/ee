@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.core.api;
 
 /**
  * @author elvea

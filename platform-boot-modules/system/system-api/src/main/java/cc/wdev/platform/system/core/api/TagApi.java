@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.core.api;
 
 import cc.wdev.platform.system.core.domain.form.TagForm;
 import cc.wdev.platform.system.core.domain.request.TagRelationRequest;

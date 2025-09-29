@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.core.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package cc.wdev.platform.system.core.feign;
+package cc.wdev.platform.system.core.api;
 
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.system.core.domain.dto.AccountForgotPasswordDto;
