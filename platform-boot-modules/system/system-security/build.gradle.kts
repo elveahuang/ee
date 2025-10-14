@@ -5,7 +5,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.swaggerStarter)
+    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-boot-modules:system:system-api"))

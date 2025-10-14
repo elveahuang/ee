@@ -1,12 +1,23 @@
 package cc.wdev.platform.system.commons.constants;
 
-import static cc.wdev.platform.commons.constants.MappingConstants.API_V1_ADMIN_PREFIX;
-import static cc.wdev.platform.commons.constants.MappingConstants.API_V1_PREFIX;
+import static cc.wdev.platform.commons.constants.MappingConstants.API_PREFIX;
 
 /**
  * @author elvea
  */
 public interface SystemMappingConstants {
+
+    /**
+     * 接口前缀
+     * Version - 1
+     */
+    String API_V1_PREFIX = API_PREFIX + "/v1";
+
+    /**
+     * 后端接口前缀
+     * Version - 1
+     */
+    String API_V1_ADMIN_PREFIX = API_PREFIX + "/v1/admin";
 
     // -----------------------------------------------------------------------------------------------------------------
     //  前台接口

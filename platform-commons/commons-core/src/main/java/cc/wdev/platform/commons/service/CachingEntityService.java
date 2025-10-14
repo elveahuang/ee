@@ -67,7 +67,7 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
      * @return 实体
      */
     default T findCacheById(K id) {
-        CacheKey cacheKey = getCacheKeyGenerator().key(id);
+        CacheKey cacheKey = getCacheKeyGenerator().key("id", id);
         return getCacheService().get(cacheKey, k -> this.findById(id));
     }
 

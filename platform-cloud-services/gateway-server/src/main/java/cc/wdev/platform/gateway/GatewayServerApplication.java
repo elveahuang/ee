@@ -1,28 +1,23 @@
 package cc.wdev.platform.gateway;
 
-import cc.wdev.platform.commons.constants.GlobalConstants;
+import cc.wdev.platform.system.core.feign.TenantFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.Environment;
 
 /**
  * @author elvea
  */
 @Slf4j
-@EnableFeignClients
-@EnableDiscoveryClient
+@EnableFeignClients(basePackageClasses = {
+    TenantFeignClient.class
+})
 @SpringBootApplication
 public class GatewayServerApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(GatewayServerApplication.class, args);
-        Environment env = context.getEnvironment();
-        log.info("Application {} started. ", env.getProperty("spring.application.name", ""));
-        log.info("Application version - {}. ", GlobalConstants.VERSION);
+        SpringApplication.run(GatewayServerApplication.class, args);
     }
 
 }

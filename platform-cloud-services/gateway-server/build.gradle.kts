@@ -6,14 +6,17 @@ plugins {
 
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
     implementation(rootProject.libs.bundles.springCloudCoreStarter)
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    developmentOnly(rootProject.libs.bundles.springBootDevtools)
+    implementation(rootProject.libs.bundles.swaggerWebFluxStarter)
+    implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.logging)
+    implementation(rootProject.libs.bundles.storage)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
+    implementation(project(":platform-cloud-modules:system:system-api"))
 }
 
 tasks.named<BootJar>("bootJar") {

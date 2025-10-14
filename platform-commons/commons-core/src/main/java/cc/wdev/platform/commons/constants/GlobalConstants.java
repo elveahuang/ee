@@ -36,9 +36,9 @@ public interface GlobalConstants {
     Locale DEFAULT_LOCALE = Locale.getDefault();
 
     /**
-     * 默认缓存周期为2个小时
+     * 默认缓存周期为1个小时
      */
-    Duration DEFAULT_CACHE_DURATION = Duration.ofHours(2);
+    Duration DEFAULT_CACHE_DURATION = Duration.ofHours(1);
 
     /**
      * 批处理记录数

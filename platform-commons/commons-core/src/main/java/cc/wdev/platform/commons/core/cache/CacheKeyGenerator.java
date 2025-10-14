@@ -21,7 +21,7 @@ public interface CacheKeyGenerator {
     }
 
     default CacheKey key(Object... params) {
-        String key = String.format("%s:%s", this.getPrefix(), StringUtils.arrayToDelimitedString(params, "_"));
+        String key = String.format("%s:%s", this.getPrefix(), StringUtils.arrayToDelimitedString(params, "_")).toLowerCase();
         return new CacheKey(key, getExpire());
     }
 
@@ -30,7 +30,15 @@ public interface CacheKeyGenerator {
     }
 
     default CacheKey keyByCode(String code) {
-        return this.key("key", code);
+        return this.key("code", code);
+    }
+
+    default CacheKey keyByUuid(String uuid) {
+        return this.key("uuid", uuid);
+    }
+
+    default CacheKey keyByLong(Long uuid) {
+        return this.key("key", uuid);
     }
 
 }

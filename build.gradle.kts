@@ -48,6 +48,7 @@ allprojects {
             mavenBom(rootProject.libs.spring.ai.bom.get().toString())
             mavenBom(rootProject.libs.spring.cloud.bom.get().toString())
             mavenBom(rootProject.libs.spring.grpc.bom.get().toString())
+            mavenBom(rootProject.libs.spring.swagger.bom.get().toString())
             mavenBom(rootProject.libs.spring.ai.alibaba.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.admin.bom.get().toString())
             mavenBom(rootProject.libs.mybatis.plus.bom.get().toString())

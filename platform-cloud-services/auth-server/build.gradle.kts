@@ -13,7 +13,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springCloudCoreStarter)
     implementation(rootProject.libs.bundles.redisStarter)
-    implementation(rootProject.libs.bundles.swaggerStarter)
+    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     implementation(rootProject.libs.bundles.logging)

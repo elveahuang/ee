@@ -1,16 +1,18 @@
 server:
     port: 8181
+    forward-headers-strategy: framework
 spring:
     main:
         allow-bean-definition-overriding: true
         allow-circular-references: true
-        web-application-type: servlet
+        web-application-type: reactive
     application:
-        name: gateway-server
+        name: gateway-service
     profiles:
         active: local
     config:
-        import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
+        import:
+            - optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
     cloud:
         consul:
             host: 127.0.0.1
@@ -25,7 +27,7 @@ spring:
                 enabled: true
                 format: yaml
                 prefixes: "config"
-                default-context: "ee"
+                default-context: "zp"
                 profile-separator: "-"
                 data-key: ${spring.application.name}
                 watch:

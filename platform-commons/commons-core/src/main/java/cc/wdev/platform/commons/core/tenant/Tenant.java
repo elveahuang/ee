@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Tenant implements Serializable {
 
-    public static final Tenant defaultTenant = Tenant.builder().id(1L).build();
+    public static final Tenant defaultTenant = Tenant.builder().id(1000001L).build();
 
     private Long id;
 

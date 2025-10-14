@@ -10,7 +10,7 @@ spring:
         name: master
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/ee_sample?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+        url: jdbc:mysql://127.0.0.1:3306/zp_platform?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root
     data:

@@ -2,6 +2,9 @@ package cc.wdev.platform.commons.security.auth;
 
 import jakarta.servlet.ServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.lang.NonNull;
 
 /**
  * @author elvea
@@ -15,6 +18,10 @@ public class AuthContext {
         log.info("[AuthContext] handleServletRequest start");
         String type = request.getParameter("type");
         setIdentityType(type);
+    }
+
+    public static void handleReactiveRequest(@NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
+        log.info("[AuthContext] handleReactiveRequest start");
     }
 
     public static void setIdentityType(String type) {

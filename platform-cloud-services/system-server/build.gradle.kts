@@ -16,7 +16,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.redisStarter)
-    implementation(rootProject.libs.bundles.swaggerStarter)
+    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)
     implementation(rootProject.libs.bundles.rabbitStarter)
     implementation(rootProject.libs.bundles.quartzStarter)

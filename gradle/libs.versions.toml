@@ -1,5 +1,5 @@
 [versions]
-springAiVersion = "1.0.2"
+springAiVersion = "1.0.3"
 springAiAlibabaVersion = "1.0.0.4"
 springBootVersion = "3.5.6"
 springBootAdminVersion = "3.5.5"
@@ -12,7 +12,7 @@ grpcVersion = "1.75.0"
 mcpVersion = "0.10.0"
 nettyVersion = "4.1.127.Final"
 cosidVersion = "2.13.3"
-redissonVersion = "3.51.0"
+redissonVersion = "3.52.0"
 kotlinVersion = "2.2.20"
 groovyVersion = "5.0.1"
 hutoolVersion = "5.8.40"
@@ -50,6 +50,7 @@ spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom",
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
 spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
+spring-swagger-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springDocVersion" }
 jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version.ref = "jsonSchemaGeneratorVersion" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
 mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
@@ -106,8 +107,8 @@ spring-security-oauth2-resource-server = { module = "org.springframework.securit
 
 # Spring Cloud
 spring-cloud-commons = { module = "org.springframework.cloud:spring-cloud-commons" }
-spring-cloud-starter-gateway-server = { module = "org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc" }
 spring-cloud-openfeign-core = { module = "org.springframework.cloud:spring-cloud-openfeign-core" }
+spring-cloud-starter-gateway-server = { module = "org.springframework.cloud:spring-cloud-starter-gateway-server-webflux" }
 spring-cloud-starter-consul-discovery = { module = "org.springframework.cloud:spring-cloud-starter-consul-discovery" }
 spring-cloud-starter-consul-config = { module = "org.springframework.cloud:spring-cloud-starter-consul-config" }
 spring-cloud-starter-loadbalancer = { module = "org.springframework.cloud:spring-cloud-starter-loadbalancer" }
@@ -331,7 +332,10 @@ lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-bindin
 swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swaggerVersion" }
 swagger-annotations-jakarta = { module = "io.swagger.core.v3:swagger-annotations-jakarta", version.ref = "swaggerVersion" }
 swagger-models-jakarta = { module = "io.swagger.core.v3:swagger-models-jakarta", version.ref = "swaggerVersion" }
-springdoc-starter-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springDocVersion" }
+springdoc-openapi-starter-webmvc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api" }
+springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui" }
+springdoc-openapi-starter-webflux-api = { module = "org.springdoc:springdoc-openapi-starter-webflux-api" }
+springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui" }
 
 # JUnit
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
@@ -372,8 +376,8 @@ webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-boots
 springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
-springBootCore = ["spring-boot", "spring-boot-autoconfigure", "spring-boot-starter-actuator"]
-springBootCoreStarter = ["spring-boot-starter-aop", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
+springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
+springBootCoreStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
 
@@ -431,9 +435,10 @@ quartzStarter = ["spring-boot-starter-quartz"]
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
 playwright = ["playwright"]
 
-# 接口文档
+# Swagger
 swagger = ["swagger-annotations", "swagger-annotations-jakarta", "swagger-models-jakarta"]
-swaggerStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-starter-webmvc"]
+swaggerWebMvcStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webmvc-api", "springdoc-openapi-starter-webmvc-ui"]
+swaggerWebFluxStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webflux-api", "springdoc-openapi-starter-webflux-ui"]
 
 # 文档转换
 office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]

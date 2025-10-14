@@ -72,6 +72,7 @@ public interface SecurityConstants {
         "/swagger-ui/**",
         "/swagger-ui.html",
         "/swagger.html",
+        "/v3/api-docs",
         "/webjars/**",
         "/public/**",
         "/static/**",
