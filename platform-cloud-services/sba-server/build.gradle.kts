@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     implementation(rootProject.libs.bundles.springBootCore)
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springCloudCore)
     implementation(rootProject.libs.bundles.springCloudCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityCore)

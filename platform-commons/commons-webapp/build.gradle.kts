@@ -10,7 +10,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springAiAlibabaCore)
     implementation(rootProject.libs.bundles.springAiAlibabaStarter)
     implementation(rootProject.libs.bundles.springBootCore)
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springSecurityCore)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityClientStarter)

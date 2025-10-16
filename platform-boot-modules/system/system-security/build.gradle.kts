@@ -1,11 +1,11 @@
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
+    implementation(rootProject.libs.bundles.swaggerServletStarter)
     implementation(rootProject.libs.bundles.websocket)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))

@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.logging)

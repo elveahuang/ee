@@ -10,7 +10,7 @@ plugins {
 dependencies {
     // libs
     implementation(rootProject.libs.bundles.springAiCoreStarter)
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
@@ -18,7 +18,7 @@ dependencies {
     implementation(rootProject.libs.bundles.rabbitStarter)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.quartzStarter)
-    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
+    implementation(rootProject.libs.bundles.swaggerServletStarter)
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
     implementation(rootProject.libs.bundles.selenium)

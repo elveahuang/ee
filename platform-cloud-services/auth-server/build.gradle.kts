@@ -6,14 +6,14 @@ plugins {
 
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
+    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springCloudCoreStarter)
     implementation(rootProject.libs.bundles.redisStarter)
-    implementation(rootProject.libs.bundles.swaggerWebMvcStarter)
+    implementation(rootProject.libs.bundles.swaggerServletStarter)
     implementation(rootProject.libs.bundles.mybatisStarter)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     implementation(rootProject.libs.bundles.logging)
