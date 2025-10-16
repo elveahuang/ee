@@ -6,11 +6,11 @@ plugins {
 
 dependencies {
     // libs
-    implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springCloudCoreStarter)
+    implementation(rootProject.libs.bundles.springBootReactiveStarter)
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.swaggerReactiveStarter)
+    implementation(rootProject.libs.bundles.springDocReactiveStarter)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.logging)
     implementation(rootProject.libs.bundles.storage)

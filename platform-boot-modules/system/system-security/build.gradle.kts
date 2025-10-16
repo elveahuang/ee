@@ -5,7 +5,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityAuthorizationServerStarter)
     implementation(rootProject.libs.bundles.springSecurityResourceServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
-    implementation(rootProject.libs.bundles.swaggerServletStarter)
+    implementation(rootProject.libs.bundles.springDocServletStarter)
     implementation(rootProject.libs.bundles.websocket)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))

@@ -27,8 +27,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.API_V1__TEST__DATE;
-import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.API_V1__TEST__MESSAGE;
+import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.API_V1_PREFIX;
 
 /**
  * @author elvea
@@ -44,7 +43,7 @@ public class TestController extends AbstractController {
     @Operation(summary = "发送广播消息")
     @ApiResponse(description = "发送广播消息")
     @ResponseBody
-    @PostMapping(API_V1__TEST__MESSAGE)
+    @PostMapping(API_V1_PREFIX + "/test/message")
     public R<?> send(@RequestParam("message") String message) throws Exception {
         this.broadcastManager.getRabbitSender().sendMessage(new TestBroadcastMessage(message));
         return R.success(message);
@@ -55,7 +54,7 @@ public class TestController extends AbstractController {
     @Operation(summary = "测试时区")
     @ApiResponse(description = "测试时区")
     @ResponseBody
-    @PostMapping(API_V1__TEST__DATE)
+    @PostMapping(API_V1_PREFIX + "/test/date")
     public R<DateVo> date() throws Exception {
         return R.success(DateVo.builder().build());
     }

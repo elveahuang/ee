@@ -18,7 +18,7 @@ dependencies {
     implementation(rootProject.libs.bundles.rabbitStarter)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.quartzStarter)
-    implementation(rootProject.libs.bundles.swaggerServletStarter)
+    implementation(rootProject.libs.bundles.springDocServletStarter)
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
     implementation(rootProject.libs.bundles.selenium)

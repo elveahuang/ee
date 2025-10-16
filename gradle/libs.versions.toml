@@ -372,6 +372,7 @@ json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "j
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
 ai = ["ark-sdk", "zai-sdk", "openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]
+swagger = ["swagger-annotations", "swagger-annotations-jakarta", "swagger-models-jakarta"]
 
 # Spring Boot
 springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-relational", "spring-ai-model", "spring-cloud-commons"]
@@ -382,6 +383,8 @@ springBootServletStarter = ["spring-boot-starter-aop", "spring-boot-starter-actu
 springBootReactiveStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-webflux"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
+springDocServletStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webmvc-api", "springdoc-openapi-starter-webmvc-ui"]
+springDocReactiveStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webflux-api", "springdoc-openapi-starter-webflux-ui"]
 
 # Spring Security
 springSecurityCore = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
@@ -436,11 +439,6 @@ quartzStarter = ["spring-boot-starter-quartz"]
 # 爬虫
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
 playwright = ["playwright"]
-
-# Swagger
-swagger = ["swagger-annotations", "swagger-annotations-jakarta", "swagger-models-jakarta"]
-swaggerServletStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webmvc-api", "springdoc-openapi-starter-webmvc-ui"]
-swaggerReactiveStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webflux-api", "springdoc-openapi-starter-webflux-ui"]
 
 # 文档转换
 office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]
