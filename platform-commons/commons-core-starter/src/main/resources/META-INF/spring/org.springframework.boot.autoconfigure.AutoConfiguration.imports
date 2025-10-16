@@ -25,8 +25,7 @@ cc.wdev.platform.commons.autoconfigure.extensions.SeleniumAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.KeywordAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.SensitiveAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.message.RabbitCustomAutoConfiguration
-cc.wdev.platform.commons.autoconfigure.message.WebSocketCommonAutoConfiguration
-cc.wdev.platform.commons.autoconfigure.message.WebSocketMessageBrokerAutoConfiguration
+cc.wdev.platform.commons.autoconfigure.message.WebSocketAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.oapis.WeiXinCpAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.oapis.WeiXinMaAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.oapis.WeiXinMpAutoConfiguration

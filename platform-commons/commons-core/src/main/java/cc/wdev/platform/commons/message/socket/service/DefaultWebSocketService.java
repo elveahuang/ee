@@ -5,14 +5,12 @@ import cc.wdev.platform.commons.message.socket.message.SocketMessage;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Map;
 
 import static cc.wdev.platform.commons.message.socket.WebSocketConstants.SOCKET_USER_SESSION_KEY;
-import static cc.wdev.platform.commons.message.socket.WebSocketConstants.USER_MESSAGE_ENDPOINT;
 
 /**
  * @author elvea
@@ -20,8 +18,6 @@ import static cc.wdev.platform.commons.message.socket.WebSocketConstants.USER_ME
 @Slf4j
 @AllArgsConstructor
 public class DefaultWebSocketService implements WebSocketService {
-
-    private final SimpMessagingTemplate messagingTemplate;
 
     private final WebSocketSessionService webSocketSessionService;
 
@@ -33,7 +29,7 @@ public class DefaultWebSocketService implements WebSocketService {
         String userSessionId = message.getSessionId();
         Map<String, WebSocketSession> sessionMap = this.webSocketSessionService.getWsSession(userSessionId);
         if (!CollectionUtils.isEmpty(sessionMap)) {
-            this.messagingTemplate.convertAndSendToUser(userSessionId, USER_MESSAGE_ENDPOINT, message);
+//            this.messagingTemplate.convertAndSendToUser(userSessionId, USER_MESSAGE_ENDPOINT, message);
         }
     }
 

@@ -5,6 +5,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springBootCore)
     implementation(rootProject.libs.bundles.springSecurityCore)
     annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
+    implementation(rootProject.libs.bundles.websocket)
     implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.hibernate)
     implementation(rootProject.libs.bundles.rabbit)
