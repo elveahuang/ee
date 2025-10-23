@@ -29,8 +29,8 @@ public class PayTypeServiceImpl
     @Override
     public List<PayTypeEntity> getTypeList() {
         PayTypeEntity condition = PayTypeEntity.builder().build();
-        condition.setStatus(StatusTypeEnum.ENABLED.getValue());
-        condition.setActive(ActiveTypeEnum.ACTIVE.getValue());
+        condition.setStatus(StatusTypeEnum.ON.getValue());
+        condition.setActive(ActiveTypeEnum.ENABLED.getValue());
         Example<PayTypeEntity> example = Example.of(condition);
         return this.repository.findAll(example).stream().toList();
     }

@@ -1,13 +1,16 @@
 package cc.wdev.platform.system.message.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.system.commons.enums.BizGroupTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @author elvea
  */
 @Getter
-public enum MessageTemplateTypeEnum implements BaseEnum<String> {
+@AllArgsConstructor
+public enum MessageTemplateTypeEnum implements BaseBizTypeEnum<String> {
     NOTICE("NOTICE", "系统通知"),
     MAIL("MAIL", "邮件"),
     SMS("SMS", "短信"),
@@ -16,22 +19,12 @@ public enum MessageTemplateTypeEnum implements BaseEnum<String> {
     LARK("LARK", "飞书"),
     DINGTALK("DINGTALK", "钉钉");
 
-    private final String code;
+    private final String value;
     private final String description;
 
-    MessageTemplateTypeEnum(final String code, final String description) {
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getValue() {
-        return this.code;
-    }
-
-    @Override
-    public String getLabel() {
-        return ("label_message_template_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.MESSAGE_TEMPLATE_TYPE.getValue().toUpperCase();
     }
 
 }

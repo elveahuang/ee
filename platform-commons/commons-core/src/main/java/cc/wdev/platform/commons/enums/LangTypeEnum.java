@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.enums;
 
 import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.EnumSet;
@@ -13,7 +14,8 @@ import java.util.Locale;
  * @author elvea
  */
 @Getter
-public enum LangTypeEnum implements BaseEnum<String> {
+@AllArgsConstructor
+public enum LangTypeEnum implements BaseBizTypeEnum<String> {
     ZH_CN("zh_CN", "简体中文", Locale.CHINA, Lists.asList("zh_cn", new String[]{"zh"})),
     ZH_TW("zh_TW", "繁体中文", Locale.TAIWAN, Lists.asList("zh_tw", new String[]{"zh_mo", "zh_hk"})),
     EN("en", "美式英文", Locale.US, Lists.asList("en", new String[]{"en_us", "en_uk"})),
@@ -21,26 +23,14 @@ public enum LangTypeEnum implements BaseEnum<String> {
     KR("kr", "韩语", Locale.KOREA, Lists.asList("kr", new String[]{"kr"})),
     FR("fr", "法语", Locale.FRANCE, Lists.asList("fr", new String[]{"fr"}));
 
-    private final String code;
+    private final String value;
     private final String description;
     private final Locale locale;
     private final List<String> availableCodes;
 
-    LangTypeEnum(final String code, final String description, final Locale locale, final List<String> availableCodes) {
-        this.code = code;
-        this.description = description;
-        this.locale = locale;
-        this.availableCodes = availableCodes;
-    }
-
     @Override
-    public String getValue() {
-        return this.code;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_lang_type__".concat(this.code.toLowerCase());
+    public String getGroup() {
+        return BizGroupTypeEnum.LANG_TYPE.getValue().toUpperCase();
     }
 
     /**

@@ -28,7 +28,7 @@ public class AccountVipServiceImpl
     @Override
     public List<AccountVipEntity> getAccountVip(Long accountId) {
         AccountVipEntity condition = AccountVipEntity.builder().build();
-        condition.setActive(ActiveTypeEnum.ACTIVE.getValue());
+        condition.setActive(ActiveTypeEnum.ENABLED.getValue());
         Example<AccountVipEntity> example = Example.of(condition);
         return this.repository.findAll(example).stream().toList();
     }

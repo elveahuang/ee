@@ -1,13 +1,14 @@
 package cc.wdev.platform.system.message.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.system.commons.enums.BizGroupTypeEnum;
 import lombok.Getter;
 
 /**
  * @author elvea
  */
 @Getter
-public enum MessageTargetTypeEnum implements BaseEnum<Integer> {
+public enum MessageTargetTypeEnum implements BaseBizTypeEnum<Integer> {
     IMMEDIATE(1, "IMMEDIATE", "立即发送"),
     FIXED(2, "FIXED", "定时发送"),
     AUTO(3, "AUTO", "跟谁系统");
@@ -23,8 +24,8 @@ public enum MessageTargetTypeEnum implements BaseEnum<Integer> {
     }
 
     @Override
-    public String getLabel() {
-        return ("label_message_target_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.MESSAGE_TARGET_TYPE.getValue().toUpperCase();
     }
 
 }

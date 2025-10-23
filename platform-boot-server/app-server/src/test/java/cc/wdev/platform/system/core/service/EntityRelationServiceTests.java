@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static cc.wdev.platform.system.commons.enums.EntityRelationTypeEnum.USR_CURRENT_ORG;
+import static cc.wdev.platform.system.commons.enums.EntityRelationBizTypeEnum.USR_CURRENT_ORG;
 
 /**
  * @author elvea

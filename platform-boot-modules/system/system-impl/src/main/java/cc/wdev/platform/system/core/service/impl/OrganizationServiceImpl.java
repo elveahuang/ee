@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.constants.SystemCacheConstants;
-import cc.wdev.platform.system.commons.enums.EntityRelationTypeEnum;
+import cc.wdev.platform.system.commons.enums.EntityRelationBizTypeEnum;
 import cc.wdev.platform.system.core.domain.converter.OrganizationConverter;
 import cc.wdev.platform.system.core.domain.dto.EntityRelationSaveDto;
 import cc.wdev.platform.system.core.domain.dto.OrganizationDeleteDto;
@@ -59,7 +59,7 @@ public class OrganizationServiceImpl extends BaseCachingEntityService<Organizati
 
         // 保存部门关联信息
         EntityRelationSaveDto relationSaveDto = EntityRelationSaveDto.builder()
-            .relationType(EntityRelationTypeEnum.ORG_PARENT_ORG.getValue())
+            .relationType(EntityRelationBizTypeEnum.ORG_PARENT_ORG.getValue())
             .ancestorIdList(Collections.singletonList(saveDto.getParentId()))
             .entityId(entity.getId())
             .build();

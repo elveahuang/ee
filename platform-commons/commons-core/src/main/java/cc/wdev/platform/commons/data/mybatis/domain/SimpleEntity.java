@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.data.mybatis.domain;
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Getter;
@@ -16,6 +17,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class SimpleEntity extends AbstractEntity {
+    /**
+     * 版本号
+     */
+    @Version
+    private Long version;
     /**
      * 启用状态
      */

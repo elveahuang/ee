@@ -1,40 +1,40 @@
 [versions]
 springAiVersion = "1.0.3"
 springAiAlibabaVersion = "1.0.0.4"
-springBootVersion = "3.5.6"
+springBootVersion = "3.5.7"
 springBootAdminVersion = "3.5.5"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
 springGrpcVersion = "0.10.0"
 springDocVersion = "2.8.13"
 awsSdkVersion = "2.29.52"
-grpcVersion = "1.75.0"
+grpcVersion = "1.76.0"
 mcpVersion = "0.10.0"
-nettyVersion = "4.1.127.Final"
+nettyVersion = "4.1.128.Final"
 cosidVersion = "2.13.3"
 redissonVersion = "3.52.0"
 kotlinVersion = "2.2.20"
-groovyVersion = "5.0.1"
-hutoolVersion = "5.8.40"
+groovyVersion = "5.0.2"
+hutoolVersion = "5.8.41"
 mockitoVersion = "5.19.0"
-seleniumVersion = "4.35.0"
+seleniumVersion = "4.37.0"
 seleniumWdmVersion = "6.3.2"
-playwrightVersion = "1.55.0"
+playwrightVersion = "1.56.0"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "3.0.5"
 mybatisSpringStarterVersion = "3.0.5"
 mybatisPlusVersion = "3.5.14"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
-okhttpVersion = "5.1.0"
+okhttpVersion = "5.2.1"
 javaJwtVersion = "4.5.0"
-swaggerVersion = "2.2.37"
+swaggerVersion = "2.2.39"
 bouncycastleVersion = "1.82"
-errorProneAnnotationsVersion = "2.41.0"
-checkerQualVersion = "3.51.0"
+errorProneAnnotationsVersion = "2.42.0"
+checkerQualVersion = "3.51.1"
 jsonSchemaGeneratorVersion = "4.38.0"
 gradleSpotbugsVersion = "6.2.5"
-gradleNativeVersion = "0.11.0"
+gradleNativeVersion = "0.11.2"
 gradleOSDetectorVersion = "1.7.3"
 
 [plugins]
@@ -192,13 +192,13 @@ poi-ooxml = { module = "org.apache.poi:poi-ooxml", version = "5.4.1" }
 poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version = "5.4.1" }
 poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version = "5.4.1" }
 fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.3.0" }
-pdfbox = { module = "org.apache.pdfbox:pdfbox", version = "3.0.5" }
-fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.5" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.5" }
+pdfbox = { module = "org.apache.pdfbox:pdfbox", version = "3.0.6" }
+fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.6" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.7" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
 scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
 scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
-thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.20" }
+thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.21" }
 imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.12.0" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
 imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.12.0" }
@@ -212,28 +212,28 @@ awssdk-sdk = { module = "software.amazon.awssdk:s3", version.ref = "awsSdkVersio
 awssdk-apache-client = { module = "software.amazon.awssdk:apache-client", version.ref = "awsSdkVersion" }
 awssdk-netty-client = { module = "software.amazon.awssdk:netty-nio-client", version.ref = "awsSdkVersion" }
 awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager", version.ref = "awsSdkVersion" }
-weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.7.B" }
-weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.7.B" }
-weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.7.B" }
+weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.8.B" }
+weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.8.B" }
+weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.8.B" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.34" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.2.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.11" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.12" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-cos_api = { module = "com.qcloud:cos_api", version = "5.6.255" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1341" }
+cos_api = { module = "com.qcloud:cos_api", version = "5.6.257" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1353" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
-tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1338" }
-tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1321" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1337" }
+tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1353" }
+tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1343" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1350" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.24" }
-zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.5.1" }
-openai-java = { module = "com.openai:openai-java", version = "3.7.1" }
-ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.36" }
-telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.1.0" }
-telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.1.0" }
+zai-sdk = { module = "ai.z.openapi:zai-sdk", version = "0.0.6.1" }
+openai-java = { module = "com.openai:openai-java", version = "4.6.1" }
+ark-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.40" }
+telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.0" }
+telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.0" }
 
 jakarta-annotation = { module = "jakarta.annotation:jakarta.annotation-api" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api" }
@@ -253,7 +253,7 @@ commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.12.1"
 commons-email = { module = "org.apache.commons:commons-email", version = "1.6.0" }
 commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
 commons-text = { module = "org.apache.commons:commons-text", version = "1.14.0" }
-commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.18.0" }
+commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.19.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version = "1.28.0" }
 commons-collections = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
 
@@ -302,10 +302,10 @@ xxl-job-core = { module = "com.xuxueli:xxl-job-core", version = "3.2.0" }
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 ognl = { module = "ognl:ognl", version = "3.4.7" }
-asm = { module = "org.ow2.asm:asm", version = "9.8" }
+asm = { module = "org.ow2.asm:asm", version = "9.9" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
-okio = { module = "com.squareup.okio:okio", version = "3.16.0" }
+okio = { module = "com.squareup.okio:okio", version = "3.16.2" }
 joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.4.0" }
 ip2region = { module = "org.lionsoul:ip2region", version = "3.1.0" }
@@ -313,9 +313,9 @@ objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
 nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.5" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.28" }
-spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.6" }
-logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.0" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.30" }
+spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.8" }
+logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.1" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
 checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
 
@@ -356,6 +356,7 @@ baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
+baseJakartaServlet = ["jakarta-servlet"]
 baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
 
 html = ["jsoup"]

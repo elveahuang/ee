@@ -16,6 +16,7 @@ public interface UserSessionConverter {
     UserSessionDto entity2Dto(UserSessionEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "version", ignore = true)
     @Mapping(target = "active", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)

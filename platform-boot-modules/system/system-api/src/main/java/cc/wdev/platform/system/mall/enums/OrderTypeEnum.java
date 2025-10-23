@@ -1,6 +1,8 @@
 package cc.wdev.platform.system.mall.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.system.commons.enums.BizGroupTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,7 +11,8 @@ import lombok.Getter;
  * @author elvea
  */
 @Getter
-public enum OrderTypeEnum implements BaseEnum<Integer> {
+@AllArgsConstructor
+public enum OrderTypeEnum implements BaseBizTypeEnum<Integer> {
     VIP(1, "VIP", "会员订单"),
     MALL(2, "MALL", "商城订单");
 
@@ -17,15 +20,9 @@ public enum OrderTypeEnum implements BaseEnum<Integer> {
     private final String code;
     private final String description;
 
-    OrderTypeEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getLabel() {
-        return ("label_order_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.ORDER_TYPE.getValue();
     }
 
 }

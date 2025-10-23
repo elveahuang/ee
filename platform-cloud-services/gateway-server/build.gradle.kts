@@ -11,6 +11,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springCloudGatewayServerStarter)
     implementation(rootProject.libs.bundles.springBootAdminClientStarter)
     implementation(rootProject.libs.bundles.springDocReactiveStarter)
+    implementation(rootProject.libs.bundles.baseJakartaServlet)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.logging)
     implementation(rootProject.libs.bundles.storage)

@@ -2,7 +2,7 @@ package cc.wdev.platform.system.core.domain.form;
 
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
-import cc.wdev.platform.commons.enums.PublishStatusTypeEnum;
+import cc.wdev.platform.system.commons.enums.StatusTypeEnum;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.validation.constraints.NotEmpty;
@@ -47,7 +47,7 @@ public class AnnouncementForm implements Serializable {
      * 发布状态
      */
     @Builder.Default
-    private Integer status = PublishStatusTypeEnum.OFF.getValue();
+    private Integer status = StatusTypeEnum.ON.getValue();
     /**
      * 发布期限-开始时间
      */

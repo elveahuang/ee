@@ -29,8 +29,8 @@ public class VipTypeServiceImpl
     @Override
     public List<VipTypeEntity> getTypeList() {
         VipTypeEntity condition = VipTypeEntity.builder().build();
-        condition.setStatus(StatusTypeEnum.ENABLED.getValue());
-        condition.setActive(ActiveTypeEnum.ACTIVE.getValue());
+        condition.setStatus(StatusTypeEnum.ON.getValue());
+        condition.setActive(ActiveTypeEnum.ENABLED.getValue());
         Example<VipTypeEntity> example = Example.of(condition);
         return this.repository.findAll(example).stream().toList();
     }

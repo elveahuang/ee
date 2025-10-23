@@ -22,6 +22,14 @@ public class OperationLogDto implements Serializable {
      */
     private Long tenantId;
     /**
+     * 实体ID
+     */
+    private Long entityId;
+    /**
+     * 实体类型
+     */
+    private String entityType;
+    /**
      * 类名
      */
     private String className;

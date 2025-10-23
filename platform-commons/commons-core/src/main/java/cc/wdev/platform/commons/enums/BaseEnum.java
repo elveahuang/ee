@@ -14,19 +14,18 @@ public interface BaseEnum<T extends Serializable> {
 
     T getValue();
 
-    String getLabel();
-
     String getDescription();
 
-    /**
-     * 根据值获取枚举
-     */
     static <E extends Enum<E> & BaseEnum<?>> E getEnumByValue(Object value, Class<E> clazz) {
+        return getEnumByValue(value, clazz, null);
+    }
+
+    static <E extends Enum<E> & BaseEnum<?>> E getEnumByValue(Object value, Class<E> clazz, E defaultValue) {
         EnumSet<E> enumSet = EnumSet.allOf(clazz);
         return enumSet.stream()
             .filter(e -> ObjectUtils.equals(e.getValue(), value))
             .findFirst()
-            .orElse(null);
+            .orElse(defaultValue);
     }
 
 }

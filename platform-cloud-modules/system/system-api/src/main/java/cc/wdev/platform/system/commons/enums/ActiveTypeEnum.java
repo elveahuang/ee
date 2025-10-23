@@ -1,6 +1,7 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,7 +10,8 @@ import lombok.Getter;
  * @author elvea
  */
 @Getter
-public enum ActiveTypeEnum implements BaseEnum<Boolean> {
+@AllArgsConstructor
+public enum ActiveTypeEnum implements BaseBizTypeEnum<Boolean> {
     ACTIVE(Boolean.TRUE, "ACTIVE", "启用"),
     INACTIVE(Boolean.FALSE, "INACTIVE", "禁用");
 
@@ -17,25 +19,9 @@ public enum ActiveTypeEnum implements BaseEnum<Boolean> {
     private final String code;
     private final String description;
 
-    ActiveTypeEnum(final Boolean value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
-    public static ActiveTypeEnum getActiveType(String code) {
-        ActiveTypeEnum[] ts = ActiveTypeEnum.values();
-        for (ActiveTypeEnum t : ts) {
-            if (t.getCode().equalsIgnoreCase(code)) {
-                return t;
-            }
-        }
-        return ACTIVE;
-    }
-
     @Override
-    public String getLabel() {
-        return "label_active_type__" + this.code.toLowerCase();
+    public String getGroup() {
+        return "CacheTypeEnum";
     }
 
 }

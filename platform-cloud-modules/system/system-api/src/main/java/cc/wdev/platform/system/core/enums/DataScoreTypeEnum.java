@@ -39,9 +39,4 @@ public enum DataScoreTypeEnum implements BaseEnum<String> {
         return this.code;
     }
 
-    @Override
-    public String getLabel() {
-        return "label_authority_type__" + this.code.toLowerCase();
-    }
-
 }

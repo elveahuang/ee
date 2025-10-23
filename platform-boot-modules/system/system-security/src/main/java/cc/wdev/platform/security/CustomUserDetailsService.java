@@ -1,6 +1,6 @@
 package cc.wdev.platform.security;
 
-import cc.wdev.platform.commons.enums.MobileCountryCodeEnum;
+import cc.wdev.platform.commons.enums.MobileCountryCodeTypeEnum;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.RegexUtils;
@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (RegexUtils.checkEmail(username)) {
             user = userApi.findByEmail(username);
         } else if (RegexUtils.checkMobile(username)) {
-            user = userApi.findByMobile(MobileCountryCodeEnum.ZH_CN.getCode(), username);
+            user = userApi.findByMobile(MobileCountryCodeTypeEnum.ZH_CN.getCode(), username);
         } else {
             user = userApi.findByUsername(username);
         }

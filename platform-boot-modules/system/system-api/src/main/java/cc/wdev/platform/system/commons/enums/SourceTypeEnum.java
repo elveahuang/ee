@@ -1,38 +1,28 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 数据来源
- * <p>
- * 1. SYSTEM    - 系统内置，内置数据一般不允许删除
- * 2. NORMAL    - 普通数据
- * 3. IMPORT    - 导入数据
- * 3. SYNC      - 同步数据
+ * 数据来源类型
  *
  * @author elvea
  */
 @Getter
-public enum SourceTypeEnum implements BaseEnum<Integer> {
-    SYSTEM(1, "SYSTEM", "内置"),
-    NORMAL(2, "NORMAL", "普通"),
-    IMPORT(3, "IMPORT", "导入"),
-    SYNC(4, "SYNC", "同步");
+@AllArgsConstructor
+public enum SourceTypeEnum implements BaseBizTypeEnum<Integer> {
+    SYSTEM(1, "系统内置，一般情况下不允许删除"),
+    NORMAL(2, "普通，直接在页面添加的记录，一般情况下允许直接删除"),
+    IMP(3, "导入，从导入模版导入的记录，一般情况下允许直接删除"),
+    SYNC(4, "同步，从其他系统同步的记录，一般情况下允许直接删除");
 
     private final Integer value;
-    private final String code;
     private final String description;
 
-    SourceTypeEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getLabel() {
-        return ("label_source_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.SOURCE_TYPE.getValue();
     }
 
 }

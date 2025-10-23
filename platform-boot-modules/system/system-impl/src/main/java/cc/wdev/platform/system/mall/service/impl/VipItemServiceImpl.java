@@ -30,8 +30,8 @@ public class VipItemServiceImpl
     @Override
     public List<VipItemEntity> getVipItemByVipType(Long vipTypeId) {
         VipItemEntity condition = VipItemEntity.builder().build();
-        condition.setStatus(StatusTypeEnum.ENABLED.getValue());
-        condition.setActive(ActiveTypeEnum.ACTIVE.getValue());
+        condition.setStatus(StatusTypeEnum.ON.getValue());
+        condition.setActive(ActiveTypeEnum.ENABLED.getValue());
         if (ObjectUtils.isValidId(vipTypeId)) {
             condition.setVipTypeId(vipTypeId);
         }

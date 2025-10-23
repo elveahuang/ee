@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -8,7 +9,8 @@ import lombok.Getter;
  * @author elvea
  */
 @Getter
-public enum PlatformTypeEnum implements BaseEnum<String> {
+@AllArgsConstructor
+public enum PlatformTypeEnum implements BaseBizTypeEnum<String> {
     WECHAT("WECHAT", "微信"),
     WECOM("WECOM", "企微"),
     LARK("LARK", "飞书"),
@@ -17,22 +19,12 @@ public enum PlatformTypeEnum implements BaseEnum<String> {
     WAP("WAP", "手机浏览器"),
     OTHERS("OTHERS", "其他");
 
-    private final String code;
+    private final String value;
     private final String description;
 
-    PlatformTypeEnum(final String code, final String description) {
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getValue() {
-        return this.code;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_platform__".concat(this.code.toLowerCase());
+    public String getGroup() {
+        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
     }
 
 }

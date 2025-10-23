@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 /**
- * @author erden
+ * @author elvea
  */
 @Mapper(componentModel = SPRING)
 public interface TenantConverter {

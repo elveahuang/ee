@@ -5,6 +5,7 @@ import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Getter;
@@ -18,6 +19,11 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 public abstract class BaseEntity extends AbstractEntity {
+    /**
+     * 版本号
+     */
+    @Version
+    private Long version;
     /**
      * 启用状态
      */

@@ -1,14 +1,11 @@
 package cc.wdev.platform.commons.data.jpa.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
-import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
-import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.jpa.repository.BaseEntityRepository;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
-import cc.wdev.platform.commons.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -193,15 +190,16 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void updateBatchById(Collection<T> entityList, int batchSize) {
-        this.getRepository().saveAll(entityList);
+        this.getRepository().saveAllAndFlush(entityList);
     }
 
     /**
      * @see EntityService#save(IdEntity)
      */
     @Override
+    @Transactional
     public T save(T entity) {
-        return this.getRepository().save(entity);
+        return this.getRepository().saveAndFlush(entity);
     }
 
     /**
@@ -209,7 +207,7 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void saveBatch(Collection<T> entityList, int batchSize) {
-        CollectionUtils.toArrayList(this.getRepository().saveAll(entityList));
+        CollectionUtils.toArrayList(this.getRepository().saveAllAndFlush(entityList));
     }
 
     /**
@@ -254,45 +252,6 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public void deleteAll() {
         this.getRepository().deleteAll();
-    }
-
-    /**
-     * @see EntityService#softDelete(IdEntity)
-     */
-    @Override
-    public void softDelete(T entity) {
-        if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setActive(Boolean.FALSE);
-            baseEntity.setDeletedAt(getCurLocalDateTime());
-            baseEntity.setDeletedBy(SecurityUtils.getUid());
-            this.save(entity);
-        } else if (entity instanceof SimpleEntity simpleEntity) {
-            simpleEntity.setActive(Boolean.FALSE);
-            this.save(entity);
-        }
-    }
-
-    /**
-     * @see EntityService#softDeleteBatch(Collection, int)
-     */
-    @Override
-    public void softDeleteBatch(Collection<T> entityList, int batchSize) {
-        this.updateBatchById(entityList.stream().peek(e -> {
-            if (e instanceof BaseEntity entity) {
-                entity.setActive(Boolean.FALSE);
-                entity.setDeletedAt(getCurLocalDateTime());
-                entity.setDeletedBy(SecurityUtils.getUid());
-            } else if (e instanceof SimpleEntity entity) {
-                entity.setActive(Boolean.FALSE);
-            }
-        }).toList(), batchSize);
-    }
-
-    /**
-     * @see EntityService#softDeleteAll()
-     */
-    @Override
-    public void softDeleteAll() {
     }
 
     /**

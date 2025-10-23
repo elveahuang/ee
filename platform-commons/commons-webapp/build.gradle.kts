@@ -14,6 +14,7 @@ dependencies {
     implementation(rootProject.libs.bundles.springSecurityCore)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
     implementation(rootProject.libs.bundles.springSecurityClientStarter)
+    implementation(rootProject.libs.bundles.springDocServletStarter)
     implementation(rootProject.libs.bundles.redis)
     implementation(rootProject.libs.bundles.redisStarter)
     implementation(rootProject.libs.bundles.mybatis)

@@ -1,13 +1,16 @@
 package cc.wdev.platform.system.message.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.system.commons.enums.BizGroupTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @author elvea
  */
 @Getter
-public enum MessageStatusEnum implements BaseEnum<Integer> {
+@AllArgsConstructor
+public enum MessageStatusEnum implements BaseBizTypeEnum<Integer> {
     PENDING(1, "PENDING", "等待发送"),
     SENT(2, "SENT", "已发送"),
     SENDING(3, "SENDING", "发送中"),
@@ -17,15 +20,9 @@ public enum MessageStatusEnum implements BaseEnum<Integer> {
     private final String code;
     private final String description;
 
-    MessageStatusEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getLabel() {
-        return ("label_message_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.MESSAGE_STATUS_TYPE.getValue();
     }
 
 }

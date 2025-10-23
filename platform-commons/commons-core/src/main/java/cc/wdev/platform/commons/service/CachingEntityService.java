@@ -153,6 +153,16 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
     }
 
     /**
+     * 删除实体缓存
+     */
+    default void deleteCache(K id) {
+        if (id == null) {
+            return;
+        }
+        getCacheService().delete(getCacheKeyGenerator().key(id));
+    }
+
+    /**
      * 设置实体缓存
      */
     default void setCache(T model) {

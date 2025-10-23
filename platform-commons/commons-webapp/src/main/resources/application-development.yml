@@ -41,6 +41,28 @@ spring:
         dashscope:
             api-key: xxx
 ### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+    swagger-ui:
+        enabled: true
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
 ### Platform Config
 ### --------------------------------------------------------------------------------------------------------------------
 platform:
@@ -64,10 +86,8 @@ platform:
     ip:
         enabled: true
         geo-lite:
-            location: file_system
             path: GeoLite2-City.mmdb
         ip2region:
-            location: file_system
             path: ip2region.xdb
     storage:
         enabled: true

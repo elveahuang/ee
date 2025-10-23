@@ -1,32 +1,24 @@
 package cc.wdev.platform.commons.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @author elvea
  */
 @Getter
-public enum RateLimitTypeEnum implements BaseEnum<String> {
+@AllArgsConstructor
+public enum RateLimitTypeEnum implements BaseBizTypeEnum<String> {
     DEFAULT("DEFAULT", "默认限流"),
     IP("IP", "IP限流"),
     CLUSTER("CLUSTER", "CLUSTER限流");
 
-    private final String code;
+    private final String value;
     private final String description;
 
-    RateLimitTypeEnum(final String code, final String description) {
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public String getValue() {
-        return this.code;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_rate_limit_type__".concat(this.code.toLowerCase());
+    public String getGroup() {
+        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
     }
 
 }

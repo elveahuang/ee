@@ -26,7 +26,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
         if (e instanceof OAuth2AuthenticationException) {
             OAuth2Error error = ((OAuth2AuthenticationException) e).getError();
-            ServletUtils.renderJson(response, R.fail(ResponseCodeEnum.BAD_REQUEST.getCode(), error.getDescription()));
+            ServletUtils.renderJson(response, R.fail(ResponseCodeEnum.BAD_REQUEST.getValue(), error.getDescription()));
         } else {
             if (e instanceof InvalidCaptchaException) {
                 ServletUtils.renderJson(response, R.fail(ResponseCodeEnum.INVALID_CAPTCHA));

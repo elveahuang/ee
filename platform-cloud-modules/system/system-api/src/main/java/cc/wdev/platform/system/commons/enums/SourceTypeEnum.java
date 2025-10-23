@@ -1,6 +1,7 @@
 package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Getter;
  * @author elvea
  */
 @Getter
+@AllArgsConstructor
 public enum SourceTypeEnum implements BaseEnum<Integer> {
     SYSTEM(1, "SYSTEM", "内置"),
     NORMAL(2, "NORMAL", "普通"),
@@ -18,36 +20,4 @@ public enum SourceTypeEnum implements BaseEnum<Integer> {
     private final Integer value;
     private final String code;
     private final String description;
-
-    SourceTypeEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
-    public static SourceTypeEnum getSourceType(int value) {
-        SourceTypeEnum[] ts = SourceTypeEnum.values();
-        for (SourceTypeEnum t : ts) {
-            if (t.getValue() == value) {
-                return t;
-            }
-        }
-        return NORMAL;
-    }
-
-    public static SourceTypeEnum getSourceType(String code) {
-        SourceTypeEnum[] ts = SourceTypeEnum.values();
-        for (SourceTypeEnum t : ts) {
-            if (t.getCode().equalsIgnoreCase(code)) {
-                return t;
-            }
-        }
-        return NORMAL;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_source_type__" + this.code.toLowerCase();
-    }
-
 }

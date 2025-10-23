@@ -23,6 +23,13 @@ public abstract class MyBatisPlusUtils {
      * 把MyBatis-Plus的分页对象转换成为Spring-Data的分页对象
      */
     public static <T> org.springframework.data.domain.Page<T> toSpringDataPage(IPage<T> mybatisPlusPage) {
+        return toSpringDataPage(mybatisPlusPage, mybatisPlusPage.getRecords());
+    }
+
+    /**
+     * 把MyBatis-Plus的分页对象转换成为Spring-Data的分页对象
+     */
+    public static <T> org.springframework.data.domain.Page<T> toSpringDataPage(IPage<?> mybatisPlusPage, List<T> list) {
         // Spring Data Pageable 目前只支持 int 类型的 page 和 size
         int page = Math.toIntExact(mybatisPlusPage.getCurrent() - 1);
         int size = Math.toIntExact(mybatisPlusPage.getSize());
@@ -38,7 +45,14 @@ public abstract class MyBatisPlusUtils {
         }
         // 转换分页对象
         Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size, Sort.by(orderList));
-        return new PageImpl<>(mybatisPlusPage.getRecords(), pageable, mybatisPlusPage.getTotal());
+        return new PageImpl<>(list, pageable, mybatisPlusPage.getTotal());
+    }
+
+    /**
+     * 把MyBatis-Plus的分页对象转换成为Spring-Data的分页对象
+     */
+    public static <T> org.springframework.data.domain.Page<T> toSpringDataPage(Pageable pageable, List<T> list, Long total) {
+        return new PageImpl<>(list, pageable, total);
     }
 
     /**

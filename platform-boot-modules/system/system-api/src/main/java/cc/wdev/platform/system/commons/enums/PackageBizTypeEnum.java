@@ -1,38 +1,26 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 套餐业务类型
- * 1. TENANT    - 租户体系，多租户模式下给租户做授权
- * 2. ACCOUNT   - 账号体系，个人账号会员套餐
+ * 套餐类型
  *
  * @author elvea
  */
 @Getter
-public enum PackageBizTypeEnum implements BaseEnum<Integer> {
-    TENANT(1, "TENANT", "租户业务类型"),
-    ACCOUNT(2, "ACCOUNT", "会员业务类型");
+@AllArgsConstructor
+public enum PackageBizTypeEnum implements BaseBizTypeEnum<String> {
+    TENANT("TENANT", "租户套餐"),
+    MEMBER("MEMBER", "会员套餐");
 
-    private final Integer value;
-    private final String code;
+    private final String value;
     private final String description;
 
-    PackageBizTypeEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
     @Override
-    public Integer getValue() {
-        return this.value;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_package_biz_type__" + this.code.toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.PACKAGE_TYPE.getValue().toUpperCase();
     }
 
 }

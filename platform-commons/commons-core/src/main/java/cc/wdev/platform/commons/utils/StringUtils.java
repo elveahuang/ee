@@ -13,6 +13,10 @@ import java.util.UUID;
 @Slf4j
 public abstract class StringUtils extends org.springframework.util.StringUtils {
 
+    public static String nvl(String value, String defaultValue) {
+        return isNotEmpty(value) ? value.trim() : defaultValue;
+    }
+
     public static boolean isEmpty(@Nullable String str) {
         return !hasText(str);
     }

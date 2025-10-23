@@ -1,9 +1,9 @@
 package cc.wdev.platform.system.core.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.wdev.platform.commons.enums.PublishStatusTypeEnum;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
+import cc.wdev.platform.system.commons.enums.StatusTypeEnum;
 import cc.wdev.platform.system.core.domain.converter.AnnouncementConverter;
 import cc.wdev.platform.system.core.domain.entity.AnnouncementEntity;
 import cc.wdev.platform.system.core.domain.form.AnnouncementForm;
@@ -41,7 +41,7 @@ public class AnnouncementServiceImpl
     public Page<?> findByPage(AnnouncementSearchRequest request) {
         AnnouncementEntity example = AnnouncementEntity.builder().build();
         example.setActive(Boolean.TRUE);
-        example.setStatus(PublishStatusTypeEnum.ON.getValue());
+        example.setStatus(StatusTypeEnum.ON.getValue());
         return findByPage(request.getPageable(), example);
     }
 

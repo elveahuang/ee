@@ -15,6 +15,7 @@ public interface AuthorizationConverter {
 
     AuthorizationDto entity2Dto(AuthorizationEntity entity);
 
+    @Mapping(target = "version", ignore = true)
     @Mapping(target = "active", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)

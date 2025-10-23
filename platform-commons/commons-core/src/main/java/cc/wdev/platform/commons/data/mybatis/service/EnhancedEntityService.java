@@ -4,8 +4,10 @@ import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.service.Service;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 
 import java.io.Serializable;
 import java.util.List;
@@ -37,6 +39,11 @@ public interface EnhancedEntityService<T extends IdEntity, K extends Serializabl
     T findOneByWrapper(QueryWrapper<T> wrapper);
 
     /**
+     * 查询单条记录
+     */
+    T findOneByWrapper(LambdaQueryChainWrapper<T> wrapper);
+
+    /**
      * 查询所有记录，支持分页
      *
      * @return Iterable<T>
@@ -55,6 +62,6 @@ public interface EnhancedEntityService<T extends IdEntity, K extends Serializabl
      *
      * @return IPage<T>
      */
-    IPage<T> findByMpPage(IPage<T> page, QueryWrapper<T> wrapper);
+    IPage<T> findByMpPage(IPage<T> page, Wrapper<T> wrapper);
 
 }

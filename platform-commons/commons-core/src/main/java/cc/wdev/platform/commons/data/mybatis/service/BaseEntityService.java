@@ -1,15 +1,13 @@
 package cc.wdev.platform.commons.data.mybatis.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
-import cc.wdev.platform.commons.data.mybatis.domain.BaseEntity;
-import cc.wdev.platform.commons.data.mybatis.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.wdev.platform.commons.data.mybatis.utils.MyBatisPlusUtils;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
-import cc.wdev.platform.commons.utils.SecurityUtils;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -306,45 +304,6 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     }
 
     /**
-     * @see EntityService#softDelete(IdEntity)
-     */
-    @Override
-    public void softDelete(T entity) {
-        if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setActive(Boolean.FALSE);
-            baseEntity.setDeletedAt(getCurLocalDateTime());
-            baseEntity.setDeletedBy(SecurityUtils.getUid());
-            this.save(entity);
-        } else if (entity instanceof SimpleEntity simpleEntity) {
-            simpleEntity.setActive(Boolean.FALSE);
-            this.save(entity);
-        }
-    }
-
-    /**
-     * @see EntityService#softDeleteBatch(Collection, int)
-     */
-    @Override
-    public void softDeleteBatch(Collection<T> entityList, int batchSize) {
-        this.updateBatchById(entityList.stream().peek(e -> {
-            if (e instanceof BaseEntity entity) {
-                entity.setActive(Boolean.FALSE);
-                entity.setDeletedAt(getCurLocalDateTime());
-                entity.setDeletedBy(SecurityUtils.getUid());
-            } else if (e instanceof SimpleEntity entity) {
-                entity.setActive(Boolean.FALSE);
-            }
-        }).toList(), batchSize);
-    }
-
-    /**
-     * @see EntityService#softDeleteAll()
-     */
-    @Override
-    public void softDeleteAll() {
-    }
-
-    /**
      * @see EntityService#count()
      */
     @Override
@@ -385,6 +344,18 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     }
 
     /**
+     * @see EnhancedEntityService#findOneByWrapper(LambdaQueryChainWrapper)
+     */
+    @Override
+    public T findOneByWrapper(LambdaQueryChainWrapper<T> wrapper) {
+        List<T> entityList = wrapper.list(MyBatisPlusUtils.getLimitPage());
+        if (CollectionUtils.isNotEmpty(entityList)) {
+            return entityList.getFirst();
+        }
+        return null;
+    }
+
+    /**
      * @see EnhancedEntityService#findAllByMpPage(IPage)
      */
     @Override
@@ -401,10 +372,10 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     }
 
     /**
-     * @see EnhancedEntityService#findByMpPage(IPage, QueryWrapper)
+     * @see EnhancedEntityService#findByMpPage(IPage, Wrapper)
      */
     @Override
-    public IPage<T> findByMpPage(IPage<T> page, QueryWrapper<T> wrapper) {
+    public IPage<T> findByMpPage(IPage<T> page, Wrapper<T> wrapper) {
         return this.mapper.selectPage(page, wrapper);
     }
 

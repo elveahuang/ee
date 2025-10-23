@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.core.cache.service;
 import cc.wdev.platform.commons.core.cache.CacheKey;
 import cc.wdev.platform.commons.core.cache.utils.RedissonUtils;
 import cc.wdev.platform.commons.enums.RateLimitTypeEnum;
+import cc.wdev.platform.commons.utils.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -184,6 +185,15 @@ public class RedissonCacheService extends AbstractCacheService implements CacheS
             }
         }
         return total;
+    }
+
+    @Override
+    public Long deleteByPattern(@NonNull String pattern) {
+        long total = 0;
+        if (StringUtils.isBlank(pattern)) {
+            return total;
+        }
+        return this.redissonClient.getKeys().unlinkByPattern(pattern);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

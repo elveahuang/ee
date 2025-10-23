@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.core.storage.model;
 
-import cc.wdev.platform.commons.enums.FileAccessTypeEnum;
+import cc.wdev.platform.commons.enums.StorageAccessTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,14 +52,14 @@ public class FileParameter implements Serializable {
     /**
      * 访问类型
      */
-    private FileAccessTypeEnum accessType;
+    private StorageAccessTypeEnum accessType;
 
     public static FileParameter withPublic() {
-        return FileParameter.builder().accessType(FileAccessTypeEnum.PUBLIC).build();
+        return FileParameter.builder().accessType(StorageAccessTypeEnum.PUBLIC).build();
     }
 
     public static FileParameter withPrivate() {
-        return FileParameter.builder().accessType(FileAccessTypeEnum.PRIVATE).build();
+        return FileParameter.builder().accessType(StorageAccessTypeEnum.PRIVATE).build();
     }
 
     public static FileParameter withDefault() {

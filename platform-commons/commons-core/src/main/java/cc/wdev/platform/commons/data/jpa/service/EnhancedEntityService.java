@@ -23,4 +23,8 @@ public interface EnhancedEntityService<T extends IdEntity, K extends Serializabl
 
     Class<R> getRepositoryClass();
 
+    default void flush() {
+        this.getRepository().flush();
+    }
+
 }

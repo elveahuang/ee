@@ -23,9 +23,4 @@ public enum UserStatusTypeEnum implements BaseEnum<Integer> {
         this.description = description;
     }
 
-    @Override
-    public String getLabel() {
-        return "label_user_status_type__" + this.code.toLowerCase();
-    }
-
 }

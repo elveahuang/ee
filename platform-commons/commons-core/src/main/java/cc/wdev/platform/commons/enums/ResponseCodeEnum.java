@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -7,7 +8,8 @@ import org.springframework.http.HttpStatus;
  * @author elvea
  */
 @Getter
-public enum ResponseCodeEnum implements BaseEnum<Integer> {
+@AllArgsConstructor
+public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
     // 核心基础
     SUCCESS(HttpStatus.OK.value(), "Success", "正确执行并成功返回"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST.value(), "Bad Request", "错误的请求"),
@@ -27,26 +29,20 @@ public enum ResponseCodeEnum implements BaseEnum<Integer> {
     USER__MOBILE_NOT_AVAILABLE(1001003, "Mobile is not present.", "手机号码不可用"),
     USER__INVALID_USERNAME_OR_PASSWORD(1001004, "Invalid Username or Password.", "用户名或者密码不正确"),
     USER__INVITE_CODE_NOT_AVAILABLE(1001005, "Invitation code is Not Available.", "邀请码不可用"),
-    USER__INVITE_CODE_LIMIT_REACHED(1001006, "Invitation limit reached.", "该邀请码邀请数上限");
+    USER__INVITE_CODE_LIMIT_REACHED(1001006, "Invitation limit reached.", "该邀请码邀请数上限"),
+    BIZ_TYPE__NOT_EMPTY(1002001, "BizType is not empty", "业务类型不能为空"),
+    BIZ_TYPE__NOT_PRESENT(1002002, "BizType is not present", "业务类型不存在"),
+    PACKAGE__NOT_PRESENT(1003001, "Package is not present", "套餐不存在"),
+    TENANT__NOT_PRESENT(1004001, "Tenant is not present", "租户不存在"),
+    ;
 
-    private final int code;
+    private final Integer value;
     private final String description;
     private final String message;
 
-    ResponseCodeEnum(final int code, final String message, final String description) {
-        this.code = code;
-        this.message = message;
-        this.description = description;
-    }
-
     @Override
-    public Integer getValue() {
-        return this.code;
-    }
-
-    @Override
-    public String getLabel() {
-        return ("label_response_code__").concat(String.valueOf(this.code));
+    public String getGroup() {
+        return BizGroupTypeEnum.RESPONSE_CODE.getValue().toUpperCase();
     }
 
 }

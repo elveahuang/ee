@@ -1,8 +1,12 @@
 package cc.wdev.platform.commons.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
+import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
+import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
+import cc.wdev.platform.commons.utils.SecurityUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -183,16 +187,35 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     }
 
     /**
-     * 删除多个实体
+     * 软删除多个实体
      */
     default void softDeleteBatchById(Collection<K> entityIdList) {
-        this.softDeleteBatch(this.findByIds(entityIdList));
+        if (CollectionUtils.isNotEmpty(entityIdList)) {
+            this.softDeleteBatch(this.findByIds(entityIdList));
+        }
     }
 
     /**
-     * 删除单个实体
+     * 软删除多个实体
+     */
+    default void softDeleteBatchById(Collection<K> entityIdList, Consumer<Collection<K>> callback) {
+        this.softDeleteBatch(this.findByIds(entityIdList));
+        callback.accept(entityIdList);
+    }
+
+    /**
+     * 软删除单个实体
      */
     default void softDelete(T entity) {
+        if (entity instanceof BaseEntity baseEntity) {
+            baseEntity.setActive(Boolean.FALSE);
+            baseEntity.setDeletedAt(getCurLocalDateTime());
+            baseEntity.setDeletedBy(SecurityUtils.getUid());
+            this.save(entity);
+        } else if (entity instanceof SimpleEntity simpleEntity) {
+            simpleEntity.setActive(Boolean.FALSE);
+            this.save(entity);
+        }
     }
 
     /**
@@ -204,22 +227,32 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     }
 
     /**
-     * 删除多个实体
+     * 软删除多个实体
      */
     default void softDeleteBatch(Collection<T> entityList) {
         this.softDeleteBatch(entityList, DEFAULT_BATCH_SIZE);
     }
 
     /**
-     * 删除多个实体
+     * 软删除多个实体
      */
     default void softDeleteBatch(Collection<T> entityList, int batchSize) {
+        this.updateBatchById(entityList.stream().peek(e -> {
+            if (e instanceof BaseEntity entity) {
+                entity.setActive(Boolean.FALSE);
+                entity.setDeletedAt(getCurLocalDateTime());
+                entity.setDeletedBy(SecurityUtils.getUid());
+            } else if (e instanceof SimpleEntity entity) {
+                entity.setActive(Boolean.FALSE);
+            }
+        }).toList(), batchSize);
     }
 
     /**
-     * 删除全部实体
+     * 软删除全部实体
      */
     default void softDeleteAll() {
+        // 暂时不实现
     }
 
     /**

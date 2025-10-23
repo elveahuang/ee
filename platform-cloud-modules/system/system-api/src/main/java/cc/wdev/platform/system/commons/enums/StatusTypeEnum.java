@@ -1,6 +1,7 @@
 package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Getter;
  * @author elvea
  */
 @Getter
+@AllArgsConstructor
 public enum StatusTypeEnum implements BaseEnum<Integer> {
     ENABLED(1, "ENABLED", "启用"),
     DISABLED(2, "DISABLED", "禁用");
@@ -16,16 +18,5 @@ public enum StatusTypeEnum implements BaseEnum<Integer> {
     private final Integer value;
     private final String code;
     private final String description;
-
-    StatusTypeEnum(final Integer value, final String code, final String description) {
-        this.value = value;
-        this.code = code;
-        this.description = description;
-    }
-
-    @Override
-    public String getLabel() {
-        return "label_status_type__" + this.code.toLowerCase();
-    }
 
 }

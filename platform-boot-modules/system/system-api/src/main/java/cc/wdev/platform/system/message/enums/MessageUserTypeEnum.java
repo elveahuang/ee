@@ -1,13 +1,14 @@
 package cc.wdev.platform.system.message.enums;
 
-import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.system.commons.enums.BizGroupTypeEnum;
 import lombok.Getter;
 
 /**
  * @author elvea
  */
 @Getter
-public enum MessageUserTypeEnum implements BaseEnum<Integer> {
+public enum MessageUserTypeEnum implements BaseBizTypeEnum<Integer> {
     FROM(1, "FROM", "发送人"),
     TO(2, "TO", "接收人"),
     CC(3, "CC", "抄送人"),
@@ -24,8 +25,8 @@ public enum MessageUserTypeEnum implements BaseEnum<Integer> {
     }
 
     @Override
-    public String getLabel() {
-        return ("label_message_user_type__".concat(this.code)).toLowerCase();
+    public String getGroup() {
+        return BizGroupTypeEnum.MESSAGE_USER_TYPE.getValue();
     }
 
 }
