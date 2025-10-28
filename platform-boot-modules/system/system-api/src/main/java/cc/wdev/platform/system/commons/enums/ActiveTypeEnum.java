@@ -11,11 +11,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ActiveTypeEnum implements BaseBizTypeEnum<Boolean> {
-    ENABLED(Boolean.TRUE, "启用，正常状态"),
-    DISABLED(Boolean.FALSE, "禁用，删除状态");
+public enum ActiveTypeEnum implements BaseBizTypeEnum<Integer> {
+    ENABLED(1, "启用，正常状态"),
+    DISABLED(0, "禁用，删除状态");
 
-    private final Boolean value;
+    private final Integer value;
     private final String description;
 
     @Override

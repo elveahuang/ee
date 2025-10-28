@@ -208,12 +208,12 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
      */
     default void softDelete(T entity) {
         if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setActive(Boolean.FALSE);
+            baseEntity.setActive(0);
             baseEntity.setDeletedAt(getCurLocalDateTime());
             baseEntity.setDeletedBy(SecurityUtils.getUid());
             this.save(entity);
         } else if (entity instanceof SimpleEntity simpleEntity) {
-            simpleEntity.setActive(Boolean.FALSE);
+            simpleEntity.setActive(0);
             this.save(entity);
         }
     }
@@ -239,11 +239,11 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     default void softDeleteBatch(Collection<T> entityList, int batchSize) {
         this.updateBatchById(entityList.stream().peek(e -> {
             if (e instanceof BaseEntity entity) {
-                entity.setActive(Boolean.FALSE);
+                entity.setActive(0);
                 entity.setDeletedAt(getCurLocalDateTime());
                 entity.setDeletedBy(SecurityUtils.getUid());
             } else if (e instanceof SimpleEntity entity) {
-                entity.setActive(Boolean.FALSE);
+                entity.setActive(0);
             }
         }).toList(), batchSize);
     }

@@ -27,7 +27,7 @@ public abstract class BaseEntity extends AbstractEntity {
     /**
      * 启用状态
      */
-    private Boolean active;
+    private Integer active;
     /**
      * 创建时间
      */
@@ -67,7 +67,7 @@ public abstract class BaseEntity extends AbstractEntity {
     private Long deletedBy;
 
     public boolean isActiveEntity() {
-        return this.active != null && this.active;
+        return this.active != null && this.active == 1;
     }
 
     public boolean isInactiveEntity() {

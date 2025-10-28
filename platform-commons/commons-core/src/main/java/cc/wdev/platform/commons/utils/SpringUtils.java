@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -14,6 +17,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -164,6 +168,14 @@ public class SpringUtils implements ApplicationContextAware {
                 status.setRollbackOnly();
             }
         });
+    }
+
+    // ------------------------------------------------------------------------------
+    // Spring Data
+    // ------------------------------------------------------------------------------
+
+    public static <T> Page<T> toSpringDataPage(Pageable pageable, List<T> list, Long total) {
+        return new PageImpl<>(list, pageable, total);
     }
 
 }

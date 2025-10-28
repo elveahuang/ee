@@ -18,7 +18,7 @@ public abstract class BaseEntity extends AbstractEntity {
     /**
      * 启用状态
      */
-    private Boolean active;
+    private Integer active;
     /**
      * 创建时间
      */

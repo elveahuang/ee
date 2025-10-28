@@ -56,6 +56,13 @@ public abstract class MyBatisPlusUtils {
     }
 
     /**
+     * 生产一个空的分页
+     */
+    public static <T> org.springframework.data.domain.Page<T> emptySpringDataPage(Pageable pageable) {
+        return org.springframework.data.domain.Page.empty(pageable);
+    }
+
+    /**
      * 把Spring-Data的分页请求对象转换成为MyBatis-Plus的分页对象
      */
     public static <E> Page<E> getMyBatisPlusPage(Pageable pageable) {

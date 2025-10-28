@@ -3,6 +3,7 @@ package cc.wdev.platform.system.core.web.admin;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.core.domain.entity.BannerEntity;
 import cc.wdev.platform.system.core.domain.form.BannerForm;
 import cc.wdev.platform.system.core.domain.request.BannerDeleteRequest;
@@ -40,7 +41,7 @@ public class BannerAdminController extends AbstractController {
     @OperationLog("获取宣传栏列表")
     public R<?> list(BannerSearchRequest request) {
         BannerEntity example = BannerEntity.builder().build();
-        example.setActive(Boolean.TRUE);
+        example.setActive(ActiveTypeEnum.ENABLED.getValue());
         return R.success(bannerService.findByPage(request.getPageable(), example));
     }
 

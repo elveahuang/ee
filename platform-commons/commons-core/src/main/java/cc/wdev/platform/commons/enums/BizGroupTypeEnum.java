@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 基础核心业务分组类型
+ *
  * @author elvea
  */
 @Getter

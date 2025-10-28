@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.core.cache.AccountCacheKeyGenerator;
 import cc.wdev.platform.system.core.domain.converter.AccountConverter;
 import cc.wdev.platform.system.core.domain.dto.AccountDto;
@@ -161,7 +162,7 @@ public class AccountServiceImpl
         } else {
             entity = SpringUtils.getBean(AccountConverter.class).formToEntity(form);
         }
-        entity.setActive(Boolean.TRUE);
+        entity.setActive(ActiveTypeEnum.ENABLED.getValue());
         this.save(entity);
     }
 

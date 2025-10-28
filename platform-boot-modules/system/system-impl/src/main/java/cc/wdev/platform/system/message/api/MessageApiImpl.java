@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.message.rabbit.RabbitUtils;
 import cc.wdev.platform.commons.utils.*;
 import cc.wdev.platform.commons.utils.template.HtmlTemplateService;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.core.domain.entity.UserEntity;
 import cc.wdev.platform.system.core.service.UserService;
 import cc.wdev.platform.system.message.domain.dto.CreateMessageDto;
@@ -81,7 +82,7 @@ public class MessageApiImpl implements MessageApi {
         }
 
         // 检查消息类型是否是正常并开启
-        if (!messageTypeEntity.getActive()) {
+        if (ActiveTypeEnum.DISABLED.getValue().equals(messageTypeEntity.getActive())) {
             log.info("Create message. type - [{}]. Inactive message type.", messageTypeEntity.getCode());
             return 0L;
         }

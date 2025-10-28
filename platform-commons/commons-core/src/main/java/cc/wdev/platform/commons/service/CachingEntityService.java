@@ -8,6 +8,7 @@ import cc.wdev.platform.commons.core.cache.service.CacheService;
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -92,41 +93,56 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
         if (CollectionUtils.isEmpty(ids)) {
             return Collections.emptyList();
         }
-        List<CacheKey> cacheKeyList = ids.stream().map(getCacheKeyGenerator()::key).collect(Collectors.toList());
-        List<List<CacheKey>> partitionKeyList = Lists.partition(cacheKeyList, getBatchSize());
+        // 批量生成缓存键
+        Map<K, CacheKey> idToCacheKey = ids.stream()
+            .collect(Collectors.toMap((v) -> v, getCacheKeyGenerator()::key, (e1, e2) -> e1));
 
-        // 获取已缓存实体
-        List<T> valueList = partitionKeyList.stream().map(this::findByCacheKey).flatMap(Collection::stream).toList();
-        // 保存未缓存实体标识
-        Set<K> keySet = Sets.newLinkedHashSet();
-        // 保存未缓存实体标识
-        List<K> keyList = Lists.newArrayList(ids);
-        // 待返回实体
-        List<T> entityList = new ArrayList<>();
-        // 处理缓存标识，把未缓存实体标识排除出来，再从数据库里面获取
-        if (CollectionUtils.isEmpty(valueList)) {
-            keySet.addAll(keyList);
-        } else {
-            for (int i = 0; i < valueList.size(); i++) {
-                T v = valueList.get(i);
-                K k = keyList.get(i);
-                if (v == null) {
-                    keySet.add(k);
-                } else {
-                    entityList.add(v);
-                }
+        // 批量查询缓存
+        List<CacheKey> cacheKeys = Lists.newArrayList(idToCacheKey.values());
+        List<List<CacheKey>> partitions = Lists.partition(cacheKeys, getBatchSize());
+        List<T> cachedValues = partitions.stream()
+            .map(this::findByCacheKey)
+            .flatMap(Collection::stream)
+            .toList();
+
+        // 建立缓存键到值的映射
+        Map<CacheKey, T> cacheKeyToValue = Maps.newHashMapWithExpectedSize(cacheKeys.size());
+        for (int i = 0; i < cacheKeys.size() && i < cachedValues.size(); i++) {
+            if (cachedValues.get(i) == null) {
+                continue;
+            }
+            cacheKeyToValue.put(cacheKeys.get(i), cachedValues.get(i));
+        }
+
+        // 分离已缓存和未缓存的ID
+        List<T> result = Lists.newArrayList();
+        Set<K> missingIds = Sets.newHashSet();
+
+        for (K id : ids) {
+            CacheKey cacheKey = idToCacheKey.get(id);
+            T value = cacheKeyToValue.get(cacheKey);
+
+            if (value != null) {
+                result.add(value);
+            } else {
+                missingIds.add(id);
             }
         }
 
-        if (CollectionUtils.isNotEmpty(keySet)) {
-            if (loader == null) {
-                loader = this::findByIds;
-            }
-            Collection<T> missList = loader.apply(keySet);
-            missList.forEach(this::setCache);
-            entityList.addAll(missList);
+        if (CollectionUtils.isEmpty(missingIds)) {
+            return result;
         }
-        return entityList;
+
+        // 加载未缓存的数据
+        if (loader == null) {
+            loader = this::findByIds;
+        }
+        Collection<T> loaded = loader.apply(missingIds);
+        loaded.forEach(entity -> {
+            setCache(entity); // 缓存新数据
+            result.add(entity);
+        });
+        return result;
     }
 
     /**

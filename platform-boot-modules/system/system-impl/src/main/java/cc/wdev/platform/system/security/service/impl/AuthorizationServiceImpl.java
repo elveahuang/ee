@@ -7,6 +7,7 @@ import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SecurityUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.security.cache.AuthorizationCacheKeyGenerator;
 import cc.wdev.platform.system.security.domain.entity.AuthorizationEntity;
 import cc.wdev.platform.system.security.domain.entity.AuthorizationEntity_;
@@ -49,7 +50,7 @@ public class AuthorizationServiceImpl extends BaseCachingEntityService<Authoriza
     public void deleteByUuid(String uuid) {
         AuthorizationEntity entity = this.findByUuid(uuid);
         if (entity != null) {
-            entity.setActive(Boolean.FALSE);
+            entity.setActive(ActiveTypeEnum.DISABLED.getValue());
             entity.setDeletedAt(getCurLocalDateTime());
             entity.setDeletedBy(SecurityUtils.getUid());
         }

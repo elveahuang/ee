@@ -14,6 +14,10 @@ public interface BaseBizTypeEnum<T extends Serializable> extends BaseEnum<T> {
 
     String getGroup();
 
+    default <C extends BaseBizTypeConfig> C getConfig() {
+        return null;
+    }
+
     default String getCode() {
         return String.valueOf(getValue());
     }

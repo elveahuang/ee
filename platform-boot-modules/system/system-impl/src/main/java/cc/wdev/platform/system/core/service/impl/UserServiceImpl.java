@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.core.cache.UserCacheKeyGenerator;
 import cc.wdev.platform.system.core.domain.converter.UserConverter;
 import cc.wdev.platform.system.core.domain.entity.UserEntity;
@@ -144,7 +145,7 @@ public class UserServiceImpl extends BaseCachingEntityService<UserEntity, Long, 
         } else {
             entity = SpringUtils.getBean(UserConverter.class).formToEntity(form);
         }
-        entity.setActive(Boolean.TRUE);
+        entity.setActive(ActiveTypeEnum.ENABLED.getValue());
         this.save(entity);
     }
 

@@ -1,9 +1,8 @@
 package cc.wdev.platform.system.commons.biz;
 
+import cc.wdev.platform.commons.enums.BaseBizTypeConfig;
 import lombok.Builder;
 import lombok.Data;
-
-import java.io.Serializable;
 
 /**
  * 订单类型配置
@@ -12,6 +11,6 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-public class OrderTypeConfig implements Serializable {
+public class OrderTypeConfig implements BaseBizTypeConfig {
     private String callback;
 }

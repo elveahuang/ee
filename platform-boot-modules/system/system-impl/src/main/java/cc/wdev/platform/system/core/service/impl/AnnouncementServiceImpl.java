@@ -3,6 +3,7 @@ package cc.wdev.platform.system.core.service.impl;
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
+import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.commons.enums.StatusTypeEnum;
 import cc.wdev.platform.system.core.domain.converter.AnnouncementConverter;
 import cc.wdev.platform.system.core.domain.entity.AnnouncementEntity;
@@ -30,7 +31,7 @@ public class AnnouncementServiceImpl
     @Override
     public Page<?> findByPage(SystemAnnouncementSearchRequest request) {
         AnnouncementEntity example = AnnouncementEntity.builder().build();
-        example.setActive(Boolean.TRUE);
+        example.setActive(ActiveTypeEnum.ENABLED.getValue());
         return findByPage(request.getPageable(), example);
     }
 
@@ -40,7 +41,7 @@ public class AnnouncementServiceImpl
     @Override
     public Page<?> findByPage(AnnouncementSearchRequest request) {
         AnnouncementEntity example = AnnouncementEntity.builder().build();
-        example.setActive(Boolean.TRUE);
+        example.setActive(ActiveTypeEnum.ENABLED.getValue());
         example.setStatus(StatusTypeEnum.ON.getValue());
         return findByPage(request.getPageable(), example);
     }
@@ -57,7 +58,7 @@ public class AnnouncementServiceImpl
         } else {
             entity = SpringUtils.getBean(AnnouncementConverter.class).formToEntity(form);
         }
-        entity.setActive(Boolean.TRUE);
+        entity.setActive(ActiveTypeEnum.ENABLED.getValue());
         this.save(entity);
     }
 
