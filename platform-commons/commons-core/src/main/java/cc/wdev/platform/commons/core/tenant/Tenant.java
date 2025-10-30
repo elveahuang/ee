@@ -16,8 +16,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Tenant implements Serializable {
 
-    public static final Tenant defaultTenant = Tenant.builder().id(1000001L).build();
+    public static final Tenant defaultTenant = Tenant.builder()
+        .id(1000001L)
+        .rootInd(Boolean.TRUE)
+        .build();
 
     private Long id;
 
+    private Boolean rootInd;
 }

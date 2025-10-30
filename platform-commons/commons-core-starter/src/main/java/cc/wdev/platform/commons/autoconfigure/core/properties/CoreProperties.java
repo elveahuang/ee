@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.message.rabbit.RabbitConfig;
 import lombok.Data;
+import org.mapstruct.MappingConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -42,7 +43,15 @@ public class CoreProperties implements Serializable {
      * 消息队列
      */
     @NestedConfigurationProperty
+    private Context.MapStruct mapStruct = Context.MapStruct.builder()
+        .componentModel(MappingConstants.ComponentModel.DEFAULT).build();
+
+    /**
+     * 消息队列
+     */
+    @NestedConfigurationProperty
     private RabbitConfig rabbit = RabbitConfig.builder().build();
+
 
     /**
      * 多租户配置

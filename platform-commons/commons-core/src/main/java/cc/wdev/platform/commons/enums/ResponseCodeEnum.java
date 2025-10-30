@@ -34,7 +34,7 @@ public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
     BIZ_TYPE__NOT_PRESENT(1002002, "BizType is not present", "业务类型不存在"),
     PACKAGE__NOT_PRESENT(1003001, "Package is not present", "套餐不存在"),
     TENANT__NOT_PRESENT(1004001, "Tenant is not present", "租户不存在"),
-    ;
+    ROLE__NOT_PRESENT(1005001, "Role is not present", "角色不存在");
 
     private final Integer value;
     private final String description;

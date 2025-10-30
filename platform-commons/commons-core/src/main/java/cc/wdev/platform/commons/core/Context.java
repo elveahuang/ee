@@ -42,6 +42,11 @@ public class Context implements Serializable, ApplicationContextAware {
     @Setter
     @Getter
     @Builder.Default
+    private Context.MapStruct mapStruct = Context.MapStruct.builder().build();
+
+    @Setter
+    @Getter
+    @Builder.Default
     private RabbitConfig rabbit = RabbitConfig.builder().build();
 
     @Setter
@@ -84,6 +89,14 @@ public class Context implements Serializable, ApplicationContextAware {
          */
         @Builder.Default
         private boolean enabled = false;
+
+    }
+
+    @Data
+    @Builder
+    public static class MapStruct implements Serializable {
+
+        private String componentModel;
 
     }
 

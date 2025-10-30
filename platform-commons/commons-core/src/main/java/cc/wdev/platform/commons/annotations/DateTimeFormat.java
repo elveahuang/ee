@@ -20,7 +20,6 @@ public @interface DateTimeFormat {
     String pattern() default "";
 
     /**
-     * ¬
      * 是否在转换时区，把用户提交的时间，按用户时区换算为系统时区的日期时间。
      */
     boolean timeZoneConvert() default false;

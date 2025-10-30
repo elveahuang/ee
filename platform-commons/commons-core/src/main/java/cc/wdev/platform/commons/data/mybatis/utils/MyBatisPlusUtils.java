@@ -56,6 +56,13 @@ public abstract class MyBatisPlusUtils {
     }
 
     /**
+     * 生成一个空的分页
+     */
+    public static <T> org.springframework.data.domain.Page<T> emptySpringDataPage() {
+        return org.springframework.data.domain.Page.empty();
+    }
+
+    /**
      * 生产一个空的分页
      */
     public static <T> org.springframework.data.domain.Page<T> emptySpringDataPage(Pageable pageable) {
@@ -94,6 +101,13 @@ public abstract class MyBatisPlusUtils {
      */
     public static <E> Page<E> getLimitPage() {
         return new Page<>(1, 1);
+    }
+
+    /**
+     * 判断分页对象是否有数据
+     */
+    public static <E> boolean isEmptyPage(IPage<E> page) {
+        return page != null && page.getRecords() != null && !page.getRecords().isEmpty();
     }
 
 }

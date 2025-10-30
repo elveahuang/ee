@@ -215,6 +215,11 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
         } else if (entity instanceof SimpleEntity simpleEntity) {
             simpleEntity.setActive(0);
             this.save(entity);
+        } else if (entity instanceof cc.wdev.platform.commons.data.mybatis.domain.BaseEntity baseEntity) {
+            baseEntity.setActive(0);
+            baseEntity.setDeletedAt(getCurLocalDateTime());
+            baseEntity.setDeletedBy(SecurityUtils.getUid());
+            this.save(entity);
         }
     }
 

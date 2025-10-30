@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.core.cache;
 
 import cc.wdev.platform.commons.constants.GlobalConstants;
-import cc.wdev.platform.commons.core.tenant.TenantContext;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
@@ -22,17 +21,15 @@ public interface CacheKeyGenerator {
     }
 
     default CacheKey key(Object... params) {
-        String key = String.format("%s:%s:%s",
+        String key = String.format("%s:%s",
                 this.getPrefix(),
-                TenantContext.getTenantId(),
                 StringUtils.arrayToDelimitedString(params, "_"))
             .toLowerCase();
         return new CacheKey(key, getExpire());
     }
 
     default String cacheKey(Object... params) {
-        return String.format("%s:%s:%s",
-                TenantContext.getTenantId(),
+        return String.format("%s:%s",
                 this.getPrefix(),
                 StringUtils.arrayToDelimitedString(params, "_"))
             .toLowerCase();

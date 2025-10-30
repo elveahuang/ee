@@ -13,12 +13,15 @@ import org.springframework.lang.NonNull;
 @Slf4j
 public class TenantContext {
 
-    private static final ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Long> tenantId = new ThreadLocal<>();
+
+    private static final ThreadLocal<Boolean> tenantRootInd = new ThreadLocal<>();
 
     public static void handleServletRequest(ServletRequest request) {
         log.info("[TenantContext] handleServletRequest start");
         Tenant tenant = GlobalTenantManager.getResolver().resolveTenant((HttpServletRequest) request);
         setTenantId(tenant.getId());
+        setTenantRootInd(tenant.getRootInd());
         log.info("[TenantContext] handleServletRequest end. tenant [{}]", tenant.getId());
     }
 
@@ -27,19 +30,31 @@ public class TenantContext {
     }
 
     public static void setTenantId(Long tenantId) {
-        threadLocal.set(tenantId);
+        TenantContext.tenantId.set(tenantId);
     }
 
     public static Long getTenantId() {
-        if (threadLocal.get() == null) {
+        if (tenantId.get() == null) {
             return GlobalTenantManager.getStore().root().getId();
         }
-        return threadLocal.get();
+        return tenantId.get();
+    }
+
+    public static void setTenantRootInd(Boolean tenantRootInd) {
+        TenantContext.tenantRootInd.set(tenantRootInd);
+    }
+
+    public static Boolean getTenantRootInd() {
+        if (tenantRootInd.get() == null) {
+            return GlobalTenantManager.getStore().root().getRootInd();
+        }
+        return tenantRootInd.get();
     }
 
     public static void clear() {
         log.info("[TenantContext] clear context");
-        threadLocal.remove();
+        tenantId.remove();
+        tenantRootInd.remove();
     }
 
 }

@@ -24,11 +24,11 @@ public class OperationLogDto implements Serializable {
     /**
      * 实体ID
      */
-    private Long entityId;
+    private Long bizId;
     /**
      * 实体类型
      */
-    private String entityType;
+    private String bizType;
     /**
      * 类名
      */

@@ -8,6 +8,7 @@ import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
 import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.EnvironmentUtils;
+import cc.wdev.platform.commons.utils.MapStructUtils;
 import cc.wdev.platform.commons.utils.MessageSourceUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
@@ -67,7 +68,11 @@ public class CoreAutoConfiguration {
         log.info("Context Rabbit {}", this.properties.getRabbit().isEnabled() ? "enabled" : "disabled");
         log.info("Context Tenancy {}", this.properties.getTenancy().isEnabled() ? "enabled" : "disabled");
 
+        // 初始化多租户管理器
         GlobalTenantManager.init(tenantStore, tenantConfig);
+
+        // 初始化转换器模式
+        MapStructUtils.init(properties.getMapStruct().getComponentModel());
 
         return Context.builder()
             .app(properties.getApp())
@@ -75,6 +80,7 @@ public class CoreAutoConfiguration {
             .home(properties.getHome())
             .rabbit(properties.getRabbit())
             .tenancy(properties.getTenancy())
+            .mapStruct(properties.getMapStruct())
             .build();
     }
 

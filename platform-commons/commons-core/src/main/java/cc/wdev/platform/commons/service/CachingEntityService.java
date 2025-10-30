@@ -7,6 +7,7 @@ import cc.wdev.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.wdev.platform.commons.core.cache.service.CacheService;
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.utils.SpringUtils;
+import cc.wdev.platform.commons.utils.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -176,6 +177,13 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
             return;
         }
         getCacheService().delete(getCacheKeyGenerator().key(id));
+    }
+
+    default void deleteCache(String code) {
+        if (StringUtils.isBlank(code)) {
+            return;
+        }
+        getCacheService().delete(getCacheKeyGenerator().keyByCode(code));
     }
 
     /**
