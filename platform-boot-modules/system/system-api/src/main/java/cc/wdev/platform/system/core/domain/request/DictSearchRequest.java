@@ -3,12 +3,13 @@ package cc.wdev.platform.system.core.domain.request;
 import cc.wdev.platform.commons.web.request.PageRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author elvea
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

@@ -1,9 +1,9 @@
 package cc.wdev.platform.system.core.domain.converter;
 
+import cc.wdev.platform.commons.annotations.mapstruct.MapStructMapper;
 import cc.wdev.platform.commons.core.tenant.Tenant;
 import cc.wdev.platform.system.core.domain.dto.TenantDto;
 import cc.wdev.platform.system.core.domain.entity.TenantEntity;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
@@ -12,7 +12,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 /**
  * @author elvea
  */
-@Mapper(componentModel = SPRING)
+@MapStructMapper(model = SPRING)
 public interface TenantConverter {
 
     TenantConverter INSTANCE = Mappers.getMapper(TenantConverter.class);
