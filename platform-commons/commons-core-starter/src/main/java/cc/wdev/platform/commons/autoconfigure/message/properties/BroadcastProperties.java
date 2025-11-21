@@ -1,11 +1,9 @@
 package cc.wdev.platform.commons.autoconfigure.message.properties;
 
-import cc.wdev.platform.commons.message.broadcast.BroadcastType;
-import cc.wdev.platform.commons.message.broadcast.rabbit.RabbitBroadcastConfig;
+import cc.wdev.platform.commons.message.topic.BroadcastType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import java.io.Serializable;
 
@@ -19,13 +17,10 @@ public class BroadcastProperties implements Serializable {
 
     public static final String PREFIX = "platform.message.broadcast";
 
-    public static final String PREFIX_RABBIT = "platform.message.broadcast.rabbit";
-
     private boolean enabled = false;
 
-    private BroadcastType type = BroadcastType.Rabbit;
+    private Long nodeId = 1L;
 
-    @NestedConfigurationProperty
-    private RabbitBroadcastConfig rabbit = new RabbitBroadcastConfig();
+    private BroadcastType type = BroadcastType.Rabbit;
 
 }

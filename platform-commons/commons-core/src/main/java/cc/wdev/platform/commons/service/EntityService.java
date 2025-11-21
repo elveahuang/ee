@@ -242,22 +242,14 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
      * 软删除多个实体
      */
     default void softDeleteBatch(Collection<T> entityList, int batchSize) {
-        this.updateBatchById(entityList.stream().peek(e -> {
-            if (e instanceof BaseEntity entity) {
-                entity.setActive(0);
-                entity.setDeletedAt(getCurLocalDateTime());
-                entity.setDeletedBy(SecurityUtils.getUid());
-            } else if (e instanceof SimpleEntity entity) {
-                entity.setActive(0);
-            }
-        }).toList(), batchSize);
+        // 默认不实现
     }
 
     /**
      * 软删除全部实体
      */
     default void softDeleteAll() {
-        // 暂时不实现
+        // 默认不实现
     }
 
     /**

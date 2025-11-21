@@ -16,8 +16,8 @@ public interface TenantCacheKeyGenerator extends CacheKeyGenerator {
 
     default String cacheKey(Object... params) {
         return String.format("%s:%s:%s",
-                TenantContext.getTenantId(),
                 this.getPrefix(),
+                TenantContext.getTenantId(),
                 StringUtils.arrayToDelimitedString(params, "_"))
             .toLowerCase();
     }

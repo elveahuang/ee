@@ -32,6 +32,7 @@ public class SwaggerAutoConfiguration {
             .components(new Components().addSecuritySchemes("basicScheme",
                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic"))
             )
+            .servers(properties.getServers())
             .info(
                 new Info().title(properties.getTitle())
                     .version(properties.getVersion())

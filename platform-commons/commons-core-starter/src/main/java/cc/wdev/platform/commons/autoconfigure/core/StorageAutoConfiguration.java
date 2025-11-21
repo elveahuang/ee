@@ -23,7 +23,6 @@ public class StorageAutoConfiguration {
         log.info("StorageAutoConfiguration is enabled");
         log.info("Current Storage is {}", properties.getType());
         log.info("Aws Storage is {}", properties.getAws().isEnabled());
-        log.info("COS Storage is {}", properties.getCos().isEnabled());
         log.info("OSS Storage is {}", properties.getOss().isEnabled());
     }
 
@@ -32,7 +31,6 @@ public class StorageAutoConfiguration {
     public StorageFactory storageManager(StorageProperties properties) {
         StorageConfig config = StorageConfig.builder()
             .type(properties.getType())
-            .cos(properties.getCos())
             .oss(properties.getOss())
             .aws(properties.getAws())
             .build();

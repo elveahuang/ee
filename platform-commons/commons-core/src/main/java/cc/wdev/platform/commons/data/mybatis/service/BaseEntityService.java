@@ -7,6 +7,7 @@ import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
+import cc.wdev.platform.commons.utils.SecurityUtils;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
@@ -304,6 +305,25 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     }
 
     /**
+     * @see EntityService#softDeleteBatch(Collection, int)
+     */
+    @Override
+    public void softDeleteBatch(Collection<T> entityList, int batchSize) {
+        if (CollectionUtils.isNotEmpty(entityList)) {
+            // 批量软删除实体 - MyBatis
+            this.updateBatchById(entityList.stream().peek(e -> {
+                if (e instanceof cc.wdev.platform.commons.data.mybatis.domain.BaseEntity entity) {
+                    entity.setActive(0);
+                    entity.setDeletedAt(getCurLocalDateTime());
+                    entity.setDeletedBy(SecurityUtils.getUid());
+                } else if (e instanceof cc.wdev.platform.commons.data.mybatis.domain.SimpleEntity entity) {
+                    entity.setActive(0);
+                }
+            }).toList(), batchSize);
+        }
+    }
+
+    /**
      * @see EntityService#count()
      */
     @Override
@@ -353,6 +373,15 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
             return entityList.getFirst();
         }
         return null;
+    }
+
+    /**
+     * @see EnhancedEntityService#findListByWrapper(LambdaQueryChainWrapper)
+     */
+    @Override
+    public List<T> findListByWrapper(LambdaQueryChainWrapper<T> wrapper) {
+        List<T> entityList = wrapper.list();
+        return CollectionUtils.isNotEmpty(entityList) ? entityList : Collections.emptyList();
     }
 
     /**

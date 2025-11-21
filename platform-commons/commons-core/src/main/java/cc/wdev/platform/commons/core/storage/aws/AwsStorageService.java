@@ -27,9 +27,7 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URI;
 import java.time.Duration;
 
@@ -145,7 +143,15 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
                 .key(key)
                 .bucket(this.config.getBucket())
                 .build();
-            RequestBody body = RequestBody.fromInputStream(is, parameter.getSize());
+//            RequestBody body = RequestBody.fromInputStream(is, parameter.getSize());
+
+            // 确保流支持mark/reset，并且正确处理
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(is);
+            // 预先读取整个文件到内存缓冲区，避免reset问题
+            byte[] fileData = IOUtils.toByteArray(bufferedInputStream);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData);
+
+            RequestBody body = RequestBody.fromInputStream(byteArrayInputStream, fileData.length);
 
             // 上传文件
             PutObjectResponse response = client.putObject(request, body);
@@ -153,7 +159,7 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
 
             // 处理响应结果
             FileUploadResult result = FileUploadResult.builder().key(key).build();
-            return AwsFileObject.builder().key(key).response(response).etag(response.eTag()).result(result).build();
+            return AwsFileObject.builder().key(key).response(response).etag(response.eTag()).result(result).url(this.getUrl(key).getUrl()).build();
         }
     }
 

@@ -3,7 +3,7 @@ package cc.wdev.platform.system.mall.web.app;
 import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

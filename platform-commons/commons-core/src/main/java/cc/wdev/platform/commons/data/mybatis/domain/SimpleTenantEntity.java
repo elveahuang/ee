@@ -11,11 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class SimpleTenantEntity extends SimpleEntity {
-
     /**
      * 租户ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
     protected Long tenantId;
-
 }

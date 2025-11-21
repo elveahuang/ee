@@ -32,6 +32,7 @@ allprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
+        options.compilerArgs.add("-parameters")
     }
 
     tasks.withType<Test> {
@@ -54,14 +55,12 @@ allprojects {
             mavenBom(rootProject.libs.mybatis.plus.bom.get().toString())
             mavenBom(rootProject.libs.cosid.bom.get().toString())
             mavenBom(rootProject.libs.hutool.bom.get().toString())
-            mavenBom(rootProject.libs.mcp.bom.get().toString())
             mavenBom(rootProject.libs.mockito.bom.get().toString())
             mavenBom(rootProject.libs.netty.bom.get().toString())
             mavenBom(rootProject.libs.groovy.bom.get().toString())
             mavenBom(rootProject.libs.kotlin.bom.get().toString())
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.bom.get().toString())
-            mavenBom(rootProject.libs.awssdk.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
         }
         dependencies {
@@ -73,7 +72,6 @@ allprojects {
             dependency(rootProject.libs.commons.text.get().toString())
             dependency(rootProject.libs.commons.codec.get().toString())
             dependency(rootProject.libs.commons.beanutils.get().toString())
-            dependency(rootProject.libs.checker.qual.get().toString())
             dependency(rootProject.libs.objenesis.get().toString())
             dependency(rootProject.libs.guava.get().toString())
             dependency(rootProject.libs.json.get().toString())
@@ -104,9 +102,6 @@ allprojects {
             if (requested.group == "org.seleniumhq.selenium") {
                 useVersion(rootProject.libs.versions.seleniumVersion.get())
             }
-            if (requested.group == "com.microsoft.playwright") {
-                useVersion(rootProject.libs.versions.playwrightVersion.get())
-            }
             if (requested.group == "org.jetbrains.kotlin") {
                 useVersion(rootProject.libs.versions.kotlinVersion.get())
             }
@@ -122,11 +117,23 @@ allprojects {
             if (requested.group == "org.bouncycastle") {
                 useVersion(rootProject.libs.versions.bouncycastleVersion.get())
             }
+            if (requested.group == "org.apache.poi") {
+                useVersion(rootProject.libs.versions.poiVersion.get())
+            }
             if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
                 useVersion(rootProject.libs.versions.errorProneAnnotationsVersion.get())
             }
+            if (requested.module.toString() == "org.checkerframework:checker-qual") {
+                useVersion(rootProject.libs.versions.checkerQualVersion.get())
+            }
             if (requested.module.toString() == "com.auth0:java-jwt") {
                 useVersion(rootProject.libs.versions.javaJwtVersion.get())
+            }
+            if (requested.module.toString() == "org.antlr:antlr-runtime") {
+                useVersion(rootProject.libs.versions.antlr3Runtime.get())
+            }
+            if (requested.module.toString() == "org.antlr:antlr4-runtime") {
+                useVersion(rootProject.libs.versions.antlr4Runtime.get())
             }
         }
 
@@ -183,8 +190,8 @@ allprojects {
         exclude(module = "shardingsphere-parser-sql-statement-presto")
         exclude(module = "shardingsphere-parser-sql-statement-sql92")
         exclude(module = "shardingsphere-parser-sql-statement-sqlserver")
-        exclude(module = "selenium-devtools-v137")
-        exclude(module = "selenium-devtools-v138")
+        exclude(module = "selenium-devtools-v140")
+        exclude(module = "selenium-devtools-v141")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")

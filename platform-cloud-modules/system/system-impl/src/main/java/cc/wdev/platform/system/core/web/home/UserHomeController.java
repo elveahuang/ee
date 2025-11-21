@@ -2,7 +2,7 @@ package cc.wdev.platform.system.core.web.home;
 
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import cc.wdev.platform.system.core.domain.dto.UserForgotPasswordDto;
 import cc.wdev.platform.system.core.domain.dto.UserRegisterDto;
 import cc.wdev.platform.system.core.domain.vo.UserInfoVo;

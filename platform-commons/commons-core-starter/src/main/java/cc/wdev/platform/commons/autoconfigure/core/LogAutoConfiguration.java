@@ -11,7 +11,7 @@ import cc.wdev.platform.commons.core.log.domain.UrlLogDto;
 import cc.wdev.platform.commons.core.log.store.DefaultLogStore;
 import cc.wdev.platform.commons.core.log.store.LogStore;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
-import cc.wdev.platform.commons.web.interceptor.LogInterceptor;
+import cc.wdev.platform.commons.web.servlet.interceptor.LogInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;

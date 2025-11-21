@@ -2,10 +2,9 @@ package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageService;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
+import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,11 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 public record StorageFactory(StorageConfig config) {
 
     public StorageService<?> getStorageService() {
-        return switch (this.config.getType()) {
-            case COS -> getCosStorageService();
-            case OSS -> getOssStorageService();
-            default -> getAwsStorageService();
-        };
+        if (StorageTypeEnum.OSS.equals(this.config.getType())) {
+            return getOssStorageService();
+        }
+        return getAwsStorageService();
     }
 
     public StorageConfig getConfig() {
@@ -40,14 +38,6 @@ public record StorageFactory(StorageConfig config) {
 
     public OssStorageService getOssStorageService(OssStorageConfig config) {
         return new OssStorageService(config);
-    }
-
-    public CosStorageService getCosStorageService() {
-        return this.getCosStorageService(this.config.getCos());
-    }
-
-    public CosStorageService getCosStorageService(CosStorageConfig config) {
-        return new CosStorageService(config);
     }
 
 }

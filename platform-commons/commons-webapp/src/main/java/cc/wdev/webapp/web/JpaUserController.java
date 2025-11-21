@@ -1,7 +1,7 @@
 package cc.wdev.webapp.web;
 
-import cc.wdev.platform.commons.web.controller.AbstractController;
 import cc.wdev.platform.commons.web.request.PageRequest;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import cc.wdev.webapp.jpa.service.JpaUserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

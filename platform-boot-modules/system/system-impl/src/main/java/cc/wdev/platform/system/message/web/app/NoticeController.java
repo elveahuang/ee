@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
 import cc.wdev.platform.commons.utils.SecurityUtils;
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import cc.wdev.platform.system.message.domain.entity.NoticeEntity;
 import cc.wdev.platform.system.message.domain.request.NoticeSearchRequest;
 import cc.wdev.platform.system.message.service.NoticeService;

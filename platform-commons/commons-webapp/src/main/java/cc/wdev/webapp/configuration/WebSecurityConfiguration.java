@@ -1,6 +1,8 @@
 package cc.wdev.webapp.configuration;
 
+import cc.wdev.platform.commons.constants.SecurityConstants;
 import cc.wdev.platform.commons.utils.JacksonUtils;
+import cc.wdev.webapp.constants.SystemConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +29,11 @@ public class WebSecurityConfiguration {
             .csrf(AbstractHttpConfigurer::disable)
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(WEB_EXCLUDE_URLS).permitAll()
+                .requestMatchers(SecurityConstants.WEB_EXCLUDE_URLS).permitAll()
+                .requestMatchers(SystemConstants.WEB_EXCLUDE_URLS).permitAll()
                 .anyRequest().permitAll());
         return http.build();
     }
+
 
 }

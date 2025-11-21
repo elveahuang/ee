@@ -12,16 +12,35 @@ import java.util.EnumSet;
  */
 public interface BaseBizTypeEnum<T extends Serializable> extends BaseEnum<T> {
 
+    /**
+     * 获取业务分组
+     */
     String getGroup();
 
+    /**
+     * 获取业务范围
+     */
+    default String getScope() {
+        return null;
+    }
+
+    /**
+     * 获取业务配置
+     */
     default <C extends BaseBizTypeConfig> C getConfig() {
         return null;
     }
 
+    /**
+     * 获取业务编号
+     */
     default String getCode() {
         return String.valueOf(getValue());
     }
 
+    /**
+     * 获取多语言文本
+     */
     default String getLabel() {
         return ("label__" + getGroup() + "__" + getValue()).toLowerCase();
     }

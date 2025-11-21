@@ -35,7 +35,7 @@ public abstract class AttachmentConstants {
     /**
      * 默认编辑器附件扩展名
      */
-    public static List<String> DEFAULT_EDITOR_EXT = Lists.newArrayList();
+    public static List<String> DEFAULT_EDITOR_EXT = Lists.newArrayList("java", "class", "jar", "war", "xml", "properties", "gradle", "mvn", "iml");
     /**
      * 默认的附件扩展名
      */

@@ -3,11 +3,9 @@ package cc.wdev.platform.commons.data.jpa.domain;
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -24,12 +22,14 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 public abstract class BaseEntity extends AbstractEntity {
-
+    /**
+     * 版本号
+     */
+    private Long version;
     /**
      * 启用状态
      */
     private Integer active;
-
     /**
      * 创建时间
      */
@@ -37,14 +37,12 @@ public abstract class BaseEntity extends AbstractEntity {
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime createdAt;
-
     /**
      * 创建人
      */
     @CreatedBy
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createdBy;
-
     /**
      * 修改时间
      */
@@ -52,37 +50,21 @@ public abstract class BaseEntity extends AbstractEntity {
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime updatedAt;
-
     /**
      * 修改人
      */
     @LastModifiedBy
     @JsonSerialize(using = ToStringSerializer.class)
     private Long updatedBy;
-
     /**
      * 删除时间
      */
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime deletedAt;
-
     /**
      * 删除人
      */
     @JsonSerialize(using = ToStringSerializer.class)
     private Long deletedBy;
-
-    @Transient
-    @JsonIgnore
-    public boolean isActiveEntity() {
-        return this.active != null && this.active == 1;
-    }
-
-    @Transient
-    @JsonIgnore
-    public boolean isInactiveEntity() {
-        return !this.isActiveEntity();
-    }
-
 }

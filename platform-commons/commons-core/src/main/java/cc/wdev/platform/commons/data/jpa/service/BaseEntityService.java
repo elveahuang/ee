@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
+import cc.wdev.platform.commons.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -252,6 +253,25 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public void deleteAll() {
         this.getRepository().deleteAll();
+    }
+
+    /**
+     * @see EntityService#softDeleteBatch(Collection, int)
+     */
+    @Override
+    public void softDeleteBatch(Collection<T> entityList, int batchSize) {
+        if (CollectionUtils.isNotEmpty(entityList)) {
+            // 批量软删除实体 - JPA
+            this.updateBatchById(entityList.stream().peek(e -> {
+                if (e instanceof cc.wdev.platform.commons.data.jpa.domain.BaseEntity entity) {
+                    entity.setActive(0);
+                    entity.setDeletedAt(getCurLocalDateTime());
+                    entity.setDeletedBy(SecurityUtils.getUid());
+                } else if (e instanceof cc.wdev.platform.commons.data.jpa.domain.SimpleEntity entity) {
+                    entity.setActive(0);
+                }
+            }).toList(), batchSize);
+        }
     }
 
     /**

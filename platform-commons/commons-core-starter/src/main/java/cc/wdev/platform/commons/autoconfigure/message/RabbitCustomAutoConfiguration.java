@@ -5,6 +5,8 @@ import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.message.rabbit.RabbitUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,7 +19,7 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @AutoConfiguration
-@ConditionalOnClass({RabbitTemplate.class})
+@ConditionalOnClass({RabbitTemplate.class, MessageConverter.class})
 @EnableConfigurationProperties({RabbitProperties.class})
 @ConditionalOnProperty(prefix = RabbitProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class RabbitCustomAutoConfiguration {
@@ -28,8 +30,9 @@ public class RabbitCustomAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public RabbitUtils rabbitUtils(RabbitTemplate rabbitTemplate, Context context) {
-        return new RabbitUtils(context, rabbitTemplate);
+    public RabbitUtils rabbitUtils(RabbitTemplate rabbitTemplate, Context context,
+                                   @Autowired(required = false) MessageConverter messageConverter) {
+        return new RabbitUtils(context, rabbitTemplate, messageConverter);
     }
 
 }

@@ -1,41 +1,41 @@
 [versions]
-springAiVersion = "1.0.3"
+springAiVersion = "1.1.0"
 springAiAlibabaVersion = "1.0.0.4"
-springBootVersion = "3.5.7"
-springBootAdminVersion = "3.5.5"
+springBootVersion = "3.5.8"
+springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.0.0"
-springGrpcVersion = "0.10.0"
-springDocVersion = "2.8.13"
-awsSdkVersion = "2.29.52"
-grpcVersion = "1.76.0"
-mcpVersion = "0.10.0"
+springGrpcVersion = "0.12.0"
+springDocVersion = "2.8.14"
+grpcVersion = "1.77.0"
 nettyVersion = "4.1.128.Final"
 cosidVersion = "2.13.3"
 redissonVersion = "3.52.0"
-kotlinVersion = "2.2.20"
+kotlinVersion = "2.2.21"
 groovyVersion = "5.0.2"
 hutoolVersion = "5.8.41"
-mockitoVersion = "5.19.0"
-seleniumVersion = "4.37.0"
-seleniumWdmVersion = "6.3.2"
-playwrightVersion = "1.56.0"
+awsSdkVersion = "2.38.9"
+mockitoVersion = "5.20.0"
+seleniumVersion = "4.38.0"
+seleniumWdmVersion = "6.3.3"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "3.0.5"
 mybatisSpringStarterVersion = "3.0.5"
 mybatisPlusVersion = "3.5.14"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
-pdfboxVersion = "3.0.6"
-okhttpVersion = "5.2.1"
+okhttpVersion = "5.3.2"
+poiVersion = "5.5.0"
 javaJwtVersion = "4.5.0"
+antlr3Runtime = "3.5.3"
+antlr4Runtime = "4.13.2"
 swaggerVersion = "2.2.40"
 bouncycastleVersion = "1.82"
-errorProneAnnotationsVersion = "2.42.0"
-checkerQualVersion = "3.51.1"
+errorProneAnnotationsVersion = "2.44.0"
+checkerQualVersion = "3.52.0"
 jsonSchemaGeneratorVersion = "4.38.0"
 gradleSpotbugsVersion = "6.2.5"
-gradleNativeVersion = "0.11.2"
+gradleNativeVersion = "0.11.3"
 gradleOSDetectorVersion = "1.7.3"
 
 [plugins]
@@ -54,10 +54,8 @@ spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies"
 spring-swagger-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springDocVersion" }
 jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version.ref = "jsonSchemaGeneratorVersion" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
-mcp-bom = { module = "io.modelcontextprotocol.sdk:mcp-bom", version.ref = "mcpVersion" }
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
-awssdk-bom = { module = "software.amazon.awssdk:bom", version.ref = "awsSdkVersion" }
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
 
 # Spring
@@ -101,6 +99,7 @@ spring-data-elasticsearch = { module = "org.springframework.data:spring-data-ela
 
 # Spring Security
 spring-security-core = { module = "org.springframework.security:spring-security-core" }
+spring-security-messaging = { module = "org.springframework.security:spring-security-messaging" }
 spring-security-web = { module = "org.springframework.security:spring-security-web" }
 spring-security-test = { module = "org.springframework.security:spring-security-test" }
 spring-security-oauth2-jose = { module = "org.springframework.security:spring-security-oauth2-jose" }
@@ -110,6 +109,7 @@ spring-security-oauth2-resource-server = { module = "org.springframework.securit
 # Spring Cloud
 spring-cloud-commons = { module = "org.springframework.cloud:spring-cloud-commons" }
 spring-cloud-openfeign-core = { module = "org.springframework.cloud:spring-cloud-openfeign-core" }
+spring-cloud-gateway-server = { module = "org.springframework.cloud:spring-cloud-gateway-server" }
 spring-cloud-starter-gateway-server = { module = "org.springframework.cloud:spring-cloud-starter-gateway-server-webflux" }
 spring-cloud-starter-consul-discovery = { module = "org.springframework.cloud:spring-cloud-starter-consul-discovery" }
 spring-cloud-starter-consul-config = { module = "org.springframework.cloud:spring-cloud-starter-consul-config" }
@@ -180,25 +180,24 @@ cosid-spring-boot-starter = { module = "me.ahoo.cosid:cosid-spring-boot-starter"
 caffeine-core = { module = "com.github.ben-manes.caffeine:caffeine" }
 caffeine-guava = { module = "com.github.ben-manes.caffeine:guava" }
 
-# Selenium * Playwright
-playwright = { module = "com.microsoft.playwright:playwright", version.ref = "playwrightVersion" }
+# Selenium
 selenium-api = { module = "org.seleniumhq.selenium:selenium-api", version.ref = "seleniumVersion" }
 selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumVersion" }
 selenium-web-driver-manager = { module = "io.github.bonigarcia:webdrivermanager", version.ref = "seleniumWdmVersion" }
 
 # PDF & Excel & Image
-poi = { module = "org.apache.poi:poi", version = "5.4.1" }
-poi-ooxml = { module = "org.apache.poi:poi-ooxml", version = "5.4.1" }
-poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version = "5.4.1" }
-poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version = "5.4.1" }
+poi = { module = "org.apache.poi:poi", version.ref = "poiVersion" }
+poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poiVersion" }
+poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version.ref = "poiVersion" }
+poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version.ref = "poiVersion" }
 fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.3.0" }
-pdfbox-core = { module = "org.apache.pdfbox:pdfbox", version.ref = "pdfboxVersion" }
-pdfbox-fontbox = { module = "org.apache.pdfbox:fontbox", version.ref = "pdfboxVersion" }
-pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version.ref = "pdfboxVersion" }
-pdfbox-xmpbox = { module = "org.apache.pdfbox:xmpbox", version.ref = "pdfboxVersion" }
-pdfbox-debugger = { module = "org.apache.pdfbox:pdfbox-debugger", version.ref = "pdfboxVersion" }
-pdfbox-tools = { module = "org.apache.pdfbox:pdfbox-tools", version.ref = "pdfboxVersion" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.4.7" }
+pdfbox-core = { module = "org.apache.pdfbox:pdfbox", version = "3.0.6" }
+pdfbox-fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.6" }
+pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version = "3.0.6" }
+pdfbox-xmpbox = { module = "org.apache.pdfbox:xmpbox", version = "3.0.6" }
+pdfbox-debugger = { module = "org.apache.pdfbox:pdfbox-debugger", version = "3.0.6" }
+pdfbox-tools = { module = "org.apache.pdfbox:pdfbox-tools", version = "3.0.6" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.3" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
 scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
 scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
@@ -206,8 +205,8 @@ thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.21" }
 imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.12.0" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
 imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.12.0" }
-zxing-core = { module = "com.google.zxing:core", version = "3.5.3" }
-zxing-javase = { module = "com.google.zxing:javase", version = "3.5.3" }
+zxing-core = { module = "com.google.zxing:core", version = "3.5.4" }
+zxing-javase = { module = "com.google.zxing:javase", version = "3.5.4" }
 tika-core = { module = "org.apache.tika:tika-core", version = "3.2.3" }
 tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standard-package", version = "3.2.3" }
 
@@ -219,21 +218,20 @@ awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.8.B" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.8.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.8.B" }
-dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.34" }
+dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.41" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.2.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.21.12" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.1" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-cos_api = { module = "com.qcloud:cos_api", version = "5.6.257" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1355" }
-tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1281" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1365" }
+tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
 tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1353" }
 tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1343" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1350" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.24" }
-openai-java = { module = "com.openai:openai-java", version = "4.6.1" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1364" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.25" }
+openai-java = { module = "com.openai:openai-java", version = "4.8.0" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.0" }
 
@@ -247,15 +245,14 @@ jakarta-json-bind = { module = "jakarta.json.bind:jakarta.json.bind-api" }
 jakarta-websocket = { module = "jakarta.websocket:jakarta.websocket-api" }
 jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
 
-commons-io = { module = "commons-io:commons-io", version = "2.20.0" }
+commons-io = { module = "commons-io:commons-io", version = "2.21.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
-commons-codec = { module = "commons-codec:commons-codec", version = "1.19.0" }
+commons-codec = { module = "commons-codec:commons-codec", version = "1.20.0" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
 commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.12.1" }
-commons-email = { module = "org.apache.commons:commons-email", version = "1.6.0" }
 commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
 commons-text = { module = "org.apache.commons:commons-text", version = "1.14.0" }
-commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.19.0" }
+commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.20.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version = "1.28.0" }
 commons-collections = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
 
@@ -269,7 +266,7 @@ libreoffice-ridl = { module = "org.libreoffice:ridl", version = "24.8.4" }
 libreoffice-unoil = { module = "org.libreoffice:unoil", version = "24.8.4" }
 
 json = { module = "org.json:json", version = "20250517" }
-gson = { module = "com.google.code.gson:gson", version = "2.13.2" }
+gson = { module = "com.google.code.gson:gson" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
@@ -282,10 +279,10 @@ hutool-dfa = { module = "cn.hutool:hutool-dfa" }
 hutool-extra = { module = "cn.hutool:hutool-extra" }
 hutool-http = { module = "cn.hutool:hutool-http" }
 
-okhttp = { module = "com.squareup.okhttp3:okhttp", version = "okhttpVersion" }
-okhttp-sse = { module = "com.squareup.okhttp3:okhttp-sse", version = "okhttpVersion" }
-okhttp-jvm = { module = "com.squareup.okhttp3:okhttp-jvm", version = "okhttpVersion" }
-okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version = "okhttpVersion" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttpVersion" }
+okhttp-sse = { module = "com.squareup.okhttp3:okhttp-sse", version.ref = "okhttpVersion" }
+okhttp-jvm = { module = "com.squareup.okhttp3:okhttp-jvm", version.ref = "okhttpVersion" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttpVersion" }
 hc = { module = "org.apache.httpcomponents.client5:httpclient5" }
 
 # HttpComponents
@@ -298,35 +295,33 @@ httpmime = { module = "org.apache.httpcomponents:httpmime", version = "4.5.14" }
 # Job
 quartz = { module = "org.quartz-scheduler:quartz" }
 quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
-xxl-job-core = { module = "com.xuxueli:xxl-job-core", version = "3.2.0" }
 
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
-ognl = { module = "ognl:ognl", version = "3.4.7" }
+ognl = { module = "ognl:ognl", version = "3.4.8" }
 asm = { module = "org.ow2.asm:asm", version = "9.9" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
-okio = { module = "com.squareup.okio:okio", version = "3.16.2" }
-joda-time = { module = "joda-time:joda-time", version = "2.14.0" }
+okio = { module = "com.squareup.okio:okio", version = "3.16.4" }
+jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.4.0" }
-ip2region = { module = "org.lionsoul:ip2region", version = "3.1.0" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
+ip2region = { module = "org.lionsoul:ip2region", version = "3.1.1" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
-nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.5" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.30" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.6" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.30.1" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.8" }
 logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.1" }
-logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.1" }
-checker-qual = { module = "org.checkerframework:checker-qual", version.ref = "checkerQualVersion" }
+logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "9.0" }
 
 # Thymeleaf
 thymeleaf = { module = "org.thymeleaf:thymeleaf" }
 thymeleaf-spring = { module = "org.thymeleaf:thymeleaf-spring6" }
 
 # MapStruct & Lombok
-lombok = { module = "org.projectlombok:lombok", version = "1.18.42" }
+lombok = { module = "org.projectlombok:lombok" }
 mapstruct = { module = "org.mapstruct:mapstruct", version = "1.6.3" }
 mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version = "1.6.3" }
 lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-binding", version = "0.2.0" }
@@ -352,8 +347,8 @@ webjars-bootstrap-icons = { module = "org.webjars.npm:bootstrap-icons", version 
 
 [bundles]
 baseCore = ["mapstruct", "lombok"]
-baseCommons = ["slf4j-api", "guava", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "joda-time", "okio", "dom4j", "hibernate-validator"]
-baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv", "commons-email"]
+baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "okio", "dom4j", "hibernate-validator"]
+baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
@@ -381,6 +376,7 @@ springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
+springBootReactive = ["spring-cloud-gateway-server"]
 springBootServletStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 springBootReactiveStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-webflux"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
@@ -389,7 +385,7 @@ springDocServletStarter = ["swagger-annotations-jakarta", "swagger-models-jakart
 springDocReactiveStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webflux-api", "springdoc-openapi-starter-webflux-ui"]
 
 # Spring Security
-springSecurityCore = ["spring-security-core", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
+springSecurityCore = ["spring-security-core", "spring-security-messaging", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
 springSecurityCoreStarter = ["spring-boot-starter-security"]
 springSecurityAuthorizationServerStarter = ["spring-boot-starter-oauth2-authorization-server"]
 springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-server"]
@@ -434,13 +430,11 @@ websocketStarter = ["spring-boot-starter-websocket"]
 thymeleaf = ["thymeleaf", "thymeleaf-spring"]
 
 # 定时任务
-xxl = ["xxl-job-core"]
 quartz = ["quartz", "quartz-jobs"]
 quartzStarter = ["spring-boot-starter-quartz"]
 
 # 爬虫
 selenium = ["selenium-api", "selenium-java", "selenium-web-driver-manager"]
-playwright = ["playwright"]
 
 # 文档转换
 office = ["jodconverter-local", "jodconverter-local-lo", "jodconverter-remote", "libreoffice-juh", "libreoffice-jurt", "libreoffice-ridl", "libreoffice-unoil"]
@@ -449,7 +443,7 @@ officeStarter = ["jodconverter-spring-boot-starter"]
 # 开放接口
 im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "dingtalk"]
 sms = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-sms", "dysmsapi"]
-storage = ["awssdk-sdk", "awssdk-netty-client", "awssdk-apache-client", "awssdk-transfer-manager", "tencentcloud-sdk-java-common", "cos_api", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
+storage = ["awssdk-sdk", "awssdk-netty-client", "awssdk-apache-client", "awssdk-transfer-manager", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
 telegram = ["telegrambots-client", "telegrambots-abilities"]
 facebody = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-iai", "facebody"]
 translate = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-tmt", "alimt"]

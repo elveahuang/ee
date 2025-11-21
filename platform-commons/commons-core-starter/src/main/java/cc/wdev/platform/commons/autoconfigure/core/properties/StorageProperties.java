@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.autoconfigure.core.properties;
 
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.Data;
@@ -25,9 +24,6 @@ public class StorageProperties {
 
     @NestedConfigurationProperty
     private AwsStorageConfig aws = new AwsStorageConfig();
-
-    @NestedConfigurationProperty
-    private CosStorageConfig cos = new CosStorageConfig();
 
     @NestedConfigurationProperty
     private OssStorageConfig oss = new OssStorageConfig();

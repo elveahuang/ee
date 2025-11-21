@@ -104,9 +104,16 @@ public abstract class MyBatisPlusUtils {
     }
 
     /**
+     * 获取一个仅查询一条记录的分页对象
+     */
+    public static <E> Page<E> getLimitPage(int limit) {
+        return new Page<>(1, limit);
+    }
+
+    /**
      * 判断分页对象是否有数据
      */
-    public static <E> boolean isEmptyPage(IPage<E> page) {
+    public static <E> boolean isNotEmptyPage(IPage<E> page) {
         return page != null && page.getRecords() != null && !page.getRecords().isEmpty();
     }
 

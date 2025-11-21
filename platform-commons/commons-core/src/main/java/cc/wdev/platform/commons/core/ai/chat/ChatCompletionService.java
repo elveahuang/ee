@@ -15,16 +15,16 @@ public interface ChatCompletionService {
 
     ChatClient getChatClient();
 
-    ChatResponse chatCompletion(SimpleChatRequest request) throws Exception;
+    ChatResponse chatCompletion(SimpleChatRequest request);
 
-    ChatResponse chatCompletion(SimpleChatRequest request, SimpleChatRequestCustomizer customizer) throws Exception;
+    ChatResponse chatCompletion(SimpleChatRequest request, SimpleChatRequestCustomizer customizer);
 
-    Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) throws Exception;
+    Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request);
 
-    Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request, SimpleCompletionRequestCustomizer customizer) throws Exception;
+    Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request, SimpleCompletionRequestCustomizer customizer);
 
-    ChatResponse completion(SimpleCompletionRequest request) throws Exception;
+    ChatResponse completion(SimpleCompletionRequest request);
 
-    String completionText(SimpleCompletionRequest request) throws Exception;
+    String completionText(SimpleCompletionRequest request);
 
 }

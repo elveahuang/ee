@@ -14,12 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ChatModelChatTests extends BaseTests {
 
     @Autowired
-    OpenAiChatModel defaultChatModel;
+    OpenAiChatModel chatModel;
 
     @Test
     public void openAiTest() {
         Prompt prompt = new Prompt("你好，你是谁？");
-        ChatResponse response = this.defaultChatModel.call(prompt);
+        ChatResponse response = this.chatModel.call(prompt);
+        String result = response.getResults().getFirst().getOutput().getText();
+        Assertions.assertNotNull(result);
+    }
+
+    @Test
+    public void toolTest() {
+        Prompt prompt = new Prompt("获取版本号");
+        ChatResponse response = this.chatModel.call(prompt);
         String result = response.getResults().getFirst().getOutput().getText();
         Assertions.assertNotNull(result);
     }

@@ -83,6 +83,11 @@ public abstract class SecurityUtils {
         return getUid(getAuthentication());
     }
 
+    public static String getUidStr() {
+        Long uid = getUid(getAuthentication());
+        return String.valueOf(uid);
+    }
+
     /**
      * 获取用户名
      */

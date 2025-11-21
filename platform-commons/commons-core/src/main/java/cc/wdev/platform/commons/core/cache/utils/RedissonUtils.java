@@ -5,6 +5,7 @@ import cc.wdev.platform.commons.message.socket.message.SocketMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
+import org.redisson.api.listener.MessageListener;
 
 import java.time.Duration;
 
@@ -32,8 +33,8 @@ public class RedissonUtils {
         }
     }
 
-    public RTopic getTopic(String listener) {
-        return this.client.getTopic(listener);
+    public RTopic getTopic(String name) {
+        return this.client.getTopic(name);
     }
 
     public RFuture<Long> publishAsync(SocketMessage message) {
@@ -41,4 +42,9 @@ public class RedissonUtils {
         return topic.publishAsync(message);
     }
 
+    public <T> void addListener(String name, Class<T> type, MessageListener<? extends T> listener) {
+        RTopic topic = this.getTopic(name);
+        topic.removeAllListeners();
+        topic.addListener(type, listener);
+    }
 }

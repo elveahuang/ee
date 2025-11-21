@@ -38,6 +38,15 @@ public abstract class BaseCachingEntityService<T extends IdEntity, K extends Ser
     }
 
     /**
+     * @see EntityService#delete(IdEntity)
+     */
+    @Override
+    public void delete(T entity) {
+        super.delete(entity);
+        this.deleteCache(entity);
+    }
+
+    /**
      * @see CachingEntityService#insert(IdEntity)
      */
     @Override

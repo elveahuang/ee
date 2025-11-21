@@ -1,8 +1,12 @@
 package cc.wdev.platform.commons.autoconfigure.core.properties;
 
+import com.google.common.collect.Lists;
+import io.swagger.v3.oas.models.servers.Server;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.List;
 
 /**
  * @author elvea
@@ -34,4 +38,8 @@ public class SwaggerProperties {
      **/
     private String version = "";
 
+    /**
+     * servers
+     */
+    private List<Server> servers = Lists.newArrayList();
 }

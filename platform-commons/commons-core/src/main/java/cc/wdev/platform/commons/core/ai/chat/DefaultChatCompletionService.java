@@ -41,19 +41,28 @@ public class DefaultChatCompletionService implements ChatCompletionService {
             .build();
     }
 
+    /**
+     * @see ChatCompletionService#getChatClient()
+     */
     @Override
     public ChatClient getChatClient() {
         return this.client;
     }
 
+    /**
+     * @see ChatCompletionService#chatCompletion(SimpleChatRequest)
+     */
     @Override
-    public ChatResponse chatCompletion(SimpleChatRequest request) throws Exception {
+    public ChatResponse chatCompletion(SimpleChatRequest request) {
         return this.chatCompletion(request, SimpleChatRequestCustomizer.builder().build());
     }
 
+    /**
+     * @see ChatCompletionService#chatCompletion(SimpleChatRequest, SimpleChatRequestCustomizer)
+     */
     @Override
     public ChatResponse chatCompletion(SimpleChatRequest request,
-                                       SimpleChatRequestCustomizer customizer) throws Exception {
+                                       SimpleChatRequestCustomizer customizer) {
         return this.client
             .prompt(request.getPrompt())
             .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()))
@@ -61,24 +70,32 @@ public class DefaultChatCompletionService implements ChatCompletionService {
             .chatResponse();
     }
 
+    /**
+     * @see ChatCompletionService#streamChatCompletion(SimpleChatRequest)
+     */
     @Override
-    public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) throws Exception {
+    public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) {
         return this.streamChatCompletion(request, SimpleCompletionRequestCustomizer.builder().build());
     }
 
+    /**
+     * @see ChatCompletionService#streamChatCompletion(SimpleChatRequest, SimpleCompletionRequestCustomizer)
+     */
     @Override
     public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request,
-                                                   SimpleCompletionRequestCustomizer customizer) throws Exception {
+                                                   SimpleCompletionRequestCustomizer customizer) {
         return this.client
             .prompt(request.getPrompt())
             .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()))
-            .tools(customizer.getTools())
             .stream()
             .chatResponse();
     }
 
+    /**
+     * @see ChatCompletionService#completion(SimpleCompletionRequest)
+     */
     @Override
-    public ChatResponse completion(SimpleCompletionRequest request) throws Exception {
+    public ChatResponse completion(SimpleCompletionRequest request) {
         OpenAiChatOptions options = new OpenAiChatOptions();
         return this.client
             .prompt(request.getPrompt())
@@ -88,13 +105,13 @@ public class DefaultChatCompletionService implements ChatCompletionService {
 
     }
 
+    /**
+     * @see ChatCompletionService#completionText(SimpleCompletionRequest)
+     */
     @Override
-    public String completionText(SimpleCompletionRequest request) throws Exception {
+    public String completionText(SimpleCompletionRequest request) {
         ChatResponse response = this.completion(request);
-        if (response == null ||
-            response.getResult() == null ||
-            response.getResult().getOutput() == null ||
-            response.getResult().getOutput().getText() == null) {
+        if (response == null || response.getResult().getOutput().getText() == null) {
             return "";
         }
         return response.getResult().getOutput().getText();

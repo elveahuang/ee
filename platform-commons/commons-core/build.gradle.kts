@@ -13,6 +13,7 @@ dependencies {
     api(rootProject.libs.bundles.swagger)
     compileOnly(rootProject.libs.bundles.springAiCore)
     compileOnly(rootProject.libs.bundles.springAiAlibabaCore)
+    compileOnly(rootProject.libs.bundles.springBootReactive)
     compileOnly(rootProject.libs.bundles.springSecurityCore)
     compileOnly(rootProject.libs.bundles.mybatis)
     compileOnly(rootProject.libs.bundles.hibernate)

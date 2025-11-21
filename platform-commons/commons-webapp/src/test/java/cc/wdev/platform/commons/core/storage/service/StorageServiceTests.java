@@ -4,7 +4,6 @@ import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
 import cc.wdev.platform.commons.core.storage.StorageService;
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageService;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageService;
 import cc.wdev.platform.commons.core.storage.model.FileObject;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageService;
 import org.junit.jupiter.api.Assertions;
@@ -29,12 +28,6 @@ public class StorageServiceTests extends BaseTests {
     @Test
     public void ossStorageServiceTest() throws Exception {
         OssStorageService service = this.storage.getOssStorageService();
-        this.baseTest(service);
-    }
-
-    @Test
-    public void cosStorageServiceTest() throws Exception {
-        CosStorageService service = this.storage.getCosStorageService();
         this.baseTest(service);
     }
 

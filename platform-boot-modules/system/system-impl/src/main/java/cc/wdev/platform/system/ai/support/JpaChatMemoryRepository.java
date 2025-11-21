@@ -3,6 +3,7 @@ package cc.wdev.platform.system.ai.support;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.system.ai.domain.entity.AiChatMemoryEntity;
 import cc.wdev.platform.system.ai.service.AiChatMemoryService;
+import com.google.common.collect.Maps;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
@@ -10,6 +11,7 @@ import org.springframework.ai.chat.messages.*;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,16 +33,23 @@ public class JpaChatMemoryRepository implements ChatMemoryRepository {
      */
     @Override
     public @NonNull List<Message> findByConversationId(@NonNull String conversationId) {
-        List<AiChatMemoryEntity> entityList = this.aiChatMemoryService.findByConversationId(conversationId);
+        List<AiChatMemoryEntity> entityList = aiChatMemoryService.findByConversationId(conversationId);
+        if (CollectionUtils.isEmpty(entityList)) {
+            return List.of();
+        }
+
         if (CollectionUtils.isNotEmpty(entityList)) {
             return entityList.stream().map((entity) -> {
+                Map<String, Object> metadata = Maps.newHashMap();
+                metadata.put("AiChatMemoryId", entity.getId());
+
                 String content = entity.getContent();
                 String type = entity.getType();
                 return switch (MessageType.fromValue(type)) {
-                    case MessageType.USER -> new UserMessage(content);
-                    case MessageType.ASSISTANT -> new AssistantMessage(content);
-                    case MessageType.SYSTEM -> new SystemMessage(content);
-                    case MessageType.TOOL -> new ToolResponseMessage(List.of());
+                    case MessageType.USER -> UserMessage.builder().text(content).metadata(metadata).build();
+                    case MessageType.ASSISTANT -> AssistantMessage.builder().content(content).properties(metadata).build();
+                    case MessageType.SYSTEM -> SystemMessage.builder().text(content).metadata(metadata).build();
+                    case MessageType.TOOL -> ToolResponseMessage.builder().metadata(metadata).build();
                 };
             }).collect(Collectors.toUnmodifiableList());
         }

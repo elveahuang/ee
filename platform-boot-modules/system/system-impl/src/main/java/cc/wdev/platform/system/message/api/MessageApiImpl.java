@@ -150,7 +150,7 @@ public class MessageApiImpl implements MessageApi {
                 log.info("Create message. type - [{}] id - [{}] template [{}]. invalid template type.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 continue;
             }
-            if (!templateTypeEntity.isActiveEntity()) {
+            if (!ActiveTypeEnum.ENABLED.getValue().equals(templateTypeEntity.getActive())) {
                 log.info("Create message. type - [{}] id - [{}] template [{}]. inactive template type.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                 continue;
             }
@@ -176,7 +176,7 @@ public class MessageApiImpl implements MessageApi {
                     log.info("Create message. type - [{}] id - [{}] template [{}]. invalid message template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                     continue;
                 }
-                if (!messageTemplateEntity.isActiveEntity()) {
+                if (!messageTemplateEntity.getActive().equals(ActiveTypeEnum.ENABLED.getValue())) {
                     log.info("Create message. type - [{}] id - [{}] template [{}]. inactive message template.", messageTypeEntity.getCode(), messageId, templateType.getCode());
                     continue;
                 }
@@ -277,7 +277,7 @@ public class MessageApiImpl implements MessageApi {
             log.info("Send message [{}]. invalid message type [{}].", messageId, messageTypeId);
             return;
         }
-        if (messageTypeEntity.isInactiveEntity()) {
+        if (messageTypeEntity.getActive().equals(ActiveTypeEnum.ENABLED.getValue())) {
             log.info("Send message [{}]. inactive message type [{}].", messageId, messageTypeId);
             return;
         }

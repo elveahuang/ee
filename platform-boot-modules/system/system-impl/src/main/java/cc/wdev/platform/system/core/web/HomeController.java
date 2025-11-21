@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.core.Context;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.platform.Platform;
 import cc.wdev.platform.commons.utils.platform.PlatformHelper;
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

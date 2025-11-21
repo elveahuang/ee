@@ -6,9 +6,7 @@ import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.commons.message.broadcast.manager.BroadcastManager;
-import cc.wdev.platform.commons.web.controller.AbstractController;
-import cc.wdev.platform.system.development.broadcast.TestBroadcastMessage;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,8 +33,6 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.A
 @Tag(name = "TestController", description = "测试验证专用控制器")
 public class TestController extends AbstractController {
 
-    private BroadcastManager broadcastManager;
-
     @PermitAll
     @OperationLog("发送广播消息")
     @Operation(summary = "发送广播消息")
@@ -45,7 +40,7 @@ public class TestController extends AbstractController {
     @ResponseBody
     @PostMapping(API_V1_PREFIX + "/test/message")
     public R<?> send(@RequestParam("message") String message) throws Exception {
-        this.broadcastManager.getRabbitSender().sendMessage(new TestBroadcastMessage(message));
+
         return R.success(message);
     }
 
@@ -74,11 +69,6 @@ public class TestController extends AbstractController {
         @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
         @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
         LocalDateTime localDateTime = LocalDateTime.now();
-    }
-
-    @Autowired(required = false)
-    public void setBroadcastManager(BroadcastManager broadcastManager) {
-        this.broadcastManager = broadcastManager;
     }
 
 }

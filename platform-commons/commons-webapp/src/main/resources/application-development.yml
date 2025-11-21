@@ -10,7 +10,7 @@ spring:
         name: master
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/zp_platform?useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://127.0.0.1:3306/ee_sample?useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root
     data:
@@ -19,6 +19,20 @@ spring:
             port: 6379
             database: 11
             password: redis
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: webapp
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+                default-requeue-rejected: true
     elasticsearch:
         uris: http://localhost:9200
         username: elastic
@@ -34,10 +48,21 @@ spring:
                 transcription: openai
         openai:
             api-key: xxx
-            base-url: https://api.deepseek.com/v1/completions
+            base-url: https://api.deepseek.com
             chat:
                 options:
                     model: deepseek-chat
+        mcp:
+            client:
+                enabled: true
+            server:
+                enabled: true
+                protocol: streamable
+                name: webapp-mcp-server
+                version: 1.0.0
+                type: sync
+                streamable-http:
+                    mcp-endpoint: /mcp
         dashscope:
             api-key: xxx
 ### --------------------------------------------------------------------------------------------------------------------

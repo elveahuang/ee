@@ -36,6 +36,11 @@ public abstract class GsonUtils {
         }.getType());
     }
 
+    public static Map<String, Object> toObjectMap(String json) {
+        return gson.fromJson(json, new TypeToken<Map<String, Object>>() {
+        }.getType());
+    }
+
     public static <T> List<T> toList(String json, Class<T> cls) {
         return gson.fromJson(json, new TypeToken<List<T>>() {
         }.getType());

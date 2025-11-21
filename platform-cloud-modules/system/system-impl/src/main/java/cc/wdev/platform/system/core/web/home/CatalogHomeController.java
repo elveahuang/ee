@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.core.web.home;
 
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RestController;
 

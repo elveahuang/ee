@@ -14,12 +14,10 @@ import lombok.Setter;
 @Getter
 @MappedSuperclass
 public abstract class BaseTenantEntity extends BaseEntity {
-
     /**
      * 租户ID
      */
     @TenantId
     @JsonSerialize(using = ToStringSerializer.class)
     protected Long tenantId;
-
 }

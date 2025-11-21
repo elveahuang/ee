@@ -3,7 +3,7 @@ package cc.wdev.platform.system.core.web.admin;
 import cc.wdev.platform.commons.annotations.Authenticated;
 import cc.wdev.platform.commons.annotations.OperationLog;
 import cc.wdev.platform.commons.domain.R;
-import cc.wdev.platform.commons.web.controller.AbstractController;
+import cc.wdev.platform.commons.web.servlet.controller.AbstractController;
 import cc.wdev.platform.system.core.domain.entity.DictTypeEntity;
 import cc.wdev.platform.system.core.domain.request.DictTypeSearchRequest;
 import cc.wdev.platform.system.core.service.DictTypeService;

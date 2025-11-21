@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.core.storage;
 
 import cc.wdev.platform.commons.core.storage.aws.AwsStorageConfig;
-import cc.wdev.platform.commons.core.storage.cos.CosStorageConfig;
 import cc.wdev.platform.commons.core.storage.oss.OssStorageConfig;
 import cc.wdev.platform.commons.enums.StorageTypeEnum;
 import lombok.AllArgsConstructor;
@@ -28,8 +27,5 @@ public class StorageConfig implements Serializable {
 
     @Builder.Default
     private OssStorageConfig oss = new OssStorageConfig();
-
-    @Builder.Default
-    private CosStorageConfig cos = new CosStorageConfig();
 
 }

@@ -66,14 +66,16 @@ public interface StorageService<C> {
             .contentType(file.getContentType())
             .size(file.getSize())
             .build();
-        return this.uploadFile(file.getInputStream(), parameter);
+        return this.uploadFile(file, parameter);
     }
 
     /**
      * 上传文件
      */
     default FileObject<?> uploadFile(MultipartFile file, FileParameter parameter) throws Exception {
-        return this.uploadFile(file.getInputStream(), parameter);
+        try (BufferedInputStream is = new BufferedInputStream(file.getInputStream())) {
+            return this.uploadFile(is, parameter);
+        }
     }
 
     /**
@@ -92,7 +94,7 @@ public interface StorageService<C> {
      * 上传文件
      */
     default FileObject<?> uploadFile(File file, FileParameter parameter) throws Exception {
-        try (InputStream is = new BufferedInputStream(new FileInputStream(file))) {
+        try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(file))) {
             return this.uploadFile(is, parameter);
         }
     }
