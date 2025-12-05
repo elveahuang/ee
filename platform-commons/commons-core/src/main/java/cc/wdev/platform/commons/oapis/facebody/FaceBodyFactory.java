@@ -1,8 +1,6 @@
 package cc.wdev.platform.commons.oapis.facebody;
 
 import cc.wdev.platform.commons.oapis.facebody.aliyun.AliyunFaceBodyService;
-import cc.wdev.platform.commons.oapis.facebody.enums.FaceBodyTypeEnum;
-import cc.wdev.platform.commons.oapis.facebody.tencent.TencentFaceBodyService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,9 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 public record FaceBodyFactory(FaceBodyConfig config) {
 
     public FaceBodyService getFaceBodyService() {
-        if (FaceBodyTypeEnum.Tencent.equals(config.getType())) {
-            return getTencentFaceBodyService();
-        }
         return getAliyunFaceBodyService();
     }
 
@@ -24,14 +19,6 @@ public record FaceBodyFactory(FaceBodyConfig config) {
 
     public FaceBodyService getAliyunFaceBodyService(AliyunFaceBodyService.Config config) {
         return new AliyunFaceBodyService(config);
-    }
-
-    public FaceBodyService getTencentFaceBodyService() {
-        return getTencentFaceBodyService(this.config.getTencent());
-    }
-
-    public FaceBodyService getTencentFaceBodyService(TencentFaceBodyService.Config config) {
-        return new TencentFaceBodyService(config);
     }
 
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static cc.wdev.webapp.constants.SystemMappingConstants.API_V1_JPA_USER_LIST;
+import static cc.wdev.dev.webapp.constants.SystemMappingConstants.API_V1_JPA_USER_LIST;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**

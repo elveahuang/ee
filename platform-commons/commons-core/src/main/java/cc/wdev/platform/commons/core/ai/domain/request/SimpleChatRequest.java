@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.core.ai.domain.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +15,36 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "简单对话请求")
 public class SimpleChatRequest implements Serializable {
+    /**
+     * 会话ID
+     */
+    @Schema(description = "会话ID")
     private String conversationId;
+    /**
+     * 用户提示词
+     */
+    @Schema(description = "用户提示词")
     private String prompt;
+    /**
+     * 系统提示词
+     */
+    @Schema(description = "系统提示")
+    private String systemPrompt;
+    /**
+     * 指定执行工具
+     */
+    @Schema(description = "指定执行工具")
+    private String tool;
+    /**
+     * 输出格式
+     */
+    @Schema(description = "输出格式")
+    private String format;
+    /**
+     * 是否强制刷新
+     */
+    @Schema(description = "是否强制刷新")
     private boolean force;
 }

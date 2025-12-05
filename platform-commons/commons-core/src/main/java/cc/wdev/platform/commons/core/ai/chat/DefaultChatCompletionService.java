@@ -3,9 +3,8 @@ package cc.wdev.platform.commons.core.ai.chat;
 import cc.wdev.platform.commons.core.ai.AiCustomizer;
 import cc.wdev.platform.commons.core.ai.advisor.CustomLoggingAdvisor;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
-import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequestCustomizer;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleCompletionRequest;
-import cc.wdev.platform.commons.core.ai.domain.request.SimpleCompletionRequestCustomizer;
+import cc.wdev.platform.commons.utils.StringUtils;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -50,48 +49,6 @@ public class DefaultChatCompletionService implements ChatCompletionService {
     }
 
     /**
-     * @see ChatCompletionService#chatCompletion(SimpleChatRequest)
-     */
-    @Override
-    public ChatResponse chatCompletion(SimpleChatRequest request) {
-        return this.chatCompletion(request, SimpleChatRequestCustomizer.builder().build());
-    }
-
-    /**
-     * @see ChatCompletionService#chatCompletion(SimpleChatRequest, SimpleChatRequestCustomizer)
-     */
-    @Override
-    public ChatResponse chatCompletion(SimpleChatRequest request,
-                                       SimpleChatRequestCustomizer customizer) {
-        return this.client
-            .prompt(request.getPrompt())
-            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()))
-            .call()
-            .chatResponse();
-    }
-
-    /**
-     * @see ChatCompletionService#streamChatCompletion(SimpleChatRequest)
-     */
-    @Override
-    public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) {
-        return this.streamChatCompletion(request, SimpleCompletionRequestCustomizer.builder().build());
-    }
-
-    /**
-     * @see ChatCompletionService#streamChatCompletion(SimpleChatRequest, SimpleCompletionRequestCustomizer)
-     */
-    @Override
-    public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request,
-                                                   SimpleCompletionRequestCustomizer customizer) {
-        return this.client
-            .prompt(request.getPrompt())
-            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()))
-            .stream()
-            .chatResponse();
-    }
-
-    /**
      * @see ChatCompletionService#completion(SimpleCompletionRequest)
      */
     @Override
@@ -102,7 +59,6 @@ public class DefaultChatCompletionService implements ChatCompletionService {
             .options(options)
             .call()
             .chatResponse();
-
     }
 
     /**
@@ -110,11 +66,75 @@ public class DefaultChatCompletionService implements ChatCompletionService {
      */
     @Override
     public String completionText(SimpleCompletionRequest request) {
-        ChatResponse response = this.completion(request);
-        if (response == null || response.getResult().getOutput().getText() == null) {
-            return "";
+        OpenAiChatOptions options = new OpenAiChatOptions();
+        return this.client
+            .prompt(request.getPrompt())
+            .options(options)
+            .call()
+            .content();
+    }
+
+    /**
+     * @see ChatCompletionService#chatCompletion(SimpleChatRequest)
+     */
+    @Override
+    public ChatResponse chatCompletion(SimpleChatRequest request) {
+        ChatClient.ChatClientRequestSpec spec = this.client
+            .prompt(request.getPrompt())
+            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()));
+
+        // 添加系统提示词
+        if (request.getSystemPrompt() != null && !request.getSystemPrompt().isEmpty()) {
+            spec = spec.system(request.getSystemPrompt());
         }
-        return response.getResult().getOutput().getText();
+
+        return spec.call().chatResponse();
+    }
+
+    /**
+     * @see ChatCompletionService#chatCompletionText(SimpleChatRequest)
+     */
+    @Override
+    public String chatCompletionText(SimpleChatRequest request) {
+        ChatClient.ChatClientRequestSpec spec = this.client
+            .prompt(request.getPrompt())
+            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()));
+        if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
+            spec = spec.system(request.getSystemPrompt());
+        }
+        if (request.getTool() != null) {
+            spec = spec.toolNames(request.getTool());
+        }
+        return spec.call().content();
+    }
+
+    /**
+     * @see ChatCompletionService#streamChatCompletion(SimpleChatRequest)
+     */
+    @Override
+    public Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request) {
+        ChatClient.ChatClientRequestSpec spec = this.client
+            .prompt(request.getPrompt())
+            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()));
+        if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
+            spec = spec.system(request.getSystemPrompt());
+        }
+        return spec.stream().chatResponse();
+    }
+
+    /**
+     * @see ChatCompletionService#streamChatCompletionText(SimpleChatRequest)
+     */
+    @Override
+    public Flux<String> streamChatCompletionText(SimpleChatRequest request) {
+        ChatClient.ChatClientRequestSpec spec = this.client
+            .prompt(request.getPrompt())
+            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()));
+        if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
+            spec = spec.system(request.getSystemPrompt());
+        }
+        return spec.stream().content();
+
     }
 
 }

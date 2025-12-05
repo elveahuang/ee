@@ -48,11 +48,12 @@ class UserDeserializer extends JsonDeserializer<User> {
         String username = JacksonUtils.findStringValue(root, "username");
         String password = JacksonUtils.findStringValue(root, "password");
         boolean enabled = JacksonUtils.findBooleanValue(root, "enabled");
+        String usertype = JacksonUtils.findStringValue(root, "userType");
         boolean accountNonExpired = JacksonUtils.findBooleanValue(root, "accountNonExpired");
         boolean credentialsNonExpired = JacksonUtils.findBooleanValue(root, "credentialsNonExpired");
         boolean accountNonLocked = JacksonUtils.findBooleanValue(root, "accountNonLocked");
         Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET, mapper);
-        return new User(id, username, password, authorities, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
+        return new User(id, usertype, username, password, authorities, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
     }
 
 }

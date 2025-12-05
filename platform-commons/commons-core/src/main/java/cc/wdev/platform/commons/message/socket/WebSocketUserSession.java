@@ -18,6 +18,10 @@ public class WebSocketUserSession implements Serializable {
      */
     private String userId;
     /**
+     * 用户类型
+     */
+    private String userType;
+    /**
      * 用户名
      */
     private String username;

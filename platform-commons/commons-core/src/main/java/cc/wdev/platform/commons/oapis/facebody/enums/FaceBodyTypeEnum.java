@@ -5,5 +5,4 @@ package cc.wdev.platform.commons.oapis.facebody.enums;
  */
 public enum FaceBodyTypeEnum {
     Aliyun,
-    Tencent,
 }

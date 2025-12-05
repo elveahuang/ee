@@ -17,7 +17,7 @@ import static cc.wdev.platform.commons.message.socket.WebSocketConstants.SOCKET_
  */
 @Slf4j
 @AllArgsConstructor
-public class DefaultWebSocketService implements WebSocketService {
+public class DefaultWebSocketService implements WebSocketService<SocketMessage> {
 
     private final WebSocketSessionService webSocketSessionService;
 

@@ -35,13 +35,30 @@ public class CustomLoggingAdvisor implements CallAdvisor, StreamAdvisor {
         return 0;
     }
 
-    private ChatClientRequest before(ChatClientRequest request) {
+    @NonNull
+    @Override
+    public ChatClientResponse adviseCall(@NonNull ChatClientRequest advisedRequest, CallAdvisorChain chain) {
+        log.info("AI adviseCall.");
+        ChatClientResponse advisedResponse = chain.nextCall(this.logRequest(advisedRequest));
+        this.logResponses(advisedResponse);
+        return advisedResponse;
+    }
+
+    @NonNull
+    @Override
+    public Flux<ChatClientResponse> adviseStream(@NonNull ChatClientRequest advisedRequest, StreamAdvisorChain chain) {
+        log.info("AI adviseStream.");
+        Flux<ChatClientResponse> advisedResponses = chain.nextStream(this.logRequest(advisedRequest));
+        return (new ChatClientMessageAggregator()).aggregateChatClientResponse(advisedResponses, this::logResponses);
+    }
+
+    private ChatClientRequest logRequest(ChatClientRequest request) {
         log.info("AI Request: {}", request.prompt().getContents());
         log.info("AI Request Message: {}", request.context());
         return request;
     }
 
-    private void observeAfter(ChatClientResponse advisedResponse) {
+    private void logResponses(ChatClientResponse advisedResponse) {
         ChatResponse response = advisedResponse.chatResponse();
         if (null == response) {
             log.info("AI Response is null");
@@ -62,23 +79,6 @@ public class CustomLoggingAdvisor implements CallAdvisor, StreamAdvisor {
         String toolCallInfo = toolCallList.stream().map(toolCall -> String.format("Tool：%s，Params：%s", toolCall.name(), toolCall.arguments())).collect(Collectors.joining("\n"));
         log.info(toolCallInfo);
         log.info("AI Response: {}", assistantMessage.getText());
-    }
-
-    @NonNull
-    @Override
-    public ChatClientResponse adviseCall(@NonNull ChatClientRequest advisedRequest, CallAdvisorChain chain) {
-        log.info("AI adviseCall.");
-        ChatClientResponse advisedResponse = chain.nextCall(this.before(advisedRequest));
-        this.observeAfter(advisedResponse);
-        return advisedResponse;
-    }
-
-    @NonNull
-    @Override
-    public Flux<ChatClientResponse> adviseStream(@NonNull ChatClientRequest advisedRequest, StreamAdvisorChain chain) {
-        log.info("AI adviseStream.");
-        Flux<ChatClientResponse> advisedResponses = chain.nextStream(this.before(advisedRequest));
-        return (new ChatClientMessageAggregator()).aggregateChatClientResponse(advisedResponses, this::observeAfter);
     }
 
 }

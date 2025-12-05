@@ -74,7 +74,7 @@ public class MyBatisCustomAutoConfiguration {
     @ConditionalOnMissingBean
     public DatabaseIdProvider databaseIdProvider() {
         Properties properties = new Properties();
-        properties.put("PgSQL", "postgresql");
+        properties.put("PostgreSQL", "postgresql");
         properties.put("MySQL", "mysql");
 
         DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();

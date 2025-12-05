@@ -2,7 +2,6 @@ package cc.wdev.platform.commons.oapis.translator;
 
 import cc.wdev.platform.commons.oapis.translator.aliyun.AliyunTranslator;
 import cc.wdev.platform.commons.oapis.translator.enums.TranslatorTypeEnum;
-import cc.wdev.platform.commons.oapis.translator.tencent.TencentTranslator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +21,6 @@ public class TranslatorConfig {
 
     @Builder.Default
     private TranslatorTypeEnum type = TranslatorTypeEnum.Aliyun;
-
-    @Builder.Default
-    private TencentTranslator.Config tencent = new TencentTranslator.Config();
 
     @Builder.Default
     private AliyunTranslator.Config aliyun = new AliyunTranslator.Config();

@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author elvea
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
  */
 public abstract class AbstractEntity implements IdEntity {
 
+    @Schema(description = "主键")
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
     protected Long id;

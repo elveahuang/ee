@@ -13,9 +13,14 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class SocketMessage implements Serializable {
-    private String type;
-    private String content;
-    private String sessionId;
+    protected String type;
+    protected String content;
+    protected String sessionId;
+    protected String conversationId;
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long userId;
+    protected Long userId;
+    protected String userType;
+    @JsonSerialize(using = ToStringSerializer.class)
+    protected Long recipientId;
+    protected String recipientType;
 }

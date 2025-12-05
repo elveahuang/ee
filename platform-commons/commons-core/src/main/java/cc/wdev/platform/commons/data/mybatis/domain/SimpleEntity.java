@@ -6,6 +6,7 @@ import cc.wdev.platform.commons.constants.DateTimeConstants;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,21 +21,25 @@ public abstract class SimpleEntity extends AbstractEntity {
     /**
      * 版本号
      */
+    @Schema(description = "版本号")
     @Version
     private Long version;
     /**
      * 启用状态
      */
+    @Schema(description = "启用状态")
     private Integer active;
     /**
      * 创建时间
      */
+    @Schema(description = "创建时间")
     @JsonFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN)
     private LocalDateTime createdAt;
     /**
      * 创建人
      */
+    @Schema(description = "创建人")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long createdBy;
 }

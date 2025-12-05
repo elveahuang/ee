@@ -6,5 +6,5 @@ import java.io.Serializable;
  * @author elvea
  */
 public enum AiServiceProvider implements Serializable {
-    SPRING, OPENAI,
+    SPRING, OPENAI, LANG_CHAIN
 }

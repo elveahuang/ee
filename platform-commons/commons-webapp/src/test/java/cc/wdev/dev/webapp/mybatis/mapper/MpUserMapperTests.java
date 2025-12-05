@@ -1,7 +1,6 @@
 package cc.wdev.dev.webapp.mybatis.mapper;
 
 import cc.wdev.dev.webapp.BaseTests;
-import cc.wdev.webapp.mybatis.mapper.MpUserMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

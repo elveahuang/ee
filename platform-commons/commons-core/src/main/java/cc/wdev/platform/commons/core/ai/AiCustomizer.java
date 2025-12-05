@@ -18,6 +18,9 @@ import java.util.List;
 public class AiCustomizer {
 
     @Builder.Default
+    private String defaultSystem = "";
+
+    @Builder.Default
     private List<Object> tools = List.of(new CommonTools());
 
     public static AiCustomizer defaultCustomizer() {

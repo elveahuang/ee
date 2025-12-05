@@ -2,7 +2,6 @@ package cc.wdev.dev.webapp.jpa.repository;
 
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.platform.commons.core.tenant.TenantContext;
-import cc.wdev.webapp.jpa.repository.JpaUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -18,10 +18,10 @@ public class Tenant implements Serializable {
 
     public static final Tenant defaultTenant = Tenant.builder()
         .id(1000001L)
-        .rootInd(Boolean.TRUE)
+        .rootInd(1)
         .build();
 
     private Long id;
 
-    private Boolean rootInd;
+    private Integer rootInd;
 }

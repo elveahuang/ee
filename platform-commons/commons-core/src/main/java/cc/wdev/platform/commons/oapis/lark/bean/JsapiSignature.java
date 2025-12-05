@@ -15,22 +15,22 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(name = "飞书鉴权信息")
+@Schema(description = "飞书鉴权信息")
 public class JsapiSignature implements Serializable {
 
-    @Schema(name = "飞书应用编号")
+    @Schema(description = "飞书应用编号")
     private String appId;
 
-    @Schema(name = "随机字符串")
+    @Schema(description = "随机字符串")
     private String nonceStr;
 
-    @Schema(name = "当前时间戳")
+    @Schema(description = "当前时间戳")
     private long timestamp;
 
-    @Schema(name = "当前网页地址")
+    @Schema(description = "当前网页地址")
     private String url;
 
-    @Schema(name = "签名")
+    @Schema(description = "签名")
     private String signature;
 
 }

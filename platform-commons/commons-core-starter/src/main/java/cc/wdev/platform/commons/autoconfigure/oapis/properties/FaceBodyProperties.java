@@ -2,7 +2,6 @@ package cc.wdev.platform.commons.autoconfigure.oapis.properties;
 
 import cc.wdev.platform.commons.oapis.facebody.aliyun.AliyunFaceBodyService;
 import cc.wdev.platform.commons.oapis.facebody.enums.FaceBodyTypeEnum;
-import cc.wdev.platform.commons.oapis.facebody.tencent.TencentFaceBodyService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -24,8 +23,5 @@ public class FaceBodyProperties {
 
     @NestedConfigurationProperty
     private AliyunFaceBodyService.Config aliyun = new AliyunFaceBodyService.Config();
-
-    @NestedConfigurationProperty
-    private TencentFaceBodyService.Config tencent = new TencentFaceBodyService.Config();
 
 }

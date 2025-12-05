@@ -21,7 +21,7 @@ public class FaceBodyAutoConfiguration {
 
     public FaceBodyAutoConfiguration(FaceBodyProperties properties) {
         log.info("FaceBodyAutoConfiguration is enabled");
-        log.info("Current FaceBody type is {}", properties.getType());
+        log.info("Current FaceBody service is {}", properties.getType());
     }
 
     @Bean
@@ -31,7 +31,7 @@ public class FaceBodyAutoConfiguration {
             .enabled(properties.isEnabled())
             .type(properties.getType())
             .aliyun(properties.getAliyun())
-            .tencent(properties.getTencent()).build();
+            .build();
         return new FaceBodyFactory(config);
     }
 

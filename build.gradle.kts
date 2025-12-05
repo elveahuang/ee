@@ -62,6 +62,7 @@ allprojects {
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
+            mavenBom(rootProject.libs.langchain.bom.get().toString())
         }
         dependencies {
             dependency(rootProject.libs.nimbus.jose.jwt.get().toString())

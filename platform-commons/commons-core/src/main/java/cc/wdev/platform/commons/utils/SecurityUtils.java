@@ -103,10 +103,29 @@ public abstract class SecurityUtils {
     }
 
     /**
+     * 获取用户类型
+     */
+    public static String getUserType(Authentication authentication) {
+        if (!ObjectUtils.isEmpty(authentication) && authentication.getPrincipal() instanceof User user) {
+            return user.getUserType();
+        } else if (!ObjectUtils.isEmpty(authentication) && authentication.getPrincipal() instanceof Jwt jwt) {
+            return jwt.getClaim(SecurityConstants.JWT_KEY_USERTYPE);
+        }
+        return null;
+    }
+
+    /**
      * 获取用户名
      */
     public static String getUsername() {
         return getUsername(getAuthentication());
+    }
+
+    /**
+     * 获取用户类型
+     */
+    public static String getUserType() {
+        return getUserType(getAuthentication());
     }
 
     /**

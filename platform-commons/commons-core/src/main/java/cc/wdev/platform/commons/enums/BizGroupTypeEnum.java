@@ -23,6 +23,7 @@ public enum BizGroupTypeEnum implements BaseBizGroupTypeEnum {
     SSL_PROTOCOL_TYPE("SSL_PROTOCOL_TYPE", "SSL协议类型"),
     SOCIAL_ACCOUNT_TYPE("SOCIAL_ACCOUNT_TYPE", "社交账号类型"),
     SELENIUM_DRIVER_TYPE("SELENIUM_DRIVER_TYPE", "浏览器驱动类型"),
+    SOCKET_MESSAGE_TYPE("SOCKET_MESSAGE_TYPE", "WS消息类型"),
     NONE("NONE", "NONE");
 
     private final String value;

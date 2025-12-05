@@ -67,6 +67,9 @@ public abstract class JacksonUtils {
      * 把JSON文本转成对象
      */
     public static <T> T toObject(String json, Class<T> clazz) throws Exception {
+        if (StringUtils.isEmpty(json)) {
+            return null;
+        }
         return getObjectMapper().readValue(json, clazz);
     }
 

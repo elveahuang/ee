@@ -1,5 +1,5 @@
 [versions]
-springAiVersion = "1.1.0"
+springAiVersion = "1.1.1"
 springAiAlibabaVersion = "1.0.0.4"
 springBootVersion = "3.5.8"
 springBootAdminVersion = "3.5.6"
@@ -9,27 +9,27 @@ springGrpcVersion = "0.12.0"
 springDocVersion = "2.8.14"
 grpcVersion = "1.77.0"
 nettyVersion = "4.1.128.Final"
-cosidVersion = "2.13.3"
+cosidVersion = "2.15.1"
 redissonVersion = "3.52.0"
 kotlinVersion = "2.2.21"
 groovyVersion = "5.0.2"
 hutoolVersion = "5.8.41"
-awsSdkVersion = "2.38.9"
+awsSdkVersion = "2.39.6"
 mockitoVersion = "5.20.0"
 seleniumVersion = "4.38.0"
-seleniumWdmVersion = "6.3.3"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "3.0.5"
 mybatisSpringStarterVersion = "3.0.5"
-mybatisPlusVersion = "3.5.14"
+mybatisPlusVersion = "3.5.15"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
+langChainVersion = "1.9.1"
 okhttpVersion = "5.3.2"
 poiVersion = "5.5.0"
 javaJwtVersion = "4.5.0"
 antlr3Runtime = "3.5.3"
 antlr4Runtime = "4.13.2"
-swaggerVersion = "2.2.40"
+swaggerVersion = "2.2.41"
 bouncycastleVersion = "1.82"
 errorProneAnnotationsVersion = "2.44.0"
 checkerQualVersion = "3.52.0"
@@ -57,6 +57,7 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
+langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -183,7 +184,7 @@ caffeine-guava = { module = "com.github.ben-manes.caffeine:guava" }
 # Selenium
 selenium-api = { module = "org.seleniumhq.selenium:selenium-api", version.ref = "seleniumVersion" }
 selenium-java = { module = "org.seleniumhq.selenium:selenium-java", version.ref = "seleniumVersion" }
-selenium-web-driver-manager = { module = "io.github.bonigarcia:webdrivermanager", version.ref = "seleniumWdmVersion" }
+selenium-web-driver-manager = { module = "io.github.bonigarcia:webdrivermanager", version = "6.3.3" }
 
 # PDF & Excel & Image
 poi = { module = "org.apache.poi:poi", version.ref = "poiVersion" }
@@ -197,7 +198,7 @@ pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version = "3.0.6" }
 pdfbox-xmpbox = { module = "org.apache.pdfbox:xmpbox", version = "3.0.6" }
 pdfbox-debugger = { module = "org.apache.pdfbox:pdfbox-debugger", version = "3.0.6" }
 pdfbox-tools = { module = "org.apache.pdfbox:pdfbox-tools", version = "3.0.6" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.3" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.4" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
 scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
 scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
@@ -215,23 +216,22 @@ awssdk-sdk = { module = "software.amazon.awssdk:s3", version.ref = "awsSdkVersio
 awssdk-apache-client = { module = "software.amazon.awssdk:apache-client", version.ref = "awsSdkVersion" }
 awssdk-netty-client = { module = "software.amazon.awssdk:netty-nio-client", version.ref = "awsSdkVersion" }
 awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager", version.ref = "awsSdkVersion" }
-weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.8.B" }
-weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.8.B" }
-weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.8.B" }
+weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.9.B" }
+weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.9.B" }
+weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.9.B" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.41" }
 facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
-dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.2.0" }
+dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.1" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.2" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1365" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1372" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
-tencentcloud-sdk-java-tmt = { module = "com.tencentcloudapi:tencentcloud-sdk-java-tmt", version = "3.1.1353" }
-tencentcloud-sdk-java-iai = { module = "com.tencentcloudapi:tencentcloud-sdk-java-iai", version = "3.1.1343" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1364" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.25" }
 openai-java = { module = "com.openai:openai-java", version = "4.8.0" }
+volcengine-java-sdk-ark = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.48" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.0" }
 
@@ -367,7 +367,7 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
+ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan", "volcengine-java-sdk-ark"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]
 swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
 
@@ -445,5 +445,5 @@ im = ["weixin-java-cp", "weixin-java-mp", "weixin-java-miniapp", "oapi-sdk", "di
 sms = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-sms", "dysmsapi"]
 storage = ["awssdk-sdk", "awssdk-netty-client", "awssdk-apache-client", "awssdk-transfer-manager", "aliyun-sdk-oss", "aliyun-java-sdk-core"]
 telegram = ["telegrambots-client", "telegrambots-abilities"]
-facebody = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-iai", "facebody"]
-translate = ["tencentcloud-sdk-java-common", "tencentcloud-sdk-java-tmt", "alimt"]
+facebody = ["facebody"]
+translate = ["alimt"]

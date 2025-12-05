@@ -15,7 +15,7 @@ public class TenantContext {
 
     private static final ThreadLocal<Long> tenantId = new ThreadLocal<>();
 
-    private static final ThreadLocal<Boolean> tenantRootInd = new ThreadLocal<>();
+    private static final ThreadLocal<Integer> tenantRootInd = new ThreadLocal<>();
 
     public static void handleServletRequest(ServletRequest request) {
         log.info("[TenantContext] handleServletRequest start");
@@ -40,11 +40,11 @@ public class TenantContext {
         return tenantId.get();
     }
 
-    public static void setTenantRootInd(Boolean tenantRootInd) {
+    public static void setTenantRootInd(Integer tenantRootInd) {
         TenantContext.tenantRootInd.set(tenantRootInd);
     }
 
-    public static Boolean getTenantRootInd() {
+    public static Integer getTenantRootInd() {
         if (tenantRootInd.get() == null) {
             return GlobalTenantManager.getStore().root().getRootInd();
         }

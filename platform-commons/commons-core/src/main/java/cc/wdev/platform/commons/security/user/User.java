@@ -26,6 +26,8 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
 
     private final Long id;
 
+    private final String userType;
+
     private final String password;
 
     private final String username;
@@ -40,14 +42,15 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
 
     private final boolean credentialsNonExpired;
 
-    public User(Long id, String username, String password, Set<GrantedAuthority> authorities) {
-        this(id, username, password, authorities, true, true, true, true);
+    public User(Long id, String userType, String username, String password, Set<GrantedAuthority> authorities) {
+        this(id, userType, username, password, authorities, true, true, true, true);
     }
 
-    public User(Long id, String username, String password,
+    public User(Long id, String userType, String username, String password,
                 Set<GrantedAuthority> authorities,
                 boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired) {
         this.id = id;
+        this.userType = userType;
         this.password = password;
         this.username = username;
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));

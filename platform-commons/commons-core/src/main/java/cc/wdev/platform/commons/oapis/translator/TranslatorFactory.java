@@ -1,8 +1,6 @@
 package cc.wdev.platform.commons.oapis.translator;
 
 import cc.wdev.platform.commons.oapis.translator.aliyun.AliyunTranslator;
-import cc.wdev.platform.commons.oapis.translator.enums.TranslatorTypeEnum;
-import cc.wdev.platform.commons.oapis.translator.tencent.TencentTranslator;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,9 +16,6 @@ public class TranslatorFactory {
     }
 
     public Translator getTranslator() {
-        if (TranslatorTypeEnum.Tencent.equals(config.getType())) {
-            return getTencentTranslator();
-        }
         return getAliyunTranslator();
     }
 
@@ -30,14 +25,6 @@ public class TranslatorFactory {
 
     public AliyunTranslator getAliyunTranslator(AliyunTranslator.Config config) {
         return new AliyunTranslator(config);
-    }
-
-    public TencentTranslator getTencentTranslator() {
-        return getTencentTranslator(this.config.getTencent());
-    }
-
-    public TencentTranslator getTencentTranslator(TencentTranslator.Config config) {
-        return new TencentTranslator(config);
     }
 
 }

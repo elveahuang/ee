@@ -2,7 +2,6 @@ package cc.wdev.platform.commons.autoconfigure.oapis.properties;
 
 import cc.wdev.platform.commons.oapis.translator.aliyun.AliyunTranslator;
 import cc.wdev.platform.commons.oapis.translator.enums.TranslatorTypeEnum;
-import cc.wdev.platform.commons.oapis.translator.tencent.TencentTranslator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,9 +22,6 @@ public class TranslatorProperties implements Serializable {
     private boolean enabled = false;
 
     private TranslatorTypeEnum type = TranslatorTypeEnum.Aliyun;
-
-    @NestedConfigurationProperty
-    private TencentTranslator.Config tencent = new TencentTranslator.Config();
 
     @NestedConfigurationProperty
     private AliyunTranslator.Config aliyun = new AliyunTranslator.Config();

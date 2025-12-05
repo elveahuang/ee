@@ -20,7 +20,7 @@ public class TranslatorAutoConfiguration {
 
     public TranslatorAutoConfiguration(TranslatorProperties properties) {
         log.info("TranslatorAutoConfiguration is enabled");
-        log.info("Current Translator type is {}", properties.getType());
+        log.info("Current Translator service is {}", properties.getType());
     }
 
     @Bean
@@ -29,7 +29,7 @@ public class TranslatorAutoConfiguration {
             .enabled(properties.isEnabled())
             .type(properties.getType())
             .aliyun(properties.getAliyun())
-            .tencent(properties.getTencent()).build();
+            .build();
         return new TranslatorFactory(config);
     }
 
