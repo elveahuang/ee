@@ -1,5 +1,6 @@
 package cc.wdev.platform.auth.security;
 
+import cc.wdev.platform.commons.enums.UserTypeEnum;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.system.core.domain.dto.UserLoginDto;
@@ -42,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (CollectionUtils.isNotEmpty(user.getRoles())) {
             authorities.addAll(user.getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getCode())).collect(Collectors.toSet()));
         }
-        return new User(user.getId(), user.getUsername(), user.getPassword(), authorities);
+        return new User(user.getId(), UserTypeEnum.USER.getCode(), user.getUsername(), user.getPassword(), authorities);
     }
 
 }

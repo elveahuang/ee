@@ -1,6 +1,7 @@
 package cc.wdev.platform.security;
 
 import cc.wdev.platform.commons.enums.MobileCountryCodeTypeEnum;
+import cc.wdev.platform.commons.enums.UserTypeEnum;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.RegexUtils;
@@ -54,7 +55,7 @@ public class CustomAccountDetailsService implements UserDetailsService {
         if (CollectionUtils.isNotEmpty(account.getRoles())) {
             authorities.addAll(account.getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getCode())).collect(Collectors.toSet()));
         }
-        return new User(account.getId(), account.getUsername(), account.getPassword(), authorities);
+        return new User(account.getId(), UserTypeEnum.ACCOUNT.getCode(), account.getUsername(), account.getPassword(), authorities);
     }
 
 }

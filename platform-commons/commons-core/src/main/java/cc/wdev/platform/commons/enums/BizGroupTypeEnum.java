@@ -13,6 +13,7 @@ import lombok.Getter;
 public enum BizGroupTypeEnum implements BaseBizGroupTypeEnum {
     RESPONSE_CODE("RESPONSE_CODE", "响应码"),
     SSE_RESPONSE_CODE("SSE_RESPONSE_CODE", "SSE链接响应码"),
+    USER_TYPE("USER_TYPE", "用户类型"),
     LANG_TYPE("LANG_TYPE", "语言类型"),
     CONFIG_TYPE("CONFIG_TYPE", "自动配置方式"),
     ACTION_TYPE("ACTION_TYPE", "操作类型"),
