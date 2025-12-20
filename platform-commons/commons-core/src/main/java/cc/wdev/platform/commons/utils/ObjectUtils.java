@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.utils;
 
-import cc.wdev.platform.commons.data.mybatis.domain.BaseEntity;
+import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -19,7 +19,7 @@ public abstract class ObjectUtils extends org.springframework.util.ObjectUtils {
         return id != null && id > 0;
     }
 
-    public static <T extends BaseEntity> boolean isValidId(T entity) {
+    public static <T extends IdEntity> boolean isValidId(T entity) {
         return entity != null && entity.getId() > 0;
     }
 

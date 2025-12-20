@@ -1,6 +1,8 @@
 package cc.wdev.platform.commons.data.jpa.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
+import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
+import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.jpa.repository.BaseEntityRepository;
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
@@ -285,6 +287,24 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
                     entity.setActive(0);
                 }
             }).toList(), batchSize);
+        }
+    }
+
+    /**
+     * @see EntityService#softDelete(IdEntity)
+     */
+    @Override
+    public void softDelete(T entity) {
+        if (entity instanceof BaseEntity baseEntity) {
+            // 批量软删除实体 - Jpa BaseEntity
+            baseEntity.setDeletedAt(getCurLocalDateTime());
+            baseEntity.setDeletedBy(SecurityUtils.getUid());
+            baseEntity.setActive(0);
+            this.save(entity);
+        } else if (entity instanceof SimpleEntity simpleEntity) {
+            // 批量软删除实体 - Jpa SimpleEntity
+            simpleEntity.setActive(0);
+            this.save(entity);
         }
     }
 

@@ -267,6 +267,14 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     }
 
     /**
+     * @see EntityService#softDelete(IdEntity)
+     */
+    @Override
+    public void softDelete(T entity) {
+
+    }
+
+    /**
      * @see EntityService#count()
      */
     @Override

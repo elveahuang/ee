@@ -1,13 +1,10 @@
 package cc.wdev.platform.commons.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
-import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
-import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
-import cc.wdev.platform.commons.utils.SecurityUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -213,22 +210,7 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     /**
      * 软删除单个实体
      */
-    default void softDelete(T entity) {
-        if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setActive(0);
-            baseEntity.setDeletedAt(getCurLocalDateTime());
-            baseEntity.setDeletedBy(SecurityUtils.getUid());
-            this.save(entity);
-        } else if (entity instanceof SimpleEntity simpleEntity) {
-            simpleEntity.setActive(0);
-            this.save(entity);
-        } else if (entity instanceof cc.wdev.platform.commons.data.mybatis.domain.BaseEntity baseEntity) {
-            baseEntity.setActive(0);
-            baseEntity.setDeletedAt(getCurLocalDateTime());
-            baseEntity.setDeletedBy(SecurityUtils.getUid());
-            this.save(entity);
-        }
-    }
+    void softDelete(T entity);
 
     /**
      * 删除单个实体(执行回调方法，一般用于删除关联关系)

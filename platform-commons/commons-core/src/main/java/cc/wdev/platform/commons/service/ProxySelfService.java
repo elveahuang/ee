@@ -45,12 +45,7 @@ public interface ProxySelfService<T> {
      * @return 自身代理实例/自身实例
      */
     default T getInstance(Class<T> clazz, T instance) {
-        try {
-            return SpringUtils.getBean(clazz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return instance;
+        return SpringUtils.getBean(clazz);
     }
 
 }

@@ -1,6 +1,8 @@
 package cc.wdev.platform.commons.data.mybatis.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
+import cc.wdev.platform.commons.data.mybatis.domain.BaseEntity;
+import cc.wdev.platform.commons.data.mybatis.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.wdev.platform.commons.data.mybatis.utils.MyBatisPlusUtils;
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
@@ -326,14 +328,32 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
         if (CollectionUtils.isNotEmpty(entityList)) {
             // 批量软删除实体 - MyBatis
             this.updateBatchById(entityList.stream().peek(e -> {
-                if (e instanceof cc.wdev.platform.commons.data.mybatis.domain.BaseEntity entity) {
+                if (e instanceof BaseEntity entity) {
                     entity.setActive(0);
                     entity.setDeletedAt(getCurLocalDateTime());
                     entity.setDeletedBy(SecurityUtils.getUid());
-                } else if (e instanceof cc.wdev.platform.commons.data.mybatis.domain.SimpleEntity entity) {
+                } else if (e instanceof SimpleEntity entity) {
                     entity.setActive(0);
                 }
             }).toList(), batchSize);
+        }
+    }
+
+    /**
+     * @see EntityService#softDelete(IdEntity)
+     */
+    @Override
+    public void softDelete(T entity) {
+        if (entity instanceof BaseEntity baseEntity) {
+            // 批量软删除实体 - MyBatis BaseEntity
+            baseEntity.setActive(0);
+            baseEntity.setDeletedAt(getCurLocalDateTime());
+            baseEntity.setDeletedBy(SecurityUtils.getUid());
+            this.save(entity);
+        } else if (entity instanceof SimpleEntity simpleEntity) {
+            // 批量软删除实体 - MyBatis SimpleEntity
+            simpleEntity.setActive(0);
+            this.save(entity);
         }
     }
 
