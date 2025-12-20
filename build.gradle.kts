@@ -32,7 +32,7 @@ allprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-        options.compilerArgs.add("-parameters")
+//        options.compilerArgs.add("-Xlint:unchecked")
     }
 
     tasks.withType<Test> {
@@ -49,8 +49,11 @@ allprojects {
             mavenBom(rootProject.libs.spring.ai.bom.get().toString())
             mavenBom(rootProject.libs.spring.cloud.bom.get().toString())
             mavenBom(rootProject.libs.spring.grpc.bom.get().toString())
+            mavenBom(rootProject.libs.spring.shell.bom.get().toString())
             mavenBom(rootProject.libs.spring.swagger.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.alibaba.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.alibaba.extensions.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.alibaba.agent.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.tst.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.admin.bom.get().toString())
             mavenBom(rootProject.libs.mybatis.plus.bom.get().toString())
             mavenBom(rootProject.libs.cosid.bom.get().toString())
@@ -63,6 +66,7 @@ allprojects {
             mavenBom(rootProject.libs.spring.boot.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
             mavenBom(rootProject.libs.langchain.bom.get().toString())
+            mavenBom(rootProject.libs.jackson.bom.get().toString())
         }
         dependencies {
             dependency(rootProject.libs.nimbus.jose.jwt.get().toString())
@@ -72,11 +76,11 @@ allprojects {
             dependency(rootProject.libs.commons.lang.get().toString())
             dependency(rootProject.libs.commons.text.get().toString())
             dependency(rootProject.libs.commons.codec.get().toString())
+            dependency(rootProject.libs.commons.pool.get().toString())
             dependency(rootProject.libs.commons.beanutils.get().toString())
             dependency(rootProject.libs.objenesis.get().toString())
             dependency(rootProject.libs.guava.get().toString())
             dependency(rootProject.libs.json.get().toString())
-            dependency(rootProject.libs.annotations.get().toString())
             dependency(rootProject.libs.spotbugs.annotations.get().toString())
             dependency(rootProject.libs.httpcore.core.get().toString())
             dependency(rootProject.libs.httpcore.nio.get().toString())
@@ -89,13 +93,17 @@ allprojects {
     configurations.configureEach {
         // 强制使用指定版本
         resolutionStrategy.eachDependency {
-            if (requested.group == "io.netty") {
-                useVersion(rootProject.libs.versions.nettyVersion.get())
-            }
+            // MacOS 下使用 aarch_64 版本
             if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
                 this.artifactSelection {
                     this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
                 }
+            }
+            if (requested.group == "org.apache.lucene") {
+                useVersion(rootProject.libs.versions.luceneVersion.get())
+            }
+            if (requested.group == "io.netty") {
+                useVersion(rootProject.libs.versions.nettyVersion.get())
             }
             if (requested.group == "org.mockito") {
                 useVersion(rootProject.libs.versions.mockitoVersion.get())

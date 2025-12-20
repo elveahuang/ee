@@ -1,69 +1,79 @@
 package cc.wdev.platform.commons.message.topic;
 
+import cc.wdev.platform.commons.message.model.SimpleMessage;
+import cc.wdev.platform.commons.message.socket.WebSocketManager;
 import cc.wdev.platform.commons.utils.GenericsUtils;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.ObjectProvider;
 
 /**
  * @author elvea
  */
 @Slf4j
-public abstract class AbstractTopicService<T> implements TopicService<T> {
+public abstract class AbstractTopicService<T extends SimpleMessage<?>, S> implements TopicService<T> {
 
+    @Getter
     private final TopicConfig config;
 
-    private final TopicManager topicManager;
+    @Getter
+    private final TopicManager manager;
 
-    public AbstractTopicService(TopicConfig config, ObjectProvider<TopicManager> topicManager) {
+    @Getter
+    private final WebSocketManager<String, S> webSocketManager;
+
+    public AbstractTopicService(TopicConfig config,
+                                TopicManager manager,
+                                WebSocketManager<String, S> webSocketManager) {
         this.config = config;
-        this.topicManager = topicManager.getIfAvailable();
+        this.manager = manager;
+        this.webSocketManager = webSocketManager;
         this.init();
     }
 
     private void init() {
         Class<T> superGenericType = GenericsUtils.getSuperGenericType(getClass(), AbstractTopicService.class, 0);
 
-        if (BroadcastType.Redisson.equals(this.topicManager.getBroadcastType())) {
-            log.info("Init topic {} with redisson. Message Type [{}]", config.getName(), superGenericType.getSimpleName());
-            topicManager.getRedissonUtils().addListener(config.getName(), superGenericType, (channel, msg) -> {
-                log.info("Receive message {} from channel {}.", msg, channel);
-                this.receive(msg);
+        if (BroadcastType.Redisson.equals(this.manager.getBroadcastType())) {
+            log.info("Init topic [{}] with redisson. Message Type [{}]", config.getName(), superGenericType.getSimpleName());
+            manager.getRedissonUtils().addListener(config.getName(), superGenericType, (channel, msg) -> {
+                log.info("Receive message [{}] from channel [{}].", msg, channel);
+                this.handle(msg);
             });
-        }
-
-        if (BroadcastType.Rabbit.equals(this.topicManager.getBroadcastType())) {
+        } else if (BroadcastType.Rabbit.equals(this.manager.getBroadcastType())) {
             log.info("Init topic {} with rabbitmq. Message Type [{}]", config.getName(), superGenericType.getSimpleName());
-            topicManager.getRabbitUtils().subscribeFanout(
-                topicManager.getNodeId(), config.getExchange(), config.getDlx(), superGenericType,
+            manager.getRabbitUtils().subscribeFanout(
+                manager.getNodeId(), config.getExchange(), config.getDlx(), superGenericType,
                 (msg) -> {
-                    log.info("Receive message {} from exchange {}.", msg, config.getExchange());
-                    this.receive(msg);
-                }, () -> log.warn("RabbitMQ Subscriber failed to subscribe to exchange {}.", config.getExchange()));
+                    log.info("Receive message [{}] from exchange [{}].", msg, config.getExchange());
+                    this.handle(msg);
+                }, () -> log.warn("RabbitMQ Subscriber failed to subscribe to exchange [{}].", config.getExchange()));
+        } else {
+            log.warn("Unsupported broadcast type [{}].", this.manager.getBroadcastType());
         }
     }
 
     /**
-     * 发送消息到指定的主题
+     * @see TopicService#publish(SimpleMessage)
      */
     public void publish(T message) throws Exception {
-        if (BroadcastType.Redisson.equals(this.topicManager.getBroadcastType())) {
-            log.info("Publish redisson message {} to topic {}.", message, config.getName());
-            this.topicManager.getRedissonUtils().getTopic(config.getName()).publish(message);
-        }
-        if (BroadcastType.Rabbit.equals(this.topicManager.getBroadcastType())) {
-            log.info("Publish rabbit message {} to topic {}.", message, config.getName());
-            this.topicManager.getRabbitUtils().send(this.config.getExchange(), this.config.getRoutingKey(), message);
+        if (BroadcastType.Redisson.equals(this.manager.getBroadcastType())) {
+            log.info("Publish redisson message [{}] to redis topic [{}].", message, config.getTopicName());
+            this.manager.getRedissonUtils().getTopic(config.getTopicName()).publish(message);
+        } else if (BroadcastType.Rabbit.equals(this.manager.getBroadcastType())) {
+            log.info("Publish rabbit message [{}] to rabbit topic [{}].", message, config.getTopicName());
+            this.manager.getRabbitUtils().send(this.config.getExchange(), this.config.getRoutingKey(), message);
+        } else {
+            log.info("Publish rabbit message [{}] to topic [{}] failed.", message, config.getTopicName());
         }
     }
 
     /**
-     * 接收指定主题的消息
+     * @see TopicService#handle(SimpleMessage)
      */
-    public void receive(T message) {
-        log.info("Receive message {} to topic {}.", message, config.getName());
-        this.handle(message);
+    @Override
+    public void handle(T message) {
+        log.info("Topic [{}] Receive message [{}]", config.getTopicName(), message);
+        this.webSocketManager.sendMessage(message);
     }
-
-    protected abstract void handle(T message);
 
 }

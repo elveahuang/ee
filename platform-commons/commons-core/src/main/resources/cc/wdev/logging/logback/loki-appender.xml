@@ -9,7 +9,7 @@
     <springProperty name="LOG_LOKI_PASS" source="logging.loki.pass" scop="context" defaultValue=""/>
 
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
-        <message class="com.github.loki4j.logback.JsonLayout"/>
+        <simpleMessage class="com.github.loki4j.logback.JsonLayout"/>
         <http>
             <url>${LOG_LOKI_URL}</url>
             <auth>

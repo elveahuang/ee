@@ -31,26 +31,26 @@ public class AiController {
         conversationId = (StringUtils.isEmpty(conversationId) || force) ? StringUtils.uuid() : conversationId;
         SimpleChatResponse response = SimpleChatResponse.builder()
             .conversationId(conversationId)
-            .messages(factory.getMessageWindowChatMemory().get(conversationId))
+            .messages(factory.getChatMemory().get(conversationId))
             .build();
         return R.success(response);
     }
 
     @PostMapping(API_V1__AI__CHAT)
     public String chatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
-        ChatResponse response = this.factory.getChatCompletionService().chatCompletion(request);
+        ChatResponse response = this.factory.getChatService().chatCompletion(request);
         return response.getResult().getOutput().getText();
     }
 
     @PostMapping(API_V1__AI__CHAT_STREAM)
     public Flux<String> streamChatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamChatCompletion(request);
+        Flux<ChatResponse> flux = this.factory.getChatService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 
     @PostMapping(API_V1__AI__COMPLETION)
     public Flux<String> completion(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatCompletionService().streamChatCompletion(request);
+        Flux<ChatResponse> flux = this.factory.getChatService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 

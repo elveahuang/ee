@@ -27,7 +27,7 @@ public interface BaseBizTypeEnum<T extends Serializable> extends BaseEnum<T> {
     /**
      * 获取业务配置
      */
-    default <C extends BaseBizTypeConfig> C getConfig() {
+    default BaseBizTypeConfig getConfig() {
         return null;
     }
 

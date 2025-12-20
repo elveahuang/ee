@@ -33,6 +33,7 @@ public interface DateTimeConstants {
     enum Pattern {
         DATE,
         SIMPLE_DATE,
+        MONTH,
         DATE_TIME,
         FULL_DATE_TIME,
         SIMPLE_DATE_TIME,

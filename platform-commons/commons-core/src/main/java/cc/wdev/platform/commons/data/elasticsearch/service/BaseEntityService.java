@@ -2,6 +2,8 @@ package cc.wdev.platform.commons.data.elasticsearch.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.elasticsearch.repository.BaseEntityRepository;
+import cc.wdev.platform.commons.enums.ResponseCodeEnum;
+import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
@@ -34,7 +36,7 @@ import java.util.function.Consumer;
 @NoRepositoryBean
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public abstract class BaseEntityService<T extends IdEntity, K extends Serializable, R extends BaseEntityRepository<T, K>>
-    extends AbstractService
+    extends BaseService
     implements EntityService<T, K>, EnhancedEntityService<T, K, R> {
 
     @Autowired
@@ -220,6 +222,39 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     public void deleteBatch(Collection<T> entityList, int batchSize) {
         if (CollectionUtils.isNotEmpty(entityList)) {
             this.getRepository().deleteAll(entityList);
+        }
+    }
+
+    /**
+     * @see EntityService#checkExistsOrFail(Serializable, ResponseCodeEnum)
+     */
+    @Override
+    public T checkExistsOrFail(K id, ResponseCodeEnum responseCode) {
+        T entity = this.getRepository().findById(id).orElse(null);
+        if (entity == null) {
+            throw new ServiceException(responseCode);
+        }
+        return entity;
+    }
+
+    /**
+     * @see EntityService#findByPage(Pageable, IdEntity)
+     */
+    @Override
+    public Page<T> findByPage(Pageable pageable, T example) {
+        if (example == null) {
+            return findByPage(pageable);
+        }
+        return this.getRepository().findAll(pageable);
+    }
+
+    /**
+     * @see EntityService#deleteBatchById(Collection)
+     */
+    @Override
+    public void deleteBatchById(Collection<K> entityIdList) {
+        if (CollectionUtils.isNotEmpty(entityIdList)) {
+            this.getRepository().deleteAllById(entityIdList);
         }
     }
 

@@ -43,7 +43,7 @@ public class ChatController {
         promptTemplate.add("currentUsername", "elvea");
         String prompt = promptTemplate.render();
         request.setSystemPrompt(prompt);
-        Flux<ChatResponse> publisher = aiFactory.getChatCompletionService().streamChatCompletion(request);
+        Flux<ChatResponse> publisher = aiFactory.getChatService().streamChatCompletion(request);
 
         return publisher.flatMap(response -> {
             Generation result = response.getResult();

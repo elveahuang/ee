@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.service;
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
 import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
+import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
@@ -47,6 +48,12 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     default Class<K> currentEntityIdClass() {
         return GenericsUtils.getSuperGenericType(getClass(), EntityService.class, 1);
     }
+
+    /**
+     * 根据ID查询唯一记录
+     * 若不存在，则抛出异常
+     */
+    T checkExistsOrFail(K id, ResponseCodeEnum responseCode);
 
     /**
      * 根据ID查询唯一记录

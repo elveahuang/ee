@@ -9,8 +9,8 @@ import cc.wdev.platform.commons.core.ai.AiFactoryImpl;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunConfig;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactory;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactoryImpl;
-import cc.wdev.platform.commons.core.ai.chat.ChatCompletionService;
-import cc.wdev.platform.commons.core.ai.chat.DefaultChatCompletionService;
+import cc.wdev.platform.commons.core.ai.chat.ChatService;
+import cc.wdev.platform.commons.core.ai.chat.DefaultChatService;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentConfig;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactory;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactoryImpl;
@@ -77,18 +77,18 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ChatCompletionService chatCompletionService(OpenAiChatModel model,
-                                                       MessageWindowChatMemory messageWindowChatMemory,
-                                                       ObjectProvider<AiCustomizer> customizerProvider) {
-        return new DefaultChatCompletionService(model, messageWindowChatMemory, customizerProvider);
+    public ChatService chatCompletionService(OpenAiChatModel model,
+                                             MessageWindowChatMemory messageWindowChatMemory,
+                                             ObjectProvider<AiCustomizer> customizerProvider) {
+        return new DefaultChatService(model, messageWindowChatMemory, customizerProvider);
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AiFactory aiFactory(AiProperties aiProperties,
-                               ChatCompletionService defaultChatCompletionService,
+                               ChatService defaultChatService,
                                MessageWindowChatMemory messageWindowChatMemory) {
-        return new AiFactoryImpl(aiProperties.getServiceProvider(), defaultChatCompletionService, messageWindowChatMemory);
+        return new AiFactoryImpl(aiProperties.getServiceProvider(), defaultChatService, messageWindowChatMemory);
     }
 
     @Bean

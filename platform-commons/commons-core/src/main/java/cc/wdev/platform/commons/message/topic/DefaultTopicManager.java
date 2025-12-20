@@ -51,4 +51,5 @@ public class DefaultTopicManager implements TopicManager {
         private Long nodeId;
         private BroadcastType type;
     }
+
 }

@@ -35,13 +35,14 @@ public abstract class RegionUtils {
             if (tds.size() > 3) {
                 String code = tds.get(1).text();
                 String title = tds.get(2).text();
+                String firstLetter = PinyinUtils.getFirstLetterUpper(title);
                 if (StringUtils.isNotEmpty(code)) {
                     if (code.trim().endsWith("0000")) {
-                        data.getProvinceList().add(new Region(code, title));
+                        data.getProvinceList().add(new Region(code, title, firstLetter));
                     } else if (code.trim().endsWith("00")) {
-                        data.getCityList().add(new Region(code, title));
+                        data.getCityList().add(new Region(code, title, firstLetter));
                     } else {
-                        data.getCountyList().add(new Region(code, title));
+                        data.getCountyList().add(new Region(code, title, firstLetter));
                     }
                 }
             }
@@ -65,6 +66,7 @@ public abstract class RegionUtils {
     public static class Region {
         private String code;
         private String title;
+        private String firstLetter;
     }
 
 }

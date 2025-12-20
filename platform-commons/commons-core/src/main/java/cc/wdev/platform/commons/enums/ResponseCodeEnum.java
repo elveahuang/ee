@@ -23,6 +23,8 @@ public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
     INVALID_CAPTCHA(1000003, "Incorrect Captcha", "验证码错误或者验证码已经过期"),
     RATE_LIMIT_ERROR(1000004, "Rate Limit", "限流"),
     ATTACHMENT_LIMIT_ERROR(1000005, "Attachment Limit", "附件类型错误"),
+    NOT_PRESENT(1000006, "Not present", "不存在"),
+
     // 系统模块
     USER__USERNAME_NOT_AVAILABLE(1001001, "Username is Not Available", "用户名不可用"),
     USER__EMAIL_NOT_AVAILABLE(1001002, "E-Mail is Not Available", "邮箱不可用"),
@@ -34,7 +36,10 @@ public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
     BIZ_TYPE__NOT_PRESENT(1002002, "BizType is not present", "业务类型不存在"),
     PACKAGE__NOT_PRESENT(1003001, "Package is not present", "套餐不存在"),
     TENANT__NOT_PRESENT(1004001, "Tenant is not present", "租户不存在"),
-    ROLE__NOT_PRESENT(1005001, "Role is not present", "角色不存在");
+    ROLE__NOT_PRESENT(1005001, "Role is not present", "角色不存在"),
+    ACCOUNT__NOT_PRESENT(1006001, "The account is not present", "用户不存在"),
+    USER__NOT_PRESENT(1007001, "The user is not present", "用户不存在"),
+    ;
 
     private final Integer value;
     private final String description;

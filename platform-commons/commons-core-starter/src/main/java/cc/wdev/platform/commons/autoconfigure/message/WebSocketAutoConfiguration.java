@@ -1,15 +1,7 @@
 package cc.wdev.platform.commons.autoconfigure.message;
 
 import cc.wdev.platform.commons.autoconfigure.message.properties.WebSocketProperties;
-import cc.wdev.platform.commons.message.socket.WebSocketSessionHandlerDecoratorFactory;
-import cc.wdev.platform.commons.message.socket.handler.MessageWebSocketHandler;
-import cc.wdev.platform.commons.message.socket.message.SocketMessageDelegate;
-import cc.wdev.platform.commons.message.socket.message.SocketMessageListener;
-import cc.wdev.platform.commons.message.socket.server.SessionHandshakeInterceptor;
-import cc.wdev.platform.commons.message.socket.service.DefaultWebSocketService;
-import cc.wdev.platform.commons.message.socket.service.DefaultWebSocketSessionService;
-import cc.wdev.platform.commons.message.socket.service.WebSocketService;
-import cc.wdev.platform.commons.message.socket.service.WebSocketSessionService;
+import cc.wdev.platform.commons.message.socket.servlet.interceptor.WebSocketSessionInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -17,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
@@ -24,7 +17,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
  * @author elvea
  */
 @Slf4j
-@EnableWebSocket
 @AutoConfiguration
 @EnableConfigurationProperties({WebSocketProperties.class})
 @ConditionalOnClass(WebSocketSession.class)
@@ -35,46 +27,33 @@ public class WebSocketAutoConfiguration {
         log.info("WebSocketAutoConfiguration is enabled.");
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public WebSocketSessionHandlerDecoratorFactory webSocketSessionHandlerDecoratorFactory() {
-        return new WebSocketSessionHandlerDecoratorFactory();
+    @EnableWebSocket
+    @AutoConfiguration
+    @Configuration(proxyBeanMethods = false)
+    public static class ServletWebSocketServerConfiguration {
+
+        public ServletWebSocketServerConfiguration() {
+            log.info("ServletWebSocketServerConfiguration is enabled.");
+        }
+
+        /**
+         * 会话握手拦截器
+         */
+        @Bean
+        @ConditionalOnMissingBean
+        public WebSocketSessionInterceptor webSocketSessionInterceptor() {
+            return new WebSocketSessionInterceptor();
+        }
+
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public MessageWebSocketHandler messageWebSocketHandler() {
-        return new MessageWebSocketHandler();
-    }
+    @Configuration(proxyBeanMethods = false)
+    public static class NettyWebSocketServerConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean
-    public SessionHandshakeInterceptor sessionHandshakeInterceptor() {
-        return new SessionHandshakeInterceptor();
-    }
+        public NettyWebSocketServerConfiguration() {
+            log.info("NettyWebSocketServerConfiguration is enabled.");
+        }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public SocketMessageDelegate socketMessageDelegate() {
-        return new SocketMessageDelegate();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public SocketMessageListener socketMessageListener() {
-        return new SocketMessageListener();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public WebSocketSessionService webSocketSessionService() {
-        return new DefaultWebSocketSessionService();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public WebSocketService webSocketService(WebSocketSessionService webSocketSessionService) {
-        return new DefaultWebSocketService(webSocketSessionService);
     }
 
 }

@@ -3,7 +3,7 @@ package cc.wdev.dev.webapp.ai;
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.dev.webapp.ai.constant.AiConstant;
 import cc.wdev.platform.commons.core.ai.AiFactory;
-import cc.wdev.platform.commons.core.ai.chat.ChatCompletionService;
+import cc.wdev.platform.commons.core.ai.chat.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class AiTests extends BaseTests {
     @Test
     public void baseTest() {
         Assertions.assertNotNull(aiFactory);
-        ChatCompletionService service = this.aiFactory.getChatCompletionService();
+        ChatService service = this.aiFactory.getChatService();
         Assertions.assertNotNull(service);
         ChatClient client = service.getChatClient();
         Assertions.assertNotNull(client);
@@ -45,7 +45,7 @@ public class AiTests extends BaseTests {
     @Test
     public void streamTest() {
         Assertions.assertNotNull(aiFactory);
-        ChatCompletionService service = this.aiFactory.getChatCompletionService();
+        ChatService service = this.aiFactory.getChatService();
         Assertions.assertNotNull(service);
         ChatClient client = service.getChatClient();
         Assertions.assertNotNull(client);

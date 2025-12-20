@@ -33,11 +33,17 @@ public class GeoLite implements IpManager {
 
     @Override
     public Ip search(String ip) throws Exception {
-        CountryResponse country = this.reader.country(InetAddress.getByName(ip));
-        CityResponse city = this.reader.city(InetAddress.getByName(ip));
+        CountryResponse countryResponse = this.reader.country(InetAddress.getByName(ip));
+        CityResponse cityResponse = this.reader.city(InetAddress.getByName(ip));
         return Ip.builder()
-            .country(Ip.Country.builder().code(country.getCountry().getIsoCode()).name(country.getCountry().getName()).label(country.getCountry().getNames()).build())
-            .city(Ip.City.builder().name(city.getCity().getName()).label(city.getCity().getNames()).build())
+            .country(Ip.Country.builder()
+                .code(countryResponse.country().isoCode())
+                .name(countryResponse.country().name())
+                .label(countryResponse.country().names()).build())
+            .city(Ip.City.builder()
+                .name(cityResponse.city().name())
+                .label(cityResponse.city().names())
+                .build())
             .build();
     }
 

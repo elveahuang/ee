@@ -15,4 +15,5 @@ public interface TopicManager {
     RedissonUtils getRedissonUtils();
 
     RabbitUtils getRabbitUtils();
+
 }

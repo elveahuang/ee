@@ -1,16 +1,21 @@
 package cc.wdev.platform.commons.utils;
 
 import cc.wdev.platform.commons.constants.SecurityConstants;
+import cc.wdev.platform.commons.enums.BaseEnum;
+import cc.wdev.platform.commons.enums.UserTypeEnum;
 import cc.wdev.platform.commons.security.user.User;
+import com.google.common.collect.Sets;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author elvea
@@ -36,6 +41,12 @@ public abstract class SecurityUtils {
     public static User getUser(Authentication authentication) {
         if (!ObjectUtils.isEmpty(authentication) && authentication.getPrincipal() instanceof User user) {
             return user;
+        } else if (!ObjectUtils.isEmpty(authentication) && authentication.getPrincipal() instanceof Jwt jwt) {
+            Long uid = jwt.getClaim(SecurityConstants.JWT_KEY_UID);
+            String username = jwt.getClaimAsString(SecurityConstants.JWT_KEY_USERNAME);
+            String usertype = jwt.getClaimAsString(SecurityConstants.JWT_KEY_USERTYPE);
+            Set<GrantedAuthority> authorities = Sets.newHashSet(authentication.getAuthorities());
+            return new User(uid, BaseEnum.getEnumByValue(usertype, UserTypeEnum.class).getCode(), username, null, authorities);
         }
         return null;
     }
@@ -148,7 +159,9 @@ public abstract class SecurityUtils {
      * @return boolean
      */
     public static boolean isAnonymous() {
-        return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication == null || authentication.getPrincipal() == null ||
+            "anonymousUser".equals(authentication.getPrincipal()) || !authentication.isAuthenticated();
     }
 
     /**

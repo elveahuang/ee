@@ -49,6 +49,11 @@ public interface EnhancedEntityService<T extends IdEntity, K extends Serializabl
     List<T> findListByWrapper(LambdaQueryChainWrapper<T> wrapper);
 
     /**
+     * 分页查询记录
+     */
+    IPage<T> findPageByWrapper(IPage<T> page, LambdaQueryChainWrapper<T> wrapper);
+
+    /**
      * 查询所有记录，支持分页
      *
      * @return Iterable<T>

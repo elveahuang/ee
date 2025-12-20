@@ -1,10 +1,12 @@
 package cc.wdev.platform.commons.core.cache.utils;
 
 import cc.wdev.platform.commons.enums.RateLimitTypeEnum;
-import cc.wdev.platform.commons.message.socket.message.SocketMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.*;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RTopic;
+import org.redisson.api.RateType;
+import org.redisson.api.RedissonClient;
 import org.redisson.api.listener.MessageListener;
 
 import java.time.Duration;
@@ -37,14 +39,10 @@ public class RedissonUtils {
         return this.client.getTopic(name);
     }
 
-    public RFuture<Long> publishAsync(SocketMessage message) {
-        RTopic topic = getTopic(message.getType());
-        return topic.publishAsync(message);
-    }
-
     public <T> void addListener(String name, Class<T> type, MessageListener<? extends T> listener) {
         RTopic topic = this.getTopic(name);
         topic.removeAllListeners();
         topic.addListener(type, listener);
     }
+
 }

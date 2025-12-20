@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.core.ai;
 
-import cc.wdev.platform.commons.core.ai.chat.ChatCompletionService;
+import cc.wdev.platform.commons.core.ai.chat.ChatService;
 import cc.wdev.platform.commons.core.ai.enums.AiServiceProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -13,35 +13,35 @@ public class AiFactoryImpl implements AiFactory {
 
     private final AiServiceProvider provider;
 
-    private final ChatCompletionService chatCompletionService;
+    private final ChatService chatService;
 
     private final MessageWindowChatMemory messageWindowChatMemory;
 
     public AiFactoryImpl(AiServiceProvider provider,
-                         ChatCompletionService chatCompletionService,
+                         ChatService chatService,
                          MessageWindowChatMemory messageWindowChatMemory) {
         this.provider = provider;
-        this.chatCompletionService = chatCompletionService;
+        this.chatService = chatService;
         this.messageWindowChatMemory = messageWindowChatMemory;
     }
 
     /**
-     * @see AiFactory#getMessageWindowChatMemory()
+     * @see AiFactory#getChatMemory()
      */
     @Override
-    public MessageWindowChatMemory getMessageWindowChatMemory() {
+    public MessageWindowChatMemory getChatMemory() {
         return messageWindowChatMemory;
     }
 
     /**
-     * @see AiFactory#getChatCompletionService()
+     * @see AiFactory#getChatService()
      */
     @Override
-    public ChatCompletionService getChatCompletionService() {
+    public ChatService getChatService() {
         if (AiServiceProvider.SPRING.equals(this.provider)) {
-            return chatCompletionService;
+            return chatService;
         }
-        return chatCompletionService;
+        return chatService;
     }
 
 }

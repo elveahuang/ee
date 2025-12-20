@@ -9,6 +9,7 @@ dependencies {
     api(rootProject.libs.bundles.database)
     api(rootProject.libs.bundles.json)
     api(rootProject.libs.bundles.hutool)
+    api(rootProject.libs.bundles.pinyin)
     api(rootProject.libs.bundles.thymeleaf)
     api(rootProject.libs.bundles.swagger)
     compileOnly(rootProject.libs.bundles.springAiCore)

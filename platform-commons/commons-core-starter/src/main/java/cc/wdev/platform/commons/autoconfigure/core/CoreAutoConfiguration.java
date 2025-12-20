@@ -7,10 +7,7 @@ import cc.wdev.platform.commons.core.tenant.DefaultTenantStore;
 import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
 import cc.wdev.platform.commons.core.tenant.TenantConfig;
 import cc.wdev.platform.commons.core.tenant.TenantStore;
-import cc.wdev.platform.commons.utils.EnvironmentUtils;
-import cc.wdev.platform.commons.utils.MapStructUtils;
-import cc.wdev.platform.commons.utils.MessageSourceUtils;
-import cc.wdev.platform.commons.utils.SpringUtils;
+import cc.wdev.platform.commons.utils.*;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
 import cc.wdev.platform.commons.utils.i18n.LanguageResolver;
 import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
@@ -20,6 +17,7 @@ import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFa
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -58,6 +56,12 @@ public class CoreAutoConfiguration {
     @ConditionalOnMissingBean
     public MessageSourceUtils messageSourceUtils() {
         return new MessageSourceUtils();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ValidationUtils validationUtils(Validator validator) {
+        return new ValidationUtils(validator);
     }
 
     @Bean(name = "context")

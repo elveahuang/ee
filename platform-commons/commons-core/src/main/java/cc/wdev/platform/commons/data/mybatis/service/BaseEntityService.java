@@ -3,6 +3,8 @@ package cc.wdev.platform.commons.data.mybatis.service;
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.wdev.platform.commons.data.mybatis.utils.MyBatisPlusUtils;
+import cc.wdev.platform.commons.enums.ResponseCodeEnum;
+import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
@@ -119,6 +121,18 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     // -----------------------------------------------------------------------------------------------------------------
     // EntityService
     // -----------------------------------------------------------------------------------------------------------------
+
+    /**
+     * @see EntityService#checkExistsOrFail(Serializable, ResponseCodeEnum)
+     */
+    @Override
+    public T checkExistsOrFail(K id, ResponseCodeEnum responseCode) {
+        T entity = this.getMapper().selectById(id);
+        if (entity == null) {
+            throw new ServiceException(responseCode);
+        }
+        return entity;
+    }
 
     /**
      * @see EntityService#findById(Serializable)
@@ -382,6 +396,14 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     public List<T> findListByWrapper(LambdaQueryChainWrapper<T> wrapper) {
         List<T> entityList = wrapper.list();
         return CollectionUtils.isNotEmpty(entityList) ? entityList : Collections.emptyList();
+    }
+
+    /**
+     * @see EnhancedEntityService#findPageByWrapper(IPage, LambdaQueryChainWrapper)
+     */
+    @Override
+    public IPage<T> findPageByWrapper(IPage<T> page, LambdaQueryChainWrapper<T> wrapper) {
+        return wrapper.page(page);
     }
 
     /**

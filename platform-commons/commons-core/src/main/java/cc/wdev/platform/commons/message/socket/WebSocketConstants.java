@@ -5,18 +5,8 @@ package cc.wdev.platform.commons.message.socket;
  */
 public interface WebSocketConstants {
 
-    String WEB_SOCKET_SESSION_CACHE = "WebSocketConstants.WEB_SOCKET_SESSION_CACHE";
-
     String SOCKET_USER_SESSION_KEY = "WebSocketConstants.SOCKET_USER_SESSION_KEY";
 
-    /**
-     * 用户点对点断点
-     */
-    String USER_MESSAGE_ENDPOINT = "/message";
-
-    /**
-     * 全局断点
-     */
-    String TOPIC_MESSAGE_ENDPOINT = "/topic/message";
+    int WEB_SOCKET_PORT = 8686;
 
 }

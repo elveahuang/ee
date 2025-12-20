@@ -1,22 +1,24 @@
 [versions]
-springAiVersion = "1.1.1"
-springAiAlibabaVersion = "1.0.0.4"
-springBootVersion = "3.5.8"
+springAiVersion = "1.1.2"
+springAiAlibabaVersion = "1.1.0.0-RC2"
+springAiSearchToolVersion = "1.0.1"
+springBootVersion = "3.5.9"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
-springCloudVersion = "2025.0.0"
+springCloudVersion = "2025.0.1"
 springGrpcVersion = "0.12.0"
+springShellVersion = "3.4.1"
 springDocVersion = "2.8.14"
 grpcVersion = "1.77.0"
-nettyVersion = "4.1.128.Final"
+nettyVersion = "4.1.130.Final"
 cosidVersion = "2.15.1"
 redissonVersion = "3.52.0"
-kotlinVersion = "2.2.21"
-groovyVersion = "5.0.2"
-hutoolVersion = "5.8.41"
-awsSdkVersion = "2.39.6"
-mockitoVersion = "5.20.0"
-seleniumVersion = "4.38.0"
+kotlinVersion = "2.3.0"
+groovyVersion = "5.0.3"
+hutoolVersion = "5.8.42"
+awsSdkVersion = "2.40.9"
+mockitoVersion = "5.21.0"
+seleniumVersion = "4.39.0"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "3.0.5"
 mybatisSpringStarterVersion = "3.0.5"
@@ -24,17 +26,19 @@ mybatisPlusVersion = "3.5.15"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
 langChainVersion = "1.9.1"
+jacksonVersion = "3.0.3"
 okhttpVersion = "5.3.2"
-poiVersion = "5.5.0"
+poiVersion = "5.5.1"
+luceneVersion = "10.3.2"
 javaJwtVersion = "4.5.0"
 antlr3Runtime = "3.5.3"
 antlr4Runtime = "4.13.2"
 swaggerVersion = "2.2.41"
-bouncycastleVersion = "1.82"
-errorProneAnnotationsVersion = "2.44.0"
-checkerQualVersion = "3.52.0"
+bouncycastleVersion = "1.83"
+errorProneAnnotationsVersion = "2.45.0"
+checkerQualVersion = "3.52.1"
 jsonSchemaGeneratorVersion = "4.38.0"
-gradleSpotbugsVersion = "6.2.5"
+gradleSpotbugsVersion = "6.4.7"
 gradleNativeVersion = "0.11.3"
 gradleOSDetectorVersion = "1.7.3"
 
@@ -47,10 +51,13 @@ gradle-osdetector = { id = "com.google.osdetector", version.ref = "gradleOSDetec
 
 [libraries]
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
-spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
+spring-ai-alibaba-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiAlibabaVersion" }
+spring-ai-alibaba-agent-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
+spring-ai-tst-bom = { module = "org.springaicommunity:tool-search-tool-bom", version.ref = "springAiSearchToolVersion" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
 spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
+spring-shell-bom = { module = "org.springframework.shell:spring-shell-dependencies", version.ref = "springShellVersion" }
 spring-swagger-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springDocVersion" }
 jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version.ref = "jsonSchemaGeneratorVersion" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
@@ -58,6 +65,7 @@ groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVer
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
 langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
+jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jacksonVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -74,6 +82,7 @@ spring-boot = { module = "org.springframework.boot:spring-boot" }
 spring-boot-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure" }
 spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
@@ -91,6 +100,7 @@ spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
 spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-starter-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-authorization-server" }
+spring-boot-starter-shell = { module = "org.springframework.shell:spring-shell-starter" }
 
 # Spring Data
 spring-data-commons = { module = "org.springframework.data:spring-data-commons" }
@@ -128,11 +138,17 @@ spring-ai-advisors-vector-store = { module = "org.springframework.ai:spring-ai-a
 spring-ai-elasticsearch-store = { module = "org.springframework.ai:spring-ai-elasticsearch-store" }
 spring-ai-redis-store = { module = "org.springframework.ai:spring-ai-redis-store" }
 spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
+spring-ai-starter-model-deepseek = { module = "org.springframework.ai:spring-ai-starter-model-deepseek" }
 spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-starter-mcp-client" }
 spring-ai-starter-mcp-server = { module = "org.springframework.ai:spring-ai-starter-mcp-server" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
-spring-ai-alibaba-core = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-core", version.ref = "springAiAlibabaVersion" }
-spring-ai-alibaba-starter-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope", version.ref = "springAiAlibabaVersion" }
+spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene" }
+
+# Spring AI Alibaba
+spring-ai-alibaba-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-dashscope" }
+spring-ai-alibaba-agent-framework = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-agent-framework" }
+spring-ai-alibaba-graph-core = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-graph-core" }
+spring-ai-alibaba-starter-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope" }
 
 # Spring Boot Admin
 spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencies", version.ref = "springBootAdminVersion" }
@@ -198,7 +214,7 @@ pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version = "3.0.6" }
 pdfbox-xmpbox = { module = "org.apache.pdfbox:xmpbox", version = "3.0.6" }
 pdfbox-debugger = { module = "org.apache.pdfbox:pdfbox-debugger", version = "3.0.6" }
 pdfbox-tools = { module = "org.apache.pdfbox:pdfbox-tools", version = "3.0.6" }
-x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.4" }
+x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.5" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
 scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
 scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
@@ -220,18 +236,17 @@ weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.9.B" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.9.B" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.41" }
-facebody = { module = "com.aliyun:facebody20191230", version = "5.1.2" }
-dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.0" }
-alimt = { module = "com.aliyun:alimt20181012", version = "1.5.1" }
-aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.6" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.2" }
+facebody = { module = "com.aliyun:facebody20191230", version = "6.0.0" }
+dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.1" }
+alimt = { module = "com.aliyun:alimt20181012", version = "1.5.2" }
+aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.8" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.3" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1372" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1378" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1364" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.4.25" }
-openai-java = { module = "com.openai:openai-java", version = "4.8.0" }
-volcengine-java-sdk-ark = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "0.2.48" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1376" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.1" }
+openai-java = { module = "com.openai:openai-java", version = "4.12.0" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.0" }
 
@@ -249,9 +264,9 @@ commons-io = { module = "commons-io:commons-io", version = "2.21.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
 commons-codec = { module = "commons-codec:commons-codec", version = "1.20.0" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
-commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.12.1" }
+commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.0" }
 commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
-commons-text = { module = "org.apache.commons:commons-text", version = "1.14.0" }
+commons-text = { module = "org.apache.commons:commons-text", version = "1.15.0" }
 commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.20.0" }
 commons-compress = { module = "org.apache.commons:commons-compress", version = "1.28.0" }
 commons-collections = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
@@ -299,15 +314,16 @@ quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
-ognl = { module = "ognl:ognl", version = "3.4.8" }
-asm = { module = "org.ow2.asm:asm", version = "9.9" }
+ognl = { module = "ognl:ognl", version = "3.4.9" }
+asm = { module = "org.ow2.asm:asm", version = "9.9.1" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.4" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
-geoip = { module = "com.maxmind.geoip2:geoip2", version = "4.4.0" }
+geoip = { module = "com.maxmind.geoip2:geoip2", version = "5.0.2" }
+pinyin4j = { module = "com.belerweb:pinyin4j", version = "2.5.1" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
-ip2region = { module = "org.lionsoul:ip2region", version = "3.1.1" }
+ip2region = { module = "org.lionsoul:ip2region", version = "3.3.1" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
 nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.6" }
@@ -356,6 +372,7 @@ baseJakartaServlet = ["jakarta-servlet"]
 baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
 
 html = ["jsoup"]
+pinyin = ["pinyin4j"]
 sharding = ["sharding"]
 ip = ["geoip", "ip2region"]
 database = ["pgsql", "mysql", "mariadb"]
@@ -367,7 +384,7 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan", "volcengine-java-sdk-ark"]
+ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]
 swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
 
@@ -377,8 +394,10 @@ springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
 springBootReactive = ["spring-cloud-gateway-server"]
+springBootCoreStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter"]
 springBootServletStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
 springBootReactiveStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-webflux"]
+springBootShellStarter = ["spring-boot-starter-shell"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
 springDocServletStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webmvc-api", "springdoc-openapi-starter-webmvc-ui"]
@@ -397,9 +416,9 @@ springCloudCoreStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server"]
 
 # Spring AI
-springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store"]
-springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
-springAiAlibabaCore = ["spring-ai-alibaba-core"]
+springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-model-chat-memory-repository-jdbc", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store", "spring-ai-tst-tool-searcher-lucene"]
+springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server", "spring-ai-starter-mcp-server-webmvc"]
+springAiAlibabaCore = ["spring-ai-alibaba-dashscope", "spring-ai-alibaba-agent-framework", "spring-ai-alibaba-graph-core"]
 springAiAlibabaCoreStarter = ["spring-ai-alibaba-starter-dashscope"]
 
 # Mybatis

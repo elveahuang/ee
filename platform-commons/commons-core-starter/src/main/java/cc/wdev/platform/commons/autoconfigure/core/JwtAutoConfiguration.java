@@ -98,4 +98,8 @@ public class JwtAutoConfiguration {
         return new JwtService(config, encoder, decoder);
     }
 
+    // ------------------------------------------------------------
+    // Reactive
+    // ------------------------------------------------------------
+
 }

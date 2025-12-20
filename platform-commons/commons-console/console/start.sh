@@ -3,4 +3,4 @@
 # 启动进程
 echo Starting...
 java -version
-java -classpath "./libs/*:./libs-external/*" cc.wdev.sample.JavaCvApplication
+java -classpath "./libs/*;./libs-external/*;./libs-internal/*" -jar console.jar

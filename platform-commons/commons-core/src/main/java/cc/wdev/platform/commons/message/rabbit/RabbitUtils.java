@@ -87,11 +87,12 @@ public class RabbitUtils {
         try {
             MessageProperties props = new MessageProperties();
             Message message = new Message(body, props);
-            Object obj = messageConverter.fromMessage(message); // LinkedHashMap
+            Object obj = messageConverter.fromMessage(message);
             return JacksonUtils.getObjectMapper().convertValue(obj, clazz);
         } catch (Exception e) {
             log.error("Error convert rabbit message, type is {}", clazz, e);
         }
         return null;
     }
+
 }

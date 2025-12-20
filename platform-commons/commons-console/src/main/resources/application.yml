@@ -1,0 +1,12 @@
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        allow-circular-references: true
+        web-application-type: none
+    application:
+        name: console
+    profiles:
+        active: local
+    shell:
+        interactive:
+            enabled: true

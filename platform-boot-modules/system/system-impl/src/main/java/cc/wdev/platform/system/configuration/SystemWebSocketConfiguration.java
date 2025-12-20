@@ -1,44 +1,40 @@
 package cc.wdev.platform.system.configuration;
 
-import cc.wdev.platform.commons.message.socket.handler.MessageWebSocketHandler;
-import cc.wdev.platform.commons.message.socket.server.SessionHandshakeInterceptor;
+import cc.wdev.platform.commons.message.socket.servlet.ServletWebSocketManager;
+import cc.wdev.platform.commons.message.topic.TopicManager;
+import cc.wdev.platform.system.core.socket.SystemWebSocketHandler;
+import cc.wdev.platform.system.core.socket.SystemWebSocketService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 /**
  * @author elvea
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-public class SystemWebSocketConfiguration implements WebSocketConfigurer {
+public class SystemWebSocketConfiguration {
 
-    private final MessageWebSocketHandler messageWebSocketHandler;
-
-    private final SessionHandshakeInterceptor sessionHandshakeInterceptor;
-
-    public SystemWebSocketConfiguration(MessageWebSocketHandler messageWebSocketHandler,
-                                        SessionHandshakeInterceptor sessionHandshakeInterceptor) {
-        log.info("SystemWebSocketConfiguration is enabled");
-        this.messageWebSocketHandler = messageWebSocketHandler;
-        this.sessionHandshakeInterceptor = sessionHandshakeInterceptor;
+    @Bean("systemWebSocketManager")
+    public ServletWebSocketManager servletWebSocketManager() {
+        return new ServletWebSocketManager();
     }
 
-    @Override
-    public void registerWebSocketHandlers(@NonNull WebSocketHandlerRegistry registry) {
-        // 技术验证
-        log.info("Registry messageWebSocketHandler to path [{}]", "/ws/message");
-        registry.addHandler(messageWebSocketHandler, "/ws/message")
-            .setAllowedOrigins("*")
-            .addInterceptors(sessionHandshakeInterceptor);
+    @Bean
+    public SystemWebSocketService systemWebSocketListener(
+        TopicManager topicManager,
+        @Qualifier("systemWebSocketManager") ServletWebSocketManager servletWebSocketManager
+    ) {
+        return new SystemWebSocketService(topicManager, servletWebSocketManager);
+    }
 
-        // 在线聊天室
-        log.info("Registry messageWebSocketHandler to path [{}]", "/ws/chat");
-        registry.addHandler(messageWebSocketHandler, "/ws/chat")
-            .setAllowedOrigins("*")
-            .addInterceptors(sessionHandshakeInterceptor);
+    @Bean
+    public SystemWebSocketHandler systemMessageWebSocketHandler(
+        @Qualifier("systemWebSocketManager") ServletWebSocketManager servletWebSocketManager,
+        SystemWebSocketService systemWebSocketListener
+    ) {
+        return new SystemWebSocketHandler(servletWebSocketManager, systemWebSocketListener);
     }
 
 }
