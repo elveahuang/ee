@@ -5,20 +5,18 @@ import cc.wdev.platform.commons.constants.DateTimeConstants;
 import cc.wdev.platform.commons.utils.DateUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.time.TimeZoneManager;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.BeanProperty;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.BeanProperty;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
- * @author elvea
+ * @author elvea JsonDeserializer
  */
-public class DateDeserializer extends StdDeserializer<Date> implements ContextualDeserializer {
+public class DateDeserializer extends StdDeserializer<Date> {
 
     private String pattern;
 
@@ -35,7 +33,7 @@ public class DateDeserializer extends StdDeserializer<Date> implements Contextua
     }
 
     @Override
-    public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+    public Date deserialize(JsonParser parser, DeserializationContext context) {
         String pattern = DateTimeConstants.DEFAULT_DATE_TIME_PATTERN;
         if (StringUtils.isNotEmpty(this.pattern)) {
             pattern = this.pattern;
@@ -48,7 +46,7 @@ public class DateDeserializer extends StdDeserializer<Date> implements Contextua
     }
 
     @Override
-    public JsonDeserializer<?> createContextual(DeserializationContext context, BeanProperty property) {
+    public ValueDeserializer<?> createContextual(DeserializationContext context, BeanProperty property) {
         com.fasterxml.jackson.annotation.JsonFormat.Value format = findFormatOverrides(context, property, handledType());
         JsonFormat annotation = property.getAnnotation(JsonFormat.class);
         if (annotation != null) {

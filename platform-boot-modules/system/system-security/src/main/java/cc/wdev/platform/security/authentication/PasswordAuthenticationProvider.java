@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.security.CustomAuthorizationGrantType;
 import cc.wdev.platform.commons.security.CustomParameterNames;
 import cc.wdev.platform.security.CustomAuthenticationToken;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -74,8 +75,8 @@ public class PasswordAuthenticationProvider extends AbstractAuthenticationProvid
 
         // 密码验证
         String type = (String) authenticationToken.getAdditionalParameters().get(CustomParameterNames.TYPE);
-        String username = (String) authenticationToken.getAdditionalParameters().get(OAuth2ParameterNames.USERNAME);
-        String password = (String) authenticationToken.getAdditionalParameters().get(OAuth2ParameterNames.PASSWORD);
+        String username = (String) authenticationToken.getAdditionalParameters().get(CustomParameterNames.USERNAME);
+        String password = (String) authenticationToken.getAdditionalParameters().get(CustomParameterNames.PASSWORD);
         CustomAuthenticationToken usernamePasswordAuthenticationToken = new CustomAuthenticationToken(type, username, password);
         Authentication usernamePasswordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
@@ -173,7 +174,7 @@ public class PasswordAuthenticationProvider extends AbstractAuthenticationProvid
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
+    public boolean supports(@NonNull Class<?> authentication) {
         return PasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 

@@ -3,7 +3,7 @@ package cc.wdev.platform.security.authentication;
 import cc.wdev.platform.commons.security.CustomAuthorizationGrantType;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationGrantAuthenticationToken;
 import org.springframework.util.Assert;

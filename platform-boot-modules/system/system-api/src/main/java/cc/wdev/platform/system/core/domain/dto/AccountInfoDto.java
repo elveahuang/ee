@@ -1,6 +1,5 @@
 package cc.wdev.platform.system.core.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
@@ -19,7 +18,6 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountInfoDto implements Serializable {
     /**
      * ID

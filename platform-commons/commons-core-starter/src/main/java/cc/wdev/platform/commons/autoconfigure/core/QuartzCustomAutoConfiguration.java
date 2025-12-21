@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
-import org.springframework.boot.autoconfigure.quartz.SchedulerFactoryBeanCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.quartz.autoconfigure.QuartzProperties;
+import org.springframework.boot.quartz.autoconfigure.SchedulerFactoryBeanCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,7 +24,7 @@ import javax.sql.DataSource;
  * @author elvea
  */
 @Slf4j
-@AutoConfiguration(after = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@AutoConfiguration(after = {DataSourceAutoConfiguration.class})
 @ConditionalOnClass({Scheduler.class, SchedulerFactoryBean.class, PlatformTransactionManager.class})
 @EnableConfigurationProperties({QuartzProperties.class})
 public class QuartzCustomAutoConfiguration {

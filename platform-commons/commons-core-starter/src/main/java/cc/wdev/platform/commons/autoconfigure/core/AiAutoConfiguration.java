@@ -15,8 +15,9 @@ import cc.wdev.platform.commons.core.ai.tencent.AiTencentConfig;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactory;
 import cc.wdev.platform.commons.core.ai.tencent.AiTencentFactoryImpl;
 import cc.wdev.platform.commons.core.ai.tools.CommonTools;
+import co.elastic.clients.transport.rest5_client.low_level.Rest5Client;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.client.RestClient;
+import org.jspecify.annotations.NonNull;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
@@ -38,7 +39,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
-import org.springframework.lang.NonNull;
 
 import java.util.Set;
 
@@ -68,7 +68,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public MessageWindowChatMemory messageWindowChatMemory(ChatMemoryRepository chatMemoryRepository) {
+    public MessageWindowChatMemory chatMemory(ChatMemoryRepository chatMemoryRepository) {
         return MessageWindowChatMemory.builder()
             .chatMemoryRepository(chatMemoryRepository)
             .maxMessages(100)
@@ -77,9 +77,9 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ChatService chatCompletionService(OpenAiChatModel model,
-                                             MessageWindowChatMemory messageWindowChatMemory,
-                                             ObjectProvider<AiCustomizer> customizerProvider) {
+    public ChatService chatService(OpenAiChatModel model,
+                                   MessageWindowChatMemory messageWindowChatMemory,
+                                   ObjectProvider<AiCustomizer> customizerProvider) {
         return new DefaultChatService(model, messageWindowChatMemory, customizerProvider);
     }
 
@@ -95,7 +95,7 @@ public class AiAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnClass({VectorStore.class})
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "vector-store.provider", havingValue = "elastic")
-    public VectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
+    public VectorStore vectorStore(Rest5Client restClient, EmbeddingModel embeddingModel) {
         ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
         options.setIndexName("custom-index");
         options.setSimilarity(cosine);
@@ -116,9 +116,10 @@ public class AiAutoConfiguration {
         return SimpleVectorStore.builder(embeddingModel).build();
     }
 
-    /**
-     * 腾讯云大模型
-     */
+    // ------------------------------------------------------------------------------
+    // 腾讯云大模型
+    // ------------------------------------------------------------------------------
+
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiTencentProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -127,9 +128,10 @@ public class AiAutoConfiguration {
         return new AiTencentFactoryImpl(config);
     }
 
-    /**
-     * 阿里云大模型
-     */
+    // ------------------------------------------------------------------------------
+    // 阿里云大模型
+    // ------------------------------------------------------------------------------
+
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

@@ -2,7 +2,6 @@ package cc.wdev.platform.commons.core.cache;
 
 import cc.wdev.platform.commons.core.tenant.TenantContext;
 import org.springframework.util.StringUtils;
-
 public interface TenantCacheKeyGenerator extends CacheKeyGenerator {
 
     default CacheKey key(Object... params) {

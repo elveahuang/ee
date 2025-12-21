@@ -1,6 +1,5 @@
 package cc.wdev.platform.commons.oapis.lark.message;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +14,5 @@ public class LarkMessagePayload implements Serializable {
     private String type;
     private String receiveId;
     private String json;
-    @JsonRawValue
     private Object content;
 }

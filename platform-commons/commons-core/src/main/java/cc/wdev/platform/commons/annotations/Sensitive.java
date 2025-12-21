@@ -2,8 +2,7 @@ package cc.wdev.platform.commons.annotations;
 
 import cc.wdev.platform.commons.extensions.sensitive.SensitiveSerializer;
 import cc.wdev.platform.commons.extensions.sensitive.SensitiveStrategy;
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,7 +14,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@JacksonAnnotationsInside
 @JsonSerialize(using = SensitiveSerializer.class)
 public @interface Sensitive {
 

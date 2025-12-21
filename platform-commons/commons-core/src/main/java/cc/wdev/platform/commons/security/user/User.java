@@ -3,13 +3,12 @@ package cc.wdev.platform.commons.security.user;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.util.Assert;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,9 +19,6 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializable {
-
-    @Serial
-    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Long id;
 
@@ -66,7 +62,7 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.getUsername();
     }
 
@@ -85,9 +81,6 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
     }
 
     private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
-
-        @Serial
-        private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
         @Override
         public int compare(GrantedAuthority g1, GrantedAuthority g2) {

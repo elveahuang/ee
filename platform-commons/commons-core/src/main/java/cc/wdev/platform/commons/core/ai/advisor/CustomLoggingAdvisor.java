@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.core.ai.advisor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.ai.chat.client.ChatClientMessageAggregator;
 import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;
@@ -12,7 +13,6 @@ import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.metadata.ChatResponseMetadata;
 import org.springframework.ai.chat.metadata.Usage;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.lang.NonNull;
 import reactor.core.publisher.Flux;
 
 import java.util.List;

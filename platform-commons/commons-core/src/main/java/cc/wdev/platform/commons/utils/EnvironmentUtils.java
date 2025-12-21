@@ -1,9 +1,9 @@
 package cc.wdev.platform.commons.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 /**

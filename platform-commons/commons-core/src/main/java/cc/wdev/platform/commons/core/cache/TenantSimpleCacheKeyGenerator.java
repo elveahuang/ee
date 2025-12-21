@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.core.cache;
 
 import lombok.Builder;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * @author elvea

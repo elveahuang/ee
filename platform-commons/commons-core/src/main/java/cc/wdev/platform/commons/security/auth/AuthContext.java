@@ -29,7 +29,7 @@ public class AuthContext {
     }
 
     public static void clear() {
-        log.info("[TenantContext] clear context");
+        log.info("[AuthContext] clear context");
         threadLocal.remove();
     }
 

@@ -4,15 +4,14 @@ import cc.wdev.platform.commons.security.jackson.LongMixin;
 import cc.wdev.platform.commons.security.jackson.UserMixin;
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.security.jackson2.CoreJackson2Module;
-import org.springframework.security.jackson2.SecurityJackson2Modules;
+import org.springframework.security.jackson.SecurityJacksonModules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2AuthorizationServerJackson2Module;
 import org.springframework.util.StringUtils;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -23,16 +22,16 @@ import java.util.*;
  */
 public abstract class OAuth2Utils {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static ObjectMapper objectMapper;
 
     static {
-        ClassLoader classLoader = OAuth2Utils.class.getClassLoader();
-        objectMapper.registerModules(new CoreJackson2Module());
-        objectMapper.registerModules(SecurityJackson2Modules.getModules(classLoader));
-        objectMapper.registerModule(new OAuth2AuthorizationServerJackson2Module());
-        //
-        objectMapper.addMixIn(Long.class, LongMixin.class);
-        objectMapper.addMixIn(User.class, UserMixin.class);
+        ClassLoader loader = OAuth2Utils.class.getClassLoader();
+
+        objectMapper = JsonMapper.builder()
+            .addModules(SecurityJacksonModules.getModules(loader))
+            .addMixIn(Long.class, LongMixin.class)
+            .addMixIn(User.class, UserMixin.class)
+            .build();
     }
 
     public static ClientDto toRegisteredClientDto(RegisteredClient client) {

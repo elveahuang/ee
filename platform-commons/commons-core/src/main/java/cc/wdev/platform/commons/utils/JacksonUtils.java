@@ -1,18 +1,13 @@
 package cc.wdev.platform.commons.utils;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.json.JsonReadFeature;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import tools.jackson.core.json.JsonReadFeature;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.Map;
 
@@ -21,31 +16,26 @@ import java.util.Map;
  */
 public abstract class JacksonUtils {
 
-    public final static JsonMapper cacheObjectMapper = JsonMapper.builder()
-        .enable(JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES)
+    public final static JsonMapper objectMapper = JsonMapper.builder()
+        .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
         .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
         .enable(JsonReadFeature.ALLOW_MISSING_VALUES)
         .enable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-        .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        .visibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
-        .addModule(new Jdk8Module())
-        .addModule(new JavaTimeModule())
-        .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY)
+        .changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL))
+        .changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL))
         .build();
 
-    private final static JsonMapper objectMapper = JsonMapper.builder()
-        .enable(JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES)
+    public final static JsonMapper cacheObjectMapper = JsonMapper.builder()
+        .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
         .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
         .enable(JsonReadFeature.ALLOW_MISSING_VALUES)
         .enable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-        .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        .visibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
-        .addModule(new JavaTimeModule())
-        .addModule(new Jdk8Module())
+        .changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL))
+        .changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL))
         .build();
 
     public static ObjectMapper getObjectMapper() {
@@ -108,7 +98,7 @@ public abstract class JacksonUtils {
             return false;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return value != null && value.isTextual() && value.asBoolean();
+        return value != null && value.isString() && value.asBoolean();
     }
 
     public static String findStringValue(JsonNode jsonNode, String fieldName) {
@@ -116,7 +106,7 @@ public abstract class JacksonUtils {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && value.isTextual()) ? value.asText() : null;
+        return (value != null && value.isString()) ? value.asString() : null;
     }
 
     public static <T> T findValue(JsonNode jsonNode, String fieldName, TypeReference<T> valueTypeReference,
@@ -125,7 +115,7 @@ public abstract class JacksonUtils {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && value.isContainerNode()) ? mapper.convertValue(value, valueTypeReference) : null;
+        return (value != null && value.isContainer()) ? mapper.convertValue(value, valueTypeReference) : null;
     }
 
     public static JsonNode findObjectNode(JsonNode jsonNode, String fieldName) {

@@ -1,12 +1,11 @@
 package cc.wdev.platform.system.configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,15 +17,15 @@ import static cc.wdev.platform.system.commons.constants.SystemAmqpConstants.*;
  */
 @Slf4j
 @Configuration
-public class SystemAmqpConfiguration {
+public class SystemRabbitConfiguration {
 
     /**
      * 替换默认转换器
      * 解决消息监听可能出现反序列化失败的问题
      */
     @Bean
-    public MessageConverter messageConverter(ObjectMapper objectMapper) {
-        return new Jackson2JsonMessageConverter(objectMapper);
+    public MessageConverter messageConverter() {
+        return new JacksonJsonMessageConverter();
     }
 
     @Bean

@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.core.cache;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 

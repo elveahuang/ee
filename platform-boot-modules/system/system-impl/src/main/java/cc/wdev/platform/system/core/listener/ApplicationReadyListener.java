@@ -3,9 +3,9 @@ package cc.wdev.platform.system.core.listener;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.core.service.JobService;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.lang.NonNull;
 
 /**
  * @author elvea

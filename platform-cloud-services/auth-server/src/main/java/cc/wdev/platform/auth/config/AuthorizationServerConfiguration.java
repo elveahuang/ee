@@ -1,33 +1,29 @@
 package cc.wdev.platform.auth.config;
 
 import cc.wdev.platform.auth.security.authentication.*;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.core.OAuth2Token;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationContext;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
-import org.springframework.security.oauth2.server.authorization.token.*;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationConverter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import static cc.wdev.platform.commons.constants.SecurityConstants.*;
 
@@ -41,75 +37,49 @@ public class AuthorizationServerConfiguration {
 
     private final JwtDecoder jwtDecoder;
 
-    private final JWKSource<SecurityContext> jwkSource;
+    private final JwtAuthenticationConverter jwtAuthenticationConverter;
 
-    private final OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer;
+    private final AuthenticationManager authenticationManager;
 
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    private final AuthenticationFailureHandler authenticationFailureHandler;
+
     private final AccessDeniedHandler accessDeniedHandler;
 
+    private final OAuth2AuthorizationService authorizationService;
+
+    private final OAuth2TokenGenerator<?> tokenGenerator;
+
     @Bean
-    @Order(1)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(
-        HttpSecurity http,
-        AuthenticationManager authenticationManager,
-        OAuth2AuthorizationService authorizationService,
-        OAuth2TokenGenerator<?> tokenGenerator
-    ) throws Exception {
-        log.info("creating authorizationServerSecurityFilterChain");
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) {
+        log.info("Creating authorizationServerSecurityFilterChain...");
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
-
-        http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-            .with(authorizationServerConfigurer, Customizer.withDefaults())
-            .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated());
-
-        PasswordAuthenticationProvider passwordAuthenticationProvider = new PasswordAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator);
-        SmsAuthenticationProvider smsAuthenticationProvider = new SmsAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator);
-        SocialAuthenticationProvider socialAuthenticationProvider = new SocialAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator);
-
-        Function<OidcUserInfoAuthenticationContext, OidcUserInfo> userInfoMapper = (context) -> {
-            OidcUserInfoAuthenticationToken authentication = context.getAuthentication();
-            JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
-            return new OidcUserInfo(principal.getToken().getClaims());
-        };
-
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(oidc ->
-            oidc.userInfoEndpoint((userInfo) -> userInfo.userInfoMapper(userInfoMapper))
-        ).tokenEndpoint(tokenEndpoint ->
-            tokenEndpoint.accessTokenRequestConverters(authenticationConverters ->
-                authenticationConverters.addAll(List.of(
-                    new SmsAuthenticationConverter(),
-                    new PasswordAuthenticationConverter(),
-                    new SocialAuthenticationConverter()
-                ))
-            ).authenticationProviders(authenticationProviders -> authenticationProviders.addAll(List.of(
-                socialAuthenticationProvider,
-                passwordAuthenticationProvider,
-                smsAuthenticationProvider
-            )))
-        );
-
-        http.oauth2ResourceServer((rsc) -> rsc.jwt(configurer -> {
-                configurer.decoder(jwtDecoder);
-            }))
-            .cors(Customizer.withDefaults())
+        http.oauth2AuthorizationServer(authorizationServer -> {
+                http.securityMatcher(authorizationServer.getEndpointsMatcher());
+                authorizationServer.oidc(Customizer.withDefaults()).tokenEndpoint(tokenEndpoint -> {
+                    tokenEndpoint.accessTokenRequestConverters(authenticationConverters -> authenticationConverters.addAll(authenticationConverterList()));
+                    tokenEndpoint.accessTokenResponseHandler(authenticationSuccessHandler);
+                    tokenEndpoint.errorResponseHandler(authenticationFailureHandler);
+                });
+            }).authorizeHttpRequests((authorize) ->
+                authorize.anyRequest().authenticated()
+            ).cors(Customizer.withDefaults())
             .exceptionHandling(e -> {
                 e.authenticationEntryPoint(authenticationEntryPoint);
                 e.accessDeniedHandler(accessDeniedHandler);
-            });
+            }).oauth2ResourceServer((rsc) -> rsc.jwt(jc -> {
+                jc.decoder(jwtDecoder);
+                jc.jwtAuthenticationConverter(this.jwtAuthenticationConverter);
+            }));
+
+        // 添加自定义授权模式实现
+        this.addAuthenticationProvider(http);
 
         return http.build();
-    }
-
-    @Bean
-    public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator() {
-        JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
-        jwtGenerator.setJwtCustomizer(tokenCustomizer);
-        OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-        return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
     }
 
     @Bean
@@ -126,6 +96,31 @@ public class AuthorizationServerConfiguration {
             .oidcLogoutEndpoint(OAUTH_OIDC_LOGOUT_ENDPOINT)
             .oidcClientRegistrationEndpoint(OAUTH_OIDC_CLIENT_REGISTRATION_ENDPOINT)
             .build();
+    }
+
+    private List<AuthenticationConverter> authenticationConverterList() {
+        return Arrays.asList(
+            new SmsAuthenticationConverter(),
+            new PasswordAuthenticationConverter(),
+            new SocialAuthenticationConverter()
+        );
+    }
+
+    private void addAuthenticationProvider(HttpSecurity http) {
+        // 密码模式
+        PasswordAuthenticationProvider passwordAuthenticationProvider = new PasswordAuthenticationProvider(
+            this.authenticationManager, this.authorizationService, this.tokenGenerator);
+        http.authenticationProvider(passwordAuthenticationProvider);
+
+        // 验证码模式
+        SmsAuthenticationProvider smsAuthenticationProvider = new SmsAuthenticationProvider(
+            this.authenticationManager, this.authorizationService, this.tokenGenerator);
+        http.authenticationProvider(smsAuthenticationProvider);
+
+        // 社区模式
+        SocialAuthenticationProvider socialAuthenticationProvider = new SocialAuthenticationProvider(
+            this.authenticationManager, this.authorizationService, this.tokenGenerator);
+        http.authenticationProvider(socialAuthenticationProvider);
     }
 
 }

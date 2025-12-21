@@ -6,9 +6,9 @@ import cc.wdev.platform.system.ai.service.AiChatMemoryService;
 import com.google.common.collect.Maps;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.messages.*;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.Map;

@@ -32,7 +32,6 @@ allprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-//        options.compilerArgs.add("-Xlint:unchecked")
     }
 
     tasks.withType<Test> {
@@ -47,13 +46,12 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom(rootProject.libs.spring.ai.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.tst.bom.get().toString())
+            mavenBom(rootProject.libs.spring.boot.bom.get().toString())
             mavenBom(rootProject.libs.spring.cloud.bom.get().toString())
             mavenBom(rootProject.libs.spring.grpc.bom.get().toString())
             mavenBom(rootProject.libs.spring.shell.bom.get().toString())
             mavenBom(rootProject.libs.spring.swagger.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.alibaba.extensions.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.alibaba.agent.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.tst.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.admin.bom.get().toString())
             mavenBom(rootProject.libs.mybatis.plus.bom.get().toString())
             mavenBom(rootProject.libs.cosid.bom.get().toString())
@@ -63,7 +61,6 @@ allprojects {
             mavenBom(rootProject.libs.groovy.bom.get().toString())
             mavenBom(rootProject.libs.kotlin.bom.get().toString())
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
-            mavenBom(rootProject.libs.spring.boot.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
             mavenBom(rootProject.libs.langchain.bom.get().toString())
             mavenBom(rootProject.libs.jackson.bom.get().toString())
@@ -153,7 +150,6 @@ allprojects {
         exclude(module = "groovy")
         exclude(module = "groovy-json")
         exclude(module = "android-json")
-        exclude(module = "commons-logging")
         exclude(module = "commons-dbcp")
         exclude(module = "commons-dbcp2")
         exclude(module = "commons-fileupload")
@@ -199,8 +195,8 @@ allprojects {
         exclude(module = "shardingsphere-parser-sql-statement-presto")
         exclude(module = "shardingsphere-parser-sql-statement-sql92")
         exclude(module = "shardingsphere-parser-sql-statement-sqlserver")
-        exclude(module = "selenium-devtools-v140")
         exclude(module = "selenium-devtools-v141")
+        exclude(module = "selenium-devtools-v142")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")

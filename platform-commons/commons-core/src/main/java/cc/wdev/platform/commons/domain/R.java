@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.domain;
 
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +37,7 @@ public class R<E> implements Serializable {
     private String message = "Success";
 
     @Schema(description = "响应数据")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private E data;
 
     /**

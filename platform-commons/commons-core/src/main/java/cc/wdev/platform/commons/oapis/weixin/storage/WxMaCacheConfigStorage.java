@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.core.cache.service.CacheService;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import me.chanjar.weixin.common.bean.WxAccessToken;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;

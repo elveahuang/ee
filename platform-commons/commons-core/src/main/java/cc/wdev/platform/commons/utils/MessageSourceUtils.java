@@ -1,10 +1,10 @@
 package cc.wdev.platform.commons.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 import java.util.Locale;

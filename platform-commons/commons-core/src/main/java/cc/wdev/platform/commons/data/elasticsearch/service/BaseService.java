@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.data.elasticsearch.service;
 
 import cc.wdev.platform.commons.service.AbstractService;
+import co.elastic.clients.transport.rest5_client.low_level.Rest5Client;
 import lombok.Getter;
-import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.client.elc.ReactiveElasticsearchClient;
@@ -26,6 +26,6 @@ public abstract class BaseService extends AbstractService {
     protected ReactiveElasticsearchClient elasticsearchClient;
 
     @Autowired
-    protected RestClient restClient;
+    protected Rest5Client restClient;
 
 }

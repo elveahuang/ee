@@ -6,21 +6,19 @@ import cc.wdev.platform.commons.utils.DateTimeUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.time.TimeZoneManager;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.BeanProperty;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.BeanProperty;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
+import tools.jackson.databind.ser.std.StdSerializer;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * @author elvea
  */
-public final class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> implements ContextualSerializer {
+public final class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
 
     private String pattern;
 
@@ -37,7 +35,7 @@ public final class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> 
     }
 
     @Override
-    public void serialize(LocalDateTime localDateTime, JsonGenerator generator, SerializerProvider provider) throws IOException {
+    public void serialize(LocalDateTime localDateTime, JsonGenerator generator, SerializationContext provider) {
         if (timeZoneConvert) {
             LocalDateTime targetLocalDateTime = DateTimeUtils.transfer(localDateTime, TimeZoneManager.getResolver().resolveSystemZoneId(), TimeZoneManager.getResolver().resolveUserZoneId());
             generator.writeString(DateTimeUtils.format(targetLocalDateTime, getFormatter()));
@@ -47,7 +45,7 @@ public final class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> 
     }
 
     @Override
-    public JsonSerializer<?> createContextual(SerializerProvider provider, BeanProperty property) {
+    public ValueSerializer<?> createContextual(SerializationContext provider, BeanProperty property) {
         if (!ObjectUtils.isEmpty(property)) {
             com.fasterxml.jackson.annotation.JsonFormat.Value format = findFormatOverrides(provider, property, handledType());
             JsonFormat annotation = property.getAnnotation(JsonFormat.class);

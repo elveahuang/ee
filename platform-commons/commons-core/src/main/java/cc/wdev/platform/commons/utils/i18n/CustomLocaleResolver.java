@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.utils.i18n;
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.Locale;

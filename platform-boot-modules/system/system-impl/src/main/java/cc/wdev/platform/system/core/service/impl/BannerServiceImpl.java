@@ -11,8 +11,8 @@ import cc.wdev.platform.system.core.repository.BannerRepository;
 import cc.wdev.platform.system.core.service.BannerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;

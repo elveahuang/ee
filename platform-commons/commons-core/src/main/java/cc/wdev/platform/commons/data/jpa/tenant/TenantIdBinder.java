@@ -4,13 +4,10 @@ import cc.wdev.platform.commons.core.tenant.GlobalTenantManager;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.MappingException;
 import org.hibernate.binder.AttributeBinder;
-import org.hibernate.boot.spi.InFlightMetadataCollector;
 import org.hibernate.boot.spi.MetadataBuildingContext;
 import org.hibernate.engine.spi.FilterDefinition;
 import org.hibernate.mapping.*;
-import org.hibernate.type.BasicType;
 import org.hibernate.type.descriptor.java.JavaType;
-import org.hibernate.type.spi.TypeConfiguration;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -36,21 +33,19 @@ public class TenantIdBinder implements AttributeBinder<TenantId> {
             return;
         }
 
-        final InFlightMetadataCollector collector = buildingContext.getMetadataCollector();
-        final TypeConfiguration typeConfiguration = collector.getTypeConfiguration();
+        final var collector = buildingContext.getMetadataCollector();
         final String returnedClassName = property.getReturnedClassName();
-        final BasicType<Object> tenantIdType = typeConfiguration.getBasicTypeRegistry().getRegisteredType(returnedClassName);
-
+        final var tenantIdType = collector.getTypeConfiguration().getBasicTypeRegistry().getRegisteredType(returnedClassName);
         final FilterDefinition filterDefinition = collector.getFilterDefinition(FILTER_NAME);
         if (filterDefinition == null) {
             collector.addFilterDefinition(
                 new FilterDefinition(
                     FILTER_NAME,
                     "",
-                    singletonMap(PARAMETER_NAME, tenantIdType),
-                    Collections.emptyMap(),
                     false,
-                    true
+                    true,
+                    singletonMap(PARAMETER_NAME, tenantIdType),
+                    Collections.emptyMap()
                 )
             );
         } else {

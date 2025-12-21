@@ -4,14 +4,12 @@ import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.MDC;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.lang.NonNull;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static cc.wdev.platform.commons.constants.GlobalConstants.REQUEST_ID_KEY;
 
@@ -35,7 +33,7 @@ public abstract class MdcContext {
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
             requestId = StringUtils.uuid();
-            log.info("[MdcContext] generate requestId [{}]", requestId);
+            log.info("[MdcContext] generate servlet requestId [{}]", requestId);
         }
         MdcContext.setRequestId(requestId);
 
@@ -48,8 +46,11 @@ public abstract class MdcContext {
     public static void handleReactiveRequest(@NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
         log.info("[MdcContext] handleReactiveRequest start");
 
-        request.getHeaders().putIfAbsent(REQUEST_ID_KEY, List.of(StringUtils.uuid()));
-        String requestId = Objects.requireNonNull(request.getHeaders().get(REQUEST_ID_KEY)).getFirst();
+        String requestId = request.getHeaders().getFirst(REQUEST_ID_KEY);
+        if (StringUtils.isEmpty(requestId)) {
+            requestId = StringUtils.uuid();
+            log.info("[MdcContext] generate reactive requestId [{}]", requestId);
+        }
         MdcContext.setRequestId(requestId);
     }
 

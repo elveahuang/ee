@@ -15,6 +15,7 @@ import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.Lists;
+import org.springframework.data.jpa.domain.DeleteSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -81,7 +82,7 @@ public class DictRelationServiceImpl
      */
     @Override
     public void deleteRelation(DictRelationDeleteRequest request) {
-        Specification<DictRelationEntity> specification = (root, query, builder) -> {
+        DeleteSpecification<DictRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.get(DictRelationEntity_.TYPE_ID), request.getTypeId()));
             predicates.add(builder.equal(root.get(DictRelationEntity_.ITEM_ID), request.getId()));

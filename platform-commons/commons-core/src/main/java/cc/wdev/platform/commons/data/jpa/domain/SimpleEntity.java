@@ -3,13 +3,13 @@ package cc.wdev.platform.commons.data.jpa.domain;
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import tools.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 import java.time.LocalDateTime;
 

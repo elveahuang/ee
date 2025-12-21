@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.utils;
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.UUID;
 

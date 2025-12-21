@@ -16,6 +16,7 @@ import cc.wdev.platform.system.core.service.EntityRelationService;
 import jakarta.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.Lists;
+import org.springframework.data.jpa.domain.DeleteSpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -139,7 +140,7 @@ public class CatalogRelationServiceImpl extends BaseCachingEntityService<Catalog
 
     @Override
     public void deleteAsAncestor(String relationType, Long ancestorId) {
-        Specification<CatalogRelationEntity> specification = (root, query, builder) -> {
+        DeleteSpecification<CatalogRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.ANCESTOR_ID), ancestorId));
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.RELATION_TYPE), relationType));
@@ -150,7 +151,7 @@ public class CatalogRelationServiceImpl extends BaseCachingEntityService<Catalog
 
     @Override
     public void deleteAsAncestor(String relationType, List<Long> ancestorIdList) {
-        Specification<CatalogRelationEntity> specification = (root, query, builder) -> {
+        DeleteSpecification<CatalogRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(root.get(CatalogRelationEntity_.ANCESTOR_ID).in(ancestorIdList));
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.RELATION_TYPE), relationType));
@@ -161,7 +162,7 @@ public class CatalogRelationServiceImpl extends BaseCachingEntityService<Catalog
 
     @Override
     public void deleteAsChild(String relationType, Long entityId) {
-        Specification<CatalogRelationEntity> specification = (root, query, builder) -> {
+        DeleteSpecification<CatalogRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.ENTITY_ID), entityId));
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.RELATION_TYPE), relationType));
@@ -172,7 +173,7 @@ public class CatalogRelationServiceImpl extends BaseCachingEntityService<Catalog
 
     @Override
     public void deleteAsChild(String relationType, List<Long> entityIdList) {
-        Specification<CatalogRelationEntity> specification = (root, query, builder) -> {
+        DeleteSpecification<CatalogRelationEntity> specification = (root, query, builder) -> {
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(root.get(CatalogRelationEntity_.ENTITY_ID).in(entityIdList));
             predicates.add(builder.equal(root.get(CatalogRelationEntity_.RELATION_TYPE), relationType));

@@ -2,7 +2,7 @@ package cc.wdev.platform.commons.message.socket.servlet.handler;
 
 import cc.wdev.platform.commons.message.socket.servlet.ServletWebSocketManager;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.PongMessage;
 import org.springframework.web.socket.WebSocketSession;

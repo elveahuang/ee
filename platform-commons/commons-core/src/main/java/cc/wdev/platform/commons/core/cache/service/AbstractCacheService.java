@@ -2,8 +2,8 @@ package cc.wdev.platform.commons.core.cache.service;
 
 import cc.wdev.platform.commons.constants.GlobalConstants;
 import cc.wdev.platform.commons.core.cache.NullValue;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;

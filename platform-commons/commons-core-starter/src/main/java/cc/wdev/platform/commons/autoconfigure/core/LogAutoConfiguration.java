@@ -13,6 +13,7 @@ import cc.wdev.platform.commons.core.log.store.LogStore;
 import cc.wdev.platform.commons.extensions.captcha.domain.CaptchaLogDto;
 import cc.wdev.platform.commons.web.servlet.interceptor.LogInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -25,7 +26,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportRuntimeHints;
-import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;

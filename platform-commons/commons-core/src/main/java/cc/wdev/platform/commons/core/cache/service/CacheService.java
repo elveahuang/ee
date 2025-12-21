@@ -2,7 +2,7 @@ package cc.wdev.platform.commons.core.cache.service;
 
 import cc.wdev.platform.commons.core.cache.CacheKey;
 import cc.wdev.platform.commons.enums.RateLimitTypeEnum;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 import java.util.*;

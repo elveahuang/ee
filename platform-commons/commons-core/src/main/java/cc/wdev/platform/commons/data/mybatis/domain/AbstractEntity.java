@@ -2,9 +2,9 @@ package cc.wdev.platform.commons.data.mybatis.domain;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
+import tools.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * @author elvea

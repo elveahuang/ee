@@ -4,8 +4,8 @@ import cc.wdev.platform.commons.utils.DateTimeUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.format.Formatter;
-import org.springframework.lang.NonNull;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;

@@ -6,7 +6,7 @@ import cc.wdev.platform.commons.message.session.UserSession;
 import cc.wdev.platform.commons.message.socket.servlet.ServletWebSocketManager;
 import cc.wdev.platform.commons.message.socket.servlet.handler.AbstractWebSocketHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 

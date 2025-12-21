@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.utils.StringUtils;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.enums.TicketType;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;

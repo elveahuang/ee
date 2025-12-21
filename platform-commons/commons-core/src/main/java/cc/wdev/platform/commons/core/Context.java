@@ -8,10 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 import java.time.ZoneId;

@@ -1,9 +1,9 @@
 package cc.wdev.platform.commons.core.async;
 
 import cc.wdev.platform.commons.utils.mdc.MdcContext;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.MDC;
 import org.springframework.core.task.TaskDecorator;
-import org.springframework.lang.NonNull;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

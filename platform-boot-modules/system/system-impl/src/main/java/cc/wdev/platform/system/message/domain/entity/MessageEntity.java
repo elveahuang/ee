@@ -12,8 +12,8 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 

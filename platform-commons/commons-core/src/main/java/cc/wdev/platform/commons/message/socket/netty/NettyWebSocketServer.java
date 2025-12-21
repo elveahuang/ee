@@ -4,7 +4,8 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.nio.NioIoHandler;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -37,8 +38,8 @@ public class NettyWebSocketServer {
     @PostConstruct
     public void start() {
         try {
-            this.parentGroup = new NioEventLoopGroup(1);
-            this.childGroup = new NioEventLoopGroup(8);
+            this.parentGroup = new MultiThreadIoEventLoopGroup(NioIoHandler.newFactory());
+            this.childGroup = new MultiThreadIoEventLoopGroup(NioIoHandler.newFactory());
 
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(parentGroup, childGroup)

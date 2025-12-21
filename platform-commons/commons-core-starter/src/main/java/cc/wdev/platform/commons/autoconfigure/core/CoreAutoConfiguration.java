@@ -10,21 +10,15 @@ import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.*;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
 import cc.wdev.platform.commons.utils.i18n.LanguageResolver;
-import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
 import cc.wdev.platform.commons.utils.time.DefaultTimeZoneResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  * @author elvea
@@ -136,23 +130,23 @@ public class CoreAutoConfiguration {
     // Jackson
     // ------------------------------------------------------------------------------------------------------------------------
 
-    @Bean
-    public CustomObjectMapperBuilderCustomizer objectMapperBuilderCustomizer() {
-        return new CustomObjectMapperBuilderCustomizer();
-    }
-
-    public static class CustomObjectMapperBuilderCustomizer implements Jackson2ObjectMapperBuilderCustomizer, Ordered {
-        @Override
-        public void customize(Jackson2ObjectMapperBuilder builder) {
-            builder.modulesToInstall(new JavaTimeModule());
-            builder.modulesToInstall(new Jdk8Module());
-            builder.modulesToInstall(new CustomJsonModule());
-        }
-
-        @Override
-        public int getOrder() {
-            return 1;
-        }
-    }
+//    @Bean
+//    public CustomObjectMapperBuilderCustomizer objectMapperBuilderCustomizer() {
+//        return new CustomObjectMapperBuilderCustomizer();
+//    }
+//
+//    public static class CustomObjectMapperBuilderCustomizer implements Jackson2ObjectMapperBuilderCustomizer, Ordered {
+//        @Override
+//        public void customize(Jackson2ObjectMapperBuilder builder) {
+//            builder.modulesToInstall(new JavaTimeModule());
+//            builder.modulesToInstall(new Jdk8Module());
+//            builder.modulesToInstall(new CustomJsonModule());
+//        }
+//
+//        @Override
+//        public int getOrder() {
+//            return 1;
+//        }
+//    }
 
 }

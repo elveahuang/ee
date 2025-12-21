@@ -2,6 +2,7 @@ package cc.wdev.platform.auth.security.authentication;
 
 import cc.wdev.platform.auth.security.utils.OAuth2EndpointUtils;
 import cc.wdev.platform.commons.security.CustomAuthorizationGrantType;
+import cc.wdev.platform.commons.security.CustomParameterNames;
 import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
@@ -51,21 +52,21 @@ public class PasswordAuthenticationConverter implements AuthenticationConverter 
         }
 
         // 检查用户名
-        String username = parameters.getFirst(OAuth2ParameterNames.USERNAME);
-        if (!StringUtils.isNotEmpty(username) || parameters.get(OAuth2ParameterNames.USERNAME).size() != 1) {
+        String username = parameters.getFirst(CustomParameterNames.USERNAME);
+        if (!StringUtils.isNotEmpty(username) || parameters.get(CustomParameterNames.USERNAME).size() != 1) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST);
         }
 
         // 检查密码
-        String password = parameters.getFirst(OAuth2ParameterNames.PASSWORD);
-        if (!StringUtils.isNotEmpty(password) || parameters.get(OAuth2ParameterNames.PASSWORD).size() != 1) {
+        String password = parameters.getFirst(CustomParameterNames.PASSWORD);
+        if (!StringUtils.isNotEmpty(password) || parameters.get(CustomParameterNames.PASSWORD).size() != 1) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST);
         }
 
         // 附加参数
         Map<String, Object> additionalParameters = parameters.entrySet().stream()
             .filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE) && !e.getKey().equals(OAuth2ParameterNames.SCOPE))
-            .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get(0)));
+            .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getFirst()));
 
         return new PasswordAuthenticationToken(clientPrincipal, requestedScopes, additionalParameters);
     }

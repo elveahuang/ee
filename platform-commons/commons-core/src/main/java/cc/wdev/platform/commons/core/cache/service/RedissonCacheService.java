@@ -7,12 +7,12 @@ import cc.wdev.platform.commons.utils.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.redisson.api.RType;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.options.KeysScanOptions;
 import org.springframework.data.redis.connection.DataType;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 

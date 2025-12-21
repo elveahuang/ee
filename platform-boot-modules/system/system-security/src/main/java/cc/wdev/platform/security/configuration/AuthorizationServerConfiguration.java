@@ -11,29 +11,21 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationContext;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import static cc.wdev.platform.commons.constants.SecurityConstants.*;
 
@@ -67,33 +59,20 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        log.info("Creating authorizationServerSecurityFilterChain");
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) {
+        log.info("Creating authorizationServerSecurityFilterChain...");
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
-
-        http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-            .with(authorizationServerConfigurer, Customizer.withDefaults())
-            .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated());
-
-        Function<OidcUserInfoAuthenticationContext, OidcUserInfo> userInfoMapper = (context) -> {
-            OidcUserInfoAuthenticationToken authentication = context.getAuthentication();
-            JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
-            return new OidcUserInfo(principal.getToken().getClaims());
-        };
-
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(oidc ->
-            oidc.userInfoEndpoint((userInfo) -> userInfo.userInfoMapper(userInfoMapper))
-        ).tokenEndpoint(tokenEndpoint -> {
-            tokenEndpoint.accessTokenRequestConverters(authenticationConverters -> authenticationConverters.addAll(authenticationConverterList()));
-            tokenEndpoint.accessTokenResponseHandler(authenticationSuccessHandler);
-            tokenEndpoint.errorResponseHandler(authenticationFailureHandler);
-        });
-
-        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-            .csrf(AbstractHttpConfigurer::disable)
-            .cors(Customizer.withDefaults())
-            .addFilterAfter(this.captchaAuthenticationFilter, CorsFilter.class)
+        http.oauth2AuthorizationServer(authorizationServer -> {
+                http.securityMatcher(authorizationServer.getEndpointsMatcher());
+                authorizationServer.oidc(Customizer.withDefaults()).tokenEndpoint(tokenEndpoint -> {
+                    tokenEndpoint.accessTokenRequestConverters(authenticationConverters -> authenticationConverters.addAll(authenticationConverterList()));
+                    tokenEndpoint.accessTokenResponseHandler(authenticationSuccessHandler);
+                    tokenEndpoint.errorResponseHandler(authenticationFailureHandler);
+                });
+            }).authorizeHttpRequests((authorize) ->
+                authorize.anyRequest().authenticated()
+            ).cors(Customizer.withDefaults())
+            .addFilterAfter(this.captchaAuthenticationFilter, CsrfFilter.class)
             .exceptionHandling(e -> {
                 e.authenticationEntryPoint(authenticationEntryPoint);
                 e.accessDeniedHandler(accessDeniedHandler);

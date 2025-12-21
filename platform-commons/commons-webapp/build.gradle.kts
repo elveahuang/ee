@@ -7,8 +7,6 @@ plugins {
 dependencies {
     implementation(rootProject.libs.bundles.springAiCore)
     implementation(rootProject.libs.bundles.springAiCoreStarter)
-    implementation(rootProject.libs.bundles.springAiAlibabaCore)
-    implementation(rootProject.libs.bundles.springAiAlibabaCoreStarter)
     implementation(rootProject.libs.bundles.springBootCore)
     implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springSecurityCore)
@@ -23,6 +21,8 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.rabbit)
     implementation(rootProject.libs.bundles.rabbitStarter)
+    implementation(rootProject.libs.bundles.elastic)
+    implementation(rootProject.libs.bundles.elasticStarter)
     implementation(rootProject.libs.bundles.storage)
     implementation(rootProject.libs.bundles.ip)
     implementation(rootProject.libs.bundles.im)

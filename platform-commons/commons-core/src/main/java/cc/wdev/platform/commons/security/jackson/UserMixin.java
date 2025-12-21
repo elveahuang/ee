@@ -2,48 +2,36 @@ package cc.wdev.platform.commons.security.jackson;
 
 import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.JacksonUtils;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
-import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 
 /**
  * @author elvea
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonDeserialize(using = UserDeserializer.class)
-@JsonAutoDetect(
-    fieldVisibility = JsonAutoDetect.Visibility.ANY,
-    getterVisibility = JsonAutoDetect.Visibility.NONE,
-    isGetterVisibility = JsonAutoDetect.Visibility.NONE)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class UserMixin {
 }
 
-class UserDeserializer extends JsonDeserializer<User> {
+class UserDeserializer extends ValueDeserializer<User> {
 
     private static final TypeReference<Set<GrantedAuthority>> GRANTED_AUTHORITY_SET = new TypeReference<>() {
-        //
     };
 
     @Override
-    public User deserialize(JsonParser parser, DeserializationContext context) throws IOException {
-        ObjectMapper mapper = (ObjectMapper) parser.getCodec();
-        JsonNode root = mapper.readTree(parser);
-        return deserialize(parser, mapper, root);
+    public User deserialize(JsonParser parser, DeserializationContext context) {
+        JsonNode root = context.readTree(parser);
+        return deserialize(parser, root);
     }
 
-    private User deserialize(JsonParser parser, ObjectMapper mapper, JsonNode root) {
+    private User deserialize(JsonParser parser, JsonNode root) {
         Long id = JacksonUtils.findLongValue(root, "id");
         String username = JacksonUtils.findStringValue(root, "username");
         String password = JacksonUtils.findStringValue(root, "password");
@@ -52,7 +40,8 @@ class UserDeserializer extends JsonDeserializer<User> {
         boolean accountNonExpired = JacksonUtils.findBooleanValue(root, "accountNonExpired");
         boolean credentialsNonExpired = JacksonUtils.findBooleanValue(root, "credentialsNonExpired");
         boolean accountNonLocked = JacksonUtils.findBooleanValue(root, "accountNonLocked");
-        Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET, mapper);
+        Set<GrantedAuthority> authorities = Collections.emptySet();
+//        Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET);
         return new User(id, usertype, username, password, authorities, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
     }
 

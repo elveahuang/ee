@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.utils.jackson;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import tools.jackson.databind.module.SimpleModule;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;

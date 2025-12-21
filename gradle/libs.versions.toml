@@ -1,27 +1,27 @@
 [versions]
-springAiVersion = "1.1.2"
+springAiVersion = "2.0.0-M1"
 springAiAlibabaVersion = "1.1.0.0-RC2"
-springAiSearchToolVersion = "1.0.1"
-springBootVersion = "3.5.9"
+springAiSearchToolVersion = "2.0.0"
+springBootVersion = "4.0.1"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
-springCloudVersion = "2025.0.1"
-springGrpcVersion = "0.12.0"
-springShellVersion = "3.4.1"
-springDocVersion = "2.8.14"
+springCloudVersion = "2025.1.0"
+springGrpcVersion = "1.0.0"
+springShellVersion = "4.0.0-RC1"
+springDocVersion = "3.0.0"
 grpcVersion = "1.77.0"
-nettyVersion = "4.1.130.Final"
-cosidVersion = "2.15.1"
-redissonVersion = "3.52.0"
+nettyVersion = "4.2.9.Final"
+cosidVersion = "3.0.1"
+redissonVersion = "4.0.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
 hutoolVersion = "5.8.42"
-awsSdkVersion = "2.40.9"
+awsSdkVersion = "2.40.12"
 mockitoVersion = "5.21.0"
 seleniumVersion = "4.39.0"
 mybatisVersion = "3.5.19"
-mybatisSpringVersion = "3.0.5"
-mybatisSpringStarterVersion = "3.0.5"
+mybatisSpringVersion = "4.0.0"
+mybatisSpringStarterVersion = "4.0.0"
 mybatisPlusVersion = "3.5.15"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
@@ -85,10 +85,11 @@ spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-aspectj = { module = "org.springframework.boot:spring-boot-starter-aspectj" }
+spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+spring-boot-starter-jackson = { module = "org.springframework.boot:spring-boot-starter-jackson" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
@@ -97,9 +98,9 @@ spring-boot-starter-amqp = { module = "org.springframework.boot:spring-boot-star
 spring-boot-starter-quartz = { module = "org.springframework.boot:spring-boot-starter-quartz" }
 spring-boot-starter-websocket = { module = "org.springframework.boot:spring-boot-starter-websocket" }
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
-spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
-spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
-spring-boot-starter-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-authorization-server" }
+spring-boot-starter-security-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-client" }
+spring-boot-starter-security-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-resource-server" }
+spring-boot-starter-security-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server" }
 spring-boot-starter-shell = { module = "org.springframework.shell:spring-shell-starter" }
 
 # Spring Data
@@ -120,7 +121,6 @@ spring-security-oauth2-resource-server = { module = "org.springframework.securit
 # Spring Cloud
 spring-cloud-commons = { module = "org.springframework.cloud:spring-cloud-commons" }
 spring-cloud-openfeign-core = { module = "org.springframework.cloud:spring-cloud-openfeign-core" }
-spring-cloud-gateway-server = { module = "org.springframework.cloud:spring-cloud-gateway-server" }
 spring-cloud-starter-gateway-server = { module = "org.springframework.cloud:spring-cloud-starter-gateway-server-webflux" }
 spring-cloud-starter-consul-discovery = { module = "org.springframework.cloud:spring-cloud-starter-consul-discovery" }
 spring-cloud-starter-consul-config = { module = "org.springframework.cloud:spring-cloud-starter-consul-config" }
@@ -164,13 +164,13 @@ mybatis-plus-annotation = { module = "com.baomidou:mybatis-plus-annotation", ver
 mybatis-plus-core = { module = "com.baomidou:mybatis-plus-core", version.ref = "mybatisPlusVersion" }
 mybatis-plus-extension = { module = "com.baomidou:mybatis-plus-extension", version.ref = "mybatisPlusVersion" }
 mybatis-plus-jsqlparser = { module = "com.baomidou:mybatis-plus-jsqlparser", version.ref = "mybatisPlusVersion" }
-mybatis-plus-spring-boot-starter = { module = "com.baomidou:mybatis-plus-spring-boot3-starter", version.ref = "mybatisPlusVersion" }
+mybatis-plus-spring-boot-starter = { module = "com.baomidou:mybatis-plus-spring-boot4-starter", version.ref = "mybatisPlusVersion" }
 
 # Hibernate
 hibernate-core = { module = "org.hibernate.orm:hibernate-core" }
-hibernate-core-annotation-processor = { module = "org.hibernate.orm:hibernate-jpamodelgen" }
-hibernate-validator = { module = "org.hibernate.validator:hibernate-validator" }
-hibernate-validator-annotation-processor = { module = "org.hibernate.validator:hibernate-validator-annotation-processor" }
+hibernate-processor = { module = "org.hibernate.orm:hibernate-processor" }
+hibernate-validator-core = { module = "org.hibernate.validator:hibernate-validator" }
+hibernate-validator-processor = { module = "org.hibernate.validator:hibernate-validator-annotation-processor" }
 
 # Database
 pgsql = { module = "org.postgresql:postgresql" }
@@ -186,7 +186,7 @@ netty-resolver-dns-native-macos = { module = "io.netty:netty-resolver-dns-native
 # Redis
 jedis = { module = "redis.clients:jedis" }
 redisson = { module = "org.redisson:redisson", version.ref = "redissonVersion" }
-redisson-spring-data = { module = "org.redisson:redisson-spring-data-35", version.ref = "redissonVersion" }
+redisson-spring-data = { module = "org.redisson:redisson-spring-data-40", version.ref = "redissonVersion" }
 redisson-spring-boot-starter = { module = "org.redisson:redisson-spring-boot-starter", version.ref = "redissonVersion" }
 cosid-bom = { module = "me.ahoo.cosid:cosid-bom", version.ref = "cosidVersion" }
 cosid-core = { module = "me.ahoo.cosid:cosid-core", version.ref = "cosidVersion" }
@@ -263,6 +263,7 @@ jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
 commons-io = { module = "commons-io:commons-io", version = "2.21.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
 commons-codec = { module = "commons-codec:commons-codec", version = "1.20.0" }
+commons-logging = { module = "commons-logging:commons-logging", version = "1.3.5" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
 commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.0" }
 commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
@@ -282,10 +283,9 @@ libreoffice-unoil = { module = "org.libreoffice:unoil", version = "24.8.4" }
 
 json = { module = "org.json:json", version = "20250517" }
 gson = { module = "com.google.code.gson:gson" }
-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
-jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
-jackson-datatype-jdk8 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jdk8" }
+jackson-core = { module = "tools.jackson.core:jackson-core" }
+jackson-databind = { module = "tools.jackson.core:jackson-databind" }
 
 hutool-bom = { module = "cn.hutool:hutool-bom", version.ref = "hutoolVersion" }
 hutool-core = { module = "cn.hutool:hutool-core" }
@@ -363,10 +363,10 @@ webjars-bootstrap-icons = { module = "org.webjars.npm:bootstrap-icons", version 
 
 [bundles]
 baseCore = ["mapstruct", "lombok"]
-baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "okio", "dom4j", "hibernate-validator"]
-baseApacheCommons = ["commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv"]
+baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "okio", "dom4j", "hibernate-validator-core"]
+baseApacheCommons = ["commons-logging", "commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
-baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-core-annotation-processor", "hibernate-validator-annotation-processor"]
+baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-processor", "hibernate-validator-processor"]
 baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
 baseJakartaServlet = ["jakarta-servlet"]
 baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
@@ -382,7 +382,7 @@ image = ["thumbnailator", "imageio-core", "imageio-jpeg", "imageio-webp", "zxing
 hutool = ["hutool-core", "hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
 excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
-json = ["jackson-databind", "jackson-annotations", "jackson-datatype-jsr310", "jackson-datatype-jdk8", "gson", "json"]
+json = ["jackson-annotations", "jackson-core", "jackson-databind", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
 ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]
@@ -393,10 +393,9 @@ springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
-springBootReactive = ["spring-cloud-gateway-server"]
-springBootCoreStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter"]
-springBootServletStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-web"]
-springBootReactiveStarter = ["spring-boot-starter-aop", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-webflux"]
+springBootCoreStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter"]
+springBootServletStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webmvc"]
+springBootReactiveStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webflux"]
 springBootShellStarter = ["spring-boot-starter-shell"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
@@ -406,9 +405,9 @@ springDocReactiveStarter = ["swagger-annotations-jakarta", "swagger-models-jakar
 # Spring Security
 springSecurityCore = ["spring-security-core", "spring-security-messaging", "spring-security-web", "spring-security-oauth2-jose", "spring-security-oauth2-core", "spring-security-oauth2-resource-server"]
 springSecurityCoreStarter = ["spring-boot-starter-security"]
-springSecurityAuthorizationServerStarter = ["spring-boot-starter-oauth2-authorization-server"]
-springSecurityResourceServerStarter = ["spring-boot-starter-oauth2-resource-server"]
-springSecurityClientStarter = ["spring-boot-starter-oauth2-client"]
+springSecurityAuthorizationServerStarter = ["spring-boot-starter-security-oauth2-authorization-server"]
+springSecurityResourceServerStarter = ["spring-boot-starter-security-oauth2-resource-server"]
+springSecurityClientStarter = ["spring-boot-starter-security-oauth2-client"]
 
 # Spring Cloud
 springCloudCore = ["spring-cloud-commons", "spring-cloud-openfeign-core"]

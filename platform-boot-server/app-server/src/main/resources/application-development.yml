@@ -32,8 +32,6 @@ spring:
             url: jdbc:mysql://127.0.0.1:3306/ee_quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
             username: root
             password: root
-    cache:
-        type: redis
     data:
         redis:
             host: 127.0.0.1
@@ -82,13 +80,6 @@ spring:
                 type: sync
                 sse-endpoint: /sse
                 sse-message-endpoint: /sse/messages
-### --------------------------------------------------------------------------------------------------------------------
-### Actuator
-### --------------------------------------------------------------------------------------------------------------------
-management:
-    health:
-        elasticsearch:
-            enabled: false
 ### --------------------------------------------------------------------------------------------------------------------
 ### Spring Extension Config
 ### --------------------------------------------------------------------------------------------------------------------
@@ -245,8 +236,7 @@ platform:
     message:
         broadcast:
             enabled: true
-            rabbit:
-                enabled: true
+            type: rabbit
     selenium:
         enabled: true
         driver-type: chrome

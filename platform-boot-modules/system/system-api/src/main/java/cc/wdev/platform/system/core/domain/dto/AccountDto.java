@@ -3,7 +3,6 @@ package cc.wdev.platform.system.core.domain.dto;
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
 import cc.wdev.platform.commons.constants.DateTimeConstants;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -22,7 +21,6 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDto implements Serializable {
     /**
      * ID

@@ -6,20 +6,18 @@ import cc.wdev.platform.commons.utils.DateUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import cc.wdev.platform.commons.utils.time.TimeZoneManager;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.BeanProperty;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.BeanProperty;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
+import tools.jackson.databind.ser.std.StdSerializer;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
  * @author elvea
  */
-public class DateSerializer extends StdSerializer<Date> implements ContextualSerializer {
+public class DateSerializer extends StdSerializer<Date> {
 
     private String pattern;
 
@@ -36,7 +34,7 @@ public class DateSerializer extends StdSerializer<Date> implements ContextualSer
     }
 
     @Override
-    public void serialize(Date date, JsonGenerator generator, SerializerProvider provider) throws IOException {
+    public void serialize(Date date, JsonGenerator generator, SerializationContext provider) {
         String pattern = StringUtils.isNotEmpty(this.pattern) ? this.pattern : DateTimeConstants.DEFAULT_DATE_TIME_PATTERN;
         if (timeZoneConvert) {
             generator.writeString(DateUtils.format(date, pattern, TimeZoneManager.getResolver().resolveUserTimeZone()));
@@ -46,7 +44,7 @@ public class DateSerializer extends StdSerializer<Date> implements ContextualSer
     }
 
     @Override
-    public JsonSerializer<?> createContextual(SerializerProvider provider, BeanProperty property) {
+    public ValueSerializer<?> createContextual(SerializationContext provider, BeanProperty property) {
         if (!ObjectUtils.isEmpty(property)) {
             com.fasterxml.jackson.annotation.JsonFormat.Value format = findFormatOverrides(provider, property, handledType());
             JsonFormat annotation = property.getAnnotation(JsonFormat.class);
