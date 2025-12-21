@@ -79,10 +79,8 @@ allprojects {
             dependency(rootProject.libs.guava.get().toString())
             dependency(rootProject.libs.json.get().toString())
             dependency(rootProject.libs.spotbugs.annotations.get().toString())
-            dependency(rootProject.libs.httpcore.core.get().toString())
-            dependency(rootProject.libs.httpcore.nio.get().toString())
+            dependency(rootProject.libs.httpcore.get().toString())
             dependency(rootProject.libs.httpclient.get().toString())
-            dependency(rootProject.libs.httpasyncclient.get().toString())
             dependency(rootProject.libs.httpmime.get().toString())
         }
     }

@@ -4,8 +4,8 @@ import cc.wdev.platform.commons.message.socket.servlet.interceptor.WebSocketSess
 import cc.wdev.platform.system.core.socket.SystemWebSocketHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.jspecify.annotations.NonNull;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.socket.EnableWebSocketSecurity;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
