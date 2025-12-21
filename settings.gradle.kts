@@ -35,8 +35,6 @@ include("platform-boot-server:app-server")
 // 应用模块
 include("platform-cloud-modules:system:system-api")
 include("platform-cloud-modules:system:system-impl")
-include("platform-cloud-modules:lxp:lxp-api")
-include("platform-cloud-modules:lxp:lxp-impl")
 // 应用服务
 include("platform-cloud-services:gateway-server")
 include("platform-cloud-services:auth-server")

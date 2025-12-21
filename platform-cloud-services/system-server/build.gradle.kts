@@ -26,10 +26,9 @@ dependencies {
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-cloud-modules:system:system-impl"))
-    implementation(project(":platform-cloud-modules:lxp:lxp-impl"))
 }
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveBaseName.set("app-server")
+    archiveBaseName.set("system-server")
 }
