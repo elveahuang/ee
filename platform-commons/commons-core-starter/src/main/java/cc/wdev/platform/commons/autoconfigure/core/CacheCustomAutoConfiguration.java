@@ -9,6 +9,7 @@ import cc.wdev.platform.commons.core.cache.utils.RedissonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.cache.RedissonSpringCacheManager;
+import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -47,6 +48,13 @@ public class CacheCustomAutoConfiguration {
     public RedissonUtils redissonUtils(RedissonClient redissonClient) {
         log.info("Creating redissonUtils");
         return new RedissonUtils(redissonClient);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
+        return configuration -> {
+        };
     }
 
     @Bean

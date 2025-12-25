@@ -175,6 +175,11 @@ public class ServletWebSocketManager implements WebSocketManager<String, WebSock
      */
     @Override
     public <M extends SimpleMessage<?>> void sendMessage(M message) {
+        if (message == null) {
+            log.warn("sendMessage error, message is null");
+            return;
+        }
+
         if (CollectionUtils.isNotEmpty(message.getKeys())) {
             message.getKeys().forEach(key -> {
                 if (this.exist(key)) {

@@ -4,6 +4,10 @@ import cc.wdev.platform.commons.web.request.Request;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
+import org.springframework.ai.chat.messages.Message;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author elvea
@@ -12,5 +16,20 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class SimpleCompletionRequest extends Request {
+    /**
+     * 用户消息
+     */
     private String prompt;
+    /**
+     * 消息列表
+     */
+    private List<Message> messages;
+    /**
+     * 消息列表
+     */
+    private List<Object> tools;
+    /**
+     * 工具上下文
+     */
+    private Map<String, Object> contextMap;
 }

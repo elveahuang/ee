@@ -18,12 +18,13 @@ import cc.wdev.platform.commons.core.ai.tools.CommonTools;
 import co.elastic.clients.transport.rest5_client.low_level.Rest5Client;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.TokenCountBatchingStrategy;
-import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
@@ -54,10 +55,14 @@ import static org.springframework.ai.vectorstore.elasticsearch.SimilarityFunctio
 @ImportRuntimeHints(AiAutoConfiguration.AiRuntimeHints.class)
 public class AiAutoConfiguration {
 
-    public AiAutoConfiguration(AiProperties properties) {
+    private final AiProperties aiProperties;
+
+    public AiAutoConfiguration(AiProperties aiProperties) {
         log.info("AiAutoConfiguration is enabled");
-        log.info("AiAutoConfiguration Service Provider - {}", properties.getServiceProvider());
-        log.info("AiAutoConfiguration Vector Store Provider - {}", properties.getVectorStoreProvider());
+        log.info("AiAutoConfiguration Service Provider - {}", aiProperties.getServiceProvider());
+        log.info("AiAutoConfiguration Vector Store Provider - {}", aiProperties.getVectorStoreProvider());
+
+        this.aiProperties = aiProperties;
     }
 
     @Bean
@@ -68,7 +73,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public MessageWindowChatMemory chatMemory(ChatMemoryRepository chatMemoryRepository) {
+    public ChatMemory chatMemory(ChatMemoryRepository chatMemoryRepository) {
         return MessageWindowChatMemory.builder()
             .chatMemoryRepository(chatMemoryRepository)
             .maxMessages(100)
@@ -77,18 +82,16 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ChatService chatService(OpenAiChatModel model,
-                                   MessageWindowChatMemory messageWindowChatMemory,
+    public ChatService chatService(ChatModel model,
+                                   ChatMemory chatMemory,
                                    ObjectProvider<AiCustomizer> customizerProvider) {
-        return new DefaultChatService(model, messageWindowChatMemory, customizerProvider);
+        return new DefaultChatService(model, chatMemory, customizerProvider);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public AiFactory aiFactory(AiProperties aiProperties,
-                               ChatService defaultChatService,
-                               MessageWindowChatMemory messageWindowChatMemory) {
-        return new AiFactoryImpl(aiProperties.getServiceProvider(), defaultChatService, messageWindowChatMemory);
+    public AiFactory aiFactory(ChatService chatService, ChatMemory chatMemory) {
+        return new AiFactoryImpl(aiProperties.getServiceProvider(), chatService, chatMemory);
     }
 
     @Bean

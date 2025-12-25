@@ -1,19 +1,35 @@
 package cc.wdev.platform.commons.message.model;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
+
+import static cc.wdev.platform.commons.message.model.SimpleMessage.JSON;
+import static cc.wdev.platform.commons.message.model.SimpleMessage.TEXT;
 
 /**
  * @author elvea
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class SimpleMessage<M extends Serializable> implements Serializable {
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "contentType",
+    defaultImpl = SimpleTextMessage.class
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = SimpleTextMessage.class, name = TEXT),
+    @JsonSubTypes.Type(value = SimpleJsonMessage.class, name = JSON)
+})
+public abstract class SimpleMessage<M extends Serializable> implements Serializable {
+
+    public static final String TEXT = "text";
+
+    public static final String JSON = "json";
+
     /**
      * 指定会话标识
      */

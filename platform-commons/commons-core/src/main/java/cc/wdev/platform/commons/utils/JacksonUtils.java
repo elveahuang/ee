@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.utils;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
+import lombok.Getter;
 import tools.jackson.core.json.JsonReadFeature;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.DeserializationFeature;
@@ -16,35 +17,16 @@ import java.util.Map;
  */
 public abstract class JacksonUtils {
 
+    @Getter
     public final static JsonMapper objectMapper = JsonMapper.builder()
+        .addModule(new CustomJsonModule())
         .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
         .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
         .enable(JsonReadFeature.ALLOW_MISSING_VALUES)
         .enable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-        .changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL))
-        .changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL))
         .build();
-
-    public final static JsonMapper cacheObjectMapper = JsonMapper.builder()
-        .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
-        .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
-        .enable(JsonReadFeature.ALLOW_MISSING_VALUES)
-        .enable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-        .changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL))
-        .changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL))
-        .build();
-
-    public static ObjectMapper getObjectMapper() {
-        return objectMapper;
-    }
-
-    public static ObjectMapper getCacheObjectMapper() {
-        return cacheObjectMapper;
-    }
 
     /**
      * 把对象转换成JSON文本
@@ -56,7 +38,7 @@ public abstract class JacksonUtils {
     /**
      * 把JSON文本转成对象
      */
-    public static <T> T toObject(String json, Class<T> clazz) throws Exception {
+    public static <T> T toObject(String json, Class<T> clazz) {
         if (StringUtils.isEmpty(json)) {
             return null;
         }
@@ -66,7 +48,7 @@ public abstract class JacksonUtils {
     /**
      * 把JSON文本转成对象
      */
-    public static <T> T toObject(String json, TypeReference<T> typeReference) throws Exception {
+    public static <T> T toObject(String json, TypeReference<T> typeReference) {
         return getObjectMapper().readValue(json, typeReference);
     }
 
@@ -81,7 +63,7 @@ public abstract class JacksonUtils {
     /**
      *
      */
-    public static byte[] toBytes(Object object) throws Exception {
+    public static byte[] toBytes(Object object) {
         return getObjectMapper().writeValueAsBytes(object);
     }
 

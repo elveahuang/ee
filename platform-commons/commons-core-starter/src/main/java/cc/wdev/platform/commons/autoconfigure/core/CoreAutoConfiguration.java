@@ -14,11 +14,14 @@ import cc.wdev.platform.commons.utils.time.DefaultTimeZoneResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
+import tools.jackson.databind.SerializationFeature;
 
 /**
  * @author elvea
@@ -130,23 +133,13 @@ public class CoreAutoConfiguration {
     // Jackson
     // ------------------------------------------------------------------------------------------------------------------------
 
-//    @Bean
-//    public CustomObjectMapperBuilderCustomizer objectMapperBuilderCustomizer() {
-//        return new CustomObjectMapperBuilderCustomizer();
-//    }
-//
-//    public static class CustomObjectMapperBuilderCustomizer implements Jackson2ObjectMapperBuilderCustomizer, Ordered {
-//        @Override
-//        public void customize(Jackson2ObjectMapperBuilder builder) {
-//            builder.modulesToInstall(new JavaTimeModule());
-//            builder.modulesToInstall(new Jdk8Module());
-//            builder.modulesToInstall(new CustomJsonModule());
-//        }
-//
-//        @Override
-//        public int getOrder() {
-//            return 1;
-//        }
-//    }
+    @Bean
+    public JsonMapperBuilderCustomizer jsonMapperBuilderCustomizer() {
+        return builder -> {
+            builder.enable(SerializationFeature.INDENT_OUTPUT);
+            builder.changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL));
+            builder.changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL));
+        };
+    }
 
 }

@@ -49,6 +49,7 @@ public class DataCoreAutoConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(JdbcTemplate.class)
+    @ConditionalOnProperty(prefix = DataJdbcProperties.PREFIX, name = "enabled", havingValue = "true")
     public static class JdbcConfiguration {
 
         @Bean

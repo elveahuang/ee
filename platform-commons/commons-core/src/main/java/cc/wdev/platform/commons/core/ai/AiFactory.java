@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.core.ai;
 
 import cc.wdev.platform.commons.core.ai.chat.ChatService;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.memory.ChatMemory;
 
 /**
  * @author elvea
@@ -11,7 +11,7 @@ public interface AiFactory {
     /**
      * 获取智能体存储服务
      */
-    MessageWindowChatMemory getChatMemory();
+    ChatMemory getChatMemory();
 
     /**
      * 获取智能体服务

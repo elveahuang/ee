@@ -9,8 +9,6 @@ import cc.wdev.platform.commons.utils.StringUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.commons.compress.utils.Lists;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.*;
@@ -43,12 +41,10 @@ public class ChatController {
         promptTemplate.add("currentUsername", "elvea");
         String prompt = promptTemplate.render();
         request.setSystemPrompt(prompt);
-        Flux<ChatResponse> publisher = aiFactory.getChatService().streamChatCompletion(request);
+        Flux<String> publisher = aiFactory.getChatService().streamChatCompletionText(request);
 
         return publisher.flatMap(response -> {
-            Generation result = response.getResult();
-            String content = result.getOutput().toString();
-            return Flux.just(ServerSentEvent.builder(content)
+            return Flux.just(ServerSentEvent.builder(response)
                 .event("text")
                 .build());
         });
