@@ -9,6 +9,7 @@ import cc.wdev.platform.system.core.api.UserApi;
 import cc.wdev.platform.system.core.domain.dto.UserLoginInfoDto;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -36,12 +37,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserApi userApi;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public @NonNull UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
         UserLoginInfoDto user;
         if (RegexUtils.checkEmail(username)) {
             user = userApi.findByEmail(username);
         } else if (RegexUtils.checkMobile(username)) {
-            user = userApi.findByMobile(MobileCountryCodeTypeEnum.ZH_CN.getCode(), username);
+            user = userApi.findByMobile(MobileCountryCodeTypeEnum.ZH_CN.getValue(), username);
         } else {
             user = userApi.findByUsername(username);
         }
@@ -57,7 +58,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (CollectionUtils.isNotEmpty(user.getRoles())) {
             authorities.addAll(user.getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getCode())).collect(Collectors.toSet()));
         }
-        return new User(user.getId(), UserTypeEnum.USER.getCode(), user.getUsername(), user.getPassword(), authorities);
+        return new User(user.getId(), UserTypeEnum.USER.getValue(), user.getUsername(), user.getPassword(), authorities);
     }
 
 }

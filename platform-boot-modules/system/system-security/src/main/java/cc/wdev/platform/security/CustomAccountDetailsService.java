@@ -10,6 +10,7 @@ import cc.wdev.platform.system.core.domain.dto.AccountLoginInfoDto;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,12 +35,12 @@ public class CustomAccountDetailsService implements UserDetailsService {
     private final AccountApi accountApi;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public @NonNull UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
         AccountLoginInfoDto account;
         if (RegexUtils.checkEmail(username)) {
             account = accountApi.findByEmail(username);
         } else if (RegexUtils.checkMobile(username)) {
-            account = accountApi.findByMobile(MobileCountryCodeTypeEnum.ZH_CN.getCode(), username);
+            account = accountApi.findByMobile(MobileCountryCodeTypeEnum.ZH_CN.getValue(), username);
         } else {
             account = accountApi.findByUsername(username);
         }
@@ -55,7 +56,7 @@ public class CustomAccountDetailsService implements UserDetailsService {
         if (CollectionUtils.isNotEmpty(account.getRoles())) {
             authorities.addAll(account.getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getCode())).collect(Collectors.toSet()));
         }
-        return new User(account.getId(), UserTypeEnum.ACCOUNT.getCode(), account.getUsername(), account.getPassword(), authorities);
+        return new User(account.getId(), UserTypeEnum.ACCOUNT.getValue(), account.getUsername(), account.getPassword(), authorities);
     }
 
 }

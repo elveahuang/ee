@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum RegionTypeEnum implements BaseBizTypeEnum<String> {
+public enum RegionTypeEnum implements BaseEnum<String> {
     COUNTRY("COUNTRY", "国家、地区"),
     PROVINCE("PROVINCE", "省、自治区、直辖市"),
     CITY("CITY", "地级市、地区、自治州、盟"),
@@ -16,9 +16,4 @@ public enum RegionTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
-    }
 }

@@ -8,16 +8,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum StorageAccessTypeEnum implements BaseBizTypeEnum<String> {
+public enum StorageAccessTypeEnum implements BaseEnum<String> {
     PUBLIC("PUBLIC", "公开"),
     PRIVATE("PRIVATE", "私有");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.STORAGE_ACCESS_TYPE.getValue().toUpperCase();
-    }
-
 }

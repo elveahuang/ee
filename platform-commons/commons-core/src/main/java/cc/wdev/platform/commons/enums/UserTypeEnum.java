@@ -8,16 +8,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UserTypeEnum implements BaseBizTypeEnum<String> {
+public enum UserTypeEnum implements BaseEnum<String> {
     USER("USER", "用户"),
     ACCOUNT("ACCOUNT", "账号");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.USER_TYPE.getValue().toUpperCase();
-    }
-
 }

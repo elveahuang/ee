@@ -1,7 +1,7 @@
 package cc.wdev.platform.system.mall.service.impl;
 
 import cc.wdev.platform.commons.data.jpa.service.BaseCachingEntityService;
-import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
+import cc.wdev.platform.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.mall.domain.entity.AccountVipEntity;
 import cc.wdev.platform.system.mall.repository.AccountVipRepository;
 import cc.wdev.platform.system.mall.service.AccountVipService;

@@ -6,7 +6,7 @@ import cc.wdev.platform.commons.message.rabbit.RabbitUtils;
 import cc.wdev.platform.commons.utils.*;
 import cc.wdev.platform.commons.utils.template.HtmlTemplateService;
 import cc.wdev.platform.system.commons.constants.SystemAmqpConstants;
-import cc.wdev.platform.system.commons.enums.ActiveTypeEnum;
+import cc.wdev.platform.commons.enums.ActiveTypeEnum;
 import cc.wdev.platform.system.core.domain.entity.UserEntity;
 import cc.wdev.platform.system.core.service.UserService;
 import cc.wdev.platform.system.message.domain.dto.CreateMessageDto;

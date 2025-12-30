@@ -102,12 +102,12 @@ public class LabelServiceImpl extends BaseCachingEntityService<LabelEntity, Long
                 Properties properties = new Properties();
                 properties.putAll(labelMap.get(langTypeEnum));
 
-                StorageService storageService = this.storage.getStorageService();
+                StorageService<?> storageService = this.storage.getStorageService();
 
                 String tempFileName = StorageUtils.generateExtFilename("properties");
                 File tempFile = StorageUtils.newTempFile(tempFileName);
                 try (OutputStream output = new FileOutputStream(tempFile)) {
-                    properties.store(output, langTypeEnum.getCode());
+                    properties.store(output, langTypeEnum.getValue());
                 } catch (Exception e) {
                     log.error("Fail to generate properties file.", e);
                 }
@@ -119,7 +119,7 @@ public class LabelServiceImpl extends BaseCachingEntityService<LabelEntity, Long
                 JsonObject json = new JsonObject();
                 labelMap.get(langTypeEnum).forEach(json::addProperty);
 
-                StorageService storageService = this.storage.getStorageService();
+                StorageService<?> storageService = this.storage.getStorageService();
 
                 String tempFileName = StorageUtils.generateExtFilename("properties");
                 File tempFile = StorageUtils.newTempFile(tempFileName);

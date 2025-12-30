@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizGroupTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BizGroupTypeEnum implements BaseBizGroupTypeEnum {
+public enum BizGroupTypeEnum implements BaseEnum<String> {
     // ======================================================
     // 静态类型
     // ======================================================

@@ -25,7 +25,9 @@ mybatisSpringStarterVersion = "4.0.0"
 mybatisPlusVersion = "3.5.15"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
-langChainVersion = "1.9.1"
+langChainVersion = "1.10.0"
+langChainCommunityVersion = "1.10.0-beta18"
+embabelAgentVersion = "0.3.1"
 jacksonVersion = "3.0.3"
 okhttpVersion = "5.3.2"
 poiVersion = "5.5.1"
@@ -64,8 +66,10 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVersion" }
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
-langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
 jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jacksonVersion" }
+langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
+langchain-community-bom = { module = "dev.langchain4j:langchain4j-community-bom", version.ref = "langChainCommunityVersion" }
+embabel-agent-dependencies = { module = "com.embabel.agent:embabel-agent-dependencies", version.ref = "embabelAgentVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -153,6 +157,15 @@ spring-ai-alibaba-starter-dashscope = { module = "com.alibaba.cloud.ai:spring-ai
 spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencies", version.ref = "springBootAdminVersion" }
 spring-boot-admin-starter-client = { module = "de.codecentric:spring-boot-admin-starter-client", version.ref = "springBootAdminVersion" }
 spring-boot-admin-starter-server = { module = "de.codecentric:spring-boot-admin-starter-server", version.ref = "springBootAdminVersion" }
+
+# langChain
+langchain-core = { module = "dev.langchain4j:langchain4j" }
+langchain-open-ai = { module = "dev.langchain4j:langchain4j-open-ai" }
+langchain-dashscope = { module = "dev.langchain4j:langchain4j-community-dashscope" }
+
+# embabelAgent
+embabel-agent-openai = { module = "com.embabel.agent:embabel-agent-openai" }
+embabel-agent-starter-deepseek = { module = "com.embabel.agent:embabel-agent-starter-deepseek" }
 
 # MyBatis
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatisVersion" }
@@ -413,8 +426,17 @@ springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server-webflux"
 # Spring AI
 springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-deepseek", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store", "spring-ai-tst-tool-searcher-lucene"]
 springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server-webmvc"]
+
+# Spring AI Alibaba
 springAiAlibabaCore = ["spring-ai-alibaba-dashscope", "spring-ai-alibaba-agent-framework", "spring-ai-alibaba-graph-core"]
 springAiAlibabaCoreStarter = ["spring-ai-alibaba-starter-dashscope"]
+
+# LangChain4j
+langChainCore = ["langchain-core", "langchain-dashscope", "langchain-open-ai"]
+
+# embabelAgent
+embabelAgentCore = ["embabel-agent-openai"]
+embabelAgentStarter = ["embabel-agent-starter-deepseek"]
 
 # Mybatis
 mybatis = ["mybatis", "mybatis-spring", "mybatis-plus-annotation", "mybatis-plus-core", "mybatis-plus-extension", "mybatis-plus-jsqlparser", "jsqlparser"]

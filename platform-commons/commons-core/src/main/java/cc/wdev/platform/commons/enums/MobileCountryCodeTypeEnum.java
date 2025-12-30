@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum MobileCountryCodeTypeEnum implements BaseBizTypeEnum<String> {
+public enum MobileCountryCodeTypeEnum implements BaseEnum<String> {
     ZH_CN("0086", "中国大陆"),
     ZH_HK("00852", "中国香港"),
     ZH_TW("00886", "中国台湾"),
@@ -18,10 +18,4 @@ public enum MobileCountryCodeTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
-    }
-
 }

@@ -24,7 +24,7 @@ import static cc.wdev.platform.commons.message.model.SimpleMessage.TEXT;
     @JsonSubTypes.Type(value = SimpleTextMessage.class, name = TEXT),
     @JsonSubTypes.Type(value = SimpleJsonMessage.class, name = JSON)
 })
-public abstract class SimpleMessage<M extends Serializable> implements Serializable {
+public class SimpleMessage<M extends Serializable> implements Serializable {
 
     public static final String TEXT = "text";
 

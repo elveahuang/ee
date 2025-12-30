@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.system.mall.enums.OrderStatusTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PayStatusTypeEnum implements BaseBizTypeEnum<String> {
+public enum PayStatusTypeEnum implements BaseEnum<String> {
     PENDING_PAY("PENDING_PAY", "待支付", OrderStatusTypeEnum.PENDING_PAY),
     PENDING_CONFIRM("PENDING_CONFIRM", "待确认", OrderStatusTypeEnum.PENDING_CONFIRM),
     PAYED("PAYED", "已支付", OrderStatusTypeEnum.PAID),
@@ -21,11 +21,6 @@ public enum PayStatusTypeEnum implements BaseBizTypeEnum<String> {
     private final String value;
     private final String description;
     private final OrderStatusTypeEnum orderStatus;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.PAY_STATUS_TYPE.getValue();
-    }
 
     public static OrderStatusTypeEnum getOrderStatus(String value) {
         PayStatusTypeEnum[] ts = PayStatusTypeEnum.values();

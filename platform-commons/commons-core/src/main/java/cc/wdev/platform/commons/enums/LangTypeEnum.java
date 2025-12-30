@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 @Getter
 @AllArgsConstructor
-public enum LangTypeEnum implements BaseBizTypeEnum<String> {
+public enum LangTypeEnum implements BaseEnum<String> {
     ZH_CN("zh_CN", "简体中文", Locale.CHINA, Lists.asList("zh_cn", new String[]{"zh"})),
     ZH_TW("zh_TW", "繁体中文", Locale.TAIWAN, Lists.asList("zh_tw", new String[]{"zh_mo", "zh_hk"})),
     EN("en", "美式英文", Locale.US, Lists.asList("en", new String[]{"en_us", "en_uk"})),
@@ -27,11 +27,6 @@ public enum LangTypeEnum implements BaseBizTypeEnum<String> {
     private final String description;
     private final Locale locale;
     private final List<String> availableCodes;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.LANG_TYPE.getValue().toUpperCase();
-    }
 
     /**
      * 根据可用编号获取对应的语言类型，默认为简体中文

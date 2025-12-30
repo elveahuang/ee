@@ -2,7 +2,7 @@ package cc.wdev.platform.system.core.domain.form;
 
 import cc.wdev.platform.commons.annotations.DateTimeFormat;
 import cc.wdev.platform.commons.annotations.JsonFormat;
-import cc.wdev.platform.system.commons.enums.StatusTypeEnum;
+import cc.wdev.platform.commons.enums.StatusTypeEnum;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

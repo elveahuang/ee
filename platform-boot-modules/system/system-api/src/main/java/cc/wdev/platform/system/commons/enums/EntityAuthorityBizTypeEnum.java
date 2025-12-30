@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum EntityAuthorityBizTypeEnum implements BaseBizTypeEnum<String> {
+public enum EntityAuthorityBizTypeEnum implements BaseEnum<String> {
     PACKAGE("PACKAGE", "套餐-权限关联"),
     TENANT("TENANT", "租户-权限关联"),
     ROLE("ROLE", "角色-权限关联"),
@@ -18,10 +18,4 @@ public enum EntityAuthorityBizTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.ENTITY_AUTHORITY_TYPE.getValue();
-    }
-
 }

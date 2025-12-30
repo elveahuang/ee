@@ -17,6 +17,10 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 public class SimpleCompletionRequest extends Request {
     /**
+     * 系统消息
+     */
+    private String systemPrompt;
+    /**
      * 用户消息
      */
     private String prompt;

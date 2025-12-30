@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,18 +15,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum AiChatBizTypeEnum implements BaseBizTypeEnum<String> {
-    ASSISTANT("ASSISTANT", "助手对话"),
-    CUSTOMER_SERVICE("CUSTOMER_SERVICE", "客服对话"),
-    KNOWLEDGE_BASE("KNOWLEDGE_BASE", "知识库问答"),
-    CODE_REVIEW("CODE_REVIEW", "代码审查");
+public enum AiChatBizTypeEnum implements BaseEnum<String> {
+    ASSISTANT("ASSISTANT", "助手对话");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.AI_CHAT_TYPE.getValue().toUpperCase();
-    }
-
 }

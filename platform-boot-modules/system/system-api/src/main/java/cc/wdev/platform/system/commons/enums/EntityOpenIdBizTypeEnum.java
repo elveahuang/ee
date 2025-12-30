@@ -1,6 +1,7 @@
 package cc.wdev.platform.system.commons.enums;
 
 import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,15 +10,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum EntityOpenIdBizTypeEnum implements BaseBizTypeEnum<String> {
+public enum EntityOpenIdBizTypeEnum implements BaseEnum<String> {
     NONE("NONE", "未指定");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.ENTITY_OPEN_ID_TYPE.getValue().toUpperCase();
-    }
-
 }

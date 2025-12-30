@@ -46,7 +46,7 @@ public abstract class SecurityUtils {
             String username = jwt.getClaimAsString(SecurityConstants.JWT_KEY_USERNAME);
             String usertype = jwt.getClaimAsString(SecurityConstants.JWT_KEY_USERTYPE);
             Set<GrantedAuthority> authorities = Sets.newHashSet(authentication.getAuthorities());
-            return new User(uid, BaseEnum.getEnumByValue(usertype, UserTypeEnum.class).getCode(), username, null, authorities);
+            return new User(uid, BaseEnum.getEnumByValue(usertype, UserTypeEnum.class).getValue(), username, null, authorities);
         }
         return null;
     }

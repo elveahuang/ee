@@ -8,16 +8,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SslProtocolTypeEnum implements BaseBizTypeEnum<String> {
+public enum SslProtocolTypeEnum implements BaseEnum<String> {
     SSL("SSL", "SSL"),
     STARTTLS("STARTTLS", "STARTTLS");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.SSL_PROTOCOL_TYPE.getValue().toUpperCase();
-    }
-
 }

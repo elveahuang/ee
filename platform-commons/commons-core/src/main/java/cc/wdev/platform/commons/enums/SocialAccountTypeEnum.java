@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SocialAccountTypeEnum implements BaseBizTypeEnum<String> {
+public enum SocialAccountTypeEnum implements BaseEnum<String> {
     LARK("LARK", "飞书"),
     WECHAT("WECHAT", "微信"),
     WEWORK("WEWORK", "企微"),
@@ -16,10 +16,4 @@ public enum SocialAccountTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.SOCIAL_ACCOUNT_TYPE.getValue().toUpperCase();
-    }
-
 }

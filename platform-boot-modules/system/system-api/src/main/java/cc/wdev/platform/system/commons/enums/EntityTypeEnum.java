@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum EntityTypeEnum implements BaseBizTypeEnum<Integer> {
+public enum EntityTypeEnum implements BaseEnum<Integer> {
     USER(1, "USER", "用户体系"),
     ACCOUNT(2, "ACCOUNT", "账号体系"),
     NONE(0, "NONE", "未知身份");
@@ -21,10 +21,4 @@ public enum EntityTypeEnum implements BaseBizTypeEnum<Integer> {
     private final Integer value;
     private final String code;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.ENTITY_TYPE.getValue();
-    }
-
 }

@@ -10,16 +10,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ActionTypeEnum implements BaseBizTypeEnum<String> {
+public enum ActionTypeEnum implements BaseEnum<String> {
     SAVE("SAVE", "保存"),
     DELETE("DELETE", "删除");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.ACTION_TYPE.getValue().toUpperCase();
-    }
-
 }

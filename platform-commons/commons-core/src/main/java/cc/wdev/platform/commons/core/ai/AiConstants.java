@@ -4,8 +4,21 @@ package cc.wdev.platform.commons.core.ai;
  * @author elvea
  */
 public interface AiConstants {
+
+    /**
+     * 默认智能体名称
+     */
+    String DEFAULT_AGENT_NAME = "智能体";
+
+    /**
+     * 系统默认提示词
+     */
+    String DEFDAULT_PROMPT = """
+        """;
+
     /**
      * 最大会话记录数
      */
     int MAX_MEMORY_MESSAGE_COUNT = 36;
+
 }

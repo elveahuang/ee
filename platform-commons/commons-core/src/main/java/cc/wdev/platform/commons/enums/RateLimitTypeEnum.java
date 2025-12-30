@@ -8,17 +8,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum RateLimitTypeEnum implements BaseBizTypeEnum<String> {
+public enum RateLimitTypeEnum implements BaseEnum<String> {
     DEFAULT("DEFAULT", "默认限流"),
     IP("IP", "IP限流"),
     CLUSTER("CLUSTER", "CLUSTER限流");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
-    }
-
 }

@@ -24,5 +24,4 @@ public enum MessageBizTypeEnum implements BaseBizTypeEnum<String> {
         return BizGroupTypeEnum.MESSAGE_TYPE.getValue().toUpperCase();
     }
 
-
 }

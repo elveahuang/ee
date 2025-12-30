@@ -8,6 +8,7 @@ import com.google.common.collect.Maps;
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.model.tool.ToolCallingChatOptions;
@@ -26,6 +27,9 @@ public abstract class AiUtils {
     public static List<Message> processCompletionMessages(SimpleCompletionRequest request) {
         // 处理信息
         List<Message> messages = Lists.newArrayList();
+        if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
+            messages.add(new SystemMessage(request.getSystemPrompt()));
+        }
         if (CollectionUtils.isNotEmpty(request.getMessages())) {
             messages.addAll(request.getMessages());
         }

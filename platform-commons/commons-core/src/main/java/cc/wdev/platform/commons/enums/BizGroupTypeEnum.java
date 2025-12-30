@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BizGroupTypeEnum implements BaseBizGroupTypeEnum {
+public enum BizGroupTypeEnum implements BaseEnum<String> {
     RESPONSE_CODE("RESPONSE_CODE", "响应码"),
     SSE_RESPONSE_CODE("SSE_RESPONSE_CODE", "SSE链接响应码"),
     USER_TYPE("USER_TYPE", "用户类型"),

@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PlatformTypeEnum implements BaseBizTypeEnum<String> {
+public enum PlatformTypeEnum implements BaseEnum<String> {
     WECHAT("WECHAT", "微信"),
     WECOM("WECOM", "企微"),
     LARK("LARK", "飞书"),
@@ -21,10 +21,4 @@ public enum PlatformTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.MOBILE_COUNTRY_CODE_TYPE.getValue().toUpperCase();
-    }
-
 }

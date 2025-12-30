@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SocketMessageTypeEnum implements BaseBizTypeEnum<String> {
+public enum SocketMessageTypeEnum implements BaseEnum<String> {
     PING("ping", "PING"),
     VALID("valid", "校验"),
     ACK("ack", "确认"),
@@ -16,10 +16,4 @@ public enum SocketMessageTypeEnum implements BaseBizTypeEnum<String> {
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.SOCKET_MESSAGE_TYPE.getValue();
-    }
-
 }

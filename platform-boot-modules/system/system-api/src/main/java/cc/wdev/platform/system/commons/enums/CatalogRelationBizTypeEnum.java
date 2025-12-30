@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,15 +11,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum CatalogRelationBizTypeEnum implements BaseBizTypeEnum<String> {
+public enum CatalogRelationBizTypeEnum implements BaseEnum<String> {
     NONE("NONE", "NONE");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.CATALOG_RELATION_TYPE.getValue().toUpperCase();
-    }
-
 }

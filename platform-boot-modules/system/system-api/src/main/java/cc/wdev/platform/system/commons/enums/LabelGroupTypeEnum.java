@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,16 +11,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum LabelGroupTypeEnum implements BaseBizTypeEnum<String> {
+public enum LabelGroupTypeEnum implements BaseEnum<String> {
     COMMON("common", "公共类，系统基础模块文本"),
     CUSTOM("custom", "定制类，业务拓展模块文本");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.LABEL_GROUP_TYPE.getValue();
-    }
-
 }

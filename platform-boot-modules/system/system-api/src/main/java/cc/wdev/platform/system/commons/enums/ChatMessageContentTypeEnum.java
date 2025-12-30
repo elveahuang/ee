@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.enums;
 
-import cc.wdev.platform.commons.enums.BaseBizTypeEnum;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,15 +11,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ChatMessageContentTypeEnum implements BaseBizTypeEnum<String> {
+public enum ChatMessageContentTypeEnum implements BaseEnum<String> {
     TEXT("TEXT", "文本");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.CHAT_MESSAGE_CONTENT_TYPE.getValue().toUpperCase();
-    }
-
 }

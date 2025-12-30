@@ -8,16 +8,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SeleniumDriverTypeEnum implements BaseBizTypeEnum<String> {
+public enum SeleniumDriverTypeEnum implements BaseEnum<String> {
     CHROME("CHROME", "Google Chrome"),
     EDGE("EDGE", "Microsoft Edge");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.SELENIUM_DRIVER_TYPE.getValue().toUpperCase();
-    }
-
 }

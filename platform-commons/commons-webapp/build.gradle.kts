@@ -23,6 +23,8 @@ dependencies {
     implementation(rootProject.libs.bundles.rabbitStarter)
     implementation(rootProject.libs.bundles.elastic)
     implementation(rootProject.libs.bundles.elasticStarter)
+    implementation(rootProject.libs.bundles.embabelAgentCore)
+    implementation(rootProject.libs.bundles.langChainCore)
     implementation(rootProject.libs.bundles.storage)
     implementation(rootProject.libs.bundles.ip)
     implementation(rootProject.libs.bundles.im)

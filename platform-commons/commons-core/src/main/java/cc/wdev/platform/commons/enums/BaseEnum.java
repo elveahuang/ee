@@ -16,6 +16,13 @@ public interface BaseEnum<T extends Serializable> {
 
     String getDescription();
 
+    /**
+     * 获取多语言文本
+     */
+    default String getLabel() {
+        return ("label__" + getValue()).toLowerCase();
+    }
+
     static <E extends Enum<E> & BaseEnum<?>> E getEnumByValue(Object value, Class<E> clazz) {
         return getEnumByValue(value, clazz, null);
     }

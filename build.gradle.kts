@@ -63,6 +63,8 @@ allprojects {
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
             mavenBom(rootProject.libs.langchain.bom.get().toString())
+            mavenBom(rootProject.libs.langchain.community.bom.get().toString())
+            mavenBom(rootProject.libs.embabel.agent.dependencies.get().toString())
             mavenBom(rootProject.libs.jackson.bom.get().toString())
         }
         dependencies {

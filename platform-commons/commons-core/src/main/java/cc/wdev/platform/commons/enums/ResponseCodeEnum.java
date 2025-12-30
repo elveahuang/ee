@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 @AllArgsConstructor
-public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
+public enum ResponseCodeEnum implements BaseEnum<Integer> {
     // 核心基础
     SUCCESS(HttpStatus.OK.value(), "Success", "正确执行并成功返回"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST.value(), "Bad Request", "错误的请求"),
@@ -38,16 +38,9 @@ public enum ResponseCodeEnum implements BaseBizTypeEnum<Integer> {
     TENANT__NOT_PRESENT(1004001, "Tenant is not present", "租户不存在"),
     ROLE__NOT_PRESENT(1005001, "Role is not present", "角色不存在"),
     ACCOUNT__NOT_PRESENT(1006001, "The account is not present", "用户不存在"),
-    USER__NOT_PRESENT(1007001, "The user is not present", "用户不存在"),
-    ;
+    USER__NOT_PRESENT(1007001, "The user is not present", "用户不存在");
 
     private final Integer value;
     private final String description;
     private final String message;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.RESPONSE_CODE.getValue().toUpperCase();
-    }
-
 }

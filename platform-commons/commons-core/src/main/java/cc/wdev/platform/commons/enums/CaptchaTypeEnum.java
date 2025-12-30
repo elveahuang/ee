@@ -10,17 +10,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum CaptchaTypeEnum implements BaseBizTypeEnum<String> {
+public enum CaptchaTypeEnum implements BaseEnum<String> {
     CODE("CODE", "随机验证码"),
     SMS("SMS", "手机短信验证码"),
     MAIL("EMAIL", "电子邮件验证码");
 
     private final String value;
     private final String description;
-
-    @Override
-    public String getGroup() {
-        return BizGroupTypeEnum.CAPTCHA_TYPE.getValue().toUpperCase();
-    }
-
 }

@@ -8,6 +8,7 @@ import cc.wdev.platform.system.core.feign.UserFeignClient;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,14 +24,14 @@ import java.util.stream.Collectors;
  * @see UserDetailsService
  */
 @Slf4j
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserFeignClient userFeignClient;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public @NonNull UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
         UserLoginDto user = userFeignClient.findByUsername(username).getData();
         if (null == user) {
             throw new UsernameNotFoundException(username);
@@ -43,7 +44,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (CollectionUtils.isNotEmpty(user.getRoles())) {
             authorities.addAll(user.getRoles().stream().map(e -> new SimpleGrantedAuthority(e.getCode())).collect(Collectors.toSet()));
         }
-        return new User(user.getId(), UserTypeEnum.USER.getCode(), user.getUsername(), user.getPassword(), authorities);
+        return new User(user.getId(), UserTypeEnum.USER.getValue(), user.getUsername(), user.getPassword(), authorities);
     }
 
 }

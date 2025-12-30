@@ -54,10 +54,6 @@ public abstract class AbstractTopicService<T extends SimpleMessage<?>, S> implem
                 if (obj instanceof SimpleMessage<?> msg) {
                     this.handle((T) msg);
                 }
-
-                if (channel != null) {
-                    channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-                }
             });
         } else {
             log.warn("Unsupported broadcast type [{}].", this.manager.getBroadcastType());
