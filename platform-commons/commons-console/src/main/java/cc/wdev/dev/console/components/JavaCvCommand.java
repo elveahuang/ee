@@ -1,14 +1,16 @@
-package cc.wdev.dev.console.shells;
+package cc.wdev.dev.console.components;
 
 import org.bytedeco.javacpp.Loader;
 import org.springframework.shell.core.command.annotation.Command;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-public class JavaCvShell {
+@Component
+public class JavaCvCommand {
 
-    @Command(name = "javavc")
-    public void check() {
+    @Command(name = "javacv")
+    public void javacv() {
         System.setProperty("org.bytedeco.javacpp.logger.debug", "true");
         Properties properties = Loader.loadProperties();
         System.out.println(properties.getProperty("platform.extension"));

@@ -1,18 +1,19 @@
 [versions]
 springAiVersion = "2.0.0-M1"
-springAiAlibabaVersion = "1.1.0.0-RC2"
+springAiAlibabaVersion = "1.1.0.0"
+springAiExtensionsVersion = "1.1.2.0"
 springAiSearchToolVersion = "2.0.0"
 springBootVersion = "4.0.1"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.1.0"
 springGrpcVersion = "1.0.0"
-springShellVersion = "4.0.0-RC1"
+springShellVersion = "4.0.0"
 springDocVersion = "3.0.0"
-grpcVersion = "1.77.0"
+grpcVersion = "1.78.0"
 nettyVersion = "4.2.9.Final"
 cosidVersion = "3.0.1"
-redissonVersion = "4.0.0"
+redissonVersion = "4.1.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
 hutoolVersion = "5.8.42"
@@ -53,8 +54,8 @@ gradle-osdetector = { id = "com.google.osdetector", version.ref = "gradleOSDetec
 
 [libraries]
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
-spring-ai-alibaba-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiAlibabaVersion" }
-spring-ai-alibaba-agent-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
+spring-ai-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiExtensionsVersion" }
+spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
 spring-ai-tst-bom = { module = "org.springaicommunity:tool-search-tool-bom", version.ref = "springAiSearchToolVersion" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
@@ -105,7 +106,7 @@ spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-security-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-client" }
 spring-boot-starter-security-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-resource-server" }
 spring-boot-starter-security-oauth2-authorization-server = { module = "org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server" }
-spring-boot-starter-shell = { module = "org.springframework.shell:spring-shell-starter" }
+spring-boot-starter-shell = { module = "org.springframework.shell:spring-shell-starter-jansi" }
 
 # Spring Data
 spring-data-commons = { module = "org.springframework.data:spring-data-commons" }
@@ -199,6 +200,7 @@ netty-codec-http = { module = "io.netty:netty-codec-http", version.ref = "nettyV
 # Redis
 jedis = { module = "redis.clients:jedis" }
 redisson = { module = "org.redisson:redisson", version.ref = "redissonVersion" }
+redisson-spring-cache = { module = "org.redisson:redisson-spring-cache", version.ref = "redissonVersion" }
 redisson-spring-data = { module = "org.redisson:redisson-spring-data-40", version.ref = "redissonVersion" }
 redisson-spring-boot-starter = { module = "org.redisson:redisson-spring-boot-starter", version.ref = "redissonVersion" }
 cosid-bom = { module = "me.ahoo.cosid:cosid-bom", version.ref = "cosidVersion" }
@@ -405,7 +407,7 @@ springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
 springBootCoreStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter"]
 springBootServletStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webmvc"]
 springBootReactiveStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webflux"]
-springBootShellStarter = ["spring-boot-starter-shell"]
+springBootShellStarter = ["spring-boot-starter", "spring-boot-starter-shell"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
 springDocServletStarter = ["swagger-annotations-jakarta", "swagger-models-jakarta", "springdoc-openapi-starter-webmvc-api", "springdoc-openapi-starter-webmvc-ui"]
@@ -447,7 +449,7 @@ hibernate = ["spring-data-jpa", "hibernate-core"]
 hibernateStarter = ["spring-boot-starter-jdbc", "spring-boot-starter-data-jpa"]
 
 # Redis
-redis = ["jedis", "redisson", "redisson-spring-data", "cosid-core", "cosid-spring-redis", "netty-resolver-dns-native-macos"]
+redis = ["jedis", "redisson", "redisson-spring-cache", "redisson-spring-data", "cosid-core", "cosid-spring-redis", "netty-resolver-dns-native-macos"]
 redisStarter = ["redisson-spring-boot-starter", "cosid-spring-boot-starter"]
 
 # RabbitMQ

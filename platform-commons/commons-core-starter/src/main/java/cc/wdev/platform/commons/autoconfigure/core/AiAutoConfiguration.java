@@ -40,6 +40,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.context.annotation.Primary;
 
 import java.util.Set;
 
@@ -50,7 +51,8 @@ import static org.springframework.ai.vectorstore.elasticsearch.SimilarityFunctio
  */
 @Slf4j
 @AutoConfiguration
-@ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnClass(name = "org.springframework.ai.vectorstore.VectorStore")
 @EnableConfigurationProperties({AiProperties.class, AiTencentProperties.class, AiAliyunProperties.class})
 @ImportRuntimeHints(AiAutoConfiguration.AiRuntimeHints.class)
 public class AiAutoConfiguration {
@@ -81,11 +83,18 @@ public class AiAutoConfiguration {
     }
 
     @Bean
+    @Primary
     @ConditionalOnMissingBean
-    public ChatService chatService(ChatModel model,
+    public ChatModel chatModel(ObjectProvider<ChatModel> objectProvider) {
+        return objectProvider.getIfAvailable();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ChatService chatService(ChatModel chatModel,
                                    ChatMemory chatMemory,
                                    ObjectProvider<AiCustomizer> customizerProvider) {
-        return new DefaultChatService(model, chatMemory, customizerProvider);
+        return new DefaultChatService(chatModel, chatMemory, customizerProvider);
     }
 
     @Bean
@@ -125,7 +134,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = AiTencentProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = AiTencentProperties.PREFIX, name = "enabled", havingValue = "true")
     public AiTencentFactory aiTencentFactory(AiTencentProperties properties) {
         AiTencentConfig config = AiTencentConfig.builder().apiKey(properties.getApiKey()).build();
         return new AiTencentFactoryImpl(config);
@@ -137,7 +146,7 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = AiAliyunProperties.PREFIX, name = "enabled", havingValue = "true")
     public AiAliyunFactory aiAliyunFactory(AiAliyunProperties properties) {
         AiAliyunConfig config = AiAliyunConfig.builder()
             .apiKey(properties.getApiKey())

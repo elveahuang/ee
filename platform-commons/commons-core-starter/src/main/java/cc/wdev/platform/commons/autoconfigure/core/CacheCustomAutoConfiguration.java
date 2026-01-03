@@ -8,6 +8,8 @@ import cc.wdev.platform.commons.core.cache.service.RedissonCacheService;
 import cc.wdev.platform.commons.core.cache.utils.RedissonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.Codec;
+import org.redisson.codec.JsonJackson3Codec;
 import org.redisson.spring.cache.RedissonSpringCacheManager;
 import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
 import org.springframework.aot.hint.MemberCategory;
@@ -44,6 +46,12 @@ public class CacheCustomAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
+    public Codec codec() {
+        return new JsonJackson3Codec();
+    }
+
+    @Bean
     @ConditionalOnMissingBean(RedissonUtils.class)
     public RedissonUtils redissonUtils(RedissonClient redissonClient) {
         log.info("Creating redissonUtils");
@@ -52,9 +60,8 @@ public class CacheCustomAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
-        return configuration -> {
-        };
+    public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer(Codec codec) {
+        return config -> config.setCodec(codec);
     }
 
     @Bean

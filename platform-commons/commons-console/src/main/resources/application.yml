@@ -8,5 +8,7 @@ spring:
     profiles:
         active: local
     shell:
+        debug:
+            enabled: true
         interactive:
             enabled: true
