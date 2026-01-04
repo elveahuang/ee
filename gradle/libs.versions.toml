@@ -17,7 +17,8 @@ redissonVersion = "4.1.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
 hutoolVersion = "5.8.42"
-awsSdkVersion = "2.40.12"
+awsSdkVersion = "2.41.1"
+wxJavaVersion = "4.8.0"
 mockitoVersion = "5.21.0"
 seleniumVersion = "4.39.0"
 mybatisVersion = "3.5.19"
@@ -245,9 +246,9 @@ tika-parsers-standard-package = { module = "org.apache.tika:tika-parsers-standar
 # SDK
 awssdk-sdk = { module = "software.amazon.awssdk:s3", version.ref = "awsSdkVersion" }
 awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager", version.ref = "awsSdkVersion" }
-weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version = "4.7.9.B" }
-weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version = "4.7.9.B" }
-weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version = "4.7.9.B" }
+weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version.ref = "wxJavaVersion" }
+weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version.ref = "wxJavaVersion" }
+weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version.ref = "wxJavaVersion" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.41" }
 facebody = { module = "com.aliyun:facebody20191230", version = "6.0.0" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.1" }
