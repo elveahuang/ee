@@ -104,6 +104,14 @@ public class DefaultChatService implements ChatService {
     }
 
     /**
+     * @see ChatService#chatCompletion(SimpleChatRequest)
+     */
+    @Override
+    public ChatResponse chatCompletion(Prompt prompt) {
+        return this.chatClient.prompt(prompt).call().chatResponse();
+    }
+
+    /**
      * @see ChatService#chatCompletionText(SimpleChatRequest)
      */
     @Override

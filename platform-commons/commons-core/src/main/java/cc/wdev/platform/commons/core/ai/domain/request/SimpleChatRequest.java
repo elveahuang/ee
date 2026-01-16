@@ -47,4 +47,10 @@ public class SimpleChatRequest implements Serializable {
      */
     @Schema(description = "是否强制刷新")
     private boolean force;
+    /**
+     * 是否由框架自行控制工具执行
+     */
+    @Builder.Default
+    @Schema(description = "是否由框架自行控制工具执行")
+    private boolean internalToolExecutionEnabled = true;
 }

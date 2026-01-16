@@ -56,8 +56,8 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public ToolCallbackProvider commonToolsProvider(CommonTools commonTools) {
-        return MethodToolCallbackProvider.builder().toolObjects(commonTools).build();
+    public ToolCallbackProvider commonToolsProvider(CommonTools commonTools, CoreTools coreTools) {
+        return MethodToolCallbackProvider.builder().toolObjects(commonTools, coreTools).build();
     }
 
 }

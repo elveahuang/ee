@@ -3,16 +3,17 @@ springAiVersion = "2.0.0-M1"
 springAiAlibabaVersion = "1.1.0.0"
 springAiExtensionsVersion = "1.1.2.0"
 springAiSearchToolVersion = "2.0.0"
+springAiAgentUtilsVersion = "0.3.0"
 springBootVersion = "4.0.1"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.1.0"
-springGrpcVersion = "1.0.0"
+springGrpcVersion = "1.0.1"
 springShellVersion = "4.0.0"
-springDocVersion = "3.0.0"
+springDocVersion = "3.0.1"
 grpcVersion = "1.78.0"
 nettyVersion = "4.2.9.Final"
-cosidVersion = "3.0.1"
+cosidVersion = "3.0.2"
 redissonVersion = "4.1.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
@@ -23,8 +24,8 @@ mockitoVersion = "5.21.0"
 seleniumVersion = "4.39.0"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "4.0.0"
-mybatisSpringStarterVersion = "4.0.0"
-mybatisPlusVersion = "3.5.15"
+mybatisSpringStarterVersion = "4.0.1"
+mybatisPlusVersion = "3.5.16"
 jsqlparserPlusVersion = "5.3"
 shardingSpherePlusVersion = "5.5.2"
 langChainVersion = "1.10.0"
@@ -148,6 +149,7 @@ spring-ai-starter-model-deepseek = { module = "org.springframework.ai:spring-ai-
 spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-starter-mcp-client" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
 spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene" }
+spring-ai-agent-utils = { module = "org.springaicommunity:spring-ai-agent-utils", version.ref = "springAiAgentUtilsVersion" }
 
 # Spring AI Alibaba
 spring-ai-alibaba-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-dashscope" }
@@ -254,15 +256,15 @@ facebody = { module = "com.aliyun:facebody20191230", version = "6.0.0" }
 dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.1" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.2" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.8" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.3" }
-aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.3" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1378" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.4" }
+aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.4" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1391" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1376" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.1" }
-openai-java = { module = "com.openai:openai-java", version = "4.12.0" }
-telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.0" }
-telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.0" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1379" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.2" }
+openai-java = { module = "com.openai:openai-java", version = "4.13.0" }
+telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.1" }
+telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.1" }
 
 jakarta-annotation = { module = "jakarta.annotation:jakarta.annotation-api" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api" }
@@ -335,7 +337,7 @@ jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "5.0.2" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version = "2.5.1" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
-ip2region = { module = "org.lionsoul:ip2region", version = "3.3.1" }
+ip2region = { module = "org.lionsoul:ip2region", version = "3.3.3" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
 nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.6" }
@@ -427,7 +429,7 @@ springCloudCoreStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server-webflux"]
 
 # Spring AI
-springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-deepseek", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store", "spring-ai-tst-tool-searcher-lucene"]
+springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-deepseek", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store", "spring-ai-tst-tool-searcher-lucene", "spring-ai-agent-utils"]
 springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server-webmvc"]
 
 # Spring AI Alibaba

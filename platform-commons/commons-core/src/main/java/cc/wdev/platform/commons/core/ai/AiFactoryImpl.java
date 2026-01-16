@@ -4,6 +4,7 @@ import cc.wdev.platform.commons.core.ai.chat.ChatService;
 import cc.wdev.platform.commons.core.ai.enums.AiServiceProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.model.ChatModel;
 
 /**
  * @author elvea
@@ -15,13 +16,17 @@ public class AiFactoryImpl implements AiFactory {
 
     private final ChatService chatService;
 
+    private final ChatModel chatModel;
+
     private final ChatMemory chatMemory;
 
     public AiFactoryImpl(AiServiceProvider provider,
+                         ChatModel chatModel,
                          ChatService chatService,
                          ChatMemory chatMemory) {
         this.provider = provider;
         this.chatService = chatService;
+        this.chatModel = chatModel;
         this.chatMemory = chatMemory;
     }
 
@@ -31,6 +36,14 @@ public class AiFactoryImpl implements AiFactory {
     @Override
     public ChatMemory getChatMemory() {
         return chatMemory;
+    }
+
+    /**
+     * @see AiFactory#getChatModel()
+     */
+    @Override
+    public ChatModel getChatModel() {
+        return chatModel;
     }
 
     /**

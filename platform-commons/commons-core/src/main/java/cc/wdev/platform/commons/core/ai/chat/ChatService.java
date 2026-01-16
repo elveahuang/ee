@@ -27,6 +27,8 @@ public interface ChatService {
 
     ChatResponse chatCompletion(SimpleChatRequest request);
 
+    ChatResponse chatCompletion(Prompt prompt);
+
     String chatCompletionText(SimpleChatRequest request);
 
     Flux<ChatResponse> streamChatCompletion(SimpleChatRequest request);

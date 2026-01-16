@@ -99,8 +99,8 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public AiFactory aiFactory(ChatService chatService, ChatMemory chatMemory) {
-        return new AiFactoryImpl(aiProperties.getServiceProvider(), chatService, chatMemory);
+    public AiFactory aiFactory(ChatService chatService, ChatModel chatModel, ChatMemory chatMemory) {
+        return new AiFactoryImpl(aiProperties.getServiceProvider(), chatModel, chatService, chatMemory);
     }
 
     @Bean

@@ -1,4 +1,4 @@
-package cc.wdev.dev.webapp.core;
+package cc.wdev.platform.commons.core;
 
 import cc.wdev.dev.webapp.BaseTests;
 import lombok.extern.slf4j.Slf4j;

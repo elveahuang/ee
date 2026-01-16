@@ -14,6 +14,7 @@ public interface AiConstants {
      * 系统默认提示词
      */
     String DEFDAULT_PROMPT = """
+        你是一个智能体，你需要根据用户的问题，回答用户的问题。
         """;
 
     /**

@@ -96,7 +96,7 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
         }
         // 批量生成缓存键
         Map<K, CacheKey> idToCacheKey = ids.stream()
-            .collect(Collectors.toMap((v) -> v, getCacheKeyGenerator()::key, (e1, e2) -> e1));
+            .collect(Collectors.toMap((v) -> v, getCacheKeyGenerator()::key, (e, _) -> e));
 
         // 批量查询缓存
         List<CacheKey> cacheKeys = Lists.newArrayList(idToCacheKey.values());
@@ -139,6 +139,68 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
             loader = this::findByIds;
         }
         Collection<T> loaded = loader.apply(missingIds);
+        loaded.forEach(entity -> {
+            setCache(entity); // 缓存新数据
+            result.add(entity);
+        });
+        return result;
+    }
+
+    /**
+     * 获取指定Key的缓存实体
+     */
+    default List<T> findCacheByBizIds(Collection<K> bizIds,
+                                      Function<K, CacheKey> converter,
+                                      Function<Collection<K>, Collection<T>> loader) {
+        if (CollectionUtils.isEmpty(bizIds)) {
+            return Collections.emptyList();
+        }
+
+        // 批量生成缓存键
+        Map<K, CacheKey> bidToCacheKey = bizIds.stream()
+            .collect(Collectors.toMap((v) -> v, converter, (e, _) -> e));
+
+        // 批量查询缓存
+        List<CacheKey> cacheKeys = Lists.newArrayList(bidToCacheKey.values());
+        List<List<CacheKey>> partitions = Lists.partition(cacheKeys, getBatchSize());
+        List<T> cachedValues = partitions.stream()
+            .map(this::findByCacheKey)
+            .flatMap(Collection::stream)
+            .toList();
+
+        // 建立缓存键到值的映射
+        Map<CacheKey, T> cacheKeyToValue = Maps.newHashMapWithExpectedSize(cacheKeys.size());
+        for (int i = 0; i < cacheKeys.size() && i < cachedValues.size(); i++) {
+            if (cachedValues.get(i) == null) {
+                continue;
+            }
+            cacheKeyToValue.put(cacheKeys.get(i), cachedValues.get(i));
+        }
+
+        // 分离已缓存和未缓存的ID
+        List<T> result = Lists.newArrayList();
+        Set<K> missingBizIds = Sets.newHashSet();
+
+        for (K bid : bizIds) {
+            CacheKey cacheKey = bidToCacheKey.get(bid);
+            T value = cacheKeyToValue.get(cacheKey);
+
+            if (value != null) {
+                result.add(value);
+            } else {
+                missingBizIds.add(bid);
+            }
+        }
+
+        if (CollectionUtils.isEmpty(missingBizIds)) {
+            return result;
+        }
+
+        // 加载未缓存的数据
+        if (loader == null) {
+            return result;
+        }
+        Collection<T> loaded = loader.apply(missingBizIds);
         loaded.forEach(entity -> {
             setCache(entity); // 缓存新数据
             result.add(entity);

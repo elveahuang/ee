@@ -60,7 +60,7 @@ public abstract class AiUtils {
     public static ChatClient.ChatClientRequestSpec processChatSpec(ChatClient chatClient, SimpleChatRequest request) {
         ChatClient.ChatClientRequestSpec spec = chatClient
             .prompt(request.getPrompt())
-            .advisors(a -> a.param(CONVERSATION_ID, request.getConversationId()));
+            .advisors(a -> a.param(CONVERSATION_ID, StringUtils.nvl(request.getConversationId(), StringUtils.uuid())));
 
         if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
             spec = spec.system(request.getSystemPrompt());

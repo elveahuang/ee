@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    implementation(rootProject.libs.bundles.springBootCoreStarter)
     implementation(rootProject.libs.bundles.springBootShellStarter)
     implementation(project(":platform-commons:commons-javacv"))
 }

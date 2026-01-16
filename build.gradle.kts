@@ -62,10 +62,12 @@ allprojects {
             mavenBom(rootProject.libs.kotlin.bom.get().toString())
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
+            mavenBom(rootProject.libs.jackson.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.extensions.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.alibaba.bom.get().toString())
             mavenBom(rootProject.libs.langchain.bom.get().toString())
             mavenBom(rootProject.libs.langchain.community.bom.get().toString())
             mavenBom(rootProject.libs.embabel.agent.dependencies.get().toString())
-            mavenBom(rootProject.libs.jackson.bom.get().toString())
         }
         dependencies {
             dependency(rootProject.libs.nimbus.jose.jwt.get().toString())
