@@ -1,0 +1,16 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    security:
+        user:
+            name: admin
+            password: admin
+    boot:
+        admin:
+            context-path: /devops/sba
+            ui:
+                title: Admin Console
+                public-url: http://cloud.wdev.cc/devops/sba
+            discovery:
+                ignored-services: consul

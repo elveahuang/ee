@@ -1,0 +1,22 @@
+package cc.wdev.platform.commons.annotations;
+
+import cc.wdev.platform.commons.extensions.sensitive.SensitiveSerializer;
+import cc.wdev.platform.commons.extensions.sensitive.SensitiveStrategy;
+import tools.jackson.databind.annotation.JsonSerialize;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * @author elvea
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@JsonSerialize(using = SensitiveSerializer.class)
+public @interface Sensitive {
+
+    SensitiveStrategy strategy();
+
+}
