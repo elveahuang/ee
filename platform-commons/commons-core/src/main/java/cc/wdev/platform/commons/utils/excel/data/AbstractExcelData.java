@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.utils.excel.data;
 
-import cn.idev.excel.annotation.ExcelIgnore;
-import cn.idev.excel.annotation.ExcelIgnoreUnannotated;
 import lombok.Data;
+import org.apache.fesod.sheet.annotation.ExcelIgnore;
+import org.apache.fesod.sheet.annotation.ExcelIgnoreUnannotated;
 
 import java.io.Serializable;
 

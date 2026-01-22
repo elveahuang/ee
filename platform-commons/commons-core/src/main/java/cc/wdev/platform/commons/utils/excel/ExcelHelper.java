@@ -3,11 +3,11 @@ package cc.wdev.platform.commons.utils.excel;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.excel.data.AbstractExcelData;
 import cc.wdev.platform.commons.utils.excel.listener.ReadWithExtraListener;
-import cn.idev.excel.EasyExcel;
-import cn.idev.excel.annotation.ExcelProperty;
-import cn.idev.excel.enums.CellExtraTypeEnum;
-import cn.idev.excel.metadata.CellExtra;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.fesod.sheet.FesodSheet;
+import org.apache.fesod.sheet.annotation.ExcelProperty;
+import org.apache.fesod.sheet.enums.CellExtraTypeEnum;
+import org.apache.fesod.sheet.metadata.CellExtra;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -17,15 +17,12 @@ import java.util.List;
  * @author elvea
  */
 @Slf4j
-public class EasyExcelHelper<T extends AbstractExcelData> {
+public class ExcelHelper<T extends AbstractExcelData> {
 
-    /**
-     *
-     */
     public List<T> getList(File file, List<List<String>> headers, Class<T> clazz, Integer sheetNo, Integer headRowNumber) {
         ReadWithExtraListener<T> listener = new ReadWithExtraListener<>(headRowNumber);
         try {
-            EasyExcel.read(file, clazz, listener).extraRead(CellExtraTypeEnum.MERGE)
+            FesodSheet.read(file, clazz, listener).extraRead(CellExtraTypeEnum.MERGE)
                 .head(headers).sheet(sheetNo).doRead();
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -78,9 +75,6 @@ public class EasyExcelHelper<T extends AbstractExcelData> {
         }
     }
 
-    /**
-     *
-     */
     private Object getInitValueFromList(Integer firstRowIndex, Integer firstColumnIndex, List<T> data) {
         Object filedValue = null;
         T object = data.get(firstRowIndex);
@@ -94,7 +88,7 @@ public class EasyExcelHelper<T extends AbstractExcelData> {
                         filedValue = field.get(object);
                         break;
                     } catch (IllegalAccessException e) {
-                        log.error("设置合并单元格的初始值异常：" + e.getMessage());
+                        log.error("设置合并单元格的初始值异常：{}", e.getMessage(), e);
                     }
                 }
             }

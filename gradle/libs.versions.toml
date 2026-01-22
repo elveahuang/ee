@@ -2,8 +2,6 @@
 springAiVersion = "2.0.0-M1"
 springAiAlibabaVersion = "1.1.0.0"
 springAiExtensionsVersion = "1.1.2.0"
-springAiSearchToolVersion = "2.0.0"
-springAiAgentUtilsVersion = "0.3.0"
 springBootVersion = "4.0.1"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
@@ -17,34 +15,35 @@ cosidVersion = "3.0.2"
 redissonVersion = "4.1.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
-hutoolVersion = "5.8.42"
-awsSdkVersion = "2.41.1"
+hutoolVersion = "5.8.43"
+awsSdkVersion = "2.41.10"
 wxJavaVersion = "4.8.0"
 mockitoVersion = "5.21.0"
-seleniumVersion = "4.39.0"
+seleniumVersion = "4.40.0"
 mybatisVersion = "3.5.19"
 mybatisSpringVersion = "4.0.0"
 mybatisSpringStarterVersion = "4.0.1"
 mybatisPlusVersion = "3.5.16"
-jsqlparserPlusVersion = "5.3"
-shardingSpherePlusVersion = "5.5.2"
+jsqlparserVersion = "5.3"
+shardingSphereVersion = "5.5.2"
 langChainVersion = "1.10.0"
 langChainCommunityVersion = "1.10.0-beta18"
-embabelAgentVersion = "0.3.1"
-jacksonVersion = "3.0.3"
+agentScopeVersion = "1.0.7"
+embabelAgentVersion = "0.3.2"
+jacksonVersion = "3.0.4"
 okhttpVersion = "5.3.2"
 poiVersion = "5.5.1"
 luceneVersion = "10.3.2"
 javaJwtVersion = "4.5.0"
 antlr3Runtime = "3.5.3"
 antlr4Runtime = "4.13.2"
-swaggerVersion = "2.2.41"
+swaggerVersion = "2.2.42"
 bouncycastleVersion = "1.83"
-errorProneAnnotationsVersion = "2.45.0"
-checkerQualVersion = "3.52.1"
+errorProneAnnotationsVersion = "2.46.0"
+checkerQualVersion = "3.53.0"
 jsonSchemaGeneratorVersion = "4.38.0"
-gradleSpotbugsVersion = "6.4.7"
-gradleNativeVersion = "0.11.3"
+gradleSpotbugsVersion = "6.4.8"
+gradleNativeVersion = "0.11.4"
 gradleOSDetectorVersion = "1.7.3"
 
 [plugins]
@@ -58,7 +57,6 @@ gradle-osdetector = { id = "com.google.osdetector", version.ref = "gradleOSDetec
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
 spring-ai-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiExtensionsVersion" }
 spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
-spring-ai-tst-bom = { module = "org.springaicommunity:tool-search-tool-bom", version.ref = "springAiSearchToolVersion" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
 spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
 spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
@@ -70,6 +68,7 @@ groovy-bom = { module = "org.apache.groovy:groovy-bom", version.ref = "groovyVer
 mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersion" }
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
 jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jacksonVersion" }
+bouncycastle-bom = { module = "org.bouncycastle:bc-jdk18on-bom", version.ref = "bouncycastleVersion" }
 langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
 langchain-community-bom = { module = "dev.langchain4j:langchain4j-community-bom", version.ref = "langChainCommunityVersion" }
 embabel-agent-dependencies = { module = "com.embabel.agent:embabel-agent-dependencies", version.ref = "embabelAgentVersion" }
@@ -148,8 +147,8 @@ spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-st
 spring-ai-starter-model-deepseek = { module = "org.springframework.ai:spring-ai-starter-model-deepseek" }
 spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-starter-mcp-client" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
-spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene" }
-spring-ai-agent-utils = { module = "org.springaicommunity:spring-ai-agent-utils", version.ref = "springAiAgentUtilsVersion" }
+spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene", version = "2.0.0" }
+spring-ai-agent-utils = { module = "org.springaicommunity:spring-ai-agent-utils", version = "0.4.1" }
 
 # Spring AI Alibaba
 spring-ai-alibaba-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-dashscope" }
@@ -170,6 +169,10 @@ langchain-dashscope = { module = "dev.langchain4j:langchain4j-community-dashscop
 # embabelAgent
 embabel-agent-openai = { module = "com.embabel.agent:embabel-agent-openai" }
 embabel-agent-starter-deepseek = { module = "com.embabel.agent:embabel-agent-starter-deepseek" }
+
+# Agent Scope
+agentscope = { module = "io.agentscope:agentscope", version.ref = "agentScopeVersion" }
+agentscope-spring-boot-starter = { module = "io.agentscope:agentscope-spring-boot-starter", version.ref = "agentScopeVersion" }
 
 # MyBatis
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatisVersion" }
@@ -192,8 +195,8 @@ hibernate-validator-processor = { module = "org.hibernate.validator:hibernate-va
 pgsql = { module = "org.postgresql:postgresql" }
 mysql = { module = "com.mysql:mysql-connector-j" }
 mariadb = { module = "org.mariadb.jdbc:mariadb-java-client" }
-jsqlparser = { module = "com.github.jsqlparser:jsqlparser", version.ref = "jsqlparserPlusVersion" }
-sharding = { module = "org.apache.shardingsphere:shardingsphere-jdbc", version.ref = "shardingSpherePlusVersion" }
+jsqlparser = { module = "com.github.jsqlparser:jsqlparser", version.ref = "jsqlparserVersion" }
+sharding = { module = "org.apache.shardingsphere:shardingsphere-jdbc", version.ref = "shardingSphereVersion" }
 
 # Netty
 netty-bom = { module = "io.netty:netty-bom", version.ref = "nettyVersion" }
@@ -225,7 +228,7 @@ poi = { module = "org.apache.poi:poi", version.ref = "poiVersion" }
 poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poiVersion" }
 poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version.ref = "poiVersion" }
 poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version.ref = "poiVersion" }
-fastexcel = { module = "cn.idev.excel:fastexcel", version = "1.3.0" }
+fesod-sheet = { module = "org.apache.fesod:fesod-sheet", version = "2.0.0-incubating" }
 pdfbox-core = { module = "org.apache.pdfbox:pdfbox", version = "3.0.6" }
 pdfbox-fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.6" }
 pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version = "3.0.6" }
@@ -236,10 +239,9 @@ x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.5" 
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
 scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
 scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
-thumbnailator = { module = "net.coobird:thumbnailator", version = "0.4.21" }
-imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.12.0" }
-imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.12.0" }
-imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.12.0" }
+imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.13.0" }
+imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.13.0" }
+imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.13.0" }
 zxing-core = { module = "com.google.zxing:core", version = "3.5.4" }
 zxing-javase = { module = "com.google.zxing:javase", version = "3.5.4" }
 tika-core = { module = "org.apache.tika:tika-core", version = "3.2.3" }
@@ -251,18 +253,18 @@ awssdk-transfer-manager = { module = "software.amazon.awssdk:s3-transfer-manager
 weixin-java-cp = { module = "com.github.binarywang:weixin-java-cp", version.ref = "wxJavaVersion" }
 weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version.ref = "wxJavaVersion" }
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version.ref = "wxJavaVersion" }
-dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.41" }
+dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.43" }
 facebody = { module = "com.aliyun:facebody20191230", version = "6.0.0" }
-dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.3.1" }
+dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.4.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.2" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.8" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.4" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.6" }
 aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.4" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1391" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1399" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1379" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.2" }
-openai-java = { module = "com.openai:openai-java", version = "4.13.0" }
+openai-java = { module = "com.openai:openai-java", version = "4.15.0" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.1" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.1" }
 
@@ -281,7 +283,7 @@ commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
 commons-codec = { module = "commons-codec:commons-codec", version = "1.20.0" }
 commons-logging = { module = "commons-logging:commons-logging", version = "1.3.5" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
-commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.0" }
+commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.1" }
 commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
 commons-text = { module = "org.apache.commons:commons-text", version = "1.15.0" }
 commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.20.0" }
@@ -297,7 +299,7 @@ libreoffice-jurt = { module = "org.libreoffice:jurt", version = "24.8.4" }
 libreoffice-ridl = { module = "org.libreoffice:ridl", version = "24.8.4" }
 libreoffice-unoil = { module = "org.libreoffice:unoil", version = "24.8.4" }
 
-json = { module = "org.json:json", version = "20250517" }
+json = { module = "org.json:json", version = "20251224" }
 gson = { module = "com.google.code.gson:gson" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
 jackson-core = { module = "tools.jackson.core:jackson-core" }
@@ -328,22 +330,22 @@ quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
 # Others
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
-ognl = { module = "ognl:ognl", version = "3.4.9" }
+ognl = { module = "ognl:ognl", version = "3.4.10" }
 asm = { module = "org.ow2.asm:asm", version = "9.9.1" }
 dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
-jsoup = { module = "org.jsoup:jsoup", version = "1.21.2" }
+jsoup = { module = "org.jsoup:jsoup", version = "1.22.1" }
 okio = { module = "com.squareup.okio:okio", version = "3.16.4" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "5.0.2" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version = "2.5.1" }
 objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
-ip2region = { module = "org.lionsoul:ip2region", version = "3.3.3" }
+ip2region = { module = "org.lionsoul:ip2region", version = "3.3.4" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
-nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.6" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.30.1" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.7" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.31.1" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.8" }
-logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.1" }
+logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.2" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "9.0" }
 
 # Thymeleaf
@@ -391,10 +393,10 @@ sharding = ["sharding"]
 ip = ["geoip", "ip2region"]
 database = ["pgsql", "mysql", "mariadb"]
 caffeine = ["caffeine-core", "caffeine-guava"]
-pdf = ["pdfbox-core", "pdfbox-fontbox", "pdfbox-preflight", "pdfbox-xmpbox", "pdfbox-debugger", "pdfbox-tools", "jsoup", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
-image = ["thumbnailator", "imageio-core", "imageio-jpeg", "imageio-webp", "zxing-core", "zxing-javase", "scrimage-core", "scrimage-webp", "scrimage-filters"]
+pdf = ["pdfbox-core", "pdfbox-fontbox", "pdfbox-preflight", "pdfbox-xmpbox", "pdfbox-debugger", "pdfbox-tools", "x-easypdf-pdfbox", "tika-core", "tika-parsers-standard-package"]
+image = ["imageio-core", "imageio-jpeg", "imageio-webp", "zxing-core", "zxing-javase", "scrimage-core", "scrimage-webp", "scrimage-filters"]
 hutool = ["hutool-core", "hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
-excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fastexcel"]
+excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fesod-sheet"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-annotations", "jackson-core", "jackson-databind", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
@@ -442,6 +444,10 @@ langChainCore = ["langchain-core", "langchain-dashscope", "langchain-open-ai"]
 # embabelAgent
 embabelAgentCore = ["embabel-agent-openai"]
 embabelAgentStarter = ["embabel-agent-starter-deepseek"]
+
+# Agent Scope
+agentScopeCore = ["agentscope"]
+agentScopeStarter = ["agentscope-spring-boot-starter"]
 
 # Mybatis
 mybatis = ["mybatis", "mybatis-spring", "mybatis-plus-annotation", "mybatis-plus-core", "mybatis-plus-extension", "mybatis-plus-jsqlparser", "jsqlparser"]

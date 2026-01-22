@@ -18,4 +18,21 @@ public enum StatusTypeEnum implements BaseEnum<Integer> {
     private final Integer value;
     private final String code;
     private final String description;
+
+    public String getLabel() {
+        return ("label__status__" + getValue()).toLowerCase();
+    }
+
+    public static int getStatusTypeValue(Integer value) {
+        if (value != null && value.intValue() == ON.getValue()) {
+            return ON.getValue();
+        }
+        if (value != null && value.intValue() == OFF.getValue()) {
+            return OFF.getValue();
+        }
+        if (value != null && value.intValue() == PENDING.getValue()) {
+            return PENDING.getValue();
+        }
+        return -1;
+    }
 }

@@ -48,7 +48,7 @@ public class CourseElasticServiceImpl extends BaseEntityService<CourseElasticEnt
             )._toQuery();
             boolQueryBuilder.must(multiMatchQuery);
         }
-        
+
         // 查询
         builder.withQuery(boolQueryBuilder.build()._toQuery());
         builder.withPageable(request.getPageable());

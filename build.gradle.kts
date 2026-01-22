@@ -46,7 +46,8 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom(rootProject.libs.spring.ai.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.tst.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.extensions.bom.get().toString())
+            mavenBom(rootProject.libs.spring.ai.alibaba.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.bom.get().toString())
             mavenBom(rootProject.libs.spring.cloud.bom.get().toString())
             mavenBom(rootProject.libs.spring.grpc.bom.get().toString())
@@ -63,8 +64,7 @@ allprojects {
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
             mavenBom(rootProject.libs.jackson.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.extensions.bom.get().toString())
-            mavenBom(rootProject.libs.spring.ai.alibaba.bom.get().toString())
+            mavenBom(rootProject.libs.bouncycastle.bom.get().toString())
             mavenBom(rootProject.libs.langchain.bom.get().toString())
             mavenBom(rootProject.libs.langchain.community.bom.get().toString())
             mavenBom(rootProject.libs.embabel.agent.dependencies.get().toString())
@@ -92,7 +92,7 @@ allprojects {
     configurations.configureEach {
         // 强制使用指定版本
         resolutionStrategy.eachDependency {
-            // MacOS 下使用 aarch_64 版本
+            // 固定MaxOS环境下的版本为 osx-aarch_64，不在使用默认的 x64 版本
             if (requested.module.toString() == "io.netty:netty-resolver-dns-native-macos") {
                 this.artifactSelection {
                     this.selectArtifact(DependencyArtifact.DEFAULT_TYPE, null, "osx-aarch_64")
@@ -197,13 +197,14 @@ allprojects {
         exclude(module = "shardingsphere-parser-sql-statement-presto")
         exclude(module = "shardingsphere-parser-sql-statement-sql92")
         exclude(module = "shardingsphere-parser-sql-statement-sqlserver")
-        exclude(module = "selenium-devtools-v141")
         exclude(module = "selenium-devtools-v142")
+        exclude(module = "selenium-devtools-v143")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")
         exclude(module = "kotlin-stdlib-jdk7")
         exclude(module = "kotlin-stdlib-jdk8")
+        exclude(module = "fesod-shaded")
     }
 }
 
