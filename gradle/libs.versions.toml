@@ -2,7 +2,7 @@
 springAiVersion = "2.0.0-M1"
 springAiAlibabaVersion = "1.1.0.0"
 springAiExtensionsVersion = "1.1.2.0"
-springBootVersion = "4.0.1"
+springBootVersion = "4.0.2"
 springBootAdminVersion = "3.5.6"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.1.0"
