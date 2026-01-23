@@ -10,7 +10,7 @@ import org.springframework.ai.chat.model.ChatModel;
  * @author elvea
  */
 @Slf4j
-public class AiFactoryImpl implements AiFactory {
+public class AiManagerImpl implements AiManager {
 
     private final AiServiceProvider provider;
 
@@ -20,7 +20,7 @@ public class AiFactoryImpl implements AiFactory {
 
     private final ChatMemory chatMemory;
 
-    public AiFactoryImpl(AiServiceProvider provider,
+    public AiManagerImpl(AiServiceProvider provider,
                          ChatModel chatModel,
                          ChatService chatService,
                          ChatMemory chatMemory) {
@@ -31,7 +31,7 @@ public class AiFactoryImpl implements AiFactory {
     }
 
     /**
-     * @see AiFactory#getChatMemory()
+     * @see AiManager#getChatMemory()
      */
     @Override
     public ChatMemory getChatMemory() {
@@ -39,7 +39,7 @@ public class AiFactoryImpl implements AiFactory {
     }
 
     /**
-     * @see AiFactory#getChatModel()
+     * @see AiManager#getChatModel()
      */
     @Override
     public ChatModel getChatModel() {
@@ -47,7 +47,7 @@ public class AiFactoryImpl implements AiFactory {
     }
 
     /**
-     * @see AiFactory#getChatService()
+     * @see AiManager#getChatService()
      */
     @Override
     public ChatService getChatService() {

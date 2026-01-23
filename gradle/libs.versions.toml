@@ -1,5 +1,5 @@
 [versions]
-springAiVersion = "2.0.0-M1"
+springAiVersion = "2.0.0-M2"
 springAiAlibabaVersion = "1.1.0.0"
 springAiExtensionsVersion = "1.1.2.0"
 springBootVersion = "4.0.2"

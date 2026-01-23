@@ -45,7 +45,7 @@ public class JpaChatMemoryRepository implements ChatMemoryRepository {
 
                 String content = entity.getContent();
                 String type = entity.getType();
-                return switch (MessageType.fromValue(type)) {
+                return switch (MessageType.valueOf(type)) {
                     case MessageType.USER -> UserMessage.builder().text(content).metadata(metadata).build();
                     case MessageType.ASSISTANT -> AssistantMessage.builder().content(content).properties(metadata).build();
                     case MessageType.SYSTEM -> SystemMessage.builder().text(content).metadata(metadata).build();

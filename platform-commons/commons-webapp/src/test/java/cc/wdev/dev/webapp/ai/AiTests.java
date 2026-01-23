@@ -3,7 +3,7 @@ package cc.wdev.dev.webapp.ai;
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.dev.webapp.ai.constant.AiConstant;
 import cc.wdev.dev.webapp.ai.vo.Courses;
-import cc.wdev.platform.commons.core.ai.AiFactory;
+import cc.wdev.platform.commons.core.ai.AiManager;
 import cc.wdev.platform.commons.core.ai.chat.ChatService;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -28,15 +28,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AiTests extends BaseTests {
 
     @Autowired
-    private AiFactory aiFactory;
+    private AiManager aiManager;
 
     @Autowired
     private ToolCallbackProvider commonToolsProvider;
 
     @Test
     public void baseTest() {
-        Assertions.assertNotNull(aiFactory);
-        ChatService service = this.aiFactory.getChatService();
+        Assertions.assertNotNull(aiManager);
+        ChatService service = this.aiManager.getChatService();
         Assertions.assertNotNull(service);
         ChatClient client = service.getChatClient();
         Assertions.assertNotNull(client);
@@ -56,8 +56,8 @@ public class AiTests extends BaseTests {
 
     @Test
     public void streamTest() {
-        Assertions.assertNotNull(aiFactory);
-        ChatService service = this.aiFactory.getChatService();
+        Assertions.assertNotNull(aiManager);
+        ChatService service = this.aiManager.getChatService();
         Assertions.assertNotNull(service);
         ChatClient client = service.getChatClient();
         Assertions.assertNotNull(client);
@@ -78,7 +78,7 @@ public class AiTests extends BaseTests {
     @Test
     public void userControlledToolTest() {
         ToolCallingManager toolCallingManager = ToolCallingManager.builder().build();
-        ChatModel chatModel = this.aiFactory.getChatModel();
+        ChatModel chatModel = this.aiManager.getChatModel();
         ChatOptions chatOptions = ToolCallingChatOptions.builder()
             .toolCallbacks(this.commonToolsProvider.getToolCallbacks())
             .internalToolExecutionEnabled(false)
@@ -99,7 +99,7 @@ public class AiTests extends BaseTests {
      */
     @Test
     public void structuredOutputToolTest() {
-        ChatModel chatModel = this.aiFactory.getChatModel();
+        ChatModel chatModel = this.aiManager.getChatModel();
         Courses courses = ChatClient.create(chatModel).prompt()
             .user(u -> u.text("今天几号"))
             .toolCallbacks(this.commonToolsProvider.getToolCallbacks())
@@ -113,7 +113,7 @@ public class AiTests extends BaseTests {
         SimpleChatRequest request = SimpleChatRequest.builder()
             .prompt("三国演义相关课程")
             .build();
-        ChatResponse response = this.aiFactory.getChatService().chatCompletion(request);
+        ChatResponse response = this.aiManager.getChatService().chatCompletion(request);
         Assertions.assertNotNull(response);
     }
 

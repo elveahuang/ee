@@ -7,7 +7,7 @@ import org.springframework.ai.chat.model.ChatModel;
 /**
  * @author elvea
  */
-public interface AiFactory {
+public interface AiManager {
 
     /**
      * 获取智能体存储服务

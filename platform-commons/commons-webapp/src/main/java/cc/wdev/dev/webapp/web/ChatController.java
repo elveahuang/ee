@@ -2,7 +2,7 @@ package cc.wdev.dev.webapp.web;
 
 import cc.wdev.dev.webapp.ai.constant.AiConstant;
 import cc.wdev.dev.webapp.ai.vo.Courses;
-import cc.wdev.platform.commons.core.ai.AiFactory;
+import cc.wdev.platform.commons.core.ai.AiManager;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import cc.wdev.platform.commons.core.ai.domain.response.SimpleChatResponse;
 import cc.wdev.platform.commons.domain.R;
@@ -32,7 +32,7 @@ import reactor.core.publisher.Flux;
 @Tag(name = "ChatController", description = "对话控制器")
 public class ChatController {
 
-    private final AiFactory aiFactory;
+    private final AiManager aiManager;
 
     private final ToolCallbackProvider commonToolsProvider;
 
@@ -50,7 +50,7 @@ public class ChatController {
     public String chatCompletion(@RequestBody SimpleChatRequest request) {
         ToolCallingManager toolCallingManager = ToolCallingManager.builder().build();
 
-        ChatModel chatModel = aiFactory.getChatModel();
+        ChatModel chatModel = aiManager.getChatModel();
         ChatOptions chatOptions = ToolCallingChatOptions.builder()
             .toolCallbacks(this.commonToolsProvider.getToolCallbacks())
             .internalToolExecutionEnabled(false)
@@ -74,7 +74,7 @@ public class ChatController {
         promptTemplate.add("currentUsername", "elvea");
         String prompt = promptTemplate.render();
         request.setSystemPrompt(prompt);
-        Flux<ChatResponse> publisher = aiFactory.getChatService().streamChatCompletion(request);
+        Flux<ChatResponse> publisher = aiManager.getChatService().streamChatCompletion(request);
         try {
             return publisher.map(response -> {
                 String content = response.getResult().getOutput().getText();

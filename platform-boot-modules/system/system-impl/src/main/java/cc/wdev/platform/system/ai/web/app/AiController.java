@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.ai.web.app;
 
-import cc.wdev.platform.commons.core.ai.AiFactory;
+import cc.wdev.platform.commons.core.ai.AiManager;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import cc.wdev.platform.commons.core.ai.domain.response.SimpleChatResponse;
 import cc.wdev.platform.commons.domain.R;
@@ -19,10 +19,10 @@ import static cc.wdev.platform.system.commons.constants.SystemMappingConstants.*
 @Tag(name = "AiController", description = "AiController")
 public class AiController {
 
-    private final AiFactory factory;
+    private final AiManager aiManager;
 
-    public AiController(AiFactory factory) {
-        this.factory = factory;
+    public AiController(AiManager aiManager) {
+        this.aiManager = aiManager;
     }
 
     @GetMapping(API_V1__AI__CHAT)
@@ -31,26 +31,26 @@ public class AiController {
         conversationId = (StringUtils.isEmpty(conversationId) || force) ? StringUtils.uuid() : conversationId;
         SimpleChatResponse response = SimpleChatResponse.builder()
             .conversationId(conversationId)
-            .messages(factory.getChatMemory().get(conversationId))
+            .messages(aiManager.getChatMemory().get(conversationId))
             .build();
         return R.success(response);
     }
 
     @PostMapping(API_V1__AI__CHAT)
     public String chatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
-        ChatResponse response = this.factory.getChatService().chatCompletion(request);
+        ChatResponse response = this.aiManager.getChatService().chatCompletion(request);
         return response.getResult().getOutput().getText();
     }
 
     @PostMapping(API_V1__AI__CHAT_STREAM)
     public Flux<String> streamChatCompletion(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatService().streamChatCompletion(request);
+        Flux<ChatResponse> flux = this.aiManager.getChatService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 
     @PostMapping(API_V1__AI__COMPLETION)
     public Flux<String> completion(@RequestBody SimpleChatRequest request) throws Exception {
-        Flux<ChatResponse> flux = this.factory.getChatService().streamChatCompletion(request);
+        Flux<ChatResponse> flux = this.aiManager.getChatService().streamChatCompletion(request);
         return flux.mapNotNull(resp -> resp.getResult().getOutput().getText());
     }
 

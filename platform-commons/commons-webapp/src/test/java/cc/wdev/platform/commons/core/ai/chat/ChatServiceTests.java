@@ -4,7 +4,7 @@ import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.dev.webapp.ai.tools.CoreTools;
 import cc.wdev.dev.webapp.ai.utils.AiUtils;
 import cc.wdev.dev.webapp.ai.vo.JobVo;
-import cc.wdev.platform.commons.core.ai.AiFactory;
+import cc.wdev.platform.commons.core.ai.AiManager;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleCompletionRequest;
 import org.junit.jupiter.api.Assertions;
@@ -32,14 +32,14 @@ import static cn.hutool.core.util.StrUtil.uuid;
 public class ChatServiceTests extends BaseTests {
 
     @Autowired
-    private AiFactory aiFactory;
+    private AiManager aiManager;
 
     @Test
     public void baseTest() throws Exception {
-        Assertions.assertNotNull(this.aiFactory);
-        Assertions.assertNotNull(this.aiFactory.getChatService());
-        Assertions.assertNotNull(this.aiFactory.getChatService().getChatClient());
-        Assertions.assertNotNull(this.aiFactory.getChatService().getChatModel());
+        Assertions.assertNotNull(this.aiManager);
+        Assertions.assertNotNull(this.aiManager.getChatService());
+        Assertions.assertNotNull(this.aiManager.getChatService().getChatClient());
+        Assertions.assertNotNull(this.aiManager.getChatService().getChatModel());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ChatServiceTests extends BaseTests {
             .prompt("你好")
             .build();
 
-        ChatService chatService = aiFactory.getChatService();
+        ChatService chatService = aiManager.getChatService();
         String content = chatService.completionText(request);
         Assertions.assertNotNull(content);
     }
@@ -62,12 +62,12 @@ public class ChatServiceTests extends BaseTests {
             .internalToolExecutionEnabled(false)
             .build();
         Prompt prompt = new Prompt("搜索产品经理职位", options);
-        ChatResponse response = this.aiFactory.getChatService().completion(prompt);
+        ChatResponse response = this.aiManager.getChatService().completion(prompt);
         while (response.hasToolCalls()) {
             ToolExecutionResult result = toolCallingManager.executeToolCalls(prompt, response);
             prompt = new Prompt(result.conversationHistory(), options);
-            response = this.aiFactory.getChatService().completion(prompt);
-            List<JobVo> list = this.aiFactory.getChatService().getChatClient().prompt(prompt).call().entity(new ParameterizedTypeReference<>() {
+            response = this.aiManager.getChatService().completion(prompt);
+            List<JobVo> list = this.aiManager.getChatService().getChatClient().prompt(prompt).call().entity(new ParameterizedTypeReference<>() {
             });
             Assertions.assertNotNull(list);
         }
@@ -83,7 +83,7 @@ public class ChatServiceTests extends BaseTests {
             .internalToolExecutionEnabled(false)
             .build();
         final Prompt prompt = new Prompt("搜索产品经理职位", chatOptions);
-        Flux<ChatResponse> publisher = this.aiFactory.getChatService().streamChatCompletion(prompt);
+        Flux<ChatResponse> publisher = this.aiManager.getChatService().streamChatCompletion(prompt);
         publisher.map(response -> {
             boolean hasToolCall = false;
             Prompt fp = prompt;
@@ -91,7 +91,7 @@ public class ChatServiceTests extends BaseTests {
                 hasToolCall = true;
                 ToolExecutionResult toolExecutionResult = toolCallingManager.executeToolCalls(fp, response);
                 fp = new Prompt(toolExecutionResult.conversationHistory(), chatOptions);
-                response = this.aiFactory.getChatService().completion(prompt);
+                response = this.aiManager.getChatService().completion(prompt);
             }
             if (hasToolCall) {
                 return ServerSentEvent.builder(response.toString()).event("interaction").build();
@@ -110,7 +110,7 @@ public class ChatServiceTests extends BaseTests {
             .build();
         AiUtils.handleRequest(request);
 
-        ChatService chatService = aiFactory.getChatService();
+        ChatService chatService = aiManager.getChatService();
         String content = chatService.chatCompletionText(request);
         Assertions.assertNotNull(content);
     }

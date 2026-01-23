@@ -4,8 +4,8 @@ import cc.wdev.platform.commons.autoconfigure.core.properties.AiAliyunProperties
 import cc.wdev.platform.commons.autoconfigure.core.properties.AiProperties;
 import cc.wdev.platform.commons.autoconfigure.core.properties.AiTencentProperties;
 import cc.wdev.platform.commons.core.ai.AiCustomizer;
-import cc.wdev.platform.commons.core.ai.AiFactory;
-import cc.wdev.platform.commons.core.ai.AiFactoryImpl;
+import cc.wdev.platform.commons.core.ai.AiManager;
+import cc.wdev.platform.commons.core.ai.AiManagerImpl;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunConfig;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactory;
 import cc.wdev.platform.commons.core.ai.aliyun.AiAliyunFactoryImpl;
@@ -99,8 +99,8 @@ public class AiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public AiFactory aiFactory(ChatService chatService, ChatModel chatModel, ChatMemory chatMemory) {
-        return new AiFactoryImpl(aiProperties.getServiceProvider(), chatModel, chatService, chatMemory);
+    public AiManager aiManager(ChatService chatService, ChatModel chatModel, ChatMemory chatMemory) {
+        return new AiManagerImpl(aiProperties.getServiceProvider(), chatModel, chatService, chatMemory);
     }
 
     @Bean
