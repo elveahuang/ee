@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.oapis.sms.tencent;
 
+import cc.wdev.platform.commons.oapis.sms.SmsResult;
 import cc.wdev.platform.commons.oapis.sms.SmsSender;
 import cc.wdev.platform.commons.oapis.sms.domain.SmsBody;
-import com.aliyun.tea.TeaException;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -18,40 +18,40 @@ import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 
+import static com.tencentcloudapi.common.AbstractModel.toJsonString;
+
 /**
  * @author elvea
  */
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-public class TencentSmsSender implements SmsSender<TencentSmsSender.TencentSmsConfig> {
+public class TencentSmsSender implements SmsSender<TencentSmsSender.Config, SmsResult> {
 
     public final static String ENDPOINT = "sms.tencentcloudapi.com";
 
-    private TencentSmsConfig config;
+    private Config config;
 
     @Override
-    public void send(SmsBody body) throws Exception {
-        this.send(this.config, body);
+    public SmsResult send(SmsBody body) throws Exception {
+        return this.send(this.config, body);
     }
 
     @Override
-    public void send(TencentSmsConfig config, SmsBody body) throws Exception {
-        try {
-            SmsClient client = createClient(config, body);
-            SendSmsRequest request = getRequest(config, body);
-            SendSmsResponse response = client.SendSms(request);
-            System.out.println(response);
-        } catch (TeaException error) {
-            com.aliyun.teautil.Common.assertAsString(error.message);
-        } catch (Exception _error) {
-            TeaException error = new TeaException(_error.getMessage(), _error);
-            com.aliyun.teautil.Common.assertAsString(error.message);
-        }
+    public SmsResult send(Config config, SmsBody body) throws Exception {
+        SmsClient client = createClient(config, body);
+        SendSmsRequest request = getRequest(config, body);
+        SendSmsResponse response = client.SendSms(request);
+
+        return SmsResult.builder()
+            .status(true)
+            .response(toJsonString(response))
+            .data(response)
+            .build();
     }
 
     @NonNull
-    private static SmsClient createClient(TencentSmsConfig config, SmsBody body) throws Exception {
+    private static SmsClient createClient(Config config, SmsBody body) throws Exception {
         Credential credential = new Credential(config.getSecretId(), config.getSecretKey());
 
         HttpProfile httpProfile = new HttpProfile();
@@ -67,7 +67,7 @@ public class TencentSmsSender implements SmsSender<TencentSmsSender.TencentSmsCo
     }
 
     @NonNull
-    private static SendSmsRequest getRequest(TencentSmsConfig config, SmsBody body) {
+    private static SendSmsRequest getRequest(Config config, SmsBody body) {
         SendSmsRequest request = new SendSmsRequest();
         request.setSmsSdkAppId(config.getAppId());
         request.setSignName(config.getSignName());
@@ -84,7 +84,7 @@ public class TencentSmsSender implements SmsSender<TencentSmsSender.TencentSmsCo
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class TencentSmsConfig implements Serializable {
+    public static class Config implements Serializable {
         @Builder.Default
         private Boolean enabled = Boolean.FALSE;
         @Builder.Default

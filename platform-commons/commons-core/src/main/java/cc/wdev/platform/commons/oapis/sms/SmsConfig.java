@@ -22,6 +22,6 @@ public class SmsConfig implements Serializable {
     private AliyunSmsSender.Config aliyun = AliyunSmsSender.Config.builder().build();
 
     @Builder.Default
-    private TencentSmsSender.TencentSmsConfig tencent = TencentSmsSender.TencentSmsConfig.builder().build();
+    private TencentSmsSender.Config tencent = TencentSmsSender.Config.builder().build();
 
 }

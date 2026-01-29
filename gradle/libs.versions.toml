@@ -3,7 +3,7 @@ springAiVersion = "2.0.0-M2"
 springAiAlibabaVersion = "1.1.0.0"
 springAiExtensionsVersion = "1.1.2.0"
 springBootVersion = "4.0.2"
-springBootAdminVersion = "3.5.6"
+springBootAdminVersion = "4.0.0-M1"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.1.0"
 springGrpcVersion = "1.0.1"
@@ -16,7 +16,7 @@ redissonVersion = "4.1.0"
 kotlinVersion = "2.3.0"
 groovyVersion = "5.0.3"
 hutoolVersion = "5.8.43"
-awsSdkVersion = "2.41.10"
+awsSdkVersion = "2.41.14"
 wxJavaVersion = "4.8.0"
 mockitoVersion = "5.21.0"
 seleniumVersion = "4.40.0"
@@ -28,8 +28,8 @@ jsqlparserVersion = "5.3"
 shardingSphereVersion = "5.5.2"
 langChainVersion = "1.10.0"
 langChainCommunityVersion = "1.10.0-beta18"
-agentScopeVersion = "1.0.7"
-embabelAgentVersion = "0.3.2"
+agentScopeVersion = "1.0.8"
+embabelAgentVersion = "0.3.3"
 jacksonVersion = "3.0.4"
 okhttpVersion = "5.3.2"
 poiVersion = "5.5.1"
@@ -96,6 +96,7 @@ spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-st
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
 spring-boot-starter-jackson = { module = "org.springframework.boot:spring-boot-starter-jackson" }
+spring-boot-starter-mail = { module = "org.springframework.boot:spring-boot-starter-mail" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
@@ -142,13 +143,12 @@ spring-ai-mcp = { module = "org.springframework.ai:spring-ai-mcp" }
 spring-ai-rag = { module = "org.springframework.ai:spring-ai-rag" }
 spring-ai-advisors-vector-store = { module = "org.springframework.ai:spring-ai-advisors-vector-store" }
 spring-ai-elasticsearch-store = { module = "org.springframework.ai:spring-ai-elasticsearch-store" }
-spring-ai-redis-store = { module = "org.springframework.ai:spring-ai-redis-store" }
 spring-ai-starter-model-openai = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
 spring-ai-starter-model-deepseek = { module = "org.springframework.ai:spring-ai-starter-model-deepseek" }
 spring-ai-starter-mcp-client = { module = "org.springframework.ai:spring-ai-starter-mcp-client" }
 spring-ai-starter-mcp-server-webmvc = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webmvc" }
-spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene", version = "2.0.0" }
-spring-ai-agent-utils = { module = "org.springaicommunity:spring-ai-agent-utils", version = "0.4.1" }
+spring-ai-tst-tool-searcher-lucene = { module = "org.springaicommunity:tool-searcher-lucene", version = "2.0.1" }
+spring-ai-agent-utils = { module = "org.springaicommunity:spring-ai-agent-utils", version = "0.4.2" }
 
 # Spring AI Alibaba
 spring-ai-alibaba-dashscope = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-dashscope" }
@@ -170,8 +170,8 @@ langchain-dashscope = { module = "dev.langchain4j:langchain4j-community-dashscop
 embabel-agent-openai = { module = "com.embabel.agent:embabel-agent-openai" }
 embabel-agent-starter-deepseek = { module = "com.embabel.agent:embabel-agent-starter-deepseek" }
 
-# Agent Scope
-agentscope = { module = "io.agentscope:agentscope", version.ref = "agentScopeVersion" }
+# AgentScope
+agentscope-core = { module = "io.agentscope:agentscope", version.ref = "agentScopeVersion" }
 agentscope-spring-boot-starter = { module = "io.agentscope:agentscope-spring-boot-starter", version.ref = "agentScopeVersion" }
 
 # MyBatis
@@ -265,6 +265,7 @@ tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-jav
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1379" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.2" }
 openai-java = { module = "com.openai:openai-java", version = "4.15.0" }
+volcengine-java-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "1.0.7" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.1" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.1" }
 
@@ -383,9 +384,9 @@ baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt
 baseApacheCommons = ["commons-logging", "commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-processor", "hibernate-validator-processor"]
-baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence"]
+baseJakarta = ["jakarta-annotation", "jakarta-validation", "jakarta-persistence", "jakarta-mail"]
 baseJakartaServlet = ["jakarta-servlet"]
-baseJakartaCompile = ["jakarta-mail", "jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
+baseJakartaCompile = ["jakarta-servlet", "jakarta-websocket", "jakarta-transaction", "jakarta-json", "jakarta-json-bind"]
 
 html = ["jsoup"]
 pinyin = ["pinyin4j"]
@@ -400,7 +401,7 @@ excel = ["poi", "poi-ooxml", "poi-ooxml-lite", "poi-scratchpad", "fesod-sheet"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
 json = ["jackson-annotations", "jackson-core", "jackson-databind", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
-ai = ["openai-java", "dashscope-sdk-java", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
+ai = ["openai-java", "dashscope-sdk-java", "volcengine-java-sdk", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]
 swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
 
@@ -409,9 +410,9 @@ springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
 springBootCore = ["spring-boot", "spring-boot-autoconfigure"]
-springBootCoreStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter"]
-springBootServletStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webmvc"]
-springBootReactiveStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webflux"]
+springBootCoreStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter"]
+springBootServletStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webmvc"]
+springBootReactiveStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webflux"]
 springBootShellStarter = ["spring-boot-starter", "spring-boot-starter-shell"]
 springBootAdminClientStarter = ["spring-boot-admin-starter-client"]
 springBootAdminServerStarter = ["spring-boot-admin-starter-server"]
@@ -431,7 +432,7 @@ springCloudCoreStarter = ["spring-cloud-starter-consul-discovery", "spring-cloud
 springCloudGatewayServerStarter = ["spring-cloud-starter-gateway-server-webflux"]
 
 # Spring AI
-springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-deepseek", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-redis-store", "spring-ai-tst-tool-searcher-lucene", "spring-ai-agent-utils"]
+springAiCore = ["spring-ai-client-chat", "spring-ai-openai", "spring-ai-deepseek", "spring-ai-mcp", "spring-ai-rag", "spring-ai-advisors-vector-store", "spring-ai-elasticsearch-store", "spring-ai-tst-tool-searcher-lucene", "spring-ai-agent-utils"]
 springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-model-deepseek", "spring-ai-starter-mcp-client", "spring-ai-starter-mcp-server-webmvc"]
 
 # Spring AI Alibaba
@@ -446,7 +447,7 @@ embabelAgentCore = ["embabel-agent-openai"]
 embabelAgentStarter = ["embabel-agent-starter-deepseek"]
 
 # Agent Scope
-agentScopeCore = ["agentscope"]
+agentScopeCore = ["agentscope-core"]
 agentScopeStarter = ["agentscope-spring-boot-starter"]
 
 # Mybatis

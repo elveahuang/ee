@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public record SmsFactory(SmsConfig config) {
 
-    public SmsSender<?> getSmsSender() {
+    public SmsSender<?, SmsResult> getSmsSender() {
         if (SmsTypeEnum.Tencent.equals(this.config.getType())) {
             return getTencentSmsSender();
         }
@@ -30,7 +30,7 @@ public record SmsFactory(SmsConfig config) {
         return this.getTencentSmsSender(this.config.getTencent());
     }
 
-    public TencentSmsSender getTencentSmsSender(TencentSmsSender.TencentSmsConfig config) {
+    public TencentSmsSender getTencentSmsSender(TencentSmsSender.Config config) {
         return new TencentSmsSender(config);
     }
 

@@ -59,7 +59,16 @@ public abstract class AiUtils {
 
     public static ChatClient.ChatClientRequestSpec processChatSpec(ChatClient chatClient, SimpleChatRequest request) {
         ChatClient.ChatClientRequestSpec spec = chatClient
-            .prompt(request.getPrompt())
+            .prompt()
+            .user(u -> {
+                u.text(request.getPrompt());
+                if (request.getEntityId() != null) {
+                    u.metadata(AiConstants.METADATA_ENTITY_ID, request.getEntityId());
+                }
+                if (StringUtils.isNotEmpty(request.getEntityType())) {
+                    u.metadata(AiConstants.METADATA_ENTITY_TYPE, request.getEntityType());
+                }
+            })
             .advisors(a -> a.param(CONVERSATION_ID, StringUtils.nvl(request.getConversationId(), StringUtils.uuid())));
 
         if (StringUtils.isNotEmpty(request.getSystemPrompt())) {

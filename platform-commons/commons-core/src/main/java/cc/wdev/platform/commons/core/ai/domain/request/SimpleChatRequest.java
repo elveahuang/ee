@@ -22,6 +22,12 @@ public class SimpleChatRequest implements Serializable {
      */
     @Schema(description = "会话ID")
     private String conversationId;
+
+    @Schema(description = "实体ID")
+    private Long entityId;
+
+    @Schema(description = "实体类型")
+    private String entityType;
     /**
      * 用户提示词
      */

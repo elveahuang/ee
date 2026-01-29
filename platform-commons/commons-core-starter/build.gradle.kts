@@ -28,6 +28,7 @@ dependencies {
     compileOnly(rootProject.libs.bundles.sharding)
     compileOnly(rootProject.libs.bundles.selenium)
     compileOnly(rootProject.libs.bundles.im)
+    compileOnly(rootProject.libs.bundles.sms)
     compileOnly(rootProject.libs.bundles.ip)
     compileOnly(rootProject.libs.bundles.telegram)
     compileOnly(rootProject.libs.bundles.html)

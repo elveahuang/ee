@@ -2,6 +2,7 @@ package cc.wdev.platform.commons.core.ai.chat;
 
 import cc.wdev.platform.commons.core.ai.AiCustomizer;
 import cc.wdev.platform.commons.core.ai.advisor.CustomLoggingAdvisor;
+import cc.wdev.platform.commons.core.ai.advisor.UserContextChatMemoryAdvisor;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleChatRequest;
 import cc.wdev.platform.commons.core.ai.domain.request.SimpleCompletionRequest;
 import org.springframework.ai.chat.client.ChatClient;
@@ -35,6 +36,7 @@ public class DefaultChatService implements ChatService {
 
         this.chatModel = chatModel;
         this.chatClient = ChatClient.builder(chatModel).defaultAdvisors(
+                new UserContextChatMemoryAdvisor(),
                 MessageChatMemoryAdvisor.builder(chatMemory).scheduler(MessageChatMemoryAdvisor.DEFAULT_SCHEDULER).build(),
                 new CustomLoggingAdvisor()
             )

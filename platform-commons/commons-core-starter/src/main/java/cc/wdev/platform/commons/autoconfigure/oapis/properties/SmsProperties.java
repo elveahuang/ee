@@ -26,6 +26,6 @@ public class SmsProperties {
     private AliyunSmsSender.Config aliyun = AliyunSmsSender.Config.builder().build();
 
     @NestedConfigurationProperty
-    private TencentSmsSender.TencentSmsConfig tencent = TencentSmsSender.TencentSmsConfig.builder().build();
+    private TencentSmsSender.Config tencent = TencentSmsSender.Config.builder().build();
 
 }

@@ -22,4 +22,10 @@ public interface AiConstants {
      */
     int MAX_MEMORY_MESSAGE_COUNT = 36;
 
+    String METADATA_ENTITY_ID = "entityId";
+
+    String METADATA_ENTITY_TYPE = "entityType";
+
+    String METADATA_CHAT_MEMORY_ID = "AiChatMemoryId";
+
 }

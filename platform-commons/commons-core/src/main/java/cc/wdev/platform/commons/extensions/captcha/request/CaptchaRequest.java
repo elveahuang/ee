@@ -21,6 +21,9 @@ import java.time.Duration;
 public class CaptchaRequest implements Serializable {
     @Schema(description = "验证码类型")
     private CaptchaTypeEnum type;
+    @Schema(description = "业务ID")
+    @Builder.Default
+    private Long bizId = 0L;
     @Schema(description = "邮箱")
     private String email;
     @Schema(description = "移动国家码")

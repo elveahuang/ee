@@ -180,7 +180,9 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void updateBatchById(Collection<T> entityList, int batchSize) {
-        this.getRepository().saveAll(entityList);
+        if (CollectionUtils.isNotEmpty(entityList)) {
+            this.getRepository().saveAll(entityList);
+        }
     }
 
     /**

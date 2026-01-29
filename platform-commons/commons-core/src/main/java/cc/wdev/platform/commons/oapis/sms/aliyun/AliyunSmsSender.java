@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.oapis.sms.aliyun;
 
+import cc.wdev.platform.commons.oapis.sms.SmsResult;
 import cc.wdev.platform.commons.oapis.sms.SmsSender;
 import cc.wdev.platform.commons.oapis.sms.domain.SmsBody;
 import cc.wdev.platform.commons.utils.GsonUtils;
@@ -7,7 +8,6 @@ import cc.wdev.platform.commons.utils.StringUtils;
 import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
-import com.aliyun.tea.TeaException;
 import com.aliyun.teautil.models.RuntimeOptions;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,30 +24,28 @@ import java.io.Serializable;
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-public class AliyunSmsSender implements SmsSender<AliyunSmsSender.Config> {
+public class AliyunSmsSender implements SmsSender<AliyunSmsSender.Config, SmsResult> {
 
     public final static String ENDPOINT = "dysmsapi.aliyuncs.com";
 
     private Config config;
 
     @Override
-    public void send(SmsBody body) throws Exception {
-        this.send(this.config, body);
+    public SmsResult send(SmsBody body) throws Exception {
+        return this.send(this.config, body);
     }
 
     @Override
-    public void send(Config config, SmsBody body) throws Exception {
+    public SmsResult send(Config config, SmsBody body) throws Exception {
         Client client = createClient(config, body);
         SendSmsRequest request = getRequest(config, body);
-        try {
-            SendSmsResponse response = client.sendSmsWithOptions(request, new RuntimeOptions());
-            System.out.println(response);
-        } catch (TeaException error) {
-            com.aliyun.teautil.Common.assertAsString(error.message);
-        } catch (Exception _error) {
-            TeaException error = new TeaException(_error.getMessage(), _error);
-            com.aliyun.teautil.Common.assertAsString(error.message);
-        }
+        SendSmsResponse response = client.sendSmsWithOptions(request, new RuntimeOptions());
+
+        return SmsResult.builder()
+            .status(true)
+            .response(GsonUtils.toJson(response.toMap()))
+            .data(response)
+            .build();
     }
 
     @NonNull

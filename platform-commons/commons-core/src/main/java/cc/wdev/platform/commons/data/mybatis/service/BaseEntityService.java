@@ -236,12 +236,14 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void updateBatchById(Collection<T> entityList, int batchSize) {
-        String sqlStatement = getSqlStatement(SqlMethod.UPDATE_BY_ID);
-        executeBatch(entityList, batchSize, (sqlSession, entity) -> {
-            MapperMethod.ParamMap<T> param = new MapperMethod.ParamMap<>();
-            param.put(Constants.ENTITY, entity);
-            sqlSession.update(sqlStatement, param);
-        });
+        if (CollectionUtils.isNotEmpty(entityList)) {
+            String sqlStatement = getSqlStatement(SqlMethod.UPDATE_BY_ID);
+            executeBatch(entityList, batchSize, (sqlSession, entity) -> {
+                MapperMethod.ParamMap<T> param = new MapperMethod.ParamMap<>();
+                param.put(Constants.ENTITY, entity);
+                sqlSession.update(sqlStatement, param);
+            });
+        }
     }
 
     /**
