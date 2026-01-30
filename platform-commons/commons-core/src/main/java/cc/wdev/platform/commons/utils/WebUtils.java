@@ -19,4 +19,8 @@ public abstract class WebUtils {
         return new PageImpl<>(content, page.getPageable(), page.getTotalElements());
     }
 
+    public static <T> Page<T> newPage(Pageable pageable, List<T> content, long total) {
+        return new PageImpl<>(content, pageable, total);
+    }
+
 }

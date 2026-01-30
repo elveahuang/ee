@@ -3,15 +3,16 @@ package cc.wdev.platform.commons.utils;
 import com.google.common.collect.Lists;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author elvea
  */
 public class CollectionUtils extends org.springframework.util.CollectionUtils {
+
+    public static <E> Collection<E> nvl(@Nullable Collection<E> collection) {
+        return isNotEmpty(collection) ? collection : Collections.emptyList();
+    }
 
     public static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
