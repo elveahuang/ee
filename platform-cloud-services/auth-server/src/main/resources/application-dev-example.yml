@@ -1,0 +1,136 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    thymeleaf:
+        cache: true
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:9292
+                username: admin
+                password: admin
+    datasource:
+        name: master
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: root
+    cache:
+        type: redis
+        redis:
+            time-to-live: 2H
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 0
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: platform
+        username: guest
+        password: guest
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+        path: /swagger-ui.html
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        machine-bit: 10
+        distributor:
+            type: redis
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        zone-id: Asia/Shanghai
+        epoch: 1672502400000
+        share:
+            enabled: true
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    debug:
+        enabled: true
+    amqp:
+        enabled: true
+    sequence:
+        enabled: true
+        type: auto
+    data:
+        enabled: true
+        jdbc:
+            enabled: true
+        mybatis:
+            enabled: true
+        elasticsearch:
+            enabled: false
+        mongodb:
+            enabled: false
+        jpa:
+            enabled: false
+    cache:
+        enabled: true
+        type: redis
+        redis:
+            enabled: true
+        redisson:
+            enabled: true
+    storage:
+        enabled: false
+        type: min
+    jwt:
+        enabled: true
+        public-key-value: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA15d0j/2y9gfvh9ZH696pjVCGfXKNt47/dN9WZ6rNOauzE7jPgWr1GC4XCudxD5gjDB8L6d//yKGLkvC/vDBMFL6aKp1ySDoP624+XNBJbMVvsICmqf8hmTh1icV/JIW2MioXsxKgOR0rC+Kfl0p5SP26SfUalTZDgnvvzVwN8NSwKxtyUSirBEtUsZqBZaZGVormGkaOKtOpDt9osDmSXb2AR+3mVCPLPEcDH89RdBIvYTS3S+9h795L6Buznq+KIglS/r/4uoW+NyPIapuYbHpdUlIjzm9nh1lWs0BRJvXgz0VgzKs5sUCCw0Aq0JAiJ4nn7LDYMY2yMUK7RKSF0QIDAQAB
+        private-key-value: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDXl3SP/bL2B++H1kfr3qmNUIZ9co23jv9031Znqs05q7MTuM+BavUYLhcK53EPmCMMHwvp3//IoYuS8L+8MEwUvpoqnXJIOg/rbj5c0ElsxW+wgKap/yGZOHWJxX8khbYyKhezEqA5HSsL4p+XSnlI/bpJ9RqVNkOCe+/NXA3w1LArG3JRKKsES1SxmoFlpkZWiuYaRo4q06kO32iwOZJdvYBH7eZUI8s8RwMfz1F0Ei9hNLdL72Hv3kvoG7Oer4oiCVL+v/i6hb43I8hqm5hsel1SUiPOb2eHWVazQFEm9eDPRWDMqzmxQILDQCrQkCIniefssNgxjbIxQrtEpIXRAgMBAAECggEAV19KHhDzNkKBEMwG2dCjZmH8H1sNlBaf8P2SRvExuu2a5aNAdXKjYelL7V9esrM1gPQUH/Rn9SeDKUnoapwoOUAFur+UUTE2wnMrUvIWz740RZPd94cuVqpK+ErR/Ds0W6Azep9Rz9PCXk653taP0MUDenWbEF2tfnQ7+z4TaEYLmPtAzYPR3rQRHcpYsbDNQHw6WuRFz2wwpSuhdQOkAGKsT0buhpjquGAek3AW1kiuaipsI0PHBXPh2XrboUTf1Y2EVeTwCXnMc7IHsjQXR0pyze2/LyF96Q7vLZZhE17S4eKCN++Vvn8fkdDttTP091/cMSG/8qfGIn9novPHAQKBgQDy15pWn47ZMkIpxkfjT/auIYpTzPbrPnhX8AzNJ89wpIlhC08tzyq3mJ48zzh0LgH4k6/k9pAOBVD1h5EyIbBOVIhSY5LNPfMX67jDyai5wBAn/tNSZb/HUGQPflBs+LZsib5k1GAlTZONZVD8Uc/nkK9ZFQhbR5zKrQLYUaD3NwKBgQDjRd4Bs2gq7virDjgvFjYU9MGzY9cINUgxfioji8IaSEClO4JdtaI9a2t7yzRf/PgcZ38OCacX/blfgFdpKMosIFgKIn1OM2EWviuGcEG8ylD5QUrf73cOiELFFM5wbI1teq4dpIlAXBJzqVdv0u/wJcQpgyrKcUTeKiIt4D5fNwKBgQCfCHFLv0yGkvJfdznG9Kwg11hGjxk5b/zR4iQQCr1AEJDjW8urvVtFRw6B1lcrRqIFz3pGoO4wMG0XjoOY6BUVBykLg6g0/xf/F2E13w+/Lbem6aws7vOMLOqKdvdmle6p3/8u+yJH66jw1WQXCeD0znz3At4pIRneZTVSwwp+OwKBgQC5/50AYVZ4BJlITNvYVWIvZlv8N1JtakXKE4njC2bwYX9eesRnctXzVC1j49raT8qyXFVUJLw2WzTRntRqwLIsyM+kg7NvQ4dKuJogbVCvdBgu1au0d2NFZmjWp/+HbJ+WIJfMtLKLFI8ZT1a6srQhIpdWrf1gLrEA7RSJ3QLOowKBgQCa/wDn5cc5tHfd0AjzrysOcrmzDyfKIceMitc7DaARus6VJPHVkUizr1+ADnBYBnjiD1sO1iRYTh23jmrm+jOVXII45eSwQxZ8/GL5at4ZOfFzYpWNEOKPoned1ixlDDyN/HOYowaLjJxbQHQmxusas/JTJMtnbax++rSQjYZS1w==
+    oapis:
+        dingtalk:
+            enabled: false
+            cache-type: redis
+            agent-id:
+            app-key:
+            app-secret:
+            corp-id:
+        lark:
+            enabled: false
+            cache-type: redis
+            app-type: self_built
+            app-id:
+            app-secret:
+        weixin:
+            cp:
+                enabled: false
+                cache-type: redis
+                agent-id:
+                corp-id:
+                corp-secret:
+            mp:
+                enabled: false
+                cache-type: redis
+                app-id:
+                app-secret:
+            ma:
+                enabled: false
+                cache-type: redis
+                app-id:
+                app-secret:

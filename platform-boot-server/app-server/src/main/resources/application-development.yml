@@ -1,0 +1,248 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:8282
+                username: admin
+                password: admin
+                api-path: /devops/sba/instances
+    datasource:
+        master:
+            name: master
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        slave:
+            name: slave
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+        job:
+            name: job
+            type: com.zaxxer.hikari.HikariDataSource
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/ee_quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            username: root
+            password: root
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+    jpa:
+        open-in-view: false
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: ee
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+                default-requeue-rejected: true
+    quartz:
+        scheduler-name: QuartzScheduler
+        properties:
+            org:
+                quartz:
+                    scheduler:
+                        instanceId: ${spring.application.name}_${server.port}
+    ai:
+        model:
+            chat: openai
+        openai:
+            api-key: xxx
+            base-url: https://api.deepseek.com
+            chat:
+                options:
+                    model: deepseek-chat
+        mcp:
+            client:
+                enabled: true
+            server:
+                enabled: true
+                name: ee-mcp-server
+                version: 1.0.0
+                type: sync
+                sse-endpoint: /sse
+                sse-message-endpoint: /sse/messages
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+        path: /swagger-ui.html
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    home:
+        admin: http://127.0.0.1:8081
+        mobile: http://127.0.0.1:8082
+        webapp: http://127.0.0.1:8083
+        main: http://127.0.0.1:8084
+    ai:
+        enabled: true
+        service-provider: spring
+        vector-store-provider: simple
+        tencent:
+            enabled: true
+            api-key: xxx
+        aliyun:
+            enabled: true
+            api-key: xxx
+    data:
+        core:
+            enabled: true
+        datasource:
+            enabled: true
+            master:
+                enabled: true
+            slave:
+                enabled: true
+            job:
+                enabled: true
+        jpa:
+            enabled: true
+        mybatis:
+            enabled: false
+    jwt:
+        enabled: true
+        strategy: auto
+        public-key-value:
+        private-key-value:
+    rabbit:
+        enabled: true
+    captcha:
+        enabled: true
+    http:
+        enabled: true
+        type: okhttp
+        proxy:
+            enabled: false
+            host: 127.0.0.1
+            port: 7890
+    oapis:
+        dingtalk:
+            enabled: false
+            agent-id:
+            app-key:
+            app-secret:
+            corp-id:
+        lark:
+            enabled: false
+            app-type: self_built
+            app-id:
+            app-secret:
+        weixin:
+            cp:
+                enabled: false
+                agent-id:
+                corp-id:
+                corp-secret:
+            mp:
+                enabled: false
+                app-id:
+                app-secret:
+            ma:
+                enabled: false
+                app-id:
+                app-secret:
+    storage:
+        enabled: true
+        type: aws
+        aws:
+            enabled: true
+            access-key:
+            secret-key:
+            endpoint:
+            bucket:
+            path-style-enabled: true
+            chunked-encoding-enabled: false
+        oss:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+            endpoint:
+            bucket:
+            region:
+    sms:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+            sign-name:
+            template:
+    mail:
+        enabled: true
+        config:
+            from:
+            host:
+            port: 25
+            username:
+            password:
+    translator:
+        enabled: true
+        type: aliyun
+        aliyun:
+            enabled: true
+            access-key-id:
+            access-key-secret:
+    face-body:
+        enabled: false
+        type: aliyun
+        aliyun:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+    ip:
+        enabled: true
+        geo-lite:
+            location: file_system
+            path: ./ip/GeoLite2-City.mmdb
+    message:
+        broadcast:
+            enabled: true
+            type: rabbit
+    selenium:
+        enabled: true
+        driver-type: chrome
+        proxy:
+            enabled: true
+            host: 127.0.0.1
+            port: 7890
+    test:
+        enabled: false
+        email:
+        mobile:

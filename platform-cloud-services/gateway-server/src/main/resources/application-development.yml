@@ -1,0 +1,86 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    boot:
+        admin:
+            client:
+                enabled: false
+                url: http://127.0.0.1:8282
+                username: admin
+                password: admin
+                api-path: /devops/sba/instances
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+    cloud:
+        gateway:
+            server:
+                webflux:
+                    routes:
+                        -   id: auth-service
+                            uri: lb://auth-service
+                            predicates:
+                                - Path=/oauth/**
+                        -   id: auth-service
+                            uri: lb://auth-service
+                            predicates:
+                                - Path=/auth-service/**
+                            filters:
+                                - RewritePath=/auth-service/(?<path>.*), /$\{path}
+                        -   id: system-service
+                            uri: lb://system-service
+                            predicates:
+                                - Path=/api/**
+                        -   id: system-service
+                            uri: lb://system-service
+                            predicates:
+                                - Path=/system-service/**
+                            filters:
+                                - RewritePath=/system-service/(?<path>.*), /$\{path}
+                        -   id: openapi-proxy
+                            uri: https://wdev.cc
+                            predicates:
+                                - Path=/v3/api-docs/**
+                            filters:
+                                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+                        -   id: openapi
+                            uri: http://localhost:${server.port}
+                            predicates:
+                                - Path=/v3/api-docs/**
+                            filters:
+                                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+    swagger-ui:
+        enabled: true
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    data:
+        core:
+            enabled: false
+        jdbc:
+            enabled: false
