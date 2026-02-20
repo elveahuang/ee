@@ -2,21 +2,21 @@
 springAiVersion = "2.0.0-M2"
 springAiAlibabaVersion = "1.1.2.0"
 springAiExtensionsVersion = "1.1.2.1"
-springBootVersion = "4.0.2"
-springBootAdminVersion = "4.0.0-M1"
+springBootVersion = "4.0.3"
+springBootAdminVersion = "4.0.0"
 springDependencyManagementVersion = "1.1.7"
 springCloudVersion = "2025.1.1"
 springGrpcVersion = "1.0.2"
 springShellVersion = "4.0.1"
 springDocVersion = "3.0.1"
-grpcVersion = "1.78.0"
-nettyVersion = "4.2.9.Final"
+grpcVersion = "1.79.0"
+nettyVersion = "4.2.10.Final"
 cosidVersion = "3.0.2"
-redissonVersion = "4.1.0"
-kotlinVersion = "2.3.0"
+redissonVersion = "4.2.0"
+kotlinVersion = "2.3.10"
 groovyVersion = "5.0.4"
 hutoolVersion = "5.8.43"
-awsSdkVersion = "2.41.14"
+awsSdkVersion = "2.41.32"
 wxJavaVersion = "4.8.0"
 mockitoVersion = "5.21.0"
 seleniumVersion = "4.40.0"
@@ -28,8 +28,8 @@ jsqlparserVersion = "5.3"
 shardingSphereVersion = "5.5.2"
 langChainVersion = "1.11.0"
 langChainCommunityVersion = "1.11.0-beta19"
-agentScopeVersion = "1.0.8"
-embabelAgentVersion = "0.3.3"
+agentScopeVersion = "1.0.9"
+embabelAgentVersion = "0.3.4"
 jacksonVersion = "3.0.4"
 okhttpVersion = "5.3.2"
 poiVersion = "5.5.1"
@@ -37,7 +37,7 @@ luceneVersion = "10.3.2"
 javaJwtVersion = "4.5.0"
 antlr3Runtime = "3.5.3"
 antlr4Runtime = "4.13.2"
-swaggerVersion = "2.2.42"
+swaggerVersion = "2.2.43"
 bouncycastleVersion = "1.83"
 errorProneAnnotationsVersion = "2.46.0"
 checkerQualVersion = "3.53.0"
@@ -228,7 +228,7 @@ poi = { module = "org.apache.poi:poi", version.ref = "poiVersion" }
 poi-ooxml = { module = "org.apache.poi:poi-ooxml", version.ref = "poiVersion" }
 poi-ooxml-lite = { module = "org.apache.poi:poi-ooxml-lite", version.ref = "poiVersion" }
 poi-scratchpad = { module = "org.apache.poi:poi-scratchpad", version.ref = "poiVersion" }
-fesod-sheet = { module = "org.apache.fesod:fesod-sheet", version = "2.0.0-incubating" }
+fesod-sheet = { module = "org.apache.fesod:fesod-sheet", version = "2.0.1-incubating" }
 pdfbox-core = { module = "org.apache.pdfbox:pdfbox", version = "3.0.6" }
 pdfbox-fontbox = { module = "org.apache.pdfbox:fontbox", version = "3.0.6" }
 pdfbox-preflight = { module = "org.apache.pdfbox:preflight", version = "3.0.6" }
@@ -236,9 +236,9 @@ pdfbox-xmpbox = { module = "org.apache.pdfbox:xmpbox", version = "3.0.6" }
 pdfbox-debugger = { module = "org.apache.pdfbox:pdfbox-debugger", version = "3.0.6" }
 pdfbox-tools = { module = "org.apache.pdfbox:pdfbox-tools", version = "3.0.6" }
 x-easypdf-pdfbox = { module = "org.dromara:x-easypdf-pdfbox", version = "3.5.5" }
-scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.5" }
-scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.5" }
-scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.5" }
+scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version = "4.3.6" }
+scrimage-filters = { module = "com.sksamuel.scrimage:scrimage-filters", version = "4.3.6" }
+scrimage-webp = { module = "com.sksamuel.scrimage:scrimage-webp", version = "4.3.6" }
 imageio-core = { module = "com.twelvemonkeys.imageio:imageio-core", version = "3.13.0" }
 imageio-jpeg = { module = "com.twelvemonkeys.imageio:imageio-jpeg", version = "3.13.0" }
 imageio-webp = { module = "com.twelvemonkeys.imageio:imageio-webp", version = "3.13.0" }
@@ -255,19 +255,19 @@ weixin-java-mp = { module = "com.github.binarywang:weixin-java-mp", version.ref 
 weixin-java-miniapp = { module = "com.github.binarywang:weixin-java-miniapp", version.ref = "wxJavaVersion" }
 dingtalk = { module = "com.aliyun:dingtalk", version = "2.2.43" }
 facebody = { module = "com.aliyun:facebody20191230", version = "6.0.0" }
-dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.4.0" }
+dysmsapi = { module = "com.aliyun:dysmsapi20170525", version = "4.5.0" }
 alimt = { module = "com.aliyun:alimt20181012", version = "1.5.2" }
 aliyun-java-sdk-core = { module = "com.aliyun:aliyun-java-sdk-core", version = "4.7.8" }
-dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.6" }
-aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.4" }
-tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1399" }
+dashscope-sdk-java = { module = "com.alibaba:dashscope-sdk-java", version = "2.22.9" }
+aliyun-sdk-oss = { module = "com.aliyun.oss:aliyun-sdk-oss", version = "3.18.5" }
+tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-java-common", version = "3.1.1413" }
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1357" }
-tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1379" }
-oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.2" }
-openai-java = { module = "com.openai:openai-java", version = "4.15.0" }
-volcengine-java-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "1.0.7" }
-telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.2.1" }
-telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.2.1" }
+tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1413" }
+oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.3" }
+openai-java = { module = "com.openai:openai-java", version = "4.21.0" }
+volcengine-java-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "1.0.9" }
+telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.3.0" }
+telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.3.0" }
 
 jakarta-annotation = { module = "jakarta.annotation:jakarta.annotation-api" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api" }
@@ -281,7 +281,7 @@ jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
 
 commons-io = { module = "commons-io:commons-io", version = "2.21.0" }
 commons-net = { module = "commons-net:commons-net", version = "3.12.0" }
-commons-codec = { module = "commons-codec:commons-codec", version = "1.20.0" }
+commons-codec = { module = "commons-codec:commons-codec", version = "1.21.0" }
 commons-logging = { module = "commons-logging:commons-logging", version = "1.3.5" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
 commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.1" }
@@ -339,14 +339,14 @@ okio = { module = "com.squareup.okio:okio", version = "3.16.4" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "5.0.2" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version = "2.5.1" }
-objenesis = { module = "org.objenesis:objenesis", version = "3.4" }
+objenesis = { module = "org.objenesis:objenesis", version = "3.5" }
 ip2region = { module = "org.lionsoul:ip2region", version = "3.3.4" }
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
-annotations = { module = "org.jetbrains:annotations", version = "26.0.2-1" }
-nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.7" }
-oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.31.1" }
+annotations = { module = "org.jetbrains:annotations", version = "26.1.0" }
+nimbus-jose-jwt = { module = "com.nimbusds:nimbus-jose-jwt", version = "10.8" }
+oauth2-oidc-sdk = { module = "com.nimbusds:oauth2-oidc-sdk", version = "11.33" }
 spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.9.8" }
-logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.2" }
+logback-loki-appender = { module = "com.github.loki4j:loki-logback-appender", version = "2.0.3" }
 logback-logstash-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "9.0" }
 
 # Thymeleaf
@@ -373,7 +373,7 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 
 # Webjars
 webjars-core = { module = "org.webjars:webjars-locator-core" }
-webjars-jquery = { module = "org.webjars:jquery", version = "3.7.1" }
+webjars-jquery = { module = "org.webjars:jquery", version = "4.0.0" }
 webjars-popper-js = { module = "org.webjars:popper.js", version = "2.11.7" }
 webjars-bootstrap = { module = "org.webjars:bootstrap", version = "5.3.8" }
 webjars-bootstrap-icons = { module = "org.webjars.npm:bootstrap-icons", version = "1.13.1" }
