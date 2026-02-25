@@ -1,7 +1,7 @@
-var javaCppVersion = "1.5.12"
-var ffmpegVersion = "7.1.1-$javaCppVersion"
-var tesseractVersion = "5.5.1-$javaCppVersion"
-var leptonicaVersion = "1.85.0-$javaCppVersion"
+var javaCppVersion = "1.5.13"
+var ffmpegVersion = "8.0.1-$javaCppVersion"
+var tesseractVersion = "5.5.2-$javaCppVersion"
+var leptonicaVersion = "1.87.0-$javaCppVersion"
 
 dependencies {
     // javacv & javacpp

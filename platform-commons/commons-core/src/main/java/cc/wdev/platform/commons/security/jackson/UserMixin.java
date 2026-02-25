@@ -44,10 +44,10 @@ class UserDeserializer extends ValueDeserializer<User> {
         String password = JacksonUtils.findStringValue(root, "password");
         boolean enabled = JacksonUtils.findBooleanValue(root, "enabled");
         String usertype = JacksonUtils.findStringValue(root, "userType");
+        Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET, context);
         boolean accountNonExpired = JacksonUtils.findBooleanValue(root, "accountNonExpired");
         boolean credentialsNonExpired = JacksonUtils.findBooleanValue(root, "credentialsNonExpired");
         boolean accountNonLocked = JacksonUtils.findBooleanValue(root, "accountNonLocked");
-        Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET, context);
         return new User(id, usertype, username, password, authorities, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
     }
 

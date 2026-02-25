@@ -4,7 +4,6 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     alias(libs.plugins.spring.boot)
-    alias(libs.plugins.gradle.native)
 }
 
 dependencies {
@@ -34,17 +33,14 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-        attributes("Spring-Boot-Native-Processed" to "false")
-    }
     archiveFileName.set("app.jar")
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
     builder = "bellsoft/buildpacks.builder:musl"
     environment = mapOf(
-        "BP_LOG_LEVEL" to "debug",
         "BP_JVM_VERSION" to "25",
+        "BPL_JVM_CDS_ENABLED" to "true",
         "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
         "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
     )
@@ -52,32 +48,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
         "$rootDir/tools/buildpacks/bindings-remote:/platform/bindings"
     )
     cleanCache = true
-    imageName = "boot-app-server"
-}
-
-graalvmNative {
-    toolchainDetection.set(true)
-    binaries {
-        named("main") {
-            buildArgs.add("--allow-incomplete-classpath")
-            buildArgs.add("--initialize-at-build-time=org.slf4j")
-            buildArgs.add("--initialize-at-build-time=ch.qos.logback")
-            buildArgs.add("--initialize-at-run-time=org.springframework.ai.chat.client.advisor.api.BaseAdvisor")
-            buildArgs.add("--trace-class-initialization=org.springframework.util.ClassUtils")
-            buildArgs.add("-H:+PrintClassInitialization")
-            buildArgs.add("-H:+ReportExceptionStackTraces")
-            buildArgs.add("-H:+UnlockExperimentalVMOptions")
-            buildArgs.add("-H:+ReportUnsupportedElementsAtRuntime")
-            buildArgs.add("-H:-DeadlockWatchdogExitOnTimeout")
-            buildArgs.add("-H:DeadlockWatchdogInterval=0")
-            buildArgs.add("-J-Xmx16G")
-            verbose.set(true)
-            fallback.set(false)
-            quickBuild.set(true)
-            sharedLibrary.set(false)
-            imageName.set("app")
-        }
-    }
+    imageName = "app"
 }
 
 tasks.withType<ProcessAot> {

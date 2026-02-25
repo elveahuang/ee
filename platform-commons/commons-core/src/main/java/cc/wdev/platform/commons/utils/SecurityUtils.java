@@ -14,9 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.util.Assert;
 
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author elvea
@@ -205,4 +206,27 @@ public abstract class SecurityUtils {
         return new BCryptPasswordEncoder();
     }
 
+    public static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
+        SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new AuthorityComparator());
+        for (GrantedAuthority grantedAuthority : authorities) {
+            Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
+            sortedAuthorities.add(grantedAuthority);
+        }
+        return sortedAuthorities;
+    }
+
+    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
+
+        @Override
+        public int compare(GrantedAuthority g1, GrantedAuthority g2) {
+            if (g2.getAuthority() == null) {
+                return -1;
+            }
+            if (g1.getAuthority() == null) {
+                return 1;
+            }
+            return g1.getAuthority().compareTo(g2.getAuthority());
+        }
+    }
 }
