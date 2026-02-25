@@ -21,9 +21,9 @@ dependencies {
     implementation(rootProject.libs.bundles.hibernateStarter)
     implementation(rootProject.libs.bundles.websocketStarter)
     implementation(rootProject.libs.bundles.selenium)
-    implementation(rootProject.libs.bundles.storage)
     implementation(rootProject.libs.bundles.im)
     implementation(rootProject.libs.bundles.logging)
+    implementation(rootProject.libs.bundles.storage)
     developmentOnly(rootProject.libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
@@ -39,6 +39,7 @@ tasks.named<BootJar>("bootJar") {
 tasks.named<BootBuildImage>("bootBuildImage") {
     builder = "bellsoft/buildpacks.builder:musl"
     environment = mapOf(
+        "BP_LOG_LEVEL" to "debug",
         "BP_JVM_VERSION" to "25",
         "BPL_JVM_CDS_ENABLED" to "true",
         "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
@@ -48,7 +49,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
         "$rootDir/tools/buildpacks/bindings-remote:/platform/bindings"
     )
     cleanCache = true
-    imageName = "app"
+    imageName = "boot-app-server"
 }
 
 tasks.withType<ProcessAot> {

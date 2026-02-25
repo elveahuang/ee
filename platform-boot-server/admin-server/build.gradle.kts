@@ -6,6 +6,7 @@ plugins {
 }
 
 dependencies {
+    // libs
     implementation(rootProject.libs.bundles.springBootServletStarter)
     implementation(rootProject.libs.bundles.springBootAdminServerStarter)
     implementation(rootProject.libs.bundles.springSecurityCoreStarter)
@@ -18,9 +19,6 @@ dependencies {
 
 tasks.named<BootJar>("bootJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest {
-        attributes("Spring-Boot-Native-Processed" to "false")
-    }
     archiveFileName.set("admin.jar")
 }
 
@@ -29,6 +27,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
     environment = mapOf(
         "BP_LOG_LEVEL" to "debug",
         "BP_JVM_VERSION" to "25",
+        "BPL_JVM_CDS_ENABLED" to "true",
         "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
         "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
     )
