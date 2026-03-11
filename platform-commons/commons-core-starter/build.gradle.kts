@@ -1,0 +1,42 @@
+dependencies {
+    // libs
+    api(rootProject.libs.bundles.springBootCore)
+    annotationProcessor(rootProject.libs.bundles.springBootAnnotationProcessor)
+    compileOnly(rootProject.libs.bundles.springBootServletStarter)
+    compileOnly(rootProject.libs.bundles.springBootReactiveStarter)
+    compileOnly(rootProject.libs.bundles.springAiCore)
+    compileOnly(rootProject.libs.bundles.springAiCoreStarter)
+    compileOnly(rootProject.libs.bundles.springSecurityCore)
+    compileOnly(rootProject.libs.bundles.springSecurityCoreStarter)
+    compileOnly(rootProject.libs.bundles.mybatis)
+    compileOnly(rootProject.libs.bundles.mybatisStarter)
+    compileOnly(rootProject.libs.bundles.redis)
+    compileOnly(rootProject.libs.bundles.redisStarter)
+    compileOnly(rootProject.libs.bundles.hibernate)
+    compileOnly(rootProject.libs.bundles.hibernateStarter)
+    compileOnly(rootProject.libs.bundles.elastic)
+    compileOnly(rootProject.libs.bundles.elasticStarter)
+    compileOnly(rootProject.libs.bundles.rabbit)
+    compileOnly(rootProject.libs.bundles.rabbitStarter)
+    compileOnly(rootProject.libs.bundles.rabbit)
+    compileOnly(rootProject.libs.bundles.quartz)
+    compileOnly(rootProject.libs.bundles.quartzStarter)
+    compileOnly(rootProject.libs.bundles.websocket)
+    compileOnly(rootProject.libs.bundles.websocketStarter)
+    compileOnly(rootProject.libs.bundles.office)
+    compileOnly(rootProject.libs.bundles.officeStarter)
+    compileOnly(rootProject.libs.bundles.sharding)
+    compileOnly(rootProject.libs.bundles.selenium)
+    compileOnly(rootProject.libs.bundles.im)
+    compileOnly(rootProject.libs.bundles.sms)
+    compileOnly(rootProject.libs.bundles.ip)
+    compileOnly(rootProject.libs.bundles.telegram)
+    compileOnly(rootProject.libs.bundles.html)
+    compileOnly(rootProject.libs.bundles.ai)
+    // modules
+    api(project(":platform-commons:commons-core"))
+}
+
+tasks.named<Jar>("jar") {
+    archiveBaseName.set("platform-commons-core-starter")
+}
