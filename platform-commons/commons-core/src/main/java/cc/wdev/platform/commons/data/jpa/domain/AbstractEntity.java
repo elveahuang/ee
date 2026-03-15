@@ -2,6 +2,7 @@ package cc.wdev.platform.commons.data.jpa.domain;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.jpa.id.Sequence;
+import cc.wdev.platform.commons.utils.NumberUtils;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import tools.jackson.databind.annotation.JsonSerialize;
@@ -25,8 +26,18 @@ public abstract class AbstractEntity implements IdEntity {
     }
 
     @Override
+    public String getIdStr() {
+        return NumberUtils.convertToString(this.id);
+    }
+
+    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = NumberUtils.convertToLang(id);
     }
 
 }

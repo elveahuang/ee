@@ -1,17 +1,17 @@
 package cc.wdev.platform.commons.data.elasticsearch.domain;
 
 import cc.wdev.platform.commons.utils.NumberUtils;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-/**
- * @author elvea
- */
-@Setter
 @Getter
-public abstract class BaseTenantEntity extends BaseEntity {
+@Setter
+@MappedSuperclass
+public abstract class SimpleTenantEntity extends SimpleEntity {
+
     /**
      * 租户ID
      */

@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.oapis.sms.aliyun;
 
+import cc.wdev.platform.commons.oapis.sms.SmsBody;
 import cc.wdev.platform.commons.oapis.sms.SmsResult;
 import cc.wdev.platform.commons.oapis.sms.SmsSender;
-import cc.wdev.platform.commons.oapis.sms.domain.SmsBody;
 import cc.wdev.platform.commons.utils.GsonUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import com.aliyun.dysmsapi20170525.Client;

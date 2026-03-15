@@ -5,10 +5,12 @@ import cc.wdev.platform.commons.core.storage.StorageConfig;
 import cc.wdev.platform.commons.core.storage.StorageFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import software.amazon.awssdk.services.s3.S3Client;
 
 /**
  * @author elvea
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @AutoConfiguration
 @EnableConfigurationProperties(StorageProperties.class)
+@ConditionalOnClass({S3Client.class})
 @ConditionalOnProperty(prefix = StorageProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class StorageAutoConfiguration {
 

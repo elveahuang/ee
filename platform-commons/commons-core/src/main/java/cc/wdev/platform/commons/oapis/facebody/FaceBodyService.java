@@ -1,7 +1,5 @@
 package cc.wdev.platform.commons.oapis.facebody;
 
-import cc.wdev.platform.commons.oapis.facebody.model.FaceBodyResult;
-
 /**
  * @author elvea
  */

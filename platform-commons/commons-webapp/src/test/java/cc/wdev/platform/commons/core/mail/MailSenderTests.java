@@ -2,7 +2,6 @@ package cc.wdev.platform.commons.core.mail;
 
 import cc.wdev.dev.webapp.BaseTests;
 import cc.wdev.platform.commons.autoconfigure.core.properties.TestProperties;
-import cc.wdev.platform.commons.core.mail.domain.MailBody;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

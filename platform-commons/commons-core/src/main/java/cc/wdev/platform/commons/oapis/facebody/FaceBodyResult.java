@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.oapis.facebody.model;
+package cc.wdev.platform.commons.oapis.facebody;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

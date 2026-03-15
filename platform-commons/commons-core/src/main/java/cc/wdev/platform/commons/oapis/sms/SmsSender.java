@@ -1,7 +1,5 @@
 package cc.wdev.platform.commons.oapis.sms;
 
-import cc.wdev.platform.commons.oapis.sms.domain.SmsBody;
-
 /**
  * @author elvea
  */

@@ -28,24 +28,32 @@ public class ReactiveWebFilter implements WebFilter, Ordered {
 
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
+
         try {
             // 初始化MDC上下文
             log.info("[ReactiveWebFilter] Init MDC Context");
             MdcContext.handleReactiveRequest(request, response);
-            log.info("[ReactiveWebFilter] MDC Context {}", MdcContext.getRequestId());
+            log.info("[ReactiveWebFilter] MDC Context {}. URL [{}]", MdcContext.getRequestId(), request.getPath());
 
             // 初始化租户上下文
             log.info("[ReactiveWebFilter] Init Tenant Context");
             TenantContext.handleReactiveRequest(request, response);
 
             ServerHttpRequest wr = exchange.getRequest().mutate().header(REQUEST_ID_KEY, MdcContext.getRequestId()).build();
-            return chain.filter(exchange.mutate().request(wr).build());
+
+            final long startTime = System.currentTimeMillis();
+            return chain.filter(exchange.mutate().request(wr).build()).doFinally(_ -> {
+                final long endTime = System.currentTimeMillis();
+                final long totalTime = endTime - startTime;
+
+                log.info("[ReactiveWebFilter] doFilter end. URL [{}]. totalTime: [{}]", exchange.getRequest().getPath(), totalTime);
+            });
         } finally {
             log.info("[ReactiveWebFilter] Clear Tenant Context");
             TenantContext.clear();
 
             log.info("[ReactiveWebFilter] Clear MDC Context");
-            TenantContext.clear();
+            MdcContext.clear();
         }
     }
 

@@ -1,7 +1,7 @@
 package cc.wdev.platform.system.message.sender;
 
+import cc.wdev.platform.commons.core.mail.MailBody;
 import cc.wdev.platform.commons.core.mail.MailSender;
-import cc.wdev.platform.commons.core.mail.domain.MailBody;
 import cc.wdev.platform.commons.utils.ExceptionUtils;
 import cc.wdev.platform.system.message.domain.dto.SendMessageDto;
 import cc.wdev.platform.system.message.service.MessageContentService;

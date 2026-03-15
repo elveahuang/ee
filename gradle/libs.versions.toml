@@ -21,13 +21,12 @@ wxJavaVersion = "4.8.0"
 mockitoVersion = "5.22.0"
 seleniumVersion = "4.41.0"
 mybatisVersion = "3.5.19"
+mybatisDynamicSqlVersion = "2.0.0"
 mybatisSpringVersion = "4.0.0"
 mybatisSpringStarterVersion = "4.0.1"
 mybatisPlusVersion = "3.5.16"
 jsqlparserVersion = "5.3"
 shardingSphereVersion = "5.5.3"
-langChainVersion = "1.12.1"
-langChainCommunityVersion = "1.12.1-beta21"
 embabelAgentVersion = "0.3.4"
 jacksonVersion = "3.0.4"
 okhttpVersion = "5.3.2"
@@ -70,8 +69,6 @@ mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockitoVersio
 grpc-bom = { module = "io.grpc:grpc-bom", version.ref = "grpcVersion" }
 jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jacksonVersion" }
 bouncycastle-bom = { module = "org.bouncycastle:bc-jdk18on-bom", version.ref = "bouncycastleVersion" }
-langchain-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langChainVersion" }
-langchain-community-bom = { module = "dev.langchain4j:langchain4j-community-bom", version.ref = "langChainCommunityVersion" }
 embabel-agent-dependencies = { module = "com.embabel.agent:embabel-agent-dependencies", version.ref = "embabelAgentVersion" }
 
 # Spring
@@ -162,17 +159,13 @@ spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencie
 spring-boot-admin-starter-client = { module = "de.codecentric:spring-boot-admin-starter-client", version.ref = "springBootAdminVersion" }
 spring-boot-admin-starter-server = { module = "de.codecentric:spring-boot-admin-starter-server", version.ref = "springBootAdminVersion" }
 
-# langChain
-langchain-core = { module = "dev.langchain4j:langchain4j" }
-langchain-open-ai = { module = "dev.langchain4j:langchain4j-open-ai" }
-langchain-dashscope = { module = "dev.langchain4j:langchain4j-community-dashscope" }
-
 # embabelAgent
 embabel-agent-openai = { module = "com.embabel.agent:embabel-agent-openai" }
 embabel-agent-starter-deepseek = { module = "com.embabel.agent:embabel-agent-starter-deepseek" }
 
 # MyBatis
 mybatis = { module = "org.mybatis:mybatis", version.ref = "mybatisVersion" }
+mybatis-dynamic-sql = { module = "org.mybatis.dynamic-sql:mybatis-dynamic-sql", version.ref = "mybatisDynamicSqlVersion" }
 mybatis-spring = { module = "org.mybatis:mybatis-spring", version.ref = "mybatisSpringVersion" }
 mybatis-spring-boot-starter = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter", version.ref = "mybatisSpringStarterVersion" }
 mybatis-plus-bom = { module = "com.baomidou:mybatis-plus-bom", version.ref = "mybatisPlusVersion" }
@@ -440,15 +433,12 @@ springAiCoreStarter = ["spring-ai-starter-model-openai", "spring-ai-starter-mode
 springAiAlibabaCore = ["spring-ai-alibaba-dashscope", "spring-ai-alibaba-agent-framework", "spring-ai-alibaba-graph-core"]
 springAiAlibabaCoreStarter = ["spring-ai-alibaba-starter-dashscope"]
 
-# LangChain4j
-langChainCore = ["langchain-core", "langchain-dashscope", "langchain-open-ai"]
-
 # embabelAgent
 embabelAgentCore = ["embabel-agent-openai"]
 embabelAgentStarter = ["embabel-agent-starter-deepseek"]
 
 # Mybatis
-mybatis = ["mybatis", "mybatis-spring", "mybatis-plus-annotation", "mybatis-plus-core", "mybatis-plus-extension", "mybatis-plus-jsqlparser", "jsqlparser"]
+mybatis = ["mybatis", "mybatis-dynamic-sql", "mybatis-spring", "mybatis-plus-annotation", "mybatis-plus-core", "mybatis-plus-extension", "mybatis-plus-jsqlparser", "jsqlparser"]
 mybatisStarter = ["mybatis-spring-boot-starter", "mybatis-plus-spring-boot-starter"]
 
 # Hibernate

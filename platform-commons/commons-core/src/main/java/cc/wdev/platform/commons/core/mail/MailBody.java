@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.core.mail.domain;
+package cc.wdev.platform.commons.core.mail;
 
 import lombok.Builder;
 import lombok.Data;

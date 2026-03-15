@@ -1,10 +1,16 @@
 package cc.wdev.platform.commons.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import static java.util.Objects.isNull;
 
 /**
  * @author elvea
  */
+@Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public abstract class NumberUtils {
 
     public static Long nvl(Long value) {
@@ -15,4 +21,20 @@ public abstract class NumberUtils {
         return isNull(value) ? defaultValue : value;
     }
 
+    public static String convertToString(Number num) {
+        if (num == null) {
+            return null;
+        }
+
+        return String.valueOf(num);
+    }
+
+    public static Long convertToLang(String str) {
+        try {
+            return Long.parseLong(str);
+        } catch (NumberFormatException e) {
+            log.warn("Invalid number format: {}", str);
+            return null;
+        }
+    }
 }

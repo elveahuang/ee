@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.oapis.sms.tencent;
 
+import cc.wdev.platform.commons.oapis.sms.SmsBody;
 import cc.wdev.platform.commons.oapis.sms.SmsResult;
 import cc.wdev.platform.commons.oapis.sms.SmsSender;
-import cc.wdev.platform.commons.oapis.sms.domain.SmsBody;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;

@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.data.mybatis.domain;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
+import cc.wdev.platform.commons.utils.NumberUtils;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import tools.jackson.databind.annotation.JsonSerialize;
@@ -23,8 +24,18 @@ public abstract class AbstractEntity implements IdEntity {
     }
 
     @Override
+    public String getIdStr() {
+        return NumberUtils.convertToString(this.id);
+    }
+
+    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = NumberUtils.convertToLang(id);
     }
 
 }

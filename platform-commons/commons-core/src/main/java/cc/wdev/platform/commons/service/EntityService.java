@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.service;
 
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
-import cc.wdev.platform.commons.enums.ResponseCodeEnum;
+import cc.wdev.platform.commons.enums.BaseResponseCodeEnum;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
 import cc.wdev.platform.commons.utils.ObjectUtils;
@@ -50,7 +50,7 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
      * 根据ID查询唯一记录
      * 若不存在，则抛出异常
      */
-    T checkExistsOrFail(K id, ResponseCodeEnum responseCode);
+    T checkExistsOrFail(K id, BaseResponseCodeEnum responseCode);
 
     /**
      * 根据ID查询唯一记录

@@ -1,7 +1,6 @@
 package cc.wdev.platform.commons.oapis.facebody;
 
 import cc.wdev.dev.webapp.BaseTests;
-import cc.wdev.platform.commons.oapis.facebody.model.FaceBodyResult;
 import cn.hutool.core.codec.Base64;
 import com.google.common.io.ByteStreams;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +16,13 @@ import org.springframework.core.io.ClassPathResource;
 public class FaceBodyServiceTests extends BaseTests {
 
     @Autowired
-    private FaceBodyFactory faceBodyManager;
+    private FaceBodyFactory faceBodyFactory;
 
     @Test
     public void detectFaceTest() throws Exception {
         ClassPathResource resource = new ClassPathResource("images/user.jpg");
         String image = Base64.encode(ByteStreams.toByteArray(resource.getInputStream()));
-        FaceBodyResult result = this.faceBodyManager.getAliyunFaceBodyService().detectFace(image);
+        FaceBodyResult result = this.faceBodyFactory.getFaceBodyService().detectFace(image);
         Assertions.assertFalse(result.isSuccess());
     }
 
@@ -31,7 +30,7 @@ public class FaceBodyServiceTests extends BaseTests {
     public void compareFaceTest() throws Exception {
         ClassPathResource resource = new ClassPathResource("images/user.jpg");
         String image = Base64.encode(ByteStreams.toByteArray(resource.getInputStream()));
-        FaceBodyResult result = this.faceBodyManager.getAliyunFaceBodyService().compareFace(image, image);
+        FaceBodyResult result = this.faceBodyFactory.getAliyunFaceBodyService().compareFace(image, image);
         Assertions.assertTrue(result.isSuccess());
     }
 

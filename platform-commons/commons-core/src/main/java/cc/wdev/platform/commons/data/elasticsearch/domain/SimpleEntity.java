@@ -6,19 +6,21 @@ import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-/**
- * @author elvea
- */
-@Setter
 @Getter
-public abstract class BaseTenantEntity extends BaseEntity {
+@Setter
+public abstract class SimpleEntity extends AbstractEntity {
     /**
-     * 租户ID
+     * 启用状态
+     */
+    @Field(type = FieldType.Integer)
+    private Integer active;
+    /**
+     * 创建人
      */
     @Field(type = FieldType.Keyword, ignoreAbove = 256)
-    protected String tenantId;
+    private String createdBy;
 
-    public void setTenantId(Long tenantId) {
-        this.tenantId = NumberUtils.convertToString(tenantId);
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = NumberUtils.convertToString(createdBy);
     }
 }

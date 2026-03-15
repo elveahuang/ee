@@ -33,12 +33,12 @@ public abstract class MdcContext {
         String requestId = request.getHeader(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
             requestId = StringUtils.uuid();
-            log.info("[MdcContext] generate servlet requestId [{}]", requestId);
+            log.info("[MdcContext] generate servlet requestId [{}] for url [{}]", requestId, request.getRequestURI());
         }
         MdcContext.setRequestId(requestId);
 
         if (!response.getHeaderNames().contains(REQUEST_ID_KEY)) {
-            log.info("[MdcContext] set requestId [{}]", requestId);
+            log.info("[MdcContext] set servlet requestId [{}] for url [{}]", requestId, request.getRequestURI());
             response.setHeader(REQUEST_ID_KEY, requestId);
         }
     }
@@ -49,7 +49,7 @@ public abstract class MdcContext {
         String requestId = request.getHeaders().getFirst(REQUEST_ID_KEY);
         if (StringUtils.isEmpty(requestId)) {
             requestId = StringUtils.uuid();
-            log.info("[MdcContext] generate reactive requestId [{}]", requestId);
+            log.info("[MdcContext] generate reactive requestId [{}] for url [{}]", requestId, request.getURI());
         }
         MdcContext.setRequestId(requestId);
     }

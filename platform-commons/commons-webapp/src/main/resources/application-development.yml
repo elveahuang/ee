@@ -52,6 +52,8 @@ spring:
             chat:
                 options:
                     model: deepseek-chat
+        deepseek:
+            api-key: xxx
         mcp:
             client:
                 enabled: true
@@ -85,9 +87,6 @@ cosid:
     snowflake:
         enabled: true
         epoch: 1672502400000
-agentscope:
-    agent:
-        enabled: false
 ### --------------------------------------------------------------------------------------------------------------------
 ### Platform Config
 ### --------------------------------------------------------------------------------------------------------------------
@@ -98,10 +97,13 @@ platform:
         enabled: true
     ai:
         enabled: true
-        vector-store-provider: simple
+        vector-store-provider: elastic
         aliyun:
             enabled: true
-            api-key:
+            api-key: xxx
+        tencent:
+            enabled: true
+            api-key: xxx
     data:
         core:
             enabled: true

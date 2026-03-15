@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.oapis.sms.domain;
+package cc.wdev.platform.commons.oapis.sms;
 
 import com.google.common.collect.Maps;
 import lombok.Builder;

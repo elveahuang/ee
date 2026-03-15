@@ -28,6 +28,7 @@ public class ServletWebFilter implements Filter {
             // 初始化MDC上下文
             log.info("[ServletWebFilter] Init MDC Context");
             MdcContext.handleServletRequest(request, response);
+            log.info("[ReactiveWebFilter] MDC Context {}. URL [{}]", MdcContext.getRequestId(), request.getRequestURI());
 
             // 初始化租户上下文
             log.info("[ServletWebFilter] Init Tenant Context");
@@ -43,18 +44,16 @@ public class ServletWebFilter implements Filter {
             endTime = System.currentTimeMillis();
             totalTime = endTime - startTime;
         } finally {
-            log.info("[ServletWebFilter] URL [{}]. totalTime: [{}]", request.getRequestURI(), totalTime);
+            log.info("[ServletWebFilter] doFilter end. URL [{}]. totalTime: [{}]", request.getRequestURI(), totalTime);
+
+            log.info("[ServletWebFilter] Clear Auth Context");
+            AuthContext.clear();
 
             log.info("[ServletWebFilter] Clear Tenant Context");
             TenantContext.clear();
 
             log.info("[ServletWebFilter] Clear MDC Context");
-            TenantContext.clear();
-
-            log.info("[ServletWebFilter] Clear Auth Context");
-            AuthContext.clear();
-
-            log.info("[ServletWebFilter] doFilter end");
+            MdcContext.clear();
         }
     }
 

@@ -1,10 +1,10 @@
 package cc.wdev.platform.commons.core.mail.spring;
 
 import cc.wdev.platform.commons.constants.GlobalConstants;
+import cc.wdev.platform.commons.core.mail.MailBody;
 import cc.wdev.platform.commons.core.mail.MailConfig;
 import cc.wdev.platform.commons.core.mail.MailResult;
 import cc.wdev.platform.commons.core.mail.MailSender;
-import cc.wdev.platform.commons.core.mail.domain.MailBody;
 import cc.wdev.platform.commons.enums.SslProtocolTypeEnum;
 import cc.wdev.platform.commons.utils.StringUtils;
 import jakarta.mail.internet.InternetAddress;

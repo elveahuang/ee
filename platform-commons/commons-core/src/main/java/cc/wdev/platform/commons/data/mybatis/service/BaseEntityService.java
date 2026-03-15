@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.data.mybatis.domain.BaseEntity;
 import cc.wdev.platform.commons.data.mybatis.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.mybatis.mapper.BaseEntityMapper;
 import cc.wdev.platform.commons.data.mybatis.utils.MyBatisPlusUtils;
-import cc.wdev.platform.commons.enums.ResponseCodeEnum;
+import cc.wdev.platform.commons.enums.BaseResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
@@ -125,10 +125,10 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @see EntityService#checkExistsOrFail(Serializable, ResponseCodeEnum)
+     * @see EntityService#checkExistsOrFail(Serializable, BaseResponseCodeEnum)
      */
     @Override
-    public T checkExistsOrFail(K id, ResponseCodeEnum responseCode) {
+    public T checkExistsOrFail(K id, BaseResponseCodeEnum responseCode) {
         T entity = this.getMapper().selectById(id);
         if (entity == null) {
             throw new ServiceException(responseCode);

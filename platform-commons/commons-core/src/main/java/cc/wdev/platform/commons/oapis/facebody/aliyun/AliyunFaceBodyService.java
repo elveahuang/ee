@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.oapis.facebody.aliyun;
 
+import cc.wdev.platform.commons.oapis.facebody.FaceBodyResult;
 import cc.wdev.platform.commons.oapis.facebody.FaceBodyService;
-import cc.wdev.platform.commons.oapis.facebody.model.FaceBodyResult;
 import cc.wdev.platform.commons.utils.JacksonUtils;
 import com.aliyun.facebody20191230.Client;
 import com.aliyun.facebody20191230.models.*;

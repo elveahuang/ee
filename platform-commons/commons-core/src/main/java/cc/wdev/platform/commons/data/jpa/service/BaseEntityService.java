@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.data.core.domain.IdEntity;
 import cc.wdev.platform.commons.data.jpa.domain.BaseEntity;
 import cc.wdev.platform.commons.data.jpa.domain.SimpleEntity;
 import cc.wdev.platform.commons.data.jpa.repository.BaseEntityRepository;
-import cc.wdev.platform.commons.enums.ResponseCodeEnum;
+import cc.wdev.platform.commons.enums.BaseResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
@@ -97,10 +97,10 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     // -----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @see EntityService#checkExistsOrFail(Serializable, ResponseCodeEnum)
+     * @see EntityService#checkExistsOrFail(Serializable, BaseResponseCodeEnum)
      */
     @Override
-    public T checkExistsOrFail(K id, ResponseCodeEnum responseCode) {
+    public T checkExistsOrFail(K id, BaseResponseCodeEnum responseCode) {
         T entity = this.getRepository().findById(id).orElse(null);
         if (entity == null) {
             throw new ServiceException(responseCode);

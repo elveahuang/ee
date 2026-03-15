@@ -32,14 +32,23 @@ public enum ResponseCodeEnum implements BaseEnum<Integer>, BaseResponseCodeEnum 
     USER__INVALID_USERNAME_OR_PASSWORD(1001004, "Invalid Username or Password.", "用户名或者密码不正确"),
     USER__INVITE_CODE_NOT_AVAILABLE(1001005, "Invitation code is Not Available.", "邀请码不可用"),
     USER__INVITE_CODE_LIMIT_REACHED(1001006, "Invitation limit reached.", "该邀请码邀请数上限"),
+    ES_DOCUMENT_SAVE_ERROR(1001007, "The es doc save failed", "es文档保存失败"),
+    ES_DOCUMENT_DELETE_ERROR(1001008, "The es doc delete failed", "es文档删除失败"),
+    ES_DOCUMENT_QUERY_ERROR(1001009, "The es doc query failed", "es文档查询异常"),
+
     BIZ_TYPE__NOT_EMPTY(1002001, "BizType is not empty", "业务类型不能为空"),
     BIZ_TYPE__NOT_PRESENT(1002002, "BizType is not present", "业务类型不存在"),
-    PACKAGE__NOT_PRESENT(1003001, "Package is not present", "套餐不存在"),
-    TENANT__NOT_PRESENT(1004001, "Tenant is not present", "租户不存在"),
-    ROLE__NOT_PRESENT(1005001, "Role is not present", "角色不存在"),
-    ACCOUNT__NOT_PRESENT(1006001, "The account is not present", "用户不存在"),
-    USER__NOT_PRESENT(1007001, "The user is not present", "用户不存在"),
-    ACCOUNT_PASSWORD_NOT_MATCH(1008001, "The original password does not match", "原密码不匹配");
+
+    TENANT__PACKAGE_NOT_PRESENT(1003001, "Package is not present", "套餐不存在"),
+    TENANT__NOT_PRESENT(1003002, "Tenant is not present", "租户不存在"),
+
+    ROLE__NOT_PRESENT(1004001, "Role is not present", "角色不存在"),
+
+    USER__NOT_PRESENT(1005002, "The user is not present", "用户不存在"),
+
+    ACCOUNT__NOT_PRESENT(1006002, "The account is not present", "用户不存在"),
+    ACCOUNT_PASSWORD_NOT_MATCH(1006003, "The original password does not match", "原密码不匹配"),
+    ;
 
     private final Integer value;
     private final String description;

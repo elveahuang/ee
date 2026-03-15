@@ -18,8 +18,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import static cc.wdev.platform.commons.autoconfigure.data.properties.DataCoreProperties.PREFIX;
-
 /**
  * @author elvea
  */
@@ -36,11 +34,11 @@ public class DataCoreAutoConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(AuditorAware.class)
+    @ConditionalOnProperty(prefix = DataCoreProperties.PREFIX, name = "enabled", havingValue = "true")
     public static class CoreConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        @ConditionalOnProperty(prefix = PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
         public UserAuditorAware userAuditorAware() {
             return new UserAuditorAware();
         }
