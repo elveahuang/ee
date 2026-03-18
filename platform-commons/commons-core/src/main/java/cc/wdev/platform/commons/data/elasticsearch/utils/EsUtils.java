@@ -5,7 +5,7 @@ import cc.wdev.platform.commons.data.elasticsearch.domain.EsSearchResp;
 import cc.wdev.platform.commons.enums.ResponseCodeEnum;
 import cc.wdev.platform.commons.exception.ServiceException;
 import cc.wdev.platform.commons.utils.ArrayUtils;
-import cn.hutool.core.collection.CollUtil;
+import cc.wdev.platform.commons.utils.CollectionUtils;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
@@ -220,7 +220,7 @@ public class EsUtils {
     }
 
     /**
-     * in查询
+     * or查询
      *
      * @param expression 是否执行
      * @param builder    查询条件
@@ -229,7 +229,7 @@ public class EsUtils {
      */
     public static <T> BoolQuery.Builder or(boolean expression, BoolQuery.Builder builder, List<String> fields, List<String> values, String minimumShouldMatch) {
         List<Query> phraseQueryList = new ArrayList<>();
-        if (expression && Objects.nonNull(builder) && CollUtil.isNotEmpty(fields) && CollUtil.isNotEmpty(values)) {
+        if (expression && Objects.nonNull(builder) && CollectionUtils.isNotEmpty(fields) && CollectionUtils.isNotEmpty(values)) {
             for (String field : fields) {
                 for (String value : values) {
                     MatchPhraseQuery.Builder phraseQuery = QueryBuilders.matchPhrase();
@@ -255,7 +255,7 @@ public class EsUtils {
      * @param values     值
      */
     public static <T> BoolQuery.Builder in(boolean expression, BoolQuery.Builder builder, String field, List<T> values) {
-        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollUtil.isNotEmpty(values)) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollectionUtils.isNotEmpty(values)) {
             builder.must(TermsQuery.of(fn -> fn.field(field).terms(t -> t.value(values.stream()
                 .filter(Objects::nonNull).map(value -> FieldValue.of(value.toString())).collect(Collectors.toList()))))._toQuery());
         }
@@ -270,7 +270,7 @@ public class EsUtils {
      * @param value      值
      */
     public static BoolQuery.Builder like(boolean expression, BoolQuery.Builder builder, String value, List<String> contentFiledList) {
-        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(value) && CollUtil.isNotEmpty(contentFiledList)) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(value) && CollectionUtils.isNotEmpty(contentFiledList)) {
             builder.must(QueryBuilders.multiMatch().query(value).slop(0).type(TextQueryType.BestFields).fields(contentFiledList)
                 .lenient(true).build()._toQuery());
         }
@@ -301,7 +301,7 @@ public class EsUtils {
      * @param value      值
      */
     public static BoolQuery.Builder eqFields(boolean expression, BoolQuery.Builder builder, String value, List<String> fields) {
-        if (expression && Objects.nonNull(builder) && CollUtil.isNotEmpty(fields) && Objects.nonNull(value)) {
+        if (expression && Objects.nonNull(builder) && CollectionUtils.isNotEmpty(fields) && Objects.nonNull(value)) {
             builder.must(QueryBuilders.multiMatch().fields(fields).query(value).build()._toQuery());
         }
         return builder;
@@ -371,9 +371,85 @@ public class EsUtils {
      * @param values     值
      */
     public static <T> BoolQuery.Builder inFilter(boolean expression, BoolQuery.Builder builder, String field, List<T> values) {
-        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollUtil.isNotEmpty(values)) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollectionUtils.isNotEmpty(values)) {
             builder.filter(TermsQuery.of(fn -> fn.field(field).terms(t -> t.value(values.stream()
                 .filter(Objects::nonNull).map(value -> FieldValue.of(value.toString())).collect(Collectors.toList()))))._toQuery());
+        }
+        return builder;
+    }
+
+    /**
+     * ≥
+     * gte查询
+     *
+     * @param expression 是否执行
+     * @param builder    查询条件
+     * @param field      字段
+     * @param value      值
+     */
+    public static <T> BoolQuery.Builder gteFilter(boolean expression, BoolQuery.Builder builder, String field, Double value) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && Objects.nonNull(value)) {
+            builder.filter(QueryBuilders.range()
+                .number(n -> n.gte(value).field(field))
+                .build()
+                ._toQuery());
+        }
+        return builder;
+    }
+
+    /**
+     * >
+     * gt查询
+     *
+     * @param expression 是否执行
+     * @param builder    查询条件
+     * @param field      字段
+     * @param value      值
+     */
+    public static <T> BoolQuery.Builder gtFilter(boolean expression, BoolQuery.Builder builder, String field, Double value) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && Objects.nonNull(value)) {
+            builder.filter(QueryBuilders.range()
+                .number(n -> n.gt(value).field(field))
+                .build()
+                ._toQuery());
+        }
+        return builder;
+    }
+
+    /**
+     * ≤
+     * lte查询
+     *
+     * @param expression 是否执行
+     * @param builder    查询条件
+     * @param field      字段
+     * @param value      值
+     */
+    public static <T> BoolQuery.Builder lteFilter(boolean expression, BoolQuery.Builder builder, String field, Double value) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && Objects.nonNull(value)) {
+            builder.filter(QueryBuilders.range()
+                .number(n -> n.lte(value).field(field))
+                .build()
+                ._toQuery());
+        }
+        return builder;
+    }
+
+    /**
+     * <
+     * lt查询
+     *
+     * @param expression 是否执行
+     * @param builder    查询条件
+     * @param field      字段
+     * @param value      值
+     */
+    public static <T> BoolQuery.Builder ltFilter(boolean expression, BoolQuery.Builder builder, String field, Double value) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && Objects.nonNull(value)) {
+            builder.filter(QueryBuilders.range()
+                .number(n -> n.lt(value).field(field))
+                .build()
+                ._toQuery());
         }
         return builder;
     }
@@ -387,7 +463,7 @@ public class EsUtils {
      * @param value      值
      */
     public static BoolQuery.Builder filterLike(boolean expression, BoolQuery.Builder builder, String value, List<String> contentFiledList) {
-        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(value) && CollUtil.isNotEmpty(contentFiledList)) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(value) && CollectionUtils.isNotEmpty(contentFiledList)) {
             builder.filter(QueryBuilders.multiMatch().query(value).slop(0).type(TextQueryType.BestFields).fields(contentFiledList)
                 .lenient(true).build()._toQuery());
         }
@@ -419,7 +495,7 @@ public class EsUtils {
      * @param value      值
      */
     public static BoolQuery.Builder filterFields(boolean expression, BoolQuery.Builder builder, String value, List<String> fields) {
-        if (expression && Objects.nonNull(builder) && CollUtil.isNotEmpty(fields) && Objects.nonNull(value)) {
+        if (expression && Objects.nonNull(builder) && CollectionUtils.isNotEmpty(fields) && Objects.nonNull(value)) {
             builder.filter(QueryBuilders.multiMatch().fields(fields).query(value).build()._toQuery());
         }
         return builder;
@@ -466,7 +542,7 @@ public class EsUtils {
      * @param values     值
      */
     public static <T> BoolQuery.Builder shouldIn(boolean expression, BoolQuery.Builder builder, String field, List<T> values) {
-        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollUtil.isNotEmpty(values)) {
+        if (expression && Objects.nonNull(builder) && StrUtil.isNotBlank(field) && CollectionUtils.isNotEmpty(values)) {
             builder.should(TermsQuery.of(fn -> fn.field(field).terms(t -> t.value(values.stream()
                 .filter(Objects::nonNull).map(value -> FieldValue.of(value.toString())).collect(Collectors.toList()))))._toQuery());
         }

@@ -38,6 +38,15 @@ public abstract class BaseCachingEntityService<T extends IdEntity, K extends Ser
     }
 
     /**
+     * @see EntityService#deleteById(Serializable)
+     */
+    @Override
+    public void softDelete(T entity) {
+        super.softDelete(entity);
+        this.deleteCache(entity);
+    }
+
+    /**
      * @see EntityService#delete(IdEntity)
      */
     @Override

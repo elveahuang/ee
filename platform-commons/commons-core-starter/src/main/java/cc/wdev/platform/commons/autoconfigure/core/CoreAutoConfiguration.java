@@ -16,6 +16,7 @@ import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFa
 import cc.wdev.platform.commons.utils.time.TimeZoneResolver;
 import cc.wdev.platform.commons.web.feign.interceptor.MdcRequestInterceptor;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Validator;
@@ -113,7 +114,7 @@ public class CoreAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass({RequestTemplate.class})
+    @ConditionalOnClass({RequestTemplate.class, RequestInterceptor.class})
     public MdcRequestInterceptor mdcRequestInterceptor() {
         return new MdcRequestInterceptor();
     }

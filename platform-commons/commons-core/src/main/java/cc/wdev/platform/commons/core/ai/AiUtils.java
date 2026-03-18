@@ -41,7 +41,7 @@ public abstract class AiUtils {
 
     public static ChatOptions processCompletionOptions(SimpleCompletionRequest request) {
         // 处理调用工具
-        ToolCallingChatOptions.Builder builder = ToolCallingChatOptions.builder();
+        ToolCallingChatOptions.Builder<?> builder = ToolCallingChatOptions.builder();
         if (CollectionUtils.isNotEmpty(request.getTools())) {
             ToolCallback[] toolCallbacks = ToolCallbacks.from(request.getTools());
             builder.toolCallbacks(toolCallbacks);

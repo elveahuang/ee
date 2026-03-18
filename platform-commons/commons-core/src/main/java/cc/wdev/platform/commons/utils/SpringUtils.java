@@ -178,4 +178,7 @@ public class SpringUtils implements ApplicationContextAware {
         return new PageImpl<>(list, pageable, total);
     }
 
+    public static <T> Page<T> empySpringDataPage() {
+        return Page.empty();
+    }
 }

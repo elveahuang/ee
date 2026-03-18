@@ -3,6 +3,7 @@ package cc.wdev.platform.commons.data.elasticsearch.domain;
 import cc.wdev.platform.commons.utils.NumberUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -28,7 +29,7 @@ public abstract class BaseEntity extends AbstractEntity {
     /**
      * 创建时间
      */
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private LocalDateTime createdAt;
     /**
      * 最后修改人
@@ -38,7 +39,7 @@ public abstract class BaseEntity extends AbstractEntity {
     /**
      * 修改时间
      */
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private LocalDateTime updatedAt;
     /**
      * 删除人
@@ -48,7 +49,7 @@ public abstract class BaseEntity extends AbstractEntity {
     /**
      * 删除时间
      */
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private LocalDateTime deletedAt;
 
     public void setCreatedBy(Long createdBy) {
