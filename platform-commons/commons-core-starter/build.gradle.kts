@@ -5,7 +5,6 @@ dependencies {
     compileOnly(rootProject.libs.bundles.springBootServletStarter)
     compileOnly(rootProject.libs.bundles.springBootReactiveStarter)
     compileOnly(rootProject.libs.bundles.springAiCore)
-    compileOnly(rootProject.libs.bundles.springAiCoreStarter)
     compileOnly(rootProject.libs.bundles.springCloudCore)
     compileOnly(rootProject.libs.bundles.springSecurityCore)
     compileOnly(rootProject.libs.bundles.springSecurityCoreStarter)

@@ -15,22 +15,22 @@ spring:
         master:
             name: master
             type: com.zaxxer.hikari.HikariDataSource
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            driver-class-name: org.postgresql.Driver
+            url: jdbc:postgresql://127.0.0.1:5432/ee_platform
             username: root
             password: root
         slave:
             name: slave
             type: com.zaxxer.hikari.HikariDataSource
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/ee_platform?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            driver-class-name: org.postgresql.Driver
+            url: jdbc:postgresql://127.0.0.1:5432/ee_platform
             username: root
             password: root
         job:
             name: job
             type: com.zaxxer.hikari.HikariDataSource
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://127.0.0.1:3306/ee_quartz?useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowPublicKeyRetrieval=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+            driver-class-name: org.postgresql.Driver
+            url: jdbc:postgresql://127.0.0.1:5432/ee_quartz
             username: root
             password: root
     data:
@@ -53,6 +53,10 @@ spring:
                 retry:
                     enabled: true
                 default-requeue-rejected: true
+    elasticsearch:
+        uris: http://175.178.92.42:9200
+        username: elastic
+        password: elastic
     quartz:
         scheduler-name: QuartzScheduler
         properties:
@@ -129,6 +133,8 @@ platform:
     data:
         core:
             enabled: true
+        jdbc:
+            enabled: true
         datasource:
             enabled: true
             master:
@@ -179,6 +185,8 @@ platform:
                 enabled: false
                 app-id:
                 app-secret:
+                token:
+                aes-key:
             ma:
                 enabled: false
                 app-id:
@@ -192,6 +200,7 @@ platform:
             secret-key:
             endpoint:
             bucket:
+            region:
             path-style-enabled: true
             chunked-encoding-enabled: false
         oss:
@@ -218,6 +227,7 @@ platform:
             port: 25
             username:
             password:
+            name:
     translator:
         enabled: true
         type: aliyun
@@ -243,9 +253,9 @@ platform:
             type: rabbit
     selenium:
         enabled: true
-        driver-type: chrome
+        driver-type: edge
         proxy:
-            enabled: true
+            enabled: false
             host: 127.0.0.1
             port: 7890
     test:

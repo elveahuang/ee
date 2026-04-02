@@ -301,14 +301,6 @@ values (1001001, 1, 'Professional', '专业版', 'label_package_professional', 1
 -- 定时任务
 --
 
-truncate sys_job;
-
-insert into sys_job (id, code, classname, status, type, unit, period)
-values (1, 'EXAMPLE', 'cc.wdev.platform.system.core.jobs.ExampleJob', 1, 'period', 'm', 3),
-       (2, 'SEND_MESSAGE_JOB', 'cc.wdev.platform.system.job.task.MessageSendJob', 1, 'period', 'm', 1);
-insert into sys_job (id, code, classname, status, type, unit, period, hour, minute)
-values (3, 'SYNC_MCA_JOB', 'cc.wdev.platform.system.job.task.SyncMcaJob', 1, 'DAILY', 'MINUTES', 1, 1, 1);
-
 -- ==============================¬=======================================================================================
 -- OAuth
 -- =====================================================================================================================
