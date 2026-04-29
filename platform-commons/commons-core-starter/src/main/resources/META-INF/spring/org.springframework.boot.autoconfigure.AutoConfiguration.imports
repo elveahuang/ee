@@ -3,7 +3,6 @@ cc.wdev.platform.commons.autoconfigure.core.CoreAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.AsyncAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.JwtAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.CacheCustomAutoConfiguration
-cc.wdev.platform.commons.autoconfigure.core.HttpAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.LogAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.QuartzCustomAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.core.MailAutoConfiguration
@@ -22,6 +21,7 @@ cc.wdev.platform.commons.autoconfigure.data.ElasticsearchCustomAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.CaptchaAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.IpAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.SeleniumAutoConfiguration
+cc.wdev.platform.commons.autoconfigure.extensions.HttpAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.KeywordAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.extensions.SensitiveAutoConfiguration
 cc.wdev.platform.commons.autoconfigure.message.BroadcastAutoConfiguration

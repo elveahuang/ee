@@ -3,8 +3,8 @@ package cc.wdev.platform.commons.autoconfigure.oapis;
 import cc.wdev.platform.commons.autoconfigure.oapis.properties.WeiXinMpProperties;
 import cc.wdev.platform.commons.core.cache.service.CacheService;
 import cc.wdev.platform.commons.oapis.weixin.config.AppMpConfig;
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinMpService;
-import cc.wdev.platform.commons.oapis.weixin.service.impl.WeiXinMpServiceImpl;
+import cc.wdev.platform.commons.oapis.weixin.service.WxMpManager;
+import cc.wdev.platform.commons.oapis.weixin.service.impl.WxMpManagerImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,8 +26,8 @@ public class WeiXinMpAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(WeiXinMpService.class)
-    public WeiXinMpService weiXinMpService(WeiXinMpProperties properties, CacheService cacheService) {
+    @ConditionalOnMissingBean(WxMpManager.class)
+    public WxMpManager wxMpManager(WeiXinMpProperties properties, CacheService cacheService) {
         // 默认微信公众号应用配置信息
         AppMpConfig appConfig = AppMpConfig.builder()
             .appId(properties.getAppId())
@@ -36,9 +36,9 @@ public class WeiXinMpAutoConfiguration {
             .aesKey(properties.getAesKey())
             .build();
         // 创建微信公众号服务实例
-        WeiXinMpServiceImpl service = new WeiXinMpServiceImpl(cacheService, properties.getCacheKeyPrefix());
-        service.setAppConfig(appConfig);
-        return service;
+        WxMpManagerImpl manager = new WxMpManagerImpl(cacheService, properties.getCacheKeyPrefix());
+        manager.setAppConfig(appConfig);
+        return manager;
     }
 
 }

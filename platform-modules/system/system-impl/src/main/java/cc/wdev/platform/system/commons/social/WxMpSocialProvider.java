@@ -2,7 +2,7 @@ package cc.wdev.platform.system.commons.social;
 
 import cc.wdev.platform.commons.enums.LangTypeEnum;
 import cc.wdev.platform.commons.enums.SocialTypeEnum;
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinMpService;
+import cc.wdev.platform.commons.oapis.weixin.service.WxMpManager;
 import cc.wdev.platform.commons.security.CustomParameterNames;
 import cc.wdev.platform.commons.security.user.SocialUser;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +27,9 @@ import static cc.wdev.platform.commons.security.utils.OAuth2EndpointUtils.ACCESS
 @Component
 public class WxMpSocialProvider implements SocialProvider {
 
-    private final ObjectProvider<WeiXinMpService> service;
+    private final ObjectProvider<WxMpManager> service;
 
-    public WxMpSocialProvider(ObjectProvider<WeiXinMpService> service) {
+    public WxMpSocialProvider(ObjectProvider<WxMpManager> service) {
         this.service = service;
     }
 
@@ -38,7 +38,7 @@ public class WxMpSocialProvider implements SocialProvider {
 
         String code = (String) parameters.get(CustomParameterNames.CODE);
 
-        WeiXinMpService weiXinMpService = this.service.getIfAvailable();
+        WxMpManager weiXinMpService = this.service.getIfAvailable();
         if (weiXinMpService != null) {
             try {
                 WxOAuth2Service oAuth2Service = weiXinMpService.getService().getOAuth2Service();

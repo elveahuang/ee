@@ -1,5 +1,7 @@
 package cc.wdev.platform.commons.ai.model;
 
+import java.net.Proxy;
+import java.time.Duration;
 import java.util.Map;
 
 /**
@@ -23,14 +25,39 @@ public interface ModelConfig {
     String getBaseUrl();
 
     /**
-     * 获取提供商编码
+     * 获取服务提供商
      */
-    String getProviderCode();
+    String getModelProvider();
+
+    /**
+     * 获取提供商
+     */
+    String getServiceProvider();
 
     /**
      * 获取模型类型
      */
     String getModelType();
+
+    /**
+     * 获取请求头参数
+     */
+    Map<String, String> getHeaders();
+
+    /**
+     * 获取超时时间
+     */
+    Duration getTimeout();
+
+    /**
+     * 获取重试次数
+     */
+    int getMaxRetries();
+
+    /**
+     * 获取代理
+     */
+    Proxy getProxy();
 
     /**
      * 获取扩展参数
@@ -49,6 +76,13 @@ public interface ModelConfig {
      */
     default Boolean getEnableWebSearch() {
         return false;
+    }
+
+    /**
+     * 是否启用内部工具执行
+     */
+    default Boolean getInternalToolExecutionEnabled() {
+        return true;
     }
 
 }

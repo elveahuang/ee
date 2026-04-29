@@ -21,6 +21,6 @@ public abstract class SimpleEntity extends AbstractEntity {
     private String createdBy;
 
     public void setCreatedBy(Long createdBy) {
-        this.createdBy = NumberUtils.convertToString(createdBy);
+        this.createdBy = NumberUtils.toString(createdBy);
     }
 }

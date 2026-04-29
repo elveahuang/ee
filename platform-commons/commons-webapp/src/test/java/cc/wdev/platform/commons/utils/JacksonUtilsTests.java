@@ -3,7 +3,7 @@ package cc.wdev.platform.commons.utils;
 import cc.wdev.platform.commons.message.model.SimpleJsonMessage;
 import cc.wdev.platform.commons.message.model.SimpleMessage;
 import cc.wdev.platform.commons.message.model.SimpleTextMessage;
-import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
+import cc.wdev.platform.commons.utils.jackson.CommonModule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -53,7 +53,7 @@ public class JacksonUtilsTests {
             .build();
 
         JsonMapper objectMapper = JsonMapper.builder()
-            .addModule(new CustomJsonModule())
+            .addModule(new CommonModule())
             .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
             .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
             .enable(JsonReadFeature.ALLOW_MISSING_VALUES)

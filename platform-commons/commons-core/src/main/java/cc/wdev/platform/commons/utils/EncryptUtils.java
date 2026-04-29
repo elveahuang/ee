@@ -42,8 +42,9 @@ public abstract class EncryptUtils {
     private static final String AES_CBC = "AES/CBC/PKCS5Padding";
     private static final String DEFAULT_AES_KEY = "1234567812345678";
     private static final String DEFAULT_AES_IV = "1234567812345678";
-    private final static SecureRandom random = new SecureRandom();
-    public static final KeyFactory defaultKeyFactory;
+
+    private static final SecureRandom random = new SecureRandom();
+    private static final KeyFactory defaultKeyFactory;
 
     static {
         try {

@@ -12,6 +12,7 @@ import cc.wdev.platform.commons.service.AbstractService;
 import cc.wdev.platform.commons.service.EntityService;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.GenericsUtils;
+import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SecurityUtils;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -143,6 +144,14 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public T findById(K id) {
         return this.getMapper().selectById(id);
+    }
+
+    /**
+     * @see EntityService#findById(Serializable)
+     */
+    @Override
+    public T findByCode(String code) {
+        return findOneByWrapper(queryWrapper().eq("code", code).lambda());
     }
 
     /**
@@ -376,6 +385,19 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
         return null != id && this.findById(id) != null;
     }
 
+    /**
+     * @see EntityService#existsByCode(String, Serializable)
+     */
+    @Override
+    public boolean existsByCode(String code, K id) {
+        long total = queryWrapper()
+            .eq("code", code)
+            .notIn(!ObjectUtils.isEmpty(id), "id", id)
+            .page(MyBatisPlusUtils.getLimitPage())
+            .getTotal();
+        return total > 0;
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // EnhancedEntityService
     // -----------------------------------------------------------------------------------------------------------------
@@ -451,6 +473,15 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
     @Override
     public IPage<T> findByMpPage(IPage<T> page, Wrapper<T> wrapper) {
         return this.mapper.selectPage(page, wrapper);
+    }
+
+    /**
+     * @see EnhancedEntityService#checkExists(LambdaQueryChainWrapper)
+     */
+    @Override
+    public boolean checkExists(LambdaQueryChainWrapper<T> wrapper) {
+        long total = wrapper.page(MyBatisPlusUtils.getLimitPage()).getTotal();
+        return total > 0;
     }
 
     // -----------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 package cc.wdev.platform.commons.core.tenant;
 
+import cc.wdev.platform.commons.utils.NumberUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +30,7 @@ public class Tenant implements Serializable {
 
     private Integer rootInd;
 
+    public String getIdAsString() {
+        return NumberUtils.toString(id);
+    }
 }

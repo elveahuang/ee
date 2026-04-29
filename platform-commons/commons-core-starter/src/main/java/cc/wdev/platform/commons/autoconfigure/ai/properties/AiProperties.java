@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.autoconfigure.ai.properties;
 
-import cc.wdev.platform.commons.ai.enums.ModelProvider;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +30,7 @@ public class AiProperties {
     public static class Providers {
 
         @Builder.Default
-        private String defaultProvider = ModelProvider.DEEPSEEK.getValue();
+        private String defaultProvider = ServiceProvider.DEEPSEEK.getValue();
 
         @Builder.Default
         @NestedConfigurationProperty

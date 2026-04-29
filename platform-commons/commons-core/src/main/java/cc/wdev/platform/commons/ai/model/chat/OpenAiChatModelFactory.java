@@ -1,15 +1,24 @@
 package cc.wdev.platform.commons.ai.model.chat;
 
 import cc.wdev.platform.commons.ai.config.ProviderConfig;
-import cc.wdev.platform.commons.ai.enums.ModelProvider;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
 import cc.wdev.platform.commons.ai.model.ModelConfig;
+import cc.wdev.platform.commons.ai.model.ModelFactory;
 import cc.wdev.platform.commons.ai.model.config.SimpleModelConfig;
 import cc.wdev.platform.commons.utils.StringUtils;
+import com.openai.client.OpenAIClient;
+import com.openai.client.OpenAIClientAsync;
+import io.micrometer.observation.ObservationRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.observation.ChatModelObservationConvention;
+import org.springframework.ai.model.tool.DefaultToolExecutionEligibilityPredicate;
+import org.springframework.ai.model.tool.ToolCallingManager;
+import org.springframework.ai.model.tool.ToolExecutionEligibilityPredicate;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
-import org.springframework.ai.openai.api.OpenAiApi;
+import org.springframework.ai.openai.setup.OpenAiSetup;
+import org.springframework.beans.factory.ObjectProvider;
 
 /**
  * @author elvea
@@ -17,16 +26,32 @@ import org.springframework.ai.openai.api.OpenAiApi;
 @Slf4j
 public class OpenAiChatModelFactory extends AbstractChatModelFactory implements ChatModelFactory {
 
-    public OpenAiChatModelFactory(ChatMemory chatMemory, ProviderConfig config) {
+    private final ToolCallingManager toolCallingManager;
+    private final ObjectProvider<ObservationRegistry> observationRegistry;
+    private final ObjectProvider<ChatModelObservationConvention> observationConvention;
+    private final ObjectProvider<ToolExecutionEligibilityPredicate> openAiToolExecutionEligibilityPredicate;
+
+    public OpenAiChatModelFactory(ChatMemory chatMemory,
+                                  ProviderConfig config,
+                                  ToolCallingManager toolCallingManager,
+                                  ObjectProvider<ObservationRegistry> observationRegistry,
+                                  ObjectProvider<ChatModelObservationConvention> observationConvention,
+                                  ObjectProvider<ToolExecutionEligibilityPredicate> openAiToolExecutionEligibilityPredicate
+    ) {
         super(chatMemory, config);
+
+        this.toolCallingManager = toolCallingManager;
+        this.observationRegistry = observationRegistry;
+        this.observationConvention = observationConvention;
+        this.openAiToolExecutionEligibilityPredicate = openAiToolExecutionEligibilityPredicate;
     }
 
     /**
-     * @see ChatModelFactory#getModelProvider()
+     * @see ModelFactory#getServiceProvider()
      */
     @Override
-    public ModelProvider getModelProvider() {
-        return ModelProvider.OPENAI;
+    public ServiceProvider getServiceProvider() {
+        return ServiceProvider.OPENAI;
     }
 
     /**
@@ -42,6 +67,7 @@ public class OpenAiChatModelFactory extends AbstractChatModelFactory implements 
             builder.apiKey(System.getenv("OPENAI_API_KEY"));
         }
         if (config != null && StringUtils.isNotEmpty(config.getBaseUrl())) {
+            log.info("Get Model Config for OpenAI ChatModel with BaseUrl {}.", config.getBaseUrl());
             builder.baseUrl(config.getBaseUrl());
         }
         if (config != null && StringUtils.isNotEmpty(config.getModels().getChat())) {
@@ -55,35 +81,43 @@ public class OpenAiChatModelFactory extends AbstractChatModelFactory implements 
      */
     @Override
     public OpenAiChatModel getModel(ModelConfig config) {
-        OpenAiApi.Builder apiBuilder = OpenAiApi.builder().apiKey(config.getApiKey());
-        if (StringUtils.isNotEmpty(config.getBaseUrl())) {
-            apiBuilder.baseUrl(config.getBaseUrl());
-        }
-
         OpenAiChatOptions.Builder optionsBuilder = OpenAiChatOptions.builder();
         if (StringUtils.isNotEmpty(config.getName())) {
-            optionsBuilder.model(config.getModelType());
-        } else {
-            optionsBuilder.model(OpenAiApi.ChatModel.GPT_5.getValue());
+            optionsBuilder.model(config.getName());
         }
+        optionsBuilder.internalToolExecutionEnabled(config.getInternalToolExecutionEnabled());
 
-        // todo
-//        // 开启思考模式
-//        if (null != config.getReturnThinking() && config.getReturnThinking()) {
-//
-//        }
-        // 联网搜索
-        if (null != config.getEnableWebSearch() && config.getEnableWebSearch()) {
-            OpenAiApi.ChatCompletionRequest.WebSearchOptions.UserLocation.Approximate approximate =
-                new OpenAiApi.ChatCompletionRequest.WebSearchOptions.UserLocation.Approximate("guangzhou", "China", "Guangdong", "Asia/Shanghai");
-            OpenAiApi.ChatCompletionRequest.WebSearchOptions.UserLocation userLocation =
-                new OpenAiApi.ChatCompletionRequest.WebSearchOptions.UserLocation("approximate", approximate);
-            optionsBuilder.webSearchOptions(
-                new OpenAiApi.ChatCompletionRequest.WebSearchOptions(OpenAiApi.ChatCompletionRequest.WebSearchOptions.SearchContextSize.MEDIUM, userLocation)
-            );
-        }
+        OpenAIClient openAIClient = this.openAiClient(config);
+        OpenAIClientAsync openAIClientAsync = this.openAiClientAsync(config);
 
-        return OpenAiChatModel.builder().openAiApi(apiBuilder.build()).defaultOptions(optionsBuilder.build()).build();
+        OpenAiChatModel chatModel = OpenAiChatModel.builder()
+            .openAiClient(openAIClient)
+            .openAiClientAsync(openAIClientAsync)
+            .options(optionsBuilder.build())
+            .toolCallingManager(this.toolCallingManager)
+            .observationRegistry(this.observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP))
+            .toolExecutionEligibilityPredicate(this.openAiToolExecutionEligibilityPredicate.getIfUnique(DefaultToolExecutionEligibilityPredicate::new))
+            .build();
+
+        observationConvention.ifAvailable(chatModel::setObservationConvention);
+
+        return chatModel;
+    }
+
+    private OpenAIClient openAiClient(ModelConfig config) {
+        return OpenAiSetup.setupSyncClient(config.getBaseUrl(), config.getApiKey(), null,
+            null, null,
+            null, false, false,
+            config.getName(), config.getTimeout(), config.getMaxRetries(), config.getProxy(),
+            config.getHeaders());
+    }
+
+    private OpenAIClientAsync openAiClientAsync(ModelConfig config) {
+        return OpenAiSetup.setupAsyncClient(config.getBaseUrl(), config.getApiKey(), null,
+            null, null,
+            null, false, false,
+            config.getName(), config.getTimeout(), config.getMaxRetries(), config.getProxy(),
+            config.getHeaders());
     }
 
 }

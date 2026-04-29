@@ -1,10 +1,13 @@
 package cc.wdev.platform.commons.core.quartz;
 
+import cn.hutool.json.JSONUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -63,15 +66,24 @@ public class QuartzJobManager {
             Trigger trigger = builder.build();
 
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobKey).build();
-            if (scheduler.checkExists(triggerKey)) {
-                scheduler.rescheduleJob(triggerKey, trigger);
-                log.info("Schedule task [{}][{}]. done. rescheduled", job.getKey(), job.getClassName());
-            } else {
-                scheduler.scheduleJob(jobDetail, trigger);
-                log.info("Schedule task [{}][{}]. done. scheduled", job.getKey(), job.getClassName());
+            if (job.getParams() != null && !job.getParams().isEmpty()) {
+                try {
+                    Map<String, Object> paramsMap = JSONUtil.toBean(job.getParams(), Map.class);
+                    jobDetail.getJobDataMap().putAll(paramsMap);
+                } catch (Exception e) {
+                    throw new SchedulerException("Invalid params");
+                }
             }
+            if (scheduler.checkExists(triggerKey)) {
+                scheduler.pauseJob(jobKey);
+                scheduler.deleteJob(jobKey);
+                log.info("Schedule task [{}][{}]. old job deleted", job.getKey(), job.getClassName());
+            }
+            scheduler.scheduleJob(jobDetail, trigger);
+            log.info("Schedule task [{}][{}]. done. scheduled", job.getKey(), job.getClassName());
         } catch (Exception e) {
             log.error("Schedule task [{}][{}]. failed", job.getKey(), job.getClassName(), e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -163,6 +175,25 @@ public class QuartzJobManager {
         } catch (SchedulerException e) {
             log.error("Clear scheduler failed.", e);
         }
+    }
+
+    /**
+     * 拆分String参数成Map
+     */
+    public static Map<String, String> parseParams(String params) {
+        Map<String, String> map = new HashMap<>();
+        if (params == null || params.isEmpty()) {
+            return map;
+        }
+
+        String[] pairs = params.split(",");
+        for (String pair : pairs) {
+            String[] kv = pair.split("=", 2);
+            if (kv.length == 2) {
+                map.put(kv[0].trim(), kv[1].trim());
+            }
+        }
+        return map;
     }
 
 }

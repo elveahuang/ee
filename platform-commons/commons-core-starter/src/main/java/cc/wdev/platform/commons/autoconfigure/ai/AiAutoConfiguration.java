@@ -7,7 +7,7 @@ import cc.wdev.platform.commons.ai.aliyun.AiAliyunManagerImpl;
 import cc.wdev.platform.commons.ai.config.ProviderConfig;
 import cc.wdev.platform.commons.ai.config.ProviderModelConfig;
 import cc.wdev.platform.commons.ai.model.ModelFactory;
-import cc.wdev.platform.commons.ai.model.audio.OpenAiAudioModelFactory;
+import cc.wdev.platform.commons.ai.model.audio.OpenAiAudioTranscriptionSpeechModelFactory;
 import cc.wdev.platform.commons.ai.model.chat.DeepSeekChatModelFactory;
 import cc.wdev.platform.commons.ai.model.chat.OpenAiChatModelFactory;
 import cc.wdev.platform.commons.ai.model.embedding.OpenAiEmbeddingModelFactory;
@@ -17,19 +17,25 @@ import cc.wdev.platform.commons.ai.tools.CommonTools;
 import cc.wdev.platform.commons.autoconfigure.ai.properties.AiProperties;
 import com.alibaba.dashscope.common.DashScopeResult;
 import com.tencentcloudapi.hunyuan.v20230901.HunyuanClient;
+import io.micrometer.observation.ObservationRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.ChatMemoryRepository;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.observation.ChatModelObservationConvention;
 import org.springframework.ai.deepseek.DeepSeekChatModel;
+import org.springframework.ai.embedding.observation.EmbeddingModelObservationConvention;
+import org.springframework.ai.model.tool.ToolCallingManager;
+import org.springframework.ai.model.tool.ToolExecutionEligibilityPredicate;
 import org.springframework.ai.openai.OpenAiAudioTranscriptionModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -37,6 +43,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.core.retry.RetryTemplate;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Set;
@@ -91,28 +101,46 @@ public class AiAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "providers.deepseek.enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnClass(DeepSeekChatModel.class)
-    public DeepSeekChatModelFactory deepSeekChatModelFactory(ChatMemory chatMemory) {
-        return new DeepSeekChatModelFactory(chatMemory, getDeepSeekConfig());
+    public DeepSeekChatModelFactory deepSeekChatModelFactory(
+        ChatMemory chatMemory,
+        ToolCallingManager toolCallingManager,
+        ObjectProvider<RestClient.Builder> restClientBuilderProvider,
+        ObjectProvider<WebClient.Builder> webClientBuilderProvider,
+        ObjectProvider<RetryTemplate> retryTemplate,
+        ObjectProvider<ResponseErrorHandler> responseErrorHandler,
+        ObjectProvider<ObservationRegistry> observationRegistry,
+        ObjectProvider<ChatModelObservationConvention> observationConvention
+    ) {
+        return new DeepSeekChatModelFactory(chatMemory, getDeepSeekConfig(), toolCallingManager,
+            restClientBuilderProvider, webClientBuilderProvider,
+            retryTemplate, responseErrorHandler, observationRegistry, observationConvention);
     }
 
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "providers.openai.enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnClass(OpenAiChatModel.class)
-    public OpenAiChatModelFactory openAiChatModelFactory(ChatMemory chatMemory) {
-        return new OpenAiChatModelFactory(chatMemory, getOpenAiConfig());
+    public OpenAiChatModelFactory openAiChatModelFactory(
+        ChatMemory chatMemory,
+        ToolCallingManager toolCallingManager,
+        ObjectProvider<ObservationRegistry> observationRegistry,
+        ObjectProvider<ChatModelObservationConvention> observationConvention,
+        ObjectProvider<ToolExecutionEligibilityPredicate> openAiToolExecutionEligibilityPredicate
+    ) {
+        return new OpenAiChatModelFactory(chatMemory, getOpenAiConfig(), toolCallingManager,
+            observationRegistry, observationConvention, openAiToolExecutionEligibilityPredicate);
     }
 
     // ------------------------------------------------------------------------------
-    // Image Model
+    // Audio Model
     // ------------------------------------------------------------------------------
 
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "providers.openai.enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnClass(OpenAiAudioTranscriptionModel.class)
-    public OpenAiAudioModelFactory openAiAudioModelFactory() {
-        return new OpenAiAudioModelFactory(getOpenAiConfig());
+    public OpenAiAudioTranscriptionSpeechModelFactory openAiAudioModelFactory() {
+        return new OpenAiAudioTranscriptionSpeechModelFactory(getOpenAiConfig());
     }
 
     // ------------------------------------------------------------------------------
@@ -123,14 +151,16 @@ public class AiAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = AiProperties.PREFIX, name = "providers.openai.enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnClass(OpenAiEmbeddingModel.class)
-    public OpenAiEmbeddingModelFactory openAiEmbeddingModelFactory() {
-        return new OpenAiEmbeddingModelFactory(getOpenAiConfig());
+    public OpenAiEmbeddingModelFactory openAiEmbeddingModelFactory(
+        ObjectProvider<ObservationRegistry> observationRegistry,
+        ObjectProvider<EmbeddingModelObservationConvention> observationConvention
+    ) {
+        return new OpenAiEmbeddingModelFactory(getOpenAiConfig(), observationRegistry, observationConvention);
     }
 
     // ------------------------------------------------------------------------------
     // Model Manager
     // ------------------------------------------------------------------------------
-
 
     @Bean
     @ConditionalOnMissingBean

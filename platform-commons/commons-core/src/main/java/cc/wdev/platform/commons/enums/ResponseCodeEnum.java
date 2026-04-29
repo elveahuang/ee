@@ -24,7 +24,7 @@ public enum ResponseCodeEnum implements BaseEnum<Integer>, BaseResponseCodeEnum 
     RATE_LIMIT_ERROR(1000004, "Rate Limit", "限流"),
     ATTACHMENT_LIMIT_ERROR(1000005, "Attachment Limit", "附件类型错误"),
     NOT_PRESENT(1000006, "Not present", "不存在"),
-
+    ALREADY_EXISTS_DELETE_ERROR(1000007, "Relation already exists delete failed.", "关联已存在，不允许删除"),
     // 系统模块
     USER__USERNAME_NOT_AVAILABLE(1001001, "Username is Not Available", "用户名不可用"),
     USER__EMAIL_NOT_AVAILABLE(1001002, "E-Mail is Not Available", "邮箱不可用"),
@@ -46,6 +46,13 @@ public enum ResponseCodeEnum implements BaseEnum<Integer>, BaseResponseCodeEnum 
 
     USER__NOT_PRESENT(1005001, "The user is not present", "用户不存在"),
     USER_PASSWORD_NOT_MATCH(1005002, "The original password does not match", "原密码不匹配"),
+    USER_PASSWORD_SAME_AS_OLD(1005003, "New password cannot be the same as the original password", "新密码不能与原始密码相同"),
+
+    AI_INVALID_CHAT_TYPE(1006001, "Invalid Chat Type", "错误的对话类型"),
+    AI_INVALID_MODEL(1006001, "Invalid Model", "错误的模型"),
+    AI_INVALID_AGENT(1006001, "Invalid Agent", "错误的智能体"),
+    AI_INVALID_TOOL(1006001, "Invalid Agent", "错误的智能体"),
+    AI_INVALID_AGENT_MODEL(1006001, "Invalid Agent Model", "错误的智能体"),
     ;
 
     private final Integer value;

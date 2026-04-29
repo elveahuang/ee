@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.autoconfigure.oapis.properties;
 
-import cc.wdev.platform.commons.core.http.HttpProxy;
+import cc.wdev.platform.commons.extensions.http.HttpProxy;
 import cc.wdev.platform.commons.oapis.telegram.TelegramConfig;
 import lombok.AllArgsConstructor;
 import lombok.Data;

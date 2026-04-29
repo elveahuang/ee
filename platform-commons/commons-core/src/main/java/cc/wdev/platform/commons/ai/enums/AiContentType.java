@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * AI消息数据类型枚举
+ * 对话消息内容类型
  */
 @Getter
 @AllArgsConstructor
 public enum AiContentType implements BaseEnum<String> {
+    START("[START]", "开始标记"),
     TEXT("text", "文本"),
-    INTERACTION("interaction", "交互");
+    INTERACTION("interaction", "交互"),
+    ERROR("error", "Connection timeout."),
+    END("[DONE]", "结束标记");
 
     private final String value;
     private final String description;

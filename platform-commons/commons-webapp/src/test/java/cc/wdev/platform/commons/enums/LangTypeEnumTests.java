@@ -22,6 +22,7 @@ public class LangTypeEnumTests {
         Assertions.assertEquals(LangTypeEnum.EN, LangTypeEnum.getLangType("en_UK"));
         Assertions.assertEquals(LangTypeEnum.FR, LangTypeEnum.getLangType("fr"));
         Assertions.assertEquals(LangTypeEnum.JA, LangTypeEnum.getLangType("jp"));
+        Assertions.assertEquals(LangTypeEnum.VI, LangTypeEnum.getLangType("vi"));
     }
 
 }

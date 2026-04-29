@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
@@ -26,9 +27,13 @@ public class WebSocketSessionInterceptor implements HandshakeInterceptor {
                                    @NonNull Map<String, Object> attributes) {
         try {
             if (SecurityUtils.isAuthenticated()) {
+                String uType = ((ServletServerHttpRequest) request).getServletRequest().getParameter("uType");
                 UserSession wsUserSession = new UserSession();
                 wsUserSession.setUid(SecurityUtils.getUid());
+                wsUserSession.setUid(SecurityUtils.getUid());
                 wsUserSession.setUsername(SecurityUtils.getUsername());
+                wsUserSession.setTid(SecurityUtils.getTid());
+                wsUserSession.setUType(uType);
                 wsUserSession.setLast(System.currentTimeMillis());
                 attributes.put(SOCKET_USER_SESSION_KEY, wsUserSession);
                 return true;

@@ -15,7 +15,7 @@ public interface IdEntity extends Serializable {
     /**
      * @return String
      */
-    String getIdStr();
+    String getIdAsString();
 
     /**
      * @param id Long

@@ -11,7 +11,14 @@ public interface Sequence {
      * 生成一个ID后做36进制转换并转成大写
      */
     default String generateCode() {
-        return Long.toString(this.nextId(), 36).toUpperCase();
+        return generateCode(32);
+    }
+
+    /**
+     * 生成一个ID后做36进制转换并转成大写
+     */
+    default String generateCode(int radix) {
+        return Long.toString(this.nextId(), radix).toUpperCase();
     }
 
 }

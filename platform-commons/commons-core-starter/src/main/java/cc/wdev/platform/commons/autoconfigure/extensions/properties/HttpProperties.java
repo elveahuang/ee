@@ -1,8 +1,8 @@
 package cc.wdev.platform.commons.autoconfigure.extensions.properties;
 
-import cc.wdev.platform.commons.core.http.HttpDebug;
-import cc.wdev.platform.commons.core.http.HttpProxy;
-import cc.wdev.platform.commons.core.http.enums.HttpClientTypeEnum;
+import cc.wdev.platform.commons.extensions.http.HttpDebug;
+import cc.wdev.platform.commons.extensions.http.HttpProxy;
+import cc.wdev.platform.commons.extensions.http.enums.HttpClientTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;

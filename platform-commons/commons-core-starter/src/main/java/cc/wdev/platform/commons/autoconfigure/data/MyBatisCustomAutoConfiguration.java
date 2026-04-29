@@ -13,6 +13,7 @@ import cc.wdev.platform.commons.data.mybatis.log.MyBatisLog;
 import cc.wdev.platform.commons.utils.CollectionUtils;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -117,6 +118,16 @@ public class MyBatisCustomAutoConfiguration {
             }
         }
         return new CustomTenantLineHandler(config.getExcludes());
+    }
+
+    /**
+     * 增加自定义的Mapper XML文件路径
+     */
+    @Bean
+    public MybatisPlusPropertiesCustomizer mybatisPlusPropertiesCustomizer() {
+        return properties -> properties.setMapperLocations(
+            new String[]{"classpath*:/mapper/**/*.xml", "classpath*:/repository/**/*.xml"}
+        );
     }
 
     @Bean

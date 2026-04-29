@@ -5,7 +5,9 @@ import cc.wdev.platform.commons.core.cache.CacheKey;
 import cc.wdev.platform.commons.core.cache.CacheKeyGenerator;
 import cc.wdev.platform.commons.core.cache.SimpleCacheKeyGenerator;
 import cc.wdev.platform.commons.core.cache.service.CacheService;
+import cc.wdev.platform.commons.data.core.domain.CodeEntity;
 import cc.wdev.platform.commons.data.core.domain.IdEntity;
+import cc.wdev.platform.commons.utils.ObjectUtils;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import com.google.common.collect.Lists;
@@ -69,8 +71,17 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
      * @return 实体
      */
     default T findCacheById(K id) {
-        CacheKey cacheKey = getCacheKeyGenerator().key("id", id);
-        return getCacheService().get(cacheKey, k -> this.findById(id));
+        return getCacheService().get(getCacheKeyGenerator().keyById(id), k -> this.findById(id));
+    }
+
+    /**
+     * 基于缓存实现获取指定主键的实体
+     *
+     * @param code 编号
+     * @return 实体
+     */
+    default T findCacheByCode(String code) {
+        return getCacheService().get(getCacheKeyGenerator().keyByCode(code), _ -> this.findByCode(code));
     }
 
     /**
@@ -211,7 +222,7 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
     /**
      * 刷新缓存
      */
-    default void refreshCache() {
+    default void loadCache() {
         this.findAll().forEach(this::setCache);
     }
 
@@ -227,25 +238,13 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
      */
     default void deleteCache(T model) {
         if (hasId(model)) {
-            getCacheService().delete(getCacheKeyGenerator().key(model.getId()));
+            if (model instanceof IdEntity entity && ObjectUtils.isValidId(entity.getId())) {
+                getCacheService().delete(getCacheKeyGenerator().keyById(entity.getId()));
+            }
+            if (model instanceof CodeEntity entity && StringUtils.isNotEmpty(entity.getCode())) {
+                getCacheService().delete(getCacheKeyGenerator().keyByCode(entity.getCode()));
+            }
         }
-    }
-
-    /**
-     * 删除实体缓存
-     */
-    default void deleteCache(K id) {
-        if (id == null) {
-            return;
-        }
-        getCacheService().delete(getCacheKeyGenerator().key(id));
-    }
-
-    default void deleteCache(String code) {
-        if (StringUtils.isBlank(code)) {
-            return;
-        }
-        getCacheService().delete(getCacheKeyGenerator().keyByCode(code));
     }
 
     /**
@@ -253,7 +252,12 @@ public interface CachingEntityService<T extends IdEntity, K extends Serializable
      */
     default void setCache(T model) {
         if (hasId(model)) {
-            getCacheService().set(getCacheKeyGenerator().key(model.getId()), model);
+            if (model instanceof IdEntity entity && ObjectUtils.isValidId(entity.getId())) {
+                getCacheService().set(getCacheKeyGenerator().keyById(model.getId()), entity);
+            }
+            if (model instanceof CodeEntity entity && StringUtils.isNotEmpty(entity.getCode())) {
+                getCacheService().set(getCacheKeyGenerator().keyByCode(entity.getCode()), entity);
+            }
         }
     }
 

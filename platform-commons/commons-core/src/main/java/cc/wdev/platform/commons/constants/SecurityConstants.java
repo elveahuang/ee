@@ -65,10 +65,10 @@ public interface SecurityConstants {
      * =================================================================================================================
      */
 
-    String[] API_EXCLUDE_URLS = {
+    String[] GLOBAL_API_EXCLUDE_URLS = {
     };
 
-    String[] WEB_EXCLUDE_URLS = {
+    String[] GLOBAL_WEB_EXCLUDE_URLS = {
         "/",
         "/favicon.ico",
         "/assets/**",
@@ -82,6 +82,7 @@ public interface SecurityConstants {
         "/static/**",
         "/actuator/**",
         "/ai/**",
+        "/MP_verify_**.txt",
     };
 
 }

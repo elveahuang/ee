@@ -1,29 +1,33 @@
 package cc.wdev.platform.commons.ai.domain.request;
 
+import cc.wdev.platform.commons.web.request.Request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import tools.jackson.databind.annotation.JsonSerialize;
 import tools.jackson.databind.ser.std.ToStringSerializer;
 
-import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author elvea
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "简单对话请求")
-public class SimpleChatRequest implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class SimpleChatRequest extends Request {
     /**
-     * 会话ID
+     * 租户ID
      */
-    @Schema(description = "会话ID")
-    private String conversationId;
+    @Schema(title = "租户ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long tenantId;
     /**
      * 用户ID
      */
@@ -31,44 +35,60 @@ public class SimpleChatRequest implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
+     * 智能体ID
+     */
+    @Schema(description = "智能体ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long agentId;
+    /**
+     * 智能体标识
+     */
+    @Schema(description = "智能体标识")
+    private String agentCode;
+    /**
+     * 模型ID
+     */
+    @Schema(description = "模型ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long modelId;
+    /**
+     * 模型标识
+     */
+    @Schema(description = "模型标识")
+    private String modelCode;
+    /**
+     * 会话ID
+     */
+    @Schema(description = "会话ID")
+    private String conversationId;
+    /**
      * 对话类型
      */
     @Schema(title = "对话类型")
     private String chatType;
     /**
-     * 模型
+     * 响应类型
      */
-    @Schema(description = "模型名称")
-    private String modelCode;
+    @Schema(title = "响应类型")
+    private String responseType;
     /**
      * 用户提示词
      */
     @Schema(description = "用户提示词")
     private String prompt;
     /**
-     * 系统提示词
+     * 智能体工具名称
      */
-    @Schema(description = "系统提示")
+    @Schema(description = "智能体工具名称")
     private String systemPrompt;
     /**
-     * 指定执行工具
+     * 系统提示词
      */
-    @Schema(description = "指定执行工具")
-    private String tool;
+    @Schema(description = "系统提示词")
+    private List<String> toolNames;
     /**
-     * 输出格式
+     * 附加参数
      */
-    @Schema(description = "输出格式")
-    private String format;
-    /**
-     * 是否强制刷新
-     */
-    @Schema(description = "是否强制刷新")
-    private boolean force;
-    /**
-     * 是否由框架自行控制工具执行
-     */
-    @Builder.Default
-    @Schema(description = "是否由框架自行控制工具执行")
-    private boolean internalToolExecutionEnabled = true;
+    @Schema(description = "附加参数")
+    private Map<String, Object> params;
 }

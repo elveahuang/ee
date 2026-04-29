@@ -18,17 +18,17 @@ public abstract class AbstractEntity implements IdEntity {
 
     @Override
     public Long getId() {
-        return NumberUtils.convertToLang(this.id);
+        return NumberUtils.toLong(this.id);
     }
 
     @Override
-    public String getIdStr() {
+    public String getIdAsString() {
         return this.id;
     }
 
     @Override
     public void setId(Long id) {
-        this.id = NumberUtils.convertToString(id);
+        this.id = NumberUtils.toString(id);
     }
 
     @Override

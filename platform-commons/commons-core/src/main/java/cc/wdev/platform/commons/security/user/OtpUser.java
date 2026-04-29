@@ -47,7 +47,7 @@ public class OtpUser implements Serializable {
         if (OtpTypeEnum.EMAIL.equals(otpTypeEnum)) {
             return this.email;
         } else if (OtpTypeEnum.SMS.equals(otpTypeEnum)) {
-            return "%s:%s".formatted(StringUtils.nvl(mobileCountryCode, "0086"), this.mobileNumber);
+            return "%s:%s".formatted(StringUtils.nvl(mobileCountryCode, "86"), this.mobileNumber);
         }
         return "NONE_PROVIDED";
     }

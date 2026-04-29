@@ -88,5 +88,21 @@ public class AiTests extends BaseTests {
         Assertions.assertNotNull(courses);
     }
 
+    /**
+     * 简介结构化输出
+     */
+    @Test
+    public void agentTest() {
+        // 1
+        ChatModel chatModel = this.aiManager.getChatModelFactory().getModel();
+        Courses courses = ChatClient.create(chatModel).prompt()
+            .user(u -> u.text("今天几号"))
+            .toolCallbacks(this.commonToolsProvider.getToolCallbacks())
+            .call()
+            .entity(Courses.class);
+        Assertions.assertNotNull(courses);
+        // 2
+        // 3
+    }
 
 }

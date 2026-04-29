@@ -34,8 +34,11 @@ public interface Service {
         return String.valueOf(SequenceManager.getSequence().nextId());
     }
 
+    /**
+     * 生成唯一编码
+     */
     default String generateCode(String prefix) {
-        return String.format("%s-%s", prefix, generateIdAsString());
+        return String.format("%s-%s", prefix, SequenceManager.getSequence().generateCode());
     }
 
 }

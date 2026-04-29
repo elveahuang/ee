@@ -44,7 +44,6 @@ public abstract class AbstractChatModelFactory implements ChatModelFactory {
                 MessageChatMemoryAdvisor.builder(chatMemory).scheduler(MessageChatMemoryAdvisor.DEFAULT_SCHEDULER).build(),
                 new CustomLoggingAdvisor()
             );
-        // ::todo
         log.info("Create ChatClient: {}", config.getName());
         return chatClientBuilder.build();
     }

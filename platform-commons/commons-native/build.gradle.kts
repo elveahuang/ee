@@ -8,7 +8,8 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springBootServletStarter)
+    implementation(libs.bundles.springBootCore)
+    implementation(libs.bundles.springBootServletStarter)
 }
 
 graalvmNative {
@@ -47,11 +48,8 @@ tasks.named<BootBuildImage>("bootBuildImage") {
         "BP_LOG_LEVEL" to "debug",
         "BP_JVM_VERSION" to "25",
         "BPL_JVM_CDS_ENABLED" to "true",
-        "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
+        "BPE_DELIM_JAVA_TOOL_OPTIONS" to "",
         "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-XX:+HeapDumpOnOutOfMemoryError",
-    )
-    bindings = listOf(
-        "$rootDir/tools/buildpacks/bindings-remote:/platform/bindings"
     )
     cleanCache = true
     imageName = "native"

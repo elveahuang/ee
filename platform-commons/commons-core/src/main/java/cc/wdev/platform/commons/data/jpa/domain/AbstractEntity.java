@@ -26,8 +26,8 @@ public abstract class AbstractEntity implements IdEntity {
     }
 
     @Override
-    public String getIdStr() {
-        return NumberUtils.convertToString(this.id);
+    public String getIdAsString() {
+        return NumberUtils.toString(this.id);
     }
 
     @Override
@@ -37,7 +37,7 @@ public abstract class AbstractEntity implements IdEntity {
 
     @Override
     public void setId(String id) {
-        this.id = NumberUtils.convertToLang(id);
+        this.id = NumberUtils.toLong(id);
     }
 
 }

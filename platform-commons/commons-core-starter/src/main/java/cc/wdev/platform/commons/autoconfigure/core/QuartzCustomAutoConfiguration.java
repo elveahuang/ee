@@ -20,6 +20,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
+import static cc.wdev.platform.commons.utils.StringUtils.nvl;
+
 /**
  * @author elvea
  */
@@ -44,7 +46,7 @@ public class QuartzCustomAutoConfiguration {
                                                                          @JobTransactionManager ObjectProvider<PlatformTransactionManager> jobTransactionManager) {
         return (schedulerFactoryBean) -> {
             log.info("Quartz DataSource is enabled");
-            schedulerFactoryBean.setSchedulerName(this.quartzProperties.getSchedulerName());
+            schedulerFactoryBean.setSchedulerName(nvl(this.quartzProperties.getSchedulerName(), "QuartzScheduler"));
             schedulerFactoryBean.setDataSource(jobDataSource.getIfAvailable(() -> dataSource));
             schedulerFactoryBean.setTransactionManager(jobTransactionManager.getIfAvailable(() -> transactionManager));
         };

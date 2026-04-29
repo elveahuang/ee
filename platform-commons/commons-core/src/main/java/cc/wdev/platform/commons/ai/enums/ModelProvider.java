@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 模型类型
+ * 模型提供商
  */
 @Getter
 @AllArgsConstructor
@@ -16,15 +16,27 @@ public enum ModelProvider implements BaseEnum<String> {
     DEEPSEEK("deepseek", "深度求索", true,
         new Model[]{
             new Model("deepseek-chat", true, false, ModelType.TEXT),
-            new Model("deepseek-reasoner", true, false, ModelType.TEXT)
+            new Model("deepseek-reasoner", true, false, ModelType.TEXT),
+            new Model("deepseek-v4-flash", true, false, ModelType.TEXT),
+            new Model("deepseek-v4-pro", true, false, ModelType.TEXT)
         },
-        new ModelType[]{ModelType.TEXT, ModelType.EMBEDDING}
+        new ModelType[]{ModelType.TEXT}
+    ),
+
+    ALIYUN("aliyun", "阿里云", true,
+        new Model[]{
+            new Model("deepseek-chat", true, false, ModelType.TEXT),
+            new Model("deepseek-reasoner", true, false, ModelType.TEXT),
+            new Model("deepseek-v4-flash", true, false, ModelType.TEXT),
+            new Model("deepseek-v4-pro", true, false, ModelType.TEXT)
+        },
+        new ModelType[]{ModelType.TEXT, ModelType.AUDIO, ModelType.EMBEDDING}
     ),
 
     DASHSCOPE("dashscope", "阿里云", true,
         new Model[]{
             new Model("deepseek-chat", true, false, ModelType.TEXT),
-            new Model("deepseek-reasoner", true, false, ModelType.TEXT)
+            new Model("deepseek-reasoner", true, false, ModelType.TEXT),
         },
         new ModelType[]{ModelType.TEXT, ModelType.EMBEDDING}
     ),
@@ -32,7 +44,7 @@ public enum ModelProvider implements BaseEnum<String> {
     OPENAI("openai", "OpenAI", true,
         new Model[]{
             new Model("deepseek-chat", true, false, ModelType.TEXT),
-            new Model("deepseek-reasoner", true, false, ModelType.TEXT)
+            new Model("deepseek-reasoner", true, false, ModelType.TEXT),
         },
         new ModelType[]{ModelType.TEXT, ModelType.EMBEDDING}
     );

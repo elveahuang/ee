@@ -21,15 +21,14 @@ public abstract class NumberUtils {
         return isNull(value) ? defaultValue : value;
     }
 
-    public static String convertToString(Number num) {
+    public static String toString(Number num) {
         if (num == null) {
             return null;
         }
-
         return String.valueOf(num);
     }
 
-    public static Long convertToLang(String str) {
+    public static Long toLong(String str) {
         try {
             return Long.parseLong(str);
         } catch (NumberFormatException e) {
@@ -37,4 +36,14 @@ public abstract class NumberUtils {
             return null;
         }
     }
+
+    public static Integer toInteger(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            log.warn("Invalid number format: {}", str);
+            return null;
+        }
+    }
+
 }

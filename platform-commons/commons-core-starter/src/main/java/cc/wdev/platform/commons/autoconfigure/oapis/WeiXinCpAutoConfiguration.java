@@ -3,8 +3,8 @@ package cc.wdev.platform.commons.autoconfigure.oapis;
 import cc.wdev.platform.commons.autoconfigure.oapis.properties.WeiXinCpProperties;
 import cc.wdev.platform.commons.core.cache.service.CacheService;
 import cc.wdev.platform.commons.oapis.weixin.config.AppCpConfig;
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinCpService;
-import cc.wdev.platform.commons.oapis.weixin.service.impl.WeiXinCpServiceImpl;
+import cc.wdev.platform.commons.oapis.weixin.service.WxCpManager;
+import cc.wdev.platform.commons.oapis.weixin.service.impl.WxCpManagerImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,8 +26,8 @@ public class WeiXinCpAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(WeiXinCpService.class)
-    public WeiXinCpService weiXinCpService(WeiXinCpProperties properties, CacheService cacheService) {
+    @ConditionalOnMissingBean(WxCpManager.class)
+    public WxCpManager wxCpManager(WeiXinCpProperties properties, CacheService cacheService) {
         // 默认企业微信应用配置信息
         AppCpConfig appConfig = AppCpConfig.builder()
             .corpId(properties.getCorpId())
@@ -36,9 +36,9 @@ public class WeiXinCpAutoConfiguration {
             .token(properties.getToken())
             .build();
         // 创建企业微信服务实例
-        WeiXinCpServiceImpl service = new WeiXinCpServiceImpl(cacheService, properties.getCacheKeyPrefix());
-        service.setAppConfig(appConfig);
-        return service;
+        WxCpManagerImpl manager = new WxCpManagerImpl(cacheService, properties.getCacheKeyPrefix());
+        manager.setAppConfig(appConfig);
+        return manager;
     }
 
 }

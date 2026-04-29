@@ -10,6 +10,7 @@ import cc.wdev.platform.commons.core.tenant.TenantStore;
 import cc.wdev.platform.commons.utils.*;
 import cc.wdev.platform.commons.utils.i18n.DefaultLanguageResolver;
 import cc.wdev.platform.commons.utils.i18n.LanguageResolver;
+import cc.wdev.platform.commons.utils.jackson.CommonModule;
 import cc.wdev.platform.commons.utils.time.DefaultTimeZoneResolver;
 import cc.wdev.platform.commons.utils.time.LegacyDateTimeAnnotationFormatterFactory;
 import cc.wdev.platform.commons.utils.time.StandardDateTimeAnnotationFormatterFactory;
@@ -167,6 +168,7 @@ public class CoreAutoConfiguration {
     @Bean
     public JsonMapperBuilderCustomizer jsonMapperBuilderCustomizer() {
         return builder -> {
+            builder.addModule(new CommonModule());
             builder.enable(SerializationFeature.INDENT_OUTPUT);
             builder.changeDefaultPropertyInclusion(v -> v.withValueInclusion(JsonInclude.Include.NON_NULL));
             builder.changeDefaultPropertyInclusion(v -> v.withContentInclusion(JsonInclude.Include.NON_NULL));

@@ -3,8 +3,10 @@ package cc.wdev.platform.commons.oapis.sms;
 import cc.wdev.platform.commons.oapis.sms.aliyun.AliyunSmsSender;
 import cc.wdev.platform.commons.oapis.sms.enums.SmsTypeEnum;
 import cc.wdev.platform.commons.oapis.sms.tencent.TencentSmsSender;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -13,6 +15,8 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SmsConfig implements Serializable {
 
     @Builder.Default

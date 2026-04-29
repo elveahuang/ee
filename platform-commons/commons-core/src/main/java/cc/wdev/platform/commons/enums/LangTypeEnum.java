@@ -21,7 +21,8 @@ public enum LangTypeEnum implements BaseEnum<String> {
     EN("en", "美式英文", Locale.US, Lists.asList("en", new String[]{"en_us", "en_uk"})),
     JA("ja", "日语", Locale.JAPAN, Lists.asList("ja", new String[]{"jp"})),
     KR("kr", "韩语", Locale.KOREA, Lists.asList("kr", new String[]{"kr"})),
-    FR("fr", "法语", Locale.FRANCE, Lists.asList("fr", new String[]{"fr"}));
+    FR("fr", "法语", Locale.FRANCE, Lists.asList("fr", new String[]{"fr"})),
+    VI("vi", "越南语", Locale.of("vi", "VN"), Lists.asList("vi", new String[]{"vi"}));
 
     private final String value;
     private final String description;

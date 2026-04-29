@@ -1,6 +1,6 @@
 package cc.wdev.platform.commons.oapis.telegram;
 
-import cc.wdev.platform.commons.core.http.HttpProxy;
+import cc.wdev.platform.commons.extensions.http.HttpProxy;
 import cc.wdev.platform.commons.oapis.telegram.bot.TelegramBotConfig;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;

@@ -15,6 +15,13 @@ import java.util.TimeZone;
 public abstract class DateUtils {
 
     /**
+     * 获取当前日期
+     */
+    public static Date date() {
+        return new Date();
+    }
+
+    /**
      * 格式化日期
      */
     public static String format(Date date, String pattern) {

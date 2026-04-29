@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.autoconfigure.extensions.properties;
 
-import cc.wdev.platform.commons.core.http.HttpProxy;
 import cc.wdev.platform.commons.enums.SeleniumDriverTypeEnum;
+import cc.wdev.platform.commons.extensions.http.HttpProxy;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;

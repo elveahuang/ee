@@ -18,7 +18,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static cc.wdev.platform.commons.constants.SecurityConstants.*;
+import static cc.wdev.platform.commons.constants.SecurityConstants.API_REQUEST_PATH;
+import static cc.wdev.platform.system.commons.constants.SystemSecurityConstants.API_EXCLUDE_URLS;
+import static cc.wdev.platform.system.commons.constants.SystemSecurityConstants.WEB_EXCLUDE_URLS;
 
 /**
  * @author elvea

@@ -24,4 +24,5 @@ public class QuartzJobInfo implements Serializable {
     private int hour;
     private int minute;
     private String cron;
+    private String params;
 }

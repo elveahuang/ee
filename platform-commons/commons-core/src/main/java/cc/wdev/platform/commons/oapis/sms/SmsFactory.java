@@ -18,6 +18,15 @@ public record SmsFactory(SmsConfig config) {
         return getAliyunSmsSender();
     }
 
+    public SmsSender<?, SmsResult> getSmsSender(SmsConfig config) {
+        if (SmsTypeEnum.Tencent.equals(config.getType())) {
+            return getTencentSmsSender(config.getTencent());
+        } else if (SmsTypeEnum.Aliyun.equals(config.getType())) {
+            return getAliyunSmsSender(config.getAliyun());
+        }
+        return null;
+    }
+
     public AliyunSmsSender getAliyunSmsSender() {
         return this.getAliyunSmsSender(this.config.getAliyun());
     }

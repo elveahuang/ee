@@ -76,7 +76,7 @@ public class AliyunSmsSender implements SmsSender<AliyunSmsSender.Config, SmsRes
     @AllArgsConstructor
     public static class Config implements Serializable {
         @Builder.Default
-        private boolean enabled = false;
+        private Boolean enabled = false;
         @Builder.Default
         private String endpoint = ENDPOINT;
         private String accessKeyId;

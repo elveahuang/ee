@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.message.sender;
 
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinCpService;
+import cc.wdev.platform.commons.oapis.weixin.service.WxCpManager;
 import cc.wdev.platform.commons.utils.ExceptionUtils;
 import cc.wdev.platform.commons.utils.GsonUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageWeWorkSender implements MessageSender {
 
-    private WeiXinCpService weiXinCpService;
+    private WxCpManager wxCpManager;
 
     private MessageContentService messageContentService;
 
@@ -30,7 +30,7 @@ public class MessageWeWorkSender implements MessageSender {
             log.info("Send wework message. message id [{}]. message content id [{}]. start", message.getId(), message.getContentId());
 
             // 检查企微服务是否已经启动
-            if (this.weiXinCpService == null) {
+            if (this.wxCpManager == null) {
                 log.info("Send wework message. message id [{}]. message content id [{}]. failed. wework is disabled. ", message.getId(), message.getContentId());
                 return;
             }
@@ -44,7 +44,7 @@ public class MessageWeWorkSender implements MessageSender {
                     // 先检测当前用户在企业微信里面是否存在
                     log.info("Send wework message. message id [{}]. message content id [{}]. check user [{}].", message.getId(), message.getContentId(), username);
 
-                    WxCpUser wxCpUser = weiXinCpService.getUserService().getById(username);
+                    WxCpUser wxCpUser = wxCpManager.getUserService().getById(username);
                     wxCpUserId = wxCpUser.getUserId();
 
                     log.info("Send wework message. message id [{}]. message content id [{}]. check user [{}]. valid user [{}].", message.getId(), message.getContentId(), username, wxCpUserId);
@@ -58,7 +58,7 @@ public class MessageWeWorkSender implements MessageSender {
                     // 先检测当前手机号码在企业微信里面是否存在
                     log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}].", message.getId(), message.getContentId(), mobile);
 
-                    wxCpUserId = weiXinCpService.getUserService().getUserId(mobile);
+                    wxCpUserId = wxCpManager.getUserService().getUserId(mobile);
                     log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}]. valid user [{}].", message.getId(), message.getContentId(), mobile, wxCpUserId);
                 } catch (Exception e) {
                     log.info("Send wework message. message id [{}]. message content id [{}]. check mobile [{}]. failed.", message.getId(), message.getContentId(), mobile);
@@ -73,11 +73,11 @@ public class MessageWeWorkSender implements MessageSender {
             // 发送企微消息
             WxCpMessage wxCpMessage = WxCpMessage
                 .TEXT()
-                .agentId(weiXinCpService.getConfigStorage().getAgentId())
+                .agentId(wxCpManager.getConfigStorage().getAgentId())
                 .toUser(wxCpUserId)
                 .content(message.getContent())
                 .build();
-            WxCpMessageSendResult result = weiXinCpService.getMessageService().send(wxCpMessage);
+            WxCpMessageSendResult result = wxCpManager.getMessageService().send(wxCpMessage);
 
             log.info("Send wework message. message id [{}]. message content id [{}]. result - [{}].", message.getId(), message.getContentId(), GsonUtils.toJson(result));
             if (result.getErrCode() == 0) {
@@ -97,8 +97,8 @@ public class MessageWeWorkSender implements MessageSender {
     }
 
     @Autowired(required = false)
-    public void setWeiXinCpService(WeiXinCpService weiXinCpService) {
-        this.weiXinCpService = weiXinCpService;
+    public void setWeiXinCpService(WxCpManager wxCpManager) {
+        this.wxCpManager = wxCpManager;
     }
 
     @Autowired

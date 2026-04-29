@@ -19,6 +19,4 @@ public abstract class BaseTenantEntity extends BaseEntity implements TenantEntit
     @Schema(title = "租户ID", description = "租户ID")
     @JsonSerialize(using = ToStringSerializer.class)
     protected Long tenantId;
-
-
 }

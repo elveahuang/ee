@@ -9,6 +9,27 @@ import cn.hutool.core.util.DesensitizedUtil;
 public abstract class SensitiveUtils {
 
     /**
+     * AES 加密
+     */
+    public static String doAesEncrypt(String value) {
+        return SensitiveManager.getService().encrypt(value);
+    }
+
+    /**
+     * AES 加密
+     */
+    public static String doAesDecrypt(String value) {
+        return SensitiveManager.getService().decrypt(value);
+    }
+
+    /**
+     * 密钥
+     */
+    public static String apiKey(String apiKey) {
+        return StringUtils.isNotEmpty(apiKey) ? DesensitizedUtil.idCardNum(apiKey, 5, 2) : "";
+    }
+
+    /**
      * 身份证脱敏
      */
     public static String idCard(String idCard) {

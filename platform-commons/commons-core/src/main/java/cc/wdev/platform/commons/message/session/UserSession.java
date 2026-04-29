@@ -28,6 +28,14 @@ public class UserSession implements Serializable {
      */
     private Long uid;
     /**
+     * 用户类型
+     */
+    private String uType;
+    /**
+     * 租户ID
+     */
+    private Long tid;
+    /**
      * 用户名
      */
     private String username;

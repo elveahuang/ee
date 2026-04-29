@@ -53,14 +53,14 @@ public abstract class BaseEntity extends AbstractEntity {
     private LocalDateTime deletedAt;
 
     public void setCreatedBy(Long createdBy) {
-        this.createdBy = NumberUtils.convertToString(createdBy);
+        this.createdBy = NumberUtils.toString(createdBy);
     }
 
     public void setUpdatedBy(Long updatedBy) {
-        this.updatedBy = NumberUtils.convertToString(updatedBy);
+        this.updatedBy = NumberUtils.toString(updatedBy);
     }
 
     public void setDeletedBy(Long deletedBy) {
-        this.deletedBy = NumberUtils.convertToString(deletedBy);
+        this.deletedBy = NumberUtils.toString(deletedBy);
     }
 }

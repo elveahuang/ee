@@ -30,8 +30,8 @@ public class ServletWebFilter implements Filter {
             log.info("[ReactiveWebFilter] MDC Context {}. URL [{}]", MdcContext.getRequestId(), request.getRequestURI());
 
             // 初始化租户上下文
-            log.info("[ServletWebFilter] Init Tenant Context");
-            TenantContext.handleServletRequest(request);
+            log.info("[ServletWebFilter] Init Tenant Context [{}]", request.getServerName());
+            TenantContext.handleServletRequest(request, response);
 
             // 记录执行时间
             startTime = System.currentTimeMillis();

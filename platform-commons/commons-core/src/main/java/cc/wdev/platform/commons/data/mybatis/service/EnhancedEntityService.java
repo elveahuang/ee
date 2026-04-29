@@ -74,4 +74,9 @@ public interface EnhancedEntityService<T extends IdEntity, K extends Serializabl
      */
     IPage<T> findByMpPage(IPage<T> page, Wrapper<T> wrapper);
 
+    /**
+     * 检查记录是否存在
+     */
+    boolean checkExists(LambdaQueryChainWrapper<T> wrapper);
+
 }

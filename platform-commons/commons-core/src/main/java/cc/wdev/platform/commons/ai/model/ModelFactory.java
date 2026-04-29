@@ -2,6 +2,8 @@ package cc.wdev.platform.commons.ai.model;
 
 import cc.wdev.platform.commons.ai.enums.ModelProvider;
 import cc.wdev.platform.commons.ai.enums.ModelType;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
+import cc.wdev.platform.commons.enums.BaseEnum;
 import org.springframework.ai.model.Model;
 
 /**
@@ -10,22 +12,12 @@ import org.springframework.ai.model.Model;
 public interface ModelFactory<T extends Model<?, ?>> {
 
     /**
-     * 获取模型服务商
+     * 获取服务提供商
      *
-     * @return 模型服务商
-     *
-     */
-    ModelProvider getModelProvider();
-
-    /**
-     * 获取模型提供程序ID
-     *
-     * @return 模型提供程序ID
+     * @return 服务提供商
      *
      */
-    default String getProviderId() {
-        return getModelProvider().getValue();
-    }
+    ServiceProvider getServiceProvider();
 
     /**
      * 获取模型类型
@@ -41,9 +33,11 @@ public interface ModelFactory<T extends Model<?, ?>> {
      * @return 是否支持
      */
     default boolean supports(ModelConfig config) {
-        ModelProvider provider = getModelProvider();
-        return provider.getValue().equalsIgnoreCase(config.getProviderCode())
-            && provider.supportsModel(config.getName());
+        ServiceProvider serviceProvider = getServiceProvider();
+        ModelProvider modelProvider = BaseEnum.getEnumByValue(config.getModelProvider(), ModelProvider.class);
+        return serviceProvider.getValue().equalsIgnoreCase(config.getServiceProvider())
+            && modelProvider != null
+            && modelProvider.supportsModel(config.getName());
     }
 
     /**

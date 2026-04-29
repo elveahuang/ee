@@ -3,7 +3,7 @@ package cc.wdev.platform.security.core.utils;
 import cc.wdev.platform.commons.security.jackson.LongMixin;
 import cc.wdev.platform.commons.security.jackson.UserMixin;
 import cc.wdev.platform.commons.security.user.User;
-import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
+import cc.wdev.platform.commons.utils.jackson.CommonModule;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
 import org.springframework.security.jackson.SecurityJacksonModules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -37,7 +37,7 @@ public abstract class OAuth2Utils {
 
         objectMapper = JsonMapper.builder()
             .addModules(SecurityJacksonModules.getModules(loader, builder))
-            .addModule(new CustomJsonModule())
+            .addModule(new CommonModule())
             .addMixIn(Long.class, LongMixin.class)
             .addMixIn(User.class, UserMixin.class)
             .build();

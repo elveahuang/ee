@@ -17,44 +17,44 @@ dependencies {
         exclude(group = "org.bytedeco", module = "openblas")
         exclude(group = "org.bytedeco", module = "videoinput")
     }
-    api(group = "org.bytedeco", name = "javacpp-platform", version = javaCppVersion) {
+    api("org.bytedeco:javacpp-platform:$javaCppVersion") {
         exclude(group = "org.bytedeco", module = "javacpp")
     }
-    api(group = "org.bytedeco", name = "javacpp", version = javaCppVersion)
-    api(group = "org.bytedeco", name = "javacpp", version = javaCppVersion, classifier = "linux-x86_64")
-    api(group = "org.bytedeco", name = "javacpp", version = javaCppVersion, classifier = "macosx-arm64")
-    api(group = "org.bytedeco", name = "javacpp", version = javaCppVersion, classifier = "windows-x86_64")
+    api("org.bytedeco:javacpp:$javaCppVersion")
+    api("org.bytedeco:javacpp:$javaCppVersion:linux-x86_64")
+    api("org.bytedeco:javacpp:$javaCppVersion:macosx-arm64")
+    api("org.bytedeco:javacpp:$javaCppVersion:windows-x86_64")
 
     // ffmpeg
-    api(group = "org.bytedeco", name = "ffmpeg-platform", version = ffmpegVersion) {
+    api("org.bytedeco:ffmpeg-platform:$ffmpegVersion") {
         exclude(group = "org.bytedeco", module = "ffmpeg")
         exclude(group = "org.bytedeco", module = "javacpp-platform")
     }
-    api(group = "org.bytedeco", name = "ffmpeg", version = ffmpegVersion)
-    api(group = "org.bytedeco", name = "ffmpeg", version = ffmpegVersion, classifier = "linux-x86_64")
-    api(group = "org.bytedeco", name = "ffmpeg", version = ffmpegVersion, classifier = "macosx-arm64")
-    api(group = "org.bytedeco", name = "ffmpeg", version = ffmpegVersion, classifier = "windows-x86_64")
+    api("org.bytedeco:ffmpeg:$ffmpegVersion")
+    api("org.bytedeco:ffmpeg:$ffmpegVersion:linux-x86_64")
+    api("org.bytedeco:ffmpeg:$ffmpegVersion:macosx-arm64")
+    api("org.bytedeco:ffmpeg:$ffmpegVersion:windows-x86_64")
 
     // tesseract
-    api(group = "org.bytedeco", name = "tesseract-platform", version = tesseractVersion) {
+    api("org.bytedeco:tesseract-platform:$tesseractVersion") {
         exclude(group = "org.bytedeco", module = "tesseract")
         exclude(group = "org.bytedeco", module = "javacpp-platform")
         exclude(group = "org.bytedeco", module = "leptonica-platform")
     }
-    api(group = "org.bytedeco", name = "tesseract", version = tesseractVersion)
-    api(group = "org.bytedeco", name = "tesseract", version = tesseractVersion, classifier = "linux-x86_64")
-    api(group = "org.bytedeco", name = "tesseract", version = tesseractVersion, classifier = "macosx-arm64")
-    api(group = "org.bytedeco", name = "tesseract", version = tesseractVersion, classifier = "windows-x86_64")
+    api("org.bytedeco:tesseract:$tesseractVersion")
+    api("org.bytedeco:tesseract:$tesseractVersion:linux-x86_64")
+    api("org.bytedeco:tesseract:$tesseractVersion:macosx-arm64")
+    api("org.bytedeco:tesseract:$tesseractVersion:windows-x86_64")
 
     // leptonica
-    api(group = "org.bytedeco", name = "leptonica-platform", version = leptonicaVersion) {
+    api("org.bytedeco:leptonica-platform:$leptonicaVersion") {
         exclude(group = "org.bytedeco", module = "leptonica")
         exclude(group = "org.bytedeco", module = "javacpp-platform")
     }
-    api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion)
-    api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion, classifier = "linux-x86_64")
-    api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion, classifier = "macosx-arm64")
-    api(group = "org.bytedeco", name = "leptonica", version = leptonicaVersion, classifier = "windows-x86_64")
+    api("org.bytedeco:leptonica:$leptonicaVersion")
+    api("org.bytedeco:leptonica:$leptonicaVersion:linux-x86_64")
+    api("org.bytedeco:leptonica:$leptonicaVersion:macosx-arm64")
+    api("org.bytedeco:leptonica:$leptonicaVersion:windows-x86_64")
 }
 
 tasks.named<Jar>("jar") {

@@ -7,7 +7,9 @@ import cc.wdev.platform.commons.core.storage.model.FileParameter;
 import cc.wdev.platform.commons.core.storage.model.FileUploadResult;
 import cc.wdev.platform.commons.core.storage.model.GenerateUrlRequest;
 import cc.wdev.platform.commons.exception.ServiceException;
+import cc.wdev.platform.commons.utils.CollectionUtils;
 import cc.wdev.platform.commons.utils.JacksonUtils;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -209,6 +211,34 @@ public record AwsStorageService(AwsStorageConfig config) implements StorageServi
 
     @Override
     public Map<String, String> presignedObjectUrlMap(Collection<String> fileKeys) {
-        return Collections.emptyMap();
+        if (CollectionUtils.isEmpty(fileKeys)) {
+            return Collections.emptyMap();
+        }
+
+        Map<String, String> urlMap = Maps.newHashMapWithExpectedSize(fileKeys.size());
+        try (S3Presigner presigner = getS3Presigner()) {
+            for (String fileKey : fileKeys) {
+                try {
+                    GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                        .bucket(getBucket())
+                        .key(fileKey)
+                        .build();
+
+                    GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                        .signatureDuration(Duration.ofMinutes(30))
+                        .getObjectRequest(getObjectRequest)
+                        .build();
+
+                    String url = presigner.presignGetObject(presignRequest).url().toExternalForm();
+                    urlMap.put(fileKey, url);
+                } catch (Exception e) {
+                    log.error("AWS S3 generatePresignedUrl failed. key={}", fileKey, e);
+                }
+            }
+        } catch (Exception e) {
+            log.error("AWS S3 presigner initialization failed.", e);
+        }
+
+        return urlMap;
     }
 }

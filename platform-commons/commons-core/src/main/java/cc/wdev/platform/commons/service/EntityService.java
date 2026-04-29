@@ -58,6 +58,13 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
     T findById(K id);
 
     /**
+     * 根据编号查询唯一记录
+     */
+    default T findByCode(String code) {
+        throw new RuntimeException("Unsupport method findByCode");
+    }
+
+    /**
      * 根据ID查询唯一记录，并执行回调(一般用于获取附加信息)
      */
     T findById(K id, Consumer<T> extraFn);
@@ -250,6 +257,14 @@ public interface EntityService<T extends IdEntity, K extends Serializable> exten
      * 是否存在指定ID的记录
      */
     boolean existsById(K id);
+
+    /**
+     * 根据ID查询唯一记录
+     * 若不存在，则抛出异常
+     */
+    default boolean existsByCode(String code, K id) {
+        return false;
+    }
 
     /**
      * 实体是否存在主键值

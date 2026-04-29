@@ -5,6 +5,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.util.StringUtils;
 
+import java.io.Serializable;
 import java.time.Duration;
 
 /**
@@ -35,7 +36,7 @@ public interface CacheKeyGenerator {
             .toLowerCase();
     }
 
-    default CacheKey keyById(Long id) {
+    default CacheKey keyById(Serializable id) {
         return this.key("id", id);
     }
 

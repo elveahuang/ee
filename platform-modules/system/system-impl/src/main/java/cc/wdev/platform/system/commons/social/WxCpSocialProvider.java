@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.social;
 
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinCpService;
+import cc.wdev.platform.commons.oapis.weixin.service.WxCpManager;
 import cc.wdev.platform.commons.security.user.SocialUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
@@ -15,9 +15,9 @@ import java.util.Map;
 @Component
 public class WxCpSocialProvider implements SocialProvider {
 
-    private final ObjectProvider<WeiXinCpService> service;
+    private final ObjectProvider<WxCpManager> service;
 
-    public WxCpSocialProvider(ObjectProvider<WeiXinCpService> service) {
+    public WxCpSocialProvider(ObjectProvider<WxCpManager> service) {
         this.service = service;
     }
 

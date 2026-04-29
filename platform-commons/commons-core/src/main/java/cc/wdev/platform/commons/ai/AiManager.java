@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.ai;
 
 import cc.wdev.platform.commons.ai.enums.ModelProvider;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
 import cc.wdev.platform.commons.ai.model.ModelConfig;
 import cc.wdev.platform.commons.ai.model.chat.ChatModelFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -50,7 +51,12 @@ public interface AiManager {
     ChatClient getChatClient(ModelConfig config);
 
     /**
-     * 获取所有可用的提供商
+     * 获取可用服务提供商
+     */
+    List<ServiceProvider> getAvailableServiceProviders();
+
+    /**
+     * 获取可用提供商
      */
     List<ModelProvider> getAvailableProviders();
 

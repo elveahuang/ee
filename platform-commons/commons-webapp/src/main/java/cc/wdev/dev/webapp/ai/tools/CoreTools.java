@@ -1,48 +1,44 @@
 package cc.wdev.dev.webapp.ai.tools;
 
-import cc.wdev.dev.webapp.ai.vo.JobVo;
 import cc.wdev.dev.webapp.es.domain.entity.CourseElasticEntity;
 import cc.wdev.dev.webapp.es.service.CourseElasticService;
 import cc.wdev.platform.commons.web.request.PageRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author elvea
  */
-@Component
+@Component("CoreTools")
+@RequiredArgsConstructor
 public class CoreTools {
 
-    private CourseElasticService courseElasticService;
-
-    @Tool(name = "searchJob", description = """
-        搜索职位
-        """)
-    public List<JobVo> searchJob(@ToolParam(description = "关键字") String keyword) {
-        return List.of(JobVo.builder().name("仓管员").description("负责管理仓库库存和订单").build());
-    }
+    private final CourseElasticService courseElasticService;
 
     @Tool(name = "searchCourse", description = """
         搜索课程
         """)
     public List<CourseElasticEntity> searchCourse(@ToolParam(description = "关键字") String keyword) {
-        PageRequest request = PageRequest.builder().page(1).size(10).build();
-        request.setQ(keyword);
+        PageRequest request = PageRequest.builder().page(1).size(10).q(keyword).build();
         Page<CourseElasticEntity> page = courseElasticService.search(request);
-        if (page.isEmpty()) {
-            return List.of();
-        }
-        return page.getContent().stream().toList();
+        return page.isEmpty() ? emptyList() : page.getContent().stream().toList();
     }
 
-    @Autowired
-    public void setCourseElasticService(CourseElasticService courseElasticService) {
-        this.courseElasticService = courseElasticService;
+    @Tool(name = "getBooks", description = "获取推荐书籍")
+    List<String> getBooks() {
+        List<String> books = new ArrayList<>();
+        books.add("三国演义");
+        books.add("高等数学");
+        books.add("语言榆树");
+        return books;
     }
 
 }

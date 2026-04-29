@@ -16,4 +16,6 @@ public class SensitiveProperties {
 
     private boolean enabled = true;
 
+    private String aesKey;
+
 }

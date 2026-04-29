@@ -2,7 +2,7 @@ spring:
     main:
         allow-bean-definition-overriding: true
         allow-circular-references: true
-        web-application-type: none
+        web-application-type: servlet
     application:
         name: native
     profiles:

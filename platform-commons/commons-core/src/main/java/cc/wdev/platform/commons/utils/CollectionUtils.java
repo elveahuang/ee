@@ -30,4 +30,8 @@ public class CollectionUtils extends org.springframework.util.CollectionUtils {
         return Lists.newArrayList(iterator);
     }
 
+    public static Long[] toLongArray(final Collection<Long> collection) {
+        return collection.toArray(new Long[0]);
+    }
+
 }

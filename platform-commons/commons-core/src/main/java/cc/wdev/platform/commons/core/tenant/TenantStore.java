@@ -17,4 +17,8 @@ public interface TenantStore {
         return this.root();
     }
 
+    default Tenant findByDomain(String domain) {
+        return this.root();
+    }
+
 }

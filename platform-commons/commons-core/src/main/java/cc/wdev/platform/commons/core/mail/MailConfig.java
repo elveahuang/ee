@@ -18,6 +18,9 @@ import java.io.Serializable;
 public class MailConfig implements Serializable {
 
     @Builder.Default
+    private boolean enabled = true;
+
+    @Builder.Default
     private boolean auth = true;
 
     @Builder.Default

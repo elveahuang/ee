@@ -1,34 +1,46 @@
 package cc.wdev.platform.commons.ai.model.embedding;
 
 import cc.wdev.platform.commons.ai.config.ProviderConfig;
-import cc.wdev.platform.commons.ai.enums.ModelProvider;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
 import cc.wdev.platform.commons.ai.model.ModelConfig;
 import cc.wdev.platform.commons.ai.model.chat.ChatModelFactory;
 import cc.wdev.platform.commons.ai.model.config.SimpleModelConfig;
 import cc.wdev.platform.commons.utils.StringUtils;
-import lombok.RequiredArgsConstructor;
+import com.openai.client.OpenAIClient;
+import io.micrometer.observation.ObservationRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.MetadataMode;
+import org.springframework.ai.embedding.observation.EmbeddingModelObservationConvention;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.ai.openai.OpenAiEmbeddingOptions;
-import org.springframework.ai.openai.api.OpenAiApi;
-import org.springframework.ai.retry.RetryUtils;
+import org.springframework.ai.openai.setup.OpenAiSetup;
+import org.springframework.beans.factory.ObjectProvider;
 
 /**
  * @author elvea
  */
 @Slf4j
-@RequiredArgsConstructor
 public class OpenAiEmbeddingModelFactory extends AbstractEmbeddingModelFactory implements EmbeddingModelFactory {
 
-    private final ProviderConfig config;
+    private final ObjectProvider<ObservationRegistry> observationRegistry;
+    private final ObjectProvider<EmbeddingModelObservationConvention> observationConvention;
+
+    public OpenAiEmbeddingModelFactory(ProviderConfig config,
+                                       ObjectProvider<ObservationRegistry> observationRegistry,
+                                       ObjectProvider<EmbeddingModelObservationConvention> observationConvention
+    ) {
+        super(config);
+
+        this.observationRegistry = observationRegistry;
+        this.observationConvention = observationConvention;
+    }
 
     /**
-     * @see EmbeddingModelFactory#getModelProvider()
+     * @see EmbeddingModelFactory#getServiceProvider() ()
      */
     @Override
-    public ModelProvider getModelProvider() {
-        return ModelProvider.OPENAI;
+    public ServiceProvider getServiceProvider() {
+        return ServiceProvider.OPENAI;
     }
 
     /**
@@ -57,18 +69,30 @@ public class OpenAiEmbeddingModelFactory extends AbstractEmbeddingModelFactory i
      */
     @Override
     public OpenAiEmbeddingModel getModel(ModelConfig config) {
-        OpenAiApi openAiApi = OpenAiApi.builder()
-            .apiKey(System.getenv("OPENAI_API_KEY"))
-            .build();
+        MetadataMode metadataMode = MetadataMode.EMBED;
 
-        return new OpenAiEmbeddingModel(
-            openAiApi,
-            MetadataMode.EMBED,
-            OpenAiEmbeddingOptions.builder()
-                .model("text-embedding-ada-002")
-                .user("user-6")
-                .build(),
-            RetryUtils.DEFAULT_RETRY_TEMPLATE);
+        OpenAiEmbeddingOptions.Builder optionsBuilder = OpenAiEmbeddingOptions.builder();
+        if (StringUtils.isNotEmpty(config.getName())) {
+            optionsBuilder.model(config.getName());
+        } else {
+            optionsBuilder.model(OpenAiEmbeddingOptions.DEFAULT_EMBEDDING_MODEL);
+        }
+
+        OpenAiEmbeddingModel embeddingModel = new OpenAiEmbeddingModel(this.openAiClient(config),
+            metadataMode, optionsBuilder.build(),
+            observationRegistry.getIfUnique(() -> ObservationRegistry.NOOP));
+
+        observationConvention.ifAvailable(embeddingModel::setObservationConvention);
+
+        return embeddingModel;
+    }
+
+    private OpenAIClient openAiClient(ModelConfig config) {
+        return OpenAiSetup.setupSyncClient(config.getBaseUrl(), config.getApiKey(), null,
+            null, null,
+            null, false, false,
+            config.getName(), config.getTimeout(), config.getMaxRetries(), config.getProxy(),
+            config.getHeaders());
     }
 
 }

@@ -25,7 +25,7 @@ public class CourseElasticServiceTests extends BaseTests {
 
         this.courseElasticService.deleteAll();
 
-        List<String> books = List.of("三国演义", "高等数学", "四世同堂");
+        List<String> books = List.of("三国演义", "高等数学", "西方政治经济学");
         for (String book : books) {
             CourseElasticEntity entity = CourseElasticEntity.builder()
                 .title(book)

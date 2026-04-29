@@ -74,6 +74,10 @@ public interface GlobalConstants {
      *
      */
     String TENANT_ID_KEY = "x-tenant-id";
+    /**
+     *
+     */
+    String TENANT_ROOT_IND_KEY = "x-tenant-root-ind";
 
     /**
      *

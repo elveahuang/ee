@@ -33,7 +33,7 @@ public class DingTalkAutoConfiguration {
 
     @Bean("dingtalkCache")
     @ConditionalOnMissingBean(Cache.class)
-    public Cache larkCache(CacheService cacheService, DingTalkProperties properties) {
+    public Cache dingtalkCache(CacheService cacheService, DingTalkProperties properties) {
         return new DefaultCache(cacheService, properties.getCacheKeyPrefix());
     }
 

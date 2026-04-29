@@ -5,17 +5,19 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springBootCoreStarter)
-    implementation(rootProject.libs.bundles.springBootShellStarter)
+    implementation(libs.bundles.springBootCoreStarter)
+    implementation(libs.bundles.springBootShellStarter)
     implementation(project(":platform-commons:commons-javacv"))
 }
 
 tasks.register<Delete>("clearLibs") {
+    description = "清理依赖"
     delete(layout.buildDirectory.dir("libs/libs-internal"));
     delete(layout.buildDirectory.dir("libs/libs-external"));
 }
 
 tasks.register<Copy>("copyInternalLibs") {
+    description = "拷贝内部依赖"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     include("**/platform-*.jar")
@@ -23,6 +25,7 @@ tasks.register<Copy>("copyInternalLibs") {
 }
 
 tasks.register<Copy>("copyExternalLibs") {
+    description = "拷贝外部依赖"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     exclude("**/platform-*.jar")

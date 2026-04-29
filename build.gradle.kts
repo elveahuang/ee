@@ -29,6 +29,10 @@ allprojects {
         options.encoding = "UTF-8"
     }
 
+    tasks.withType<JavaCompile>().configureEach {
+        options.compilerArgs.add("-parameters")
+    }
+
     tasks.withType<Test> {
         useJUnitPlatform()
     }
@@ -55,6 +59,7 @@ allprojects {
             mavenBom(rootProject.libs.spring.cloud.bom.get().toString())
             mavenBom(rootProject.libs.spring.grpc.bom.get().toString())
             mavenBom(rootProject.libs.spring.shell.bom.get().toString())
+            mavenBom(rootProject.libs.spring.modulith.bom.get().toString())
             mavenBom(rootProject.libs.spring.swagger.bom.get().toString())
             mavenBom(rootProject.libs.spring.boot.admin.bom.get().toString())
             mavenBom(rootProject.libs.mybatis.plus.bom.get().toString())
@@ -66,9 +71,12 @@ allprojects {
             mavenBom(rootProject.libs.kotlin.bom.get().toString())
             mavenBom(rootProject.libs.jsonschema.generator.bom.get().toString())
             mavenBom(rootProject.libs.grpc.bom.get().toString())
+            mavenBom(rootProject.libs.okhttp.bom.get().toString())
+            mavenBom(rootProject.libs.retrofit.bom.get().toString())
             mavenBom(rootProject.libs.jackson.bom.get().toString())
             mavenBom(rootProject.libs.bouncycastle.bom.get().toString())
             mavenBom(rootProject.libs.embabel.agent.dependencies.get().toString())
+            mavenBom(rootProject.libs.agentscope.bom.get().toString())
         }
         dependencies {
             dependency(rootProject.libs.nimbus.jose.jwt.get().toString())
@@ -169,6 +177,7 @@ allprojects {
         exclude(module = "slf4j-log4j12")
         exclude(module = "slf4j-simple")
         exclude(module = "ehcache")
+        exclude(module = "poi-ooxml-lite")
         exclude(module = "poi-ooxml-schemas")
         exclude(module = "jaxb-api")
         exclude(module = "validation-api")
@@ -179,14 +188,13 @@ allprojects {
         exclude(module = "bcutil-jdk15on")
         exclude(module = "telegrambots-webhook")
         exclude(module = "shardingsphere-database-connector-h2")
-        exclude(module = "selenium-devtools-v143")
-        exclude(module = "selenium-devtools-v144")
+        exclude(module = "selenium-devtools-v145")
+        exclude(module = "selenium-devtools-v146")
         exclude(module = "selenium-firefox-driver")
         exclude(module = "selenium-safari-driver")
         exclude(module = "selenium-ie-driver")
         exclude(module = "kotlin-stdlib-jdk7")
         exclude(module = "kotlin-stdlib-jdk8")
-        exclude(module = "fesod-shaded")
     }
 }
 

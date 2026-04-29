@@ -1,28 +1,22 @@
 package cc.wdev.platform.commons.ai.utils;
 
 import cc.wdev.platform.commons.ai.AiConstants;
+import cc.wdev.platform.commons.ai.domain.AiContentVo;
 import cc.wdev.platform.commons.ai.domain.request.SimpleChatRequest;
-import cc.wdev.platform.commons.ai.domain.request.SimpleCompletionRequest;
-import cc.wdev.platform.commons.utils.CollectionUtils;
-import cc.wdev.platform.commons.utils.ObjectUtils;
-import cc.wdev.platform.commons.utils.SecurityUtils;
-import cc.wdev.platform.commons.utils.StringUtils;
-import com.google.common.collect.Maps;
-import org.apache.commons.compress.utils.Lists;
+import cc.wdev.platform.commons.ai.enums.AiContentType;
+import cc.wdev.platform.commons.utils.*;
+import org.apache.commons.collections4.MapUtils;
+import org.jspecify.annotations.Nullable;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.SystemMessage;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.messages.AbstractMessage;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.ChatOptions;
+import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.model.tool.ToolCallingChatOptions;
-import org.springframework.ai.support.ToolCallbacks;
-import org.springframework.ai.tool.ToolCallback;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import reactor.core.publisher.Flux;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
 
@@ -31,28 +25,52 @@ import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
  */
 public abstract class AiUtils {
 
+    public static AiContentVo STREAM_CONTENT_START = AiContentVo.builder().type(AiContentType.START.getValue()).build();
+
+    public static AiContentVo STREAM_CONTENT_END = AiContentVo.builder().type(AiContentType.END.getValue()).build();
+
+    public static AiContentVo STREAM_CONTENT_ERROR = AiContentVo.builder().type(AiContentType.ERROR.getValue()).build();
+
+    /**
+     * 生成新的对话ID
+     */
+    public static String generateConversationId() {
+        return StringUtils.uuid();
+    }
+
+    /**
+     * 处理提示词
+     */
+    public static String renderPrompt(String prompt, Map<String, Object> context) {
+        if (MapUtils.isNotEmpty(context)) {
+            PromptTemplate promptTemplate = PromptTemplate
+                .builder()
+                .template(prompt)
+                .variables(context)
+                .build();
+            return promptTemplate.render();
+        }
+        return prompt;
+    }
+
     // ------------------------------------------------------------------------------
-    // ChatModel
+    // Stream Content
     // ------------------------------------------------------------------------------
 
-    public static ChatResponse completion(ChatModel chatModel, SimpleCompletionRequest request) {
-        List<Message> messages = processCompletionMessages(request);
-        ChatOptions options = processCompletionOptions(request);
-        return completion(chatModel, new Prompt(messages, options));
+    public static String getStartContent() {
+        return GsonUtils.toJson(STREAM_CONTENT_START);
     }
 
-    public static ChatResponse completion(ChatModel chatModel, Prompt prompt) {
-        return chatModel.call(prompt);
+    public static String getEndContent() {
+        return GsonUtils.toJson(STREAM_CONTENT_END);
     }
 
-    public static String completionText(ChatModel chatModel, SimpleCompletionRequest request) {
-        List<Message> messages = processCompletionMessages(request);
-        ChatOptions options = processCompletionOptions(request);
-        return completionText(chatModel, new Prompt(messages, options));
+    public static String getErrorContent() {
+        return GsonUtils.toJson(STREAM_CONTENT_ERROR);
     }
 
-    public static String completionText(ChatModel chatModel, Prompt prompt) {
-        return chatModel.call(prompt).getResult().getOutput().getText();
+    public static String getTextContent(String text) {
+        return GsonUtils.toJson(AiContentVo.builder().type(AiContentType.TEXT.getValue()).content(text).build());
     }
 
     // ------------------------------------------------------------------------------
@@ -91,39 +109,6 @@ public abstract class AiUtils {
     // Utils
     // ------------------------------------------------------------------------------
 
-    public static List<Message> processCompletionMessages(SimpleCompletionRequest request) {
-        // 处理信息
-        List<Message> messages = Lists.newArrayList();
-        if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
-            messages.add(new SystemMessage(request.getSystemPrompt()));
-        }
-        if (CollectionUtils.isNotEmpty(request.getMessages())) {
-            messages.addAll(request.getMessages());
-        }
-        if (StringUtils.isNotEmpty(request.getPrompt())) {
-            messages.add(new UserMessage(request.getPrompt()));
-        }
-        return messages;
-    }
-
-    public static ChatOptions processCompletionOptions(SimpleCompletionRequest request) {
-        // 处理调用工具
-        ToolCallingChatOptions.Builder<?> builder = ToolCallingChatOptions.builder();
-        if (CollectionUtils.isNotEmpty(request.getTools())) {
-            ToolCallback[] toolCallbacks = ToolCallbacks.from(request.getTools());
-            builder.toolCallbacks(toolCallbacks);
-        }
-
-        // 处理工具上下文
-        if (CollectionUtils.isNotEmpty(request.getContextMap())) {
-            builder.toolContext(request.getContextMap());
-        } else {
-            builder.toolContext(Maps.newHashMap());
-        }
-
-        return builder.build();
-    }
-
     public static ChatClient.ChatClientRequestSpec processChatSpec(ChatClient chatClient, SimpleChatRequest request) {
         // userId
         if (!ObjectUtils.isValidId(request.getUserId())) {
@@ -140,12 +125,24 @@ public abstract class AiUtils {
                     u.metadata(AiConstants.CHAT_TYPE, request.getChatType());
                 }
             })
+            .toolContext(Map.of(AiConstants.METADATA_USER_ID, request.getUserId()))
             .advisors(a -> a.param(CONVERSATION_ID, StringUtils.nvl(request.getConversationId(), StringUtils.uuid())));
 
+        if (CollectionUtils.isNotEmpty(request.getToolNames())) {
+            spec = spec.toolNames(request.getToolNames().toArray(new String[0]));
+        }
         if (StringUtils.isNotEmpty(request.getSystemPrompt())) {
             spec = spec.system(request.getSystemPrompt());
         }
         return spec;
+    }
+
+    public static @Nullable String getChatResponseContent(ChatResponse chatResponse) {
+        return Optional.ofNullable(chatResponse)
+            .map(ChatResponse::getResult)
+            .map(Generation::getOutput)
+            .map(AbstractMessage::getText)
+            .orElse(null);
     }
 
 }

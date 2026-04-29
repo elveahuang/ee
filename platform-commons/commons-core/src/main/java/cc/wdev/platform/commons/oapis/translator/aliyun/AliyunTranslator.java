@@ -104,6 +104,7 @@ public class AliyunTranslator implements Translator {
                 case "ja", "jp" -> "ja";
                 case "fr" -> "fr";
                 case "kr", "ko" -> "ko";
+                case "vi", "vi_vn", "vn" -> "vi";
                 default -> language;
             };
         }

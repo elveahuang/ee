@@ -1,5 +1,7 @@
 package cc.wdev.platform.commons.message.socket.servlet.handler;
 
+import cc.wdev.platform.commons.core.tenant.TenantContext;
+import cc.wdev.platform.commons.message.session.UserSession;
 import cc.wdev.platform.commons.message.socket.servlet.ServletWebSocketManager;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
@@ -23,6 +25,8 @@ public abstract class AbstractWebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(@NonNull WebSocketSession session) {
         log.info("Connection Established sessionId: {}", session.getId());
         this.getWebSocketManager().createSession(session);
+        UserSession userSession = this.getWebSocketManager().getUserSession(session);
+        TenantContext.setTenantId(userSession.getTid());
     }
 
     /**
@@ -33,6 +37,7 @@ public abstract class AbstractWebSocketHandler extends TextWebSocketHandler {
                                       @NonNull CloseStatus status) {
         log.info("Connection Closed sessionId: {}", session.getId());
         this.getWebSocketManager().closeSession(session);
+        TenantContext.clear();
     }
 
     /**

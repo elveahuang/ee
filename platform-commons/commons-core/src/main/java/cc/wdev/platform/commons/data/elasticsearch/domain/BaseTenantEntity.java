@@ -19,6 +19,6 @@ public abstract class BaseTenantEntity extends BaseEntity {
     protected String tenantId;
 
     public void setTenantId(Long tenantId) {
-        this.tenantId = NumberUtils.convertToString(tenantId);
+        this.tenantId = NumberUtils.toString(tenantId);
     }
 }

@@ -198,6 +198,9 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void saveBatch(Collection<T> entityList, int batchSize) {
+        if (CollectionUtils.isEmpty(entityList)) {
+            return;
+        }
         CollectionUtils.toArrayList(this.getRepository().saveAll(entityList));
     }
 
@@ -222,9 +225,10 @@ public abstract class BaseEntityService<T extends IdEntity, K extends Serializab
      */
     @Override
     public void deleteBatch(Collection<T> entityList, int batchSize) {
-        if (CollectionUtils.isNotEmpty(entityList)) {
-            this.getRepository().deleteAll(entityList);
+        if (CollectionUtils.isEmpty(entityList)) {
+            return;
         }
+        this.getRepository().deleteAll(entityList);
     }
 
     /**

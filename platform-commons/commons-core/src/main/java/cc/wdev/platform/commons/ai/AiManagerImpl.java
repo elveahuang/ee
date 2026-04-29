@@ -1,10 +1,10 @@
 package cc.wdev.platform.commons.ai;
 
 import cc.wdev.platform.commons.ai.enums.ModelProvider;
+import cc.wdev.platform.commons.ai.enums.ServiceProvider;
 import cc.wdev.platform.commons.ai.model.ModelConfig;
 import cc.wdev.platform.commons.ai.model.ModelFactory;
 import cc.wdev.platform.commons.ai.model.chat.ChatModelFactory;
-import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.commons.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -12,6 +12,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -55,10 +56,7 @@ public class AiManagerImpl implements AiManager {
                 return null;
             })
             .filter(Objects::nonNull)
-            .filter(factory -> {
-                ModelProvider provider = BaseEnum.getEnumByValue(factory.getProviderId(), ModelProvider.class);
-                return provider != null && provider.isEnabled();
-            })
+            .filter(factory -> factory.getServiceProvider().isEnabled())
             .findFirst()
             .orElseThrow(() -> new SystemException("Unavailable provider."));
     }
@@ -68,12 +66,16 @@ public class AiManagerImpl implements AiManager {
      */
     @Override
     public ChatModelFactory getChatModelFactory(ModelConfig config) {
-        if (config.getProviderCode() == null) {
+        if (config.getServiceProvider() == null) {
+            throw new IllegalArgumentException("Model service provider code cannot be null");
+        }
+        if (config.getModelProvider() == null) {
             throw new IllegalArgumentException("Model provider code cannot be null");
         }
         if (config.getName() == null) {
             throw new IllegalArgumentException("Model name cannot be null");
         }
+
         for (ModelFactory<?> factory : factories) {
             if (factory instanceof ChatModelFactory chatModelFactory && chatModelFactory.supports(config)) {
                 return chatModelFactory;
@@ -115,15 +117,23 @@ public class AiManagerImpl implements AiManager {
     }
 
     /**
+     * @see AiManager#getAvailableServiceProviders()
+     */
+    public List<ServiceProvider> getAvailableServiceProviders() {
+        return this.factories.stream()
+            .map(ModelFactory::getServiceProvider)
+            .filter(ServiceProvider::isEnabled)
+            .collect(Collectors.toList());
+    }
+
+    /**
      * @see AiManager#getAvailableProviders()
      */
     public List<ModelProvider> getAvailableProviders() {
-        return this.factories.stream()
-            .filter(factory -> {
-                ModelProvider provider = BaseEnum.getEnumByValue(factory.getProviderId(), ModelProvider.class);
-                return provider != null && provider.isEnabled();
-            })
-            .map(factory -> BaseEnum.getEnumByValue(factory.getProviderId(), ModelProvider.class))
+        return Arrays.stream(ModelProvider.values())
+            .toList()
+            .stream()
+            .filter(provider -> provider != null && provider.isEnabled())
             .collect(Collectors.toList());
     }
 

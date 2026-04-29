@@ -5,46 +5,51 @@ plugins {
 }
 
 dependencies {
-    implementation(rootProject.libs.bundles.springAiCore)
-    implementation(rootProject.libs.bundles.springAiMcpStarter)
-    implementation(rootProject.libs.bundles.springBootCore)
-    implementation(rootProject.libs.bundles.springBootServletStarter)
-    implementation(rootProject.libs.bundles.springSecurityCore)
-    implementation(rootProject.libs.bundles.springSecurityCoreStarter)
-    implementation(rootProject.libs.bundles.springSecurityClientStarter)
-    implementation(rootProject.libs.bundles.springDocServletStarter)
-    implementation(rootProject.libs.bundles.redis)
-    implementation(rootProject.libs.bundles.redisStarter)
-    implementation(rootProject.libs.bundles.mybatis)
-    implementation(rootProject.libs.bundles.mybatisStarter)
-    implementation(rootProject.libs.bundles.hibernate)
-    implementation(rootProject.libs.bundles.hibernateStarter)
-    implementation(rootProject.libs.bundles.rabbit)
-    implementation(rootProject.libs.bundles.rabbitStarter)
-    implementation(rootProject.libs.bundles.elastic)
-    implementation(rootProject.libs.bundles.elasticStarter)
-    implementation(rootProject.libs.bundles.embabelAgentCore)
-    implementation(rootProject.libs.bundles.storage)
-    implementation(rootProject.libs.bundles.ip)
-    implementation(rootProject.libs.bundles.im)
-    implementation(rootProject.libs.bundles.ai)
-    implementation(rootProject.libs.bundles.pdf)
-    implementation(rootProject.libs.bundles.image)
-    implementation(rootProject.libs.bundles.logging)
-    implementation(rootProject.libs.bundles.selenium)
-    implementation(rootProject.libs.bundles.webjars)
-    developmentOnly(rootProject.libs.bundles.springBootDevtools)
+    implementation(libs.bundles.springAiCore)
+    implementation(libs.bundles.springAiBaseStarter)
+    implementation(libs.bundles.springAiMcpStarter)
+    implementation(libs.bundles.springBootCore)
+    implementation(libs.bundles.springBootServletStarter)
+    implementation(libs.bundles.springSecurityCore)
+    implementation(libs.bundles.springSecurityCoreStarter)
+    implementation(libs.bundles.springSecurityClientStarter)
+    implementation(libs.bundles.springDocServletStarter)
+    implementation(libs.bundles.redis)
+    implementation(libs.bundles.redisStarter)
+    implementation(libs.bundles.mybatis)
+    implementation(libs.bundles.mybatisStarter)
+    implementation(libs.bundles.hibernate)
+    implementation(libs.bundles.hibernateStarter)
+    implementation(libs.bundles.rabbit)
+    implementation(libs.bundles.rabbitStarter)
+    implementation(libs.bundles.elastic)
+    implementation(libs.bundles.elasticStarter)
+    implementation(libs.bundles.embabelAgentCore)
+    implementation(libs.bundles.agentScopeCore)
+    implementation(libs.bundles.agentScopeStarter)
+    implementation(libs.bundles.storage)
+    implementation(libs.bundles.ip)
+    implementation(libs.bundles.im)
+    implementation(libs.bundles.ai)
+    implementation(libs.bundles.pdf)
+    implementation(libs.bundles.image)
+    implementation(libs.bundles.logging)
+    implementation(libs.bundles.selenium)
+    implementation(libs.bundles.webjars)
+    developmentOnly(libs.bundles.springBootDevtools)
     // modules
     implementation(project(":platform-commons:commons-core-starter"))
     implementation(project(":platform-commons:commons-javacv"))
 }
 
 tasks.register<Delete>("clearLibs") {
+    description = "清理依赖"
     delete(layout.buildDirectory.dir("libs/libs-internal"));
     delete(layout.buildDirectory.dir("libs/libs-external"));
 }
 
 tasks.register<Copy>("copyInternalLibs") {
+    description = "拷贝内部依赖"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     include("**/platform-*.jar")
@@ -52,6 +57,7 @@ tasks.register<Copy>("copyInternalLibs") {
 }
 
 tasks.register<Copy>("copyExternalLibs") {
+    description = "拷贝外部依赖"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(configurations.runtimeClasspath)
     exclude("**/platform-*.jar")

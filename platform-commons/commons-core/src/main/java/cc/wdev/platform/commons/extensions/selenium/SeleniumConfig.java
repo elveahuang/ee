@@ -1,7 +1,7 @@
 package cc.wdev.platform.commons.extensions.selenium;
 
-import cc.wdev.platform.commons.core.http.HttpProxy;
 import cc.wdev.platform.commons.enums.SeleniumDriverTypeEnum;
+import cc.wdev.platform.commons.extensions.http.HttpProxy;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

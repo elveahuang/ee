@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.utils;
 
-import cc.wdev.platform.commons.utils.jackson.CustomJsonModule;
+import cc.wdev.platform.commons.extensions.sensitive.encrypt.SensitiveEncryptModule;
+import cc.wdev.platform.commons.utils.jackson.CommonModule;
 import lombok.Getter;
 import tools.jackson.core.json.JsonReadFeature;
 import tools.jackson.core.type.TypeReference;
@@ -26,7 +27,19 @@ public abstract class JacksonUtils {
 
     @Getter
     public final static JsonMapper objectMapper = JsonMapper.builder()
-        .addModule(new CustomJsonModule())
+        .addModule(new CommonModule())
+        .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
+        .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
+        .enable(JsonReadFeature.ALLOW_MISSING_VALUES)
+        .enable(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+        .build();
+
+    @Getter
+    public final static JsonMapper cacheObjectMapper = JsonMapper.builder()
+        .addModule(new CommonModule())
+        .addModule(new SensitiveEncryptModule())
         .enable(JsonReadFeature.ALLOW_UNQUOTED_PROPERTY_NAMES)
         .enable(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS)
         .enable(JsonReadFeature.ALLOW_MISSING_VALUES)

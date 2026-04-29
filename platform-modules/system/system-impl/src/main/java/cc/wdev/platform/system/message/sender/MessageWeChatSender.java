@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.message.sender;
 
-import cc.wdev.platform.commons.oapis.weixin.service.WeiXinMpService;
+import cc.wdev.platform.commons.oapis.weixin.service.WxMpManager;
 import cc.wdev.platform.commons.utils.ExceptionUtils;
 import cc.wdev.platform.commons.utils.GsonUtils;
 import cc.wdev.platform.system.message.domain.dto.SendMessageDto;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageWeChatSender implements MessageSender {
 
-    private WeiXinMpService weiXinMpService;
+    private WxMpManager wxMpManager;
 
     private MessageContentService messageContentService;
 
@@ -26,7 +26,7 @@ public class MessageWeChatSender implements MessageSender {
             log.info("Send wechat message. message id [{}]. message content id [{}]. start", message.getId(), message.getContentId());
 
             // 检查企微服务是否已经启动
-            if (this.weiXinMpService == null) {
+            if (this.wxMpManager == null) {
                 log.info("Send wechat message. message id [{}]. message content id [{}]. failed. wework is disabled. ", message.getId(), message.getContentId());
                 return;
             }
@@ -49,8 +49,8 @@ public class MessageWeChatSender implements MessageSender {
     }
 
     @Autowired(required = false)
-    public void setWeiXinMpService(WeiXinMpService weiXinMpService) {
-        this.weiXinMpService = weiXinMpService;
+    public void setWeiXinMpService(WxMpManager wxMpManager) {
+        this.wxMpManager = wxMpManager;
     }
 
     @Autowired

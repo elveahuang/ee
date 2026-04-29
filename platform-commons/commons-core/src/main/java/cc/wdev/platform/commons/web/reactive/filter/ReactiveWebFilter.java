@@ -35,11 +35,10 @@ public class ReactiveWebFilter implements WebFilter, Ordered {
             MdcContext.handleReactiveRequest(request, response);
             log.info("[ReactiveWebFilter] MDC Context {}. URL [{}]", MdcContext.getRequestId(), request.getPath());
 
-            // 初始化租户上下文
-            log.info("[ReactiveWebFilter] Init Tenant Context");
-            TenantContext.handleReactiveRequest(request, response);
-
-            ServerHttpRequest wr = exchange.getRequest().mutate().header(REQUEST_ID_KEY, MdcContext.getRequestId()).build();
+            ServerHttpRequest wr = exchange.getRequest()
+                .mutate()
+                .header(REQUEST_ID_KEY, MdcContext.getRequestId())
+                .build();
 
             final long startTime = System.currentTimeMillis();
             return chain.filter(exchange.mutate().request(wr).build()).doFinally(_ -> {
@@ -61,5 +60,4 @@ public class ReactiveWebFilter implements WebFilter, Ordered {
     public int getOrder() {
         return Ordered.HIGHEST_PRECEDENCE;
     }
-
 }
