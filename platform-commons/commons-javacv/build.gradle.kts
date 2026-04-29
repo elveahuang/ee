@@ -4,7 +4,7 @@ var tesseractVersion = "5.5.2-$javaCppVersion"
 var leptonicaVersion = "1.87.0-$javaCppVersion"
 
 plugins {
-    id("library-conventions")
+    id("java-library-conventions")
 }
 
 dependencies {

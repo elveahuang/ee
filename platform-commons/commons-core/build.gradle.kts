@@ -1,5 +1,5 @@
 plugins {
-    id("library-conventions")
+    id("java-library-conventions")
 }
 
 dependencies {
