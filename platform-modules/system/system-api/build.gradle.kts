@@ -1,3 +1,7 @@
+plugins {
+    id("library-conventions")
+}
+
 dependencies {
     // libs
     implementation(rootProject.libs.bundles.excel)

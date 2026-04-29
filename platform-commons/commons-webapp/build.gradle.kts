@@ -1,7 +1,7 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    alias(libs.plugins.spring.boot)
+    id("spring-boot-conventions")
 }
 
 dependencies {

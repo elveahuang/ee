@@ -1,3 +1,7 @@
+plugins {
+    id("library-conventions")
+}
+
 dependencies {
     // libs
     api(libs.bundles.springBootCore)
@@ -19,7 +23,6 @@ dependencies {
     compileOnly(libs.bundles.elasticStarter)
     compileOnly(libs.bundles.rabbit)
     compileOnly(libs.bundles.rabbitStarter)
-    compileOnly(libs.bundles.rabbit)
     compileOnly(libs.bundles.quartz)
     compileOnly(libs.bundles.quartzStarter)
     compileOnly(libs.bundles.websocket)

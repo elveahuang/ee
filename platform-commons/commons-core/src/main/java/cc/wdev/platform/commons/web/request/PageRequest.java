@@ -1,6 +1,5 @@
 package cc.wdev.platform.commons.web.request;
 
-import cc.wdev.platform.commons.data.jdbc.utils.JdbcUtils;
 import cc.wdev.platform.commons.utils.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -57,13 +56,4 @@ public class PageRequest extends Request {
             return org.springframework.data.domain.PageRequest.of(this.page - 1, size);
         }
     }
-
-    /**
-     * 转换成模糊搜索
-     */
-    @Schema(title = "模糊搜索", description = "模糊搜索字符")
-    public String getQLike() {
-        return JdbcUtils.generateLike(q);
-    }
-
 }

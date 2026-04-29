@@ -3,6 +3,10 @@ var ffmpegVersion = "8.0.1-$javaCppVersion"
 var tesseractVersion = "5.5.2-$javaCppVersion"
 var leptonicaVersion = "1.87.0-$javaCppVersion"
 
+plugins {
+    id("library-conventions")
+}
+
 dependencies {
     // javacv & javacpp
     api("org.bytedeco:javacv:$javaCppVersion") {

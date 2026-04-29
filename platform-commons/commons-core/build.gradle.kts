@@ -1,3 +1,7 @@
+plugins {
+    id("library-conventions")
+}
+
 dependencies {
     // libs
     api(libs.bundles.baseCommons)

@@ -3,6 +3,6 @@ import org.gradle.accessors.dm.LibrariesForLibs
 val libs = the<LibrariesForLibs>()
 
 plugins {
-    id("library-conventions")
-    id("org.springframework.boot")
+    id("spring-boot-conventions")
+    id("org.graalvm.buildtools.native")
 }

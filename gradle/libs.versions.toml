@@ -63,10 +63,10 @@ gradle-osdetector = { id = "com.google.osdetector", version.ref = "gradleOSDetec
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
 spring-ai-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiExtensionsVersion" }
 spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
-spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
-spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
-spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
-spring-shell-bom = { module = "org.springframework.shell:spring-shell-dependencies", version.ref = "springShellVersion" }
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBootVersion" }
+spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudVersion" }
+spring-grpc-dependencies = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "springGrpcVersion" }
+spring-shell-dependencies = { module = "org.springframework.shell:spring-shell-dependencies", version.ref = "springShellVersion" }
 spring-modulith-bom = { module = "org.springframework.modulith:spring-modulith-bom", version.ref = "springModulithVersion" }
 spring-swagger-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springDocVersion" }
 jsonschema-generator-bom = { module = "com.github.victools:jsonschema-generator-bom", version.ref = "jsonSchemaGeneratorVersion" }
@@ -282,7 +282,7 @@ tencentcloud-sdk-java-common = { module = "com.tencentcloudapi:tencentcloud-sdk-
 tencentcloud-sdk-java-sms = { module = "com.tencentcloudapi:tencentcloud-sdk-java-sms", version = "3.1.1445" }
 tencentcloud-sdk-java-hunyuan = { module = "com.tencentcloudapi:tencentcloud-sdk-java-hunyuan", version = "3.1.1422" }
 oapi-sdk = { module = "com.larksuite.oapi:oapi-sdk", version = "2.5.3" }
-openai-java = { module = "com.openai:openai-java", version = "4.32.0" }
+openai-java = { module = "com.openai:openai-java", version = "4.28.0" }
 volcengine-java-sdk = { module = "com.volcengine:volcengine-java-sdk-ark-runtime", version = "2.0.0" }
 telegrambots-client = { module = "org.telegram:telegrambots-client", version = "9.5.0" }
 telegrambots-abilities = { module = "org.telegram:telegrambots-abilities", version = "9.5.0" }
@@ -320,7 +320,6 @@ libreoffice-unoil = { module = "org.libreoffice:unoil", version = "26.2.2" }
 
 json = { module = "org.json:json", version = "20251224" }
 gson = { module = "com.google.code.gson:gson" }
-jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
 jackson-core = { module = "tools.jackson.core:jackson-core" }
 jackson-databind = { module = "tools.jackson.core:jackson-databind" }
 
@@ -416,7 +415,7 @@ image = ["imageio-core", "imageio-jpeg", "imageio-webp", "zxing-core", "zxing-ja
 hutool = ["hutool-core", "hutool-captcha", "hutool-dfa", "hutool-extra", "hutool-http"]
 excel = ["poi", "poi-ooxml", "poi-ooxml-full", "poi-scratchpad", "fesod-sheet"]
 http = ["okhttp", "okhttp-sse", "okhttp-jvm", "okhttp-logging-interceptor", "hc"]
-json = ["jackson-annotations", "jackson-core", "jackson-databind", "gson", "json"]
+json = ["jackson-core", "jackson-databind", "gson", "json"]
 logging = ["logback-logstash-encoder", "logback-loki-appender"]
 ai = ["openai-java", "dashscope-sdk-java", "volcengine-java-sdk", "tencentcloud-sdk-java-common", "tencentcloud-sdk-java-hunyuan"]
 webjars = ["webjars-core", "webjars-jquery", "webjars-bootstrap", "webjars-bootstrap-icons", "webjars-popper-js"]

@@ -9,6 +9,16 @@ pluginManagement {
         maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public") }
     }
 }
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public") }
+    }
+}
+
 rootProject.name = "ee"
 // -----------------------------------------------------------------------
 // 公共模块
