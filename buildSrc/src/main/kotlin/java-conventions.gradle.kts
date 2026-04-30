@@ -32,10 +32,10 @@ tasks.named<Test>("test") {
 
 dependencyManagement {
     imports {
+        mavenBom(libs.spring.boot.dependencies.get().toString())
         mavenBom(libs.spring.ai.bom.get().toString())
         mavenBom(libs.spring.ai.extensions.bom.get().toString())
         mavenBom(libs.spring.ai.alibaba.bom.get().toString())
-        mavenBom(libs.spring.boot.dependencies.get().toString())
         mavenBom(libs.spring.cloud.dependencies.get().toString())
         mavenBom(libs.spring.grpc.dependencies.get().toString())
         mavenBom(libs.spring.shell.dependencies.get().toString())
@@ -58,24 +58,14 @@ dependencyManagement {
         mavenBom(libs.embabel.agent.dependencies.get().toString())
         mavenBom(libs.agentscope.bom.get().toString())
     }
-    dependencies {
-        dependency(libs.nimbus.jose.jwt.get().toString())
-        dependency(libs.oauth2.oidc.sdk.get().toString())
-        dependency(libs.asm.get().toString())
-        dependency(libs.commons.csv.get().toString())
-        dependency(libs.commons.lang.get().toString())
-        dependency(libs.commons.text.get().toString())
-        dependency(libs.commons.codec.get().toString())
-        dependency(libs.commons.pool.get().toString())
-        dependency(libs.commons.beanutils.get().toString())
-        dependency(libs.objenesis.get().toString())
-        dependency(libs.guava.get().toString())
-        dependency(libs.json.get().toString())
-        dependency(libs.spotbugs.annotations.get().toString())
-        dependency(libs.httpcore.get().toString())
-        dependency(libs.httpclient.get().toString())
-        dependency(libs.httpmime.get().toString())
-    }
+}
+
+dependencies {
+    implementation(libs.bundles.baseCore)
+    compileOnly(libs.bundles.baseJakartaCompile)
+    testImplementation(libs.bundles.baseTest)
+    annotationProcessor(libs.bundles.baseAnnotationProcessor)
+    testAnnotationProcessor(libs.bundles.baseAnnotationProcessor)
 }
 
 configurations.configureEach {
@@ -117,6 +107,9 @@ configurations.configureEach {
         if (requested.group == "org.apache.poi") {
             useVersion(libs.versions.poiVersion.get())
         }
+        if (requested.group == "io.opentelemetry") {
+            useVersion(libs.versions.opentelemetryVersion.get())
+        }
         if (requested.module.toString() == "com.google.errorprone:error_prone_annotations") {
             useVersion(libs.versions.errorProneAnnotationsVersion.get())
         }
@@ -137,6 +130,56 @@ configurations.configureEach {
         }
         if (requested.module.toString() == "io.opentelemetry.semconv:opentelemetry-semconv") {
             useVersion(libs.versions.opentelemetrySemconvVersion.get())
+        }
+        if (requested.module.toString() == "org.ow2.asm:asm") {
+            useVersion(libs.versions.asmVersion.get())
+        }
+        if (requested.module.toString() == "org.objenesis:objenesis") {
+            useVersion(libs.versions.objenesisVersion.get())
+        }
+        // commons
+        if (requested.module.toString() == "commons-codec:commons-codec") {
+            useVersion(libs.versions.commonsCodecVersion.get())
+        }
+        if (requested.module.toString() == "org.apache.commons:commons-pool2") {
+            useVersion(libs.versions.commonsPoolVersion.get())
+        }
+        if (requested.module.toString() == "org.apache.commons:commons-lang3") {
+            useVersion(libs.versions.commonsLangVersion.get())
+        }
+        // httpcomponents
+        if (requested.module.toString() == "org.apache.httpcomponents:httpcore") {
+            useVersion("4.4.16")
+        }
+        if (requested.module.toString() == "org.apache.httpcomponents:httpclient") {
+            useVersion("4.5.14")
+        }
+        if (requested.module.toString() == "org.apache.httpcomponents:httpmime") {
+            useVersion("4.5.14")
+        }
+        // bytebuddy
+        if (requested.module.toString() == "net.bytebuddy:byte-buddy") {
+            useVersion("1.18.7")
+        }
+        if (requested.module.toString() == "net.bytebuddy:byte-buddy-agent") {
+            useVersion("1.18.7")
+        }
+        // jna
+        if (requested.module.toString() == "net.java.dev.jna:jna") {
+            useVersion("5.17.0")
+        }
+        if (requested.module.toString() == "net.java.dev.jna:jna-platform") {
+            useVersion("5.17.0")
+        }
+        // aliyun
+        if (requested.module.toString() == "com.aliyun:tea") {
+            useVersion("1.4.1")
+        }
+        if (requested.module.toString() == "com.aliyun:tea-openapi") {
+            useVersion("0.3.12")
+        }
+        if (requested.module.toString() == "com.aliyun:tea-util") {
+            useVersion("0.2.26")
         }
     }
 
@@ -175,12 +218,4 @@ configurations.configureEach {
     exclude(module = "selenium-ie-driver")
     exclude(module = "kotlin-stdlib-jdk7")
     exclude(module = "kotlin-stdlib-jdk8")
-}
-
-dependencies {
-    implementation(libs.bundles.baseCore)
-    compileOnly(libs.bundles.baseJakartaCompile)
-    testImplementation(libs.bundles.baseTest)
-    annotationProcessor(libs.bundles.baseAnnotationProcessor)
-    testAnnotationProcessor(libs.bundles.baseAnnotationProcessor)
 }

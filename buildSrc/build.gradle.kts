@@ -15,8 +15,18 @@ dependencies {
     // https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 
-    // 插件必须在这里定义好依赖，否则在脚本里面会找不到插件
-    implementation("io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:${libs.versions.springDependencyManagementVersion.get()}")
-    implementation("org.springframework.boot:org.springframework.boot.gradle.plugin:${libs.versions.springBootVersion.get()}")
-    implementation("org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:${libs.versions.gradleNativeVersion.get()}")
+    // dependencies
+    implementation(platform(libs.spring.boot.dependencies.get().toString()))
+    implementation(platform(libs.kotlin.bom.get().toString()))
+    implementation(libs.annotations.get().toString())
+    implementation(libs.commons.io.get().toString())
+    implementation(libs.commons.codec.get().toString())
+    implementation(libs.commons.compress.get().toString())
+    implementation(libs.commons.lang.get().toString())
+    implementation(libs.commons.pool.get().toString())
+    // plugins
+    implementation(libs.spring.dependency.management)
+    implementation(libs.spring.boot.gradle.plugin)
+    implementation(libs.graalvm.native.gradle.plugin)
+    implementation(libs.spotbugs.gradle.plugin)
 }

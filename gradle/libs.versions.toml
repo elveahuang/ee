@@ -40,26 +40,44 @@ poiVersion = "5.5.1"
 luceneVersion = "10.4.0"
 javaJwtVersion = "4.5.1"
 jsoupVersion = "1.22.2"
+asmVersion = "9.9.1"
+objenesisVersion = "3.5"
 antlr3Runtime = "3.5.3"
 antlr4Runtime = "4.13.2"
 swaggerVersion = "2.2.48"
 bouncycastleVersion = "1.84"
+opentelemetryVersion = "1.60.1"
+micrometerVersion = "1.16.5"
 opentelemetrySemconvVersion = "1.40.0"
 errorProneAnnotationsVersion = "2.49.0"
 checkerQualVersion = "3.55.1"
 jsonSchemaGeneratorVersion = "5.0.0"
 gradleSpotbugsVersion = "6.4.8"
 gradleNativeVersion = "1.1.0"
-gradleOSDetectorVersion = "1.7.3"
+commonsIoVersion = "2.21.0"
+commonsNetVersion = "3.13.0"
+commonsCodecVersion = "1.21.0"
+commonsLoggingVersion = "1.3.6"
+commonsBeanutilsVersion = "1.11.0"
+commonsPoolVersion = "2.13.1"
+commonsCsvVersion = "1.14.1"
+commonsTextVersion = "1.15.0"
+commonsLangVersion = "3.20.0"
+commonsCompressVersion = "1.28.0"
+commonsCollectionsVersion = "4.5.0"
 
 [plugins]
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagementVersion" }
 spring-boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
 gradle-spotbugs = { id = "com.github.spotbugs", version.ref = "gradleSpotbugsVersion" }
 gradle-native = { id = "org.graalvm.buildtools.native", version.ref = "gradleNativeVersion" }
-gradle-osdetector = { id = "com.google.osdetector", version.ref = "gradleOSDetectorVersion" }
 
 [libraries]
+spring-dependency-management = { module = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin", version.ref = "springDependencyManagementVersion" }
+spring-boot-gradle-plugin = { module = "org.springframework.boot:org.springframework.boot.gradle.plugin", version.ref = "springBootVersion" }
+graalvm-native-gradle-plugin = { module = "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin", version.ref = "gradleNativeVersion" }
+spotbugs-gradle-plugin = { module = "com.github.spotbugs:com.github.spotbugs.gradle.plugin", version.ref = "gradleSpotbugsVersion" }
+
 spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "springAiVersion" }
 spring-ai-extensions-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-extensions-bom", version.ref = "springAiExtensionsVersion" }
 spring-ai-alibaba-bom = { module = "com.alibaba.cloud.ai:spring-ai-alibaba-bom", version.ref = "springAiAlibabaVersion" }
@@ -80,6 +98,8 @@ jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jacksonVers
 bouncycastle-bom = { module = "org.bouncycastle:bc-jdk18on-bom", version.ref = "bouncycastleVersion" }
 embabel-agent-dependencies = { module = "com.embabel.agent:embabel-agent-dependencies", version.ref = "embabelAgentVersion" }
 agentscope-bom = { module = "io.agentscope:agentscope-bom", version.ref = "agentScopeVersion" }
+opentelemetry-bom = { module = "io.opentelemetry:opentelemetry-bom", version.ref = "opentelemetryVersion" }
+micrometer-bom = { module = "io.micrometer:micrometer-bom", version.ref = "micrometerVersion" }
 
 # Spring
 spring-tx = { module = "org.springframework:spring-tx" }
@@ -297,17 +317,17 @@ jakarta-json-bind = { module = "jakarta.json.bind:jakarta.json.bind-api" }
 jakarta-websocket = { module = "jakarta.websocket:jakarta.websocket-api" }
 jakarta-transaction = { module = "jakarta.transaction:jakarta.transaction-api" }
 
-commons-io = { module = "commons-io:commons-io", version = "2.21.0" }
-commons-net = { module = "commons-net:commons-net", version = "3.13.0" }
-commons-codec = { module = "commons-codec:commons-codec", version = "1.21.0" }
-commons-logging = { module = "commons-logging:commons-logging", version = "1.3.6" }
-commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.11.0" }
-commons-pool = { module = "org.apache.commons:commons-pool2", version = "2.13.1" }
-commons-csv = { module = "org.apache.commons:commons-csv", version = "1.14.1" }
-commons-text = { module = "org.apache.commons:commons-text", version = "1.15.0" }
-commons-lang = { module = "org.apache.commons:commons-lang3", version = "3.20.0" }
-commons-compress = { module = "org.apache.commons:commons-compress", version = "1.28.0" }
-commons-collections = { module = "org.apache.commons:commons-collections4", version = "4.5.0" }
+commons-io = { module = "commons-io:commons-io", version.ref = "commonsIoVersion" }
+commons-net = { module = "commons-net:commons-net", version.ref = "commonsNetVersion" }
+commons-codec = { module = "commons-codec:commons-codec", version.ref = "commonsCodecVersion" }
+commons-logging = { module = "commons-logging:commons-logging", version.ref = "commonsLoggingVersion" }
+commons-beanutils = { module = "commons-beanutils:commons-beanutils", version.ref = "commonsBeanutilsVersion" }
+commons-pool = { module = "org.apache.commons:commons-pool2", version.ref = "commonsPoolVersion" }
+commons-csv = { module = "org.apache.commons:commons-csv", version.ref = "commonsCsvVersion" }
+commons-text = { module = "org.apache.commons:commons-text", version.ref = "commonsTextVersion" }
+commons-lang = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLangVersion" }
+commons-compress = { module = "org.apache.commons:commons-compress", version.ref = "commonsCompressVersion" }
+commons-collections = { module = "org.apache.commons:commons-collections4", version.ref = "commonsCollectionsVersion" }
 
 jodconverter-local = { module = "org.jodconverter:jodconverter-local", version = "4.4.11" }
 jodconverter-local-lo = { module = "org.jodconverter:jodconverter-local-lo", version = "4.4.11" }
@@ -336,11 +356,6 @@ okhttp-jvm = { module = "com.squareup.okhttp3:okhttp-jvm" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 hc = { module = "org.apache.httpcomponents.client5:httpclient5" }
 
-# HttpComponents
-httpcore = { module = "org.apache.httpcomponents:httpcore", version = "4.4.16" }
-httpclient = { module = "org.apache.httpcomponents:httpclient", version = "4.5.14" }
-httpmime = { module = "org.apache.httpcomponents:httpmime", version = "4.5.14" }
-
 # Job
 quartz = { module = "org.quartz-scheduler:quartz" }
 quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
@@ -349,14 +364,12 @@ quartz-jobs = { module = "org.quartz-scheduler:quartz-jobs" }
 slf4j-api = { module = "org.slf4j:slf4j-api" }
 aspectjweaver = { module = "org.aspectj:aspectjweaver" }
 ognl = { module = "ognl:ognl", version = "3.4.11" }
-asm = { module = "org.ow2.asm:asm", version = "9.9.1" }
-dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoupVersion" }
+dom4j = { module = "org.dom4j:dom4j", version = "2.2.0" }
 okio = { module = "com.squareup.okio:okio", version = "3.17.0" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 geoip = { module = "com.maxmind.geoip2:geoip2", version = "5.0.2" }
 pinyin4j = { module = "com.belerweb:pinyin4j", version = "2.5.1" }
-objenesis = { module = "org.objenesis:objenesis", version = "3.5" }
 ip2region = { module = "org.lionsoul:ip2region", version = "3.3.7" }
 guava = { module = "com.google.guava:guava", version = "33.6.0-jre" }
 annotations = { module = "org.jetbrains:annotations", version = "26.1.0" }
@@ -397,7 +410,7 @@ webjars-bootstrap-icons = { module = "org.webjars.npm:bootstrap-icons", version 
 
 [bundles]
 baseCore = ["mapstruct", "lombok"]
-baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt", "asm", "ognl", "aspectjweaver", "thymeleaf", "okio", "dom4j", "hibernate-validator-core"]
+baseCommons = ["slf4j-api", "guava", "jspecify", "annotations", "nimbus-jose-jwt", "ognl", "aspectjweaver", "thymeleaf", "okio", "dom4j", "hibernate-validator-core"]
 baseApacheCommons = ["commons-logging", "commons-io", "commons-codec", "commons-compress", "commons-text", "commons-pool", "commons-beanutils", "commons-lang", "commons-collections", "commons-net", "commons-csv"]
 baseTest = ["spring-security-test", "spring-boot-starter-test", "junit-jupiter-api", "junit-jupiter-engine", "jakarta-servlet"]
 baseAnnotationProcessor = ["lombok-mapstruct-binding", "mapstruct-processor", "lombok", "hibernate-processor", "hibernate-validator-processor"]
