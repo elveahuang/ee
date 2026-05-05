@@ -1,0 +1,134 @@
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Config
+### --------------------------------------------------------------------------------------------------------------------
+spring:
+    security:
+        user:
+            name: admin
+            password: admin
+    datasource:
+        name: master
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/ee_sample?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 11
+            password: redis
+    rabbitmq:
+        host: localhost
+        port: 5672
+        virtual-host: webapp
+        username: admin
+        password: admin
+        publisher-confirm-type: correlated
+        publisher-returns: true
+        listener:
+            simple:
+                acknowledge-mode: auto
+                retry:
+                    enabled: true
+                default-requeue-rejected: true
+    elasticsearch:
+        uris: http://localhost:9200
+        username: elastic
+        password: elastic
+    ai:
+        mcp:
+            server:
+                enabled: true
+                name: webapp-mcp-server
+                version: 1.0.0
+                type: sync
+                protocol: streamable
+                streamable-http:
+                    mcp-endpoint: /api/mcp
+                    keep-alive-interval: 30s
+### --------------------------------------------------------------------------------------------------------------------
+### Spring Extension Config
+### --------------------------------------------------------------------------------------------------------------------
+springdoc:
+    api-docs:
+        enabled: true
+    swagger-ui:
+        enabled: true
+cosid:
+    enabled: true
+    namespace: ${spring.application.name}
+    machine:
+        enabled: true
+        distributor:
+            type: manual
+            manual:
+                machine-id: 1
+        guarder:
+            enabled: true
+    snowflake:
+        enabled: true
+        epoch: 1672502400000
+### --------------------------------------------------------------------------------------------------------------------
+### Platform Config
+### --------------------------------------------------------------------------------------------------------------------
+platform:
+    cache:
+        enabled: true
+    tenancy:
+        enabled: true
+    ai:
+        enabled: true
+        providers:
+            deepseek:
+                enabled: true
+                api-key: sk-6b918ebf6d574ccbb34c128d9cf514ea
+                models:
+                    chat: deepseek-chat
+            openai:
+                enabled: true
+                api-key: xxx
+                models:
+                    chat: xxx
+                    image: xxx
+                    embedding: xxx
+                    transcription: xxx
+            aliyun:
+                enabled: true
+                api-key: xxx
+            tencent:
+                enabled: true
+                api-key: xxx
+    data:
+        core:
+            enabled: true
+        jpa:
+            enabled: true
+        mybatis:
+            enabled: true
+    ip:
+        enabled: true
+        geo-lite:
+            path: GeoLite2-City.mmdb
+        ip2region:
+            path: ip2region.xdb
+    storage:
+        enabled: true
+        type: aws
+        aws:
+            enabled: false
+            access-key:
+            secret-key:
+            endpoint:
+            bucket:
+            region:
+            path-style-enabled: false
+            chunked-encoding-enabled: false
+        oss:
+            enabled: false
+            access-key-id:
+            access-key-secret:
+            endpoint:
+            bucket:
+            region:
