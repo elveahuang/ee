@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.security.user;
+package cc.wdev.platform.commons.security.domain;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.commons.enums.SocialTypeEnum;

@@ -1,9 +1,9 @@
 package cc.wdev.platform.security.core.service;
 
 import cc.wdev.platform.commons.enums.MobileCountryCodeTypeEnum;
-import cc.wdev.platform.commons.security.user.OtpUser;
-import cc.wdev.platform.commons.security.user.SocialUser;
-import cc.wdev.platform.commons.security.user.User;
+import cc.wdev.platform.commons.security.domain.OtpUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
+import cc.wdev.platform.commons.security.domain.User;
 import cc.wdev.platform.commons.utils.RegexUtils;
 import cc.wdev.platform.system.core.api.AccountApi;
 import cc.wdev.platform.system.core.domain.dto.AccountLoginDto;

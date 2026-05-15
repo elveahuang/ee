@@ -1,6 +1,6 @@
 package cc.wdev.platform.security.core;
 
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 import cc.wdev.platform.security.core.service.CustomUserDetailsService;
 import cc.wdev.platform.system.core.api.SocialApi;
 import lombok.extern.slf4j.Slf4j;

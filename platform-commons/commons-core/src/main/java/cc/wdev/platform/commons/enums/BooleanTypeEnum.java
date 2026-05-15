@@ -3,6 +3,8 @@ package cc.wdev.platform.commons.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Objects;
+
 /**
  * 发布状态类型
  *
@@ -20,6 +22,13 @@ public enum BooleanTypeEnum implements BaseEnum<Integer> {
 
     public static BooleanTypeEnum getByValue(Integer value) {
         if (TRUE.getValue().intValue() == value) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    public static BooleanTypeEnum getByBoolValue(Boolean boolValue) {
+        if (Objects.equals(TRUE.getBoolValue(), boolValue)) {
             return TRUE;
         }
         return FALSE;

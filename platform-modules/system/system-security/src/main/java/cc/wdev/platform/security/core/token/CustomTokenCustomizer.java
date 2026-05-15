@@ -1,7 +1,7 @@
 package cc.wdev.platform.security.core.token;
 
 import cc.wdev.platform.commons.constants.SecurityConstants;
-import cc.wdev.platform.commons.security.user.User;
+import cc.wdev.platform.commons.security.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;

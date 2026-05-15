@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.commons.enums.CaptchaTypeEnum;
 import cc.wdev.platform.commons.enums.OtpTypeEnum;
 import cc.wdev.platform.commons.extensions.captcha.request.CaptchaCheckRequest;
-import cc.wdev.platform.commons.security.user.OtpUser;
+import cc.wdev.platform.commons.security.domain.OtpUser;
 import cc.wdev.platform.security.core.service.CustomUserDetailsService;
 import cc.wdev.platform.system.commons.enums.ConfigBizTypeEnum;
 import cc.wdev.platform.system.core.api.CaptchaApi;

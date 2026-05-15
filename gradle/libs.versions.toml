@@ -1,7 +1,7 @@
 [versions]
-springAiVersion = "2.0.0-M5"
+springAiVersion = "2.0.0-M6"
 springAiAlibabaVersion = "1.1.2.2"
-springAiExtensionsVersion = "1.1.2.2"
+springAiExtensionsVersion = "2.0.0-M1.1"
 springAiAgentUtilsVersion = "0.7.0"
 springAiToolSearchToolVersion = "2.1.0"
 springMcpSecurityVersion = "0.1.8"
@@ -438,7 +438,7 @@ swagger = ["swagger-annotations-jakarta", "swagger-models-jakarta"]
 springCore = ["spring-aop", "spring-context", "spring-tx", "spring-web", "spring-webmvc", "spring-data-commons", "spring-data-jpa", "spring-data-relational", "spring-cloud-commons", "spring-ai-model", "spring-ai-client-chat"]
 springBootDevtools = ["spring-boot-devtools"]
 springBootAnnotationProcessor = ["spring-boot-configuration-processor"]
-springBootCore = ["spring-boot", "spring-boot-autoconfigure", "feign-core"]
+springBootCore = ["spring-boot", "spring-boot-autoconfigure", "feign-core", "spring-security-core"]
 springBootCoreStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter"]
 springBootServletStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webmvc"]
 springBootReactiveStarter = ["spring-boot-starter-aspectj", "spring-boot-starter-actuator", "spring-boot-starter-thymeleaf", "spring-boot-starter-mail", "spring-boot-starter-validation", "spring-boot-starter-jackson", "spring-boot-starter-webflux"]

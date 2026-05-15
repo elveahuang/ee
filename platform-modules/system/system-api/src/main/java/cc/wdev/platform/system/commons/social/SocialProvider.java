@@ -1,6 +1,6 @@
 package cc.wdev.platform.system.commons.social;
 
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 
 import java.util.Map;
 

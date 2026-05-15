@@ -1,4 +1,4 @@
-package cc.wdev.platform.commons.security.user;
+package cc.wdev.platform.commons.security.domain;
 
 import com.google.common.collect.Maps;
 import lombok.Getter;
@@ -30,6 +30,8 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
 
     private final Set<GrantedAuthority> authorities;
 
+    private final Set<Role> roles;
+
     private final boolean enabled;
 
     private final boolean accountNonExpired;
@@ -40,22 +42,23 @@ public class User implements UserDetails, OAuth2AuthenticatedPrincipal, Serializ
 
     public User(Long id, String username, String password,
                 Set<GrantedAuthority> authorities) {
-        this(0L, id, username, password, authorities, true, true, true, true);
+        this(0L, id, username, password, authorities, Collections.emptySet(), true, true, true, true);
     }
 
     public User(Long tenantId, Long id, String username, String password,
-                Set<GrantedAuthority> authorities) {
-        this(tenantId, id, username, password, authorities, true, true, true, true);
+                Set<GrantedAuthority> authorities, Set<Role> roles) {
+        this(tenantId, id, username, password, authorities, roles, true, true, true, true);
     }
 
     public User(Long tenantId, Long id, String username, String password,
-                Set<GrantedAuthority> authorities,
+                Set<GrantedAuthority> authorities, Set<Role> roles,
                 boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired) {
         this.id = id;
         this.tenantId = tenantId;
         this.password = password;
         this.username = username;
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
+        this.roles = Collections.unmodifiableSet(roles);
         this.enabled = enabled;
         this.accountNonExpired = accountNonExpired;
         this.accountNonLocked = accountNonLocked;

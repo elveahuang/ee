@@ -11,11 +11,15 @@ import cc.wdev.platform.commons.utils.ServletUtils;
 import cc.wdev.platform.commons.utils.mdc.MdcContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.StopWatch;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * @author elvea
@@ -24,11 +28,14 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public record OperationLogAspect(LogStore store, LogConfig config) {
 
+    private static final ThreadLocal<StopWatch> stopWatchHolder = new ThreadLocal<>();
+
     /**
      * 执行前
      */
     @Before(value = "@annotation(operationLog)")
     public void boBefore(JoinPoint point, OperationLog operationLog) {
+        stopWatchHolder.set(StopWatch.createStarted());
         MdcContext.handleAspect();
     }
 
@@ -50,6 +57,10 @@ public record OperationLogAspect(LogStore store, LogConfig config) {
 
     private void outputLog(JoinPoint joinPoint, OperationLog operationLog, Throwable e, Object result) {
         try {
+            // 获取执行时间
+            StopWatch stopWatch = stopWatchHolder.get();
+            stopWatch.stop();
+
             HttpServletRequest request = ServletUtils.getRequest();
 
             OperationLogDto dto = OperationLogDto.builder()
@@ -65,11 +76,16 @@ public record OperationLogAspect(LogStore store, LogConfig config) {
                 .requestHeaders(ServletUtils.getHeaderAsJson(request))
                 .exception(e != null ? ExceptionUtils.getStackTraceAsString(e) : "")
                 .details(operationLog.value())
+                .startTime(LocalDateTime.ofInstant(stopWatch.getStartInstant(), ZoneId.systemDefault()))
+                .endTime(LocalDateTime.ofInstant(stopWatch.getStopInstant(), ZoneId.systemDefault()))
+                .execTime(stopWatch.getNanoTime())
                 .build();
 
             store.saveOperationLog(dto);
         } catch (Exception ex) {
             log.error("Failed to save operation log", ex);
+        } finally {
+            stopWatchHolder.remove();
         }
     }
 

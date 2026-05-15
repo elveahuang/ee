@@ -4,7 +4,7 @@ import cc.wdev.platform.commons.enums.LangTypeEnum;
 import cc.wdev.platform.commons.enums.SocialTypeEnum;
 import cc.wdev.platform.commons.oapis.weixin.service.WxMpManager;
 import cc.wdev.platform.commons.security.CustomParameterNames;
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;

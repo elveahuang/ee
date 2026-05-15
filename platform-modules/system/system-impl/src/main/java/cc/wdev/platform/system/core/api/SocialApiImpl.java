@@ -2,7 +2,7 @@ package cc.wdev.platform.system.core.api;
 
 import cc.wdev.platform.commons.enums.BaseEnum;
 import cc.wdev.platform.commons.enums.SocialTypeEnum;
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 import cc.wdev.platform.commons.utils.SpringUtils;
 import cc.wdev.platform.system.commons.social.SocialProvider;
 import cc.wdev.platform.system.commons.social.WxMpSocialProvider;

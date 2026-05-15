@@ -1,7 +1,7 @@
 package cc.wdev.platform.system.commons.social;
 
 import cc.wdev.platform.commons.oapis.weixin.service.WxCpManager;
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Component;

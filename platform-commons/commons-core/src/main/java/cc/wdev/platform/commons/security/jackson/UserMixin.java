@@ -1,6 +1,7 @@
 package cc.wdev.platform.commons.security.jackson;
 
-import cc.wdev.platform.commons.security.user.User;
+import cc.wdev.platform.commons.security.domain.Role;
+import cc.wdev.platform.commons.security.domain.User;
 import cc.wdev.platform.commons.utils.JacksonUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -31,6 +32,8 @@ class UserDeserializer extends ValueDeserializer<User> {
 
     private static final TypeReference<Set<GrantedAuthority>> GRANTED_AUTHORITY_SET = new TypeReference<>() {
     };
+    private static final TypeReference<Set<Role>> ROLE_SET = new TypeReference<>() {
+    };
 
     @Override
     public User deserialize(JsonParser parser, DeserializationContext context) {
@@ -45,10 +48,11 @@ class UserDeserializer extends ValueDeserializer<User> {
         String password = JacksonUtils.findStringValue(root, "password");
         boolean enabled = JacksonUtils.findBooleanValue(root, "enabled");
         Set<GrantedAuthority> authorities = JacksonUtils.findValue(root, "authorities", GRANTED_AUTHORITY_SET, context);
+        Set<Role> roles = JacksonUtils.findValue(root, "roles", ROLE_SET, context);
         boolean accountNonExpired = JacksonUtils.findBooleanValue(root, "accountNonExpired");
         boolean credentialsNonExpired = JacksonUtils.findBooleanValue(root, "credentialsNonExpired");
         boolean accountNonLocked = JacksonUtils.findBooleanValue(root, "accountNonLocked");
-        return new User(tid, uid, username, password, authorities, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
+        return new User(tid, uid, username, password, authorities, roles, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired);
     }
 
 }

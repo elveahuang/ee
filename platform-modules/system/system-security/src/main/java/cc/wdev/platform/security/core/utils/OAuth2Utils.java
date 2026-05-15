@@ -1,8 +1,8 @@
 package cc.wdev.platform.security.core.utils;
 
+import cc.wdev.platform.commons.security.domain.User;
 import cc.wdev.platform.commons.security.jackson.LongMixin;
 import cc.wdev.platform.commons.security.jackson.UserMixin;
-import cc.wdev.platform.commons.security.user.User;
 import cc.wdev.platform.commons.utils.jackson.CommonModule;
 import cc.wdev.platform.system.security.domain.dto.ClientDto;
 import org.springframework.security.jackson.SecurityJacksonModules;

@@ -2,7 +2,7 @@ package cc.wdev.platform.security.core.oauth;
 
 import cc.wdev.platform.commons.enums.ActionTypeEnum;
 import cc.wdev.platform.commons.enums.BooleanTypeEnum;
-import cc.wdev.platform.commons.security.user.User;
+import cc.wdev.platform.commons.security.domain.User;
 import cc.wdev.platform.commons.utils.SecurityUtils;
 import cc.wdev.platform.commons.utils.ServletUtils;
 import cc.wdev.platform.security.core.utils.OAuth2Utils;

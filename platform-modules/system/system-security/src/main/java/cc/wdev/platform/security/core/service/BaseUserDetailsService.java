@@ -1,7 +1,7 @@
 package cc.wdev.platform.security.core.service;
 
-import cc.wdev.platform.commons.security.user.OtpUser;
-import cc.wdev.platform.commons.security.user.SocialUser;
+import cc.wdev.platform.commons.security.domain.OtpUser;
+import cc.wdev.platform.commons.security.domain.SocialUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

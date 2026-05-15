@@ -2,7 +2,8 @@ package cc.wdev.platform.commons.utils;
 
 import cc.wdev.platform.commons.constants.SecurityConstants;
 import cc.wdev.platform.commons.core.tenant.TenantContext;
-import cc.wdev.platform.commons.security.user.User;
+import cc.wdev.platform.commons.security.domain.Role;
+import cc.wdev.platform.commons.security.domain.User;
 import com.google.common.collect.Sets;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author elvea
@@ -47,7 +49,7 @@ public abstract class SecurityUtils {
             Long tid = jwt.getClaim(SecurityConstants.JWT_KEY_TID);
             String username = jwt.getClaimAsString(SecurityConstants.JWT_KEY_USERNAME);
             Set<GrantedAuthority> authorities = Sets.newHashSet(authentication.getAuthorities());
-            return new User(tid, uid, username, null, authorities);
+            return new User(tid, uid, username, null, authorities, Collections.emptySet());
         }
         return null;
     }
@@ -105,6 +107,28 @@ public abstract class SecurityUtils {
     public static String getUidStr() {
         Long uid = getUid(getAuthentication());
         return String.valueOf(uid);
+    }
+
+    /**
+     * 获取用户数据范围
+     */
+    public static Set<String> getDataScopes() {
+        return getDataScopes(getAuthentication());
+    }
+
+    /**
+     * 获取用户数据范围
+     */
+    public static Set<String> getDataScopes(Authentication authentication) {
+        User user = getUser(authentication);
+        if (user != null) {
+            Set<String> scopes = Sets.newHashSet();
+            if (CollectionUtils.isNotEmpty(user.getRoles())) {
+                scopes.addAll(user.getRoles().stream().map(Role::getScopes).flatMap(Set::stream).collect(Collectors.toSet()));
+            }
+            return scopes;
+        }
+        return Collections.emptySet();
     }
 
     /**
